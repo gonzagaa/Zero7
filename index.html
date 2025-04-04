@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero7- Home</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+
+    <link href="https://fonts.cdnfonts.com/css/ncs-radhiumz" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tt-fors-trial" rel="stylesheet">             
+
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/lenis@1.1.14/dist/lenis.css"
+    />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body id="body" class="smooth-scroll-wrapper">
+
+    <nav id="navigation" class="">
+    <div class="wrapper">
+
+        <a class="logo" href="#home">
+            <img  src="./assets/logo zero7.svg" alt="Logo">
+        </a>
+        
+        <div class="menu">
+
+            <ul>
+                <li data-aos="fade-right"><a onclick="closeMenu()" href="#home">Home</a></li>
+                <li data-aos="fade-right"><a onclick="closeMenu()" href="#">Quem somos</a></li>
+                <li data-aos="fade-right"><a onclick="closeMenu()" href="#">Blog</a></li>
+                <li data-aos="fade-right"><a onclick="closeMenu()" href="#">Planos</a></li>
+                <li data-aos="fade-right"><a onclick="closeMenu()" href="#">Regulamento</a></li>
+
+                <div data-aos="fade-right" class="buttons">
+                  <a onclick="closeMenu()" class="button" href=""><button id="navButton" class="button">
+                      Área do Trader
+                  </button></a>
+              </div>
+            </ul>
+
+            
+         </div>
+
+        <button 
+        aria-expanded="false"
+        aria-label="Abrir menu"
+        onclick="openMenu()" 
+        class="open-menu">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20H30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 12H30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 28L30 28" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg> 
+        </button>
+        <button
+        aria-expanded="true"
+        aria-label="Fechar menu"
+        onclick="closeMenu()" 
+        class="close-menu">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 10L10 30M10 10L30 30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                        
+        </button>
+
+    </div>       
+    </nav>
+
+    <header class="header" id="home"> 
+      <!-- <div class="blush um"></div> -->
+
+      <div class="wrapper">
+        <div class="content">
+            <div class="text">
+                  <!-- <h1>O ecossistema <span id="typed-word"></span> para operar Day Trade.</h1> -->
+                  <h1>
+                    O ECOSSISTEMA <span class="reveal-wrapper">
+                      <span class="reveal-word">acessível</span>
+                    </span> PARA OPERAR DAY TRADE.
+                  </h1>
+
+                  <p>Desenvolva sua carreira como trader de qualquer lugar do mundo, operando em grande volume na bolsa de valores e lucre em uma das profissões mais rentáveis do mundo.</p>
+
+                  <a><button id="openModalForm" class="button openModalForm">COMEÇAR AGORA MESMO</button></a>
+            </div>
+          </div>
+      </div>      
+      <div class="image">
+        
+        <img class="desktop" src="./assets/TESTE.png" alt="">
+        <img class="mobile" src="./assets/MOBILE-2.webp" alt=""> 
+        
+      </div>
+
+      <!-- <div class="custom-shape-divider-bottom-1736960517">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z" class="shape-fill"></path>
+        </svg>
+      </div> -->
+    </header>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script>
+      // Initialize Lenis with options
+      const lenis = new Lenis({
+        smooth: true, // Ativa o scroll suave
+        duration: 1.1, // Define a duração do scroll (maior valor deixa mais lento)
+        easing: (t) => 1 - Math.pow(1 - t, 4), // Função de easing para suavidade
+      });
+
+      // Listen for the scroll event and log the event data
+      lenis.on("scroll", (e) => {
+        console.log(e);
+      });
+
+      // Use requestAnimationFrame to continuously update the scroll
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="./script.js?v=6"></script>
+</body>
+</html> 
