@@ -95,8 +95,8 @@
     section#divisa .cards {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        width: 70%;
-        top: -58%;
+        width: 80%;
+        top: -20%;
 
         position: absolute;
         left: 50%;
@@ -137,4 +137,11 @@
         background: linear-gradient(-130deg, #023c83, #1da4f3, #1da4f3, #023c83);
     }
     
+}
+
+@media (min-width: 1700px) {
+    section#divisa .cards {
+        width: 70%;
+        top: -50%;
+    }
 }

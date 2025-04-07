@@ -62,4 +62,45 @@ function animateSwitch() {
 
 setInterval(animateSwitch, 2000);
 
+gsap.registerPlugin(ScrollTrigger);
+
+// Animação da linha de progresso
+gsap.to(".line-progress", {
+  scrollTrigger: {
+    trigger: ".timeline",
+    start: "top center",
+    end: "bottom bottom",
+    scrub: true
+  },
+  height: "100%",
+  ease: "none"
+});
+
+// Ativa bolinhas conforme o scroll
+gsap.utils.toArray(".step").forEach(step => {
+  const circle = step.querySelector(".circle");
+
+  ScrollTrigger.create({
+    trigger: step,
+    start: "top center+=100",
+    onEnter: () => circle.classList.add("active"),
+    onLeaveBack: () => circle.classList.remove("active")
+  });
+});
+
+// Aparecer os textos se quiser manter a animação original dos conteúdos
+gsap.utils.toArray(".contentStep").forEach(content => {
+  gsap.to(content, {
+    scrollTrigger: {
+      trigger: content,
+      start: "top 80%",
+      toggleActions: "play none none reverse"
+    },
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    ease: "power2.out"
+  });
+});
+
 
