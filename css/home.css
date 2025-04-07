@@ -11,6 +11,7 @@
     flex-direction: column;
   
     transition: all 200ms ease-in-out;
+    margin-bottom: 0;
   }
   
   #home .wrapper {
@@ -72,15 +73,6 @@
     transform: scale(1);
   }
   
-  
-
-  /* #typed-word {
-    white-space: nowrap;
-    overflow: hidden;
-    display: inline-block;
-    font-weight: bold;
-    color: var(--primary-color);
-  } */
   
   #home p {
     font-size: 1.6rem;
@@ -209,8 +201,8 @@
       position: absolute;
       top: 0;
       right:0;
-  
-      mask-image: linear-gradient(to left, #000 80%, transparent);
+
+      mask-image: linear-gradient(to bottom, #000 60%, transparent);
     }
   
   
@@ -281,13 +273,11 @@
       position: absolute;
       top: 0;
       right:0;
-  
-      mask-image: none;
     }
 
     header#home .content h1 {
       font-size: 6rem;
-      width: 80%;
+      width: 85%;
     }
 
     header#home .content h1 span {

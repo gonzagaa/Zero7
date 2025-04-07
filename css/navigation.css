@@ -364,8 +364,16 @@ nav {
     }
   
     @media (min-width: 1700px) {
+      nav#navigation {
+        width: calc(100% - 340px);
+        left: 170px;
+      }
+
+      nav#navigation .wrapper {
+        padding-inline: 5rem;
+      }
+
       nav#navigation .menu {
-        width: 65%;
       }
     }
   

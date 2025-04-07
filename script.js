@@ -37,7 +37,7 @@ function animateSwitch() {
 
   // anima saída
   tl.to(wordEl, {
-    duration: 0.4,
+    duration: 0.3,
     opacity: 0,
     filter: "blur(4px)",
     scale: 0.95,
@@ -60,8 +60,6 @@ function animateSwitch() {
   });
 }
 
-setInterval(animateSwitch, 3000);
-
-
+setInterval(animateSwitch, 2000);
 
 
