@@ -1,0 +1,119 @@
+#depoimentos {
+    overflow: hidden;
+    position: relative;
+}
+
+#depoimentos header p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+#depoimentos .cards {
+    border-radius: 1rem;
+}
+
+#depoimentos .cards .card {
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 1rem;
+
+}
+
+#depoimentos .cards .card img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+
+    transition: all 300ms ease-in-out;
+
+    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+
+#depoimentos .cards .card:hover img {
+    transform: scale(1.04);
+    filter: brightness(1.2);
+}
+
+#depoimentos .wrapper.carrossel {
+    position: relative;
+}
+
+.swiper-pagination-bullet {
+    background-color: #ffffff2e; 
+    opacity: 1; 
+    width: 15px;
+    height: 4px;
+    border-radius: .3rem;
+}
+  
+.swiper-pagination-bullet-active {
+    background-color: #0080c9; 
+}
+
+.swiper-button-next {
+    top: 50%;
+    color: #ffffff; 
+    transform: scale(.7);
+}
+  
+.swiper-button-prev {
+    top: 50%;
+    color: #ffffff; 
+    transform: scale(.7);
+}
+
+@media (min-width: 1080px) {
+    section#depoimentos header h2 {
+        font-size: 2.7rem;
+    }
+
+    section#depoimentos header p {
+        font-size: 1.4rem;
+    }
+
+    section#depoimentos .content .cards {
+        overflow: initial;
+        border-radius: 0;
+    }
+
+    section#depoimentos .card img {
+        mask-image: linear-gradient(to bottom, #000 70%, transparent);
+    }
+
+    section#depoimentos .swiper {
+        position: relative;
+    }
+
+    section#depoimentos .swiper:before,
+    section#depoimentos .swiper:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 20rem;
+        height: 100%;
+        z-index: 2;
+    }
+    
+    section#depoimentos .swiper:before {
+        left: 0;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), #000205);
+    }
+    
+    section#depoimentos .swiper:after {
+        right: 0;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #000205);
+    }
+
+    section#depoimentos .wrapper.carrossel {
+        position: relative;
+        width: 100%;
+        padding-inline: 0;
+    }
+
+    section#depoimentos img.logo {
+        display: inherit;
+        position: absolute;
+    }
+}
