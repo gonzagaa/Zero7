@@ -4,9 +4,14 @@
 @import './sectionCards.css';
 @import './sectionNumeros.css';
 @import './sectionDepoimentos.css';
+@import './sectionPlanos.css';
+@import './sectionFaq.css';
+@import './sectionContato.css';
+@import './divSuporte.css';
 
 @import './navigation.css';
 @import './button.css';
 @import './head.css';
+@import './author.css';
 
 

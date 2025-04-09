@@ -9,7 +9,7 @@ a {
     position: relative;
     transition: all 0.3s ease-in-out;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-    padding-block: 1.5rem;
+    padding-block: 2rem;
     padding-inline: 2rem;
     background: var(--gradient);
     border-radius: .3rem 1.3rem .3rem 1.3rem;

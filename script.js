@@ -69,8 +69,8 @@ gsap.to(".line-progress", {
   scrollTrigger: {
     trigger: ".timeline",
     start: "top center",
-    end: "bottom bottom",
-    scrub: true
+    end: "bottom center",
+    scrub: true,
   },
   height: "100%",
   ease: "none"
@@ -82,7 +82,7 @@ gsap.utils.toArray(".step").forEach(step => {
 
   ScrollTrigger.create({
     trigger: step,
-    start: "top center+=100",
+    start: "top center+=20",
     onEnter: () => circle.classList.add("active"),
     onLeaveBack: () => circle.classList.remove("active")
   });
@@ -104,7 +104,6 @@ gsap.utils.toArray(".contentStep").forEach(content => {
 });
 
 const larguraDaTela = window.innerWidth
-
 
 if (larguraDaTela < 800) {
     var swiper3 = new Swiper(".mySwiper3", {
@@ -138,3 +137,34 @@ if (larguraDaTela < 800) {
       });
 }
 
+if (larguraDaTela < 800) {
+  var swiper4 = new Swiper(".mySwiper4", {
+      slidesPerView: 1,
+      spaceBetween: 5,
+      loop: true,
+      grabCursor: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+} else {
+  var swiper4 = new Swiper(".mySwiper4", {
+      slidesPerView: 3,
+      spaceBetween: 90,
+      loop: true,
+      grabCursor: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+}

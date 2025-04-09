@@ -45,12 +45,12 @@
 
 #divisa .cards .borderCard:nth-child(1) .card,
 #divisa .cards .borderCard:nth-child(3) .card {
-    background: linear-gradient(130deg, #1C1C1C, #080808);
+    background: linear-gradient(130deg, #001120, #01050b);
 }
 
 
 #divisa .cards .borderCard:nth-child(2) .card {
-    background: linear-gradient(to right, #1C1C1C, #080808);
+    background: linear-gradient(to right, #001120, #01050b);
     position: relative;
 }
 
@@ -116,16 +116,16 @@
     }
     
     section#divisa .cards .borderCard:nth-child(1) .card {
-        background: linear-gradient(130deg, #1C1C1C, #080808);
+        background: linear-gradient(130deg, #001120, #01050b);
     }
     
     
     section#divisa .cards .borderCard:nth-child(3) .card {
-        background: linear-gradient(-130deg, #1C1C1C, #080808);
+        background: linear-gradient(-130deg, #001120, #01050b);
     }
     
     section#divisa .cards .borderCard:nth-child(2) .card {
-        background: linear-gradient(to top, #1C1C1C, #080808);
+        background: linear-gradient(to top, #001120, #01050b);
         position: relative;
     }
     

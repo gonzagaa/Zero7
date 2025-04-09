@@ -66,6 +66,12 @@
     border-radius: 2rem;
 
     transition: all 500ms ease-in-out;
+
+    border: 1px solid #ffffff1a;
+}
+
+#cards .card:hover .text {
+    border: 1px solid #1da5f379;
 }
 
 #cards .card .head {
@@ -150,6 +156,12 @@
         object-fit: cover;
     }
 
+    section#cards .cards .row-1 .card:nth-child(1) img {
+        aspect-ratio: 16/13;
+        width: 110%;
+        margin-left: -5%;
+    }
+
     section#cards .cards .row-2 {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -176,5 +188,11 @@
 
     section#cards .cards .row-2 .card h3 {
         font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 1700px) {
+    section#cards header h2 {
+        width: 60%;
     }
 }

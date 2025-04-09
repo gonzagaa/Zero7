@@ -112,6 +112,8 @@
     background: linear-gradient(to bottom, #023c83, #0080c9, transparent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0 0 20px #1da5f349);
 }
 
 #numeros .contentStep h2.um {
@@ -143,5 +145,11 @@
     }
 
     section#numeros .line-base {
+    }
+}
+
+@media (min-width: 1700px) {
+    section#numeros .content header h2 {
+        font-size: 3.5rem;
     }
 }

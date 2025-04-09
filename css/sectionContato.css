@@ -1,0 +1,63 @@
+#contato {
+    overflow: hidden;
+    position: relative;
+}
+
+#contato .cards {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#contato header a button {
+    margin-top: 2rem;
+}
+
+#contato .card {
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 1rem;
+    padding: 2rem;
+
+    background: linear-gradient(130deg, #001120, #01050b);
+
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+#contato .card h3 {
+    font-size: 1.8rem;
+
+    color: #fff;
+    text-align: left;
+}
+
+#contato .cards .card ion-icon {
+    color: var(--primary-color);
+    font-size: 4rem;
+
+    min-width: 4rem;
+    min-height: 4rem;
+}
+
+#contato .cards .card p {
+    font-size: 1.4rem;
+    text-align: left;
+    color: #fff;
+}
+
+#contato .cards .card p a {
+    color: #fff;
+}
+
+@media (min-width: 1080px) {
+    section#contato .cards {
+        gap: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 1fr;
+    }
+}
