@@ -8,8 +8,6 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
-
-   
 }
 
 #divisa .cards .borderCard {
@@ -90,21 +88,28 @@
 
 @media (min-width: 1080px) {
     section#divisa {
+        padding-top: 0;
+        margin-top: -3rem;
+
+        padding-bottom: 6rem;
     }
 
     section#divisa .cards {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        width: 80%;
-        top: -20%;
+        width: 100%;
+    }
 
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, 0);
+    section#divisa .cards .card h3 {
+        font-size: 3rem;
+    }
+
+    section#divisa .cards .card h3 span {
+        font-size: 5rem;
     }
 
     section#divisa .cards .borderCard:nth-child(1) {
-        background: linear-gradient(130deg, #023c83, #1da4f3, #1da4f3, #000 30%);
+        background: linear-gradient(168deg, #023c83, #1da4f3, #1da4f3, #000 30%);
     }
     
     section#divisa .cards .borderCard:nth-child(2) {
@@ -112,36 +117,33 @@
     }
     
     section#divisa .cards .borderCard:nth-child(3) {
-        background: linear-gradient(-130deg, #023c83, #1da4f3, #1da4f3, #000 30%);
+        background: linear-gradient(-168deg, #023c83, #1da4f3, #1da4f3, #000 30%);
     }
     
     section#divisa .cards .borderCard:nth-child(1) .card {
-        background: linear-gradient(130deg, #001120, #01050b);
+        background: linear-gradient(168deg, #001120, #01050b);
     }
     
     
     section#divisa .cards .borderCard:nth-child(3) .card {
-        background: linear-gradient(-130deg, #001120, #01050b);
+        background: linear-gradient(-168deg, #001120, #01050b);
     }
     
     section#divisa .cards .borderCard:nth-child(2) .card {
-        background: linear-gradient(to top, #001120, #01050b);
+        background: linear-gradient(to bottom, #001120, #01050b);
         position: relative;
     }
     
     section#divisa .cards .borderCard:nth-child(2) .card::before {
         left: 0;
-        bottom: 0;
+        top: 0;
         width: 100%;
         height: 2px;
-        background: linear-gradient(-130deg, #023c83, #1da4f3, #1da4f3, #023c83);
+        background: linear-gradient(-130deg, #023c8336, #1da4f3, #1da4f3, #023c8336);
     }
     
 }
 
 @media (min-width: 1700px) {
-    section#divisa .cards {
-        width: 70%;
-        top: -50%;
-    }
+
 }
