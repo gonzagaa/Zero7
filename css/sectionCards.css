@@ -31,6 +31,10 @@
     bottom: 0;
 }
 
+#cards::before {
+    display: none;
+}
+
 #cards .content {
     position: relative;
     z-index: 1;
@@ -172,6 +176,10 @@
 
     section#cards header h2 {
         width: 70%;
+    }
+
+    section#cards img.bgsection {
+        mask-image: linear-gradient(to top, #000 80%, transparent);
     }
 
     section#cards .cards .row-1 {

@@ -1,7 +1,7 @@
 /* From Uiverse.io by adeladel522 */ 
 a {
     text-decoration: none;
-
+    width: 100%;
 }
 
 .button {
@@ -78,6 +78,9 @@ a {
   }
 
   @media (min-width: 1080px) {
+    a {
+      width: initial;
+    }
     button.button {
         width: initial;
         padding: 2rem 4.5rem;

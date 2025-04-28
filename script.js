@@ -27,7 +27,7 @@ AOS.init(
   }
 );
 
-const words = ["acessível", "seguro", "lucrativo"];
+const words = ["acessível", "seguroㅤㅤ", "lucrativo"];
 let index = 0;
 
 const wordEl = document.querySelector(".reveal-word");
