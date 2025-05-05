@@ -22,11 +22,15 @@
 }
 
 #contato .border:nth-child(1) {
-    background: linear-gradient(145deg, #023c83, #1da4f3, #1da4f3, #000 30%);
+    background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 15%);
+}
+
+#contato .border:nth-child(2) {
+    background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 15%);
 }
 
 #contato .border:nth-child(3) {
-    background: linear-gradient(-145deg, #023c83, #1da4f3, #1da4f3, #000 30%);
+    background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 15%);
 }
 
 #contato .card {
@@ -36,8 +40,6 @@
     cursor: pointer;
     border-radius: 1rem;
     padding: 2rem;
-
-
     display: flex;
     align-items: center;
     gap: 1.5rem;
@@ -71,7 +73,7 @@
 }
 
 #contato .cards .card p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-align: left;
     color: #fff;
 }
@@ -85,5 +87,17 @@
         gap: 2rem;
         display: grid;
         grid-template-columns: 1fr 1.5fr 1fr;
+    }
+
+    section#contato .border:nth-child(1) {
+        background: linear-gradient(145deg, #023c83, #1da4f3, #1da4f3, #000 30%);
+    }
+
+    section#contato .border:nth-child(2) {
+        background: transparent;
+    }
+    
+    section#contato .border:nth-child(3) {
+        background: linear-gradient(-145deg, #023c83, #1da4f3, #1da4f3, #000 30%);
     }
 }

@@ -29,7 +29,7 @@
   }
   
   #home .text {
-    margin-top: 100%;
+    margin-top: 80%;
     text-align: center;
     z-index: 4;
 
@@ -105,7 +105,7 @@
   
   #home .image img.mobile {
     position: absolute;
-    top: 0;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, 0);
     width: auto;

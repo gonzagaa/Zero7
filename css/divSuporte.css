@@ -5,7 +5,9 @@
 #suporte .content {
     display: grid;
     grid-template-rows: 1fr 2fr 2fr;
-    gap: 1rem;
+    gap: 2rem;
+
+    margin-top: 2rem;
 }
 
 #suporte .content .border {
@@ -15,11 +17,15 @@
 }
 
 #suporte .content .border:nth-child(1) {
-    background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 30%);
+    background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 15%);
+}
+
+#suporte .content .border:nth-child(2) {
+    background: transparent;
 }
 
 #suporte .content .border:nth-child(3) {
-    background: linear-gradient(-45deg, #023c83, #1da4f3, #1da4f3, #000 30%);
+    background: linear-gradient(360deg, #023c83, #1da4f3, #1da4f3, #000 5%);
 }
 
 #suporte .whatsapp {
@@ -34,7 +40,7 @@
 }
 
 #suporte .whatsapp ion-icon {
-    font-size: 4rem;
+    font-size: 2.8rem;
     padding: 1rem;
     border-radius: 1rem;
     background: var(--gradient);
@@ -42,7 +48,7 @@
 }
 
 #suporte .whatsapp p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     text-align: left;
     font-weight: 400;
     color: #fff;
@@ -53,13 +59,12 @@
 }
 
 #suporte .image {
-    display: flex;
-    align-items: center;
+    height: 100%;
 }
 
 #suporte .image img {
     width: 100%;
-    aspect-ratio: 16/9;
+    height: 100%;
     object-fit: cover;
     border-radius: 1rem;
 }
@@ -143,6 +148,8 @@
         gap: 2rem;
         grid-template-rows: 1fr;
         grid-template-columns: 1fr 1.5fr 1fr;
+
+        margin-top: 0;
     }
 
     div#suporte .whatsapp {
@@ -165,5 +172,17 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    #suporte .content .border:nth-child(2) {
+        background: transparent;
+    }
+
+    #suporte .content .border:nth-child(1) {
+        background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 30%);
+    }
+    
+    #suporte .content .border:nth-child(3) {
+        background: linear-gradient(-45deg, #023c83, #1da4f3, #1da4f3, #000 30%);
     }
 }
