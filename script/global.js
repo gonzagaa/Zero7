@@ -1,25 +1,25 @@
-window.addEventListener('scroll', onScroll)
+// window.addEventListener('scroll', onScroll)
 
-onScroll()
-function onScroll() {
-    showNavOnScroll()
-}
+// onScroll()
+// function onScroll() {
+//     showNavOnScroll()
+// }
 
-function showNavOnScroll() {
-    if(scrollY > 0) {
-        document.querySelector("#navigation").classList.add("scroll")
-    } else {
-        document.querySelector("#navigation").classList.remove("scroll")
-    }
-}
+// function showNavOnScroll() {
+//     if(scrollY > 0) {
+//         document.querySelector("#navigation").classList.add("scroll")
+//     } else {
+//         document.querySelector("#navigation").classList.remove("scroll")
+//     }
+// }
 
-function openMenu() {
-    document.body.classList.add('menu-expanded')
-}
+// function openMenu() {
+//     document.body.classList.add('menu-expanded')
+// }
 
-function closeMenu() {
-    document.body.classList.remove('menu-expanded')
-}
+// function closeMenu() {
+//     document.body.classList.remove('menu-expanded')
+// }
 
 AOS.init(
   {
@@ -168,3 +168,43 @@ if (larguraDaTela < 800) {
       },
     });
 }
+
+const modalGeral = document.getElementById("modalDepoimentos");
+const videoContainerGeral = document.getElementById("video-container-geral");
+const closeBtnGeral = document.querySelector(".close-depoimento-geral");
+
+document.querySelectorAll(".depoimento").forEach((depoimento) => {
+  depoimento.addEventListener("click", () => {
+    const videoUrl = depoimento.getAttribute("data-video");
+    if (!videoUrl) return;
+
+    modalGeral.style.display = "flex";
+    videoContainerGeral.innerHTML = `
+      <iframe src="${videoUrl}?autoplay=1&rel=0"
+        title="Depoimento"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    `;
+  });
+});
+
+closeBtnGeral.addEventListener("click", () => {
+  modalGeral.style.display = "none";
+  videoContainerGeral.innerHTML = "";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modalGeral) {
+    modalGeral.style.display = "none";
+    videoContainerGeral.innerHTML = "";
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modalGeral.style.display === "flex") {
+    modalGeral.style.display = "none";
+    videoContainerGeral.innerHTML = "";
+  }
+});

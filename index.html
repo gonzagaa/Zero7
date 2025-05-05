@@ -32,7 +32,7 @@
 </head>
 <body id="body" class="smooth-scroll-wrapper">
 
-    <nav id="navigation" class="">
+    <!-- <nav id="navigation" class="">
     <div class="wrapper">
 
         <a class="logo" href="#home">
@@ -80,7 +80,7 @@
         </button>
 
     </div>       
-    </nav>
+    </nav> -->
 
     <header class="header" id="home">
       <div class="wrapper">
@@ -341,30 +341,30 @@
       <div class="wrapper header">
         <div class="content">
           <div data-aos="fade-up" class="cards">
-            <div class="card">
-                <img src="./assets/depoimentos/1.webp" alt="">
+            <div class="card depoimento" data-video="https://www.youtube.com/embed/ShcucfOriyI">
+              <img src="./assets/depoimentos/1.webp" alt="">
             </div>
-
-            <div class="card swiper-slide">
-                <img src="./assets/depoimentos/2.webp" alt="">
+          
+            <div class="card depoimento" data-video="https://www.youtube.com/embed/QVpL1JFxrw0">
+              <img src="./assets/depoimentos/2.webp" alt="">
             </div>
-
-            <div class="card swiper-slide">
+          
+            <div class="card depoimento" data-video="https://www.youtube.com/embed/ugqDbiOHej8">
               <img src="./assets/depoimentos/3.webp" alt="">
             </div>
-
-            <div class="card swiper-slide">
-                <img src="./assets/depoimentos/4.webp" alt="">
+          
+            <div class="card depoimento" data-video="https://www.youtube.com/embed/xhlykTHDCzU">
+              <img src="./assets/depoimentos/4.webp" alt="">
             </div>
-
-            <div class="card swiper-slide">
+          
+            <div class="card depoimento" data-video="https://www.youtube.com/embed/cHUaUY76x9U">
               <img src="./assets/depoimentos/5.webp" alt="">
             </div>
-
-            <div class="card swiper-slide">
-                <img src="./assets/depoimentos/6.webp" alt="">
+          
+            <div class="card depoimento" data-video="https://www.youtube.com/embed/8OK7I1S1URY">
+              <img src="./assets/depoimentos/6.webp" alt="">
             </div>
-          </div>
+          </div>          
 
           <header data-aos="fade-up">
             <h2>TRANSFORME SUAS HABILIDADES EM <span>GRANDES PAGAMENTOS</span></h2>
@@ -375,6 +375,13 @@
         </div>
       </div>
     </section>
+
+    <div id="modalDepoimentos" class="modal-depoimento" style="display: none;">
+      <div class="modal-content-depoimento">
+        <span class="close-depoimento-geral" role="button" aria-label="Fechar depoimento">&times;</span>
+        <div id="video-container-geral"></div>
+      </div>
+    </div>    
 
     <section id="plan" class="planos">
       <img class="bg" src="./assets/bg2.webp" alt="">
