@@ -74,6 +74,7 @@
     border-radius: 1rem;
     padding: 2rem;
     text-align: left;
+    height: 100%;
 }
 
 #suporte .ajuda > span {

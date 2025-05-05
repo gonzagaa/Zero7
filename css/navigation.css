@@ -225,8 +225,12 @@ nav {
       nav#navigation .menu ul:nth-child(1) {
         display: flex;
         gap: 3.2rem;
-        margin-top: 1rem;
+
       } 
+
+      nav#navigation .menu ul li {
+        margin-top: .5rem;
+      }
 
       nav#navigation .menu ul li a {
         color: #ffffffce;
