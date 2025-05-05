@@ -1,5 +1,8 @@
 #divisa {
     position: relative;
+    overflow: hidden;
+
+    padding-top: 0;
 }
 
 #divisa .cards {
@@ -20,7 +23,7 @@
     position: relative;
     width: 100%;
     padding: 2rem;
-    padding-block: 5rem;
+    padding-block: 3rem;
     border-radius: 1rem;
 
 
@@ -63,7 +66,7 @@
 }
 
 #divisa .cards .card h3 {
-    font-size: 4rem;
+    font-size: 3rem;
     margin-top: 1rem;
     line-height: .8;
     color: #d2d2d2;
@@ -72,7 +75,7 @@
 }
 
 #divisa .cards .card h3 span {
-    font-size: 6rem;
+    font-size: 4rem;
     background: linear-gradient(130deg, #023c83, #1da4f3, #023c83);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -92,6 +95,11 @@
         margin-top: 0;
 
         padding-bottom: 2rem;
+    }
+
+    section#divisa .cards .card {
+        padding: 2rem;
+        padding-block: 5rem;
     }
 
     section#divisa .cards {
