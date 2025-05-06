@@ -1,7 +1,7 @@
 #home {
     background: var(--bg-black);
-    height: 95vh;
-    max-height: 95vh;
+    height: 85vh;
+    max-height: 85vh;
     overflow: hidden;
   
     position: relative;
@@ -105,7 +105,7 @@
   
   #home .image img.mobile {
     position: absolute;
-    top: 10%;
+    top: 0%;
     left: 50%;
     transform: translate(-50%, 0);
     width: auto;
