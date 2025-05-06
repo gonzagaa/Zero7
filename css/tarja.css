@@ -1,0 +1,18 @@
+.tarja img.mobile {
+    width: 100%;
+}
+
+.tarja img.desktop {
+    display: none;
+    width: 100%;
+}
+
+@media (min-width: 1080px) {
+    div.tarja img.mobile {
+        display: none;
+    }
+    
+    div.tarja img.desktop {
+        display: inherit;
+    }
+}

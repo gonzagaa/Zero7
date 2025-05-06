@@ -154,9 +154,8 @@
     header#home {
       justify-content: center;
       position: relative;
-      height: 108vh;
-      max-height: 108vh;
-
+      height: 100vh;
+      max-height: 100vh;
       /* mask-image: linear-gradient(to bottom, #000 80%, transparent)  */
     }
 
