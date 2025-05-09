@@ -208,3 +208,33 @@ document.addEventListener("keydown", (e) => {
     videoContainerGeral.innerHTML = "";
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("popupOverlay");
+  const content = document.getElementById("popupContent");
+  const closeBtn = document.getElementById("popupClose");
+
+  // Mostrar o popup após 2s
+  setTimeout(() => {
+    overlay.classList.add("active");
+    content.classList.add("active");
+  }, 2000);
+
+  // Fechar com botão X
+  closeBtn.addEventListener("click", () => {
+    closePopup();
+  });
+
+  // Fechar ao clicar na overlay
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closePopup();
+  });
+
+  function closePopup() {
+    content.classList.remove("active");
+    overlay.style.opacity = "1";
+    setTimeout(() => {
+      overlay.classList.remove("active");
+    }, 300); // tempo igual ao da transição CSS
+  }
+});
