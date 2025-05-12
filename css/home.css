@@ -1,7 +1,7 @@
 #home {
     background: var(--bg-black);
-    height: 85vh;
-    max-height: 85vh;
+    height: 90vh;
+    max-height: 90vh;
     overflow: hidden;
   
     position: relative;
@@ -29,7 +29,7 @@
   }
   
   #home .text {
-    margin-top: 80%;
+    margin-top: 60%;
     text-align: center;
     z-index: 4;
 
@@ -38,6 +38,11 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+  }
+
+  #home img.logo {
+    width: 10rem;
+    margin-bottom: 1.5rem;
   }
 
   #home h1 {
@@ -231,7 +236,7 @@
     header#home .content img.logo {
       position: initial;
       transform: initial;
-      width: 20rem;
+      width: 15rem;
     }
   
     header#home .content h1 {
