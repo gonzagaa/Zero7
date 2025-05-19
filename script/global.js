@@ -238,3 +238,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 300); // tempo igual ao da transição CSS
   }
 });
+
+ // Data final: 1º de junho de 2025 às 00:01:42 (horário local)
+    const dataFinal = new Date("2025-06-01T00:01:42");
+
+    const diasEl = document.getElementById('dias');
+    const horasEl = document.getElementById('horas');
+    const minutosEl = document.getElementById('minutos');
+    const segundosEl = document.getElementById('segundos');
+    const mensagemEl = document.getElementById('mensagem');
+
+    function atualizarContagem() {
+      const agora = new Date();
+      const diferenca = dataFinal - agora;
+
+      if (diferenca <= 0) {
+        clearInterval(intervalo);
+        diasEl.innerText = "00";
+        horasEl.innerText = "00";
+        minutosEl.innerText = "00";
+        segundosEl.innerText = "00";
+        mensagemEl.innerText = "Tempo esgotado!";
+        return;
+      }
+
+      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+      diasEl.innerText = dias.toString().padStart(2, '0');
+      horasEl.innerText = horas.toString().padStart(2, '0');
+      minutosEl.innerText = minutos.toString().padStart(2, '0');
+      segundosEl.innerText = segundos.toString().padStart(2, '0');
+    }
+
+    const intervalo = setInterval(atualizarContagem, 1000);
+    atualizarContagem(); // inicializa já com os valores corretos
