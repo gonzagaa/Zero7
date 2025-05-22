@@ -1,25 +1,25 @@
-// window.addEventListener('scroll', onScroll)
+ window.addEventListener('scroll', onScroll)
 
-// onScroll()
-// function onScroll() {
-//     showNavOnScroll()
-// }
+ onScroll()
+ function onScroll() {
+     showNavOnScroll()
+ }
 
-// function showNavOnScroll() {
-//     if(scrollY > 0) {
-//         document.querySelector("#navigation").classList.add("scroll")
-//     } else {
-//         document.querySelector("#navigation").classList.remove("scroll")
-//     }
-// }
+ function showNavOnScroll() {
+     if(scrollY > 0) {
+         document.querySelector("#navigation").classList.add("scroll")
+     } else {
+         document.querySelector("#navigation").classList.remove("scroll")
+     }
+ }
 
-// function openMenu() {
-//     document.body.classList.add('menu-expanded')
-// }
+ function openMenu() {
+     document.body.classList.add('menu-expanded')
+ }
 
-// function closeMenu() {
-//     document.body.classList.remove('menu-expanded')
-// }
+function closeMenu() {
+    document.body.classList.remove('menu-expanded')
+}
 
 AOS.init(
   {
@@ -27,7 +27,7 @@ AOS.init(
   }
 );
 
-const words = ["acessível", "seguroㅤㅤ", "lucrativo"];
+const words = ["acessível", "seguro&nbsp;&nbsp;&nbsp;&nbsp;", "lucrativo&thinsp;"];
 let index = 0;
 
 const wordEl = document.querySelector(".reveal-word");
@@ -45,7 +45,7 @@ function animateSwitch() {
     ease: "power2.inOut",
     onComplete: () => {
       index = (index + 1) % words.length;
-      wordEl.textContent = words[index];
+      wordEl.innerHTML = words[index]; // <- AQUI ESTÁ A MUDANÇA
     }
   });
 
@@ -63,6 +63,7 @@ function animateSwitch() {
 setInterval(animateSwitch, 2000);
 
 gsap.registerPlugin(ScrollTrigger);
+
 
 // // Animação da linha de progresso
 // gsap.to(".line-progress", {
