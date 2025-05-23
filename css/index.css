@@ -13,10 +13,13 @@
 @import './navigation.css';
 @import './button.css';
 @import './head.css';
-@import './author.css';
 @import './buttonWpp.css';
 @import './modalDepoimento.css';
 @import './tarja.css';
 @import './popup.css';
+
+@import './author.css';
+@import './footer.css';
+@import './footerPagamento.css';
 
 

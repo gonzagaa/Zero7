@@ -14,7 +14,7 @@
 #author p,
 #author a {
     color: #fff;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     text-decoration: none;
 }
 
@@ -23,15 +23,32 @@
     font-size: 1.2rem;
 }
 
+#author p.disclaimer {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+    color: #c6c6c6;
+    font-weight: 300;
+}
+
 @media (min-width: 1080px) {
     section#author .content {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        display: flex;
+        justify-content: space-between;
         width: 100%;
+        gap: 0;
     }
 
     section#author .content p {
         width: 100%;
         text-align: center;
+    }
+
+    section#author .content p:nth-child(1) {
+        text-align: left;
+    }
+
+    section#author .content p:nth-child(5) {
+        text-align: right;
     }
 }
