@@ -87,7 +87,7 @@
   #home p {
     font-size: 1.6rem;
     font-weight: 300;
-    color: #ffffff;
+    color: #c0c0c0;
     line-height: 1.4;
   }
 
@@ -111,7 +111,7 @@
   
   #home .image img.mobile {
     position: absolute;
-    top: 0%;
+    top: 6%;
     left: 50%;
     transform: translate(-50%, 0);
     width: auto;
@@ -162,7 +162,9 @@
       position: relative;
       height: 100vh;
       max-height: 100vh;
-      /* mask-image: linear-gradient(to bottom, #000 80%, transparent)  */
+      mask-image: linear-gradient(to top, #000 90%, transparent);
+
+      margin-top: 6rem;
     }
 
     header#home .blush {
@@ -261,7 +263,6 @@
     }
 
     header#home .content p {
-      color: #fff;
       font-weight: 500;
       margin-top: 1rem;
 
@@ -270,7 +271,7 @@
   
     header#home .content a button {
       font-size: 2rem;
-      margin-top: 2rem;
+      margin-top: 0rem;
     }
   }
   

@@ -276,3 +276,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const intervalo = setInterval(atualizarContagem, 1000);
     atualizarContagem(); // inicializa já com os valores corretos
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const tarja = document.querySelector(".tarjaTimerNav");
+    const nav = document.querySelector("#navigation");
+
+    if (!tarja || !nav) return;
+
+    let repetition = 0;
+    const maxRepetitions = 4;
+    const showTime = 15000; // 15 segundos
+
+    function toggleClasses(on) {
+      if (on) {
+        tarja.classList.add("active");
+        nav.classList.add("activeTarja");
+      } else {
+        tarja.classList.remove("active");
+        nav.classList.remove("activeTarja");
+      }
+    }
+
+    setTimeout(() => {
+      toggleClasses(true); // Ativa pela primeira vez
+
+      let interval = setInterval(() => {
+        repetition++;
+
+        if (repetition >= maxRepetitions) {
+          toggleClasses(false); // Remove definitivamente
+          clearInterval(interval);
+        } else {
+          const isEven = repetition % 2 === 0;
+          toggleClasses(isEven);
+        }
+      }, showTime);
+    }, 1000); // Espera 3 segundos ao entrar na página
+  });
