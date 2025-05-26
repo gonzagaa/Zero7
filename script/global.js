@@ -277,11 +277,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const intervalo = setInterval(atualizarContagem, 1000);
     atualizarContagem(); // inicializa já com os valores corretos
 
-    document.addEventListener("DOMContentLoaded", () => {
+     document.addEventListener("DOMContentLoaded", () => {
     const tarja = document.querySelector(".tarjaTimerNav");
     const nav = document.querySelector("#navigation");
+    const header = document.querySelector("#home");
 
-    if (!tarja || !nav) return;
+    if (!tarja || !nav || !header) return;
 
     let repetition = 0;
     const maxRepetitions = 4;
@@ -291,9 +292,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (on) {
         tarja.classList.add("active");
         nav.classList.add("activeTarja");
+        header.classList.add("activeTarjaHome");
       } else {
         tarja.classList.remove("active");
         nav.classList.remove("activeTarja");
+        header.classList.remove("activeTarjaHome");
       }
     }
 
@@ -311,5 +314,5 @@ document.addEventListener("DOMContentLoaded", () => {
           toggleClasses(isEven);
         }
       }, showTime);
-    }, 1000); // Espera 3 segundos ao entrar na página
+    }, 3000); // Espera 3 segundos ao entrar na página
   });

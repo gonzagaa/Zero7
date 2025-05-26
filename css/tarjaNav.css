@@ -7,6 +7,10 @@
     transform: translateY(-300%);
 
     transition: all 300ms ease-in-out;
+
+    position: fixed;
+    top: 0;
+    z-index: 10;
 }
 
 .tarjaTimerNav.active {
@@ -42,6 +46,10 @@
       margin-top: -7px;
 }
 
+#home.activeTarjaHome {
+    margin-top: 7.2rem;
+}
+
 @media (min-width: 1080px) {
       div.tarjaTimerNav {
         padding-block: 1rem;
@@ -72,5 +80,9 @@
         top: 5rem;
         border-radius: 0 0 2rem 2rem;
         border: 1px solid #fff;
+    }
+
+    header#home.activeTarjaHome {
+        margin-top: 0;
     }
 }
