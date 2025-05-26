@@ -3,6 +3,11 @@
     position: relative;
 }
 
+#cards .content {
+    position: relative;
+    z-index: 1;
+}
+
 #cards img.bgsection {
     position: absolute;
     width: 100%;
@@ -11,6 +16,18 @@
     top: 0;
     left: 0;
     z-index: 0;
+}
+
+#cards header h2 {
+    color: #070C11;
+}
+
+#cards header p {
+    color: #070C11;
+}
+
+#cards header p span {
+    color: #070C11;
 }
 
 #cards::before,
@@ -176,10 +193,6 @@
 
     section#cards header h2 {
         width: 70%;
-    }
-
-    section#cards img.bgsection {
-        mask-image: linear-gradient(to top, #000 80%, transparent);
     }
 
     section#cards .cards .row-1 {

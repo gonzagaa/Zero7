@@ -8,7 +8,7 @@
     z-index: 1;
 }
 
-#topicos img.bg {
+#topicos img.bgsection {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -16,18 +16,6 @@
     top: 0;
     left: 0;
     z-index: 0;
-}
-
-#topicos header h2 {
-    color: #070C11;
-}
-
-#topicos header p {
-    color: #070C11;
-}
-
-#topicos header p span {
-    color: #070C11;
 }
 
 #topicos .cards {
