@@ -13,19 +13,6 @@
     z-index: 0;
 }
 
-#depoimentos header h2 {
-    color: #070C11;
-}
-
-#depoimentos header p {
-    color: #070C11;
-}
-
-#depoimentos header p span {
-    color: #070C11;
-}
-
-
 #depoimentos::before,
 #depoimentos::after {
     content: '';

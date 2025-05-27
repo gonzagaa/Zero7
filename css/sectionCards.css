@@ -18,18 +18,6 @@
     z-index: 0;
 }
 
-#cards header h2 {
-    color: #070C11;
-}
-
-#cards header p {
-    color: #070C11;
-}
-
-#cards header p span {
-    color: #070C11;
-}
-
 #cards::before,
 #cards::after {
     content: '';
@@ -189,6 +177,10 @@
 @media (min-width: 1080px) {
     section#cards .cards .card img {
         /* mask-image: linear-gradient(to bottom, #000, transparent); */
+    }
+
+    section#cards .bgsection {
+        mask-image: linear-gradient(to top, #000 80%, transparent);
     }
 
     section#cards header h2 {
