@@ -86,3 +86,10 @@
         margin-top: 6rem;
     }
 }
+
+@media (min-width: 1700px) {
+    div.tarjaTimerNav {
+        width: calc(100% - 340px);
+        left: 170px;
+    }
+}
