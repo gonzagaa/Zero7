@@ -954,6 +954,28 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCJQPMC"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+     <script>
+    let prefix = ["https://app.4st.com.br"];
+
+    function getParams() {
+        let t = "",
+            e = window.top.location.href,
+            r = new URL(e);
+        if (null != r) {
+            let a = r.searchParams.get("utm_source"),
+                n = r.searchParams.get("utm_medium"),
+                o = r.searchParams.get("utm_campaign"),
+                m = r.searchParams.get("utm_term"),
+                c = r.searchParams.get("utm_content"); - 1 !== e.indexOf("?") && (t = `&sck=${a}|${n}|${o}|${m}|${c}`), console.log(t)
+        }
+        return t
+    }! function() {
+        var t = new URLSearchParams(window.location.search);
+        t.toString() && document.querySelectorAll("a").forEach(function(e) {
+            for (let r = 0; r < prefix.length; r++) - 1 !== e.href.indexOf(prefix[r]) && (-1 === e.href.indexOf("?") ? e.href += "?" + t.toString() + getParams() : e.href += "&" + t.toString() + getParams())
+        })
+    }();
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
