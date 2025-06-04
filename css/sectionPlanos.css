@@ -328,6 +328,7 @@ body section.planos .wrapper .swiper.mySwiper4 {
         width: 20rem;
         height: 100%;
         z-index: 2;
+        display: none;
     }
     
     section.planos .swiper:before {
