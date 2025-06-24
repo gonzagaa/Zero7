@@ -3,6 +3,11 @@
     position: relative;
 }
 
+.planos img.cupom {
+    width: 20rem;
+    margin-bottom: 2rem;
+}
+
 .planos.white header h2 {
     color: #070C11;
 }
@@ -23,6 +28,14 @@
     top: 0;
     left: 0;
     z-index: 0;
+}
+
+.planos img.bg.arraia {
+    height: initial;
+}
+
+.planos img.bg.arraia.desktop {
+    display: none;
 }
 
 .planos .wrapper {
@@ -244,6 +257,14 @@ body section.planos .wrapper .swiper.mySwiper4 {
 @media (min-width: 1080px) {
     section.planos .wrapper.plano {
         width: 100%;
+    }
+
+    section.planos img.bg.arraia.desktop {
+        display: inherit;
+    }
+
+    section.planos img.bg.arraia.mobile {
+        opacity: .1;
     }
 
     section.planos .card a,
