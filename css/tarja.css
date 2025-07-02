@@ -39,6 +39,11 @@
       margin-top: -7px;
 }
 
+.tarjaImage {
+    position: fixed;
+    left: 0;
+    z-index: 99;
+}
 
 @media (min-width: 1080px) {
     div.tarja img.mobile {

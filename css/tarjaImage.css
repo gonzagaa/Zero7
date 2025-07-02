@@ -1,0 +1,28 @@
+.tarjaImage img {
+    width: 100%;
+}
+
+#home.activeTarjaImage {
+  padding-top: 7.2rem;
+}
+
+#navigation.activeTarjaImage {
+    top: 6rem;
+}
+
+@media (min-width: 1080px) {
+ nav#navigation.activeTarjaImage {
+        top: 7.5rem;
+        border-radius: 0 0 2rem 2rem;
+    }
+
+    div.tarjaImage {
+        width: calc(100% - 200px);
+        left: 100px;
+        top: 2rem;
+    }
+
+    div.tarjaImage img {
+        border-radius: 2rem 2rem 0 0;
+    }
+}
