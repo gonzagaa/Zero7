@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.tarjaImage img.desktop {
+    display: none;
+}
+
 #home.activeTarjaImage {
   padding-top: 7.2rem;
 }
@@ -24,6 +28,14 @@
 
     div.tarjaImage img {
         border-radius: 2rem 2rem 0 0;
+    }
+
+    div.tarjaImage img.mobile {
+        display: none;
+    }
+
+    div.tarjaImage img.desktop {
+        display: inherit;
     }
 }
 
