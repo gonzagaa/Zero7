@@ -3,6 +3,13 @@
     position: relative;
 }
 
+.planos header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .planos img.cupom {
     width: 35rem;
     margin-bottom: 2rem;
@@ -303,6 +310,49 @@ body section.planos .wrapper .swiper.mySwiper4 {
     color: #8298b7;
 
     transition: all 300ms ease-in-out;
+}
+
+.planos header a {
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.planos header button.corrida {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    font-size: 1.8rem;
+    font-family: var(--ncs);
+    background: linear-gradient(45deg, #1da4f3, #056ba6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    border: none;
+
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+
+
+}
+
+.planos header button.corrida ion-icon {
+    color: var(--primary-color);
+
+    transition: all 300ms ease-in-out;
+}
+
+.planos header button.corrida:hover {
+    filter: brightness(1.4);
+}
+
+.planos header button.corrida:hover ion-icon {
+    margin-left: 1rem;
 }
 
 @media (min-width: 1080px) {
