@@ -4,7 +4,7 @@
 }
 
 .planos img.cupom {
-    width: 20rem;
+    width: 35rem;
     margin-bottom: 2rem;
 }
 
@@ -31,7 +31,6 @@
 }
 
 .planos img.bg.arraia {
-    height: initial;
 }
 
 .planos img.bg.arraia.desktop {
@@ -317,6 +316,10 @@ body section.planos .wrapper .swiper.mySwiper4 {
 
     section.planos img.bg.arraia.mobile {
         opacity: .1;
+    }
+
+    section.planos img.cupom {
+        width: 45rem;
     }
 
     section.planos .card a,
