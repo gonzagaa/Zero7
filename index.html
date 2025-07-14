@@ -21,6 +21,20 @@
   })(window,document,'script','dataLayer','GTM-KCJQPMC');</script>
   <!-- End Google Tag Manager -->
 
+  <!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
+  n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '553722946901869');
+</script>
+<!-- End Meta Pixel Code -->
+
+
     <link
     rel="stylesheet"
     href="https://unpkg.com/lenis@1.1.14/dist/lenis.css"
@@ -975,6 +989,54 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCJQPMC"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+     <script>
+      function getFbp() {
+      const existing = localStorage.getItem('_fbp');
+      if (existing) return existing;
+      const fbp = 'fb.1.' + Date.now() + '.' + Math.floor(Math.random() * 1e10);
+      localStorage.setItem('_fbp', fbp);
+      return fbp;
+    }
+
+    function getFbc() {
+      const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+      if (!fbclid) return '';
+      return 'fb.1.' + Date.now() + '.' + fbclid;
+    }
+
+    function generateEventID() {
+      return '_' + Math.random().toString(36).substring(2, 11);
+    }
+
+    function sendPageViewEvent() {
+      const eventID = generateEventID();
+      const fbp = getFbp();
+      const fbc = getFbc();
+
+      // Disparo do Pixel
+      fbq('track', 'PageView', {}, { eventID });
+      console.log('📤 Pixel PageView enviado com eventID:', eventID);
+
+      // Disparo da API
+      fetch('https://backend-api-zero7.vercel.app/api/send-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: 'PageView',
+          event_id: eventID,
+          fbp,
+          fbc,
+          email: 'anonimo@teste.com'
+        })
+      })
+        .then(res => res.json())
+        .then(data => console.log('📥 Resposta API Facebook:', data))
+        .catch(err => console.error('❌ Erro na chamada da API:', err));
+    }
+
+    // Execute assim que a página carregar
+    window.addEventListener('DOMContentLoaded', sendPageViewEvent);
+     </script>
     <script>
     let prefix = ["https://app.4st.com.br"];
 
