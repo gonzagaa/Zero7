@@ -1,5 +1,5 @@
 .tarjaTimerNav {
-    background: #fff;
+    background: linear-gradient(to right, #dbf2ff, #fff, #dbf2ff);
     width: 100%;
 
     display: none;
@@ -75,7 +75,6 @@
     nav#navigation.activeTarja {
         top: 5rem;
         border-radius: 0 0 2rem 2rem;
-        border: 1px solid #fff;
     }
 
     header#home.activeTarjaHome {
