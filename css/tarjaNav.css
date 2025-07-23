@@ -1,5 +1,5 @@
 .tarjaTimerNav {
-    background: rgb(179, 89, 0);
+    background: #b39b00;
     width: 100%;
 
     display: none;
@@ -78,6 +78,9 @@
     }
 
     div.tarjaTimerNav .countdown {
+    }
+
+    div.tarjaTimerNav p.dois {
         margin-inline: 3rem;
     }
 
