@@ -119,7 +119,7 @@
     max-width: 100vw;
     height: auto;
 
-      filter: saturate(120%);
+      filter: saturate(140%);
   }
   
   #home .image img.bg {
