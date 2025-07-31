@@ -15,7 +15,7 @@
 }
 
 @media (min-width: 1080px) {
- nav#navigation.activeTarjaImage {
+    nav#navigation.activeTarjaImage {
         top: 7.5rem;
         border-radius: 0 0 2rem 2rem;
     }
@@ -43,6 +43,11 @@
       div.tarjaImage {
         width: calc(100% - 340px);
         left: 170px;
-        top: 2.5rem;
+        top: 2rem;
       } 
+
+      nav#navigation.activeTarjaImage {
+        top: 9rem;
+        border-radius: 0 0 2rem 2rem;
+    }
 }

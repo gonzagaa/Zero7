@@ -118,6 +118,8 @@
     width: auto;
     max-width: 100vw;
     height: auto;
+
+      filter: saturate(120%);
   }
   
   #home .image img.bg {
@@ -212,7 +214,7 @@
       position: absolute;
       top: 0;
       right:0;
-
+      filter: saturate(130%);
       mask-image: linear-gradient(to bottom, #000 60%, transparent);
     }
   
