@@ -12,7 +12,7 @@
 
 .planos img.cupom {
     width: 35rem;
-    margin-bottom: 2rem;
+    margin-bottom: 6rem;
 }
 
 .planos.white header h2 {
@@ -370,6 +370,7 @@ body section.planos .wrapper .swiper.mySwiper4 {
 
     section.planos img.cupom {
         width: 45rem;
+        margin-bottom: 7rem;
     }
 
     section.planos .card a,
