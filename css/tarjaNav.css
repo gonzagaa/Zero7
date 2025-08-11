@@ -1,5 +1,5 @@
 .tarjaTimerNav {
-    background: #b39b00;
+    background: #008d81;
     width: 100%;
 
     display: none;
@@ -11,11 +11,18 @@
     position: fixed;
     top: 0;
     z-index: 10;
+    padding-block: 1.5rem;
 }
 
 .tarjaTimerNav a {
     text-decoration: none;
     color: #ffffff;
+}
+
+.tarjaTimerNav .wrapper {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
 }
 
 .tarjaTimerNav.active {
@@ -25,8 +32,8 @@
 }
 
 .tarjaTimerNav p {
-    font-size: 1.4rem;
-    padding-block: .5rem;
+    font-size: 1.7rem;
+    text-align: left;
 }
 
 .tarjaTimerNav p span {
@@ -36,7 +43,7 @@
 .tarjaTimerNav .countdown {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 13px;
       font-size: 2rem;
 }
 
@@ -47,12 +54,12 @@
 }
 
 .tarjaTimerNav .label {
-      font-size: 1.2rem;
-      margin-top: -7px;
+      font-size: .8rem;
+      margin-top: -5px;
 }
 
 #home.activeTarjaHome {
-     margin-top: 10rem;
+     margin-top: 7.8rem;
 }
 
 @media (min-width: 1080px) {
@@ -81,7 +88,6 @@
     }
 
     div.tarjaTimerNav p.dois {
-        margin-inline: 3rem;
     }
 
     nav#navigation.activeTarja {
