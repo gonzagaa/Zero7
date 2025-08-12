@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Data final: 24 de junho de 2025 às 00:01:00 (horário local)
-const dataFinal = new Date("2025-08-11T23:59:00");
+const dataFinal = new Date("2025-08-13T23:59:00");
 
 const diasEl = document.getElementById('dias');
 const horasEl = document.getElementById('horas');
