@@ -170,6 +170,38 @@ if (larguraDaTela < 800) {
     });
 }
 
+if (larguraDaTela < 800) {
+  var swiper11 = new Swiper(".mySwiper11", {
+      slidesPerView: 1,
+      spaceBetween: 5,
+      loop: true,
+      grabCursor: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+} else {
+  var swiper11 = new Swiper(".mySwiper11", {
+      slidesPerView: 2,
+      spaceBetween: 30,
+      loop: true,
+      grabCursor: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+}
+
 const modalGeral = document.getElementById("modalDepoimentos");
 const videoContainerGeral = document.getElementById("video-container-geral");
 const closeBtnGeral = document.querySelector(".close-depoimento-geral");
