@@ -32,8 +32,8 @@
     inset: 0;
     z-index: 5;
 
-    backdrop-filter: blur(11px) saturate(108%);
-    -webkit-backdrop-filter: blur(11px) saturate(108%);
+    backdrop-filter: blur(3px) saturate(108%);
+    -webkit-backdrop-filter: blur(3px) saturate(108%);
     background: rgba(255, 255, 255, 0);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.836);
