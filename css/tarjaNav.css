@@ -1,5 +1,5 @@
 .tarjaTimerNav {
-    background: #008d81;
+    background: #10b521;
     width: 100%;
 
     display: none;
@@ -32,12 +32,13 @@
 }
 
 .tarjaTimerNav p {
-    font-size: 1.7rem;
+    font-size: 1.2rem;
     text-align: left;
 }
 
 .tarjaTimerNav p span {
     font-weight: 600;
+    font-size: 1.4rem;
 }
 
 .tarjaTimerNav .countdown {
