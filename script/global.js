@@ -258,19 +258,39 @@ document.addEventListener("DOMContentLoaded", () => {
     closePopup();
   });
 
-  // Fechar ao clicar na overlay
+  // Fechar ao clicar fora do conteúdo (na overlay)
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) closePopup();
   });
 
-  function closePopup() {
+  // Fechar ao clicar em QUALQUER link dentro do popup (ex.: <a href="#plan">...</a>)
+  content.addEventListener("click", (e) => {
+    const anchor = e.target.closest("a");
+    if (anchor) {
+      // fecha instantaneamente para não atrapalhar o scroll até a âncora
+      closePopup({ instant: true });
+      // não damos preventDefault: o navegador segue o link normalmente
+    }
+  });
+
+  function closePopup(opts = {}) {
+    const { instant = false } = opts;
     content.classList.remove("active");
+
+    if (instant) {
+      overlay.classList.remove("active");
+      overlay.style.opacity = "";
+      return;
+    }
+
     overlay.style.opacity = "1";
     setTimeout(() => {
       overlay.classList.remove("active");
-    }, 300); // tempo igual ao da transição CSS
+      overlay.style.opacity = "";
+    }, 300); // mesmo tempo da transição no CSS
   }
 });
+
 
 // Data final: 24 de junho de 2025 às 00:01:00 (horário local)
 const dataFinal = new Date("2025-09-16T23:59:00");
