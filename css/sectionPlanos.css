@@ -499,7 +499,7 @@ body section.planos .wrapper .swiper.mySwiper4 {
     }
 
     section.planos.bit {
-        padding-inline: 20%;
+        padding-inline: 15%;
     }
 
     section.planos.bit a button {
@@ -508,5 +508,11 @@ body section.planos .wrapper .swiper.mySwiper4 {
     section.planos.bit .swiper-button-next,
     section.planos.bit .swiper-button-prev {
         display: none;
+    }
+}
+
+@media (min-width: 1700px) {
+    section.planos.bit {
+        padding-inline: 20%;
     }
 }
