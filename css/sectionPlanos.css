@@ -198,6 +198,42 @@
     color: var(--primary-color);
 }
 
+.planos .card .oldPrice {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    color: #ffffff;
+    background: #f300003a;
+    padding: .5rem;
+    width: 50%;
+    border-radius: 1rem;
+    font-weight: 300;
+}
+
+.planos .card .oldPrice h4 {
+    font-family: var(--tts);
+    font-weight: 500;
+    
+    position: relative;
+}
+
+.planos .card .oldPrice h4::before {
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 2px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    background: #f60404e8;
+    z-index: 2;
+}
+
+.planos.bit .card .oldPrice h4::before {
+    background: #ff0000e5;
+}
+
+
 .planos .card .price h4 {
     font-size: 3rem;
     color: #fff;
@@ -508,6 +544,13 @@ body section.planos .wrapper .swiper.mySwiper4 {
     section.planos.bit .swiper-button-next,
     section.planos.bit .swiper-button-prev {
         display: none;
+    }
+
+    section.planos .card .oldPrice h4::before {
+        width: 30%;
+    }
+
+    section.planos.bit .card .oldPrice h4::before {
     }
 }
 
