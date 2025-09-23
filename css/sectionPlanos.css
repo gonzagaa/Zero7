@@ -202,9 +202,7 @@
     font-size: 2rem;
     margin-bottom: 1.5rem;
     font-weight: 400;
-    color: #ffffff;
-    background: #f300003a;
-    padding: .5rem;
+    color: #ffffffc2;
     width: 50%;
     border-radius: 1rem;
     font-weight: 300;
@@ -224,9 +222,13 @@
     height: 2px;
     top: 50%;
     transform: translate(-50%, -50%);
-    left: 50%;
+    left: 48.5%;
     background: #f60404e8;
     z-index: 2;
+}
+
+.planos.bit .card .oldPrice h4 {
+    color: #02060f;
 }
 
 .planos.bit .card .oldPrice h4::before {
