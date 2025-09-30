@@ -32,6 +32,7 @@
 
     div.tarjaImage img.mobile {
         display: none;
+        
     }
 
     div.tarjaImage img.desktop {
