@@ -28,7 +28,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="../css/index.css?v=19">
+  <link rel="stylesheet" href="../css/index.css?v=20">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - Obrigado.</title>
@@ -284,14 +284,14 @@
           <p><span>Acesse abaixo as ferramentas que vão impulsionar seus trades:</span></p>
         </div>
 
-        <div class="cards">
+        <div class="cards">  
           <div class="card">
             <img src="../assets/planocarreira.webp" alt="">
 
             <div class="text">
               <h3>Avaliação comportamental</h3>
               <p>Conheça como você se comporta diante da tela e descubra os gatilhos que podem atrapalhar seu sucesso no Day trade.</p>
-              <a target="_blank" href=""><button class="button">Iniciar Avaliação</button></a>
+              <button class="button openModalMerlin">Iniciar Avaliação</button>
             </div>
           </div>
 
@@ -463,6 +463,48 @@
     <ion-icon name="logo-whatsapp"></ion-icon>
   </a>
 
+  <!-- Modal -->
+  <div id="modalMerlin" class="modalMerlin">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <!-- Chatbot dentro do modal -->
+      <div id="merlin-container" style="width: 100%; height: 500px;"></div>
+    </div>
+  </div>
+
+  <!-- Script do Merlin -->
+  <script nonce="c0532c60f0f7d243fc211fd0af58ca7d" src="https://scripts.gomerlin.com.br/merlin.js"></script>
+  <script>
+    // Inicializa o chatbot apenas quando o modal abrir
+    let merlinLoaded = false;
+    const modal = document.getElementById("modalMerlin");
+    const openBtn = document.querySelector(".openModalMerlin");
+    const closeBtn = modal.querySelector(".close");
+
+    openBtn.addEventListener("click", () => {
+      modal.classList.add("active");
+      if (!merlinLoaded) {
+        Merlin.Container.initFromSource(
+          "https://tools.gomerlin.com.br/chat/9caf6f2c-4fc3-4c49-9034-aecc66e42045",
+          "#merlin-container"
+        );
+        merlinLoaded = true;
+      }
+    });
+
+    // Fecha ao clicar no X
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+
+    // Fecha ao clicar fora do conteúdo
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+      }
+    });
+  </script>
+
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCJQPMC" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
@@ -615,7 +657,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="../script/global.js?v=19"></script>
+  <script src="../script/global.js?v=20"></script>
   <script src="../script/4selet.js"></script>
 </body>
 </html>
