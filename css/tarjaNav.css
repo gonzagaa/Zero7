@@ -22,7 +22,7 @@
 .tarjaTimerNav .wrapper {
     display: flex;
     align-items: center;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .tarjaTimerNav.active {
@@ -32,13 +32,12 @@
 }
 
 .tarjaTimerNav p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     text-align: left;
 }
 
 .tarjaTimerNav p span {
     font-weight: 600;
-    font-size: 1.4rem;
 }
 
 .tarjaTimerNav .countdown {
@@ -60,7 +59,7 @@
 }
 
 #home.activeTarjaHome {
-     margin-top: 7rem;
+     margin-top: 8rem;
 }
 
 .countdown.dois {
