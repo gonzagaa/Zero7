@@ -16,8 +16,6 @@
         link.classList.add('link4selet');
     });
 
-
-
     jQuery(document).ready(function($){
     	var sPageURL = window.location.search.substring(1), sURLVariables = sPageURL.split('&');
     	var parametrosGet = sURLVariables.join('&');
