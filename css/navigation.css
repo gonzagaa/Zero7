@@ -38,7 +38,7 @@ nav {
   }
   
   nav .logo img {
-    width: 9rem;
+    width: 11rem;
   }
   
   nav button {
@@ -207,7 +207,7 @@ nav {
       }
 
       nav#navigation .logo img {
-        width: 7rem;
+        width: 9rem;
       }
 
       body nav#navigation button#navButton {
