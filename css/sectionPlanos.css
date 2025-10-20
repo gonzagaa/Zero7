@@ -409,6 +409,8 @@ body section.planos .wrapper .swiper.mySwiper4 {
     section.planos img.bg.arraia.desktop {
         display: inherit;
         width: 100%;
+        inset: 0;
+        object-fit: cover;
     }
 
     section.planos img.bg.arraia.mobile {
