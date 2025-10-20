@@ -415,6 +415,7 @@ body section.planos .wrapper .swiper.mySwiper4 {
 
     section.planos img.bg.arraia.mobile {
         opacity: .1;
+        display: none;
     }
 
     section.planos img.cupom {
