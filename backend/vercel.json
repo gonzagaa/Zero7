@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/send-event.js": {
-      "runtime": "nodejs18.x",
+      "runtime": "nodejs20.x",
       "memory": 128,
       "maxDuration": 10
     }

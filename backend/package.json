@@ -1,10 +1,10 @@
 {
   "name": "facebook-api-conversion",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "type": "commonjs",
   "main": "api/send-event.js",
-  "engines": { "node": "18.x" },
+  "engines": { "node": ">=18" },
   "scripts": {
     "start": "node api/send-event.js"
   },
