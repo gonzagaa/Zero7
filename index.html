@@ -1361,53 +1361,69 @@
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <script>
-    function getFbp() {
-      const existing = localStorage.getItem('_fbp');
-      if (existing) return existing;
-      const fbp = 'fb.1.' + Date.now() + '.' + Math.floor(Math.random() * 1e10);
-      localStorage.setItem('_fbp', fbp);
-      return fbp;
-    }
+  // gera e guarda o eventID ANTES para casar Pixel + API
+  window.__eventID = '_' + Math.random().toString(36).slice(2, 11);
 
-    function getFbc() {
-      const fbclid = new URLSearchParams(window.location.search).get('fbclid');
-      if (!fbclid) return '';
-      return 'fb.1.' + Date.now() + '.' + fbclid;
-    }
+  function pixelReady() {
+    return typeof window.fbq === 'function' && window.fbq.loaded;
+  }
 
-    function generateEventID() {
-      return '_' + Math.random().toString(36).substring(2, 11);
-    }
+  function safeTrackPageView() {
+    if (!pixelReady()) return false;
+    fbq('track', 'PageView', {}, { eventID: window.__eventID });
+    console.log('📤 Pixel PageView enviado com eventID:', window.__eventID);
+    return true;
+  }
 
-    function sendPageViewEvent() {
-      const eventID = generateEventID();
-      const fbp = getFbp();
-      const fbc = getFbc();
-
-      // Disparo do Pixel
-      fbq('track', 'PageView', {}, { eventID });
-      console.log('📤 Pixel PageView enviado com eventID:', eventID);
-
-      // Disparo da API
-      fetch('https://backend-api-zero7.vercel.app/api/send-event', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_name: 'PageView',
-          event_id: eventID,
-          fbp,
-          fbc,
-          email: 'anonimo@teste.com'
-        })
-      })
-        .then(res => res.json())
-        .then(data => console.log('📥 Resposta API Facebook:', data))
-        .catch(err => console.error('❌ Erro na chamada da API:', err));
-    }
-
-    // Execute assim que a página carregar
-    window.addEventListener('DOMContentLoaded', sendPageViewEvent);
+  window.addEventListener('DOMContentLoaded', function () {
+    // tenta por até ~3s (20 tentativas × 150ms)
+    let tries = 0;
+    const iv = setInterval(function () {
+      tries++;
+      if (safeTrackPageView() || tries > 20) clearInterval(iv);
+    }, 150);
+  });
   </script>
+
+  <script>
+  function getFbp() {
+    const existing = localStorage.getItem('_fbp');
+    if (existing) return existing;
+    const fbp = 'fb.1.' + Date.now() + '.' + Math.floor(Math.random() * 1e10);
+    localStorage.setItem('_fbp', fbp);
+    return fbp;
+  }
+
+  function getFbc() {
+    const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+    if (!fbclid) return '';
+    return 'fb.1.' + Date.now() + '.' + fbclid;
+  }
+
+  function sendCapiPageView() {
+    const fbp = getFbp();
+    const fbc = getFbc();
+
+    fetch('https://backend-api-zero7.vercel.app/api/send-event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event_name: 'PageView',
+        event_id: window.__eventID,           // <<< MESMO ID do Pixel
+        fbp,
+        fbc,
+        email: 'anonimo@teste.com'
+      })
+    })
+    .then(r => r.json())
+    .then(d => console.log('📥 Resposta API Facebook:', d))
+    .catch(e => console.error('❌ Erro na chamada da API:', e));
+  }
+
+  // mantenha o envio da API no DOMContentLoaded
+  window.addEventListener('DOMContentLoaded', sendCapiPageView);
+  </script>
+
   <script>
     let prefix = ["https://app.4st.com.br"];
 
