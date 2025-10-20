@@ -1,0 +1,28 @@
+.planos.halloween .card {
+    /* From https://css.glass */
+background: rgba(0, 0, 0, 0.68);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+}
+
+.planos.halloween .card a button {
+background: radial-gradient(at center bottom, #FA6725, #E03C11);
+color: #000;
+filter: drop-shadow(0 0 20px #f36b1d49);
+}
+
+.planos.halloween .card a button:hover {
+    filter: drop-shadow(0 0 40px #f37d1d76);
+}
+
+.planos.halloween .card .title::before {
+    background: linear-gradient(to right, transparent, #FA6725, transparent);
+}
+  
+.planos.halloween .card .price h4 span,
+.planos.halloween .card .price h5 span {
+    background: linear-gradient(45deg, #FA6725, #E03C11);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
