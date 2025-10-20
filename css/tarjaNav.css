@@ -1,5 +1,5 @@
 .tarjaTimerNav {
-    background: #10b579;
+    background: radial-gradient(at center bottom, #FA6725, #E03C11);
     width: 100%;
 
     display: none;
@@ -11,8 +11,7 @@
     position: fixed;
     top: 0;
     z-index: 10;
-    padding-block: 1.5rem;
-    padding-top: 0;
+    padding-block: 2rem;
 }
 
 .tarjaTimerNav h3 {
@@ -56,6 +55,7 @@
       justify-content: center;
       gap: 13px;
       font-size: 1.7rem;
+      font-weight: 700;
 }
 
 .tarjaTimerNav .countdown div {
@@ -67,10 +67,11 @@
 .tarjaTimerNav .label {
       font-size: .8rem;
       margin-top: -5px;
+      font-weight: 400;
 }
 
 #home.activeTarjaHome {
-     margin-top: 8.3rem;
+     margin-top: 7rem;
 }
 
 .countdown.dois {
