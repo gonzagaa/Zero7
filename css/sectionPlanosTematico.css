@@ -1,27 +1,83 @@
-.planos.halloween .card {
+.planos.tema .card {
     /* From https://css.glass */
-background: rgba(0, 0, 0, 0.68);
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
+background: linear-gradient(to top, #000, #0e0e0e);
 }
 
-.planos.halloween .card a button {
-background: radial-gradient(at center bottom, #FA6725, #E03C11);
-filter: drop-shadow(0 0 20px #f36b1d49);
+.planos.tema .card .title {
+    background: linear-gradient(to bottom, #000000, #000000);
 }
 
-.planos.halloween .card a button:hover {
-    filter: drop-shadow(0 0 40px #f37d1d76);
+.planos.tema .card a button {
+    background: radial-gradient(at center bottom, #ffffff, #a9a9a9);
+    filter: drop-shadow(0 0 20px #f6f6f649);
+    color: #000;
 }
 
-.planos.halloween .card .title::before {
-    background: linear-gradient(to right, transparent, #FA6725, transparent);
+.planos.tema .card a button:hover {
+    filter: drop-shadow(0 0 40px #ffffff34);
+}
+
+.planos.tema .card .title::before {
+    background: linear-gradient(to right, transparent, #ffffff, transparent);
 }
   
-.planos.halloween .card .price h4 span,
-.planos.halloween .card .price h5 span {
-    background: linear-gradient(45deg, #FA6725, #E03C11);
+.planos.tema .card .price h4 span,
+.planos.tema .card .price h5 span {
+    background: linear-gradient(45deg, #cdcdcd, #636363);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.planos.tema .card .topics p::before {
+    background: linear-gradient(to right, #ffffff, transparent 70%);
+}
+
+.planos.tema .card .topics ion-icon {
+    color: #fff;
+}
+
+section.planos.tema .swiper-button-next,
+section.planos.tema .swiper-button-prev {
+    border: 3px solid #ffffffb2;
+    color: #ffffff8c;
+}
+
+.planos.tema .swiper-pagination-bullet-active {
+    background-color: #ffffff; 
+}
+
+.planos .botoes {
+    display: flex;
+    gap: 1rem .5rem; 
+
+    margin-top: 2rem;
+}
+
+.planos .botoes button {
+    padding: 1rem;
+    border-radius: .5rem;
+    color: #fff;
+    font-size: 1.2rem;
+
+    border: 1px solid #464646;
+    background: linear-gradient(45deg, #000, #1a1a1a);
+
+    transition: all 300ms ease-in-out;
+}
+
+.planos .botoes button:hover {
+    cursor: pointer;
+    background:#1c1c1c;
+}
+
+.planos .botoes button.selecionado {
+    background: linear-gradient(45deg, #ffffff, #ababab);
+    color: #000;
+}
+
+@media (min-width: 1080px) {
+    section.planos .botoes button {
+        padding: 1rem 2rem;
+        font-size: 1.4rem;
+    }
 }
