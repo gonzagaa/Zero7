@@ -1,0 +1,175 @@
+{
+  "30dias": {
+    "trainee": {
+      "parcel": "12x R$18,20",
+      "avista": "ou R$182,80 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/868db1",
+      "maxDias": 30
+    },
+
+    "junior": {
+      "parcel": "12x R$27,48",
+      "avista": "ou R$274,80 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/2ad99e",
+      "maxDias": 30
+    },
+
+    "pleno": {
+      "parcel": "12x R$55,08",
+      "avista": "ou R$550,80 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/951a2e",
+      "maxDias": 30
+    },
+
+    "senior": {
+      "parcel": "12x R$91,88",
+      "avista": "ou R$918,80 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/5b4fbd",
+      "maxDias": 30
+    },
+
+    "expert": {
+      "parcel": "12x R$147,08",
+      "avista": "ou R$1.470,80 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/da7ab3",
+      "maxDias": 30
+    },
+
+    "master": {
+      "parcel": "12x R$179,48",
+      "avista": "ou R$1.794,80 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/5ad741",
+      "maxDias": 30
+    },
+
+    "bit_trainee": {
+      "parcel": "12x R$18,20",
+      "avista": "ou R$182,80 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/6f46d5",
+      "maxDias": 30
+    },
+
+    "bit_junior": {
+      "parcel": "12x R$27,48",
+      "avista": "ou R$274,80 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/102e44",
+      "maxDias": 30
+    }
+  },
+
+  "60dias": {
+    "trainee": {
+      "parcel": "12x R$25,13",
+      "avista": "ou R$251,35 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/edc2b2",
+      "maxDias": 60
+    },
+
+    "junior": {
+      "parcel": "12x R$37,78",
+      "avista": "ou R$377,85 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/8296d5",
+      "maxDias": 60
+    },
+
+    "pleno": {
+      "parcel": "12x R$75,73",
+      "avista": "ou R$757,35 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/eb9d60",
+      "maxDias": 60
+    },
+
+    "senior": {
+      "parcel": "12x R$126,33",
+      "avista": "ou R$1.263,35 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/a3703e",
+      "maxDias": 60
+    },
+
+    "expert": {
+      "parcel": "12x R$202,23",
+      "avista": "ou R$2.022,35 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/6bfaa2",
+      "maxDias": 60
+    },
+
+    "master": {
+      "parcel": "12x R$246,78",
+      "avista": "ou R$2.467,85 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/a2e62e",
+      "maxDias": 60
+    },
+
+    "bit_trainee": {
+      "parcel": "12x R$25,13",
+      "avista": "ou R$251,35 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/b013c9",
+      "maxDias": 60
+    },
+    
+    "bit_junior": {
+      "parcel": "12x R$37,78",
+      "avista": "ou R$377,85 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/f33c79",
+      "maxDias": 60
+    }
+  },
+
+  "reinicio": {
+    "trainee": {
+      "parcel": "12x R$31,99",
+      "avista": "ou R$319,90 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/522fa1",
+      "maxDias": "60 + Reinício"
+    },
+
+    "junior": {
+      "parcel": "12x R$48,09",
+      "avista": "ou R$480,90 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/16fe6c",
+      "maxDias": "60 + Reinício"
+    },
+
+    "pleno": {
+      "parcel": "12x R$96,39",
+      "avista": "ou R$963,90 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/3d4156",
+      "maxDias": "60 + Reinício"
+    },
+
+    "senior": {
+      "parcel": "12x R$160,79",
+      "avista": "ou R$1.607,90 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/0481e7",
+      "maxDias": "60 + Reinício"
+    },
+
+    "expert": {
+      "parcel": "12x R$257,39",
+      "avista": "ou R$2.573,90 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/8f4197",
+      "maxDias": "60 + Reinício"
+    },
+
+    "master": {
+      "parcel": "12x R$314,09",
+      "avista": "ou R$3.140,90 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/e64380",
+      "maxDias": "60 + Reinício"
+    },
+
+    "bit_trainee": {
+      "parcel": "12x R$31,99",
+      "avista": "ou R$319,90 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/40238d",
+      "maxDias": "60 + Reinício"
+    },
+
+    "bit_junior": {
+      "parcel": "12x R$48,09",
+      "avista": "ou R$480,90 à vista",
+      "checkout": "https://app.zero7.com.br/checkout/c44cad",
+      "maxDias": "60 + Reinício"
+    }
+  }
+}

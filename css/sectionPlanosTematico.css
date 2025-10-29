@@ -57,7 +57,7 @@ section.planos.tema .swiper-button-prev {
     padding: 1rem;
     border-radius: .5rem;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 
     border: 1px solid #464646;
     background: linear-gradient(45deg, #000, #1a1a1a);
@@ -75,9 +75,55 @@ section.planos.tema .swiper-button-prev {
     color: #000;
 }
 
+.planos.bit .botoes button {
+    background: linear-gradient(45deg, #00000030, rgba(215, 215, 215, 0.108));
+    color: #000;
+    border: 1px solid #46464647;
+}
+
+.planos.bit .botoes button:hover {
+    background: #00000020;
+}
+
+.planos.bit .botoes button.selecionado {
+    background: var(--gradient);
+    color: #fff;
+}
+
+.planos .textBotoes p {
+    font-size: 1.4rem;
+    color: #ffffff80;
+
+    position: relative;
+    z-index: 1;
+
+    margin-top: 2rem;
+}
+
+.planos .textBotoes p.reinicio {
+    font-size: 1.2rem;
+}
+
+/* deixa tudo escondido por padrão... */
+.textBotoes p { display: none; }
+/* ...e só mostra o ativo */
+.textBotoes p.is-active { display: block; }
+
+
+
 @media (min-width: 1080px) {
     section.planos .botoes button {
-        padding: 1rem 2rem;
-        font-size: 1.4rem;
+        padding: 1rem 3rem;
+        font-size: 1.6rem;
+    }
+    
+    section.planos .textBotoes p {
+        font-size: 1.6rem;
+        padding-inline: 20%;
+    }
+
+    section.planos .textBotoes p.reinicio {
+        font-size: 1.6rem;
+        padding-inline: 10%;
     }
 }
