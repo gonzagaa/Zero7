@@ -7,7 +7,7 @@ background: linear-gradient(to top, #000, #0e0e0e);
     background: linear-gradient(to bottom, #000000, #000000);
 }
 
-.planos.tema .card a button {
+/* .planos.tema .card a button {
     background: radial-gradient(at center bottom, #ffffff, #a9a9a9);
     filter: drop-shadow(0 0 20px #f6f6f649);
     color: #000;
@@ -15,7 +15,7 @@ background: linear-gradient(to top, #000, #0e0e0e);
 
 .planos.tema .card a button:hover {
     filter: drop-shadow(0 0 40px #ffffff34);
-}
+} */
 
 .planos.tema .card .title::before {
     background: linear-gradient(to right, transparent, #ffffff, transparent);
@@ -71,8 +71,7 @@ section.planos.tema .swiper-button-prev {
 }
 
 .planos .botoes button.selecionado {
-    background: linear-gradient(45deg, #ffffff, #ababab);
-    color: #000;
+    background: var(--gradient);
 }
 
 .planos.bit .botoes button {
