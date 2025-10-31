@@ -7,16 +7,16 @@
 }
 
 #home.activeTarjaImage {
-  padding-top: 7.2rem;
+  padding-top: 8.2rem;
 }
 
 #navigation.activeTarjaImage {
-    top: 6rem;
+    top: 6.8rem;
 }
 
 @media (min-width: 1080px) {
     nav#navigation.activeTarjaImage {
-        top: 7.5rem;
+        top: 9rem;
         border-radius: 0 0 2rem 2rem;
     }
 
@@ -48,13 +48,13 @@
       } 
 
       nav#navigation.activeTarjaImage {
-        top: 9rem;
+        top: 9.5rem;
         border-radius: 0 0 2rem 2rem;
     }
 }
 
 @media (min-width: 2500px) {
     nav#navigation.activeTarjaImage {
-        top: 11.5rem;
+        top: 12.5rem;
     }
 }
