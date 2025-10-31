@@ -7,7 +7,7 @@
 */
 
 (function () {
-  const DATA_URL = "/script/planos.json";
+  const DATA_URL = "./script/planos.json";
   const DEFAULT_MODE = "60dias";
   const VALID_MODES = ["30dias", "60dias", "reinicio"];
 
