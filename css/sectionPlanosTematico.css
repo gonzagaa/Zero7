@@ -36,12 +36,6 @@ background: linear-gradient(to top, #000, #0e0e0e);
     color: #fff;
 }
 
-section.planos.tema .swiper-button-next,
-section.planos.tema .swiper-button-prev {
-    border: 3px solid #ffffffb2;
-    color: #ffffff8c;
-}
-
 .planos.tema .swiper-pagination-bullet-active {
     background-color: #ffffff; 
 }
@@ -108,7 +102,43 @@ section.planos.tema .swiper-button-prev {
 /* ...e só mostra o ativo */
 .textBotoes p.is-active { display: block; }
 
+/* animação antiga, só pro máximo de dias */
+.flash-change {
+  animation: flashChange 0.6s ease-out;
+}
 
+@keyframes flashChange {
+  0% {
+    color: #0080c9;
+    text-shadow: 0 0 8px #007fc959;
+  }
+  50% {
+    color: #0080c9;
+    text-shadow: 0 0 4px #007fc959;
+  }
+  100% {
+    color: inherit;
+    text-shadow: none;
+  }
+}
+
+/* estado base: garante transição suave sempre depois da 1ª troca */
+.flash-base {
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+/* estado ativo rápido: destaque */
+.flash-active {
+  color: #0080c9; /* amarelo destaque */
+  text-shadow: 0 0 8px #007fc98e,
+               0 0 16px #007fc99c;
+}
+
+.planos.bit .flash-active {
+  color: #0080c9; /* amarelo destaque */
+  text-shadow: 0 0 8px #007fc925,
+               0 0 16px #007fc927;
+}
 
 @media (min-width: 1080px) {
     section.planos .botoes button {
