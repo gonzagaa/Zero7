@@ -28,7 +28,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=33">
+  <link rel="stylesheet" href="./css/index.css?v=34">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
@@ -274,6 +274,25 @@
 </div> -->
 
   <div class="tarjaImage">
+    <div class="countdown countdown--promo" id="countdownPromo">
+  <div>
+    <span id="diasPromo">00</span>
+    <span class="label">Dias</span>
+  </div>
+  <div>
+    <span id="horasPromo">00</span>
+    <span class="label">Horas</span>
+  </div>
+  <div>
+    <span id="minutosPromo">00</span>
+    <span class="label">Minutos</span>
+  </div>
+  <div>
+    <span id="segundosPromo">00</span>
+    <span class="label">Segundos</span>
+  </div>
+</div>
+
         <a href="#plan">
           <img class="desktop" src="./assets/tarjapopup/tarjaa desk white large (3).avif" alt="">
           <img class="mobile" src="./assets/tarjapopup/tarjaa white small.avif" alt="">
@@ -1691,6 +1710,49 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
 
   <script>
+(() => {
+  // Prazo: 05/11 às 23:59 no fuso de Brasília (-03:00)
+  const fimPromo = new Date("2025-11-05T23:59:00-03:00");
+
+  const root = document.getElementById("countdownPromo");
+  if (!root) return; // se o bloco não estiver na página
+
+  const diasEl = document.getElementById("diasPromo");
+  const horasEl = document.getElementById("horasPromo");
+  const minutosEl = document.getElementById("minutosPromo");
+  const segundosEl = document.getElementById("segundosPromo");
+
+  const pad2 = (n) => String(n).padStart(2, "0");
+
+  function tickPromo() {
+    const agora = new Date();
+    const diff = fimPromo - agora;
+
+    if (diff <= 0) {
+      clearInterval(intervaloPromo);
+      // some com o timer quando acabar
+      root.style.display = "none"; // ou root.remove();
+      return;
+    }
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+
+    diasEl.textContent = pad2(dias);
+    horasEl.textContent = pad2(horas);
+    minutosEl.textContent = pad2(minutos);
+    segundosEl.textContent = pad2(segundos);
+  }
+
+  const intervaloPromo = setInterval(tickPromo, 1000);
+  tickPromo(); // inicializa
+})();
+</script>
+
+
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
       const optionsBase = {
         useEasing: true,
@@ -1741,7 +1803,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=33"></script>
+  <script src="./script/global.js?v=34"></script>
   <script src="./script/4selet.js"></script>
   <script src="./script/blackPlanos.js"></script>
 </body>

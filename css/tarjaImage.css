@@ -7,16 +7,44 @@
 }
 
 #home.activeTarjaImage {
-  padding-top: 8.2rem;
+  padding-top: 15.2rem;
+}
+
+#home.activeTarjaImage .image img.mobile {
+    top: 18%;
 }
 
 #navigation.activeTarjaImage {
-    top: 6.8rem;
+    top: 11rem;
+}
+
+.countdown--promo {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 1.7rem;
+      font-weight: 700;
+
+      background: #000;
+      padding-block: .8rem;
+}
+
+.countdown--promo div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+}
+
+.countdown--promo .label {
+      font-size: .6rem;
+      margin-top: -5px;
+      font-weight: 400;
 }
 
 @media (min-width: 1080px) {
     nav#navigation.activeTarjaImage {
-        top: 9rem;
+        top: 12rem;
         border-radius: 0 0 2rem 2rem;
     }
 
@@ -48,13 +76,13 @@
       } 
 
       nav#navigation.activeTarjaImage {
-        top: 9.5rem;
+        top: 14rem;
         border-radius: 0 0 2rem 2rem;
     }
 }
 
 @media (min-width: 2500px) {
     nav#navigation.activeTarjaImage {
-        top: 12.5rem;
+        top: 15rem;
     }
 }
