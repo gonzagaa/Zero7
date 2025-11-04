@@ -1,7 +1,7 @@
 #home {
     background: var(--bg-black);
-    height: 90vh;
-    max-height: 90vh;
+    height: 100vh;
+    max-height: 100vh;
     overflow: hidden;
   
     position: relative;
