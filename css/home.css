@@ -163,11 +163,11 @@
     header#home {
       justify-content: center;
       position: relative;
-      height: 100vh;
-      max-height: 100vh;
       mask-image: linear-gradient(to top, #000 90%, transparent);
 
       margin-top: 6rem;
+
+      padding-block: 10%;
     }
 
     header#home .blush {
@@ -279,6 +279,10 @@
   }
   
   @media (min-width: 1700px) {
+    header#home {
+      padding-block: 5%;
+    }
+
     header#home .image img.desktop {
       display: inherit;
       width: 100%;
