@@ -17,8 +17,8 @@
 @import './buttonWpp.css';
 @import './modalDepoimento.css';
 @import './tarja.css';
-@import './tarjaNav.css';
-@import './tarjaImage.css';
+@import './tarjaNav.css?v=37';
+@import './tarjaImage.css?v=37';
 @import './popup.css';
 
 @import './author.css';
