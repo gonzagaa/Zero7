@@ -1,4 +1,9 @@
 deployment:
   tasks:
     - export DEPLOY_PATH=$HOME/public_html/home
-    - php $DEPLOY_PATH/tools/bump-css-version.php
+    - cd $DEPLOY_PATH
+    # tenta vários binários de PHP comuns no cPanel; usa o primeiro que existir
+    - if command -v /usr/bin/php >/dev/null 2>&1; then /usr/bin/php tools/bump-css-version.php; \
+      elif command -v /opt/cpanel/ea-php82/root/usr/bin/php >/dev/null 2>&1; then /opt/cpanel/ea-php82/root/usr/bin/php tools/bump-css-version.php; \
+      elif command -v /opt/cpanel/ea-php81/root/usr/bin/php >/dev/null 2>&1; then /opt/cpanel/ea-php81/root/usr/bin/php tools/bump-css-version.php; \
+      else php tools/bump-css-version.php; fi
