@@ -4,14 +4,14 @@
 # Última atualização: 2025-11-04
 
 site:
-  name: "Zero7 — Mesa Proprietária (Tesouraria)"
+  name: "Zero7 — Mesa Proprietária"
   domain: "https://zero7.com.br"
   canonical: "https://zero7.com.br/home"
   language: "pt-BR"
   owner: "Zero7 Tesouraria LTDA"
   cnpj: "49.452.697/0001-20"
   description: |
-    A Zero7 é uma mesa proprietária (tesouraria) brasileira que seleciona e
+    A Zero7 é uma mesa proprietária brasileira que seleciona e
     desenvolve traders para operarem capital da própria empresa. O modelo oferece:
     (1) avaliação com prazo definido, (2) ambiente de incubação remunerada por
     performance, (3) progressão de carreira até contas reais com repasse de
