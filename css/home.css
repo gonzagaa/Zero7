@@ -1,7 +1,6 @@
 #home {
     background: var(--bg-black);
-    height: 100vh;
-    max-height: 100vh;
+    
     overflow: hidden;
   
     position: relative;
@@ -13,6 +12,7 @@
     transition: all 200ms ease-in-out;
     margin-bottom: 0;
 
+    padding-block: 5%;
   }
   
   #home .wrapper {
