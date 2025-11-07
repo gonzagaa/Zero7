@@ -13,7 +13,7 @@ footer::before {
     left: 0;
     right: 0;
     top: 0;
-    height: 1px;
+    height: 1.1px;
     background: linear-gradient(to right, transparent, #023c83, #0080c9, #023c83, transparent);
 }
 
