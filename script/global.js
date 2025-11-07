@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     overlay.classList.add("active");
     content.classList.add("active");
-  }, 2000);
+  }, 3000);
 
   // Fechar com botão X
   closeBtn.addEventListener("click", () => {
