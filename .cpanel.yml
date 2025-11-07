@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOY_PATH=$HOME/public_html/home
+    - php $DEPLOY_PATH/tools/bump-css-version.php
