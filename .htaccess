@@ -1,5 +1,0 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  # Serve /css/index.css pelo proxy PHP
-  RewriteRule ^css/index\.css$ css/index-proxy.php [L]
-</IfModule>
