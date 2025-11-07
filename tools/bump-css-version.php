@@ -1,60 +1,77 @@
 <?php
-// bump-css-version.php
-// Atualiza ?v=<versao> no <link href="./css/index.css"> do index.html
-// e em todos os @import do css/index.css. Não muda sua estrutura.
-// Versão = hash curto do git; se falhar, usa timestamp.
+// Compatível com PHP 7+ (sem str_starts_with). Mostra erros na tela (tire em produção).
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
-$root = __DIR__ . '/..';
+// Caminhos
+$root = realpath(__DIR__ . '/..');
 $indexHtml = $root . '/index.html';
 $indexCss  = $root . '/css/index.css';
 
-// 1) versão
-$version = trim(@shell_exec('git -C ' . escapeshellarg($root) . ' rev-parse --short HEAD 2>&1'));
-if ($version === '' || stripos($version, 'fatal') !== false) {
-  $version = (string) time();
+// Versão: use timestamp (evita shell_exec/ git)
+$version = date('YmdHis');
+
+// Helpers
+function read_or_die($path, $label) {
+  $c = @file_get_contents($path);
+  if ($c === false) {
+    http_response_code(500);
+    exit("ERRO: não consegui ler {$label} em {$path}\n");
+  }
+  return $c;
+}
+function write_or_die($path, $content, $label) {
+  if (@file_put_contents($path, $content) === false) {
+    http_response_code(500);
+    exit("ERRO: não consegui gravar {$label} em {$path}\n");
+  }
 }
 
-// 2) index.html: atualiza link do index.css
-$html = file_get_contents($indexHtml);
-if ($html === false) { http_response_code(500); exit("Erro lendo index.html\n"); }
-
-$html = preg_replace_callback(
+// 1) index.html
+$html = read_or_die($indexHtml, 'index.html');
+$htmlNew = preg_replace_callback(
   '/<link([^>]+)href=["\']([^"\']*\/css\/index\.css)(\?v=[^"\']*)?["\']([^>]*)>/i',
   function($m) use ($version) {
-    $pre  = $m[1] ?? '';
-    $href = $m[2] ?? '';
-    $post = $m[4] ?? '';
+    $pre  = isset($m[1]) ? $m[1] : '';
+    $href = isset($m[2]) ? $m[2] : '';
+    $post = isset($m[4]) ? $m[4] : '';
     return '<link' . $pre . 'href="' . $href . '?v=' . $version . '"' . $post . '>';
   },
   $html,
   1
 );
+if ($htmlNew === null) {
+  http_response_code(500);
+  exit("ERRO: regex falhou ao atualizar link do index.css\n");
+}
 
-// 3) css/index.css: atualiza todos os @import
-$css = file_get_contents($indexCss);
-if ($css === false) { http_response_code(500); exit("Erro lendo css/index.css\n"); }
-
-$css = preg_replace_callback(
+// 2) css/index.css — atualiza todos os @import locais
+$css = read_or_die($indexCss, 'css/index.css');
+$cssNew = preg_replace_callback(
   '/@import\s+(url\()?["\']([^"\']+)["\']\)?\s*;/i',
   function($m) use ($version) {
-    $isUrl  = $m[1] !== null;
-    $url    = $m[2];
+    $isUrl = !empty($m[1]);
+    $url   = $m[2];
 
-    // ignora http(s) e data:
-    if (preg_match('/^(https?:)?\/\//i', $url) || str_starts_with($url, 'data:')) {
+    // ignorar http(s) e data:
+    if (preg_match('/^(https?:)?\/\//i', $url) || strpos($url, 'data:') === 0) {
       return $m[0];
     }
 
-    // remove versão antiga
-    $base = preg_replace('/\?v=[\w\.-]+$/', '', $url);
+    // remove versão antiga se houver
+    $base = preg_replace('/\?v=[\w\.\-]+$/', '', $url);
     return '@import ' . ($isUrl ? 'url(' : '') . '"' . $base . '?v=' . $version . '"' . ($isUrl ? ')' : '') . ';';
   },
   $css
 );
+if ($cssNew === null) {
+  http_response_code(500);
+  exit("ERRO: regex falhou ao atualizar @import do index.css\n");
+}
 
-// 4) grava
-if (file_put_contents($indexHtml, $html) === false) { http_response_code(500); exit("Erro gravando index.html\n"); }
-if (file_put_contents($indexCss, $css) === false)   { http_response_code(500); exit("Erro gravando css/index.css\n"); }
+// 3) gravar
+write_or_die($indexHtml, $htmlNew, 'index.html');
+write_or_die($indexCss,  $cssNew,  'css/index.css');
 
 header('Content-Type: text/plain; charset=utf-8');
-echo "OK: versao aplicada ?v={$version} em index.html e imports do index.css\n";
+echo "OK: versao aplicada ?v={$version} em index.html e nos @import do css/index.css\n";
