@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 // --- CORS ---
-const allowedOrigin = 'https://zero7.com.br'; // ajuste se tiver www ou outro domínio
+const allowedOrigin = 'https://zero7.com.br/home'; // ajuste se tiver www ou outro domínio
 app.use(cors({
   origin: allowedOrigin,
   methods: ['POST', 'OPTIONS'],
