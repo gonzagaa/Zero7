@@ -15,7 +15,7 @@
 }
 
 #navigation.activeTarjaImage {
-    top: 10.4rem;
+    top: 12.7rem;
 }
 
 .countdown--promo {
@@ -41,6 +41,16 @@
       margin-top: -1px;
 }
 
+.tarjaImage h3 {
+    color: #fff;
+    font-size: 1rem;
+    padding: .5rem;
+    width: 100%;
+    background: rgb(128, 0, 0);
+
+
+}
+
 @media (min-width: 1080px) {
     nav#navigation.activeTarjaImage {
         top: 12rem;
@@ -64,6 +74,20 @@
 
     div.tarjaImage img.desktop {
         display: inherit;
+    }
+
+    div.tarjaImage h3 {
+        position: absolute;
+        width: max-content;
+        padding: .5rem 3rem;
+        font-size: 1rem;
+        top: 13.2%;
+        z-index: 101;
+        left: 34%;
+        transform: translate(0, -50%);
+        border-radius: .5rem;
+
+        margin-top: 0;
     }
 
     /* asasa */
