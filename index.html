@@ -1712,11 +1712,15 @@
 
   <script>
 (() => {
-  // Prazo: 05/11 às 23:59 no fuso de Brasília (-03:00)
-  const fimPromo = new Date("2025-11-14T23:59:00-03:00");
+  // Lista de prazos (fuso de Brasília -03:00)
+  const prazosPromo = [
+    new Date("2025-11-14T23:59:00-03:00"),
+    new Date("2025-11-15T23:59:00-03:00"),
+    new Date("2025-11-16T23:59:00-03:00"),
+  ];
 
   const root = document.getElementById("countdownPromo");
-  if (!root) return; // se o bloco não estiver na página
+  if (!root) return;
 
   const diasEl = document.getElementById("diasPromo");
   const horasEl = document.getElementById("horasPromo");
@@ -1725,16 +1729,23 @@
 
   const pad2 = (n) => String(n).padStart(2, "0");
 
+  function getPrazoAtual(agora) {
+    // pega o primeiro prazo que ainda não passou
+    return prazosPromo.find((prazo) => prazo.getTime() > agora.getTime()) || null;
+  }
+
   function tickPromo() {
     const agora = new Date();
-    const diff = fimPromo - agora;
+    const fimPromo = getPrazoAtual(agora);
 
-    if (diff <= 0) {
+    // Se não tiver mais nenhum prazo futuro, some com o timer
+    if (!fimPromo) {
       clearInterval(intervaloPromo);
-      // some com o timer quando acabar
-      root.style.display = "none"; // ou root.remove();
+      root.style.display = "none";
       return;
     }
+
+    const diff = fimPromo - agora;
 
     const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
     const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1750,7 +1761,8 @@
   const intervaloPromo = setInterval(tickPromo, 1000);
   tickPromo(); // inicializa
 })();
-  </script>
+</script>
+
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
