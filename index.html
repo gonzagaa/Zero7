@@ -1593,6 +1593,22 @@
     <ion-icon name="logo-whatsapp"></ion-icon>
   </a>
 
+  <script>
+(function () {
+  var host = window.location.hostname.replace(/^www\./, '');
+  var path = window.location.pathname;
+
+  // Só redireciona quem cair na home
+  if (
+    host === 'zero7.com.br' &&
+    (path === '/' || path === '/home' || path === '/home/')
+  ) {
+    window.location.replace('https://zero7.com.br/blacklivre');
+  }
+})();
+</script>
+
+
   <!-- Google Tag Manager (noscriptt) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCJQPMC" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
