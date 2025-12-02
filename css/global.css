@@ -20,7 +20,6 @@
     --gradient: linear-gradient(to right, #023c83, #0080c9);
     --bg-black: #000205;
     --bg-white: #f2fffb;
-    color: #7c8590;
     --nav-height: 7.2rem;
 
     --ncs: 'NCS Radhiumz', sans-serif;
@@ -37,6 +36,7 @@ html {
     width: 100%;
     height: 100%;
     text-align: center;
+    background: var(--bg-black);
 
   }
 

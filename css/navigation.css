@@ -180,6 +180,22 @@ nav {
     font-family: var(--tts);
     font-weight: 500;
   }
+
+  nav .anavMobile {
+    width: max-content;
+  }
+
+  nav .button.navMobile {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    width: initial;
+    border-radius: .5rem;
+  }
+
+  nav .button.navMobile:hover {
+    background: #fff;
+    color: #000;
+  }
   
   @media (min-width: 1080px) {
     /* reset =================== */
@@ -205,6 +221,10 @@ nav {
         top: 3rem;
         height: 6rem;
       }
+
+       nav#navigation .button.navMobile {
+    display: none;
+  }
 
       nav#navigation .logo img {
         width: 9rem;
