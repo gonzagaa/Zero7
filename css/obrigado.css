@@ -50,6 +50,12 @@
     -webkit-text-fill-color: transparent;
 }
 
+#obrigado.natal h1 {
+    background: linear-gradient(45deg, #810103, #FC0E1D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 #obrigado header p {
     font-size: 1.7rem;
     font-weight: 600;
@@ -87,6 +93,10 @@
     height: 100%;
 }
 
+#obrigado.natal .card {
+    background: linear-gradient(to right, #fcfcfc, #c7c7c7);
+}
+
 #obrigado .card img {
     width: 100%;
     aspect-ratio: 16/6;
@@ -115,8 +125,16 @@
     margin-bottom: .5rem;
 }
 
+#obrigado.natal .card .text h3 {
+    color: #000;
+}
+
 #obrigado .card .text p {
     font-size: 1.2rem;
+}
+
+#obrigado.natal .card .text p {
+    color: #000;
 }
 
 #obrigado .card .text button {
@@ -124,6 +142,10 @@
     font-size: 1.4rem;
     padding-block: 1.4rem;
     padding-inline: 2rem;
+}
+
+#obrigado.natal .card .text button {
+    background: linear-gradient(45deg, #810103, #FC0E1D);
 }
 
 #obrigado header h2 {
