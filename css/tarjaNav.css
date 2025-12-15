@@ -15,11 +15,11 @@
 }
 
 .tarjaTimerNav h3 {
-    color: #fff;
+    color: #000000;
     font-size: 1rem;
     padding: .5rem;
     width: 100%;
-    background: #114ee0;
+    background: #ffffff;
 
     margin-bottom: 1.3rem;
 
@@ -73,7 +73,7 @@
 }
 
 #home.activeTarjaHome {
-     margin-top: 7rem;
+     margin-top: 8.8rem;
 }
 
 .countdown.dois {
@@ -125,7 +125,7 @@
         font-size: 1rem;
         top: 50%;
         z-index: 101;
-        left: 1%;
+        left: 15%;
         transform: translate(0, -50%);
         border-radius: .5rem;
 
@@ -179,6 +179,6 @@
     }
 
     div.tarjaTimerNav h3 {
-        left: 5%;
+        left: 22%;
     }
 }

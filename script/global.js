@@ -292,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-const dataFinal = new Date("2025-12-12T23:59:00");
+const dataFinal = new Date("2025-12-15T23:59:00");
 
 const diasEl = document.getElementById('dias');
 const horasEl = document.getElementById('horas');

@@ -42,13 +42,11 @@
 }
 
 .tarjaImage h3 {
-    color: #fff;
+    color: #000000;
     font-size: 1rem;
     padding: .5rem;
     width: 100%;
-    background: rgb(225, 139, 0);
-
-
+    background: rgb(255, 255, 255);
 }
 
 @media (min-width: 1080px) {
@@ -83,7 +81,7 @@
         font-size: 1rem;
         top: 13.2%;
         z-index: 101;
-        left: 34%;
+        left: 45%;
         transform: translate(0, -50%);
         border-radius: .5rem;
 
