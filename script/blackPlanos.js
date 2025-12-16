@@ -4,6 +4,7 @@
    - Destaque visual:
        * Máximo de dias  -> efeito antigo (flash-change)
        * Preço           -> efeito suave (flash-base / flash-active)
+       * Old price       -> efeito suave (flash-base / flash-active) [NOVO]
 */
 
 (function () {
@@ -15,20 +16,21 @@
   let cache = null;
 
   // pega TODAS as sections .planos (normais e .bit)
-  const sections = Array.from(document.querySelectorAll('section.planos'));
+  const sections = Array.from(document.querySelectorAll("section.planos"));
   if (!sections.length) return;
 
   const allButtons = [];
   const allCards = [];
-  sections.forEach(sec => {
-    const btns = Array.from(sec.querySelectorAll('.botoes button'));
-    const cards = Array.from(sec.querySelectorAll('.card[data-plan]'));
+
+  sections.forEach((sec) => {
+    const btns = Array.from(sec.querySelectorAll(".botoes button"));
+    const cards = Array.from(sec.querySelectorAll(".card[data-plan]"));
 
     allButtons.push(...btns);
     allCards.push(...cards);
 
     // garante data-mode se não tiver
-    btns.forEach(btn => {
+    btns.forEach((btn) => {
       if (!btn.dataset.mode) {
         const txt = (btn.textContent || "").toLowerCase();
         if (txt.includes("reinício") || txt.includes("reinicio")) {
@@ -47,8 +49,8 @@
   updateModeTexts(DEFAULT_MODE);
 
   // clique em QUALQUER botão muda o modo global
-  allButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
+  allButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
       const mode = btn.dataset.mode;
       if (!VALID_MODES.includes(mode)) return;
       setMode(mode).catch(console.error);
@@ -76,7 +78,7 @@
   }
 
   function setButtonsVisual(mode) {
-    allButtons.forEach(b => {
+    allButtons.forEach((b) => {
       b.classList.toggle("selecionado", b.dataset.mode === mode);
     });
   }
@@ -87,9 +89,9 @@
       "section.planos:not(.bit) .textBotoes"
     );
 
-    containers.forEach(ct => {
+    containers.forEach((ct) => {
       const ps = Array.from(ct.querySelectorAll("p"));
-      ps.forEach(p => {
+      ps.forEach((p) => {
         const show = p.classList.contains(mode); // "30dias" | "60dias" | "reinicio"
         p.classList.toggle("is-active", show);
         p.style.display = show ? "" : "none";
@@ -116,14 +118,12 @@
     el.offsetHeight;
     el.classList.add("flash-change");
 
-    // opcional remover depois; mas como é keyframe com 0.6s e não depende da classe no fim,
-    // tanto faz manter ou remover. vamos remover pra não acumular:
     setTimeout(() => {
       el.classList.remove("flash-change");
     }, 700);
   }
 
-  // efeito novo suave -> só nos preços
+  // efeito novo suave -> preços e oldPrice
   function flashPreco(el) {
     if (!el) return;
 
@@ -150,10 +150,20 @@
     const table = db[mode];
     if (!table) return;
 
-    allCards.forEach(card => {
+    allCards.forEach((card) => {
       const key = (card.dataset.plan || "").toLowerCase(); // trainee, junior, bit_trainee...
       const cfg = table[key];
       if (!cfg) return;
+
+      // OLD PRICE (NOVO) -> "de R$457 por"
+      const oldEl = card.querySelector(".js-old-price");
+      if (oldEl && typeof cfg.oldPrice !== "undefined") {
+        const newOld = String(cfg.oldPrice);
+        if (oldEl.textContent !== newOld) {
+          oldEl.textContent = newOld;
+          flashPreco(oldEl);
+        }
+      }
 
       // MAX DIAS (efeito antigo)
       const maxEl = card.querySelector(".js-max-dias");
@@ -161,7 +171,7 @@
         const newMax = String(cfg.maxDias);
         if (maxEl.textContent !== newMax) {
           maxEl.textContent = newMax;
-          flashMaxDias(maxEl); // efeito antigo aqui
+          flashMaxDias(maxEl);
         }
       }
 
@@ -175,11 +185,11 @@
 
         if (parcelEl.innerHTML !== newParcelVal) {
           parcelEl.innerHTML = newParcelVal;
-          flashPreco(parcelEl); // efeito novo só aqui
+          flashPreco(parcelEl);
         }
       }
 
-      // PREÇO À VISTA (efeito suave tbm)
+      // PREÇO À VISTA (efeito suave)
       const avistaEl = card.querySelector(".js-price-avista");
       if (avistaEl && cfg.avista) {
         const cleaned = String(cfg.avista)
@@ -191,18 +201,16 @@
 
         if (avistaEl.innerHTML !== newAvistaVal) {
           avistaEl.innerHTML = newAvistaVal;
-          flashPreco(avistaEl); // efeito novo aqui tbm
+          flashPreco(avistaEl);
         }
       }
 
-      // LINK DO CHECKOUT (não precisa animar)
+      // LINK DO CHECKOUT (sem animação)
       const link = card.querySelector(".js-checkout");
       if (link && cfg.checkout) {
         const newHref = cfg.checkout;
         if (link.getAttribute("href") !== newHref) {
           link.setAttribute("href", newHref);
-          // se quiser flash no botão, você poderia chamar flashPreco(link),
-          // mas eu deixei sem porque pode distrair muito no CTA.
         }
       }
     });
