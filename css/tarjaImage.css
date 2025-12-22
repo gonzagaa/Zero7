@@ -15,29 +15,31 @@
 }
 
 #navigation.activeTarjaImage {
-    top: 6.9rem;
+    /* top: 6.9rem; */
+    top: 10rem;
 }
 
 .countdown--promo {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      font-size: 1.7rem;
-      font-weight: 700;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.4rem;
+      font-weight: 800;
 
-      background: #000;
+      background: #ffffff;
       padding-block: .5rem;
 }
 
 .countdown--promo div {
       display: flex;
       align-items: end;
-      color: #fff;
+      color: #9e0000;
 }
 
 .countdown--promo .label {
-      font-size: 1.3rem;
-      font-weight: 400;
+      font-size: 1.2rem;
+      font-weight: 600;
       margin-top: -1px;
 }
 
@@ -49,10 +51,20 @@
     background: rgb(255, 255, 255);
 }
 
+.tarjaImage p.text {
+    color: #9e0000;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
 @media (min-width: 1080px) {
     nav#navigation.activeTarjaImage {
-        top: 8.2rem;
+        top: 11.5rem;
         border-radius: 0 0 2rem 2rem;
+    }
+
+    header#home.activeTarjaImage {
+        padding-top: 10rem;
     }
 
     div.tarjaImage {
@@ -63,11 +75,11 @@
 
     div.tarjaImage img {
         border-radius: 2rem 2rem 0 0;
+        border-radius: 0;
     }
 
     div.tarjaImage img.mobile {
         display: none;
-        
     }
 
     div.tarjaImage img.desktop {
@@ -99,13 +111,12 @@
       } 
 
       nav#navigation.activeTarjaImage {
-        top: 9rem;
-        border-radius: 0 0 2rem 2rem;
+        top: 12rem;
     }
 }
 
 @media (min-width: 2500px) {
     nav#navigation.activeTarjaImage {
-        top: 10rem;
+        top: 14rem;
     }
 }
