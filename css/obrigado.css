@@ -278,6 +278,10 @@
         height: 65%;
     }
 
+    section#obrigado.natal .card.destaque .text {
+        height: 55%;
+    }
+
     section#obrigado .card a {
         width: 100%;
     }
