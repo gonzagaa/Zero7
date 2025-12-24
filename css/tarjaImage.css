@@ -27,14 +27,14 @@
       font-size: 1.4rem;
       font-weight: 800;
 
-      background: #ffffff;
+      background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751, #DCA542, #E9C751);
       padding-block: .5rem;
 }
 
 .countdown--promo div {
       display: flex;
       align-items: end;
-      color: #9e0000;
+      color: #ffffff;
 }
 
 .countdown--promo .label {
@@ -52,7 +52,7 @@
 }
 
 .tarjaImage p.text {
-    color: #9e0000;
+    color: #ffffff;
     font-size: 1.2rem;
     font-weight: 500;
 }
@@ -111,7 +111,7 @@
       } 
 
       nav#navigation.activeTarjaImage {
-        top: 12rem;
+        top: 12.5rem;
     }
 }
 

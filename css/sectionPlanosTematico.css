@@ -11,8 +11,20 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to right, transparent, #3c0206, #FC0E1D, #3c0206, transparent);
+    background: linear-gradient(to right, transparent, #dca64224, #DCA542, #dca6421d, transparent);
     z-index: 2;
+}
+
+.planos.tema header h2 {
+    color: #000;
+}
+
+.planos.tema header .textBotoes p {
+    color: #000;
+}
+
+.planos.tema p.obs {
+    color: #000;
 }
 
 .planos.tema .card .title {
@@ -49,7 +61,7 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos.tema .card .topics ion-icon {
-    color: #b50000;
+    color: #DCA542;
 }
 
 .planos.tema .card .topics p {
@@ -70,7 +82,7 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 
 .planos.tema .card .price h4 span {
     font-family: var(--ncs);
-     background: linear-gradient(45deg, #810103, #FC0E1D);
+    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 2rem;
@@ -83,19 +95,19 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos.tema .card .price h5 span {
-     background: linear-gradient(45deg, #810103, #FC0E1D);
+    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 1.7rem;
 }
 
 .planos.tema .card a button {
-    background: linear-gradient(45deg, #810103, #FC0E1D);
-    filter: drop-shadow(0 0 20px #fc0e1e20);
+    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
+    filter: drop-shadow(0 0 20px #dca64228);
 }
 
 .planos.tema .card a button:hover {
-    filter: drop-shadow(0 0 20px #fc0e1e20);
+    filter: drop-shadow(0 0 20px #dca64235);
 }
 
 .planos.tema .swiper-pagination-bullet-active {
@@ -126,7 +138,7 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos .botoes button.selecionado {
-    background: linear-gradient(45deg, #810103, #FC0E1D);
+    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
     color: #fff;
 }
 

@@ -51,7 +51,7 @@
 }
 
 #obrigado.natal h1 {
-    background: linear-gradient(45deg, #810103, #FC0E1D);
+    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -65,10 +65,18 @@
     margin-bottom: 1rem;
 }
 
+#obrigado.natal header p {
+    color: #000;
+}
+
 #obrigado .text p {
     font-size: 1.4rem;
     color: #d0d0d0;
     margin-top: .5rem;
+}
+
+#obrigado.natal .text p {
+    color: #000;
 }
 
 #obrigado .text p span {
@@ -95,6 +103,18 @@
 
 #obrigado.natal .card {
     background: linear-gradient(to right, #fcfcfc, #c7c7c7);
+}
+
+#obrigado .card.destaque {
+    background: linear-gradient(45deg, #010d15, #030215);
+}
+
+#obrigado .card.destaque .text h3 {
+    color: #fff;
+}
+
+#obrigado .card.destaque .text p {
+    color: #fff;
 }
 
 #obrigado .card img {
@@ -125,7 +145,7 @@
     margin-bottom: .5rem;
 }
 
-#obrigado.natal .card .text h3 {
+#obrigado.natal .card h3 {
     color: #000;
 }
 
@@ -133,7 +153,7 @@
     font-size: 1.2rem;
 }
 
-#obrigado.natal .card .text p {
+#obrigado.natal .card p {
     color: #000;
 }
 
@@ -145,11 +165,16 @@
 }
 
 #obrigado.natal .card .text button {
-    background: linear-gradient(45deg, #810103, #FC0E1D);
+    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
+    filter: none;
 }
 
 #obrigado header h2 {
     font-size: 2rem;
+}
+
+#obrigado.natal header h2 {
+    color: #000;
 }
 
 #obrigado header button {
@@ -241,7 +266,24 @@
 
     section#obrigado .content .cards {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    section#obrigado.natal .card .text {
+        padding: 3rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        height: 65%;
+    }
+
+    section#obrigado .card a {
+        width: 100%;
+    }
+
+    section#obrigado .card button {
+        width: 100%;
     }
   
 }
