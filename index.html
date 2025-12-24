@@ -1555,6 +1555,7 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCJQPMC" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+   
   <script>
   // gera e guarda o eventID ANTES para casar Pixel + API
   window.__eventID = '_' + Math.random().toString(36).slice(2, 11);
@@ -1672,7 +1673,12 @@
 (() => {
   // Lista de prazos (fuso de Brasília -03:00)
   const prazosPromo = [
-    new Date("2025-12-24T23:59:00-03:00"), // primeiro prazo
+    new Date("2025-12-24T23:59:00-03:00"),
+    new Date("2025-12-25T23:59:00-03:00"),
+    new Date("2025-12-26T23:59:00-03:00"),
+    new Date("2025-12-27T23:59:00-03:00"),
+    new Date("2025-12-28T23:59:00-03:00"),
+    new Date("2025-12-29T23:59:00-03:00"),
   ];
 
   const root = document.getElementById("countdownPromo");
@@ -1717,8 +1723,7 @@
   const intervaloPromo = setInterval(tickPromo, 1000);
   tickPromo(); // inicializa
 })();
-</script>
-
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
