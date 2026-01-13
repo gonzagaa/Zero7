@@ -269,7 +269,7 @@
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
-    section#obrigado.natal .card .text {
+    section#obrigado .card .text {
         padding: 3rem;
 
         display: flex;
@@ -278,7 +278,7 @@
         height: 65%;
     }
 
-    section#obrigado.natal .card.destaque .text {
+    section#obrigado .card.destaque .text {
         height: 55%;
     }
 

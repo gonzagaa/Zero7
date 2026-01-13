@@ -138,24 +138,25 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos .botoes button.selecionado {
-    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
+    background: var(--gradient);
     color: #fff;
 }
 
-/* .planos.bit .botoes button {
-    background: linear-gradient(45deg, #00000030, rgba(215, 215, 215, 0.108));
-    color: #000;
+.planos.bit .botoes button {
+    background: #081c31;
+    color: #ffffff;
     border: 1px solid #46464647;
 }
 
+/* 
 .planos.bit .botoes button:hover {
     background: #00000020;
-}
+} */
 
 .planos.bit .botoes button.selecionado {
     background: var(--gradient);
     color: #fff;
-} */
+}
 
 .planos .textBotoes p {
     font-size: 1.4rem;
