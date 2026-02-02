@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V2 (dois modos: com_ativacao | sem_ativacao) */
 
 (function () {
-  const DATA_URL = "./script/planos.json";
+  const DATA_URL = "./script/planos.json?v=bqwe5fdg";
   const DEFAULT_MODE = "com_ativacao";
   const VALID_MODES = ["com_ativacao", "sem_ativacao"];
 
