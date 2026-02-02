@@ -2,7 +2,12 @@
     height: auto;
     overflow: hidden;
     position: relative;
-    padding-block: 10rem;
+    padding-block: 30%;
+}
+
+#obrigado img.logo {
+    width: 10rem;
+    margin-bottom: 2rem;
 }
 
 #obrigado .wrapper {
@@ -181,6 +186,10 @@
     margin-top: 2rem;
 }
 
+#obrigado header.dois {
+    margin-top: 3rem;
+}
+
 /* Overlay */
 .modalMerlin {
   position: fixed;
@@ -247,6 +256,10 @@
 }
 
 @media (min-width: 1080px) {
+    section#obrigado {
+        padding-block: 10%;
+    }
+
     section#obrigado .content h1 {
       font-size: 7rem;
       line-height: 1;
