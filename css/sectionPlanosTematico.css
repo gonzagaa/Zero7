@@ -11,20 +11,20 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to right, transparent, #dca64224, #DCA542, #dca6421d, transparent);
+    background: linear-gradient(to right, transparent, #ffffff24, #ffffff, #ffffff1d, transparent);
     z-index: 2;
 }
 
 .planos.tema header h2 {
-    color: #000;
+    color: #ffffff;
 }
 
 .planos.tema header .textBotoes p {
-    color: #000;
+    color: #ffffff;
 }
 
 .planos.tema p.obs {
-    color: #000;
+    color: #ffffff;
 }
 
 .planos.tema .card .title {
@@ -61,7 +61,7 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos.tema .card .topics ion-icon {
-    color: #DCA542;
+    color: var(--primary-color);
 }
 
 .planos.tema .card .topics p {
@@ -82,7 +82,7 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 
 .planos.tema .card .price h4 span {
     font-family: var(--ncs);
-    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
+    background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 2rem;
@@ -95,19 +95,19 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos.tema .card .price h5 span {
-    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
+    background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 1.7rem;
 }
 
 .planos.tema .card a button {
-    background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
-    filter: drop-shadow(0 0 20px #dca64228);
+    background: var(--gradient);
+    filter: drop-shadow(0 0 20px #428fdc28);
 }
 
 .planos.tema .card a button:hover {
-    filter: drop-shadow(0 0 20px #dca64235);
+    filter: drop-shadow(0 0 20px #42a1dc35);
 }
 
 .planos.tema .swiper-pagination-bullet-active {

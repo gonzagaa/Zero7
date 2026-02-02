@@ -15,8 +15,8 @@
 }
 
 #navigation.activeTarjaImage {
-    /* top: 6.9rem; */
-    top: 10rem;
+    /* top: 10rem; */
+    top: 8.5rem;
 }
 
 .countdown--promo {
@@ -111,12 +111,14 @@
       } 
 
       nav#navigation.activeTarjaImage {
-        top: 12.5rem;
+        /* top: 12.5rem; */
+        top: 9.5rem;
     }
 }
 
 @media (min-width: 2500px) {
     nav#navigation.activeTarjaImage {
-        top: 14rem;
+        /* top: 14rem; */
+        top: 12rem;
     }
 }

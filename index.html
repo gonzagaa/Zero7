@@ -296,8 +296,8 @@
     </div>
 
     <a href="#plan">
-      <img class="desktop" src="./assets/tarjapopup/TARJA DESK vida nova.avif" alt="">
-      <img class="mobile" src="./assets/tarjapopup/TARJA MOBILE vida nova.avif" alt="">
+      <img class="desktop" src="./assets/tarjapopup/TARJA DESK aniversario.png" alt="">
+      <img class="mobile" src="./assets/tarjapopup/TARJA MOBILE aniversario.png" alt="">
     </a>
   </div>
 
@@ -688,30 +688,31 @@
     </div>
   </div>
 
-  <section id="plan" class="planos">
+  <section id="plan" class="planos tema">
   <img class="bg" src="./assets/bg2.webp" alt="">
-  <img class="bg arraia desktop" src="./assets/bg2.webp" alt="">
-  <img class="bg arraia mobile" src="./assets/bg2.webp" alt="">
+  <img class="bg arraia desktop" src="./assets/tarjapopup/bg.png" alt="">
+  <img class="bg arraia mobile" src="./assets/tarjapopup/bg.png" alt="">
 
   <div class="wrapper">
     <header data-aos="fade-up">
-      <img class="cupom" src="./assets/tarjapopup/cupom.avif" alt="">
+      <img class="cupom" src="./assets/tarjapopup/Group 135.png" alt="">
       <h2>Mini índice / Dólar</h2>
 
-      <!-- Botões de modos -->
+      <!-- Botões (2 modos) -->
       <div class="botoes">
-        <button data-mode="30dias">Planos 30 dias</button>
-        <button data-mode="60dias" class="selecionado">Planos 60 dias</button>
-        <button data-mode="reinicio">Planos com Reinício</button>
+        <button data-mode="com_ativacao" class="selecionado">Planos com ativação</button>
+        <button data-mode="sem_ativacao">Planos sem ativação</button>
       </div>
 
-      
+      <!-- Textos que trocam conforme o modo (apenas nesta seção, igual antes) -->
       <div class="textBotoes">
-        <p class="30dias">Os planos com 30 dias de avaliação são ideais para quem tem um perfil agressivo e busca resultados maiores no dia.</p>
-        <p class="60dias">Os planos com 60 dias de avaliação são ideais para quem constroe resultado dia após dia, mantendo sempre a consistência.</p>
-        <p class="reinicio">Os planos com reinício tem duração de 60 dias e dentro desse período sempre que atingir o limite de perda total, pode reiniciar a sua avaliação. Esse plano é ideal para quem ainda está inseguro com sua estratégia, pois vai te permitir reajustar e tentar novamente.</p>
+        <p class="com_ativacao">
+          Escolha seu plano, faça uma avaliação por um preço baixíssimo e pague a taxa de ativação somente após a aprovação.
+        </p>
+        <p class="sem_ativacao" style="display:none;">
+          Escolha seu plano, faça uma avaliação e, após a aprovação, comece a operar direto na mesa.
+        </p>
       </div>
-    
     </header>
   </div>
 
@@ -732,12 +733,10 @@
             <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 997,00</span></p>
             <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
             <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+            <!-- Taxa de ativação aparece via JS quando for com_ativacao -->
           </div>
 
-          <div class="oldPrice">
-            <h4 class="js-old-price">de R$457 por</h4>
-          </div>
-
+          <div class="oldPrice"><h4>de R$457 por</h4></div>
           <div class="price">
             <h4 class="js-price-parcel"><span>12x</span> R$25,13</h4>
             <h5 class="js-price-avista"><span>ou</span> R$251,35 <span>à vista</span></h5>
@@ -763,10 +762,7 @@
             <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
           </div>
 
-          <div class="oldPrice">
-            <h4 class="js-old-price">de R$687 por</h4>
-          </div>
-
+          <div class="oldPrice"><h4>de R$687 por</h4></div>
           <div class="price">
             <h4 class="js-price-parcel"><span>12x</span> R$37,78</h4>
             <h5 class="js-price-avista"><span>ou</span> R$377,85 <span>à vista</span></h5>
@@ -792,10 +788,7 @@
             <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
           </div>
 
-          <div class="oldPrice">
-            <h4 class="js-old-price">de R$1.377 por</h4>
-          </div>
-
+          <div class="oldPrice"><h4>de R$1.377 por</h4></div>
           <div class="price">
             <h4 class="js-price-parcel"><span>12x</span> R$75,73</h4>
             <h5 class="js-price-avista"><span>ou</span> R$757,35 <span>à vista</span></h5>
@@ -821,13 +814,10 @@
             <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
           </div>
 
-          <div class="oldPrice">
-            <h4 class="js-old-price">de R$2.297 por</h4>
-          </div>
-
+          <div class="oldPrice"><h4>de R$2.297 por</h4></div>
           <div class="price">
             <h4 class="js-price-parcel"><span>12x</span> R$126,33</h4>
-            <h5 class="js-price-avista"><span>ou</span> R$1263,35 <span>à vista</span></h5>
+            <h5 class="js-price-avista"><span>ou</span> R$1.263,35 <span>à vista</span></h5>
           </div>
 
           <a target="_blank" href="https://app.zero7.com.br/checkout/a3703e" class="js-checkout">
@@ -850,13 +840,10 @@
             <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>80%</span></p>
           </div>
 
-          <div class="oldPrice">
-            <h4 class="js-old-price">de R$3.677 por</h4>
-          </div>
-
+          <div class="oldPrice"><h4>de R$3.677 por</h4></div>
           <div class="price">
             <h4 class="js-price-parcel"><span>12x</span> R$202,23</h4>
-            <h5 class="js-price-avista"><span>ou</span> R$2022,35 <span>à vista</span></h5>
+            <h5 class="js-price-avista"><span>ou</span> R$2.022,35 <span>à vista</span></h5>
           </div>
 
           <a target="_blank" href="https://app.zero7.com.br/checkout/6bfaa2" class="js-checkout">
@@ -879,13 +866,10 @@
             <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>80%</span></p>
           </div>
 
-          <div class="oldPrice">
-            <h4 class="js-old-price">de R$4.487 por</h4>
-          </div>
-
+          <div class="oldPrice"><h4>de R$4.487 por</h4></div>
           <div class="price">
             <h4 class="js-price-parcel"><span>12x</span> R$246,78</h4>
-            <h5 class="js-price-avista"><span>ou</span> R$2467,85 <span>à vista</span></h5>
+            <h5 class="js-price-avista"><span>ou</span> R$2.467,85 <span>à vista</span></h5>
           </div>
 
           <a target="_blank" href="https://app.zero7.com.br/checkout/a2e62e" class="js-checkout">
@@ -905,86 +889,80 @@
     para outra plataforma, isso poderá ser feito no momento da contratação.</p>
   </section>
 
+  <!-- BITCOIN -->
   <section class="planos white bit">
-  <img class="bg" src="./assets/bg planos white.webp" alt="">
+    <img class="bg" src="./assets/bg planos white.webp" alt="">
 
-  <div class="wrapper">
-    <header data-aos="fade-up">
-      <h2>CONTRATO FUTURO DE BITCOIN</h2>
+    <div class="wrapper">
+      <header data-aos="fade-up">
+        <h2>CONTRATO FUTURO DE <span>BITCOIN</span></h2>
 
-      <div class="botoes">
-        <button data-mode="30dias">Planos 30 dias</button>
-        <button data-mode="60dias" class="selecionado">Planos 60 dias</button>
-        <button data-mode="reinicio">Planos com Reinício</button>
-      </div>
-    </header>
-  </div>
-
-  <div data-aos="fade-up" class="wrapper plano">
-    <div class="swiper mySwiper11">
-      <div class="cards swiper-wrapper">
-
-        <!-- BIT TRAINEE -->
-        <div class="card swiper-slide" data-plan="bit_trainee">
-          <div class="title"><h3>BIT 8</h3></div>
-
-          <div class="topics">
-            <p><ion-icon name="checkmark-outline"></ion-icon> Limite por operação: <span>8 contratos</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda diária: <span>R$ 247,00</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda total: <span>R$ 997,00</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 997,00</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
-          </div>
-
-          <div class="oldPrice">
-            <h4 class="js-old-price">de R$457 por</h4>
-          </div>
-
-          <div class="price">
-            <h4 class="js-price-parcel"><span>12x</span> R$25,13</h4>
-            <h5 class="js-price-avista"><span>ou</span> R$251,35 <span>à vista</span></h5>
-          </div>
-
-          <a target="_blank" href="https://app.zero7.com.br/checkout/b013c9" class="js-checkout">
-            <button class="button">CONTRATAR PLANO</button>
-          </a>
+        <div class="botoes">
+          <button data-mode="com_ativacao" class="selecionado">Planos com ativação</button>
+          <button data-mode="sem_ativacao">Planos sem ativação</button>
         </div>
-
-        <!-- BIT JÚNIOR -->
-        <div class="card swiper-slide" data-plan="bit_junior">
-          <div class="title"><h3>BIT 16</h3></div>
-
-          <div class="topics">
-            <p><ion-icon name="checkmark-outline"></ion-icon> Limite por operação: <span>16 contratos</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda diária: <span>R$ 497,00</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda total: <span>R$ 1.997,00</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 1.997,00</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-            <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
-          </div>
-
-          <div class="oldPrice">
-            <h4 class="js-old-price">de R$687 por</h4>
-          </div>
-
-          <div class="price">
-            <h4 class="js-price-parcel"><span>12x</span> R$37,78</h4>
-            <h5 class="js-price-avista"><span>ou</span> R$377,85 <span>à vista</span></h5>
-          </div>
-
-          <a target="_blank" href="https://app.zero7.com.br/checkout/f33c79" class="js-checkout">
-            <button class="button">CONTRATAR PLANO</button>
-          </a>
-        </div>
-
-      </div>
-
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
+      </header>
     </div>
-  </div>
+
+    <div data-aos="fade-up" class="wrapper plano">
+      <div class="swiper mySwiper11">
+        <div class="cards swiper-wrapper">
+
+          <!-- BIT TRAINEE -->
+          <div class="card swiper-slide" data-plan="bit_trainee">
+            <div class="title"><h3>BIT 8</h3></div>
+
+            <div class="topics">
+              <p><ion-icon name="checkmark-outline"></ion-icon> Limite por operação: <span>8 contratos</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda diária: <span>R$ 247,00</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda total: <span>R$ 997,00</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 997,00</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+            </div>
+
+            <div class="oldPrice"><h4>de R$457 por</h4></div>
+            <div class="price">
+              <h4 class="js-price-parcel"><span>12x</span> R$25,13</h4>
+              <h5 class="js-price-avista"><span>ou</span> R$251,35 <span>à vista</span></h5>
+            </div>
+
+            <a target="_blank" href="https://app.zero7.com.br/checkout/b013c9" class="js-checkout">
+              <button class="button">CONTRATAR PLANO</button>
+            </a>
+          </div>
+
+          <!-- BIT JÚNIOR -->
+          <div class="card swiper-slide" data-plan="bit_junior">
+            <div class="title"><h3>BIT 16</h3></div>
+
+            <div class="topics">
+              <p><ion-icon name="checkmark-outline"></ion-icon> Limite por operação: <span>16 contratos</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda diária: <span>R$ 497,00</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda total: <span>R$ 1.997,00</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 1.997,00</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+            </div>
+
+            <div class="oldPrice"><h4>de R$687 por</h4></div>
+            <div class="price">
+              <h4 class="js-price-parcel"><span>12x</span> R$37,78</h4>
+              <h5 class="js-price-avista"><span>ou</span> R$377,85 <span>à vista</span></h5>
+            </div>
+
+            <a target="_blank" href="https://app.zero7.com.br/checkout/f33c79" class="js-checkout">
+              <button class="button">CONTRATAR PLANO</button>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
   </section>
 
   <!-- <section id="plan" class="planos">
