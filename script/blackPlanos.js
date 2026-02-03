@@ -1,7 +1,7 @@
-/* /script/blackPlanos.js — V2 (dois modos: com_ativacao | sem_ativacao) */
+/* /script/blackPlanos.js — V3 (dois modos: com_ativacao | sem_ativacao) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=bqwe5fdg";
+  const DATA_URL = "./script/planos.json?v=bqw324fsdfdg";
   const DEFAULT_MODE = "com_ativacao";
   const VALID_MODES = ["com_ativacao", "sem_ativacao"];
 
@@ -56,7 +56,6 @@
   function setButtonsVisual(mode) {
     allButtons.forEach(b => {
       b.classList.toggle("selecionado", b.dataset.mode === mode);
-      // acessibilidade opcional:
       b.setAttribute("aria-pressed", b.dataset.mode === mode ? "true" : "false");
     });
   }
@@ -130,6 +129,16 @@
       const cfg = table[key];
       if (!cfg) return;
 
+      // OLD PRICE (NOVO) -> atualiza só o valor do span
+      const oldPriceEl = card.querySelector(".js-old-price");
+      if (oldPriceEl && cfg.oldPrice) {
+        const newOld = String(cfg.oldPrice);
+        if (oldPriceEl.textContent !== newOld) {
+          oldPriceEl.textContent = newOld;
+          flashPreco(oldPriceEl);
+        }
+      }
+
       // MAX DIAS
       const maxEl = card.querySelector(".js-max-dias");
       if (maxEl && typeof cfg.maxDias !== "undefined") {
@@ -184,7 +193,6 @@
           }
         }
       } else {
-        // modo sem_ativacao: remove o tópico, caso exista
         removeTaxaNode(card);
       }
     });
