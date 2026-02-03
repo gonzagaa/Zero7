@@ -166,6 +166,20 @@
     position: relative;
 }
 
+.planos .card .topics .js-taxa-ativacao {
+    background: linear-gradient(to right, #023c83a7, #007fc9af);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: max-content;
+}
+
+.planos .card .topics p.js-taxa-ativacao,
+.planos .card .topics p.js-taxa-ativacao span,
+.planos .card .topics p.js-taxa-ativacao ion-icon {
+    color: #fff !important;
+}
+
 .planos.white .card .topics p {
     color: #070C11;
 }
