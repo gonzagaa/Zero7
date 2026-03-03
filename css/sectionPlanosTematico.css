@@ -1,5 +1,5 @@
 .planos.tema .card {
-background: linear-gradient(to top, #ffffff, #c5c5c5);
+background: linear-gradient(to bottom, #02060f, #0a121a);
 }
 
 .planos.tema::before,
@@ -28,11 +28,11 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos.tema .card .title {
-    background: linear-gradient(to bottom, #dadada, #b7b7b7);
+    background: linear-gradient(to bottom, #01040A, #070C11);
 }
 
 .planos.tema .card .title h3 {
-    color: #000;
+    color: #ffffff;
 }
 
 /* .planos.tema .card a button {
@@ -57,7 +57,7 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos.tema .card .topics p::before {
-    background: linear-gradient(to right, #000000, transparent 70%);
+    background: linear-gradient(to right, #ffffff52, #ffffff17 70%);
 }
 
 .planos.tema .card .topics ion-icon {
@@ -65,19 +65,19 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 }
 
 .planos.tema .card .topics p {
-    color: #000000;
+    color: #ffffff;
 }
 
 .planos.tema .card .topics p span {
-    color: #000000;
+    color: #ffffff;
 }
 
 .planos.tema .card .oldPrice h4 {
-    color: #000;
+    color: #ffffff;
 }
 
 .planos.tema .card .price h4 {
-    color: #000;
+    color: #ffffff;
 }
 
 .planos.tema .card .price h4 span {
@@ -90,7 +90,7 @@ background: linear-gradient(to top, #ffffff, #c5c5c5);
 
 .planos.tema .card .price h5 {
     font-family: var(--ncs);
-    color: #000000;
+    color: #ffffff;
     font-size: 2rem;
 }
 
