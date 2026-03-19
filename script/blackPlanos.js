@@ -2,7 +2,7 @@
 
 (function () {
   const DATA_URL = "./script/planos.json?v=bqw45v324fsdfdg";
-  const DEFAULT_MODE = "com_ativacao";
+  const DEFAULT_MODE = "sem_ativacao";
   const VALID_MODES = ["com_ativacao", "sem_ativacao"];
 
   let currentMode = DEFAULT_MODE;
