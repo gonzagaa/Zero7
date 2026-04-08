@@ -26,8 +26,8 @@
     },
     "senior": {
       "oldPrice": "R$ 1.857,00",
-      "parcel": "12x R$79,85",
-      "avista": "ou R$798,51 à vista",
+      "parcel": "12x R$61,28",
+      "avista": "ou R$612,81 à vista",
       "checkout": "https://app.zero7.com.br/checkout/9cc590",
       "maxDias": 60,
       "taxaAtivacao": "R$1.547,00"
@@ -89,8 +89,8 @@
     },
     "senior": {
       "oldPrice": "R$ 2.767,00",
-      "parcel": "12x R$118,98",
-      "avista": "ou R$1.189,81 à vista",
+      "parcel": "12x R$91,31",
+      "avista": "ou R$913,11 à vista",
       "checkout": "https://app.zero7.com.br/checkout/a3703e",
       "maxDias": 60
     },
