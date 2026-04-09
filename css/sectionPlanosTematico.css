@@ -125,7 +125,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     padding: 1rem;
     border-radius: .5rem;
     color: #000000;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 
     border: none;
     background: linear-gradient(45deg, #ffffff, #cbcbcb);
@@ -135,11 +135,11 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 
 .planos .botoes button:hover {
     cursor: pointer;
-}
+} 
 
 .planos .botoes button.selecionado {
-    background: var(--gradient);
-    color: #fff;
+    background: linear-gradient(45deg, #38EF7D, #11998E);
+    color: #000000;
 }
 
 .planos.bit .botoes button {
@@ -154,8 +154,8 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 } */
 
 .planos.bit .botoes button.selecionado {
-    background: var(--gradient);
-    color: #fff;
+    background: linear-gradient(45deg, #38EF7D, #11998E);
+    color: #000000;
 }
 
 .planos .textBotoes p {

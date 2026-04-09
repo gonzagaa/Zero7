@@ -100,6 +100,24 @@
     margin-top: 2rem;
 }
 
+.planos p.escolha {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #38EF7D, #11998E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.planos.white p.escolha {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #121212, #002421);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .planos.white .card {
     background: linear-gradient(to bottom, #eef5fe, #e3eefd);
     border: 2px solid #cfe2fc;
