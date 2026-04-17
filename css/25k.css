@@ -1,0 +1,266 @@
+/* =========================
+   TOPO DESCONTO + BONUS
+   ========================= */
+
+.planos .planos-topo-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+}
+
+.planos .planos-topo-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.planos .planos-topo-desconto,
+.planos .bonus-25k-header {
+    width: 100%;
+}
+
+.planos .planos-topo-desconto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.planos .planos-topo-desconto img.cupom {
+    width: min(100%, 38rem);
+    margin-bottom: 0;
+    display: block;
+}
+
+.planos .planos-topo-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.2rem;
+    height: 5.2rem;
+    border-radius: 50%;
+    font-family: var(--ncs);
+    font-size: 3.2rem;
+    line-height: 1;
+    color: #fff;
+    background: linear-gradient(to bottom, #01040A, #070C11);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 0 24px rgba(0, 128, 201, 0.12);
+}
+
+.planos .bonus-25k-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.planos .bonus-25k-box {
+    position: relative;
+    width: 100%;
+    max-width: 48rem;
+    padding: 2rem 1.8rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    isolation: isolate;
+
+    background: url("./assets/eua.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.22),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+    transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.planos .bonus-25k-box:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.28),
+        0 0 24px rgba(0, 128, 201, 0.08);
+}
+
+.planos .bonus-25k-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(1, 4, 10, 0.54),
+        rgba(7, 12, 17, 0.62)
+    );
+}
+
+.planos .bonus-25k-box > * {
+    position: relative;
+    z-index: 1;
+}
+
+.planos .bonus-25k-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1rem;
+    margin-bottom: 1.1rem;
+    border-radius: 999px;
+    font-family: var(--ncs);
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: linear-gradient(45deg, #023c83, #0080c9);
+    box-shadow: 0 0 16px rgba(0, 128, 201, 0.16);
+}
+
+.planos .bonus-25k-box h2 {
+    width: 100%;
+    text-align: left;
+    color: #fff;
+    font-size: 2.6rem;
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+}
+
+.planos .bonus-25k-box p {
+    width: 100%;
+    text-align: left;
+    color: #e7edf5;
+    font-size: 1.24rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.planos .bonus-25k-box a {
+    margin-top: 1rem;
+    width: max-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: var(--ncs);
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #1da4f3;
+    transition: filter 300ms ease, transform 300ms ease;
+}
+
+.planos .bonus-25k-box a:hover {
+    filter: brightness(1.15);
+    transform: translateX(3px);
+}
+
+.planos .planos-topo-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.planos .planos-topo-conteudo h2 {
+    color: #fff;
+}
+
+.planos .planos-topo-conteudo .botoes,
+.planos .planos-topo-conteudo .textBotoes {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.planos .planos-topo-conteudo .textBotoes p {
+    max-width: 62rem;
+}
+
+.planos .planos-topo-conteudo {
+    width: 100%;
+    max-width: 78rem;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.planos .planos-topo-conteudo .textBotoes {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.planos .planos-topo-conteudo .textBotoes p {
+    width: 100%;
+    max-width: 62rem;
+    margin: 0 auto;
+    text-align: center;
+    
+    margin-block: 2rem;
+}
+
+@media (min-width: 1080px) {
+    .planos .planos-topo-grid {
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        gap: 2.6rem;
+    }
+
+    .planos .planos-topo-desconto {
+        justify-content: flex-end;
+    }
+
+    .planos .bonus-25k-header {
+        justify-content: flex-start;
+    }
+
+    .planos .planos-topo-desconto img.cupom {
+        width: min(100%, 42rem);
+    }
+
+    .planos .bonus-25k-box {
+        max-width: 46rem;
+        min-height: 32rem;
+        padding: 2.2rem 2rem;
+    }
+
+    .planos .bonus-25k-box h2 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 1079px) {
+    .planos .planos-topo-plus {
+        width: 4.6rem;
+        height: 4.6rem;
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .planos .planos-topo-wrapper {
+        gap: 2.4rem;
+    }
+
+    .planos .bonus-25k-box {
+        padding: 1.8rem 1.5rem;
+        border-radius: 1.8rem;
+    }
+
+    .planos .bonus-25k-box h2 {
+        font-size: 2.1rem;
+    }
+
+    .planos .bonus-25k-box p {
+        font-size: 1.14rem;
+    }
+
+    .planos .planos-topo-desconto img.cupom {
+        width: min(100%, 30rem);
+    }
+}
