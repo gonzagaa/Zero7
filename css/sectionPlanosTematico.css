@@ -138,7 +138,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 } 
 
 .planos .botoes button.selecionado {
-    background: linear-gradient(45deg, #38EF7D, #11998E);
+    background: linear-gradient(45deg, #FFDE00, #FF9500);
     color: #000000;
 }
 
@@ -154,7 +154,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 } */
 
 .planos.bit .botoes button.selecionado {
-    background: linear-gradient(45deg, #38EF7D, #11998E);
+    background: linear-gradient(45deg, #FFDE00, #FF9500);
     color: #000000;
 }
 
@@ -234,6 +234,10 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     section.planos .textBotoes p {
         font-size: 1.6rem;
         padding-inline: 20%;
+    }
+
+    section.planos .textBotoes p.mode-reinicio {
+        padding-inline: 0;
     }
 
     section.planos .textBotoes p.reinicio {

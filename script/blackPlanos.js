@@ -1,9 +1,9 @@
-/* /script/blackPlanos.js — V3 (dois modos: com_ativacao | sem_ativacao) */
+/* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=qwdhhtrhrthqwdqwdqwd21qwd4535ssd";
-  const DEFAULT_MODE = "com_ativacao";
-  const VALID_MODES = ["com_ativacao", "sem_ativacao"];
+  const DATA_URL = "./script/planos.json?v=213123qwdfwefwe";
+  const DEFAULT_MODE = "60dias";
+  const VALID_MODES = ["30dias", "60dias", "reinicio"];
 
   let currentMode = DEFAULT_MODE;
   let cache = null;
@@ -19,12 +19,13 @@
     allButtons.push(...btns);
     allCards.push(...cards);
 
-    // assegura data-mode
+    // assegura data-mode (fallback caso o HTML venha sem)
     btns.forEach(btn => {
       if (!btn.dataset.mode) {
         const txt = (btn.textContent || "").toLowerCase();
-        if (txt.includes("sem")) btn.dataset.mode = "sem_ativacao";
-        else btn.dataset.mode = "com_ativacao";
+        if (txt.includes("rein")) btn.dataset.mode = "reinicio";
+        else if (txt.includes("30")) btn.dataset.mode = "30dias";
+        else btn.dataset.mode = "60dias";
       }
     });
   });
@@ -66,7 +67,7 @@
     containers.forEach(ct => {
       const ps = Array.from(ct.querySelectorAll("p"));
       ps.forEach(p => {
-        const show = p.classList.contains(mode);
+        const show = p.classList.contains("mode-" + mode);
         p.classList.toggle("is-active", show);
         p.style.display = show ? "" : "none";
       });
@@ -100,25 +101,6 @@
     setTimeout(() => el.classList.remove("flash-active"), 400);
   }
 
-  function ensureTaxaNode(card) {
-    // cria (se não existir) o <p class="js-taxa-ativacao"> … </p> como ÚLTIMO item de .topics
-    let taxa = card.querySelector(".topics .js-taxa-ativacao");
-    if (!taxa) {
-      const topics = card.querySelector(".topics");
-      if (!topics) return null;
-      taxa = document.createElement("p");
-      taxa.className = "js-taxa-ativacao";
-      taxa.innerHTML = `<ion-icon name="checkmark-outline"></ion-icon> Taxa de ativação: <span></span>`;
-      topics.appendChild(taxa);
-    }
-    return taxa;
-  }
-
-  function removeTaxaNode(card) {
-    const taxa = card.querySelector(".topics .js-taxa-ativacao");
-    if (taxa) taxa.remove();
-  }
-
   async function applyModeToCards(mode) {
     const db = await loadData();
     const table = db[mode];
@@ -129,7 +111,7 @@
       const cfg = table[key];
       if (!cfg) return;
 
-      // OLD PRICE (NOVO) -> atualiza só o valor do span
+      // OLD PRICE -> atualiza só o valor do span
       const oldPriceEl = card.querySelector(".js-old-price");
       if (oldPriceEl && cfg.oldPrice) {
         const newOld = String(cfg.oldPrice);
@@ -180,20 +162,6 @@
         if (link.getAttribute("href") !== newHref) {
           link.setAttribute("href", newHref);
         }
-      }
-
-      // TAXA DE ATIVAÇÃO (só quando existir no cfg)
-      if (typeof cfg.taxaAtivacao !== "undefined" && cfg.taxaAtivacao !== null && cfg.taxaAtivacao !== "") {
-        const taxa = ensureTaxaNode(card);
-        if (taxa) {
-          const span = taxa.querySelector("span");
-          const val = String(cfg.taxaAtivacao);
-          if (span && span.textContent !== val) {
-            span.textContent = val;
-          }
-        }
-      } else {
-        removeTaxaNode(card);
       }
     });
   }

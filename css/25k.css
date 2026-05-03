@@ -207,8 +207,7 @@
 
 @media (min-width: 1080px) {
     .planos .planos-topo-grid {
-        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-        gap: 2.6rem;
+        
     }
 
     .planos .planos-topo-desconto {
