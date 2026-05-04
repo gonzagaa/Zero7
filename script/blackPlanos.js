@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=213123qwdfwefwe";
+  const DATA_URL = "./script/planos.json?v=435345213123qwdfwefwe";
   const DEFAULT_MODE = "60dias";
   const VALID_MODES = ["30dias", "60dias", "reinicio"];
 
