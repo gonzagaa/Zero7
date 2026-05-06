@@ -1,118 +1,285 @@
+/* ===========================
+   TOPICOS (REFATORADO - DESIGN)
+   Mantém textos e botão iguais
+=========================== */
+
 #topicos {
-    overflow: hidden;
-    position: relative;
+  overflow: hidden;
+  position: relative;
+
+  border-radius: 6rem 0 6rem 0;
+}
+
+/* overlay premium por cima do bg (sem mudar a imagem) */
+#topicos::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  /* vinheta + textura leve */
+  background:
+    radial-gradient(1200px 500px at 50% 0%, rgba(7, 12, 17, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 15% 90%, rgba(7, 12, 17, 0.08), transparent 65%),
+    repeating-linear-gradient(
+      135deg,
+      rgba(7, 12, 17, 0.03) 0px,
+      rgba(7, 12, 17, 0.03) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+  mix-blend-mode: multiply;
+  opacity: 1;
 }
 
 #topicos .content {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 2;
 }
 
 #topicos img.bgsection {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-    z-index: 0;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+
+
 }
 
 #topicos header h2 {
-    color: #070C11;
+  color: #070C11;
+  letter-spacing: -0.04em;
+  font-size: clamp(3rem, 3.2vw, 4.6rem);
+  line-height: 1.05;
 }
 
-#topicos header p {
-    color: #070C11;
-}
-
-#topicos header p span {
-    color: #070C11;
+/* deixa o “Zero7” com presença, sem trocar texto */
+#topicos header h2 span {
+  background: linear-gradient(90deg, #0080c9, #0a61a5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 #topicos .cards {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+  position: relative;
+  z-index: 2;
+
+  counter-reset: step;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.6rem, 2vw, 2.4rem);
+  margin-top: clamp(2.2rem, 3vw, 3.2rem);
+  align-items: stretch;
 }
 
 #topicos .cards .card {
-    border: 3px solid #ffffff09;
-    border-radius: 1rem;
-    overflow: hidden;
-    height: 100%;
+  position: relative;
+  border-radius: 38px 0 38px 0;
+  overflow: hidden;
+
+  /* gradient border premium sem pseudo (pra sobrar pseudo pro “01/02/03”) */
+  border: 1px solid transparent;
+  background:
+    /* camada do fundo (cada card define o seu abaixo) */
+    linear-gradient(180deg, #070c11 0%, #05070b 100%) padding-box,
+    /* camada da borda */
+    linear-gradient(135deg, var(--acc1), var(--acc2)) border-box;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+
 }
 
-#topicos .cards .card:nth-child(1)  {
-    background: #070E0F;
+/* textura interna + vinheta do card */
+#topicos .cards .card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(700px 260px at 20% 0%, rgba(255,255,255,0.07), transparent 60%),
+    radial-gradient(900px 420px at 80% 120%, rgba(0,0,0,0.35), transparent 55%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+}
+
+/* backgrounds individuais com glow controlado */
+#topicos .cards .card:nth-child(1) {
+  --acc1: #00FFDE;
+  --acc2: #00B49D;
+  background:
+    radial-gradient(900px 320px at 25% 0%, rgba(0,255,222,0.14), transparent 60%),
+    linear-gradient(180deg, #070E0F 0%, #05090A 100%) padding-box,
+    linear-gradient(135deg, var(--acc1), var(--acc2)) border-box;
 }
 
 #topicos .cards .card:nth-child(2) {
-    background: #070C11;
+  --acc1: #00A1FF;
+  --acc2: #007EC7;
+  background:
+    radial-gradient(900px 320px at 25% 0%, rgba(0,161,255,0.14), transparent 60%),
+    linear-gradient(180deg, #070C11 0%, #05070B 100%) padding-box,
+    linear-gradient(135deg, var(--acc1), var(--acc2)) border-box;
 }
 
-#topicos .cards .card:nth-child(3)  {
-    background: #0D0F18;
+#topicos .cards .card:nth-child(3) {
+  --acc1: #0021FF;
+  --acc2: #0015A0;
+  background:
+    radial-gradient(900px 320px at 25% 0%, rgba(0,33,255,0.14), transparent 60%),
+    linear-gradient(180deg, #0D0F18 0%, #070812 100%) padding-box,
+    linear-gradient(135deg, var(--acc1), var(--acc2)) border-box;
 }
 
+#topicos .cards .card:hover {
+  transform: translateY(-7px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+}
+
+/* imagem com acabamento melhor */
 #topicos .cards .card img {
-    width: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 2;
 
-    border-bottom: 2px solid #ffffff17;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  filter: saturate(1.03) contrast(1.03);
 }
 
+/* layout interno: texto + botão alinhado e sempre no “rodapé” do card */
 #topicos .cards .card .text {
-    padding: 1.5rem;
+  position: relative;
+  z-index: 3;
+
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
 }
 
 #topicos .cards .card .text p {
-    font-size: 1.4rem;
-    line-height: 1.4;
-    color: #fff;
+  font-size: 1.4rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.90);
+  margin: 0;
 
-    margin-bottom: 2rem;
+  text-wrap: pretty;
 }
 
-#topicos .cards .card:nth-child(1) a button {
-    background: linear-gradient(to right, #00FFDE, #00B49D);
-    color: #000;
+#topicos .cards .card .text p span {
+  font-weight: 700;
 }
 
-#topicos .cards .card:nth-child(2) a button {
-    background: linear-gradient(to right, #00A1FF, #007EC7);
+/* botão: largura total, sem mudar estrutura nem texto */
+#topicos .cards .card .z7-btnx {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
 }
 
-#topicos .cards .card:nth-child(3) a button {
-    background: linear-gradient(to right, #0021FF, #0015A0);
+/* agora sim: gradientes por card (seu CSS antigo não aplicava) */
+#topicos .cards .card:nth-child(1) .z7-btnx__bg {
+  background: linear-gradient(to right, #00dfc1, #00B49D);
 }
 
+#topicos .cards .card:nth-child(1) .z7-btnx {
+  box-shadow:
+    0 0rem 4.5rem #00b49c43,
+    0 0rem 4.6rem #00b49c1b,
+    0 0 0 .4rem #00b49c3f;
+}
+
+#topicos .cards .card:nth-child(2) .z7-btnx__bg {
+  background: linear-gradient(to right, #00A1FF, #007EC7);
+}
+
+#topicos .cards .card:nth-child(3) .z7-btnx__bg {
+  background: linear-gradient(to right, #0021FF, #0015A0);
+}
+
+
+/* cap (bolinha da seta) com leve destaque */
+#topicos .cards .card .z7-btnx__cap {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+}
+
+
+/* refininho no desktop */
 @media (min-width: 1080px) {
-    section#topicos .cards {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+  
 
-    section#topicos .cards .card a button,
-    section#topicos .cards .card a {
-        width: 100%;
-        font-size: 1.4rem;
-        padding: 1.5rem 4.5rem;
-    }
+  section#topicos .wrapper {
+    
+  }
 
-    section#topicos .cards .card .text {
-        padding: 1rem;
-        padding-inline: 2rem;
-    }
+  #topicos .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.2rem;
+  }
 
-    section#topicos .cards .card .text p {
-        margin-top: 1rem;
-        font-size: 1.4rem;
-    }
+  #topicos .cards::before {
+    content: "";
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    top: 12.5rem; /* ajuste fino se quiser: sobe/desce a linha */
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(7, 12, 17, 0.18),
+      transparent
+    );
+    z-index: 0;
+    pointer-events: none;
+  }
 
-    section#topicos .cards .card:nth-child(3) .text p {
-        margin-bottom: 3.3rem;
-        font-size: 1.2rem;
-    }
+  #topicos .cards .card .text {
+    padding: 2rem 2.2rem 2.4rem;
+  }
+
+  #topicos .cards .card::before {
+    font-size: 8rem;
+  }
+
+   #topicos .cards .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* a área de texto vira "container flex" e preenche a altura restante */
+  #topicos .cards .card .text {
+    flex: 1;                 /* ocupa o restante abaixo da imagem */
+    display: flex;
+    flex-direction: column;  /* p -> em cima, botão -> embaixo */
+  }
+
+  /* empurra o botão pro final do card */
+  #topicos .cards .card .z7-btnx {
+    margin-top: auto;
+  }
+
+  #topicos .cards .card:nth-child(3) p {
+    font-size: 1.3rem;
+  }
 }

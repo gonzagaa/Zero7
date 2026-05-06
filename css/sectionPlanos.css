@@ -231,7 +231,7 @@
 }
 
 .planos .card .oldPrice {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin-bottom: 1.5rem;
     font-weight: 400;
     color: #ffffffc2;
@@ -306,6 +306,10 @@
 
 .planos .card a {
     width: 100%;
+}
+
+.planos .z7-btnx {
+    margin-top: 3rem;
 }
 
 .planos .card a button {
@@ -465,6 +469,9 @@ body section.planos .wrapper .swiper.mySwiper11 {
     left: -16%;
 }
 
+.planos .z7-btnx__label span {
+    display: none ;
+}
 
 @media (min-width: 1080px) {
     
@@ -472,6 +479,10 @@ body section.planos .wrapper .swiper.mySwiper11 {
     section.planos .wrapper.plano {
         width: 100%;
     }
+
+    section.planos .z7-btnx__label span {
+    display: initial ;
+}
 
     section.planos img.bg.arraia.desktop {
         display: inherit;
@@ -493,6 +504,8 @@ body section.planos .wrapper .swiper.mySwiper11 {
     section.planos .card a,
     section.planos .card a button {
         width: 100%;
+
+        margin-top: 4rem;
     }
 
     section.planos .card .title {

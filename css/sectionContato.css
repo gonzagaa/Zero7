@@ -1,103 +1,377 @@
 #contato {
-    overflow: hidden;
-    position: relative;
+  position: relative;
+  overflow: hidden;
 }
 
-#contato .cards {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+#contato .content {
+  position: relative;
+  z-index: 1;
 }
 
 #contato header a button {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
-#contato .border {
-    height: 100%;
-    border-radius: 1.2rem;
-    padding: .2rem;
+#contato .cards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-#contato .border:nth-child(1) {
-    background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 15%);
+/* =========================
+   BORDER CARD SYSTEM
+========================= */
+#contato .border,
+#suporte .content .border {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  border-radius: 1.8rem;
+  padding: 1px;
+  isolation: isolate;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0, 128, 201, 0.85) 0%,
+      rgba(0, 128, 201, 0.32) 18%,
+      rgba(255, 255, 255, 0.08) 48%,
+      rgba(255, 255, 255, 0.02) 68%,
+      rgba(0, 0, 0, 0.18) 100%
+    );
+
+  box-shadow:
+    0 0 0 1px rgba(0, 128, 201, 0.06),
+    0 18px 40px rgba(0, 0, 0, 0.28);
 }
 
-#contato .border:nth-child(2) {
-    background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 15%);
+#contato .border::before,
+#suporte .content .border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    radial-gradient(circle at top left, rgba(0, 128, 201, 0.22), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(0, 128, 201, 0.14), transparent 32%);
 }
 
-#contato .border:nth-child(3) {
-    background: linear-gradient(45deg, #023c83, #1da4f3, #1da4f3, #000 15%);
+#contato .border::after,
+#suporte .content .border::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(1.8rem - 1px);
+  pointer-events: none;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
+#contato .border:hover,
+#suporte .content .border:hover {
+  box-shadow:
+    0 0 0 1px rgba(0, 128, 201, 0.12),
+    0 22px 50px rgba(0, 0, 0, 0.34);
+}
+
+/* variações leves por posição */
+#contato .cards .border:nth-child(1)::before,
+#suporte .content .border:nth-child(1)::before {
+  background:
+    radial-gradient(circle at left center, rgba(0, 128, 201, 0.22), transparent 40%),
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 30%);
+}
+
+#contato .cards .border:nth-child(2)::before,
+#suporte .content .border:nth-child(2)::before {
+  background:
+    radial-gradient(circle at center top, rgba(0, 128, 201, 0.18), transparent 32%),
+    radial-gradient(circle at center bottom, rgba(255, 255, 255, 0.04), transparent 28%);
+}
+
+#contato .cards .border:nth-child(3)::before,
+#suporte .content .border:nth-child(3)::before {
+  background:
+    radial-gradient(circle at right center, rgba(0, 128, 201, 0.22), transparent 40%),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 30%);
+}
+
+/* =========================
+   TOP CARDS
+========================= */
 #contato .card {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 1rem;
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  width: 100%;
+  height: 100%;
+  min-height: 11rem;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  cursor: default;
+  border-radius: calc(1.8rem - 1px);
+  padding: 2.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  background:
+    linear-gradient(180deg, rgba(6, 17, 29, 0.98) 0%, rgba(2, 7, 13, 0.98) 100%);
 }
 
-#contato .border:nth-child(1) .card {
-    background: linear-gradient(130deg, #000e1a, #010307);
+#contato .card ion-icon {
+  color: #18a9ff;
+  font-size: 2.8rem;
+  min-width: 5.6rem;
+  min-height: 5.6rem;
+  width: 5.6rem;
+  height: 5.6rem;
+  padding: 1.2rem;
+  border-radius: 1.3rem;
+  flex-shrink: 0;
+
+  background:
+    linear-gradient(180deg, rgba(0, 128, 201, 0.16), rgba(0, 128, 201, 0.05));
+  border: 1px solid rgba(29, 164, 243, 0.18);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 28px rgba(0, 128, 201, 0.08);
 }
 
-#contato .border:nth-child(2) .card {
-    background: linear-gradient(to bottom, #000e1a, #010307);
-}
-
-#contato .border:nth-child(3) .card {
-    background: linear-gradient(-130deg, #000e1a, #010307);
+#contato .card .text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 #contato .card h3 {
-    font-size: 1.8rem;
-
-    color: #fff;
-    text-align: left;
-}
-
-#contato .cards .card ion-icon {
-    color: var(--primary-color);
-    font-size: 4rem;
-
-    min-width: 4rem;
-    min-height: 4rem;
+  font-size: 1.9rem;
+  color: #fff;
+  text-align: left;
+  margin: 0;
 }
 
 #contato .cards .card p {
-    font-size: 1.2rem;
-    text-align: left;
-    color: #fff;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  text-align: left;
+  color: #b9c5d3;
+  margin: 0;
 }
 
 #contato .cards .card p a {
-    color: #fff;
+  color: #fff;
+  text-decoration: none;
 }
 
+#contato .cards .card p a:hover {
+  color: var(--primary-color);
+}
+
+/* =========================
+   SUPORTE
+========================= */
+#suporte {
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+#suporte .content {
+  display: grid;
+  grid-template-rows: auto;
+  gap: 2rem;
+}
+
+#suporte .whatsapp,
+#suporte .ajuda,
+#suporte .image {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  border-radius: calc(1.8rem - 1px);
+  background:
+    linear-gradient(180deg, rgba(6, 17, 29, 0.98) 0%, rgba(2, 7, 13, 0.98) 100%);
+}
+
+#suporte .whatsapp {
+  min-height: 22rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 2.4rem;
+  text-align: center;
+}
+
+#suporte .whatsapp ion-icon {
+  font-size: 2.8rem;
+  width: 5.8rem;
+  height: 5.8rem;
+  margin-inline: auto;
+  border-radius: 1.4rem;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+
+  background: linear-gradient(135deg, #0c77d6, #18a9ff);
+  color: #fff;
+
+  box-shadow:
+    0 10px 28px rgba(0, 128, 201, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+#suporte .whatsapp p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+
+#suporte .image {
+  min-height: 22rem;
+  overflow: hidden;
+}
+
+#suporte .image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(2, 7, 13, 0.06), rgba(2, 7, 13, 0.22));
+  pointer-events: none;
+  z-index: 1;
+}
+
+#suporte .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+#suporte .border:hover .image img {
+  transform: scale(1.04);
+}
+
+#suporte .ajuda {
+  min-height: 22rem;
+  padding: 2.4rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#suporte .ajuda > span {
+  width: fit-content;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #57ff6d;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.2rem;
+  border-radius: 999px;
+
+  background: rgba(87, 255, 109, 0.05);
+  border: 1px solid rgba(87, 255, 109, 0.12);
+}
+
+#suporte .ajuda > span ion-icon {
+  font-size: 1.5rem;
+}
+
+#suporte .ajuda h3 {
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 1rem 0;
+}
+
+#suporte .ajuda h3 span {
+  color: var(--primary-color);
+}
+
+#suporte .ajuda p {
+  font-size: 1.55rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #95a2b1;
+  margin: 0;
+}
+
+#suporte .ajuda p span {
+  color: #d7e2ee;
+}
+
+#suporte .ajuda a {
+  text-decoration: none;
+}
+
+#suporte .ajuda a button {
+  margin-top: 2rem;
+  border: none;
+  background: linear-gradient(135deg, #0c77d6, #18a9ff);
+  padding: 1.2rem 2.8rem;
+  border-radius: 1.2rem;
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#suporte .ajuda a button:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 12px 30px rgba(0, 128, 201, 0.22);
+}
+
+/* =========================
+   DESKTOP
+========================= */
 @media (min-width: 1080px) {
-    section#contato .cards {
-        gap: 2rem;
-        display: grid;
-        grid-template-columns: 1fr 1.5fr 1fr;
-    }
+  #contato .cards {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    align-items: stretch;
+  }
 
-    section#contato .border:nth-child(1) {
-        background: linear-gradient(145deg, #023c83, #1da4f3, #1da4f3, #000 30%);
-    }
+  #contato .card {
+    min-height: 10.5rem;
+  }
 
-    section#contato .border:nth-child(2) {
-        background: transparent;
-    }
-    
-    section#contato .border:nth-child(3) {
-        background: linear-gradient(-145deg, #023c83, #1da4f3, #1da4f3, #000 30%);
-    }
+  #suporte .content {
+    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-rows: 1fr;
+    margin-top: 0;
+  }
+
+  #suporte .whatsapp,
+  #suporte .ajuda,
+  #suporte .image {
+    min-height: 25rem;
+  }
+
+  #suporte .whatsapp {
+    padding-inline: 4rem;
+  }
+
+  #suporte .image img {
+    aspect-ratio: 16 / 7;
+    height: 100%;
+  }
 }

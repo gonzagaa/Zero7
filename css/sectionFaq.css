@@ -141,10 +141,15 @@ summary::-webkit-details-marker {
     font-size: 1.4rem;
     color: #fff;
     font-weight: 500;
+
 }
+
+
 
 @media (min-width: 1080px) {
     section#faq .faq {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 
     section#faq summary {

@@ -27,42 +27,166 @@ AOS.init(
   }
 );
 
-const words = ["acessível", "seguro&nbsp;&nbsp;&nbsp;&nbsp;", "lucrativo&thinsp;"];
-let index = 0;
+(() => {
+  const wrapper = document.querySelector(".reveal-wrapper");
+  if (!wrapper) return;
 
-const wordEl = document.querySelector(".reveal-word");
+  const NBSP = "\u00A0";
+  const THIN = "\u2009";
 
-function animateSwitch() {
-  const tl = gsap.timeline();
+  const words = [
+    "acessível",
+    "seguro" + NBSP + NBSP + NBSP + NBSP,
+    "lucrativo" + THIN
+  ];
 
-  // anima saída
-  tl.to(wordEl, {
-    duration: 0.3,
-    opacity: 0,
-    filter: "blur(4px)",
-    scale: 0.95,
-    y: -10,
-    ease: "power2.inOut",
-    onComplete: () => {
-      index = (index + 1) % words.length;
-      wordEl.innerHTML = words[index]; // <- AQUI ESTÁ A MUDANÇA
+  // garante 2 spans (front/back)
+  let front =
+    wrapper.querySelector(".reveal-word.is-front") ||
+    wrapper.querySelector(".reveal-word");
+
+  if (!front) return;
+
+  front.classList.add("reveal-word", "is-front");
+
+  let back = wrapper.querySelector(".reveal-word.is-back");
+  if (!back) {
+    back = document.createElement("span");
+    back.className = "reveal-word is-back";
+    wrapper.appendChild(back);
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // índice inicial
+  const initial = (front.textContent || "").trim();
+  let index = Math.max(0, words.findIndex(w => w.trim() === initial));
+  if (!initial) front.textContent = words[index];
+
+  // trava largura na maior palavra (zero pulo)
+  function measureMaxWidth() {
+    const probe = document.createElement("span");
+    probe.style.position = "absolute";
+    probe.style.visibility = "hidden";
+    probe.style.whiteSpace = "pre";
+    probe.style.left = "-9999px";
+    probe.style.top = "-9999px";
+
+    const cs = getComputedStyle(front);
+    probe.style.font = cs.font;
+    probe.style.letterSpacing = cs.letterSpacing;
+    probe.style.textTransform = cs.textTransform;
+
+    document.body.appendChild(probe);
+
+    let max = 0;
+    for (const w of words) {
+      probe.textContent = w;
+      max = Math.max(max, probe.getBoundingClientRect().width);
     }
-  });
 
-  // anima entrada
-  tl.to(wordEl, {
-    duration: 0.6,
-    opacity: 1,
-    filter: "blur(0px)",
-    scale: 1,
-    y: 0,
-    ease: "power2.out"
-  });
-}
+    document.body.removeChild(probe);
+    wrapper.style.width = `${Math.ceil(max) + 2}px`;
+  }
 
-setInterval(animateSwitch, 2000);
+  let nextCall = null;
 
-gsap.registerPlugin(ScrollTrigger);
+  function scheduleNext(delay = 2.0) {
+    if (nextCall) nextCall.kill();
+    nextCall = gsap.delayedCall(delay, animateSwitch);
+  }
+
+  function animateSwitch() {
+    const nextIndex = (index + 1) % words.length;
+    const nextWord = words[nextIndex];
+
+    if (prefersReducedMotion) {
+      front.textContent = nextWord;
+      index = nextIndex;
+      scheduleNext(2.0);
+      return;
+    }
+
+    back.textContent = nextWord;
+
+    // estado inicial da palavra que entra
+    gsap.set(back, {
+      yPercent: 110,
+      opacity: 0,
+      filter: "blur(14px)",
+      scale: 0.985
+    });
+
+    // garante estado normal da palavra que sai
+    gsap.set(front, {
+      yPercent: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      scale: 1
+    });
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // swap refs
+        const tmp = front;
+        front = back;
+        back = tmp;
+
+        front.classList.add("is-front");
+        front.classList.remove("is-back");
+        back.classList.add("is-back");
+        back.classList.remove("is-front");
+
+        // prepara back (que ficou escondido) pro próximo ciclo
+        gsap.set(back, { yPercent: 110, opacity: 0, filter: "blur(14px)", scale: 0.985 });
+
+        index = nextIndex;
+        scheduleNext(2.0);
+      }
+    });
+
+    // SAÍDA (mais perceptível pelo blur)
+    tl.to(front, {
+      duration: 0.45,
+      yPercent: -110,
+      opacity: 0,
+      filter: "blur(16px)",
+      scale: 0.985,
+      ease: "power3.inOut"
+    }, 0);
+
+    // ENTRADA (baixo -> cima + blur “dissolve”)
+    tl.to(back, {
+      duration: 0.60,
+      yPercent: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      scale: 1,
+      ease: "power3.out"
+    }, 0.06);
+
+    // micro “settle” pra dar sensação de troca sem enfeite
+    tl.fromTo(
+      back,
+      { scale: 1.015 },
+      { scale: 1, duration: 0.25, ease: "power2.out" },
+      0.20
+    );
+  }
+
+  function start() {
+    measureMaxWidth();
+    scheduleNext(2.0);
+    window.addEventListener("resize", gsap.utils.debounce(measureMaxWidth, 150));
+  }
+
+  // espera fontes pra medir correto
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(start);
+  } else {
+    window.addEventListener("load", start);
+  }
+})();
 
 
 // // Animação da linha de progresso
@@ -106,6 +230,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const larguraDaTela = window.innerWidth
 
+/* mySwiper3 — Swiper órfão. O elemento .mySwiper3 não existe mais no HTML
+   (provavelmente fazia parte da section #plan antiga removida). Mantido aqui
+   comentado caso volte a ser necessário. */
+/*
 if (larguraDaTela < 800) {
     var swiper3 = new Swiper(".mySwiper3", {
         slidesPerView: 1,
@@ -137,6 +265,7 @@ if (larguraDaTela < 800) {
         },
       });
 }
+*/
 
 if (larguraDaTela < 800) {
   var swiper4 = new Swiper(".mySwiper4", {
@@ -242,6 +371,10 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+/* Popup overlay removido do HTML (linhas 304-311 do index.html antigo).
+   Este bloco está comentado pois os elementos #popupOverlay, #popupContent e #popupClose
+   não existem mais no DOM. Quando o popup voltar a ser usado, descomentar este bloco. */
+/*
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("popupOverlay");
   const content = document.getElementById("popupContent");
@@ -290,6 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 300); // mesmo tempo da transição no CSS
   }
 });
+*/
 
 
 const dataFinal = new Date("2025-12-15T23:59:00");
@@ -298,7 +432,11 @@ const diasEl = document.getElementById('dias');
 const horasEl = document.getElementById('horas');
 const minutosEl = document.getElementById('minutos');
 const segundosEl = document.getElementById('segundos');
-const mensagemEl = document.getElementById('mensagem');
+/* mensagemEl removido: o elemento #mensagem não existe no HTML. Quando o
+   countdown chegava a zero o código antigo dava erro `null` ao tentar setar
+   .innerText. Se quiser exibir uma mensagem ao zerar, basta adicionar um
+   <span id="mensagem"></span> no HTML e descomentar as linhas marcadas abaixo. */
+// const mensagemEl = document.getElementById('mensagem');
 
 function atualizarContagem() {
   const agora = new Date();
@@ -310,7 +448,7 @@ function atualizarContagem() {
     horasEl.innerText = "00";
     minutosEl.innerText = "00";
     segundosEl.innerText = "00";
-    mensagemEl.innerText = "Tempo esgotado!";
+    // mensagemEl.innerText = "Tempo esgotado!";
     return;
   }
 
@@ -328,6 +466,10 @@ function atualizarContagem() {
 const intervalo = setInterval(atualizarContagem, 1000);
 atualizarContagem(); // Inicializa já com os valores corretos
 
+/* Bloco da .tarjaTimerNav — a tarja foi removida do HTML.
+   Tinha proteção `if (!tarja || !nav || !header) return` então não dava erro,
+   mas era código morto sendo carregado à toa. Mantido comentado pra reversão fácil. */
+/*
 document.addEventListener("DOMContentLoaded", () => {
   const tarja = document.querySelector(".tarjaTimerNav");
   const nav = document.querySelector("#navigation");
@@ -342,3 +484,4 @@ document.addEventListener("DOMContentLoaded", () => {
     header.classList.add("activeTarjaHome");
   }, 3000);
 });
+*/

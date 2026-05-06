@@ -1,3 +1,10 @@
+.tarjaImage {
+    top: 0;
+    position: fixed;
+    left: 0;
+    z-index: 99;
+}
+
 .tarjaImage img {
     width: 100%;
 }
@@ -7,16 +14,18 @@
 }
 
 #home.activeTarjaImage {
-  padding-top: 15.2rem;
 }
 
 #home.activeTarjaImage .image img.mobile {
-    top: 18%;
+    top: 15%;
 }
 
 #navigation.activeTarjaImage {
-    top: 11.5rem;
-    /* top: 8.5rem; */
+    top: 5.3rem;
+}
+
+#navigation.activeCountdown {
+    top: 8.35rem;
 }
 
 .countdown--promo {
@@ -59,9 +68,12 @@
 
 @media (min-width: 1080px) {
     nav#navigation.activeTarjaImage {
-        /* top: 8.5rem; */
-        top: 11.9rem;
+        top: 5rem;
         border-radius: 0 0 2rem 2rem;
+    }
+
+    nav#navigation.activeCountdown {
+        top: 8rem;
     }
 
     header#home.activeTarjaImage {
@@ -71,7 +83,7 @@
     div.tarjaImage {
         width: calc(100% - 200px);
         left: 100px;
-        top: 2rem;
+        top: 0;
     }
 
     div.tarjaImage img {
@@ -108,18 +120,23 @@
       div.tarjaImage {
         width: calc(100% - 340px);
         left: 170px;
-        top: 2rem;
       } 
 
       nav#navigation.activeTarjaImage {
-        top: 12.9rem;
-        /* top: 9.5rem; */
+        top: 6rem;
+    }
+
+    nav#navigation.activeCountdown {
+        top: 8.9rem;
     }
 }
 
 @media (min-width: 2500px) {
     nav#navigation.activeTarjaImage {
-        top: 13.8rem;
-        /* top: 12rem; */
+        top: 8rem;
+    }
+
+    nav#navigation.activeCountdown {
+        top: 10rem;
     }
 }

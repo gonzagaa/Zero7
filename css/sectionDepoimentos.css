@@ -11,6 +11,12 @@
     top: 0;
     left: 0;
     z-index: 0;
+
+    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+
+#depoimentos img.bgsection.desktop {
+    display: none;
 }
 
 #depoimentos::before,
@@ -36,7 +42,7 @@
 }
 
 #depoimentos header {
-    margin-top: 6rem;
+    margin-top: 4rem;
 }
 
 #depoimentos header h2 {
@@ -60,6 +66,7 @@
     cursor: pointer;
     overflow: hidden;
     border-radius: 1rem;
+
 }
 
 #depoimentos .cards .card img {
@@ -85,6 +92,16 @@
         margin-bottom: 0;
     }
 
+    section#depoimentos img.bgsection.desktop {
+        display: inherit;
+
+        mask-image: linear-gradient(to bottom, #000 50%, transparent);
+    }
+
+    section#depoimentos img.bgsection.mobile {
+        display: none;
+    }
+
     section#depoimentos header h2 {
         font-size: 3rem;
     }
@@ -99,7 +116,10 @@
     section#depoimentos .cards {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 1rem;
+        gap: 1.8rem;
+    }
+
+    section#depoimentos .cards .card {
     }
 
     section#depoimentos header {
@@ -112,7 +132,8 @@
     }
 
     section#depoimentos header p {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
+        line-height: 1.6;
     }
 
     section#depoimentos .wrapper.carrossel {

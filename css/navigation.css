@@ -38,7 +38,7 @@ nav {
   }
   
   nav .logo img {
-    width: 11rem;
+    width: 8rem;
   }
   
   nav button {
@@ -87,32 +87,38 @@ nav {
   }
   
   .menu {
-    transform: translateY(-100%);
+    transform: translateX(100%);
   }
   
   body.menu-expanded .menu {
     top: 0;
-    right: 0;
+    right: -5%;
   
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
-    background-color: rgba(0, 0, 0, 0.832);
+    background-color: rgb(0, 0, 0);
     border-radius: 0;
     border: 1px solid rgba(63, 63, 63, 0.125);
   
-    width: 100vw;
-    height: 60vh;
+    width: 60vw;
+    height: 50vh;
   
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    align-items: start;
+    text-align: start;
+
+    padding-left: 2rem;
   
     padding-top: var(--nav-height);
   
     transition: transform 400ms ease-out;
     transform: translateY(0);
+  }
+
+  body.menu-expanded nav {
+    background: #000;
   }
   
   .menu ul:nth-child(1) {
@@ -179,6 +185,7 @@ nav {
     filter: none;
     font-family: var(--tts);
     font-weight: 500;
+    background: var(--gradient);
   }
 
   nav .anavMobile {
