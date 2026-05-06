@@ -169,6 +169,10 @@
     padding-inline: 2rem;
 }
 
+#obrigado .z7-btnx {
+    margin-top: 3rem;
+}
+
 #obrigado.natal .card .text button {
     background: linear-gradient(45deg, #DCA542, #E9C751, #DCA542, #E9C751);
     filter: none;
