@@ -138,7 +138,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 } 
 
 .planos .botoes button.selecionado {
-    background: linear-gradient(45deg, #FFDE00, #FF9500);
+    background: linear-gradient(45deg, #10A36A, #34D399);
     color: #000000;
 }
 
@@ -154,7 +154,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 } */
 
 .planos.bit .botoes button.selecionado {
-    background: linear-gradient(45deg, #FFDE00, #FF9500);
+    background: linear-gradient(45deg, #10A36A, #34D399);
     color: #000000;
 }
 
