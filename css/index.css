@@ -1,32 +1,31 @@
-@import url("./global.css?v=v10-cachebust-m3p8");
-@import url("./home.css?v=v10-cachebust-m3p8");
-@import url("./sectionDivisa.css?v=v10-cachebust-m3p8");
-@import url("./sectionCards.css?v=v10-cachebust-m3p8");
-@import url("./sectionTopicos.css?v=v10-cachebust-m3p8");
-@import url("./sectionDepoimentos.css?v=v10-cachebust-m3p8");
-@import url("./sectionPlanos.css?v=v10-cachebust-m3p8");
-@import url("./sectionPlanosTematico.css?v=v10-cachebust-m3p8");
-@import url("./sectionFaq.css?v=v10-cachebust-m3p8");
-@import url("./sectionContato.css?v=v10-cachebust-m3p8");
-@import url("./divSuporte.css?v=v10-cachebust-m3p8");
+@import url("./global.css?v=v11-cachebust-jun01");
+@import url("./home.css?v=v11-cachebust-jun01");
+@import url("./sectionDivisa.css?v=v11-cachebust-jun01");
+@import url("./sectionCards.css?v=v11-cachebust-jun01");
+@import url("./sectionTopicos.css?v=v11-cachebust-jun01");
+@import url("./sectionDepoimentos.css?v=v11-cachebust-jun01");
+@import url("./sectionPlanos.css?v=v11-cachebust-jun01");
+@import url("./sectionPlanosTematico.css?v=v11-cachebust-jun01");
+@import url("./sectionFaq.css?v=v11-cachebust-jun01");
+@import url("./sectionContato.css?v=v11-cachebust-jun01");
+@import url("./divSuporte.css?v=v11-cachebust-jun01");
 
-@import url("./navigation.css?v=v10-cachebust-m3p8");
-@import url("./button.css?v=v10-cachebust-m3p8");
-@import url("./head.css?v=v10-cachebust-m3p8");
-@import url("./buttonWpp.css?v=v10-cachebust-m3p8");
-@import url("./modalDepoimento.css?v=v10-cachebust-m3p8");
-@import url("./tarja.css?v=v10-cachebust-m3p8");
-@import url("./tarjaNav.css?v=v10-cachebust-m3p8");
-@import url("./tarjaImage.css?v=v10-cachebust-m3p8");
+@import url("./navigation.css?v=v11-cachebust-jun01");
+@import url("./button.css?v=v11-cachebust-jun01");
+@import url("./head.css?v=v11-cachebust-jun01");
+@import url("./buttonWpp.css?v=v11-cachebust-jun01");
+@import url("./modalDepoimento.css?v=v11-cachebust-jun01");
+@import url("./tarja.css?v=v11-cachebust-jun01");
+@import url("./tarjaNav.css?v=v11-cachebust-jun01");
+@import url("./tarjaImage.css?v=v11-cachebust-jun01");
 
-@import url("./author.css?v=v10-cachebust-m3p8");
-@import url("./footer.css?v=v10-cachebust-m3p8");
-@import url("./footerPagamento.css?v=v10-cachebust-m3p8");
-@import url("./coutdownDois.css?v=v10-cachebust-m3p8");
+@import url("./author.css?v=v11-cachebust-jun01");
+@import url("./footer.css?v=v11-cachebust-jun01");
+@import url("./footerPagamento.css?v=v11-cachebust-jun01");
+@import url("./coutdownDois.css?v=v11-cachebust-jun01");
 
-@import url("./obrigado.css?v=v10-cachebust-m3p8-c52d");
-@import url("./verificado.css?v=v10-cachebust-m3p8-d73f");
-@import url("./25k.css?v=v10-cachebust-m3p8");
+@import url("./obrigado.css?v=v11-cachebust-jun01");
+@import url("./verificado.css?v=v11-cachebust-jun01");
+@import url("./25k.css?v=v11-cachebust-jun01");
 
-
-@import url("./heroPromotion.css");
+@import url("./heroPromotion.css?v=v11-cachebust-jun01");
