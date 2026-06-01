@@ -2,46 +2,94 @@
 
 (function () {
   const DATA_URL = "./script/planos.json?v=wefewf435345213123qwdfwefwe";
-  const DEFAULT_MODE = "reinicio";
-  const VALID_MODES = ["30dias", "60dias", "reinicio"];
 
-  let currentMode = DEFAULT_MODE;
+  let currentMode = null;
   let cache = null;
+  let activeModeIds = [];
+  let allButtons = [];
 
   const sections = Array.from(document.querySelectorAll("section.planos"));
   if (!sections.length) return;
 
-  const allButtons = [];
+  const buttonContainers = [];
+  const modeUiElements = [];
   const allCards = [];
   sections.forEach(sec => {
-    const btns = Array.from(sec.querySelectorAll(".botoes button"));
+    const containers = Array.from(sec.querySelectorAll(".botoes"));
+    const headings = Array.from(sec.querySelectorAll(".js-plan-mode-heading"));
+    const descriptions = Array.from(sec.querySelectorAll(".js-plan-mode-description"));
     const cards = Array.from(sec.querySelectorAll(".card[data-plan]"));
-    allButtons.push(...btns);
+    buttonContainers.push(...containers);
+    modeUiElements.push(...containers, ...headings, ...descriptions);
     allCards.push(...cards);
-
-    // assegura data-mode (fallback caso o HTML venha sem)
-    btns.forEach(btn => {
-      if (!btn.dataset.mode) {
-        const txt = (btn.textContent || "").toLowerCase();
-        if (txt.includes("rein")) btn.dataset.mode = "reinicio";
-        else if (txt.includes("30")) btn.dataset.mode = "30dias";
-        else btn.dataset.mode = "60dias";
-      }
-    });
   });
 
-  setButtonsVisual(DEFAULT_MODE);
-  updateModeTexts(DEFAULT_MODE);
+  async function init() {
+    const db = await loadData();
+    const config = db?.config || {};
+    const activeModes = getActiveModes(config);
 
-  allButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const mode = btn.dataset.mode;
-      if (!VALID_MODES.includes(mode)) return;
-      setMode(mode).catch(console.error);
+    if (!activeModes.length) {
+      throw new Error("Nenhum modo ativo encontrado em config.modes no planos.json");
+    }
+
+    activeModeIds = activeModes.map(mode => mode.id);
+    renderModeButtons(activeModes, config.hideButtonsWhenSingleMode === true);
+
+    const defaultMode = activeModeIds.includes(config.defaultMode)
+      ? config.defaultMode
+      : activeModes[0].id;
+
+    await setMode(defaultMode);
+  }
+
+  function getActiveModes(config) {
+    if (!Array.isArray(config.modes)) return [];
+
+    return config.modes
+      .filter(mode => mode && mode.active === true && mode.id)
+      .map(mode => ({
+        id: String(mode.id),
+        label: mode.label ? String(mode.label) : String(mode.id)
+      }));
+  }
+
+  function renderModeButtons(activeModes, hideButtonsWhenSingleMode) {
+    allButtons = [];
+    const shouldHideModeUi = activeModes.length === 1 && hideButtonsWhenSingleMode;
+
+    modeUiElements.forEach(el => setElementVisible(el, !shouldHideModeUi));
+
+    buttonContainers.forEach(container => {
+      container.innerHTML = "";
+
+      if (shouldHideModeUi) return;
+
+      activeModes.forEach(mode => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.mode = mode.id;
+        btn.textContent = mode.label;
+        btn.setAttribute("aria-pressed", "false");
+        btn.addEventListener("click", () => {
+          if (!activeModeIds.includes(mode.id)) return;
+          setMode(mode.id).catch(console.error);
+        });
+
+        container.appendChild(btn);
+        allButtons.push(btn);
+      });
     });
-  });
+  }
+
+  function setElementVisible(el, isVisible) {
+    el.hidden = !isVisible;
+    el.style.display = isVisible ? "" : "none";
+  }
 
   async function setMode(mode) {
+    if (!activeModeIds.includes(mode)) return;
+
     currentMode = mode;
     setButtonsVisual(mode);
     updateModeTexts(mode);
@@ -104,12 +152,18 @@
   async function applyModeToCards(mode) {
     const db = await loadData();
     const table = db[mode];
-    if (!table) return;
+    if (!table) {
+      console.warn(`[blackPlanos] Modo ativo sem dados em planos.json: ${mode}`);
+      return;
+    }
 
     allCards.forEach(card => {
       const key = (card.dataset.plan || "").toLowerCase(); // trainee, junior, bit_trainee...
       const cfg = table[key];
-      if (!cfg) return;
+      if (!cfg) {
+        console.warn(`[blackPlanos] Card sem dados para o modo "${mode}": ${key}`);
+        return;
+      }
 
       // OLD PRICE -> atualiza só o valor do span
       const oldPriceEl = card.querySelector(".js-old-price");
@@ -158,7 +212,8 @@
       // CHECKOUT
       const link = card.querySelector(".js-checkout");
       if (link && cfg.checkout) {
-        const newHref = cfg.checkout;
+        link.classList.add("link4selet");
+        const newHref = withCurrentQueryParams(cfg.checkout);
         if (link.getAttribute("href") !== newHref) {
           link.setAttribute("href", newHref);
         }
@@ -170,6 +225,13 @@
     return String(s).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
   }
 
+  function withCurrentQueryParams(href) {
+    const params = window.location.search.substring(1);
+    if (!params) return href;
+
+    return href + (href.includes("?") ? "&" : "?") + params;
+  }
+
   // inicia no modo padrão
-  setMode(DEFAULT_MODE).catch(console.error);
+  init().catch(console.error);
 })();

@@ -165,7 +165,9 @@
   .custom-shape-divider-bottom-1736960517 .shape-fill {
     fill: var(--bg-white);
   }
+
   
+
   @media (min-width: 1080px) {
     header#home {
       justify-content: center;

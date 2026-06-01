@@ -223,7 +223,7 @@
 <body id="body" class="smooth-scroll-wrapper">
 
   <div data-aos="fade-down" class="tarjaImage">
-    <!-- <h3>ÚLTIMO DIA</h3> -->
+
     <div class="countdown countdown--promo" id="countdownPromo">
       <p class="text">Essa oferta encerra em:</p>
       <div>
@@ -244,13 +244,13 @@
       </div>
     </div>
 
-    <a href="#plan">
+    <!-- <a href="#plan">
       <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK PLANOS COM REINICIO.avif" alt="">
       <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE PLANOS COM REINICIO.avif" alt="">
-    </a>
+    </a> -->
   </div>
 
-  <nav data-aos="fade-down" id="navigation" class="activeTarjaImage">
+  <nav data-aos="fade-down" id="navigation" class="">
     <div class="wrapper">
 
       <a class="logo" href="#home">
@@ -293,10 +293,19 @@
     </div>
   </nav>
 
-  <header class="header activeTarjaImage" id="home">
+  <header class="header boxpromotion" id="home">
     <div class="wrapper">
       <div class="content">
         <div data-aos="fade-up" class="text">
+          <div class="box">
+            <div class="topics">
+              <h2>Avance na Avaliação</h2>
+              <h2>Receba prêmios em R$ na Incubadora</h2>
+              <h2>E tenha 100% dos lucros em Conta real</h2>
+            </div>
+            <h2 class="desconto">Todos os planos com 70% de desconto.</h2>
+          </div>
+
           <h1>
             O ECOSSISTEMA <span class="reveal-wrapper">
               <span class="reveal-word">acessível</span>
@@ -570,15 +579,8 @@
 
         <header data-aos="fade-up">
           <h2>TRANSFORME SUAS HABILIDADES EM <span>GRANDES PAGAMENTOS</span></h2>
-          <p>A Zero7 desenvolveu um <span>modelo totalmente único</span> para se operar. Aqui, traders podem ter acesso
-            a grandes contas, com muitos lotes, mas pagando até <span>20 vezes menos</span> do que o valor que teriam
-            que disponibilizar em suas contas pessoais. Depois de aprovados na avaliação - com 60 dias para finalizar -,
-            os traders iniciam sua jornada na mesa através da Incubadora, onde podem operar em ambiente simulado mas
-            sendo recompensados com até <span>90% dos lucros</span> que fizerem, <span>sem risco nenhum ao seu próprio
-              capital</span>. Depois, podem progredir para a conta real e avançarem com um plano de carreira desenhado
-            para terem <span>cada vez mais lucros</span>. A Zero7 conta ainda com inúmeros benefícios, como
-            <span>Aprovação Permanente</span>, <span>treinamentos</span> e <span>cursos completos disponíveis na Área do
-              Trader</span>.</p>
+          <p>A Zero7 desenvolveu um <span>modelo totalmente único</span> para se operar. Aqui, traders podem ter acesso a grandes contas, com muitos lotes, mas <span>pagando até 20 vezes</span> menos do que o valor que teriam que disponibilizar em suas contas pessoais. Depois de aprovados na avaliação - com 60 dias para finalizar -, os traders iniciam sua jornada na mesa através da Incubadora, onde podem operar em ambiente simulado mas <span>recebendo prêmios pela sua performance</span>, sem risco nenhum ao seu próprio capital. Depois, podem progredir para a conta real e avançarem com um plano de carreira <span>desenhado para terem cada vez mais lucros</span>. A <span>Zero7 conta ainda com inúmeros benefícios</span>, como Aprovação Permanente, treinamentos e cursos completos disponíveis na Área do Trader.
+</p>
 
           <a class="z7-btnx" href="#plan" role="button" aria-label="Contrate um plano">
             <span class="z7-btnx__bg" aria-hidden="true"></span>
@@ -608,26 +610,31 @@
     
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
-          <img class="cupom" src="./assets/tarjapopup/cupom planos com reinicio.avif" alt="">
+          <!-- <img class="cupom" src="./assets/tarjapopup/cupom planos com reinicio.avif" alt=""> -->
+
+           <div class="box">
+            <div class="topics">
+              <h2>Avance na Avaliação</h2>
+              <h2>Receba prêmios em R$ na Incubadora</h2>
+              <h2>E tenha 100% dos lucros em Conta real</h2>
+            </div>
+            <h2 class="desconto">Todos os planos com 70% de desconto.</h2>
+          </div>
       </div>
 
       <div class="planos-topo-conteudo" data-aos="fade-up">
         <header>
           <h2>Mini índice / Dólar</h2>
 
-        <p class="escolha">ESCOLHA SEU MODELO DE AVALIAÇÃO</p>
+        <p class="escolha js-plan-mode-heading">ESCOLHA SEU MODELO DE AVALIAÇÃO</p>
 
-        <div class="botoes">
-          <button data-mode="reinicio">Planos com Reinício</button>
-          <button data-mode="30dias">Planos 30 dias</button>
-          <button data-mode="60dias" class="selecionado">Planos 60 dias</button>
-        </div>
+        <div class="botoes"></div>
 
-        <div class="textBotoes">
+        <div class="textBotoes js-plan-mode-description">
           <p class="mode-30dias" style="display:none;">
             Os planos com 30 dias de avaliação são ideais para quem tem um perfil agressivo e busca resultados maiores no dia.
           </p>
-          <p class="mode-60dias">
+          <p class="mode-60dias" style="display:none;">
             Os planos com 60 dias de avaliação são ideais para quem constroe resultado dia após dia, mantendo sempre a consistência.
           </p>
           <p class="mode-reinicio" style="display:none;">
@@ -653,7 +660,7 @@
               <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda máxima: <span>R$ 997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>100% em conta real</span></p>
             </div>
 
             <div class="oldPrice">
@@ -687,7 +694,7 @@
               <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda máxima: <span>R$ 1.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 1.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>100% em conta real</span></p>
             </div>
 
             <div class="oldPrice">
@@ -721,7 +728,7 @@
               <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda máxima: <span>R$ 4.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 4.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>100% em conta real</span></p>
             </div>
 
             <div class="oldPrice">
@@ -755,7 +762,7 @@
               <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda máxima: <span>R$ 9.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 9.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>100% em conta real</span></p>
             </div>
 
             <div class="oldPrice">
@@ -789,7 +796,7 @@
               <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda total: <span>R$ 14.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 14.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>80%</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>100% em conta real</span></p>
             </div>
 
             <div class="oldPrice">
@@ -823,7 +830,7 @@
               <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda total: <span>R$ 19.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 19.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>80%</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>100% em conta real</span></p>
             </div>
 
             <div class="oldPrice">
@@ -867,13 +874,9 @@
       <header data-aos="fade-up">
         <h2>CONTRATO FUTURO DE <span>BITCOIN</span></h2>
 
-        <p class="escolha">ESCOLHA SEU MODELO DE AVALIAÇÃO</p>
+        <p class="escolha js-plan-mode-heading">ESCOLHA SEU MODELO DE AVALIAÇÃO</p>
 
-        <div class="botoes">
-          <button data-mode="30dias">Planos 30 dias</button>
-          <button data-mode="60dias" class="selecionado">Planos 60 dias</button>
-          <button data-mode="reinicio">Planos com Reinício</button>
-        </div>
+        <div class="botoes"></div>
       </header>
     </div>
 
@@ -891,7 +894,7 @@
               <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda total: <span>R$ 997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>100% em conta real</span></p>
             </div>
 
             <div class="oldPrice">
@@ -923,7 +926,7 @@
               <p><ion-icon name="checkmark-outline"></ion-icon> Limite de perda total: <span>R$ 1.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Meta de aprovação: <span>R$ 1.997,00</span></p>
               <p><ion-icon name="checkmark-outline"></ion-icon> Máximo de dias: <span class="js-max-dias">60</span></p>
-              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>90%</span></p>
+              <p><ion-icon name="checkmark-outline"></ion-icon> Repasse: <span>100% em conta real</span></p>
             </div>
 
             <div class="oldPrice">
@@ -1568,41 +1571,10 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
 
-
-
   <script>
 (() => {
 const prazosPromo = [
-  new Date("2026-06-01T23:59:59-03:00"),
-  new Date("2026-06-02T23:59:59-03:00"),
-  new Date("2026-06-03T23:59:59-03:00"),
-  new Date("2026-06-04T23:59:59-03:00"),
-  new Date("2026-06-05T23:59:59-03:00"),
-  new Date("2026-06-06T23:59:59-03:00"),
-  new Date("2026-06-07T23:59:59-03:00"),
-  new Date("2026-06-08T23:59:59-03:00"),
-  new Date("2026-06-09T23:59:59-03:00"),
-  new Date("2026-06-10T23:59:59-03:00"),
-  new Date("2026-06-11T23:59:59-03:00"),
-  new Date("2026-06-12T23:59:59-03:00"),
-  new Date("2026-06-13T23:59:59-03:00"),
-  new Date("2026-06-14T23:59:59-03:00"),
-  new Date("2026-06-15T23:59:59-03:00"),
-  new Date("2026-06-16T23:59:59-03:00"),
-  new Date("2026-06-17T23:59:59-03:00"),
-  new Date("2026-06-18T23:59:59-03:00"),
-  new Date("2026-06-19T23:59:59-03:00"),
-  new Date("2026-06-20T23:59:59-03:00"),
-  new Date("2026-06-21T23:59:59-03:00"),
-  new Date("2026-06-22T23:59:59-03:00"),
-  new Date("2026-06-23T23:59:59-03:00"),
-  new Date("2026-06-24T23:59:59-03:00"),
-  new Date("2026-06-25T23:59:59-03:00"),
-  new Date("2026-06-26T23:59:59-03:00"),
-  new Date("2026-06-27T23:59:59-03:00"),
-  new Date("2026-06-28T23:59:59-03:00"),
-  new Date("2026-06-29T23:59:59-03:00"),
-  new Date("2026-06-30T23:59:59-03:00"),
+  new Date("2026-05-01T23:59:59-03:00"),
 ];
 
   const root = document.getElementById("countdownPromo");
@@ -1656,7 +1628,7 @@ const prazosPromo = [
   const intervaloPromo = setInterval(tickPromo, 1000);
   tickPromo();
 })();
-</script>
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -1686,7 +1658,7 @@ const prazosPromo = [
       const createAnimations = () => {
         const ano = new CountUp("ano", 0, 2023, 0, 3, optionsAno);
         const traders = new CountUp("traders", 0, 25, 0, 3, optionsTraders);
-        const pagamentos = new CountUp("pagamentos", 0, 15, 0, 3, optionsPagamentos);
+        const pagamentos = new CountUp("pagamentos", 0, 18, 0, 3, optionsPagamentos);
 
         if (!ano.error) ano.start();
         if (!traders.error) traders.start();

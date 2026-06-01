@@ -224,8 +224,8 @@ nav {
       nav#navigation {
         width: calc(100% - 200px);
         left: 100px;
-        border-radius: 2rem;
-        top: 3rem;
+        border-radius: 0 0 2rem 2rem;
+        top: 0rem;
         height: 6rem;
       }
 
