@@ -1,5 +1,5 @@
 :is(#home, #plan) .box {
-  width: 85%;
+  width: 95%;
 }
 
 :is(#home, #plan) .box .topics {
