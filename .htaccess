@@ -1,0 +1,32 @@
+# ==============================
+# ZERO7 - CONTROLE DE CACHE
+# Aplicado somente na pasta /home
+# ==============================
+
+<IfModule mod_headers.c>
+
+  # HTML sempre atualizado
+  <FilesMatch "\.(html|htm)$">
+    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+  </FilesMatch>
+
+  # JSON de planos/preços sempre atualizado
+  <FilesMatch "\.(json)$">
+    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+  </FilesMatch>
+
+  # CSS e JS podem cachear, pois usam ?v=
+  <FilesMatch "\.(css|js)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Imagens, fontes e assets estáticos
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|otf)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+</IfModule>
