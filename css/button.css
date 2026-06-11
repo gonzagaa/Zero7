@@ -1,6 +1,12 @@
 :root{
   --z7-deep:#023c83;
   --z7-sky:#1da4f3;
+
+  /* variante verde (usada em CTAs em promoção, ex: PLENO Recovery) */
+  --z7-green-dark:#046b3a;
+  --z7-green:#00c86f;
+  --z7-green-light:#3cff9b;
+  --z7-green-neon:#73ffb8;
 }
 
 /* anima vars */

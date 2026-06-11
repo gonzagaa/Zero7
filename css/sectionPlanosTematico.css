@@ -251,3 +251,282 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
         color: #fff;
     }
 }
+
+/* ===== Card em promoção (PLENO Recovery) ===== */
+.planos .card.card--promo {
+    position: relative;
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(to bottom, #02060f, #0a121a) padding-box,
+        linear-gradient(135deg, var(--z7-green), var(--z7-green-light) 40%, var(--z7-green) 70%, var(--z7-green-dark)) border-box;
+    box-shadow:
+        0 0 0 1px rgba(0, 200, 111, 0.20),
+        0 12px 40px -12px rgba(0, 200, 111, 0.45);
+    animation: promoGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes promoGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 0 1px rgba(0, 200, 111, 0.20),
+            0 12px 40px -12px rgba(0, 200, 111, 0.45);
+    }
+    50% {
+        box-shadow:
+            0 0 0 1px rgba(115, 255, 184, 0.38),
+            0 16px 50px -10px rgba(60, 255, 155, 0.60);
+    }
+}
+
+/* Ribbon flutua livre fora do card (sem clip), igual o .title que tem top negativo */
+.planos .card.card--promo .card-promo-ribbon {
+    position: absolute;
+    top: 22px;
+    right: -38px;
+    transform: rotate(35deg);
+    transform-origin: center;
+    background: linear-gradient(135deg, var(--z7-green) 0%, var(--z7-green-dark) 100%);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    padding: 6px 38px;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(0, 200, 111, 0.55);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.planos .card.card--promo .card-promo-ribbon ion-icon {
+    font-size: 13px;
+}
+
+.planos .card.card--promo .title h3 {
+    color: var(--z7-green-neon);
+    -webkit-text-fill-color: var(--z7-green-neon);
+    text-shadow: 0 0 14px rgba(115, 255, 184, 0.45);
+}
+
+.planos .card.card--promo .card-promo-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    
+    padding: 6px 14px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--z7-green-light);
+    background: rgba(0, 200, 111, 0.08);
+    border: 1px solid rgba(0, 200, 111, 0.38);
+    border-radius: 999px;
+    text-align: center;
+    line-height: 1.2;
+
+    margin-top: 2rem;
+}
+
+.planos .card.card--promo .card-promo-hint ion-icon {
+    font-size: 1.3rem;
+    color: var(--z7-green);
+}
+
+@media (max-width: 720px) {
+    .planos .card.card--promo .card-promo-ribbon {
+        font-size: 10px;
+        padding: 5px 32px;
+        right: -42px;
+        top: 18px;
+    }
+
+    .planos .card.card--promo .card-promo-hint {
+        font-size: 1rem;
+        padding: 5px 12px;
+    }
+}
+
+/* ===== Botão verde (variante PROMO) =====
+   Override escopado: só o .z7-btnx dentro do .card--promo vira verde.
+   Reaproveita estrutura e animações de button.css, troca apenas a paleta. */
+.planos .card.card--promo .z7-btnx {
+    box-shadow:
+        0 0rem 4.5rem rgba(0, 200, 111, 0.34),
+        0 0rem 4.6rem rgba(60, 255, 155, 0.22),
+        0 0 0 .4rem rgba(0, 200, 111, 0.12);
+}
+
+.planos .card.card--promo .z7-btnx::before {
+    background:
+        radial-gradient(130% 160% at var(--mx) var(--my),
+            rgba(60, 255, 155, 0.68) 0%,
+            rgba(0, 200, 111, 0.30) 34%,
+            rgba(2, 60, 131, 0.18) 58%,
+            rgba(0, 0, 0, 0) 74%),
+        radial-gradient(140% 120% at 20% 30%,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(255, 255, 255, 0) 55%);
+}
+
+.planos .card.card--promo .z7-btnx::after {
+    background:
+        conic-gradient(from var(--spin),
+            rgba(60, 255, 155, 0) 0deg,
+            rgba(60, 255, 155, 0.90) 60deg,
+            rgba(255, 255, 255, 0.38) 95deg,
+            rgba(0, 200, 111, 0.85) 170deg,
+            rgba(29, 164, 243, 0.46) 250deg,
+            rgba(60, 255, 155, 0) 360deg);
+}
+
+.planos .card.card--promo .z7-btnx .z7-btnx__bg {
+    background:
+        radial-gradient(140% 180% at var(--mx) var(--my),
+            rgba(255, 255, 255, 0.22) 0%,
+            rgba(255, 255, 255, 0.08) 22%,
+            rgba(255, 255, 255, 0) 56%),
+        linear-gradient(90deg,
+            #034b2b 0%,
+            var(--z7-green-dark) 30%,
+            var(--z7-green) 62%,
+            var(--z7-green-light) 100%);
+    background-size: 130% 130%;
+    background-position: 0% 50%;
+    filter: saturate(1.14) contrast(1.08);
+}
+
+.planos .card.card--promo .z7-btnx .z7-btnx__cap {
+    background:
+        radial-gradient(120% 120% at 30% 30%,
+            rgba(255, 255, 255, 0.24) 0%,
+            rgba(255, 255, 255, 0.09) 40%,
+            rgba(255, 255, 255, 0) 72%),
+        linear-gradient(90deg,
+            rgba(255, 255, 255, 0.10) 0%,
+            rgba(255, 255, 255, 0.05) 42%,
+            rgba(255, 255, 255, 0.02) 100%),
+        linear-gradient(135deg,
+            rgba(115, 255, 184, 0.34),
+            rgba(2, 60, 131, 0.16));
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow:
+        inset 0 .1rem 0 rgba(255, 255, 255, 0.18),
+        0 1.2rem 2.6rem rgba(0, 0, 0, 0.20);
+}
+
+.planos .card.card--promo .z7-btnx:hover {
+    box-shadow:
+        var(--sh1x, 0rem) var(--sh1y, 0rem) 7.5rem rgba(0, 200, 111, 0.58),
+        var(--sh2x, 0rem) var(--sh2y, 0rem) 4.6rem rgba(60, 255, 155, 0.42),
+        0 0 0 .4rem rgba(60, 255, 155, 0.18);
+}
+
+.planos .card.card--promo .z7-btnx:focus-visible {
+    box-shadow:
+        0 2.8rem 7.5rem rgba(0, 200, 111, 0.58),
+        0 1.8rem 4.6rem rgba(60, 255, 155, 0.42),
+        0 0 0 .5rem rgba(60, 255, 155, 0.26);
+}
+
+.planos .card.card--promo .z7-btnx .z7x-ripple {
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.58) 0%,
+        rgba(60, 255, 155, 0.38) 35%,
+        rgba(60, 255, 155, 0) 70%);
+}
+
+/* ===== Variantes de cor verde (escopadas ao card promo) ===== */
+.planos .card.card--promo {
+    --z7-green-dark: #046b3a;
+    --z7-green: #00c86f;
+    --z7-green-light: #3cff9b;
+    --z7-green-neon: #73ffb8;
+}
+
+/* Botão verde apenas no PLENO (sobrescreve azul de button.css) */
+.planos .card.card--promo .z7-btnx {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 0 4.5rem rgba(0, 200, 111, 0.34),
+        0 0 4.6rem rgba(60, 255, 155, 0.22),
+        0 0 0 0.4rem rgba(0, 200, 111, 0.12);
+}
+
+.planos .card.card--promo .z7-btnx::before {
+    background:
+        radial-gradient(130% 160% at var(--mx) var(--my),
+            rgba(60, 255, 155, 0.68) 0%,
+            rgba(0, 200, 111, 0.30) 34%,
+            rgba(2, 60, 131, 0.18) 58%,
+            rgba(0, 0, 0, 0) 74%),
+        radial-gradient(140% 120% at 20% 30%,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(255, 255, 255, 0) 55%);
+}
+
+.planos .card.card--promo .z7-btnx::after {
+    background:
+        conic-gradient(from var(--spin),
+            rgba(60, 255, 155, 0) 0deg,
+            rgba(60, 255, 155, 0.90) 60deg,
+            rgba(255, 255, 255, 0.38) 95deg,
+            rgba(0, 200, 111, 0.85) 170deg,
+            rgba(29, 164, 243, 0.46) 250deg,
+            rgba(60, 255, 155, 0) 360deg);
+}
+
+.planos .card.card--promo .z7-btnx .z7-btnx__bg {
+    background:
+        radial-gradient(140% 180% at var(--mx) var(--my),
+            rgba(255, 255, 255, 0.22) 0%,
+            rgba(255, 255, 255, 0.08) 22%,
+            rgba(255, 255, 255, 0) 56%),
+        linear-gradient(90deg,
+            #034b2b 0%,
+            var(--z7-green-dark) 30%,
+            var(--z7-green) 62%,
+            var(--z7-green-light) 100%);
+    background-size: 130% 130%;
+    background-position: 0% 50%;
+    filter: saturate(1.14) contrast(1.08);
+}
+
+.planos .card.card--promo .z7-btnx .z7-btnx__cap {
+    background:
+        radial-gradient(120% 120% at 30% 30%,
+            rgba(255, 255, 255, 0.24) 0%,
+            rgba(255, 255, 255, 0.09) 40%,
+            rgba(255, 255, 255, 0) 72%),
+        linear-gradient(90deg,
+            rgba(255, 255, 255, 0.10) 0%,
+            rgba(255, 255, 255, 0.05) 42%,
+            rgba(255, 255, 255, 0.02) 100%),
+        linear-gradient(135deg,
+            rgba(115, 255, 184, 0.34),
+            rgba(2, 60, 131, 0.16));
+}
+
+.planos .card.card--promo .z7-btnx:hover {
+    box-shadow:
+        var(--sh1x, 0rem) var(--sh1y, 0rem) 7.5rem rgba(0, 200, 111, 0.58),
+        var(--sh2x, 0rem) var(--sh2y, 0rem) 4.6rem rgba(60, 255, 155, 0.42),
+        0 0 0 0.4rem rgba(60, 255, 155, 0.18);
+}
+
+.planos .card.card--promo .z7-btnx:focus-visible {
+    box-shadow:
+        0 2.8rem 7.5rem rgba(0, 200, 111, 0.58),
+        0 1.8rem 4.6rem rgba(60, 255, 155, 0.42),
+        0 0 0 0.5rem rgba(60, 255, 155, 0.26);
+}
+
+.planos .card.card--promo .z7-btnx .z7x-ripple {
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.58) 0%,
+        rgba(60, 255, 155, 0.38) 35%,
+        rgba(60, 255, 155, 0) 70%);
+}

@@ -39,7 +39,7 @@
       "oldPrice": "R$ 1.297,00",
       "parcel": "12x R$38,91",
       "avista": "ou R$389,10 à vista",
-      "checkout": "https://app.zero7.com.br/checkout/951a2e",
+      "checkout": "https://zero7.com.br/plenorecovery/",
       "maxDias": "30"
     },
     "senior": {
@@ -97,7 +97,7 @@
     "oldPrice": "R$ 1.667,00",
     "parcel": "12x R$50,01",
     "avista": "ou R$500,10 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/eb9d60",
+    "checkout": "https://zero7.com.br/plenorecovery/",
     "maxDias": "60"
   },
   "senior": {
@@ -155,7 +155,7 @@
       "oldPrice": "R$ 1.997,00",
       "parcel": "12x R$59,91",
       "avista": "ou R$599,10 à vista",
-      "checkout": "https://app.zero7.com.br/checkout/3d4156",
+      "checkout": "https://zero7.com.br/plenorecovery/",
       "maxDias": "60 + reinício"
     },
     "senior": {
