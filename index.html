@@ -225,7 +225,7 @@
   <div data-aos="fade-down" class="tarjaImage">
 
     <div class="countdown countdown--promo" id="countdownPromo">
-      <p class="text">Essa oferta encerra em:</p>
+      <p class="text">Essa oferta se encerra em:</p>
       <div>
         <span id="diasPromo">00</span>
         <span class="label">d</span>
@@ -1538,11 +1538,12 @@
   <script>
 (() => {
 const prazosPromo = [
-  new Date("2026-05-01T23:59:59-03:00"),
+  new Date("2026-06-15T23:59:59-03:00"),
 ];
 
   const root = document.getElementById("countdownPromo");
   const navigation = document.getElementById("navigation");
+  const tarjaImage = root ? root.closest(".tarjaImage") : null;
 
   if (!root) return;
 
@@ -1557,6 +1558,23 @@ const prazosPromo = [
     return prazosPromo.find((prazo) => prazo.getTime() > agora.getTime()) || null;
   }
 
+  function hasVisibleTarjaImage() {
+    if (!tarjaImage) return false;
+
+    return Array.from(tarjaImage.querySelectorAll("img")).some((img) => {
+      const style = window.getComputedStyle(img);
+      return style.display !== "none" && style.visibility !== "hidden";
+    });
+  }
+
+  function syncNavigationOffset() {
+    if (!navigation) return;
+
+    const countdownHeight = root.offsetHeight;
+    navigation.style.setProperty("--countdown-promo-height", `${countdownHeight}px`);
+    navigation.classList.toggle("activeCountdownOnly", !hasVisibleTarjaImage());
+  }
+
   function tickPromo() {
     const agora = new Date();
     const fimPromo = getPrazoAtual(agora);
@@ -1567,6 +1585,8 @@ const prazosPromo = [
 
       if (navigation) {
         navigation.classList.remove("activeCountdown");
+        navigation.classList.remove("activeCountdownOnly");
+        navigation.style.removeProperty("--countdown-promo-height");
       }
 
       return;
@@ -1574,6 +1594,7 @@ const prazosPromo = [
 
     if (navigation) {
       navigation.classList.add("activeCountdown");
+      syncNavigationOffset();
     }
 
     const diff = fimPromo - agora;
@@ -1590,6 +1611,7 @@ const prazosPromo = [
   }
 
   const intervaloPromo = setInterval(tickPromo, 1000);
+  window.addEventListener("resize", syncNavigationOffset);
   tickPromo();
 })();
   </script>

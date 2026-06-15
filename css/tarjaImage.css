@@ -28,6 +28,10 @@
     top: 8.35rem;
 }
 
+#navigation.activeCountdownOnly {
+    top: var(--countdown-promo-height, 0px);
+}
+
 .countdown--promo {
       display: flex;
       justify-content: center;
@@ -74,6 +78,10 @@
 
     nav#navigation.activeCountdown {
         top: 8rem;
+    }
+
+    nav#navigation.activeCountdownOnly {
+        top: var(--countdown-promo-height, 0px);
     }
 
     header#home.activeTarjaImage {
@@ -129,6 +137,10 @@
     nav#navigation.activeCountdown {
         top: 8.9rem;
     }
+
+    nav#navigation.activeCountdownOnly {
+        top: var(--countdown-promo-height, 0px);
+    }
 }
 
 @media (min-width: 2500px) {
@@ -138,5 +150,9 @@
 
     nav#navigation.activeCountdown {
         top: 10rem;
+    }
+
+    nav#navigation.activeCountdownOnly {
+        top: var(--countdown-promo-height, 0px);
     }
 }
