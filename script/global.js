@@ -267,12 +267,21 @@ if (larguraDaTela < 800) {
 }
 */
 
+// Quando existe um card com .card--copa em .mySwiper4, ele deve ser exibido
+// como slide inicial (primeiro no mobile, do meio no desktop).
+const __copaSlides = Array.from(
+  document.querySelectorAll(".mySwiper4 .swiper-wrapper > .swiper-slide")
+);
+const __copaIndex = __copaSlides.findIndex(el => el.classList.contains("card--copa"));
+const __hasCopa = __copaIndex >= 0;
+
 if (larguraDaTela < 800) {
   var swiper4 = new Swiper(".mySwiper4", {
       slidesPerView: 1,
       spaceBetween: 5,
       loop: true,
       grabCursor: true,
+      ...(__hasCopa ? { initialSlide: __copaIndex } : {}),
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
@@ -288,6 +297,7 @@ if (larguraDaTela < 800) {
       spaceBetween: 90,
       loop: true,
       grabCursor: true,
+      ...(__hasCopa ? { initialSlide: Math.max(0, __copaIndex - 1) } : {}),
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
