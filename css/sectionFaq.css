@@ -81,6 +81,10 @@
   transform: translateY(-50%);
 }
 
+.faq__search-loading[hidden] {
+  display: none;
+}
+
 #faq .faq__spinner {
   display: inline-block;
   width: 1.6rem;
@@ -423,23 +427,9 @@
   margin-bottom: 2.5rem;
 }
 
-#faq .faq__expanded-header > div:first-child {
+#faq .faq__expanded-title {
   flex: 1;
   min-width: 0;
-}
-
-#faq .faq__expanded-eyebrow {
-  display: block;
-  font-family: var(--tts);
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--primary-color);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-#faq .faq__expanded-title {
   font-family: var(--ncs);
   font-size: 2rem;
   color: var(--color-text);

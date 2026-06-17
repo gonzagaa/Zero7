@@ -25,9 +25,42 @@
   // ============ Fetch helpers ============
 
   async function fetchJSON(url, signal) {
-    const res = await fetch(url, { signal });
+    const res = await fetch(url, { signal, cache: 'no-cache' });
     if (!res.ok) throw new Error(`HTTP ${res.status} em ${url}`);
     return res.json();
+  }
+
+  function getStickyOffset() {
+    let total = 0;
+    const tarja = document.querySelector('.tarjaImage');
+    if (tarja) total += tarja.getBoundingClientRect().height;
+    const nav = document.getElementById('navigation');
+    if (nav) {
+      const cs = window.getComputedStyle(nav);
+      if (cs.position === 'fixed' || cs.position === 'sticky') {
+        total += nav.getBoundingClientRect().height;
+      }
+    }
+    return total + 16;
+  }
+
+  function smoothScrollTo(target, extraOffset) {
+    if (!target) return;
+    const extra = typeof extraOffset === 'number' ? extraOffset : 0;
+    const off = -getStickyOffset() + extra;
+    if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+      try {
+        window.lenis.scrollTo(target, { offset: off, duration: 1.1 });
+        return;
+      } catch (e) { /* fallback abaixo */ }
+    }
+    try {
+      const rect = target.getBoundingClientRect();
+      const top = rect.top + window.pageYOffset + off;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    } catch (e) {
+      target.scrollIntoView();
+    }
   }
 
   async function loadAll() {
@@ -128,10 +161,7 @@
     panel.hidden = true;
     panel.innerHTML = `
       <div class="faq__expanded-header">
-        <div>
-          <span class="faq__expanded-eyebrow">Categoria</span>
-          <h3 class="faq__expanded-title" id="faqExpandedTitle"></h3>
-        </div>
+        <h3 class="faq__expanded-title" id="faqExpandedTitle"></h3>
         <button type="button" class="faq__expanded-close" aria-label="Fechar">
           <ion-icon name="close-outline"></ion-icon>
         </button>
@@ -141,12 +171,12 @@
 
     el.pagination.parentNode.insertBefore(panel, el.pagination.nextSibling);
 
-    panel.querySelector('.faq__expanded-close').addEventListener('click', closeExpandedPanel);
+    panel.querySelector('.faq__expanded-close').addEventListener('click', () => closeExpandedPanel({ scrollBack: true }));
   }
 
   function toggleExpandedPanel(categoryId, cardEl) {
     if (state.activeCategoryId === categoryId) {
-      closeExpandedPanel();
+      closeExpandedPanel({ scrollBack: true });
       return;
     }
     openExpandedPanel(categoryId, cardEl);
@@ -194,6 +224,7 @@
         content.innerHTML = html;
         attachArticleListeners(content);
         content.classList.remove('is-swapping');
+        smoothScrollTo(panel);
       }, 180);
     } else {
       content.innerHTML = html;
@@ -201,6 +232,7 @@
       panel.hidden = false;
       void panel.offsetHeight;
       panel.classList.add('is-open');
+      requestAnimationFrame(() => smoothScrollTo(panel));
     }
 
     state.activeCategoryId = categoryId;
@@ -215,13 +247,17 @@
     });
   }
 
-  function closeExpandedPanel() {
+  function closeExpandedPanel(opts) {
     const panel = document.getElementById('faqExpandedPanel');
     if (!panel) return;
+    const wasOpen = state.activeCategoryId !== null;
     panel.classList.remove('is-open');
     setTimeout(() => { panel.hidden = true; }, 300);
     el.categories.querySelectorAll('.faq__category-card.is-active').forEach(c => c.classList.remove('is-active'));
     state.activeCategoryId = null;
+    if (opts && opts.scrollBack && wasOpen && el.section) {
+      smoothScrollTo(el.section);
+    }
   }
 
   // ============ Modal de artigo ============
@@ -385,6 +421,7 @@
   // ============ Init ============
 
   function init() {
+    el.section = document.getElementById('faq');
     el.categories = document.getElementById('faqCategories');
     el.pagination = document.getElementById('faqPagination');
     el.prev = document.getElementById('faqPrev');
