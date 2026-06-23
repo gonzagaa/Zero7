@@ -252,6 +252,25 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     }
 }
 
+/* ===== Bandeira do Brasil em todos os cards do Mini Índice/Dólar ===== */
+/* Excluímos card--copa pois ele já tem o próprio .card-copa-flag */
+.planos.tema .card:not(.card--copa)::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background-image: url("../assets/brasil.avif");
+    background-size: cover;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+    opacity: 0.18;
+    mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, rgba(0,0,0,0.55) 55%, transparent 88%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, rgba(0,0,0,0.55) 55%, transparent 88%);
+    filter: saturate(1.2);
+}
+
 /* ===== Card em promoção (PLENO Recovery) ===== */
 .planos .card.card--promo {
     position: relative;
