@@ -110,13 +110,13 @@ html {
 
   @media (min-width: 1200px) {
     .wrapper {
-      width: min(120rem, 100%);
+      width: min(140rem, 100%);
     }
   }
 
   @media (min-width: 1600px) {
     .wrapper {
-      width: min(130rem, 100%);
+      width: min(140rem, 100%);
     }
 
     :root {
