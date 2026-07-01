@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v19-ilimitado-jul26";
+  const DATA_URL = "./script/planos.json?v=v21-ilimitado-jul26";
 
   let currentMode = null;
   let cache = null;
