@@ -1,12 +1,13 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v24-cachebust-jul26";
+  const DATA_URL = "./script/planos.json?v=v27-cachebust-jul26";
 
   let currentMode = null;
   let cache = null;
   let activeModeIds = [];
   let allButtons = [];
+  let modesConfig = [];
 
   const sections = Array.from(document.querySelectorAll("section.planos"));
   if (!sections.length) return;
@@ -27,6 +28,7 @@
   async function init() {
     const db = await loadData();
     const config = db?.config || {};
+    modesConfig = Array.isArray(config.modes) ? config.modes : [];
     const activeModes = getActiveModes(config);
 
     if (!activeModes.length) {
@@ -94,6 +96,7 @@
     setButtonsVisual(mode);
     updateModeTexts(mode);
     await applyModeToCards(mode);
+    applyFootnote(mode);
 
     try {
       if (typeof fbq === "function") fbq("trackCustom", "SelectPlanMode", { mode });
@@ -219,6 +222,34 @@
         }
       }
     });
+  }
+
+  // Notinha dentro de cada card, acima do botão. Controlada pelo planos.json
+  // (mode.footnote). Sem o campo footnote no modo ativo, nada é exibido.
+  function applyFootnote(mode) {
+    const mc = modesConfig.find(m => m && String(m.id) === String(mode)) || {};
+    const footnote = typeof mc.footnote === "string" ? mc.footnote : "";
+    allCards.forEach(card => {
+      const fn = ensureFootnote(card);
+      if (!fn) return;
+      fn.textContent = footnote;
+      fn.style.display = footnote ? "" : "none";
+    });
+  }
+
+  function ensureFootnote(card) {
+    let fn = card.querySelector(".js-plan-footnote");
+    if (fn) return fn;
+    fn = document.createElement("p");
+    fn.className = "js-plan-footnote";
+    fn.style.cssText = "font-size:11px;line-height:1.35;color:#fff;opacity:.7;text-align:center;margin:14px 0 8px;padding:0 8px;";
+    const btn = card.querySelector(".js-checkout") || card.querySelector(".z7-btnx");
+    if (btn && btn.parentNode) {
+      btn.parentNode.insertBefore(fn, btn);
+    } else {
+      card.appendChild(fn);
+    }
+    return fn;
   }
 
   function escapeHTML(s) {
