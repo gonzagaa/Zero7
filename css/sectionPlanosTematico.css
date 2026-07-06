@@ -252,24 +252,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     }
 }
 
-/* ===== Bandeira do Brasil em todos os cards do Mini Índice/Dólar ===== */
-/* Excluímos card--copa pois ele já tem o próprio .card-copa-flag */
-.planos.tema .card:not(.card--copa)::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background-image: url("../assets/brasil.avif");
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-    opacity: 0.18;
-    mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, rgba(0,0,0,0.55) 55%, transparent 88%);
-    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, rgba(0,0,0,0.55) 55%, transparent 88%);
-    filter: saturate(1.2);
-}
+/* Bandeira do Brasil removida dos cards do Mini Índice/Dólar. */
 
 /* ===== Card em promoção (PLENO Recovery) ===== */
 .planos .card.card--promo {
@@ -466,26 +449,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     isolation: isolate;
 }
 
-/* Bandeira do Brasil como backdrop decorativo */
-.planos .card.card--copa .card-copa-flag {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    border-radius: inherit;
-    overflow: hidden;
-    background-image:
-        radial-gradient(ellipse at 50% 28%, rgba(255, 223, 0, 0.18), transparent 55%),
-        url("../assets/brasil.avif");
-    background-size: auto, 140% auto;
-    background-position: center, center 30%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 0.22;
-    mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, rgba(0, 0, 0, 0.55) 55%, transparent 88%);
-    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, rgba(0, 0, 0, 0.55) 55%, transparent 88%);
-    filter: saturate(1.15);
-}
+/* Bandeira do Brasil (backdrop do card COPA/Sênior) removida. */
 
 /* ===== Variantes de cor verde (escopadas ao card promo) ===== */
 .planos .card.card--promo {

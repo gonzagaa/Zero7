@@ -1,13 +1,12 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v21-ilimitado-jul26";
+  const DATA_URL = "./script/planos.json?v=v24-cachebust-jul26";
 
   let currentMode = null;
   let cache = null;
   let activeModeIds = [];
   let allButtons = [];
-  let modesConfig = [];
 
   const sections = Array.from(document.querySelectorAll("section.planos"));
   if (!sections.length) return;
@@ -28,7 +27,6 @@
   async function init() {
     const db = await loadData();
     const config = db?.config || {};
-    modesConfig = Array.isArray(config.modes) ? config.modes : [];
     const activeModes = getActiveModes(config);
 
     if (!activeModes.length) {
@@ -96,7 +94,6 @@
     setButtonsVisual(mode);
     updateModeTexts(mode);
     await applyModeToCards(mode);
-    applyPresentation(mode);
 
     try {
       if (typeof fbq === "function") fbq("trackCustom", "SelectPlanMode", { mode });
@@ -222,41 +219,6 @@
         }
       }
     });
-  }
-
-  // Ajustes de apresentação por modo (ex.: promoção "prazo ilimitado").
-  // Controlado pelo planos.json: mode.hideOldPrice esconde o "de X por";
-  // mode.footnote mostra uma nota pequena. Sem esses campos, volta ao padrão.
-  function applyPresentation(mode) {
-    const mc = modesConfig.find(m => m && String(m.id) === String(mode)) || {};
-    const hideOld = mc.hideOldPrice === true;
-    const footnote = typeof mc.footnote === "string" ? mc.footnote : "";
-
-    allCards.forEach(card => {
-      const oldPriceBox = card.querySelector(".oldPrice");
-      if (oldPriceBox) oldPriceBox.style.display = hideOld ? "none" : "";
-
-      const fn = ensureFootnote(card);
-      if (!fn) return;
-      fn.textContent = footnote;
-      fn.style.display = footnote ? "" : "none";
-    });
-  }
-
-  // Nota pequena dentro do card, logo acima do bloco de preço.
-  function ensureFootnote(card) {
-    let fn = card.querySelector(".js-plan-footnote");
-    if (fn) return fn;
-    fn = document.createElement("p");
-    fn.className = "js-plan-footnote";
-    fn.style.cssText = "font-size:11px;line-height:1.35;color:#fff;opacity:.7;text-align:center;margin:0 0 8px;padding:0 8px;";
-    const priceBox = card.querySelector(".price");
-    if (priceBox && priceBox.parentNode) {
-      priceBox.parentNode.insertBefore(fn, priceBox);
-    } else {
-      card.appendChild(fn);
-    }
-    return fn;
   }
 
   function escapeHTML(s) {
