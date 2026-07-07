@@ -25,7 +25,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=v27-cachebust-jul26">
+  <link rel="stylesheet" href="./css/index.css?v=v28-cachebust-jul07">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
@@ -1580,21 +1580,15 @@ const prazosPromo = [
     return prazosPromo.find((prazo) => prazo.getTime() > agora.getTime()) || null;
   }
 
-  function hasVisibleTarjaImage() {
-    if (!tarjaImage) return false;
-
-    return Array.from(tarjaImage.querySelectorAll("img")).some((img) => {
-      const style = window.getComputedStyle(img);
-      return style.display !== "none" && style.visibility !== "hidden";
-    });
-  }
-
+  /* Mede o bloco fixo INTEIRO da tarja (countdown + banner visível) e entrega
+     ao nav via CSS var. O CSS só faz `top: var(--tarja-offset)` — sem valores
+     fixos por breakpoint. Se a imagem estiver display:none (mobile/desktop),
+     ela não entra na conta automaticamente. */
   function syncNavigationOffset() {
     if (!navigation) return;
 
-    const countdownHeight = root.offsetHeight;
-    navigation.style.setProperty("--countdown-promo-height", `${countdownHeight}px`);
-    navigation.classList.toggle("activeCountdownOnly", !hasVisibleTarjaImage());
+    const alturaTarja = (tarjaImage || root).offsetHeight;
+    navigation.style.setProperty("--tarja-offset", `${alturaTarja}px`);
   }
 
   function tickPromo() {
@@ -1603,12 +1597,12 @@ const prazosPromo = [
 
     if (!fimPromo) {
       clearInterval(intervaloPromo);
+      if (tarjaObserver) tarjaObserver.disconnect();
       root.style.display = "none";
 
       if (navigation) {
         navigation.classList.remove("activeCountdown");
-        navigation.classList.remove("activeCountdownOnly");
-        navigation.style.removeProperty("--countdown-promo-height");
+        navigation.style.removeProperty("--tarja-offset");
       }
 
       return;
@@ -1631,6 +1625,15 @@ const prazosPromo = [
     minutosEl.textContent = pad2(minutos);
     segundosEl.textContent = pad2(segundos);
   }
+
+  /* ResizeObserver: qualquer variação de altura da tarja (imagens .avif
+     carregando, troca mobile/desktop, ajuste de CSS) re-sincroniza o nav
+     na hora. O listener de resize fica como fallback pra browsers antigos. */
+  const tarjaObserver = ("ResizeObserver" in window && tarjaImage)
+    ? new ResizeObserver(syncNavigationOffset)
+    : null;
+
+  if (tarjaObserver) tarjaObserver.observe(tarjaImage);
 
   const intervaloPromo = setInterval(tickPromo, 1000);
   window.addEventListener("resize", syncNavigationOffset);
@@ -1689,9 +1692,9 @@ const prazosPromo = [
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=v27-cachebust-jul26"></script>
-  <script src="./script/4selet.js?v=v27-cachebust-jul26"></script>
-  <script src="./script/blackPlanos.js?v=v27-cachebust-jul26"></script>
-  <script src="./script/sectionFaq.js?v=v27-cachebust-jul26" defer></script>
+  <script src="./script/global.js?v=v28-cachebust-jul07"></script>
+  <script src="./script/4selet.js?v=v28-cachebust-jul07"></script>
+  <script src="./script/blackPlanos.js?v=v28-cachebust-jul07"></script>
+  <script src="./script/sectionFaq.js?v=v28-cachebust-jul07" defer></script>
 </body>
 </html>
