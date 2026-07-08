@@ -25,7 +25,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=v28-cachebust-jul07">
+  <link rel="stylesheet" href="./css/index.css?v=v29-cachebust-jul07">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
@@ -222,6 +222,12 @@
 
 <body id="body" class="smooth-scroll-wrapper">
 
+  <!-- PROMO DESATIVADA (encerrada em jul/2026).
+       Para reativar: descomente o bloco .tarjaImage abaixo e atualize as datas
+       em prazosPromo no script do countdown (fim da página). O script se
+       desativa sozinho enquanto este bloco estiver comentado, e o nav volta
+       ao topo automaticamente — não precisa mexer em CSS.
+
   <div data-aos="fade-down" class="tarjaImage">
 
     <div class="countdown countdown--promo" id="countdownPromo">
@@ -249,6 +255,7 @@
       <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE ZERO7DAY.avif" alt="">
     </a>
   </div>
+  -->
 
   <nav data-aos="fade-down" id="navigation" class="">
     <div class="wrapper">
@@ -609,7 +616,7 @@
     
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
-          <img class="cupom" src="./assets/tarjapopup/cupom zero7day.avif" alt="">
+          <!-- <img class="cupom" src="./assets/tarjapopup/cupom zero7day.avif" alt=""> -->
 
            <div class="box">
             <div class="topics">
@@ -1528,6 +1535,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
 
   <script>
+/* Countdown da tarja promo (.tarjaImage). PROMO DESATIVADA: o bloco HTML está
+   comentado no topo da página, então o `if (!root) return` abaixo encerra o
+   script sem efeito. Para reativar, descomente o bloco lá e atualize as datas
+   de prazosPromo (uma por dia — o timer "reseta" a cada 24h pegando o próximo
+   prazo futuro da lista). */
 (() => {
 const prazosPromo = [
   new Date("2026-07-01T23:59:59-03:00"),
@@ -1692,9 +1704,9 @@ const prazosPromo = [
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=v28-cachebust-jul07"></script>
-  <script src="./script/4selet.js?v=v28-cachebust-jul07"></script>
-  <script src="./script/blackPlanos.js?v=v28-cachebust-jul07"></script>
-  <script src="./script/sectionFaq.js?v=v28-cachebust-jul07" defer></script>
+  <script src="./script/global.js?v=v29-cachebust-jul07"></script>
+  <script src="./script/4selet.js?v=v29-cachebust-jul07"></script>
+  <script src="./script/blackPlanos.js?v=v29-cachebust-jul07"></script>
+  <script src="./script/sectionFaq.js?v=v29-cachebust-jul07" defer></script>
 </body>
 </html>

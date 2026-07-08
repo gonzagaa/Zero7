@@ -32,69 +32,27 @@
 }
 
 .countdown--promo {
-      position: relative;
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      font-size: 1.6rem;
+      gap: 8px;
+      font-size: 1.4rem;
       font-weight: 800;
 
-      color: #FFFAF1;
-      background: linear-gradient(100deg, #FF7A32, #FA6725 45%, #E03C11);
-      background-size: 200% 100%;
-      padding-block: .8rem;
-
-      box-shadow: 0 4px 18px rgba(224, 60, 17, .45);
-      animation: promoPulse 2.4s ease-in-out infinite, promoBgShift 6s ease-in-out infinite;
-}
-
-/* brilho que atravessa a tarja */
-.countdown--promo::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, .45) 50%, transparent 80%);
-      transform: translateX(-120%);
-      animation: promoShine 3.6s ease-in-out infinite;
-      pointer-events: none;
+      background: linear-gradient(45deg, #ffffff, #e2e2e2);
+      padding-block: .5rem;
 }
 
 .countdown--promo div {
-      position: relative;
-      z-index: 1;
       display: flex;
       align-items: end;
-      color: #FFFAF1;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+      color: #000000;
 }
 
 .countdown--promo .label {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 600;
       margin-top: -1px;
-      opacity: .9;
-}
-
-@keyframes promoPulse {
-      0%, 100% { box-shadow: 0 4px 16px rgba(224, 60, 17, .35); }
-      50%      { box-shadow: 0 6px 26px rgba(250, 103, 37, .75); }
-}
-
-@keyframes promoBgShift {
-      0%, 100% { background-position: 0% 50%; }
-      50%      { background-position: 100% 50%; }
-}
-
-@keyframes promoShine {
-      0%        { transform: translateX(-120%); }
-      60%, 100% { transform: translateX(120%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-      .countdown--promo { animation: none; }
-      .countdown--promo::before { animation: none; opacity: 0; }
 }
 
 .tarjaImage h3 {
@@ -106,12 +64,9 @@
 }
 
 .tarjaImage p.text {
-    position: relative;
-    z-index: 1;
-    color: #FFFAF1;
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+    color: #000000;
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 @media (min-width: 1080px) {
