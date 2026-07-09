@@ -247,3 +247,10 @@
     white-space: normal;
   }
 }
+
+/* desktop: pills um pouco maiores somente na seção de planos */
+@media (min-width: 1080px) {
+  #plan .box .topics h2 {
+    font-size: 1.35rem;
+  }
+}

@@ -294,7 +294,7 @@ if (larguraDaTela < 800) {
 } else {
   var swiper4 = new Swiper(".mySwiper4", {
       slidesPerView: 3,
-      spaceBetween: 90,
+      spaceBetween: 60,
       loop: true,
       grabCursor: true,
       ...(__hasCopa ? { initialSlide: Math.max(0, __copaIndex - 1) } : {}),
