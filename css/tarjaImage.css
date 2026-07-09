@@ -39,14 +39,15 @@
       font-size: 1.4rem;
       font-weight: 800;
 
-      background: linear-gradient(45deg, #ffffff, #e2e2e2);
+      /* azul da identidade — mesmo gradiente oficial do :root (global.css) */
+      background: var(--gradient, linear-gradient(to right, #023c83, #0080c9));
       padding-block: .5rem;
 }
 
 .countdown--promo div {
       display: flex;
       align-items: end;
-      color: #000000;
+      color: var(--color-text, #f2fffb);
 }
 
 .countdown--promo .label {
@@ -64,7 +65,7 @@
 }
 
 .tarjaImage p.text {
-    color: #000000;
+    color: var(--color-text, #f2fffb);
     font-size: 1.2rem;
     font-weight: 500;
 }

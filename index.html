@@ -222,12 +222,10 @@
 
 <body id="body" class="smooth-scroll-wrapper">
 
-  <!-- PROMO DESATIVADA (encerrada em jul/2026).
-       Para reativar: descomente o bloco .tarjaImage abaixo e atualize as datas
-       em prazosPromo no script do countdown (fim da página). O script se
-       desativa sozinho enquanto este bloco estiver comentado, e o nav volta
-       ao topo automaticamente — não precisa mexer em CSS.
-
+  <!-- Tarja promo (timer resetando a cada 24h até 31/jul — datas em
+       prazosPromo, no script do countdown no fim da página). Para desativar,
+       basta comentar este bloco: o script se desliga sozinho e o nav volta
+       ao topo automaticamente. -->
   <div data-aos="fade-down" class="tarjaImage">
 
     <div class="countdown countdown--promo" id="countdownPromo">
@@ -251,11 +249,10 @@
     </div>
 
    <a href="#plan">
-      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK ZERO7DAY.avif" alt="">
-      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE ZERO7DAY.avif" alt="">
+      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK INEDITO.avif" alt="">
+      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE INEDITO.avif" alt="">
     </a>
   </div>
-  -->
 
   <nav data-aos="fade-down" id="navigation" class="">
     <div class="wrapper">
@@ -616,7 +613,7 @@
     
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
-          <!-- <img class="cupom" src="./assets/tarjapopup/cupom zero7day.avif" alt=""> -->
+          <img class="cupom" src="./assets/tarjapopup/cupom inedito.avif" alt="">
 
            <div class="box">
             <div class="topics">
@@ -1535,11 +1532,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
 
   <script>
-/* Countdown da tarja promo (.tarjaImage). PROMO DESATIVADA: o bloco HTML está
-   comentado no topo da página, então o `if (!root) return` abaixo encerra o
-   script sem efeito. Para reativar, descomente o bloco lá e atualize as datas
-   de prazosPromo (uma por dia — o timer "reseta" a cada 24h pegando o próximo
-   prazo futuro da lista). */
+/* Countdown da tarja promo (.tarjaImage). O timer "reseta" a cada 24h: pega
+   sempre o próximo prazo futuro de prazosPromo (um por dia, 23:59:59). Após
+   o último prazo (31/jul), tudo se desliga sozinho e o nav volta ao topo.
+   Se o bloco .tarjaImage for comentado, o `if (!root) return` abaixo encerra
+   o script sem efeito. */
 (() => {
 const prazosPromo = [
   new Date("2026-07-01T23:59:59-03:00"),
@@ -1611,6 +1608,7 @@ const prazosPromo = [
       clearInterval(intervaloPromo);
       if (tarjaObserver) tarjaObserver.disconnect();
       root.style.display = "none";
+      if (tarjaImage) tarjaImage.style.display = "none";
 
       if (navigation) {
         navigation.classList.remove("activeCountdown");
