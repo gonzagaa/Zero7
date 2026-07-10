@@ -1,0 +1,386 @@
+/* =========================================
+   MODAL INDICAÇÃO — GERAR MEU LINK
+   Etapa 1: regulamento (doc rolável)
+   Etapa 2: e-mail -> link de promoter
+   ========================================= */
+
+.modal-indicacao {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+}
+
+.modal-indicacao[hidden],
+.modal-indicacao [hidden] {
+  display: none !important;
+}
+
+/* trava o scroll da página enquanto o modal está aberto */
+html.modal-indicacao-aberto,
+html.modal-indicacao-aberto body {
+  overflow: hidden;
+}
+
+.modal-indicacao__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 2, 5, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* painel */
+.modal-indicacao__panel {
+  position: relative;
+  z-index: 1;
+
+  width: min(64rem, 100%);
+  max-height: 86dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 2.8rem 2.4rem;
+  border-radius: 1.8rem;
+
+  background: linear-gradient(135deg, #00050a, #000204);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(255, 149, 0, 0.1);
+
+  overflow: hidden;
+
+  animation: modalIndicacaoIn 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* filete laranja no topo do painel (mesmo truque do title dos planos) */
+.modal-indicacao__panel::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to right, transparent, #FF9500, transparent);
+}
+
+@keyframes modalIndicacaoIn {
+  from {
+    opacity: 0;
+    transform: translateY(1.6rem) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-indicacao__close {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 2rem;
+
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.modal-indicacao__close:hover {
+  background: rgba(255, 149, 0, 0.18);
+  border-color: rgba(255, 149, 0, 0.4);
+}
+
+/* etapas */
+.modal-indicacao__step {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.modal-indicacao__title {
+  color: #ffffff;
+  font-family: var(--ncs);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 2.2rem;
+  text-align: center;
+
+  margin-top: 0.4rem;
+}
+
+.modal-indicacao__title span {
+  font-family: var(--ncs);
+  background: linear-gradient(45deg, #ffbf66, #FF9500, #c26f00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-indicacao__hint {
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: #c1c1c1;
+  text-align: center;
+
+  margin-top: 0.8rem;
+}
+
+/* =========================
+   ETAPA 1 — o "doczinho"
+   ========================= */
+.modal-indicacao__doc {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+
+  margin-top: 1.8rem;
+  padding: 2.4rem 2rem;
+  border-radius: 1rem;
+
+  background: #f7f9fc;
+  border: 1px solid #ffffff14;
+
+  color: #10161d;
+  text-align: left;
+  font-size: 1.4rem;
+  line-height: 1.65;
+}
+
+/* tipografia do doc (estilo página de docs) */
+.modal-indicacao__doc h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #070C11;
+  margin-bottom: 1.2rem;
+}
+
+.modal-indicacao__doc h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #070C11;
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.modal-indicacao__doc p {
+  margin-bottom: 1.2rem;
+}
+
+.modal-indicacao__doc ul,
+.modal-indicacao__doc ol {
+  margin-bottom: 1.2rem;
+  padding-left: 2.2rem;
+}
+
+.modal-indicacao__doc ul {
+  list-style: disc;
+}
+
+.modal-indicacao__doc ol {
+  list-style: decimal;
+}
+
+.modal-indicacao__doc li {
+  margin-bottom: 0.6rem;
+}
+
+.modal-indicacao__doc a {
+  color: #0b5fbe;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+/* scrollbar do doc */
+.modal-indicacao__doc::-webkit-scrollbar {
+  width: 0.6rem;
+  background-color: #e4e9f0;
+  border-radius: 1rem;
+}
+
+.modal-indicacao__doc::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #c26f00, #FF9500);
+  border-radius: 1rem;
+}
+
+/* =========================
+   BOTÕES DO MODAL
+   ========================= */
+.modal-indicacao__avancar,
+.modal-indicacao__confirmar,
+.modal-indicacao__copiar {
+  padding: 1.6rem 2rem;
+  border-radius: 0.9rem;
+
+  background: linear-gradient(90deg, #c26f00, #FF9500);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  color: #ffffff;
+  font-family: var(--ncs);
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  font-size: 1.4rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow: 0 0 30px rgba(255, 149, 0, 0.22);
+  transition: all 250ms ease-in-out;
+}
+
+.modal-indicacao__avancar:hover,
+.modal-indicacao__confirmar:hover,
+.modal-indicacao__copiar:hover {
+  filter: brightness(1.1) saturate(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 0 40px rgba(255, 149, 0, 0.35);
+}
+
+.modal-indicacao__avancar {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/* =========================
+   ETAPA 2 — e-mail -> link
+   ========================= */
+.modal-indicacao__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  margin-top: 2.4rem;
+}
+
+.modal-indicacao__input {
+  width: 100%;
+  padding: 1.6rem 1.8rem;
+
+  background: linear-gradient(130deg, #010b15, #01050b);
+  border: 2px solid #5757571f;
+  border-radius: 1rem;
+
+  color: var(--color-text);
+  /* nunca abaixo de 16px: evita o auto-zoom do iOS/Android ao focar */
+  font-size: max(1.5rem, 16px);
+
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+/* autofill do navegador sem o fundo branco padrão */
+.modal-indicacao__input:-webkit-autofill,
+.modal-indicacao__input:-webkit-autofill:hover,
+.modal-indicacao__input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 100rem #010b15 inset;
+  box-shadow: 0 0 0 100rem #010b15 inset;
+  -webkit-text-fill-color: var(--color-text);
+  caret-color: var(--color-text);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.modal-indicacao__input::placeholder {
+  color: #7c8590;
+}
+
+.modal-indicacao__input:focus {
+  outline: none;
+  border-color: #FF9500;
+  box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.18);
+}
+
+.modal-indicacao__erro {
+  font-size: 1.3rem;
+  color: #ff6b6b;
+  text-align: left;
+}
+
+/* resultado (link gerado) */
+.modal-indicacao__resultado {
+  margin-top: 2.4rem;
+}
+
+.modal-indicacao__pronto {
+  font-size: 1.4rem;
+  color: #dae1e6;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.modal-indicacao__linkbox {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.modal-indicacao__link {
+  flex: 1;
+  min-width: 0;
+
+  padding: 1.4rem 1.6rem;
+
+  background: linear-gradient(130deg, #010b15, #01050b);
+  border: 1px dashed rgba(255, 149, 0, 0.45);
+  border-radius: 0.9rem;
+
+  color: #ffbf66;
+  /* nunca abaixo de 16px: evita o auto-zoom do iOS/Android ao focar */
+  font-size: max(1.3rem, 16px);
+
+  text-overflow: ellipsis;
+}
+
+.modal-indicacao__link:focus {
+  outline: none;
+  border-color: #FF9500;
+}
+
+.modal-indicacao__copiar {
+  flex-shrink: 0;
+  padding-inline: 2.4rem;
+}
+
+/* =========================
+   DESKTOP
+   ========================= */
+@media (min-width: 1080px) {
+  .modal-indicacao__panel {
+    padding: 3.6rem 3.2rem;
+  }
+
+  .modal-indicacao__title {
+    font-size: 2.6rem;
+  }
+
+  .modal-indicacao__doc {
+    padding: 3rem 2.8rem;
+    font-size: 1.5rem;
+  }
+
+  .modal-indicacao__hint {
+    font-size: 1.5rem;
+  }
+}
+
+/* acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .modal-indicacao__panel {
+    animation: none;
+  }
+}

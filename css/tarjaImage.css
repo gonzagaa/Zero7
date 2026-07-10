@@ -5,8 +5,17 @@
     z-index: 99;
 }
 
+/* a img inline gera um espacinho de descender (~4px) abaixo dela, que entrava
+   na medição da tarja e virava um vão entre a imagem e o nav — display:block
+   e line-height:0 eliminam isso. */
+.tarjaImage a {
+    display: block;
+    line-height: 0;
+}
+
 .tarjaImage img {
     width: 100%;
+    display: block;
 }
 
 .tarjaImage img.desktop {
@@ -39,8 +48,8 @@
       font-size: 1.4rem;
       font-weight: 800;
 
-      /* azul da identidade — mesmo gradiente oficial do :root (global.css) */
-      background: var(--gradient, linear-gradient(to right, #023c83, #0080c9));
+      /* gradiente destacado com base no laranja #FE9214 */
+      background: linear-gradient(100deg, #e36414, #FE9214 55%, #ffb347);
       padding-block: .5rem;
 }
 
@@ -48,6 +57,7 @@
       display: flex;
       align-items: end;
       color: var(--color-text, #f2fffb);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
 
 .countdown--promo .label {
@@ -68,6 +78,7 @@
     color: var(--color-text, #f2fffb);
     font-size: 1.2rem;
     font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
 }
 
 @media (min-width: 1080px) {
