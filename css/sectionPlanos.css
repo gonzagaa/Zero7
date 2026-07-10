@@ -707,16 +707,32 @@ body section.planos .wrapper .swiper.mySwiper11 {
 }
 
 @media (min-width: 1080px) {
+    section.planos .card {
+        padding-inline: 1.4rem;
+    }
+
     section.planos .card .topics {
         width: 100%;
     }
 
+    section.planos .card .topics .topic-box {
+        padding-inline: .4rem;
+    }
+
+    /* escala com o viewport (card = 1/3 da tela), sem nunca quebrar linha */
     section.planos .card .topics .topic-label {
-        font-size: 1.15rem;
+        font-size: clamp(0.9rem, 0.9vw - 0.17rem, 1.3rem);
+        white-space: nowrap;
     }
 
     section.planos .card .topics .topic-value {
-        font-size: 1.45rem;
+        font-size: clamp(1.1rem, 0.95vw + 0.02rem, 1.6rem);
+        white-space: nowrap;
+    }
+
+    /* bitcoin: 2 caixinhas por linha (textos longos em caixa de 1/3 não cabem) */
+    section.planos.bit .card .topics .topic-box {
+        grid-column: span 3;
     }
 }
 
