@@ -48,8 +48,8 @@
       font-size: 1.4rem;
       font-weight: 800;
 
-      /* gradiente destacado com base no laranja #FE9214 */
-      background: linear-gradient(100deg, #e36414, #FE9214 55%, #ffb347);
+      /* gradiente destacado com base no azul da identidade visual */
+      background: linear-gradient(100deg, #023c83, #0080c9 55%, #1da4f3);
       padding-block: .5rem;
 }
 

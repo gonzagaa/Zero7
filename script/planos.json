@@ -82,57 +82,57 @@
  "60dias": {
   "trainee": {
     "oldPrice": "R$ 567,00",
-    "parcel": "12x R$17,01",
-    "avista": "ou R$170,10 à vista",
+    "parcel": "12x R$13,04",
+    "avista": "ou R$130,41 à vista",
     "checkout": "https://app.zero7.com.br/checkout/469145",
     "maxDias": "ilimitado*"
   },
   "junior": {
     "oldPrice": "R$ 827,00",
-    "parcel": "12x R$24,81",
-    "avista": "ou R$248,10 à vista",
+    "parcel": "12x R$19,02",
+    "avista": "ou R$190,21 à vista",
     "checkout": "https://app.zero7.com.br/checkout/5055db",
     "maxDias": "ilimitado*"
   },
   "pleno": {
     "oldPrice": "R$ 1.667,00",
-    "parcel": "12x R$50,01",
-    "avista": "ou R$500,10 à vista",
+    "parcel": "12x R$38,34",
+    "avista": "ou R$383,41 à vista",
     "checkout": "https://app.zero7.com.br/checkout/e04174",
     "maxDias": "ilimitado*"
   },
   "senior": {
     "oldPrice": "R$ 2.767,00",
-    "parcel": "12x R$83,01",
-    "avista": "ou R$830,10 à vista",
+    "parcel": "12x R$63,64",
+    "avista": "ou R$636,41 à vista",
     "checkout": "https://app.zero7.com.br/checkout/bb0320",
     "maxDias": "ilimitado*"
   },
   "expert": {
     "oldPrice": "R$ 4.417,00",
-    "parcel": "12x R$132,51",
-    "avista": "ou R$1.325,10 à vista",
+    "parcel": "12x R$101,59",
+    "avista": "ou R$1.015,91 à vista",
     "checkout": "https://app.zero7.com.br/checkout/5aecd4",
     "maxDias": "ilimitado*"
   },
   "master": {
     "oldPrice": "R$ 5.397,00",
-    "parcel": "12x R$161,91",
-    "avista": "ou R$1.619,10 à vista",
+    "parcel": "12x R$124,13",
+    "avista": "ou R$1.241,31 à vista",
     "checkout": "https://app.zero7.com.br/checkout/029d91",
     "maxDias": "ilimitado*"
   },
   "bit_trainee": {
     "oldPrice": "R$ 567,00",
-    "parcel": "12x R$17,01",
-    "avista": "ou R$170,10 à vista",
+    "parcel": "12x R$13,04",
+    "avista": "ou R$130,41 à vista",
     "checkout": "https://app.zero7.com.br/checkout/02aff1",
     "maxDias": "ilimitado*"
   },
   "bit_junior": {
     "oldPrice": "R$ 827,00",
-    "parcel": "12x R$24,81",
-    "avista": "ou R$248,10 à vista",
+    "parcel": "12x R$19,02",
+    "avista": "ou R$190,21 à vista",
     "checkout": "https://app.zero7.com.br/checkout/ae55bc",
     "maxDias": "ilimitado*"
   }
