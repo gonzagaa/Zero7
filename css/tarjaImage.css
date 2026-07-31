@@ -41,29 +41,93 @@
 }
 
 .countdown--promo {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
-      font-size: 1.4rem;
+      gap: 10px;
+      font-size: 1.5rem;
       font-weight: 800;
+      letter-spacing: .3px;
+      color: #fff;
 
-      /* gradiente destacado com base no azul da identidade visual */
-      background: linear-gradient(100deg, #023c83, #0080c9 55%, #1da4f3);
-      padding-block: .5rem;
+      /* vermelho profundo -> carmim -> vermelho vibrante, harmonizando com
+         o azul-marinho da identidade (contraste quente sobre o dark bg). */
+      background:
+        linear-gradient(100deg,
+          #4a0010 0%,
+          #8a0018 22%,
+          #c8102e 50%,
+          #e11d3a 72%,
+          #8a0018 100%);
+      background-size: 220% 100%;
+      animation: promoGradientShift 9s ease-in-out infinite;
+
+      padding-block: .65rem;
+      padding-inline: 1rem;
+      box-shadow:
+        inset 0 -1px 0 rgba(0, 0, 0, .35),
+        inset 0 1px 0 rgba(255, 255, 255, .12),
+        0 2px 14px rgba(200, 16, 46, .35);
+}
+
+/* brilho diagonal que atravessa a tarja de tempos em tempos */
+.countdown--promo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        115deg,
+        transparent 40%,
+        rgba(255, 255, 255, .22) 50%,
+        transparent 60%
+      );
+      transform: translateX(-100%);
+      animation: promoShine 5.5s ease-in-out infinite;
+      z-index: 1;
+}
+
+/* leve pulso vermelho por trás pra dar “urgência viva” */
+.countdown--promo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(255, 60, 90, .35), transparent 65%);
+      opacity: .0;
+      animation: promoPulse 2.4s ease-in-out infinite;
+      z-index: 0;
+}
+
+.countdown--promo > * {
+      position: relative;
+      z-index: 2;
 }
 
 .countdown--promo div {
       display: flex;
       align-items: end;
-      color: var(--color-text, #f2fffb);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+}
+
+.countdown--promo span:not(.label) {
+      display: inline-block;
+      min-width: 1.9ch;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
 }
 
 .countdown--promo .label {
       font-size: 1.2rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-top: -1px;
+      margin-left: 1px;
+      opacity: .9;
 }
 
 .tarjaImage h3 {
@@ -75,10 +139,59 @@
 }
 
 .tarjaImage p.text {
-    color: var(--color-text, #f2fffb);
-    font-size: 1.2rem;
-    font-weight: 500;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    margin-right: .35rem;
+}
+
+/* bolinha pulsante ao lado do texto “Essa oferta se encerra em:” */
+.tarjaImage p.text::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, .8);
+      animation: promoDot 1.6s ease-out infinite;
+}
+
+@keyframes promoGradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+}
+
+@keyframes promoShine {
+      0%   { transform: translateX(-100%); }
+      55%  { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+}
+
+@keyframes promoPulse {
+      0%, 100% { opacity: 0; }
+      50%      { opacity: .55; }
+}
+
+@keyframes promoDot {
+      0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, .75); }
+      70%  { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+      .countdown--promo,
+      .countdown--promo::before,
+      .countdown--promo::after,
+      .tarjaImage p.text::before {
+            animation: none;
+      }
 }
 
 @media (min-width: 1080px) {
