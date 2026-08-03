@@ -36,7 +36,14 @@
     pointer-events: none;
 }
 
-/* ---------- segmented control ---------- */
+/* ---------- segmented control ----------
+   O .planos-topo-conteudo é column + align-items:center, então o <header>
+   não estica: sem isso ele fica com a largura do filho mais largo (o título),
+   e o seg em width:100% mudaria de tamanho junto com o texto do título. */
+.planos .planos-topo-conteudo > header {
+    width: 100%;
+}
+
 .planos .seg--ativo {
     position: relative;
     display: inline-flex;
@@ -199,13 +206,19 @@
     }
 }
 
-@media (max-width: 620px) {
+/* Mobile/tablet: o seg ocupa a largura toda e cada opção fica com
+   exatamente metade — o flex:1 1 0 + min-width:0 trava a divisão em 50/50,
+   então o negrito do estado selecionado não redimensiona mais os botões. */
+@media (max-width: 1079px) {
     section.planos .seg--ativo {
+        display: flex;
         width: 100%;
         padding: .6rem;
     }
 
     section.planos .seg--ativo .seg__option {
+        flex: 1 1 0;
+        width: 50%;
         min-width: 0;
         padding: 1.2rem .8rem;
         font-size: 1.3rem;

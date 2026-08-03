@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v39-tarja-red-jul31";
+  const DATA_URL = "./script/planos.json?v=v40-planos-unificados-ago03";
 
   let currentMode = null;
   let cache = null;
