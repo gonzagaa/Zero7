@@ -25,7 +25,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=v38-tarja-red-jul31">
+  <link rel="stylesheet" href="./css/index.css?v=v39-tarja-red-jul31">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
@@ -607,10 +607,11 @@
     </div>
   </div>
 
-    <!-- MINI ÍNDICE / DÓLAR -->
-  <section id="plan" class="planos tema">
-    <img class="bg" src="./assets/bg2.webp" alt="">
-    
+    <!-- PLANOS — Mini Índice/Dólar + Bitcoin (dobra unificada) -->
+  <section id="plan" class="planos tema" data-asset="indice">
+    <img class="bg bg--ativo bg--indice" src="./assets/bg2.webp" alt="">
+    <img class="bg bg--ativo bg--bit" loading="lazy" decoding="async" aria-hidden="true" src="./assets/bg planos white.webp" alt="">
+
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
           <img class="cupom" src="./assets/tarjapopup/CUPOM GERACAO.avif" alt="">
@@ -626,25 +627,39 @@
 
       <div class="planos-topo-conteudo" data-aos="fade-up">
         <header>
-          <h2>Mini índice / Dólar</h2>
+          <div class="seg seg--ativo js-plan-asset" role="radiogroup" aria-label="Escolha o mercado">
+            <span class="seg__blob" aria-hidden="true"></span>
+            <button type="button" class="seg__option selecionado" data-asset="indice" role="radio" aria-checked="true" tabindex="0">
+              Mini Índice / Dólar
+            </button>
+            <button type="button" class="seg__option" data-asset="bitcoin" role="radio" aria-checked="false" tabindex="-1">
+              Futuro de Bitcoin
+            </button>
+          </div>
 
-        <p class="escolha js-plan-mode-heading">ESCOLHA SEU MODELO DE AVALIAÇÃO</p>
+          <h2 class="js-plan-title">Mini índice / Dólar</h2>
 
-        <div class="botoes"></div>
+          <p class="escolha js-plan-mode-heading">ESCOLHA SEU MODELO DE AVALIAÇÃO</p>
 
-        <div class="textBotoes js-plan-mode-description">
-          <p class="mode-30dias" style="display:none;">
-            Os planos com 30 dias de avaliação são ideais para quem tem um perfil agressivo e busca resultados maiores no dia.
-          </p>
-          <p class="mode-60dias" style="display:none;">
-            Os planos com 60 dias de avaliação são ideais para quem constroe resultado dia após dia, mantendo sempre a consistência.
-          </p>
-          <p class="mode-reinicio" style="display:none;">
-            Os planos com reinício tem duração de 60 dias e dentro desse período sempre que atingir o limite de perda total, pode reiniciar a sua avaliação. Esse plano é ideal para quem ainda está inseguro com sua estratégia, pois vai te permitir reajustar e tentar novamente.
-          </p>
-        </div>
+          <div class="botoes"></div>
+
+          <div class="textBotoes js-plan-mode-description">
+            <p class="mode-30dias" style="display:none;">
+              Os planos com 30 dias de avaliação são ideais para quem tem um perfil agressivo e busca resultados maiores no dia.
+            </p>
+            <p class="mode-60dias" style="display:none;">
+              Os planos com 60 dias de avaliação são ideais para quem constroe resultado dia após dia, mantendo sempre a consistência.
+            </p>
+            <p class="mode-reinicio" style="display:none;">
+              Os planos com reinício tem duração de 60 dias e dentro desse período sempre que atingir o limite de perda total, pode reiniciar a sua avaliação. Esse plano é ideal para quem ainda está inseguro com sua estratégia, pois vai te permitir reajustar e tentar novamente.
+            </p>
+          </div>
+        </header>
       </div>
     </div>
+
+    <!-- ATIVO: Mini Índice / Dólar -->
+    <div class="plano-asset plano-asset--indice">
 
     <div data-aos="fade-up" class="wrapper plano">
       <div class="swiper mySwiper4">
@@ -868,21 +883,11 @@
       A plataforma Profit One está disponível para todos os planos de forma gratuita. Caso deseje alterar
       para outra plataforma, isso poderá ser feito no momento da contratação.
     </p>
-  </section>
 
-  <!-- BITCOIN -->
-  <section class="planos white bit">
-    <img class="bg" src="./assets/bg planos white.webp" alt="">
+    </div><!-- /.plano-asset--indice -->
 
-    <div class="wrapper">
-      <header data-aos="fade-up">
-        <h2>CONTRATO FUTURO DE <span>BITCOIN</span></h2>
-
-        <p class="escolha js-plan-mode-heading">ESCOLHA SEU MODELO DE AVALIAÇÃO</p>
-
-        <div class="botoes"></div>
-      </header>
-    </div>
+    <!-- ATIVO: Contrato Futuro de Bitcoin -->
+    <div class="plano-asset plano-asset--bit">
 
     <div data-aos="fade-up" class="wrapper plano">
       <div class="swiper mySwiper11">
@@ -959,6 +964,8 @@
         <div class="swiper-pagination"></div>
       </div>
     </div>
+
+    </div><!-- /.plano-asset--bit -->
   </section>
 
   <section id="faq">
@@ -1704,9 +1711,10 @@ const prazosPromo = [
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=v38-tarja-red-jul31"></script>
-  <script src="./script/4selet.js?v=v38-tarja-red-jul31"></script>
-  <script src="./script/blackPlanos.js?v=v38-tarja-red-jul31"></script>
-  <script src="./script/sectionFaq.js?v=v38-tarja-red-jul31" defer></script>
+  <script src="./script/global.js?v=v39-tarja-red-jul31"></script>
+  <script src="./script/4selet.js?v=v39-tarja-red-jul31"></script>
+  <script src="./script/blackPlanos.js?v=v39-tarja-red-jul31"></script>
+  <script src="./script/planosAtivo.js?v=v39-tarja-red-jul31"></script>
+  <script src="./script/sectionFaq.js?v=v39-tarja-red-jul31" defer></script>
 </body>
 </html>

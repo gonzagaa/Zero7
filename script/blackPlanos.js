@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v38-tarja-red-jul31";
+  const DATA_URL = "./script/planos.json?v=v39-tarja-red-jul31";
 
   let currentMode = null;
   let cache = null;
@@ -112,9 +112,10 @@
     });
   }
 
-  // Só troca textos na primeira seção (não .bit), igual antes
+  // A dobra é única agora; o .bit entra/sai da section conforme o ativo
+  // selecionado, então o seletor não pode depender dessa classe.
   function updateModeTexts(mode) {
-    const containers = document.querySelectorAll("section.planos:not(.bit) .textBotoes");
+    const containers = document.querySelectorAll("section.planos .textBotoes");
     containers.forEach(ct => {
       const ps = Array.from(ct.querySelectorAll("p"));
       ps.forEach(p => {

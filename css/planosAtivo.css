@@ -1,0 +1,207 @@
+/* ============================================================
+   Dobra unificada de planos — seletor de ativo
+   (Mini Índice/Dólar × Contrato Futuro de Bitcoin)
+
+   Portado do Zero7 Internacional (.seg + .seg__blob), reescalado
+   para o root font-size deste projeto (50% → 1rem = 8px).
+   ============================================================ */
+
+/* ---------- fundos: cross-fade entre o black e o white ---------- */
+.planos img.bg.bg--ativo {
+    transition: opacity 500ms ease;
+}
+
+#plan[data-asset="indice"] .bg--bit,
+#plan[data-asset="bitcoin"] .bg--indice {
+    opacity: 0;
+}
+
+/* ---------- segmented control ---------- */
+.planos .seg--ativo {
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+    max-width: 100%;
+
+    padding: .75rem;
+    margin-bottom: 3rem;
+
+    background: #0a0a0a;
+    border: 1px solid #ffffff1f;
+    border-radius: 999rem;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .04),
+        0 1rem 3.75rem -1.25rem rgba(0, 0, 0, .7);
+
+    transition: background 400ms ease, border-color 400ms ease;
+    z-index: 1;
+}
+
+.planos .seg--ativo .seg__blob {
+    position: absolute;
+    top: .75rem;
+    left: 0;
+    height: calc(100% - 1.5rem);
+    width: 0;
+
+    border-radius: 999rem;
+    background: var(--gradient);
+    box-shadow: 0 .5rem 2.5rem -.5rem rgba(0, 128, 201, .45);
+
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform, width;
+    transform: translate3d(0, 0, 0);
+}
+
+.planos .seg--ativo[data-ready="true"] .seg__blob {
+    transition:
+        transform 450ms cubic-bezier(.34, 1.56, .64, 1),
+        width 450ms cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.planos .seg--ativo .seg__option {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 0;
+    min-width: max-content;
+
+    padding: 1.25rem 2.2rem;
+
+    background: transparent;
+    border: 0;
+    border-radius: 999rem;
+
+    color: #e8e8e8;
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+
+    cursor: pointer;
+    transition: color 350ms cubic-bezier(.4, 0, .2, 1);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.planos .seg--ativo .seg__option:hover:not(.selecionado) {
+    color: #fff;
+}
+
+.planos .seg--ativo .seg__option.selecionado {
+    color: #fff;
+    font-weight: 700;
+}
+
+.planos .seg--ativo .seg__option:focus-visible {
+    outline: 2px solid #ffffff60;
+    outline-offset: .5rem;
+}
+
+/* variante clara (Bitcoin) */
+.planos.white .seg--ativo {
+    background: #ffffffd6;
+    border: 1px solid #0000001a;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .6),
+        0 1rem 3.75rem -1.25rem rgba(7, 12, 17, .25);
+}
+
+.planos.white .seg--ativo .seg__option {
+    color: #070c11a6;
+}
+
+.planos.white .seg--ativo .seg__option:hover:not(.selecionado) {
+    color: #070C11;
+}
+
+.planos.white .seg--ativo .seg__option.selecionado {
+    color: #fff;
+}
+
+.planos.white .seg--ativo .seg__option:focus-visible {
+    outline-color: #023c83;
+}
+
+/* ---------- título que troca junto com o ativo ---------- */
+.planos .js-plan-title {
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.planos .js-plan-title.is-swapping {
+    opacity: 0;
+    transform: translateY(-.6rem);
+}
+
+/* ---------- blocos de cada ativo ---------- */
+.plano-asset[hidden] {
+    display: none !important;
+}
+
+.plano-asset {
+    animation: planoAssetIn 400ms ease both;
+}
+
+@keyframes planoAssetIn {
+    from {
+        opacity: 0;
+        transform: translateY(1.2rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ---------- overrides do tema claro para o topo unificado ----------
+   O topo (título, textos de modo e a nota da Profit One) era exclusivo
+   da dobra black e tinha cor branca fixa; agora é compartilhado. */
+.planos.white .planos-topo-conteudo h2,
+.planos.white .js-plan-title {
+    color: #070C11;
+}
+
+.planos.white .textBotoes p,
+.planos.white .planos-topo-conteudo .textBotoes p {
+    color: #070c11c4;
+}
+
+.planos.white p.obs {
+    color: #070c1199;
+}
+
+/* ---------- responsivo ---------- */
+@media (min-width: 1080px) {
+    section.planos .seg--ativo .seg__option {
+        padding: 1.4rem 3.2rem;
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 620px) {
+    section.planos .seg--ativo {
+        width: 100%;
+        padding: .6rem;
+    }
+
+    section.planos .seg--ativo .seg__option {
+        min-width: 0;
+        padding: 1.2rem .8rem;
+        font-size: 1.3rem;
+        white-space: normal;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .planos .seg--ativo[data-ready="true"] .seg__blob,
+    .planos .js-plan-title,
+    .planos img.bg.bg--ativo {
+        transition: none;
+    }
+
+    .plano-asset {
+        animation: none;
+    }
+}
