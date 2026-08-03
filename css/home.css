@@ -166,7 +166,15 @@
     fill: var(--bg-white);
   }
 
-  
+  /* Ajuste que vinha do heroPromotion.css (removido junto com os pills
+     "Avance na Avaliação / Receba prêmios / 100% dos lucros"). Sem ele o
+     mobile volta ao margin-top: 70% da regra base de #home .text. */
+  @media (max-width: 480px) {
+    #home.boxpromotion .text {
+      margin-top: 60%;
+    }
+  }
+
 
   @media (min-width: 1080px) {
     header#home {

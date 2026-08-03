@@ -16,6 +16,26 @@
     opacity: 0;
 }
 
+/* ---------- cupom: mesma troca, versão black × white ----------
+   As duas artes ficam empilhadas na mesma célula do grid para o
+   cross-fade acontecer sem a segunda empurrar o layout. */
+.planos .cupom-wrap {
+    display: grid;
+    justify-items: center;
+    align-items: start;
+}
+
+.planos .cupom-wrap > .cupom {
+    grid-area: 1 / 1;
+    transition: opacity 500ms ease;
+}
+
+#plan[data-asset="indice"] .cupom.white,
+#plan[data-asset="bitcoin"] .cupom:not(.white) {
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* ---------- segmented control ---------- */
 .planos .seg--ativo {
     position: relative;
@@ -197,7 +217,8 @@
 
     .planos .seg--ativo[data-ready="true"] .seg__blob,
     .planos .js-plan-title,
-    .planos img.bg.bg--ativo {
+    .planos img.bg.bg--ativo,
+    .planos .cupom-wrap > .cupom {
         transition: none;
     }
 
