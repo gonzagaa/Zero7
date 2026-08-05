@@ -381,20 +381,22 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-/* Popup overlay removido do HTML (linhas 304-311 do index.html antigo).
-   Este bloco está comentado pois os elementos #popupOverlay, #popupContent e #popupClose
-   não existem mais no DOM. Quando o popup voltar a ser usado, descomentar este bloco. */
-/*
+/* Popup promo (#popupOverlay no index.html, estilos em css/popup.css).
+   Abre sozinho após o delay abaixo; fecha no X, clicando fora, com Esc,
+   ou ao clicar em qualquer link dentro dele. Se o bloco HTML for removido/
+   comentado, o guard `if (!overlay...)` desativa tudo sem erro. */
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("popupOverlay");
   const content = document.getElementById("popupContent");
   const closeBtn = document.getElementById("popupClose");
 
-  // Mostrar o popup após 2s
+  if (!overlay || !content || !closeBtn) return;
+
+  // Mostrar o popup um tempinho após o acesso
   setTimeout(() => {
     overlay.classList.add("active");
     content.classList.add("active");
-  }, 3000);
+  }, 4000);
 
   // Fechar com botão X
   closeBtn.addEventListener("click", () => {
@@ -404,6 +406,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fechar ao clicar fora do conteúdo (na overlay)
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) closePopup();
+  });
+
+  // Fechar com Esc
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("active")) closePopup();
   });
 
   // Fechar ao clicar em QUALQUER link dentro do popup (ex.: <a href="#plan">...</a>)
@@ -433,7 +440,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 300); // mesmo tempo da transição no CSS
   }
 });
-*/
 
 
 const dataFinal = new Date("2025-12-15T23:59:00");

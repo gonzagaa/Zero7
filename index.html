@@ -25,7 +25,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=v40-planos-unificados-ago03">
+  <link rel="stylesheet" href="./css/index.css?v=v42-popup-ago05b">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
@@ -252,6 +252,22 @@
       <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK GERACAO.avif" alt="">
       <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE GERACAO.avif" alt="">
     </a>
+  </div>
+
+  <!-- Popup promo: abre sozinho alguns segundos após o acesso (js em
+       global.js, busca por "popupOverlay"). Estilos em css/popup.css. -->
+  <div class="popupOverlay" id="popupOverlay" role="dialog" aria-modal="true" aria-label="Promoção">
+    <div class="popupContent" id="popupContent">
+      <button id="popupClose" class="popupClose" aria-label="Fechar popup">
+        <svg width="16" height="16" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 2L2 28M2 2L28 28" stroke="#FFFAF1" stroke-width="3" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+      <a href="#plan" aria-label="Ver planos da promoção">
+        <img decoding="async" src="./assets/tarjapopup/popup.avif" alt="Promoção Zero7">
+      </a>
+    </div>
   </div>
 
   <nav data-aos="fade-down" id="navigation" class="">
@@ -1698,10 +1714,10 @@ const prazosPromo = [
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=v40-planos-unificados-ago03"></script>
-  <script src="./script/4selet.js?v=v40-planos-unificados-ago03"></script>
-  <script src="./script/blackPlanos.js?v=v40-planos-unificados-ago03"></script>
-  <script src="./script/planosAtivo.js?v=v40-planos-unificados-ago03"></script>
-  <script src="./script/sectionFaq.js?v=v40-planos-unificados-ago03" defer></script>
+  <script src="./script/global.js?v=v42-popup-ago05b"></script>
+  <script src="./script/4selet.js?v=v42-popup-ago05b"></script>
+  <script src="./script/blackPlanos.js?v=v42-popup-ago05b"></script>
+  <script src="./script/planosAtivo.js?v=v42-popup-ago05b"></script>
+  <script src="./script/sectionFaq.js?v=v42-popup-ago05b" defer></script>
 </body>
 </html>
