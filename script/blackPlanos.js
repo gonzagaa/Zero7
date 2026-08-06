@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v42-popup-ago05b";
+  const DATA_URL = "./script/planos.json?v=v44-timer-branco-ago06";
 
   let currentMode = null;
   let cache = null;

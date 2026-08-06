@@ -25,7 +25,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=v42-popup-ago05b">
+  <link rel="stylesheet" href="./css/index.css?v=v44-timer-branco-ago06">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
@@ -222,7 +222,7 @@
 
 <body id="body" class="smooth-scroll-wrapper">
 
-  <!-- Tarja promo (timer resetando a cada 24h até 31/jul — datas em
+  <!-- Tarja promo (timer resetando a cada 24h até 31/ago — datas em
        prazosPromo, no script do countdown no fim da página). Para desativar,
        basta comentar este bloco: o script se desliga sozinho e o nav volta
        ao topo automaticamente. -->
@@ -249,13 +249,17 @@
     </div>
 
    <a href="#plan">
-      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK GERACAO.avif" alt="">
-      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE GERACAO.avif" alt="">
+      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK pais.avif" alt="">
+      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE pais.avif" alt="">
     </a>
   </div>
 
-  <!-- Popup promo: abre sozinho alguns segundos após o acesso (js em
-       global.js, busca por "popupOverlay"). Estilos em css/popup.css. -->
+  <!-- POPUP DESATIVADO. Para reativar: descomente o bloco abaixo e coloque a
+       arte em ./assets/tarjapopup/popup.avif (a anterior foi removida das
+       assets). O JS (global.js, busca "popupOverlay") e o CSS (css/popup.css)
+       ficam prontos — o script se desativa sozinho enquanto o bloco estiver
+       comentado. Delay de abertura: setTimeout no global.js (4000ms).
+
   <div class="popupOverlay" id="popupOverlay" role="dialog" aria-modal="true" aria-label="Promoção">
     <div class="popupContent" id="popupContent">
       <button id="popupClose" class="popupClose" aria-label="Fechar popup">
@@ -269,6 +273,7 @@
       </a>
     </div>
   </div>
+  -->
 
   <nav data-aos="fade-down" id="navigation" class="">
     <div class="wrapper">
@@ -623,8 +628,8 @@
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
           <div class="cupom-wrap">
-            <img class="cupom" src="./assets/tarjapopup/cupom 80 white.png" alt="">
-            <img class="cupom white" src="./assets/tarjapopup/cupom 80 black.png" alt="" aria-hidden="true">
+            <img class="cupom" src="./assets/tarjapopup/cupom white pais.avif" alt="">
+            <img class="cupom white" src="./assets/tarjapopup/cupom black pais.avif" alt="" aria-hidden="true">
           </div>
       </div>
 
@@ -1544,42 +1549,37 @@
   <script>
 /* Countdown da tarja promo (.tarjaImage). O timer "reseta" a cada 24h: pega
    sempre o próximo prazo futuro de prazosPromo (um por dia, 23:59:59). Após
-   o último prazo (31/jul), tudo se desliga sozinho e o nav volta ao topo.
+   o último prazo (31/ago), tudo se desliga sozinho e o nav volta ao topo.
    Se o bloco .tarjaImage for comentado, o `if (!root) return` abaixo encerra
    o script sem efeito. */
 (() => {
 const prazosPromo = [
-  new Date("2026-07-01T23:59:59-03:00"),
-  new Date("2026-07-02T23:59:59-03:00"),
-  new Date("2026-07-03T23:59:59-03:00"),
-  new Date("2026-07-04T23:59:59-03:00"),
-  new Date("2026-07-05T23:59:59-03:00"),
-  new Date("2026-07-06T23:59:59-03:00"),
-  new Date("2026-07-07T23:59:59-03:00"),
-  new Date("2026-07-08T23:59:59-03:00"),
-  new Date("2026-07-09T23:59:59-03:00"),
-  new Date("2026-07-10T23:59:59-03:00"),
-  new Date("2026-07-11T23:59:59-03:00"),
-  new Date("2026-07-12T23:59:59-03:00"),
-  new Date("2026-07-13T23:59:59-03:00"),
-  new Date("2026-07-14T23:59:59-03:00"),
-  new Date("2026-07-15T23:59:59-03:00"),
-  new Date("2026-07-16T23:59:59-03:00"),
-  new Date("2026-07-17T23:59:59-03:00"),
-  new Date("2026-07-18T23:59:59-03:00"),
-  new Date("2026-07-19T23:59:59-03:00"),
-  new Date("2026-07-20T23:59:59-03:00"),
-  new Date("2026-07-21T23:59:59-03:00"),
-  new Date("2026-07-22T23:59:59-03:00"),
-  new Date("2026-07-23T23:59:59-03:00"),
-  new Date("2026-07-24T23:59:59-03:00"),
-  new Date("2026-07-25T23:59:59-03:00"),
-  new Date("2026-07-26T23:59:59-03:00"),
-  new Date("2026-07-27T23:59:59-03:00"),
-  new Date("2026-07-28T23:59:59-03:00"),
-  new Date("2026-07-29T23:59:59-03:00"),
-  new Date("2026-07-30T23:59:59-03:00"),
-  new Date("2026-07-31T23:59:59-03:00"),
+  new Date("2026-08-06T23:59:59-03:00"),
+  new Date("2026-08-07T23:59:59-03:00"),
+  new Date("2026-08-08T23:59:59-03:00"),
+  new Date("2026-08-09T23:59:59-03:00"),
+  new Date("2026-08-10T23:59:59-03:00"),
+  new Date("2026-08-11T23:59:59-03:00"),
+  new Date("2026-08-12T23:59:59-03:00"),
+  new Date("2026-08-13T23:59:59-03:00"),
+  new Date("2026-08-14T23:59:59-03:00"),
+  new Date("2026-08-15T23:59:59-03:00"),
+  new Date("2026-08-16T23:59:59-03:00"),
+  new Date("2026-08-17T23:59:59-03:00"),
+  new Date("2026-08-18T23:59:59-03:00"),
+  new Date("2026-08-19T23:59:59-03:00"),
+  new Date("2026-08-20T23:59:59-03:00"),
+  new Date("2026-08-21T23:59:59-03:00"),
+  new Date("2026-08-22T23:59:59-03:00"),
+  new Date("2026-08-23T23:59:59-03:00"),
+  new Date("2026-08-24T23:59:59-03:00"),
+  new Date("2026-08-25T23:59:59-03:00"),
+  new Date("2026-08-26T23:59:59-03:00"),
+  new Date("2026-08-27T23:59:59-03:00"),
+  new Date("2026-08-28T23:59:59-03:00"),
+  new Date("2026-08-29T23:59:59-03:00"),
+  new Date("2026-08-30T23:59:59-03:00"),
+  new Date("2026-08-31T23:59:59-03:00"),
 ];
 
   const root = document.getElementById("countdownPromo");
@@ -1714,10 +1714,10 @@ const prazosPromo = [
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=v42-popup-ago05b"></script>
-  <script src="./script/4selet.js?v=v42-popup-ago05b"></script>
-  <script src="./script/blackPlanos.js?v=v42-popup-ago05b"></script>
-  <script src="./script/planosAtivo.js?v=v42-popup-ago05b"></script>
-  <script src="./script/sectionFaq.js?v=v42-popup-ago05b" defer></script>
+  <script src="./script/global.js?v=v44-timer-branco-ago06"></script>
+  <script src="./script/4selet.js?v=v44-timer-branco-ago06"></script>
+  <script src="./script/blackPlanos.js?v=v44-timer-branco-ago06"></script>
+  <script src="./script/planosAtivo.js?v=v44-timer-branco-ago06"></script>
+  <script src="./script/sectionFaq.js?v=v44-timer-branco-ago06" defer></script>
 </body>
 </html>
