@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v45-timer-quente-ago06";
+  const DATA_URL = "./script/planos.json?v=v46-timer-quente-ago06";
 
   let currentMode = null;
   let cache = null;
