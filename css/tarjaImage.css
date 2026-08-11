@@ -53,15 +53,15 @@
       letter-spacing: .3px;
       color: #FFFAF1;
 
-      /* fundo quente: vermelho profundo -> vermelho vivo -> laranja, com o
-         gradiente deslizando pra chamar atenção */
-      background: linear-gradient(100deg, #8a0018, #c8102e 30%, #e6431d 62%, #FE9214 100%);
+      /* gradiente quente com base no laranja #E84E00, deslizando
+         pra chamar atenção */
+      background: linear-gradient(100deg, #9e3000, #c63e00 30%, #E84E00 60%, #ff7a2e 100%);
       background-size: 220% 100%;
       animation: promoGradientShift 7s ease-in-out infinite;
 
       padding-block: .65rem;
       padding-inline: 1rem;
-      box-shadow: 0 2px 16px rgba(214, 40, 40, .45);
+      box-shadow: 0 2px 16px rgba(232, 78, 0, .45);
 }
 
 /* brilho diagonal que atravessa a tarja de tempos em tempos */
