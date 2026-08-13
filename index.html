@@ -25,7 +25,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=v47-timer-laranja-ago11">
+  <link rel="stylesheet" href="./css/index.css?v=v48-comunidade-wpp-nav-ago13">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
@@ -292,10 +292,28 @@
           </li>
 
           <div data-aos="fade-right" class="buttons">
-            <a onclick="closeMenu()" target="_blank" href="https://app.zero7.com.br/login"><button id="navButton"
-                class="button">
-                Área do Trader
-              </button></a>
+            <a onclick="closeMenu()" target="_blank" rel="noopener noreferrer"
+              href="https://chat.whatsapp.com/G9ma9v4zI77BBvvhdswF2r" id="navButtonComunidade"
+              class="z7-btnx z7-btnx--nav z7-btnx--wpp" role="button"
+              aria-label="Entrar na comunidade do WhatsApp">
+              <span class="z7-btnx__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label">Comunidade</span>
+              <span class="z7-btnx__cap" aria-hidden="true">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </span>
+            </a>
+
+            <a onclick="closeMenu()" target="_blank" rel="noopener noreferrer"
+              href="https://app.zero7.com.br/login" id="navButton" class="z7-btnx z7-btnx--nav" role="button"
+              aria-label="Acessar a Área do Trader">
+              <span class="z7-btnx__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label">Área do Trader</span>
+              <span class="z7-btnx__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow">→</span>
+              </span>
+            </a>
           </div>
         </ul>
 
@@ -619,6 +637,77 @@
       <div id="video-container-geral"></div>
     </div>
   </div>
+
+  <!-- ============================================================
+       DESATIVADA TEMPORARIAMENTE — dobra "Formando a próxima geração
+       de traders" (Blackarrow Academy). Ainda não está pronta.
+
+       Envolvida por um elemento template em vez de comentada: o bloco
+       tem comentários internos e comentário HTML não aninha, então o
+       primeiro fechamento de comentário de dentro encerraria o de fora
+       e metade da dobra voltaria a renderizar. O template é inerte do
+       mesmo jeito: não renderiza e não baixa os 3 vídeos.
+
+       PARA REATIVAR: apague a linha de abertura do template logo abaixo
+       e a de fechamento no fim da section. Nada mais precisa mudar.
+       ============================================================ -->
+  <template id="ba-desativado">
+
+  <section id="ba">
+    <img class="bgsection" loading="lazy" decoding="async" aria-hidden="true" src="./assets/bgsection v2.avif" alt="">
+
+    <div class="ba-ambient" aria-hidden="true">
+      <div class="ba-blob ba-blob--1"></div>
+      <div class="ba-blob ba-blob--2"></div>
+    </div>
+
+    <div class="wrapper">
+      <div class="ba-bento">
+
+        <!-- Vídeo esquerda -->
+        <div class="ba-card ba-card--video ba-card--video-a">
+          <div class="ba-card__overlay"></div>
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="./assets/academy 1.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Card hero -->
+        <div class="ba-card ba-card--hero">
+          <div class="ba-card__inner">
+            <img class="ba-hero__logo" loading="lazy" decoding="async" src="./assets/logo academy.avif" alt="Blackarrow">
+            <h2 class="ba-hero__title">FORMANDO A PRÓXIMA GERAÇÃO DE TRADERS</h2>
+
+            <a class="z7-btnx" target="_blank" rel="noopener noreferrer" href="https://www.blackarrowtrading.com/pt/tools" role="button" aria-label="Ver todos os recursos">
+              <span class="z7-btnx__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine" aria-hidden="true"></span>
+
+              <span class="z7-btnx__label">Ver todos os recursos</span>
+
+              <span class="z7-btnx__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow">→</span>
+              </span>
+            </a>
+          </div>
+          <video class="ba-hero__bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="./assets/TELA CARREGAMENTO.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <!-- Vídeo direita -->
+        <div class="ba-card ba-card--video ba-card--video-b">
+          <div class="ba-card__overlay"></div>
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="./assets/academy 2.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </template>
+  <!-- /fim da dobra desativada -->
 
     <!-- PLANOS — Mini Índice/Dólar + Bitcoin (dobra unificada) -->
   <section id="plan" class="planos tema" data-asset="indice">
@@ -1108,10 +1197,20 @@
 
         <div id="suporte">
           <div class="content">
-            <div data-aos="fade-up-left" class="border">
+            <div data-aos="fade-up-left" class="border border--wpp">
               <div class="whatsapp">
-                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-                <p>Suporte exclusivo e humano através da Área do Trader</p>
+                <span><ion-icon name="notifications-outline"></ion-icon> Fique por dentro</span>
+                <p>Faça parte da comunidade oficial da Zero7 no WhatsApp</p>
+                <a target="_blank" rel="noopener noreferrer"
+                  href="https://chat.whatsapp.com/G9ma9v4zI77BBvvhdswF2r" class="z7-btnx z7-btnx--wpp"
+                  role="button" aria-label="Entrar na comunidade oficial da Zero7 no WhatsApp">
+                  <span class="z7-btnx__bg" aria-hidden="true"></span>
+                  <span class="z7-btnx__shine" aria-hidden="true"></span>
+                  <span class="z7-btnx__label">Entrar agora</span>
+                  <span class="z7-btnx__cap" aria-hidden="true">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                  </span>
+                </a>
               </div>
             </div>
 
@@ -1714,10 +1813,11 @@ const prazosPromo = [
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=v47-timer-laranja-ago11"></script>
-  <script src="./script/4selet.js?v=v47-timer-laranja-ago11"></script>
-  <script src="./script/blackPlanos.js?v=v47-timer-laranja-ago11"></script>
-  <script src="./script/planosAtivo.js?v=v47-timer-laranja-ago11"></script>
-  <script src="./script/sectionFaq.js?v=v47-timer-laranja-ago11" defer></script>
+  <script src="./script/global.js?v=v48-comunidade-wpp-nav-ago13"></script>
+  <script src="./script/4selet.js?v=v48-comunidade-wpp-nav-ago13"></script>
+  <script src="./script/blackPlanos.js?v=v48-comunidade-wpp-nav-ago13"></script>
+  <script src="./script/planosAtivo.js?v=v48-comunidade-wpp-nav-ago13"></script>
+  <script src="./script/sectionFaq.js?v=v48-comunidade-wpp-nav-ago13" defer></script>
+  <script src="./script/sectionBa.js?v=v48-comunidade-wpp-nav-ago13" defer></script>
 </body>
 </html>

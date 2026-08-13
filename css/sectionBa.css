@@ -1,0 +1,503 @@
+/* ============================================================
+   SECTION #BA — Blackarrow Showcase
+   Identidade Zero7 nacional (azul #023c83 → #1da4f3)
+   ============================================================ */
+
+/* ------------------------------------------------------------------
+   Section base
+   ------------------------------------------------------------------ */
+#ba {
+  position: relative;
+  overflow: hidden;
+  padding-block: 10rem;
+  background: var(--bg-black);
+}
+
+/* mesmo tratamento do background da Central de Ajuda (#faq) */
+#ba img.bgsection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+#ba .wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* ------------------------------------------------------------------
+   Ambient blobs
+   ------------------------------------------------------------------ */
+.ba-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ba-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(12.5rem);
+}
+
+.ba-blob--1 {
+  width: 69rem;
+  height: 69rem;
+  background: radial-gradient(circle, rgba(29,164,243,.16), rgba(2,60,131,.05) 70%);
+  top: -20%;
+  left: -6%;
+  animation: ba-blob-drift 18s ease-in-out infinite alternate;
+}
+
+.ba-blob--2 {
+  width: 52rem;
+  height: 52rem;
+  background: radial-gradient(circle, rgba(2,60,131,.22), rgba(29,164,243,.04) 70%);
+  bottom: -12%;
+  right: -4%;
+  animation: ba-blob-drift 22s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes ba-blob-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(4rem, 3rem) scale(1.08); }
+}
+
+/* ------------------------------------------------------------------
+   Kicker
+   ------------------------------------------------------------------ */
+.ba-kicker {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.ba-kicker__line {
+  display: block;
+  flex-shrink: 0;
+  width: 3.75rem;
+  height: .2rem;
+  background: linear-gradient(90deg, var(--z7-sky), transparent);
+  border-radius: 999px;
+}
+
+.ba-kicker__text {
+  font-family: var(--tts);
+  font-size: 1.3rem;
+  letter-spacing: .28rem;
+  text-transform: uppercase;
+  color: rgba(158,206,243,.7);
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------
+   Bento grid — mobile default (flex, empilhado)
+   ------------------------------------------------------------------ */
+.ba-bento {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ------------------------------------------------------------------
+   Card base
+   ------------------------------------------------------------------ */
+.ba-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  border: .1rem solid rgba(29,164,243,.14);
+  background: rgba(0, 11, 28, .55);
+  min-height: 32rem;
+}
+
+/* Overlay dos cards de vídeo */
+.ba-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    to top,
+    rgba(0,2,5,.96) 0%,
+    rgba(0,4,12,.45) 32%,
+    rgba(0,11,28,.1) 62%,
+    transparent 100%
+  );
+}
+
+/* Caption (canto inferior esquerdo) */
+.ba-card__caption {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 3rem;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+}
+
+.ba-caption__label {
+  font-family: var(--tts);
+  font-size: 1.25rem;
+  letter-spacing: .25rem;
+  text-transform: uppercase;
+  color: rgba(158,206,243,.62);
+  font-weight: 500;
+}
+
+.ba-caption__value {
+  font-family: var(--ncs);
+  font-size: 2.25rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+/* Wrapper de conteúdo interno */
+.ba-card__inner {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+/* ------------------------------------------------------------------
+   Badge
+   ------------------------------------------------------------------ */
+.ba-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .7rem 1.7rem;
+  border-radius: 999px;
+  background: rgba(2,60,131,.28);
+  border: .1rem solid rgba(29,164,243,.28);
+  backdrop-filter: blur(.6rem);
+  -webkit-backdrop-filter: blur(.6rem);
+}
+
+.ba-badge__dot {
+  flex-shrink: 0;
+  width: .7rem;
+  height: .7rem;
+  border-radius: 50%;
+  background: var(--z7-sky);
+  box-shadow: 0 0 .9rem rgba(29,164,243,.8);
+  animation: ba-dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ba-dot-pulse {
+  0%, 100% { box-shadow: 0 0 .6rem rgba(29,164,243,.6); opacity: 1; }
+  50%      { box-shadow: 0 0 2.2rem rgba(29,164,243,.9), 0 0 .9rem rgba(29,164,243,.7); opacity: .6; }
+}
+
+.ba-card__badge span:last-child {
+  font-family: var(--tts);
+  font-size: 1.25rem;
+  letter-spacing: .18rem;
+  text-transform: uppercase;
+  color: rgba(200,230,255,.78);
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------
+   Card hero
+   ------------------------------------------------------------------ */
+.ba-card--hero {
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 50%, rgba(2,60,131,.32) 0%, rgba(0,2,5,.72) 100%);
+  box-shadow:
+    0 0 0 .1rem rgba(29,164,243,.08),
+    0 2rem 4.5rem rgba(0,0,0,.42),
+    inset 0 .1rem 0 rgba(29,164,243,.12);
+  min-height: 37.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 3.5rem;
+  text-align: center;
+}
+
+.ba-hero__bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* scrim sobre o vídeo para manter logo, título e botão legíveis */
+.ba-card--hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse 68% 58% at 50% 50%, rgba(0,2,5,.62) 0%, rgba(0,2,5,.24) 62%, transparent 100%),
+    linear-gradient(to top, rgba(0,2,5,.5) 0%, rgba(0,4,12,.16) 45%, rgba(0,11,28,.26) 100%);
+}
+
+.ba-card--hero .ba-card__inner {
+  align-items: center;
+  max-width: 102rem;
+  width: 100%;
+}
+
+.ba-hero__logo {
+  width: 13.75rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 2.5rem rgba(29,164,243,.28));
+}
+
+.ba-hero__title {
+  font-family: var(--ncs);
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.25;
+  letter-spacing: .03rem;
+  background: radial-gradient(ellipse at 50% 0%, #ffffff 0%, #b2b2b2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 .2rem 1.4rem rgba(0,2,5,.9));
+
+}
+
+/* Botão da dobra usa o componente .z7-btnx global */
+.ba-card--hero .z7-btnx {
+  align-self: center;
+}
+
+/* Barra de stats */
+.ba-hero__stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.25rem;
+  padding-top: 2.5rem;
+  border-top: .1rem solid rgba(29,164,243,.14);
+  width: 100%;
+}
+
+.ba-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .45rem;
+}
+
+.ba-stat__value {
+  font-family: var(--ncs);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(180deg, #ffffff 0%, #9ecef3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ba-stat__label {
+  font-family: var(--tts);
+  font-size: 1.25rem;
+  color: rgba(158,206,243,.45);
+  letter-spacing: .11rem;
+  text-transform: uppercase;
+}
+
+.ba-stat__divider {
+  flex-shrink: 0;
+  width: .1rem;
+  height: 4rem;
+  background: linear-gradient(to bottom, transparent, rgba(29,164,243,.28), transparent);
+}
+
+/* ------------------------------------------------------------------
+   Cards de vídeo
+   ------------------------------------------------------------------ */
+.ba-card--video {
+  min-height: 37.5rem;
+}
+
+.ba-card--video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* ------------------------------------------------------------------
+   Ordem dos cards no mobile
+   ------------------------------------------------------------------ */
+.ba-card--hero    { order: 1; }
+.ba-card--video-a { order: 2; }
+.ba-card--video-b { order: 3; }
+
+/* ------------------------------------------------------------------
+   Tablet 640–1079px
+   ------------------------------------------------------------------ */
+@media (min-width: 640px) and (max-width: 1079px) {
+  .ba-bento {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+  }
+
+  .ba-card--hero {
+    grid-column: 1 / span 2;
+    order: unset;
+    min-height: 57.5rem;
+  }
+
+  .ba-card--video-a,
+  .ba-card--video-b {
+    order: unset;
+    min-height: 37.5rem;
+  }
+
+  .ba-hero__title {
+    font-size: 3rem;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Desktop 1080px+
+   ------------------------------------------------------------------ */
+@media (min-width: 1080px) {
+  #ba {
+    padding-block: 12.5rem;
+  }
+
+  #ba .wrapper {
+    width: 100%;
+    padding-inline: 1.5%;
+    max-width: none;
+  }
+
+  .ba-bento {
+    display: grid;
+    grid-template-columns: 1fr 4.3fr 1fr;
+    grid-template-rows: 59.5rem;
+    gap: 2rem;
+  }
+
+  /* Limpa a ordenação de mobile */
+  .ba-card--video-a,
+  .ba-card--hero,
+  .ba-card--video-b {
+    order: unset;
+    min-height: unset;
+  }
+
+  /* Posicionamento no grid — os três cards dividem a mesma linha */
+  .ba-card--video-a { grid-column: 1; grid-row: 1; }
+  .ba-card--hero    { grid-column: 2; grid-row: 1; }
+  .ba-card--video-b { grid-column: 3; grid-row: 1; }
+
+  .ba-card--hero {
+    padding: 6% 5%;
+  }
+
+  .ba-hero__logo {
+    width: 17.5rem;
+  }
+
+  .ba-hero__title {
+    font-size: 3.4rem;
+  }
+
+  .ba-stat__value {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .ba-hero__title {
+    font-size: 3.75rem;
+    width: 60%;
+    margin-block: 2rem;
+  }
+
+  .ba-bento {
+    grid-template-rows: 63.25rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .ba-hero__title {
+    font-size: 4.25rem;
+  }
+
+  .ba-bento {
+    grid-template-rows: 68.25rem;
+  }
+}
+
+/* ------------------------------------------------------------------
+   1600px+ — o :root do site sobe de 50% para 65%, então as medidas
+   voltam à escala base para não estourarem de tamanho.
+   ------------------------------------------------------------------ */
+@media (min-width: 1600px) {
+  #ba {
+    padding-block: 10rem;
+  }
+
+  .ba-card {
+    border-radius: 1.6rem;
+    min-height: unset;
+  }
+
+  .ba-bento {
+    grid-template-rows: 54.6rem;
+    gap: 1.6rem;
+  }
+
+  .ba-card__caption {
+    bottom: 2rem;
+    left: 2.4rem;
+  }
+
+  .ba-caption__label { font-size: 1rem; }
+  .ba-caption__value { font-size: 1.8rem; }
+
+  .ba-card__inner { gap: 1.8rem; }
+
+  .ba-hero__logo  { width: 14rem; }
+  .ba-hero__title { font-size: 3.4rem; }
+
+  .ba-hero__stats     { gap: 1.8rem; padding-top: 2rem; }
+  .ba-stat__value     { font-size: 2.4rem; }
+  .ba-stat__label     { font-size: 1rem; }
+  .ba-stat__divider   { height: 3.2rem; }
+
+  .ba-blob { filter: blur(10rem); }
+  .ba-blob--1 { width: 55rem; height: 55rem; }
+  .ba-blob--2 { width: 42rem; height: 42rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ba-blob,
+  .ba-badge__dot {
+    animation: none;
+  }
+}

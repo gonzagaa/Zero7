@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v47-timer-laranja-ago11";
+  const DATA_URL = "./script/planos.json?v=v48-comunidade-wpp-nav-ago13";
 
   let currentMode = null;
   let cache = null;

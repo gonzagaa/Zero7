@@ -22,6 +22,11 @@
     --bg-white: #f2fffb;
     --nav-height: 7.2rem;
 
+    /* paleta oficial do WhatsApp (botão Comunidade na nav + card de contato) */
+    --wpp-deep: #075E54;
+    --wpp-teal: #128C7E;
+    --wpp-green: #25D366;
+
     --ncs: 'NCS Radhiumz', sans-serif;
     --tts: 'TT Fors Trial', sans-serif;                                             
 }  

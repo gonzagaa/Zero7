@@ -1,0 +1,214 @@
+/* ============================================================
+   .z7-btnx--nav — o botão oficial da Zero7 na escala da navegação
+
+   Mesma estética do .z7-btnx (button.css): mesmo recorte assimétrico,
+   mesmo gradiente, mesmo cap com seta, mesmo ring/shine/glow em loop.
+   Só muda a escala e a intensidade do halo, para caber numa nav de 6rem.
+
+   IMPORTANTE: todo seletor aqui é prefixado com `nav#navigation .wrapper`
+   de propósito. O desktop tem um reset universal em navigation.css
+   (`nav#navigation .wrapper *`, especificidade 1,1,1) que zera
+   position/display/font-size/color/transform de tudo dentro da nav — e ele
+   venceria as regras base do botão, quebrando as camadas absolutas.
+   O prefixo leva estas regras a (1,2,1) e devolve o controle.
+   ============================================================ */
+
+/* a paleta --wpp-* vive em global.css (usada aqui e no card da seção de contato) */
+
+nav#navigation .wrapper .z7-btnx--nav {
+    /* escala reduzida — as proporções internas derivam de --h */
+    --h: 5.2rem;
+    --in: .55rem;
+    --capw: 4.2rem;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    height: var(--h);
+    margin: 0;
+    padding-left: 2.4rem;
+    padding-right: calc(var(--capw) + (var(--in) * 2) + .8rem);
+
+    /* a --ncs é uma display font larga: no tamanho da nav ela pesa bem mais
+       que a --tts do botão antigo, daí o corpo e o peso menores que o
+       .z7-btnx original (1.6rem / 600) */
+    font-family: var(--ncs);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: .05rem;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    color: rgba(255, 255, 255, .96);
+    background-color: transparent;
+
+    /* o halo original tem 4.5rem de blur: numa nav baixa vira uma mancha
+       azul atrás do menu inteiro, então aqui ele é bem mais contido */
+    box-shadow:
+        0 0 2.6rem rgba(2, 60, 131, .42),
+        0 0 2.8rem rgba(29, 165, 243, .26),
+        0 0 0 .25rem rgba(29, 165, 243, .10);
+}
+
+/* glow externo na proporção do botão menor
+   (pseudo-elementos não são atingidos pelo reset, mas o inset precisa
+   acompanhar a escala senão o brilho fica desproporcional) */
+nav#navigation .wrapper .z7-btnx--nav::before {
+    inset: -1.2rem;
+    border-radius: calc(var(--r) + 1.2rem) 0 calc(var(--r) + 1.2rem) 0;
+    filter: blur(1.4rem);
+}
+
+/* --- camadas internas: devolve o que o reset do desktop apaga --- */
+nav#navigation .wrapper .z7-btnx--nav .z7-btnx__bg {
+    position: absolute;
+    display: block;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+}
+
+nav#navigation .wrapper .z7-btnx--nav .z7-btnx__shine {
+    position: absolute;
+    display: block;
+    inset: -35% -55%;
+    margin: 0;
+    padding: 0;
+    transform: translateX(-60%);
+}
+
+nav#navigation .wrapper .z7-btnx--nav .z7-btnx__label {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+
+    text-shadow: 0 .6rem 1.6rem rgba(0, 0, 0, .35);
+}
+
+nav#navigation .wrapper .z7-btnx--nav .z7-btnx__cap {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 0;
+
+    top: var(--in);
+    right: var(--in);
+    height: calc(100% - (var(--in) * 2));
+    width: var(--capw);
+
+    /* o reset zera o color do cap para initial (preto); sem isso a seta,
+       que herda daqui, sai preta em vez de branca */
+    color: #fff;
+}
+
+nav#navigation .wrapper .z7-btnx--nav .z7-btnx__arrow {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    font-size: 1.5rem;
+    color: #fff;
+    transform: translateX(0);
+}
+
+/* o hover magnético (--sh1x/--sh1y) vem do mesmo script do botão grande;
+   aqui só o alcance da sombra é reduzido para a escala da nav */
+nav#navigation .wrapper .z7-btnx--nav:hover {
+    box-shadow:
+        var(--sh1x, 0rem) var(--sh1y, 0rem) 4.2rem rgba(2, 60, 131, .60),
+        var(--sh2x, 0rem) var(--sh2y, 0rem) 2.8rem rgba(29, 165, 243, .44),
+        0 0 0 .25rem rgba(29, 165, 243, .18);
+}
+
+nav#navigation .wrapper .z7-btnx--nav:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 4.2rem rgba(2, 60, 131, .60),
+        0 0 2.8rem rgba(29, 165, 243, .44),
+        0 0 0 .35rem rgba(29, 165, 243, .26);
+}
+
+/* ícone no lugar da seta (ex.: WhatsApp da Comunidade) — o reset também
+   atinge o <ion-icon>, então display/tamanho/cor precisam ser devolvidos */
+nav#navigation .wrapper .z7-btnx--nav .z7-btnx__cap ion-icon {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    font-size: 1.9rem;
+    color: #fff;
+
+    transform: scale(1);
+    transition: transform .60s cubic-bezier(.16, 1, .3, 1);
+}
+
+/* o .z7-btnx original desloca a seta no hover; com ícone, um leve zoom
+   comunica melhor a mesma intenção */
+nav#navigation .wrapper .z7-btnx--nav:hover .z7-btnx__cap ion-icon {
+    transform: scale(1.12);
+}
+
+nav#navigation .wrapper .z7-btnx--nav.z7-btnx--wpp {
+    box-shadow:
+        0 0 2.6rem rgba(7, 94, 84, .42),
+        0 0 2.8rem rgba(37, 211, 102, .26),
+        0 0 0 .25rem rgba(37, 211, 102, .10);
+}
+
+nav#navigation .wrapper .z7-btnx--nav.z7-btnx--wpp:hover {
+    box-shadow:
+        var(--sh1x, 0rem) var(--sh1y, 0rem) 4.2rem rgba(7, 94, 84, .60),
+        var(--sh2x, 0rem) var(--sh2y, 0rem) 2.8rem rgba(37, 211, 102, .44),
+        0 0 0 .25rem rgba(37, 211, 102, .18);
+}
+
+nav#navigation .wrapper .z7-btnx--nav.z7-btnx--wpp:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 4.2rem rgba(7, 94, 84, .60),
+        0 0 2.8rem rgba(37, 211, 102, .44),
+        0 0 0 .35rem rgba(37, 211, 102, .26);
+}
+
+/* menu mobile: o overlay é uma coluna, os botões ocupam a linha inteira */
+@media (max-width: 1079px) {
+    nav#navigation .wrapper .menu .buttons .z7-btnx--nav {
+        width: 100%;
+    }
+}
+
+/* desktop: cabe numa nav de 6rem */
+@media (min-width: 1080px) {
+    /* com dois botões lado a lado, o gap de 2rem da nav aperta o menu */
+    nav#navigation .wrapper .menu .buttons {
+        gap: 1.2rem;
+    }
+
+    nav#navigation .wrapper .z7-btnx--nav {
+        --h: 3.8rem;
+        --in: .45rem;
+        --capw: 3.2rem;
+
+        padding-left: 1.8rem;
+        padding-right: calc(var(--capw) + (var(--in) * 2) + .6rem);
+
+        font-size: 1rem;
+        letter-spacing: .04rem;
+    }
+
+    nav#navigation .wrapper .z7-btnx--nav .z7-btnx__arrow {
+        font-size: 1.3rem;
+    }
+
+    nav#navigation .wrapper .z7-btnx--nav .z7-btnx__cap ion-icon {
+        font-size: 1.6rem;
+    }
+}
