@@ -126,4 +126,25 @@
 
   });
 
+  // ── Cards de benefício: revelação do texto ─────────────────────────────────
+  // O CSS sozinho teria que animar até um max-height arbitrário (40em), bem
+  // maior que o texto real — a parte visível terminaria no primeiro terço do
+  // tempo e o resto animaria espaço vazio, dando a sensação de estalo. Aqui a
+  // altura exata é medida, então a transição percorre só a distância real.
+  //
+  // mouseenter/mouseleave sem media query: em touch o navegador dispara os
+  // dois no toque, então o mesmo par cobre mouse e telas sensíveis.
+  document.querySelectorAll('#ba .ba-card--info').forEach(card => {
+    const desc = card.querySelector('.ba-info__desc');
+    if (!desc) return;
+
+    card.addEventListener('mouseenter', () => {
+      desc.style.maxHeight = desc.scrollHeight + 'px';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      desc.style.maxHeight = '';
+    });
+  });
+
 })();

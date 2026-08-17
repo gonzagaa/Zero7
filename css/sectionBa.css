@@ -403,7 +403,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 42rem;
+  min-height: 34rem;
   padding: 3.5rem 3rem;
   box-shadow: inset 0 .1rem 0 rgba(29,164,243,.1);
 }
@@ -423,11 +423,11 @@
 .ba-card--info .ba-card__overlay {
   background: linear-gradient(
     to top,
-    rgba(0,2,5,.96) 0%,
-    rgba(0,2,5,.86) 32%,
-    rgba(0,4,12,.42) 58%,
-    rgba(0,11,28,.08) 82%,
-    transparent 100%
+    rgba(0,2,5,.99) 0%,
+    rgba(0,2,5,.97) 42%,
+    rgba(0,2,5,.82) 62%,
+    rgba(0,4,12,.45) 80%,
+    rgba(0,11,28,.15) 100%
   );
 }
 
@@ -448,6 +448,21 @@
   gap: 1.2rem;
   align-items: flex-start;
   text-align: left;
+}
+
+.ba-info__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.ba-info__arrow {
+  flex-shrink: 0;
+  font-size: 2.2rem;
+  color: var(--z7-sky);
+  transition: transform .6s cubic-bezier(.22,.61,.36,1);
 }
 
 .ba-info__title {
@@ -472,6 +487,51 @@
 
 .ba-info__desc span {
   color: rgba(255,255,255,.92);
+}
+
+/* Véu extra que entra no hover, para o texto revelado continuar legível
+   sobre a parte clara da imagem. */
+.ba-card--info::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    to top,
+    rgba(0,2,5,.99) 0%,
+    rgba(0,2,5,.94) 55%,
+    rgba(0,2,5,.72) 100%
+  );
+  opacity: 0;
+  transition: opacity .75s ease;
+}
+
+/* Revelação — sem media query de propósito. As queries de hover consultam
+   o apontador primário e, em notebooks com touchscreen, o navegador pode
+   reportar o toque como primário e descartar o bloco inteiro mesmo havendo
+   mouse. Em touch, o .is-open (via JS) faz o papel do hover. */
+.ba-info__desc {
+  /* 3 linhas: line-height 1.6 × 3 */
+  max-height: 4.8em;
+  overflow: hidden;
+  transition: max-height .75s cubic-bezier(.22,.61,.36,1);
+}
+
+.ba-card--info:hover .ba-info__desc,
+.ba-card--info.is-open .ba-info__desc {
+  max-height: 40em;
+}
+
+.ba-card--info:hover::after,
+.ba-card--info.is-open::after {
+  opacity: 1;
+}
+
+.ba-card--info:hover .ba-info__arrow,
+.ba-card--info.is-open .ba-info__arrow {
+  transform: rotate(90deg);
 }
 
 /* ------------------------------------------------------------------
@@ -516,16 +576,10 @@
     padding-block: 12.5rem;
   }
 
-  #ba .wrapper {
-    width: 100%;
-    padding-inline: 1.5%;
-    max-width: none;
-  }
-
   .ba-bento {
     display: grid;
     grid-template-columns: 1fr 4.3fr 1fr;
-    grid-template-rows: 59.5rem;
+    grid-template-rows: 45rem;
     gap: 2rem;
   }
 
@@ -537,7 +591,7 @@
   }
 
   .ba-card--info {
-    min-height: 48rem;
+    min-height: 34rem;
     padding: 4rem 3.5rem;
   }
 
@@ -591,7 +645,7 @@
   }
 
   .ba-bento {
-    grid-template-rows: 63.25rem;
+    grid-template-rows: 48rem;
   }
 }
 
@@ -601,7 +655,7 @@
   }
 
   .ba-bento {
-    grid-template-rows: 68.25rem;
+    grid-template-rows: 51rem;
   }
 }
 
@@ -620,7 +674,7 @@
   }
 
   .ba-bento {
-    grid-template-rows: 54.6rem;
+    grid-template-rows: 42rem;
     gap: 1.6rem;
   }
 
@@ -630,7 +684,7 @@
   }
 
   .ba-card--info {
-    min-height: 38rem;
+    min-height: 28rem;
     padding: 3.2rem 2.8rem;
   }
 
