@@ -98,6 +98,41 @@
 }
 
 /* ------------------------------------------------------------------
+   Header da dobra
+   ------------------------------------------------------------------ */
+.ba-header {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.ba-header h2 {
+  font-family: var(--ncs);
+  font-size: clamp(3rem, 3.2vw, 4.6rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+}
+
+.ba-header h2 span {
+  background: linear-gradient(90deg, var(--z7-sky), #0a61a5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 1080px) {
+  .ba-header {
+    margin-bottom: 5rem;
+  }
+
+  .ba-header h2 {
+    width: 70%;
+    margin-inline: auto;
+  }
+}
+
+/* ------------------------------------------------------------------
    Bento grid — mobile default (flex, empilhado)
    ------------------------------------------------------------------ */
 .ba-bento {
@@ -259,18 +294,12 @@
   width: 100%;
 }
 
-.ba-hero__logo {
-  width: 13.75rem;
-  object-fit: contain;
-  filter: drop-shadow(0 0 2.5rem rgba(29,164,243,.28));
-}
-
 .ba-hero__title {
   font-family: var(--ncs);
   font-size: 2.5rem;
   font-weight: 500;
   text-transform: uppercase;
-  line-height: 1.25;
+  line-height: 1.1;
   letter-spacing: .03rem;
   background: radial-gradient(ellipse at 50% 0%, #ffffff 0%, #b2b2b2 100%);
   -webkit-background-clip: text;
@@ -278,6 +307,18 @@
   background-clip: text;
   filter: drop-shadow(0 .2rem 1.4rem rgba(0,2,5,.9));
 
+}
+
+.ba-hero__desc {
+  /* cancela parte do gap de 2.25rem do .ba-card__inner, mantendo título e
+     descrição como um par sem colar um no outro */
+  margin-top: -1.7rem;
+  max-width: 60rem;
+  font-family: var(--tts);
+  font-size: 1.75rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,.68);
+  text-shadow: 0 .2rem 1.2rem rgba(0,2,5,.9);
 }
 
 /* Botão da dobra usa o componente .z7-btnx global */
@@ -347,6 +388,93 @@
 }
 
 /* ------------------------------------------------------------------
+   Trio de benefícios — grid próprio, separado do .ba-bento porque as
+   colunas aqui são iguais e lá são 1fr / 4.3fr / 1fr
+   ------------------------------------------------------------------ */
+.ba-trio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.ba-card--info {
+  /* texto ancorado embaixo, deixando a imagem respirar na parte de cima */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 42rem;
+  padding: 3.5rem 3rem;
+  box-shadow: inset 0 .1rem 0 rgba(29,164,243,.1);
+}
+
+.ba-card__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Scrim firme na faixa do texto e leve no miolo, para não apagar o neon
+   das imagens — que já têm fundo praticamente preto. */
+.ba-card--info .ba-card__overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,2,5,.96) 0%,
+    rgba(0,2,5,.86) 32%,
+    rgba(0,4,12,.42) 58%,
+    rgba(0,11,28,.08) 82%,
+    transparent 100%
+  );
+}
+
+/* hairline de destaque no topo do card — z-index acima da imagem e do scrim */
+.ba-card--info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 3rem;
+  right: 3rem;
+  z-index: 3;
+  height: .2rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--z7-sky), rgba(2,60,131,0));
+}
+
+.ba-card--info .ba-card__inner {
+  gap: 1.2rem;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.ba-info__title {
+  font-family: var(--ncs);
+  font-size: 2.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.15;
+  letter-spacing: .03rem;
+  background: radial-gradient(ellipse at 0% 0%, #ffffff 0%, #b2b2b2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ba-info__desc {
+  font-family: var(--tts);
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.58);
+}
+
+.ba-info__desc span {
+  color: rgba(255,255,255,.92);
+}
+
+/* ------------------------------------------------------------------
    Ordem dos cards no mobile
    ------------------------------------------------------------------ */
 .ba-card--hero    { order: 1; }
@@ -401,6 +529,31 @@
     gap: 2rem;
   }
 
+  .ba-trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .ba-card--info {
+    min-height: 48rem;
+    padding: 4rem 3.5rem;
+  }
+
+  .ba-card--info::before {
+    left: 3.5rem;
+    right: 3.5rem;
+  }
+
+  .ba-info__title {
+    font-size: 2.8rem;
+  }
+
+  .ba-info__desc {
+    font-size: 1.7rem;
+  }
+
   /* Limpa a ordenação de mobile */
   .ba-card--video-a,
   .ba-card--hero,
@@ -418,12 +571,12 @@
     padding: 6% 5%;
   }
 
-  .ba-hero__logo {
-    width: 17.5rem;
-  }
-
   .ba-hero__title {
     font-size: 3.4rem;
+  }
+
+  .ba-hero__desc {
+    font-size: 2rem;
   }
 
   .ba-stat__value {
@@ -435,7 +588,6 @@
   .ba-hero__title {
     font-size: 3.75rem;
     width: 60%;
-    margin-block: 2rem;
   }
 
   .ba-bento {
@@ -472,6 +624,24 @@
     gap: 1.6rem;
   }
 
+  .ba-trio {
+    gap: 1.6rem;
+    margin-top: 1.6rem;
+  }
+
+  .ba-card--info {
+    min-height: 38rem;
+    padding: 3.2rem 2.8rem;
+  }
+
+  .ba-card--info::before {
+    left: 2.8rem;
+    right: 2.8rem;
+  }
+
+  .ba-info__title { font-size: 2.2rem; }
+  .ba-info__desc  { font-size: 1.35rem; }
+
   .ba-card__caption {
     bottom: 2rem;
     left: 2.4rem;
@@ -482,8 +652,14 @@
 
   .ba-card__inner { gap: 1.8rem; }
 
-  .ba-hero__logo  { width: 14rem; }
   .ba-hero__title { font-size: 3.4rem; }
+
+  .ba-hero__desc {
+    /* aqui o gap do .ba-card__inner é 1.8rem */
+    margin-top: -1.4rem;
+    max-width: 48rem;
+    font-size: 1.6rem;
+  }
 
   .ba-hero__stats     { gap: 1.8rem; padding-top: 2rem; }
   .ba-stat__value     { font-size: 2.4rem; }

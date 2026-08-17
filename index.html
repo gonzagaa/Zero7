@@ -25,7 +25,7 @@
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=v48-comunidade-wpp-nav-ago13">
+  <link rel="stylesheet" href="./css/index.css?v=v53-cachebust-ago17">
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
@@ -249,8 +249,8 @@
     </div>
 
    <a href="#plan">
-      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK ALAVANCAGEM.avif" alt="">
-      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE ALAVANCAGEM.avif" alt="">
+      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK VOUCHER.avif" alt="">
+      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE VOUCHER.avif" alt="">
     </a>
   </div>
 
@@ -401,6 +401,14 @@
     </div>
   </section>
 
+  <!-- ============================================================
+       SUBSTITUÍDA pela dobra #ba ("Conheça os Benefícios Zero7").
+
+       Mantida aqui comentada porque 3 benefícios não migraram para a
+       dobra nova: Aprovação Permanente, 60 dias de avaliação e
+       Educacional. Se não forem reaproveitados, pode apagar o bloco.
+       ============================================================ -->
+  <!--
   <section id="cards">
     <img class="bgsection" src="./assets/bg2.webp" alt="">
 
@@ -502,6 +510,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <section id="topicos">
     <img loading="lazy" decoding="async" aria-hidden="true" class="bgsection" src="./assets/bg planos white.avif" alt="">
@@ -638,21 +647,6 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       DESATIVADA TEMPORARIAMENTE — dobra "Formando a próxima geração
-       de traders" (Blackarrow Academy). Ainda não está pronta.
-
-       Envolvida por um elemento template em vez de comentada: o bloco
-       tem comentários internos e comentário HTML não aninha, então o
-       primeiro fechamento de comentário de dentro encerraria o de fora
-       e metade da dobra voltaria a renderizar. O template é inerte do
-       mesmo jeito: não renderiza e não baixa os 3 vídeos.
-
-       PARA REATIVAR: apague a linha de abertura do template logo abaixo
-       e a de fechamento no fim da section. Nada mais precisa mudar.
-       ============================================================ -->
-  <template id="ba-desativado">
-
   <section id="ba">
     <img class="bgsection" loading="lazy" decoding="async" aria-hidden="true" src="./assets/bgsection v2.avif" alt="">
 
@@ -662,12 +656,17 @@
     </div>
 
     <div class="wrapper">
+      <header class="ba-header">
+        <h2>Conheça os <span>Benefícios Zero7</span></h2>
+      </header>
+
       <div class="ba-bento">
 
         <!-- Vídeo esquerda -->
         <div class="ba-card ba-card--video ba-card--video-a">
           <div class="ba-card__overlay"></div>
           <video autoplay muted loop playsinline preload="auto">
+            <source src="./assets/academy 1.webm" type="video/webm" />
             <source src="./assets/academy 1.mp4" type="video/mp4" />
           </video>
         </div>
@@ -675,8 +674,8 @@
         <!-- Card hero -->
         <div class="ba-card ba-card--hero">
           <div class="ba-card__inner">
-            <img class="ba-hero__logo" loading="lazy" decoding="async" src="./assets/logo academy.avif" alt="Blackarrow">
-            <h2 class="ba-hero__title">FORMANDO A PRÓXIMA GERAÇÃO DE TRADERS</h2>
+            <h2 class="ba-hero__title">ACADEMY PASS</h2>
+            <p class="ba-hero__desc">Seu crescimento com conteúdos, livros e treinamentos personalizados pra quem vive de Day Trade</p>
 
             <a class="z7-btnx" target="_blank" rel="noopener noreferrer" href="https://www.blackarrowtrading.com/pt/tools" role="button" aria-label="Ver todos os recursos">
               <span class="z7-btnx__bg" aria-hidden="true"></span>
@@ -690,6 +689,7 @@
             </a>
           </div>
           <video class="ba-hero__bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="./assets/TELA CARREGAMENTO.webm" type="video/webm" />
             <source src="./assets/TELA CARREGAMENTO.mp4" type="video/mp4" />
           </video>
         </div>
@@ -698,16 +698,46 @@
         <div class="ba-card ba-card--video ba-card--video-b">
           <div class="ba-card__overlay"></div>
           <video autoplay muted loop playsinline preload="auto">
+            <source src="./assets/academy 2.webm" type="video/webm" />
             <source src="./assets/academy 2.mp4" type="video/mp4" />
           </video>
         </div>
 
       </div>
+
+      <!-- Trio de benefícios — 3 colunas iguais -->
+      <div class="ba-trio">
+
+        <div class="ba-card ba-card--info">
+          <img class="ba-card__bg" loading="lazy" decoding="async" src="./assets/magnific_photo-a-30yearold-black-m_WMnzkqhcXe.png" alt="Alavancagem">
+          <div class="ba-card__overlay"></div>
+          <div class="ba-card__inner">
+            <h3 class="ba-info__title">Alavancagem</h3>
+            <p class="ba-info__desc">A maneira mais inteligente e segura de entrar no mercado de Day Trade. Na Zero7 você opera contas <span>20x maiores</span> em relação ao capital alocado em sua conta pessoal.</p>
+          </div>
+        </div>
+
+        <div class="ba-card ba-card--info">
+          <img class="ba-card__bg" loading="lazy" decoding="async" src="./assets/magnific_photo-a-man-wearing-a-blu_brHFYEu5Y2.png" alt="Conta real">
+          <div class="ba-card__overlay"></div>
+          <div class="ba-card__inner">
+            <h3 class="ba-info__title">Conta real</h3>
+            <p class="ba-info__desc">A estrutura da Zero7 foi desenvolvida para que os traders realmente operem em conta real e se tornem profissionais. Além de receberem prêmios como incentivo durante as fases de avaliação, no ambiente de conta real ficam com <span>100% dos lucros</span>.</p>
+          </div>
+        </div>
+
+        <div class="ba-card ba-card--info">
+          <img class="ba-card__bg" loading="lazy" decoding="async" src="./assets/o4rijghi4rugh4riuhjg.png" alt="Plano de carreira">
+          <div class="ba-card__overlay"></div>
+          <div class="ba-card__inner">
+            <h3 class="ba-info__title">Plano de carreira</h3>
+            <p class="ba-info__desc">Cresça aqui dentro da Zero7, <span>sem pagar mais nenhum real</span> por isso. A cada 3 meses consistentes de forma consecutiva e com lucro líquido em um dos nossos planos, solicite migração para o plano subsequente. A partir do Plano Sênior, a cada 3 meses consistentes de forma consecutiva e com lucro líquido, solicite aumento de 10 contratos, onde proporcionalmente aumentará seus limites de perda diária e total.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
-
-  </template>
-  <!-- /fim da dobra desativada -->
 
     <!-- PLANOS — Mini Índice/Dólar + Bitcoin (dobra unificada) -->
   <section id="plan" class="planos tema" data-asset="indice">
@@ -717,8 +747,8 @@
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
           <div class="cupom-wrap">
-            <img class="cupom" src="./assets/tarjapopup/cupom alavancagem white.avif" alt="">
-            <img class="cupom white" src="./assets/tarjapopup/cupom alavancagem black.avif" alt="" aria-hidden="true">
+            <img class="cupom" src="./assets/tarjapopup/CUPOM VOUCHER WHITE.avif" alt="">
+            <img class="cupom white" src="./assets/tarjapopup/CUPOM VOUCHER BLACK.avif" alt="" aria-hidden="true">
           </div>
       </div>
 
@@ -1813,11 +1843,11 @@ const prazosPromo = [
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=v48-comunidade-wpp-nav-ago13"></script>
-  <script src="./script/4selet.js?v=v48-comunidade-wpp-nav-ago13"></script>
-  <script src="./script/blackPlanos.js?v=v48-comunidade-wpp-nav-ago13"></script>
-  <script src="./script/planosAtivo.js?v=v48-comunidade-wpp-nav-ago13"></script>
-  <script src="./script/sectionFaq.js?v=v48-comunidade-wpp-nav-ago13" defer></script>
-  <script src="./script/sectionBa.js?v=v48-comunidade-wpp-nav-ago13" defer></script>
+  <script src="./script/global.js?v=v53-cachebust-ago17"></script>
+  <script src="./script/4selet.js?v=v53-cachebust-ago17"></script>
+  <script src="./script/blackPlanos.js?v=v53-cachebust-ago17"></script>
+  <script src="./script/planosAtivo.js?v=v53-cachebust-ago17"></script>
+  <script src="./script/sectionFaq.js?v=v53-cachebust-ago17" defer></script>
+  <script src="./script/sectionBa.js?v=v53-cachebust-ago17" defer></script>
 </body>
 </html>

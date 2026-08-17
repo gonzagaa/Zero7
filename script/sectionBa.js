@@ -8,7 +8,20 @@
   if (!document.getElementById('ba') || typeof gsap === 'undefined') return;
 
   // ── Estados iniciais (o GSAP sobrescreve na entrada) ───────────────────────
+  gsap.set('.ba-header', { opacity: 0, y: 24 });
   gsap.set('#ba .ba-card', { opacity: 0, y: 38, scale: .97 });
+
+  gsap.to('.ba-header', {
+    opacity: 1,
+    y: 0,
+    duration: .9,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '#ba',
+      start: 'top 78%',
+      toggleActions: 'play none none reverse',
+    },
+  });
 
   // ── Animações de entrada por ScrollTrigger ─────────────────────────────────
   const mm = gsap.matchMedia();
@@ -51,8 +64,8 @@
     // Conteúdo interno do hero — revelação em camadas
     gsap.fromTo(
       [
-        '.ba-hero__logo',
         '.ba-hero__title',
+        '.ba-hero__desc',
         '#ba .ba-card--hero .z7-btnx',
       ],
       { opacity: 0, y: 24 },
@@ -72,6 +85,22 @@
         },
       }
     );
+
+    // Trio de benefícios — stagger da esquerda para a direita
+    gsap.to('.ba-card--info', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: .9,
+      stagger: .1,
+      ease: 'power3.out',
+      clearProps: 'transform',
+      scrollTrigger: {
+        trigger: '#ba .ba-trio',
+        start: 'top 88%',
+        toggleActions: 'play none none reverse',
+      },
+    });
 
   });
 

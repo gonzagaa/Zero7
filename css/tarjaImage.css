@@ -41,9 +41,6 @@
 }
 
 .countdown--promo {
-      position: relative;
-      overflow: hidden;
-
       display: flex;
       justify-content: center;
       align-items: center;
@@ -51,45 +48,19 @@
       font-size: 1.5rem;
       font-weight: 800;
       letter-spacing: .3px;
-      color: #FFFAF1;
+      color: #000000;
 
-      /* gradiente quente com base no laranja #E84E00, deslizando
-         pra chamar atenção */
-      background: linear-gradient(100deg, #9e3000, #c63e00 30%, #E84E00 60%, #ff7a2e 100%);
-      background-size: 220% 100%;
-      animation: promoGradientShift 7s ease-in-out infinite;
+      /* timer branco, texto preto */
+      background: #ffffff;
 
       padding-block: .65rem;
       padding-inline: 1rem;
-      box-shadow: 0 2px 16px rgba(232, 78, 0, .45);
-}
-
-/* brilho diagonal que atravessa a tarja de tempos em tempos */
-.countdown--promo::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(
-        115deg,
-        transparent 40%,
-        rgba(255, 255, 255, .25) 50%,
-        transparent 60%
-      );
-      transform: translateX(-100%);
-      animation: promoShine 5s ease-in-out infinite;
-}
-
-.countdown--promo > * {
-      position: relative;
-      z-index: 1;
 }
 
 .countdown--promo div {
       display: flex;
       align-items: end;
-      color: #FFFAF1;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+      color: #000000;
 }
 
 .countdown--promo span:not(.label) {
@@ -116,12 +87,11 @@
 }
 
 .tarjaImage p.text {
-    color: #FFFAF1;
+    color: #000000;
     font-size: 1.25rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .6px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
     display: inline-flex;
     align-items: center;
     gap: .55rem;
@@ -134,32 +104,18 @@
       width: 9px;
       height: 9px;
       border-radius: 50%;
-      background: #FFFAF1;
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, .8);
+      background: #000000;
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, .6);
       animation: promoDot 1.6s ease-out infinite;
 }
 
-@keyframes promoGradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-}
-
-@keyframes promoShine {
-      0%   { transform: translateX(-100%); }
-      55%  { transform: translateX(100%); }
-      100% { transform: translateX(100%); }
-}
-
 @keyframes promoDot {
-      0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, .75); }
-      70%  { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(0, 0, 0, .55); }
+      70%  { box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-      .countdown--promo,
-      .countdown--promo::before,
       .tarjaImage p.text::before {
             animation: none;
       }
