@@ -28,6 +28,10 @@
 .planos .cupom-wrap > .cupom {
     grid-area: 1 / 1;
     transition: opacity 500ms ease;
+
+    /* compensa o desalinhamento da arte do cupom (voucher), que vem com
+       respiro assimétrico à esquerda — ajustar aqui se a arte mudar */
+    margin-left: -.75rem;
 }
 
 #plan[data-asset="indice"] .cupom.white,
