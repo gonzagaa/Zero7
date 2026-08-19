@@ -254,12 +254,9 @@
     </a>
   </div>
 
-  <!-- POPUP DESATIVADO. Para reativar: descomente o bloco abaixo e coloque a
-       arte em ./assets/tarjapopup/popup.avif (a anterior foi removida das
-       assets). O JS (global.js, busca "popupOverlay") e o CSS (css/popup.css)
-       ficam prontos — o script se desativa sozinho enquanto o bloco estiver
-       comentado. Delay de abertura: setTimeout no global.js (4000ms).
-
+  <!-- Popup promo: abre sozinho 4s após o acesso (js em global.js, busca
+       "popupOverlay"; estilos em css/popup.css). Para desativar, basta
+       comentar este bloco — o script se desliga sozinho. -->
   <div class="popupOverlay" id="popupOverlay" role="dialog" aria-modal="true" aria-label="Promoção">
     <div class="popupContent" id="popupContent">
       <button id="popupClose" class="popupClose" aria-label="Fechar popup">
@@ -269,11 +266,10 @@
         </svg>
       </button>
       <a href="#plan" aria-label="Ver planos da promoção">
-        <img decoding="async" src="./assets/tarjapopup/popup.avif" alt="Promoção Zero7">
+        <img decoding="async" src="./assets/tarjapopup/POP-UP-REINICIO.avif" alt="Promoção Zero7">
       </a>
     </div>
   </div>
-  -->
 
   <nav data-aos="fade-down" id="navigation" class="">
     <div class="wrapper">
