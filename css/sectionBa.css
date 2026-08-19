@@ -275,7 +275,7 @@
   pointer-events: none;
 }
 
-/* scrim sobre o vídeo para manter logo, título e botão legíveis */
+/* scrim sobre o vídeo para manter título e descrição legíveis */
 .ba-card--hero::after {
   content: "";
   position: absolute;
@@ -319,11 +319,6 @@
   line-height: 1.45;
   color: rgba(255,255,255,.68);
   text-shadow: 0 .2rem 1.2rem rgba(0,2,5,.9);
-}
-
-/* Botão da dobra usa o componente .z7-btnx global */
-.ba-card--hero .z7-btnx {
-  align-self: center;
 }
 
 /* Barra de stats */

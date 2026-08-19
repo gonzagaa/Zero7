@@ -66,7 +66,6 @@
       [
         '.ba-hero__title',
         '.ba-hero__desc',
-        '#ba .ba-card--hero .z7-btnx',
       ],
       { opacity: 0, y: 24 },
       {
@@ -76,7 +75,6 @@
         duration: .9,
         delay: .55,
         ease: 'power3.out',
-        // libera o transform para o botão .z7-btnx voltar às animações próprias
         clearProps: 'transform',
         scrollTrigger: {
           trigger: '.ba-card--hero',
