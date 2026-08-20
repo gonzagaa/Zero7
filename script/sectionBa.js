@@ -1,11 +1,62 @@
 /* ============================================================
-   Section #BA — Blackarrow Showcase
-   GSAP + ScrollTrigger · tilt e spotlight no mouse
+   Section #BA — Academy Pass + benefícios
+   Autoplay dos vídeos · GSAP/ScrollTrigger · revelação dos cards
    ============================================================ */
 (function () {
   'use strict';
 
-  if (!document.getElementById('ba') || typeof gsap === 'undefined') return;
+  const secao = document.getElementById('ba');
+  if (!secao) return;
+
+  // ── Autoplay dos vídeos ────────────────────────────────────────────────────
+  // O atributo autoplay sozinho falha muito no mobile: modo de baixo consumo,
+  // economia de dados e o limite de vídeos decodificados ao mesmo tempo fazem
+  // o navegador recusar em silêncio, e não há nova tentativa. Aqui a
+  // reprodução é pedida de novo em cada momento em que costuma ser liberada.
+  const videos = secao.querySelectorAll('video');
+
+  const tocar = (v) => {
+    // por propriedade, e não só por atributo: é o que alguns navegadores
+    // conferem antes de liberar o autoplay
+    v.muted = true;
+    v.playsInline = true;
+    const p = v.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  };
+
+  videos.forEach(v => {
+    if (v.readyState >= 2) tocar(v);
+    v.addEventListener('loadeddata', () => tocar(v));
+    v.addEventListener('canplay', () => tocar(v));
+  });
+
+  // Vários navegadores só liberam quando o vídeo está de fato visível, e
+  // pausar o que saiu da tela devolve decodificador para os que ficaram.
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entradas => {
+      entradas.forEach(e => {
+        if (e.isIntersecting) tocar(e.target);
+        else e.target.pause();
+      });
+    }, { threshold: .1 });
+
+    videos.forEach(v => io.observe(v));
+  }
+
+  // Volta a tocar ao retomar a aba
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) videos.forEach(tocar);
+  });
+
+  // Último recurso: a primeira interação do usuário destrava a reprodução
+  ['touchstart', 'click', 'scroll'].forEach(ev => {
+    window.addEventListener(ev, () => videos.forEach(tocar), {
+      once: true,
+      passive: true,
+    });
+  });
+
+  if (typeof gsap === 'undefined') return;
 
   // ── Estados iniciais (o GSAP sobrescreve na entrada) ───────────────────────
   gsap.set('.ba-header', { opacity: 0, y: 24 });

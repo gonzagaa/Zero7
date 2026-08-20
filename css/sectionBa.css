@@ -133,11 +133,11 @@
 }
 
 /* ------------------------------------------------------------------
-   Bento grid — mobile default (flex, empilhado)
+   Bento grid — mobile: hero em cima, dois vídeos lado a lado embaixo
    ------------------------------------------------------------------ */
 .ba-bento {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
 }
 
@@ -530,31 +530,30 @@
 }
 
 /* ------------------------------------------------------------------
-   Ordem dos cards no mobile
+   Posicionamento até 1079px — hero em cima ocupando as duas colunas,
+   os dois vídeos lado a lado na linha de baixo.
+   Placement explícito em vez de "order": com order, o bloco de tablet
+   precisava zerá-lo e a ordem do DOM (vídeo-a, hero, vídeo-b) voltava
+   a valer, quebrando o auto-placement.
    ------------------------------------------------------------------ */
-.ba-card--hero    { order: 1; }
-.ba-card--video-a { order: 2; }
-.ba-card--video-b { order: 3; }
+.ba-card--hero    { grid-column: 1 / span 2; grid-row: 1; }
+.ba-card--video-a { grid-column: 1; grid-row: 2; }
+.ba-card--video-b { grid-column: 2; grid-row: 2; }
 
 /* ------------------------------------------------------------------
    Tablet 640–1079px
    ------------------------------------------------------------------ */
 @media (min-width: 640px) and (max-width: 1079px) {
   .ba-bento {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 1.75rem;
   }
 
   .ba-card--hero {
-    grid-column: 1 / span 2;
-    order: unset;
     min-height: 57.5rem;
   }
 
   .ba-card--video-a,
   .ba-card--video-b {
-    order: unset;
     min-height: 37.5rem;
   }
 
@@ -603,11 +602,10 @@
     font-size: 1.7rem;
   }
 
-  /* Limpa a ordenação de mobile */
+  /* Altura passa a ser definida pela linha do grid */
   .ba-card--video-a,
   .ba-card--hero,
   .ba-card--video-b {
-    order: unset;
     min-height: unset;
   }
 
