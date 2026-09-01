@@ -222,7 +222,7 @@
 
 <body id="body" class="smooth-scroll-wrapper">
 
-  <!-- Tarja promo (timer resetando a cada 24h até 31/ago — datas em
+  <!-- Tarja promo (timer resetando a cada 24h até 30/set — datas em
        prazosPromo, no script do countdown no fim da página). Para desativar,
        basta comentar este bloco: o script se desliga sozinho e o nav volta
        ao topo automaticamente. -->
@@ -249,8 +249,8 @@
     </div>
 
    <a href="#plan">
-      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK AVALIACAO.avif" alt="">
-      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE AVALIACAO.avif" alt="">
+      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK INDEPENDENCIA.avif" alt="">
+      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE INDEPENDENCIA.avif" alt="">
     </a>
   </div>
 
@@ -745,8 +745,8 @@
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
           <div class="cupom-wrap">
-            <img class="cupom" src="./assets/tarjapopup/CUPOM WHITE AVALIACAO.avif" alt="">
-            <img class="cupom white" src="./assets/tarjapopup/CUPOM BLACK AVALIACAO.avif" alt="" aria-hidden="true">
+            <img class="cupom" src="./assets/tarjapopup/CUPOM WHITE INDEPENDENCIA.avif" alt="">
+            <img class="cupom white" src="./assets/tarjapopup/CUPOM BLACK INDEPENDENCIA.avif" alt="" aria-hidden="true">
           </div>
       </div>
 
@@ -1676,37 +1676,41 @@
   <script>
 /* Countdown da tarja promo (.tarjaImage). O timer "reseta" a cada 24h: pega
    sempre o próximo prazo futuro de prazosPromo (um por dia, 23:59:59). Após
-   o último prazo (31/ago), tudo se desliga sozinho e o nav volta ao topo.
+   o último prazo (30/set), tudo se desliga sozinho e o nav volta ao topo.
    Se o bloco .tarjaImage for comentado, o `if (!root) return` abaixo encerra
    o script sem efeito. */
 (() => {
 const prazosPromo = [
-  new Date("2026-08-06T23:59:59-03:00"),
-  new Date("2026-08-07T23:59:59-03:00"),
-  new Date("2026-08-08T23:59:59-03:00"),
-  new Date("2026-08-09T23:59:59-03:00"),
-  new Date("2026-08-10T23:59:59-03:00"),
-  new Date("2026-08-11T23:59:59-03:00"),
-  new Date("2026-08-12T23:59:59-03:00"),
-  new Date("2026-08-13T23:59:59-03:00"),
-  new Date("2026-08-14T23:59:59-03:00"),
-  new Date("2026-08-15T23:59:59-03:00"),
-  new Date("2026-08-16T23:59:59-03:00"),
-  new Date("2026-08-17T23:59:59-03:00"),
-  new Date("2026-08-18T23:59:59-03:00"),
-  new Date("2026-08-19T23:59:59-03:00"),
-  new Date("2026-08-20T23:59:59-03:00"),
-  new Date("2026-08-21T23:59:59-03:00"),
-  new Date("2026-08-22T23:59:59-03:00"),
-  new Date("2026-08-23T23:59:59-03:00"),
-  new Date("2026-08-24T23:59:59-03:00"),
-  new Date("2026-08-25T23:59:59-03:00"),
-  new Date("2026-08-26T23:59:59-03:00"),
-  new Date("2026-08-27T23:59:59-03:00"),
-  new Date("2026-08-28T23:59:59-03:00"),
-  new Date("2026-08-29T23:59:59-03:00"),
-  new Date("2026-08-30T23:59:59-03:00"),
-  new Date("2026-08-31T23:59:59-03:00"),
+  new Date("2026-09-01T23:59:59-03:00"),
+  new Date("2026-09-02T23:59:59-03:00"),
+  new Date("2026-09-03T23:59:59-03:00"),
+  new Date("2026-09-04T23:59:59-03:00"),
+  new Date("2026-09-05T23:59:59-03:00"),
+  new Date("2026-09-06T23:59:59-03:00"),
+  new Date("2026-09-07T23:59:59-03:00"),
+  new Date("2026-09-08T23:59:59-03:00"),
+  new Date("2026-09-09T23:59:59-03:00"),
+  new Date("2026-09-10T23:59:59-03:00"),
+  new Date("2026-09-11T23:59:59-03:00"),
+  new Date("2026-09-12T23:59:59-03:00"),
+  new Date("2026-09-13T23:59:59-03:00"),
+  new Date("2026-09-14T23:59:59-03:00"),
+  new Date("2026-09-15T23:59:59-03:00"),
+  new Date("2026-09-16T23:59:59-03:00"),
+  new Date("2026-09-17T23:59:59-03:00"),
+  new Date("2026-09-18T23:59:59-03:00"),
+  new Date("2026-09-19T23:59:59-03:00"),
+  new Date("2026-09-20T23:59:59-03:00"),
+  new Date("2026-09-21T23:59:59-03:00"),
+  new Date("2026-09-22T23:59:59-03:00"),
+  new Date("2026-09-23T23:59:59-03:00"),
+  new Date("2026-09-24T23:59:59-03:00"),
+  new Date("2026-09-25T23:59:59-03:00"),
+  new Date("2026-09-26T23:59:59-03:00"),
+  new Date("2026-09-27T23:59:59-03:00"),
+  new Date("2026-09-28T23:59:59-03:00"),
+  new Date("2026-09-29T23:59:59-03:00"),
+  new Date("2026-09-30T23:59:59-03:00"),
 ];
 
   const root = document.getElementById("countdownPromo");
