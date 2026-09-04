@@ -451,6 +451,86 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 
 /* Bandeira do Brasil (backdrop do card COPA/Sênior) removida. */
 
+/* ===== Tarja de destaque dentro do card Sênior =====
+   "Nossos traders mais positivos operam esse plano" — dourado/laranja.
+   Posicionamento ABSOLUTE dentro do card: ocupa o espaço vazio entre o
+   título "SÊNIOR" (que flutua com top:-4%) e o bloco .topics — assim NÃO
+   soma altura ao card e ele mantém a mesma altura dos outros planos. */
+.planos .card--copa .card-tarja {
+    position: absolute;
+    top: 4.2rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    z-index: 2;
+
+    padding: .85rem 1.4rem;
+
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    text-shadow:
+        0 1px 2px rgba(80, 40, 0, .75),
+        0 0 6px rgba(0, 0, 0, .25);
+
+    background: linear-gradient(100deg,
+        #7a4a00 0%,
+        #b8730c 18%,
+        #e8951b 38%,
+        #ffb830 56%,
+        #ffd166 72%,
+        #b8730c 100%);
+    background-size: 220% 100%;
+    animation: seniorTarjaShift 9s ease-in-out infinite;
+
+    border-radius: 1rem;
+    box-shadow:
+        inset 0 -1px 0 rgba(90, 55, 0, .55),
+        inset 0 1px 0 rgba(255, 245, 200, .55),
+        0 6px 22px rgba(255, 168, 40, .40),
+        0 0 0 1px rgba(120, 75, 0, .35);
+
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* faixa de brilho diagonal cruzando a tarja (efeito "metal polido") */
+.planos .card--copa .card-tarja::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg,
+        transparent 38%,
+        rgba(255, 255, 255, .55) 50%,
+        transparent 62%);
+    transform: translateX(-100%);
+    animation: seniorTarjaShine 5.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes seniorTarjaShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes seniorTarjaShine {
+    0%   { transform: translateX(-100%); }
+    55%  { transform: translateX(100%); }
+    100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .planos .card--copa .card-tarja,
+    .planos .card--copa .card-tarja::before {
+        animation: none;
+    }
+}
+
 /* ===== Variantes de cor verde (escopadas ao card promo) ===== */
 .planos .card.card--promo {
     --z7-green-dark: #046b3a;
