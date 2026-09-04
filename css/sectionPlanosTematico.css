@@ -447,6 +447,35 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 .planos .card.card--copa {
     position: relative;
     isolation: isolate;
+
+    /* borda dourada substituindo o white 30% padrão */
+    border-color: rgba(255, 194, 90, .55);
+
+    /* halo dourado externo em 3 camadas + sombra de profundidade */
+    box-shadow:
+        0 0 0 1px rgba(255, 209, 102, .40),
+        0 0 22px rgba(255, 184, 48, .32),
+        0 0 60px rgba(232, 149, 27, .26),
+        0 14px 42px rgba(0, 0, 0, .38);
+}
+
+/* vignette dourada sutil no topo interno — dá aquele "banho de luz" de
+   plano premium sem tapar conteúdo. z-index:-1 fica contido pelo
+   isolation:isolate, então entra entre o background do card e o conteúdo. */
+.planos .card.card--copa::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: 3.5rem 3.5rem 0 0;
+    background: radial-gradient(ellipse at 50% 0%,
+        rgba(255, 184, 48, .22) 0%,
+        rgba(232, 149, 27, .10) 35%,
+        transparent 72%);
 }
 
 /* Bandeira do Brasil (backdrop do card COPA/Sênior) removida. */
