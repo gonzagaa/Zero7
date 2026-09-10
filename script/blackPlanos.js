@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v63-senior-glow-set04c";
+  const DATA_URL = "./script/planos.json?v=v66-planos-set10";
 
   let currentMode = null;
   let cache = null;
