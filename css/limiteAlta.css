@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Limite de perda total aumentado — destaque "cotação em alta"
+
+   O valor novo fica verde com a seta ▲. A entrada animada (valor antigo →
+   piscada vermelha → contagem até o novo) é do script/limiteAlta.js, que só
+   troca as classes de estado abaixo; sem JS ou com movimento reduzido, o
+   card já nasce no estado final.
+
+   Para tirar o destaque: remover este arquivo e o script, o @import no
+   index.css, a <script> no index.html e a marcação .limite-alta dos cards.
+   ========================================================================== */
+
+.limite-alta {
+    --alta: #2fe38b;
+    --alta-fundo: rgba(47, 227, 139, .09);
+    --alta-borda: rgba(47, 227, 139, .40);
+    --queda: #ff5a5f;
+    --queda-fundo: rgba(255, 90, 95, .14);
+    --queda-borda: rgba(255, 90, 95, .55);
+
+    transition: background-color 350ms ease, border-color 350ms ease;
+}
+
+/* superfície clara (seção Bitcoin): tons mais escuros para manter contraste */
+.planos.white .limite-alta {
+    --alta: #0a8048;
+    --alta-fundo: rgba(10, 128, 72, .07);
+    --alta-borda: rgba(10, 128, 72, .35);
+    --queda: #d0242c;
+    --queda-fundo: rgba(208, 36, 44, .07);
+    --queda-borda: rgba(208, 36, 44, .40);
+}
+
+/* caixa: verde no estado final, vermelha na piscada, neutra no valor antigo */
+.planos .card .topics .topic-box.limite-alta:not(.is-antigo) {
+    background: var(--alta-fundo);
+    border-color: var(--alta-borda);
+}
+
+.planos .card .topics .topic-box.limite-alta.is-queda {
+    background: var(--queda-fundo);
+    border-color: var(--queda-borda);
+}
+
+.limite-alta .topic-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------- valor e seta ---------- */
+.limite-alta__valor {
+    color: var(--alta);
+    font-variant-numeric: tabular-nums;
+    transition: color 250ms ease;
+}
+
+.limite-alta__seta {
+    flex: none;
+    width: .72em;
+    height: .6em;
+    margin-right: .32em;
+    fill: var(--alta);
+    filter: drop-shadow(0 0 .35em var(--alta-borda));
+    transition: width 300ms ease, margin 300ms ease, opacity 300ms ease, transform 300ms ease;
+}
+
+/* valor antigo: cor normal do card e sem seta */
+.limite-alta.is-antigo .limite-alta__valor {
+    color: inherit;
+}
+
+.limite-alta.is-antigo .limite-alta__seta,
+.limite-alta.is-queda .limite-alta__seta {
+    width: 0;
+    margin-right: 0;
+    opacity: 0;
+    transform: translateY(.35em);
+}
+
+/* piscada vermelha antes de subir */
+.limite-alta.is-queda .limite-alta__valor {
+    color: var(--queda);
+}
+
+/* chegou no valor novo: um pulso verde em volta da caixa */
+.limite-alta.is-alta {
+    animation: limiteAltaPulso 1.1s ease-out;
+}
+
+/* parado no valor novo, a seta fica "respirando" para cima */
+.limite-alta:not(.is-antigo):not(.is-queda):not(.is-subindo) .limite-alta__seta {
+    animation: limiteAltaSeta 2.6s ease-in-out infinite;
+}
+
+@keyframes limiteAltaPulso {
+    from { box-shadow: 0 0 0 0 var(--alta-borda); }
+    to   { box-shadow: 0 0 0 .9rem transparent; }
+}
+
+@keyframes limiteAltaSeta {
+    0%, 55%, 100% { transform: translateY(0); }
+    25%           { transform: translateY(-.18em); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .limite-alta,
+    .limite-alta__valor,
+    .limite-alta__seta {
+        transition: none;
+    }
+
+    .limite-alta,
+    .limite-alta .limite-alta__seta {
+        animation: none !important;
+    }
+}
