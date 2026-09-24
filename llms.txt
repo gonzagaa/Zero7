@@ -33,7 +33,7 @@ navigation:
     - title: "Quem Somos"
       url: "https://zero7.com.br/quem-somos"
     - title: "Blog"
-      url: "https://zero7.com.br/blog/"
+      url: "https://blog.zero7.com.br/"
     - title: "Nossos Planos"
       url: "https://zero7.com.br/home#planos"
     - title: "Regulamento"
