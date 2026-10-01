@@ -1,7 +1,7 @@
 /* /script/blackPlanos.js — V4 (três modos: 30dias | 60dias | reinicio) */
 
 (function () {
-  const DATA_URL = "./script/planos.json?v=v93-timer-blue-set10";
+  const DATA_URL = "./script/planos.json?v=v94-outubro-out01";
 
   let currentMode = null;
   let cache = null;
