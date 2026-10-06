@@ -6,21 +6,21 @@
 
     display: flex;
       justify-content: center;
-      gap: 5px;
+      gap: var(--esp-1);
 }
 
 .countdown.dois span {
-    font-size: 1.3rem;
-    color: #fff;
+    font-size: var(--fs-400);
+    color: var(--cor-titulo);
 }
 
 .countdown.dois span {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: var(--fs-400);
+    font-weight: var(--peso-semi);
 }
 
 .countdown.dois span.label {
-    font-size: 1.1rem;
+    font-size: var(--corpo-legado-200);
 }
 
 @media (min-width: 1080px) {
@@ -30,10 +30,10 @@
     }
 
     .countdown.dois span {
-        font-size: 1.8rem;
+        font-size: var(--corpo-legado-750);
     }
 
     .countdown.dois span.label {
-        font-size: 1.4rem;
+        font-size: var(--fs-500);
     }
 }

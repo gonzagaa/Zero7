@@ -1,0 +1,4 @@
+# dist/ é gerado pelo build (scripts/build.mjs) sempre em LF; sem esta linha,
+# o autocrlf do git re-normaliza e o npm run check acusa diff fantasma de
+# fim-de-linha a cada rebuild.
+dist/** -text

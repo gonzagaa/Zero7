@@ -3,58 +3,622 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="./assets/favicon zero7.webp" type="image/x-icon">
-  <link href="https://fonts.cdnfonts.com/css/ncs-radhiumz" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/tt-fors-trial" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Cor da barra do sistema no celular (iOS 15+ e Android): sem isto, o
+       Safari puxa a cor mais evidente do topo da página — com o timer branco
+       da tarja lá em cima, a faixa do relógio e da bateria ficava branca. -->
+  <meta name="theme-color" content="#000205">
 
-  <link rel="canonical" href="https://zero7.com.br/home">
+  <link rel="shortcut icon" href="./assets/favicon zero7.webp" type="image/x-icon">
+
+  <link rel="canonical" href="https://zero7.com.br/home/">
 
   <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', 'GTM-KCJQPMC');</script>
+  <!-- C5 (aprovado por Gustavo; o B5 pela gestora): o GTM só entra na
+       PRIMEIRA INTERAÇÃO — pointerdown, touchstart, keydown, scroll ou
+       mousemove (o mousemove dá segundos de folga no desktop antes de
+       qualquer clique). Sem LCP, sem timer, sem load: quem não interage não
+       carrega tag NENHUMA — e deixa de ser contado; o PageView server-side
+       do Meta (sendCapiPageView, backend próprio, intocado) continua
+       contando esses. O dataLayer segue nascendo AQUI, antes de tudo: push
+       anterior fica enfileirado e o container processa na chegada. Páginas
+       de obrigado intocadas, com o snippet original. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    (function () {
+      var injetado = false;
+      var EVENTOS = ['pointerdown', 'touchstart', 'keydown', 'scroll', 'mousemove'];
+      var OPTS = { once: true, passive: true, capture: true };
+      function injetar() {
+        if (injetado) return;
+        injetado = true;
+        for (var i = 0; i < EVENTOS.length; i++) window.removeEventListener(EVENTOS[i], injetar, OPTS);
+        var j = document.createElement('script');
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-KCJQPMC';
+        document.head.appendChild(j);
+      }
+      for (var i = 0; i < EVENTOS.length; i++) window.addEventListener(EVENTOS[i], injetar, OPTS);
+    })();
+  </script>
   <!-- End Google Tag Manager -->
 
-  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.14/dist/lenis.css" />
 
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="./css/index.css?v=v94-outubro-out01">
+  <style id="css-critico">@font-face{font-family:NCS Radhiumz;font-style:normal;font-weight:400;font-display:swap;src:url(../css/fonts/NCS%20Radhiumz.hero.woff2?v=0e788b94) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:300;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Light.hero.woff2?v=fd1b1135) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:400;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Regular.hero.woff2?v=840598f7) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:500;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Medium.hero.woff2?v=dc8c5375) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:600;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20DemiBold.hero.woff2?v=56adbf06) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:700;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Bold.hero.woff2?v=f479efb1) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:800;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20ExtraBold.hero.woff2?v=ab6e9c88) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
+@font-face{font-family:swiper-icons;src:url(data:application/font-woff;charset=utf-8;base64,\ d09GRgABAAAAAAZgABAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAGRAAAABoAAAAci6qHkUdERUYAAAWgAAAAIwAAACQAYABXR1BPUwAABhQAAAAuAAAANuAY7+xHU1VCAAAFxAAAAFAAAABm2fPczU9TLzIAAAHcAAAASgAAAGBP9V5RY21hcAAAAkQAAACIAAABYt6F0cBjdnQgAAACzAAAAAQAAAAEABEBRGdhc3AAAAWYAAAACAAAAAj//wADZ2x5ZgAAAywAAADMAAAD2MHtryVoZWFkAAABbAAAADAAAAA2E2+eoWhoZWEAAAGcAAAAHwAAACQC9gDzaG10eAAAAigAAAAZAAAArgJkABFsb2NhAAAC0AAAAFoAAABaFQAUGG1heHAAAAG8AAAAHwAAACAAcABAbmFtZQAAA/gAAAE5AAACXvFdBwlwb3N0AAAFNAAAAGIAAACE5s74hXjaY2BkYGAAYpf5Hu/j+W2+MnAzMYDAzaX6QjD6/4//Bxj5GA8AuRwMYGkAPywL13jaY2BkYGA88P8Agx4j+/8fQDYfA1AEBWgDAIB2BOoAeNpjYGRgYNBh4GdgYgABEMnIABJzYNADCQAACWgAsQB42mNgYfzCOIGBlYGB0YcxjYGBwR1Kf2WQZGhhYGBiYGVmgAFGBiQQkOaawtDAoMBQxXjg/wEGPcYDDA4wNUA2CCgwsAAAO4EL6gAAeNpj2M0gyAACqxgGNWBkZ2D4/wMA+xkDdgAAAHjaY2BgYGaAYBkGRgYQiAHyGMF8FgYHIM3DwMHABGQrMOgyWDLEM1T9/w8UBfEMgLzE////P/5//f/V/xv+r4eaAAeMbAxwIUYmIMHEgKYAYjUcsDAwsLKxc3BycfPw8jEQA/gZBASFhEVExcQlJKWkZWTl5BUUlZRVVNXUNTQZBgMAAMR+E+gAEQFEAAAAKgAqACoANAA+AEgAUgBcAGYAcAB6AIQAjgCYAKIArAC2AMAAygDUAN4A6ADyAPwBBgEQARoBJAEuATgBQgFMAVYBYAFqAXQBfgGIAZIBnAGmAbIBzgHsAAB42u2NMQ6CUAyGW568x9AneYYgm4MJbhKFaExIOAVX8ApewSt4Bic4AfeAid3VOBixDxfPYEza5O+Xfi04YADggiUIULCuEJK8VhO4bSvpdnktHI5QCYtdi2sl8ZnXaHlqUrNKzdKcT8cjlq+rwZSvIVczNiezsfnP/uznmfPFBNODM2K7MTQ45YEAZqGP81AmGGcF3iPqOop0r1SPTaTbVkfUe4HXj97wYE+yNwWYxwWu4v1ugWHgo3S1XdZEVqWM7ET0cfnLGxWfkgR42o2PvWrDMBSFj/IHLaF0zKjRgdiVMwScNRAoWUoH78Y2icB/yIY09An6AH2Bdu/UB+yxopYshQiEvnvu0dURgDt8QeC8PDw7Fpji3fEA4z/PEJ6YOB5hKh4dj3EvXhxPqH/SKUY3rJ7srZ4FZnh1PMAtPhwP6fl2PMJMPDgeQ4rY8YT6Gzao0eAEA409DuggmTnFnOcSCiEiLMgxCiTI6Cq5DZUd3Qmp10vO0LaLTd2cjN4fOumlc7lUYbSQcZFkutRG7g6JKZKy0RmdLY680CDnEJ+UMkpFFe1RN7nxdVpXrC4aTtnaurOnYercZg2YVmLN/d/gczfEimrE/fs/bOuq29Zmn8tloORaXgZgGa78yO9/cnXm2BpaGvq25Dv9S4E9+5SIc9PqupJKhYFSSl47+Qcr1mYNAAAAeNptw0cKwkAAAMDZJA8Q7OUJvkLsPfZ6zFVERPy8qHh2YER+3i/BP83vIBLLySsoKimrqKqpa2hp6+jq6RsYGhmbmJqZSy0sraxtbO3sHRydnEMU4uR6yx7JJXveP7WrDycAAAAAAAH//wACeNpjYGRgYOABYhkgZgJCZgZNBkYGLQZtIJsFLMYAAAw3ALgAeNolizEKgDAQBCchRbC2sFER0YD6qVQiBCv/H9ezGI6Z5XBAw8CBK/m5iQQVauVbXLnOrMZv2oLdKFa8Pjuru2hJzGabmOSLzNMzvutpB3N42mNgZGBg4GKQYzBhYMxJLMlj4GBgAYow/P/PAJJhLM6sSoWKfWCAAwDAjgbRAAB42mNgYGBkAIIbCZo5IPrmUn0hGA0AO8EFTQAA);font-weight:400;font-style:normal}
+:root{--swiper-theme-color:#007aff}
+.swiper-backface-hidden .swiper-slide{transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
+:root{--swiper-navigation-size:44px}
+:root{--cor-titulo: #ffffff;--cor-corpo: rgba(255, 255, 255, .9);--cor-secundario: rgba(255, 255, 255, .7);--cor-desabilitado: rgba(255, 255, 255, .58);--cor-marca: #0080c9;--cor-titulo-inverso: #070c11;--cor-corpo-inverso: rgba(7, 12, 17, .78);--sup-fundo: #000205;--sup-card: #070c11;--sup-elevada: #081c31;--sup-clara: #f2fffb;--sup-ajuda: linear-gradient(130deg, #010b15, #01050b);--borda-sutil: rgba(255, 255, 255, .14);--borda-media: rgba(255, 255, 255, .3);--borda-dourada: rgba(255, 194, 90, .55);--borda-marca: rgba(0, 128, 201, .4);--borda-acesa: rgb(29 164 243 / .5);--vidro-claro: rgba(255, 255, 255, .18);--vidro-escuro: rgba(36, 36, 36, .18);--marca: #0080c9;--marca-escura: #023c83;--marca-clara: #1da4f3;--marca-gradiente: linear-gradient(to right, #023c83, #0080c9);--dourado: #ffb830;--dourado-claro: #ffd166;--dourado-escuro: #e8951b;--acento-wpp: #25d366;--acento-wpp-meio: #128c7e;--acento-wpp-fundo: #075e54;--acento-neon: #57ff6d;--raio-sm: 1rem;--raio-md: 2rem;--raio-lg: 3rem;--raio-xl: 5rem;--raio-circulo: 50%;--raio-pilula: 999rem;--raio-assinatura: var(--raio-md) 0 var(--raio-md) 0;--raio-assinatura-xl: var(--raio-xl) 0 var(--raio-xl) 0;--esp-1: .5rem;--esp-2: 1rem;--esp-3: 1.5rem;--esp-4: 2rem;--esp-5: 3rem;--esp-6: 4rem;--esp-7: 6rem;--esp-8: 8rem;--elev-1: 0 2px 8px rgba(0, 0, 0, .25);--elev-2: 0 20px 60px rgba(0, 0, 0, .35), 0 0 0 1px rgba(255, 255, 255, .06) inset;--elev-3: 0 30px 80px rgba(0, 0, 0, .45), 0 0 0 1px rgba(255, 255, 255, .1) inset;--glow-marca: 0 12px 30px rgba(0, 128, 201, .22), 0 0 24px rgba(0, 128, 201, .12);--glow-dourado: 0 0 0 1px rgba(255, 209, 102, .4), 0 0 22px rgba(255, 184, 48, .32), 0 0 60px rgba(232, 149, 27, .26), 0 14px 42px rgba(0, 0, 0, .38);--alvo-toque: 44px;--foco-largura: 2px;--foco-recuo: 3px;--foco-cor: var(--marca-clara);--foco-cor-inverso: var(--marca-escura);--dur-rapida: .15s;--dur-media: .2s;--curva-saida: cubic-bezier(.2, 0, 0, 1);--ls-rotulo: .05em;--fonte-display: "NCS Radhiumz", "NCS fallback", sans-serif;--fonte-corpo: "TT Fors Trial", "TT Fors fallback", sans-serif;--peso-leve: 300;--peso-normal: 400;--peso-medio: 500;--peso-semi: 600;--peso-forte: 700;--peso-black: 800;--peso-max: 900;--fs-300: 1.2rem;--fs-400: 1.3rem;--fs-500: 1.4rem;--fs-650: 1.6rem;--fs-850: 2rem;--fs-900: 2.2rem;--fs-1300: 3rem;--corpo-legado-050: .8rem;--corpo-legado-100: 1rem;--corpo-legado-150: 1.05rem;--corpo-legado-200: 1.1rem;--corpo-legado-250: 1.15rem;--corpo-legado-350: 1.25rem;--corpo-legado-450: 1.35rem;--corpo-legado-550: 1.5rem;--corpo-legado-600: 1.55rem;--corpo-legado-700: 1.7rem;--corpo-legado-725: 1.75rem;--corpo-legado-750: 1.8rem;--corpo-legado-800: 1.9rem;--corpo-legado-875: 2.1rem;--corpo-legado-925: 2.25rem;--corpo-legado-950: 2.4rem;--corpo-legado-1000: 2.5rem;--corpo-legado-1100: 2.6rem;--corpo-legado-1150: 2.7rem;--corpo-legado-1200: 2.8rem;--corpo-legado-1325: 3.2rem;--corpo-legado-1350: 3.4rem;--corpo-legado-1360: 3.5rem;--corpo-legado-1375: 3.6rem;--corpo-legado-1400: 3.75rem;--corpo-legado-1450: 4rem;--corpo-legado-1500: 4.2rem;--corpo-legado-1550: 4.5rem;--corpo-legado-1600: 4.6rem;--corpo-legado-1700: 5rem;--corpo-legado-1800: 5.2rem;--corpo-legado-1900: 6rem;--corpo-legado-2000: 7rem;--corpo-legado-2100: 8rem;--medida-texto: 56ch;--medida-heroi: 65ch}
+:root{--color-text: var(--cor-titulo);--primary-color: var(--marca);--secondy-color: var(--marca-escura);--orange-black: var(--sup-fundo);--orange-blac: #000b1c;--gradient: var(--marca-gradiente);--bg-black: var(--sup-fundo);--bg-white: var(--sup-clara);--nav-height: 7.2rem;--wpp-deep: var(--acento-wpp-fundo);--wpp-teal: var(--acento-wpp-meio);--wpp-green: var(--acento-wpp);--ncs: var(--fonte-display);--tts: var(--fonte-corpo);--z7-deep: var(--marca-escura);--z7-sky: var(--marca-clara);--z7-green-dark: #046b3a;--z7-green: #00c86f;--z7-green-light: #3cff9b;--z7-green-neon: #73ffb8}
+*{margin:0;padding:0;box-sizing:border-box;font-family:var(--tts)}
+:root{font-size:50%}
+html{scroll-behavior:smooth}
+html,body{width:100%;height:100%;text-align:center;background:var(--bg-black)}
+body{background:var(--bg-black)}
+button{cursor:url(),auto}
+ul{list-style:none}
+:root{--container-max: 1120px;--bp-sm: 640px;--bp-md: 768px;--bp-lg: 1080px;--bp-xl: 1600px}
+.wrapper{width:min(var(--container-max),100%);margin-inline:auto;padding-inline:2.4rem}
+@media (min-width: 1080px){:root{font-size:62.5%;--container-max: clamp(1120px, 92vw, 1456px)}}
+@media (min-width: 1600px){:root{--container-max: 1456px}}
+section{padding-block:8rem}
+html:not(.anim) [data-aos]{opacity:1!important;transform:none!important;visibility:visible!important}
+html{scroll-padding-bottom:120px}
+@media (prefers-reduced-motion: reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}}
+#home{background:var(--bg-black);overflow:hidden;position:relative;display:flex;justify-content:start;flex-direction:column;transition:all .2s ease-in-out;margin-bottom:0;padding-block:25%}
+#home .wrapper{position:relative;z-index:3;height:100%}
+#home .content{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%}
+#home .text{margin-top:70%;text-align:center;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
+#home h1{color:var(--cor-titulo);font-size:clamp(20px,3.9vw - 10px,40px);margin-top:1rem;margin-bottom:1rem;font-family:var(--ncs);text-transform:uppercase;font-weight:var(--peso-medio);line-height:1.2}
+#home h1 span{font-size:clamp(20px,3.9vw - 10px,40px);font-family:var(--ncs);color:var(--primary-color);min-width:50%;text-align:right}
+.reveal-wrapper{display:inline-block;position:relative;overflow:hidden;vertical-align:baseline;line-height:1;text-align:center;margin-bottom:-.6rem}
+.reveal-word{display:block;width:100%;white-space:pre;will-change:transform,opacity,filter}
+.reveal-word.is-back{position:absolute;left:0;top:0}
+#home p{font-size:var(--fs-400);font-weight:var(--peso-normal);color:var(--cor-secundario);line-height:1.4;max-width:var(--medida-heroi);text-wrap:pretty}
+#home a{width:100%}
+#home .image img{width:100%;height:auto}
+#home .image picture{display:contents}
+#home .image picture img{position:absolute;top:6%;left:50%;transform:translate(-50%);width:auto;max-width:100vw;height:auto;filter:saturate(140%)}
+@media (max-width: 639.98px){#home.boxpromotion .text{margin-top:60%}}
+@media (min-width: 1080px){body.home{padding-top:6rem}
+header#home{justify-content:center;position:relative;mask-image:linear-gradient(to top,#000 90%,transparent);padding-block:10%}
+header#home:after{content:"";position:absolute;width:100%;height:100%;background:linear-gradient(to top,#020000c9,#0000 50%);z-index:2;display:none}
+header#home:before{content:"";position:absolute;width:100%;height:100%;background:linear-gradient(to right,#000504,#0000 65%);z-index:1;display:none}
+header#home .image picture img{display:block;width:100%;position:absolute;top:0;right:0;left:auto;transform:none;max-width:none;filter:saturate(130%);mask-image:linear-gradient(to bottom,#000 60%,transparent)}
+header#home .content{text-align:center;align-items:center}
+header#home .text{margin-top:initial;margin-bottom:initial;width:100%;display:flex;flex-direction:column;position:relative;z-index:2;margin-top:30%}
+header#home .content h1{width:85%;line-height:1;color:var(--cor-titulo);margin-bottom:0}
+header#home .reveal-wrapper{margin-bottom:-8.8px}
+header#home .content h1 span{min-width:216px;text-align:center}
+header#home .content a{width:initial}
+header#home .content p{font-weight:var(--peso-medio);margin-top:1rem;font-size:var(--fs-650)}}
+@media (min-width: 1600px){header#home{padding-block:5%}
+header#home .image picture img{display:block;width:100%;position:absolute;top:0;right:0;left:auto;transform:none;max-width:none}
+header#home .content h1,header#home .content h1 span{font-size:clamp(52px,1.6vw + 31.2px,62.4px)}
+header#home .content h1 span{min-width:280.8px}
+header#home .reveal-wrapper{margin-bottom:-11.44px}
+header#home .content h1{width:85%}}
+@media (max-width: 1079.98px){#home h1,#home h1 span{font-size:min(4rem,calc((100vw - 2 * var(--esp-3)) / 13.47))}
+#home h1{text-wrap:balance;line-height:1.1}
+#home p{font-size:var(--fs-850)}}
+@media (max-width: 639.98px){#home .wrapper{padding-inline:var(--esp-3)}
+#home .text .z7-btnx{width:calc(100% - 2 * (2.4rem - var(--esp-3)));margin-inline:auto}
+#home .image picture img{top:13.5rem}
+#home.boxpromotion .text{margin-top:calc(14.75rem + 30.5vw)}}
+#divisa{position:relative;padding-top:0;padding-bottom:calc(var(--divisor-folga) + var(--candles-pico));overflow:hidden;--bg1: #00050a;--bg2: #000204;--blue1: #1da4f3;--blue2: #023c83;--radius-outer: 1.6rem;--radius-inner: 1.35rem;--border: 2px}
+#divisa .content{position:relative;z-index:1}
+#divisa .cards{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--esp-4)}
+#divisa .cards .borderCard{width:100%;padding:var(--border);border-radius:var(--radius-outer);position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(180deg,#ffffff0f,#fff0),linear-gradient(135deg,#1da4f38c,#023c8340,#00000059);box-shadow:0 2px #ffffff0f inset}
+#divisa .cards .borderCard:before{content:"";position:absolute;inset:-40%;z-index:0;background:radial-gradient(circle at var(--hot-x, 30%) var(--hot-y, 25%),rgba(29,164,243,.45) 0%,rgba(2,60,131,.22) 35%,rgba(0,0,0,0) 70%);filter:blur(28px);opacity:.75;transform:translateZ(0)}
+#divisa .cards .borderCard:after{content:"";position:absolute;inset:-2px;z-index:1;border-radius:inherit;background:conic-gradient(from var(--spin, 0deg),rgba(29,164,243,0) 0%,rgba(29,164,243,.95) 10%,rgba(255,255,255,.55) 14%,rgba(2,60,131,.65) 20%,rgba(29,164,243,0) 32%,rgba(29,164,243,0) 100%);filter:blur(10px);opacity:.55;animation:borderSpin 12s linear infinite;pointer-events:none}
+#divisa .cards .card{position:relative;z-index:2;width:100%;padding:2.2rem;padding-block:3.2rem;border-radius:var(--radius-inner);display:flex;align-items:center;flex-direction:column;text-align:center;background:radial-gradient(1200px 380px at 50% 0%,#1da4f31a,#1da4f300 55%),radial-gradient(900px 420px at 90% 25%,#023c8324,#023c8300 60%),repeating-linear-gradient(90deg,#ffffff06 0px 1px,#fff0 9px 16px),linear-gradient(180deg,#ffffff0d,#fff0 22%),linear-gradient(135deg,var(--bg1),var(--bg2));border:1px solid rgba(255,255,255,.06);box-shadow:0 1px #ffffff0f inset;overflow:hidden}
+#divisa .cards .card:before{content:"";position:absolute;inset:-60%;background:linear-gradient(115deg,#fff0 40%,#ffffff14,#fff0 60%);transform:translate(-35%) translateY(-10%);opacity:.55;animation:sheen 6.5s ease-in-out infinite;pointer-events:none}
+#divisa .cards .card:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,#0000 40%,#00000059);opacity:.9;pointer-events:none}
+#divisa .cards .borderCard.um{--hot-x: 22%;--hot-y: 30%}
+#divisa .cards .borderCard.dois{--hot-x: 50%;--hot-y: 18%}
+#divisa .cards .borderCard.tres{--hot-x: 78%;--hot-y: 32%}
+#divisa .cards .borderCard.dois .card{background:radial-gradient(700px 260px at 50% 0%,#1da4f31f,#1da4f300 60%),radial-gradient(900px 420px at 10% 30%,#023c8324,#023c8300 62%),repeating-linear-gradient(90deg,#ffffff06 0px 1px,#fff0 10px 18px),linear-gradient(180deg,#ffffff0d,#fff0 22%),linear-gradient(180deg,var(--bg1),var(--bg2))}
+#divisa .cards .card h3{font-size:var(--fs-1300);margin-top:1rem;line-height:.9;color:var(--cor-secundario);font-family:var(--ncs);text-transform:uppercase;letter-spacing:.02em}
+#divisa .cards .card h3 span{font-size:var(--corpo-legado-1500);background:linear-gradient(110deg,#6ad0ff 0%,var(--blue1) 35%,#2a67ff 65%,var(--blue2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 10px 20px rgba(29,164,243,.12))}
+#divisa .cards .card p{font-size:var(--corpo-legado-550);margin-top:1rem;font-weight:var(--peso-leve);color:var(--cor-secundario)}
+@keyframes borderSpin{0%{--spin: 0deg}to{--spin: 360deg}}
+@keyframes sheen{0%,to{transform:translate(-35%) translateY(-10%) rotate(.001deg);opacity:.45}50%{transform:translate(20%) translateY(8%) rotate(.001deg);opacity:.75}}
+@media (prefers-reduced-motion: reduce){#divisa .cards .borderCard:after,#divisa .cards .card:before{animation:none!important}}
+@media (min-width: 1080px){section#divisa{padding-top:0;margin-top:0;overflow:initial}
+section#divisa .cards{display:grid;grid-template-columns:1fr 1fr 1fr;width:100%;gap:var(--esp-6)}
+section#divisa .cards .card{padding:2.4rem;padding-block:5.2rem}
+section#divisa .cards .card h3{font-size:var(--fs-1300)}
+section#divisa .cards .card h3 span{font-size:var(--corpo-legado-1800)}
+section#divisa .cards .borderCard.um,section#divisa .cards .borderCard.tres{transform:translateY(-30%)}
+section#divisa .cards .borderCard{contain:layout paint;backface-visibility:hidden;transform:translateZ(0);will-change:transform;overflow:hidden}
+section#divisa .cards .card{backface-visibility:hidden;transform:translateZ(0)}
+section#divisa .cards .borderCard:before{inset:0;filter:none;opacity:.55;background:radial-gradient(circle at var(--hot-x, 30%) var(--hot-y, 25%),rgba(29,164,243,.35) 0%,rgba(29,164,243,.12) 25%,rgba(2,60,131,.08) 45%,rgba(0,0,0,0) 70%)}
+section#divisa .cards .borderCard:after{inset:-1px;filter:blur(4px);opacity:.55;background:conic-gradient(from 0deg,#1da4f300,#1da4f3f2 10%,#ffffff8c 14%,#023c83a6 20%,#1da4f300 32% 100%);will-change:transform;transform-origin:center center;transform:scale(1.03) translateZ(0);animation:borderSpinDesktopGPU 12s linear infinite!important}
+section#divisa .cards .card:before{animation:none!important;display:none}
+section#divisa .cards .card:after{opacity:.7}
+section#divisa .cards .card h3 span{filter:none;text-shadow:0 0 18px rgba(29,164,243,.1)}}
+#divisa .cards .card h3{font-variant-numeric:tabular-nums}
+@media (min-width: 1080px) and (prefers-reduced-motion: reduce){section#divisa .cards .borderCard:after{animation:none!important}}
+@keyframes borderSpinDesktopGPU{0%{transform:scale(1.03) rotate(0) translateZ(0)}to{transform:scale(1.03) rotate(360deg) translateZ(0)}}
+@keyframes borderSpinDesktopGPU{0%{transform:scale(1.035) rotate(0) translateZ(0)}to{transform:scale(1.035) rotate(360deg) translateZ(0)}}
+@media (max-width: 1079.98px){#divisa .cards .card p{font-size:var(--fs-850)}}
+#ano{display:inline-block;min-width:2.7em;text-align:center}
+#traders,#pagamentos{display:inline-block;min-width:2em;text-align:center}
+@media (min-width: 1080px) and (max-width: 1599.98px){section#divisa .cards .borderCard.tres .card h3{min-height:7.4rem}}
+#topicos{overflow:hidden;position:relative;border-radius:var(--raio-assinatura-xl)}
+#topicos:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(1200px 500px at 50% 0%,rgba(7,12,17,.1),transparent 60%),radial-gradient(900px 500px at 15% 90%,rgba(7,12,17,.08),transparent 65%),repeating-linear-gradient(135deg,rgba(7,12,17,.03) 0px,rgba(7,12,17,.03) 1px,transparent 1px,transparent 10px);mix-blend-mode:multiply;opacity:1}
+#topicos img.bgsection{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+#topicos .cards .card img{width:100%;height:auto;display:block;position:relative;z-index:2;border-bottom:1px solid rgba(255,255,255,.12);filter:saturate(1.03) contrast(1.03)}
+#depoimentos{overflow:hidden;position:relative}
+#depoimentos img.bgsection{position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;z-index:0;mask-image:linear-gradient(to bottom,#000 70%,transparent)}
+#depoimentos img.bgsection.desktop{display:none}
+#depoimentos:before,#depoimentos:after{content:"";position:absolute;width:100%;height:2px;top:0;left:0;right:0;background:linear-gradient(to right,transparent,#023c83,#0080c9,#023c83,transparent);z-index:2}
+#depoimentos:after{top:initial;bottom:0;display:none}
+#depoimentos .cards .card img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-media) var(--curva-saida),filter var(--dur-media) var(--curva-saida)}
+@media (min-width: 1080px){section#depoimentos img.bgsection.mobile{display:none}}
+#ba{position:relative;overflow:hidden;padding-block:10rem;background:var(--bg-black)}
+#ba img.bgsection{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.ba-card{position:relative;overflow:hidden;border-radius:var(--raio-md);border:.1rem solid rgba(29,164,243,.14);background:#000b1c8c;min-height:32rem}
+.ba-hero__bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;border-radius:inherit;pointer-events:none}
+.ba-card--hero:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 68% 58% at 50% 50%,rgba(0,2,5,.62) 0%,rgba(0,2,5,.24) 62%,transparent 100%),linear-gradient(to top,#00020580,#00040c29 45%,#000b1c42)}
+.ba-card--video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;border-radius:inherit}
+.planos{overflow:hidden;position:relative}
+.planos img.cupom{width:30rem;margin-bottom:6rem}
+.planos img.bg{position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;z-index:0}
+.planos:before,.planos:after{content:"";position:absolute;width:100%;height:2px;top:0;left:0;right:0;background:linear-gradient(to right,transparent,#023c83,#0080c9,#023c83,transparent);z-index:2}
+body section.planos .wrapper .swiper.mySwiper4{overflow:inherit}
+body section.planos .wrapper .swiper.mySwiper11{overflow:inherit}
+.planos .cupom{display:flex;width:100%;margin-top:2rem;gap:var(--esp-1);align-items:center}
+@media (max-width: 1079.98px){.planos .swiper-button-prev,.planos .swiper-button-next{display:none}}
+.planos .btn__label span{display:none}
+@media (min-width: 1080px){section.planos img.cupom{width:35rem;margin-bottom:5rem}
+body section.planos .wrapper .swiper.mySwiper4{overflow:hidden}
+body section.planos .wrapper .swiper.mySwiper11{overflow:hidden}
+section.planos .swiper:before,section.planos .swiper:after{content:"";position:absolute;top:0;width:20rem;height:100%;z-index:2;display:none}}
+.planos.tema:before,.planos.tema:after{content:"";position:absolute;width:100%;height:2px;top:0;left:0;right:0;background:linear-gradient(to right,transparent,#ffffff24,#ffffff,#ffffff1d,transparent);z-index:2}
+.textBotoes p{display:none}
+body:where(.anima-ociosas) .planos .card--copa .card-tarja:before{animation:seniorTarjaShine 5.5s ease-in-out infinite}
+body:where(.anima-ociosas) .planos .card--copa .card-tarja:after{animation:seniorTarjaDesliza 9s ease-in-out infinite}
+@keyframes seniorTarjaDesliza{0%{transform:translate(0)}50%{transform:translate(-54.5455%)}to{transform:translate(0)}}
+@keyframes seniorTarjaShine{0%{transform:translate(-100%)}55%{transform:translate(100%)}to{transform:translate(100%)}}
+.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto}
+.plano-asset[hidden]{display:none!important}
+#faq [hidden]{display:none!important}
+.faq__search-loading[hidden]{display:none}
+#faq .faq__categories .faq__category-card.is-escondido{display:none}
+@media (min-width: 1080px){#faq .faq__search:after{display:none}}
+#contato{position:relative;overflow:hidden}
+#contato img.bg{position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;z-index:0}
+#suporte .image img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block;transition:transform var(--dur-media) var(--curva-saida)}
+@media (min-width: 1080px){#suporte .image img{aspect-ratio:16 / 7;height:100%}}
+nav{display:flex;height:var(--nav-height);position:fixed;backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%);background-color:#17171746;border-radius:0;border:3px solid rgba(63,63,63,.125);width:100vw;z-index:100;transition:all .3s ease-in-out}
+nav .wrapper{display:flex;align-items:center;justify-content:space-between}
+nav button path{stroke:var(--color-text)}
+nav path{stroke:var(--color-text)}
+nav a.logo{width:initial;display:inline-flex;align-items:center;min-height:var(--alvo-toque)}
+nav .logo img{width:8rem;height:auto}
+nav button{background:none;border:none}
+nav .menu,nav .close-menu{position:fixed}
+body.menu-expanded{overflow:hidden}
+.menu,.close-menu,body.menu-expanded .open-menu{opacity:0;visibility:hidden}
+body.menu-expanded .menu,body.menu-expanded .close-menu{opacity:1;visibility:visible}
+.menu{transform:translate(100%)}
+body.menu-expanded .menu{top:0;right:-5%;backdrop-filter:blur(10px) saturate(180%);-webkit-backdrop-filter:blur(10px) saturate(180%);background-color:var(--sup-fundo);border-radius:0;border:1px solid rgba(63,63,63,.125);width:60vw;height:50vh;display:flex;flex-direction:column;justify-content:center;align-items:start;text-align:start;padding-left:2rem;padding-top:var(--nav-height);transition:transform .4s ease-out;transform:translateY(0)}
+body.menu-expanded nav{background:#000}
+.menu ul:nth-child(1){display:flex;flex-direction:column;gap:var(--esp-5);font-weight:var(--peso-normal);font-size:var(--fs-650)}
+.menu ul li a{position:relative;display:inline-block;color:var(--cor-corpo);font-family:var(--tts);font-weight:var(--peso-medio);text-decoration:none;transition:color .28s cubic-bezier(.16,1,.3,1),transform .28s cubic-bezier(.16,1,.3,1)}
+.menu .buttons{display:flex;flex-direction:column;gap:var(--esp-4)}
+@media (max-width: 1079.98px){.menu .buttons .btn,.menu .buttons .z7-btnx{width:100%}}
+body.menu-expanded .logo,body.menu-expanded nav button{position:relative;z-index:100}
+body.menu-expanded button path{stroke:var(--color-text)}
+body nav#navigation button#navButton{color:var(--cor-titulo);filter:none;font-family:var(--tts);font-weight:var(--peso-medio);background:var(--gradient)}
+@media (min-width: 1080px){nav#navigation .wrapper *:where(:not(.btn,.z7-btnx,:is(.btn,.z7-btnx) *)){margin:0;padding:0;visibility:initial;display:initial;opacity:initial;flex-direction:initial;position:initial;font-weight:initial;font-size:initial;transform:initial;color:initial;background-color:initial}
+nav#navigation{width:calc(100% - 200px);left:100px;border-radius:0 0 var(--raio-md) var(--raio-md);top:0rem;height:6rem}
+nav#navigation a.logo{display:flex;align-items:center}
+nav#navigation .logo img{width:9rem}
+body nav#navigation button#navButton{font-size:var(--fs-300)}
+nav#navigation .close-menu,nav#navigation .open-menu,nav#navigation .social-links{display:none}
+nav#navigation .menu{display:flex;align-items:center;justify-content:space-between}
+nav#navigation .menu ul:nth-child(1){display:flex;align-items:center;gap:var(--esp-1)}
+nav#navigation .menu ul li{margin-top:0;display:flex}
+nav#navigation .menu ul li a{position:relative;display:inline-flex;align-items:center;padding:.7rem 1.4rem;border-radius:var(--raio-pilula);color:var(--cor-secundario);font-family:var(--tts);font-weight:var(--peso-medio);font-size:var(--fs-300);letter-spacing:.02em;text-decoration:none;white-space:nowrap;background-color:transparent;box-shadow:inset 0 0 0 1px transparent;transition:color .32s cubic-bezier(.16,1,.3,1),background-color .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}
+nav#navigation .menu a{color:var(--cor-titulo);text-decoration:none}
+nav#navigation .menu .buttons{display:flex;gap:var(--esp-2)}
+nav#navigation .menu ul li{animation:entering .42s cubic-bezier(.16,1,.3,1) backwards}
+nav#navigation .menu ul li:nth-child(1){animation-delay:40ms}
+nav#navigation .menu ul li:nth-child(2){animation-delay:.11s}
+nav#navigation .menu ul li:nth-child(3){animation-delay:.18s}
+nav#navigation .menu ul li:nth-child(4){animation-delay:.25s}}
+@media (min-width: 1600px){nav#navigation{width:calc(100% - 340px);left:170px}
+nav#navigation .wrapper{padding-inline:5rem}}
+@keyframes entering{0%{transform:translate(-1.6rem);opacity:0}to{transform:translate(0);opacity:1}}
+@media (prefers-reduced-motion: reduce){nav#navigation .menu ul li{animation:none}
+nav#navigation .menu ul li a{transition:none}}
+.menu-scrim{position:fixed;inset:0;z-index:99;background:#0009;opacity:0;visibility:hidden;transition:opacity var(--dur-media) var(--curva-saida),visibility 0s linear var(--dur-media)}
+body.menu-expanded .menu-scrim{opacity:1;visibility:visible;transition:opacity var(--dur-media) var(--curva-saida)}
+@media (min-width: 1080px){.menu-scrim{display:none}}
+@media (prefers-reduced-motion: reduce){.menu-scrim,body.menu-expanded .menu-scrim{transition:none}}
+@media (max-width: 1079.98px){body.menu-expanded .menu{right:0;width:max-content;min-width:60vw;max-width:100vw;height:auto;min-height:60vh;max-height:100dvh;overflow-y:auto;padding-inline:2rem;align-items:stretch}}
+nav .logo .logo__icone{display:none}
+@media (min-width: 1080px){nav#navigation{left:0;right:0;margin-inline:auto;width:calc(min(var(--container-max),100%) - 4.8rem);top:1.8rem;height:6rem;border:.1rem solid rgb(255 255 255 / .1);border-radius:var(--raio-md) 0 var(--raio-md) 0;background-color:#0a0a0a52;-webkit-backdrop-filter:blur(1.8rem) saturate(1.3);backdrop-filter:blur(1.8rem) saturate(1.3);box-shadow:.25rem .3rem .8rem #0000002e,-.2rem -.25rem .7rem #ffffff03,inset 0 .1rem #ffffff08}
+nav#navigation.activeCountdown{border-radius:0 0 var(--raio-md) 0;border-top-color:transparent}
+nav#navigation .wrapper,nav#navigation.scroll .wrapper{width:100%;max-width:none;height:100%;margin:0;padding:0 1rem;gap:1.6rem}
+nav#navigation a.logo:has(.logo__icone){flex:none;display:flex;align-items:center;justify-content:center;width:4rem;height:4rem;min-height:0;border:.1rem solid rgb(255 255 255 / .06);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;background-color:#ffffff0a;box-shadow:.25rem .3rem .8rem #0000002e;transition:background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation a.logo:has(.logo__icone) img:not(.logo__icone){display:none}
+nav#navigation a.logo .logo__icone{display:block;width:2.2rem;height:auto}
+nav#navigation .menu ul:nth-child(1){gap:.4rem}
+nav#navigation .menu ul li a{height:4rem;padding:0 1.6rem;border:.1rem solid rgb(255 255 255 / .06);border-radius:var(--raio-pilula);color:#fffc;font-family:var(--tts);font-size:var(--fs-500);font-weight:var(--peso-semi);letter-spacing:normal;background-color:#ffffff0a;box-shadow:.25rem .3rem .8rem #0000002e;transition:color var(--dur-rapida) var(--curva-saida),background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation .menu ul li a[aria-current=page],nav#navigation .menu ul li a[aria-current=page]:hover{color:var(--marca-clara);background-color:#1da4f31f;border-color:#1da4f31f}
+nav#navigation .menu .buttons{display:flex;align-items:center;gap:.8rem;margin-left:.7rem}
+nav#navigation .menu .buttons:before{content:"";flex:none;width:.1rem;height:3.4rem;margin-right:.4rem;background-color:#ffffff1a}}
+nav#navigation .menu .buttons .z7-btnx{height:4rem;padding:0 1.6rem;gap:.8rem;border:.1rem solid transparent;border-radius:var(--raio-sm) 0 var(--raio-sm) 0;font-family:var(--tts);font-size:var(--fs-500);font-weight:var(--peso-semi);letter-spacing:normal;text-transform:none;box-shadow:.25rem .3rem .8rem #0000002e;filter:none;animation:none;will-change:auto;transition:color var(--dur-rapida) var(--curva-saida),background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation .menu .buttons .z7-btnx:before,nav#navigation .menu .buttons .z7-btnx:after,nav#navigation .menu .buttons .z7-btnx__bg,nav#navigation .menu .buttons .z7-btnx__shine{display:none}
+nav#navigation .menu .buttons .z7-btnx__label{font-family:inherit;text-shadow:none}
+nav#navigation .menu .buttons .z7-btnx__cap{position:static;width:auto;height:auto;border:0;background:none;box-shadow:none;color:inherit}
+nav#navigation .menu .buttons .z7-btnx__cap ion-icon{font-size:1.8rem;color:inherit;transform:none}
+nav#navigation .menu .buttons #navButtonComunidade{color:#fffc;background-color:#ffffff0a;border-color:#ffffff0f}
+nav#navigation .menu .buttons #navButtonComunidade .z7-btnx__cap{order:-1}
+nav#navigation .menu .buttons #navButton{color:var(--cor-titulo);background-color:transparent}
+nav#navigation .menu .buttons #navButton .z7-btnx__bg{display:block;background:var(--btn-grad);background-size:130% 100%;background-position:0% 50%;filter:none;animation:none}
+nav#navigation .menu .buttons .z7-btnx__bg:before{content:none}
+nav#navigation .menu .buttons .z7x-anel{display:none}
+nav#navigation .menu .buttons #navButton .z7-btnx__label{text-shadow:0 .6rem 1.6rem rgb(0 0 0 / .35)}
+nav#navigation .menu .buttons #navButton .z7-btnx__cap{display:none}
+@media (min-width: 1080px) and (prefers-reduced-motion: reduce){nav#navigation a.logo:has(.logo__icone),nav#navigation .menu ul li a,nav#navigation .menu .buttons .z7-btnx{transition:none}}
+@media (max-width: 1079.98px){nav#navigation{--recuo-topo: 1.2rem;--vao: .8rem;--topo-barra: var(--recuo-topo);top:var(--topo-barra);left:0;right:0;margin-inline:auto;width:calc(min(var(--container-max),100%) - 4.8rem);border:.1rem solid rgb(255 255 255 / .1);border-radius:var(--raio-md) 0 var(--raio-md) 0;background-color:#0a0a0a52;-webkit-backdrop-filter:blur(1.8rem) saturate(1.3);backdrop-filter:blur(1.8rem) saturate(1.3);box-shadow:.25rem .3rem .8rem #0000002e,inset 0 .1rem #ffffff08}
+nav#navigation.activeCountdown{--topo-barra: calc(var(--tarja-offset, 0px) + var(--recuo-topo) + var(--vao));top:var(--topo-barra)}
+nav#navigation .wrapper{flex-wrap:wrap;align-content:start;padding-top:calc((var(--nav-height) - .2rem - var(--alvo-toque)) / 2);padding-inline:1rem;column-gap:1.6rem;row-gap:0}
+nav#navigation a.logo:has(.logo__icone){flex:none;display:grid;place-items:center;width:var(--alvo-toque);height:var(--alvo-toque);min-height:0;border:.1rem solid rgb(255 255 255 / .06);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;background-color:#ffffff0a;box-shadow:.25rem .3rem .8rem #0000002e;transition:background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation a.logo:has(.logo__icone) img:not(.logo__icone){display:none}
+nav#navigation a.logo .logo__icone{display:block;width:2.8rem;height:auto}
+nav#navigation .open-menu,nav#navigation .close-menu{flex:none;display:grid;place-items:center;width:var(--alvo-toque);height:var(--alvo-toque);padding:0;border:.1rem solid rgb(255 255 255 / .06);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;background-color:#ffffff0a;box-shadow:.25rem .3rem .8rem #0000002e;transition:background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation .open-menu svg,nav#navigation .close-menu svg{width:2.4rem;height:2.4rem}
+body.menu-expanded nav#navigation{height:auto;max-height:calc(100dvh - var(--topo-barra) - var(--recuo-topo));overflow-y:auto}
+body.menu-expanded nav#navigation .wrapper{height:auto;min-height:var(--nav-height);padding-bottom:1.2rem}
+nav#navigation .menu{position:static;order:3;flex:0 0 100%;width:100%;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:0fr;transition:grid-template-rows var(--dur-media) var(--curva-saida)}
+body.menu-expanded nav#navigation .menu{grid-template-rows:1fr;top:auto;right:auto;max-width:none;height:auto;min-height:0;max-height:none;overflow:visible;transform:none;padding:0;border:0;border-radius:0;background-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+nav#navigation .menu ul:nth-child(1){overflow:hidden;min-height:0}
+nav#navigation .close-menu{display:none;position:static}
+body.menu-expanded nav#navigation .close-menu{display:grid}
+body.menu-expanded nav#navigation .open-menu{display:none}
+body.menu-expanded .menu ul:nth-child(1){display:flex;flex-direction:column;width:100%;gap:.4rem;padding:1.2rem 0 0;font-size:inherit}
+body.menu-expanded .menu ul li{display:block}
+body.menu-expanded .menu ul li a{display:flex;align-items:center;justify-content:center;min-height:var(--alvo-toque);padding:0 1.6rem;border-radius:var(--raio-sm);color:var(--cor-corpo);font-family:var(--tts);font-size:var(--fs-850);font-weight:var(--peso-semi);text-align:center;background-color:transparent;transition:color var(--dur-rapida) var(--curva-saida),background-color var(--dur-rapida) var(--curva-saida)}
+body.menu-expanded .menu ul li a:hover,body.menu-expanded .menu ul li a:focus-visible,body.menu-expanded .menu ul li a:active{color:var(--cor-titulo);background-color:#ffffff0f;transform:none}
+body.menu-expanded .menu ul li a[aria-current=page],body.menu-expanded .menu ul li a[aria-current=page]:hover{color:var(--marca-clara);background-color:#1da4f31f}
+body.menu-expanded .menu .buttons{margin-top:1.2rem;padding-top:1.2rem;border-top:.1rem solid rgb(255 255 255 / .1);gap:.8rem}
+body.menu-expanded .menu .buttons .z7-btnx{min-height:var(--alvo-toque);height:auto;justify-content:center;font-size:var(--fs-650)}}
+@media (max-width: 1079.98px) and (prefers-reduced-motion: reduce){nav#navigation .open-menu,nav#navigation .close-menu,body.menu-expanded .menu ul li a{transition:none}}
+@property --spin{syntax: "<angle>"; inherits: false; initial-value: 0deg;}
+:where(.btn,.z7-btnx){position:relative;display:inline-flex}
+.btn,.z7-btnx{--btn-h: 7rem;--btn-in: .9rem;--btn-cap: 6.3rem;--btn-pad: 3.6rem;--btn-folga: 1rem;--btn-fs: var(--fs-650);--btn-peso: var(--peso-semi);--btn-ls: var(--ls-rotulo);--btn-seta: var(--fs-900);--btn-icone: var(--fs-900);--btn-raio: var(--raio-md);--btn-halo: 2.4rem;--btn-halo-blur: 2.8rem;--btn-sombra-1: 4.5rem;--btn-sombra-2: 4.6rem;--btn-sombra-hover: 7.5rem;--btn-anel: .4rem;--btn-sombra-rotulo: 0 1.4rem 3.6rem;--btn-grad: linear-gradient(90deg, #012b60 0%, var(--marca-escura) 44%, #0b5fbe 72%, var(--marca-clara) 100%);--btn-escuro: 2 60 131;--btn-claro: 29 164 243;align-items:center;gap:var(--esp-2);height:var(--btn-h);margin:0;padding:0 var(--btn-pad);border:0;border-radius:var(--btn-raio) 0 var(--btn-raio) 0;background:none;font-family:var(--fonte-corpo);font-size:var(--btn-fs);font-weight:var(--btn-peso);letter-spacing:var(--btn-ls);line-height:1;white-space:nowrap;text-decoration:none;user-select:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.btn--lg{--btn-h: 7rem}
+.btn--md,.btn--nav,.z7-btnx--nav{--btn-h: max(5.4rem, var(--alvo-toque));--btn-in: .7rem;--btn-cap: 4.8rem;--btn-pad: 2.6rem;--btn-folga: .8rem;--btn-fs: var(--corpo-legado-450);--btn-seta: var(--corpo-legado-750);--btn-icone: var(--fs-850);--btn-halo: 1.8rem;--btn-halo-blur: 2rem;--btn-sombra-1: 3.4rem;--btn-sombra-2: 3.6rem;--btn-sombra-hover: 5.8rem;--btn-anel: .3rem;--btn-sombra-rotulo: 0 1rem 2.6rem}
+@media (min-width: 1080px){.btn--nav,.z7-btnx--nav{--btn-h: 3.8rem;--btn-in: .45rem;--btn-cap: 3.2rem;--btn-pad: 1.8rem;--btn-folga: .6rem;--btn-fs: var(--corpo-legado-100);--btn-peso: var(--peso-medio);--btn-seta: var(--fs-400);--btn-icone: var(--fs-650);--btn-raio: var(--raio-sm);--btn-halo: 1.2rem;--btn-halo-blur: 1.4rem;--btn-sombra-1: 2.6rem;--btn-sombra-2: 2.8rem;--btn-sombra-hover: 4.2rem;--btn-anel: .25rem;--btn-sombra-rotulo: 0 .6rem 1.6rem}}
+.btn--wpp{--btn-grad: linear-gradient(90deg, #064e46 0%, var(--acento-wpp-fundo) 30%, var(--acento-wpp-meio) 66%, var(--acento-wpp) 100%);--btn-escuro: 7 94 84;--btn-claro: 37 211 102}
+.btn--icone{width:var(--btn-h);padding:0;justify-content:center}
+.btn--primaria,.z7-btnx{padding-right:calc(var(--btn-cap) + var(--btn-in) * 2 + var(--btn-folga));font-family:var(--fonte-display);text-transform:uppercase;color:var(--cor-titulo);border:.1rem solid rgba(255,255,255,.1);overflow:hidden;isolation:isolate;will-change:transform,filter,box-shadow;transition:filter var(--dur-media) var(--curva-saida),box-shadow var(--dur-media) var(--curva-saida),transform var(--dur-rapida) var(--curva-saida);box-shadow:0 0 var(--btn-sombra-1) rgb(var(--btn-escuro) / .4),0 0 var(--btn-sombra-2) rgb(var(--btn-claro) / .26),0 0 0 var(--btn-anel) rgb(var(--btn-claro) / .11)}
+.btn--primaria:before,.z7-btnx:before{content:"";position:absolute;inset:calc(var(--btn-halo) * -1);border-radius:calc(var(--btn-raio) + var(--btn-halo)) 0 calc(var(--btn-raio) + var(--btn-halo)) 0;z-index:0;background:radial-gradient(130% 160% at 50% 50%,rgb(var(--btn-claro) / .72),rgb(var(--btn-claro) / .24) 34%,rgb(var(--btn-escuro) / .12) 58%,#0000 74%),radial-gradient(140% 120% at 20% 30%,#ffffff29,#fff0 55%);filter:blur(var(--btn-halo-blur));opacity:.92;transition:opacity var(--dur-media) var(--curva-saida)}
+.btn--primaria:after,.z7-btnx:after{content:"";position:absolute;inset:0;border-radius:inherit;padding:.1rem;z-index:5;pointer-events:none;background:conic-gradient(from var(--spin),rgb(var(--btn-claro) / 0) 0deg,rgb(var(--btn-claro) / .85) 60deg,rgba(255,255,255,.34) 95deg,rgb(var(--btn-escuro) / .85) 170deg,rgb(var(--btn-claro) / .62) 250deg,rgb(var(--btn-claro) / 0) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.9}
+.btn__bg,.z7-btnx__bg{position:absolute;inset:0;border-radius:inherit;z-index:1;overflow:hidden}
+.btn__bg:before,.z7-btnx__bg:before{content:"";position:absolute;left:0;top:-15%;width:130%;height:130%;background:radial-gradient(140% 180% at 50% 50%,#fff3,#ffffff12 22%,#fff0 56%),var(--btn-grad);filter:saturate(1.1) contrast(1.05)}
+.btn__shine,.z7-btnx__shine{position:absolute;inset:-35% -55%;z-index:2;pointer-events:none;background:linear-gradient(115deg,#fff0 0% 44%,#ffffff2e 50%,#fff0 56% 100%);transform:translate(-60%)}
+.btn__label,.z7-btnx__label{position:relative;z-index:6;white-space:nowrap;line-height:1;text-shadow:var(--btn-sombra-rotulo) rgba(0,0,0,.35)}
+.btn--nav .btn__label,.z7-btnx--nav .z7-btnx__label{font-family:inherit}
+.btn__cap,.z7-btnx__cap{position:absolute;top:var(--btn-in);right:var(--btn-in);height:calc(100% - var(--btn-in) * 2);width:var(--btn-cap);border-radius:var(--raio-pilula) 0 var(--raio-pilula) var(--raio-pilula);display:grid;place-items:center;z-index:7;color:var(--cor-titulo);background:radial-gradient(120% 120% at 30% 30%,#fff3,#ffffff14 40%,#fff0 72%),linear-gradient(90deg,#ffffff14,#ffffff0a 42%,#ffffff05),linear-gradient(135deg,rgb(var(--btn-claro) / .36),rgb(var(--btn-escuro) / .1));border:.1rem solid rgba(255,255,255,.12);box-shadow:inset 0 .1rem #ffffff29,0 1.2rem 2.6rem #0003}
+.btn__arrow,.z7-btnx__arrow{font-size:var(--btn-seta);line-height:1;transform:translate(0);transition:transform var(--dur-media) var(--curva-saida)}
+.btn__cap ion-icon,.z7-btnx__cap ion-icon{display:block;font-size:var(--btn-icone);line-height:1;color:var(--cor-titulo);transform:scale(1);transition:transform var(--dur-media) var(--curva-saida)}
+.btn--texto{padding-inline:var(--esp-2);color:var(--marca-clara);transition:color var(--dur-rapida) var(--curva-saida)}
+.btn:disabled,.btn[aria-disabled=true],.btn.is-disabled,.btn.swiper-button-disabled,.z7-btnx[aria-disabled=true]{opacity:.4;filter:saturate(.4);box-shadow:none;cursor:not-allowed;pointer-events:none;animation:none}
+.z7x-anel{position:absolute;inset:0;border-radius:inherit;padding:.1rem;z-index:5;pointer-events:none;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.9;overflow:hidden}
+.z7x-anel:before{content:"";position:absolute;left:50%;top:50%;width:160%;aspect-ratio:1;transform:translate(-50%,-50%) rotate(0);background:conic-gradient(from 0deg,rgb(var(--btn-claro) / 0),rgb(var(--btn-claro) / .85) 60deg,#ffffff57 95deg,rgb(var(--btn-escuro) / .85) 170deg,rgb(var(--btn-claro) / .62) 250deg,rgb(var(--btn-claro) / 0) 360deg)}
+.z7x--rotor:after,.btn--primaria.z7x--rotor:after{content:none}
+.btn:disabled .z7x-anel:before,.btn[aria-disabled=true] .z7x-anel:before,.btn.is-disabled .z7x-anel:before,.btn.swiper-button-disabled .z7x-anel:before,.z7-btnx[aria-disabled=true] .z7x-anel:before{animation:none}
+.anim-fora,.anim-fora:before,.anim-fora:after,.anim-fora .btn__bg:before,.anim-fora .z7-btnx__bg:before,.anim-fora .btn__shine,.anim-fora .z7-btnx__shine,.anim-fora .z7x-anel:before{animation-play-state:paused!important}
+.card-beneficio{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:272px;padding:3.5rem 3rem;border-radius:var(--raio-md);border:.1rem solid rgb(29 164 243 / .14);background:#000b1c8c;box-shadow:inset 0 .1rem #1da4f31a}
+.card-beneficio__fundo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;border-radius:inherit}
+.card-beneficio:before{content:"";position:absolute;top:0;left:3rem;right:3rem;z-index:3;height:.2rem;border-radius:var(--raio-pilula);background:linear-gradient(90deg,var(--marca-clara),rgb(2 60 131 / 0))}
+.card-beneficio:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;background:linear-gradient(to top,#000205fc,#000205f0 55%,#000205b8);opacity:0;transition:opacity .75s ease}
+:root{--candles-altura: 44px;--candles-pico: 36px;--divisor-folga: clamp(var(--esp-7), 5.16rem + 2.1vw, var(--esp-8));--candles-barras-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M4 30h7v14H4zM20 22h7v22h-7zM36 33h7v11h-7zM52 14h7v30h-7zM68 26h7v18h-7zM84 35h7v9h-7zM100 19h7v25h-7zM116 8h7v36h-7zM132 24h7v20h-7zM148 31h7v13h-7zM164 16h7v28h-7zM180 28h7v16h-7zM196 34h7v10h-7zM212 11h7v33h-7zM228 23h7v21h-7zM244 32h7v12h-7zM260 18h7v26h-7zM276 25h7v19h-7zM292 36h7v8h-7zM308 13h7v31h-7zM324 27h7v17h-7z'/%3E%3C/svg%3E");--candles-topos-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M116 8h7v3h-7z'/%3E%3Cpath fill-opacity='.35' d='M212 11h7v2h-7zM308 13h7v2h-7z'/%3E%3C/svg%3E");--candles-barras-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M3 20h5v10H3zM15 15h5v15h-5zM27 22h5v8h-5zM39 10h5v20h-5zM51 18h5v12h-5zM63 24h5v6h-5zM75 13h5v17h-5zM87 5h5v25h-5zM99 16h5v14h-5zM111 21h5v9h-5zM123 11h5v19h-5zM135 19h5v11h-5z'/%3E%3C/svg%3E");--candles-topos-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M87 5h5v3h-5z'/%3E%3Cpath fill-opacity='.35' d='M39 10h5v2h-5zM123 11h5v2h-5z'/%3E%3C/svg%3E");--candles-barras-inv-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M4 0h7v14H4zM20 0h7v22h-7zM36 0h7v11h-7zM52 0h7v30h-7zM68 0h7v18h-7zM84 0h7v9h-7zM100 0h7v25h-7zM116 0h7v36h-7zM132 0h7v20h-7zM148 0h7v13h-7zM164 0h7v28h-7zM180 0h7v16h-7zM196 0h7v10h-7zM212 0h7v33h-7zM228 0h7v21h-7zM244 0h7v12h-7zM260 0h7v26h-7zM276 0h7v19h-7zM292 0h7v8h-7zM308 0h7v31h-7zM324 0h7v17h-7z'/%3E%3C/svg%3E");--candles-topos-inv-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M116 33h7v3h-7z'/%3E%3Cpath fill-opacity='.35' d='M212 31h7v2h-7zM308 29h7v2h-7z'/%3E%3C/svg%3E");--candles-barras-inv-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M3 0h5v10H3zM15 0h5v15h-5zM27 0h5v8h-5zM39 0h5v20h-5zM51 0h5v12h-5zM63 0h5v6h-5zM75 0h5v17h-5zM87 0h5v25h-5zM99 0h5v14h-5zM111 0h5v9h-5zM123 0h5v19h-5zM135 0h5v11h-5z'/%3E%3C/svg%3E");--candles-topos-inv-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M87 22h5v3h-5z'/%3E%3Cpath fill-opacity='.35' d='M39 18h5v2h-5zM123 17h5v2h-5z'/%3E%3C/svg%3E")}
+@media (max-width: 639.98px){:root{--candles-altura: 30px;--candles-pico: 25px}}
+.secao--divisor:after{content:"";position:absolute;top:0;left:0;right:0;height:var(--divisor-altura);z-index:3;pointer-events:none}
+header{margin-bottom:4rem;display:flex;flex-direction:column;align-items:center;justify-content:center}
+header p{font-size:var(--fs-500);line-height:1.4;color:var(--cor-corpo);margin-bottom:2rem}
+@media (min-width: 1080px){header p{font-size:var(--fs-650)}}
+@media (max-width: 1079.98px){:is(#ba,#topicos,#depoimentos,#plan,#faq,#contato) header h2{font-size:min(var(--fs-1300),calc((100vw - 4.8rem) / 16.4));text-wrap:balance}
+:is(#ba,#topicos,#depoimentos,#plan,#faq,#contato) header p{font-size:var(--fs-850)}}
+:is(#ba,#topicos,#depoimentos,#faq,#contato) header{margin-bottom:var(--esp-6)}
+:is(#ba,#topicos,#depoimentos,#faq,#contato) header h2+p{margin-top:var(--esp-2);margin-bottom:0}
+:is(#ba,#topicos,#depoimentos,#faq,#contato) header p+.btn{margin-top:var(--esp-4)}
+@media (min-width: 1080px){:is(#ba,#topicos,#depoimentos,#faq,#contato) header{margin-bottom:var(--esp-7)}}
+.tarjaImage{top:0;position:fixed;left:0;z-index:99}
+.tarjaImage a{display:block;line-height:0}
+.tarjaImage picture{display:contents}
+.tarjaImage img{width:100%;height:auto;display:block}
+#navigation.activeCountdown{top:var(--tarja-offset, 0px)}
+.countdown--promo{display:flex;justify-content:center;align-items:center;gap:var(--esp-3);font-size:var(--corpo-legado-550);font-weight:var(--peso-black);letter-spacing:.3px;color:var(--cor-titulo-inverso);background:#fff;padding-block:.65rem;padding-inline:1rem}
+.countdown--promo div{display:flex;align-items:end;color:var(--cor-titulo-inverso)}
+.countdown--promo span:not(.label){display:inline-block;min-width:1.9ch;text-align:center;font-variant-numeric:tabular-nums}
+.countdown--promo .label{font-size:var(--fs-300);font-weight:var(--peso-forte);margin-top:-1px;margin-left:1px;opacity:.9}
+.tarjaImage p.text{color:var(--cor-titulo-inverso);font-size:var(--corpo-legado-350);font-weight:var(--peso-forte);text-transform:uppercase;letter-spacing:.6px;display:inline-flex;align-items:center;gap:var(--esp-1);margin-right:.35rem}
+.tarjaImage p.text:before{content:"";width:9px;height:9px;border-radius:var(--raio-circulo);background:#000;box-shadow:0 0 #0009;animation:promoDot 1.6s ease-out infinite}
+@keyframes promoDot{0%{box-shadow:0 0 #0000008c}70%{box-shadow:0 0 0 10px #0000}to{box-shadow:0 0 #0000}}
+@media (prefers-reduced-motion: reduce){.tarjaImage p.text:before{animation:none}}
+@media (min-width: 1080px){div.tarjaImage{width:calc(100% - 200px);left:100px;top:0}
+div.tarjaImage img{border-radius:var(--raio-md) var(--raio-md) 0 0;border-radius:0}}
+@media (min-width: 1600px){div.tarjaImage{width:calc(100% - 340px);left:170px}}
+@media (min-width: 1080px){div.tarjaImage{left:0;right:0;margin-inline:auto;width:calc(min(var(--container-max),100%) - 4.8rem);overflow:hidden}
+div.tarjaImage a{display:flex;justify-content:center}
+div.tarjaImage img{display:block;flex:none;max-width:none;width:max(100%,calc(100vw - 200px))}}
+@media (min-width: 1600px){div.tarjaImage img{width:max(100%,calc(100vw - 340px))}}
+@media (max-width: 1079.98px){div.tarjaImage{left:0;right:0;margin-inline:auto;top:1.2rem;width:calc(min(var(--container-max),100%) - 4.8rem);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;overflow:hidden;box-shadow:.25rem .3rem .8rem #0000002e}
+.countdown--promo{gap:var(--esp-2);padding-inline:.6rem}}
+.tarjaImage img{aspect-ratio:auto 4053 / 554}
+.countdown--promo,.tarjaImage p.text{white-space:nowrap}
+@media (min-width: 1080px){div.tarjaImage img{aspect-ratio:auto 14012 / 554}}
+nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 38px) / 7.3159 + 27.4px)}
+@media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 200px) / 25.2924 + 34px)}}
+@media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2924 + 34px)}}
+@media (max-width: 1079.98px){#author .autor__cnpj{display:none}}
+@media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
+@media (min-width: 1080px){footer .rodape__cnpj{display:none}}
+html.lenis,html.lenis body{height:auto}
+@font-face{font-family:TT Fors fallback;src:local("Arial");size-adjust:110%;ascent-override:105%;descent-override:35%;line-gap-override:0%}
+@font-face{font-family:NCS fallback;src:local("Arial");size-adjust:127%;ascent-override:95%;descent-override:40%;line-gap-override:0%}
+[data-aos][data-aos][data-aos-duration="50"],body[data-aos-duration="50"] [data-aos]{transition-duration:50ms}
+[data-aos][data-aos][data-aos-delay="50"],body[data-aos-delay="50"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="50"].aos-animate,body[data-aos-delay="50"] [data-aos].aos-animate{transition-delay:50ms}
+[data-aos][data-aos][data-aos-duration="100"],body[data-aos-duration="100"] [data-aos]{transition-duration:.1s}
+[data-aos][data-aos][data-aos-delay="100"],body[data-aos-delay="100"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="100"].aos-animate,body[data-aos-delay="100"] [data-aos].aos-animate{transition-delay:.1s}
+[data-aos][data-aos][data-aos-duration="150"],body[data-aos-duration="150"] [data-aos]{transition-duration:.15s}
+[data-aos][data-aos][data-aos-delay="150"],body[data-aos-delay="150"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="150"].aos-animate,body[data-aos-delay="150"] [data-aos].aos-animate{transition-delay:.15s}
+[data-aos][data-aos][data-aos-duration="200"],body[data-aos-duration="200"] [data-aos]{transition-duration:.2s}
+[data-aos][data-aos][data-aos-delay="200"],body[data-aos-delay="200"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="200"].aos-animate,body[data-aos-delay="200"] [data-aos].aos-animate{transition-delay:.2s}
+[data-aos][data-aos][data-aos-duration="250"],body[data-aos-duration="250"] [data-aos]{transition-duration:.25s}
+[data-aos][data-aos][data-aos-delay="250"],body[data-aos-delay="250"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="250"].aos-animate,body[data-aos-delay="250"] [data-aos].aos-animate{transition-delay:.25s}
+[data-aos][data-aos][data-aos-duration="300"],body[data-aos-duration="300"] [data-aos]{transition-duration:.3s}
+[data-aos][data-aos][data-aos-delay="300"],body[data-aos-delay="300"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="300"].aos-animate,body[data-aos-delay="300"] [data-aos].aos-animate{transition-delay:.3s}
+[data-aos][data-aos][data-aos-duration="350"],body[data-aos-duration="350"] [data-aos]{transition-duration:.35s}
+[data-aos][data-aos][data-aos-delay="350"],body[data-aos-delay="350"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="350"].aos-animate,body[data-aos-delay="350"] [data-aos].aos-animate{transition-delay:.35s}
+[data-aos][data-aos][data-aos-duration="400"],body[data-aos-duration="400"] [data-aos]{transition-duration:.4s}
+[data-aos][data-aos][data-aos-delay="400"],body[data-aos-delay="400"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="400"].aos-animate,body[data-aos-delay="400"] [data-aos].aos-animate{transition-delay:.4s}
+[data-aos][data-aos][data-aos-duration="450"],body[data-aos-duration="450"] [data-aos]{transition-duration:.45s}
+[data-aos][data-aos][data-aos-delay="450"],body[data-aos-delay="450"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="450"].aos-animate,body[data-aos-delay="450"] [data-aos].aos-animate{transition-delay:.45s}
+[data-aos][data-aos][data-aos-duration="500"],body[data-aos-duration="500"] [data-aos]{transition-duration:.5s}
+[data-aos][data-aos][data-aos-delay="500"],body[data-aos-delay="500"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="500"].aos-animate,body[data-aos-delay="500"] [data-aos].aos-animate{transition-delay:.5s}
+[data-aos][data-aos][data-aos-duration="550"],body[data-aos-duration="550"] [data-aos]{transition-duration:.55s}
+[data-aos][data-aos][data-aos-delay="550"],body[data-aos-delay="550"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="550"].aos-animate,body[data-aos-delay="550"] [data-aos].aos-animate{transition-delay:.55s}
+[data-aos][data-aos][data-aos-duration="600"],body[data-aos-duration="600"] [data-aos]{transition-duration:.6s}
+[data-aos][data-aos][data-aos-delay="600"],body[data-aos-delay="600"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="600"].aos-animate,body[data-aos-delay="600"] [data-aos].aos-animate{transition-delay:.6s}
+[data-aos][data-aos][data-aos-duration="650"],body[data-aos-duration="650"] [data-aos]{transition-duration:.65s}
+[data-aos][data-aos][data-aos-delay="650"],body[data-aos-delay="650"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="650"].aos-animate,body[data-aos-delay="650"] [data-aos].aos-animate{transition-delay:.65s}
+[data-aos][data-aos][data-aos-duration="700"],body[data-aos-duration="700"] [data-aos]{transition-duration:.7s}
+[data-aos][data-aos][data-aos-delay="700"],body[data-aos-delay="700"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="700"].aos-animate,body[data-aos-delay="700"] [data-aos].aos-animate{transition-delay:.7s}
+[data-aos][data-aos][data-aos-duration="750"],body[data-aos-duration="750"] [data-aos]{transition-duration:.75s}
+[data-aos][data-aos][data-aos-delay="750"],body[data-aos-delay="750"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="750"].aos-animate,body[data-aos-delay="750"] [data-aos].aos-animate{transition-delay:.75s}
+[data-aos][data-aos][data-aos-duration="800"],body[data-aos-duration="800"] [data-aos]{transition-duration:.8s}
+[data-aos][data-aos][data-aos-delay="800"],body[data-aos-delay="800"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="800"].aos-animate,body[data-aos-delay="800"] [data-aos].aos-animate{transition-delay:.8s}
+[data-aos][data-aos][data-aos-duration="850"],body[data-aos-duration="850"] [data-aos]{transition-duration:.85s}
+[data-aos][data-aos][data-aos-delay="850"],body[data-aos-delay="850"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="850"].aos-animate,body[data-aos-delay="850"] [data-aos].aos-animate{transition-delay:.85s}
+[data-aos][data-aos][data-aos-duration="900"],body[data-aos-duration="900"] [data-aos]{transition-duration:.9s}
+[data-aos][data-aos][data-aos-delay="900"],body[data-aos-delay="900"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="900"].aos-animate,body[data-aos-delay="900"] [data-aos].aos-animate{transition-delay:.9s}
+[data-aos][data-aos][data-aos-duration="950"],body[data-aos-duration="950"] [data-aos]{transition-duration:.95s}
+[data-aos][data-aos][data-aos-delay="950"],body[data-aos-delay="950"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="950"].aos-animate,body[data-aos-delay="950"] [data-aos].aos-animate{transition-delay:.95s}
+[data-aos][data-aos][data-aos-duration="1000"],body[data-aos-duration="1000"] [data-aos]{transition-duration:1s}
+[data-aos][data-aos][data-aos-delay="1000"],body[data-aos-delay="1000"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1000"].aos-animate,body[data-aos-delay="1000"] [data-aos].aos-animate{transition-delay:1s}
+[data-aos][data-aos][data-aos-duration="1050"],body[data-aos-duration="1050"] [data-aos]{transition-duration:1.05s}
+[data-aos][data-aos][data-aos-delay="1050"],body[data-aos-delay="1050"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1050"].aos-animate,body[data-aos-delay="1050"] [data-aos].aos-animate{transition-delay:1.05s}
+[data-aos][data-aos][data-aos-duration="1100"],body[data-aos-duration="1100"] [data-aos]{transition-duration:1.1s}
+[data-aos][data-aos][data-aos-delay="1100"],body[data-aos-delay="1100"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1100"].aos-animate,body[data-aos-delay="1100"] [data-aos].aos-animate{transition-delay:1.1s}
+[data-aos][data-aos][data-aos-duration="1150"],body[data-aos-duration="1150"] [data-aos]{transition-duration:1.15s}
+[data-aos][data-aos][data-aos-delay="1150"],body[data-aos-delay="1150"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1150"].aos-animate,body[data-aos-delay="1150"] [data-aos].aos-animate{transition-delay:1.15s}
+[data-aos][data-aos][data-aos-duration="1200"],body[data-aos-duration="1200"] [data-aos]{transition-duration:1.2s}
+[data-aos][data-aos][data-aos-delay="1200"],body[data-aos-delay="1200"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1200"].aos-animate,body[data-aos-delay="1200"] [data-aos].aos-animate{transition-delay:1.2s}
+[data-aos][data-aos][data-aos-duration="1250"],body[data-aos-duration="1250"] [data-aos]{transition-duration:1.25s}
+[data-aos][data-aos][data-aos-delay="1250"],body[data-aos-delay="1250"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1250"].aos-animate,body[data-aos-delay="1250"] [data-aos].aos-animate{transition-delay:1.25s}
+[data-aos][data-aos][data-aos-duration="1300"],body[data-aos-duration="1300"] [data-aos]{transition-duration:1.3s}
+[data-aos][data-aos][data-aos-delay="1300"],body[data-aos-delay="1300"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1300"].aos-animate,body[data-aos-delay="1300"] [data-aos].aos-animate{transition-delay:1.3s}
+[data-aos][data-aos][data-aos-duration="1350"],body[data-aos-duration="1350"] [data-aos]{transition-duration:1.35s}
+[data-aos][data-aos][data-aos-delay="1350"],body[data-aos-delay="1350"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1350"].aos-animate,body[data-aos-delay="1350"] [data-aos].aos-animate{transition-delay:1.35s}
+[data-aos][data-aos][data-aos-duration="1400"],body[data-aos-duration="1400"] [data-aos]{transition-duration:1.4s}
+[data-aos][data-aos][data-aos-delay="1400"],body[data-aos-delay="1400"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1400"].aos-animate,body[data-aos-delay="1400"] [data-aos].aos-animate{transition-delay:1.4s}
+[data-aos][data-aos][data-aos-duration="1450"],body[data-aos-duration="1450"] [data-aos]{transition-duration:1.45s}
+[data-aos][data-aos][data-aos-delay="1450"],body[data-aos-delay="1450"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1450"].aos-animate,body[data-aos-delay="1450"] [data-aos].aos-animate{transition-delay:1.45s}
+[data-aos][data-aos][data-aos-duration="1500"],body[data-aos-duration="1500"] [data-aos]{transition-duration:1.5s}
+[data-aos][data-aos][data-aos-delay="1500"],body[data-aos-delay="1500"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1500"].aos-animate,body[data-aos-delay="1500"] [data-aos].aos-animate{transition-delay:1.5s}
+[data-aos][data-aos][data-aos-duration="1550"],body[data-aos-duration="1550"] [data-aos]{transition-duration:1.55s}
+[data-aos][data-aos][data-aos-delay="1550"],body[data-aos-delay="1550"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1550"].aos-animate,body[data-aos-delay="1550"] [data-aos].aos-animate{transition-delay:1.55s}
+[data-aos][data-aos][data-aos-duration="1600"],body[data-aos-duration="1600"] [data-aos]{transition-duration:1.6s}
+[data-aos][data-aos][data-aos-delay="1600"],body[data-aos-delay="1600"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1600"].aos-animate,body[data-aos-delay="1600"] [data-aos].aos-animate{transition-delay:1.6s}
+[data-aos][data-aos][data-aos-duration="1650"],body[data-aos-duration="1650"] [data-aos]{transition-duration:1.65s}
+[data-aos][data-aos][data-aos-delay="1650"],body[data-aos-delay="1650"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1650"].aos-animate,body[data-aos-delay="1650"] [data-aos].aos-animate{transition-delay:1.65s}
+[data-aos][data-aos][data-aos-duration="1700"],body[data-aos-duration="1700"] [data-aos]{transition-duration:1.7s}
+[data-aos][data-aos][data-aos-delay="1700"],body[data-aos-delay="1700"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1700"].aos-animate,body[data-aos-delay="1700"] [data-aos].aos-animate{transition-delay:1.7s}
+[data-aos][data-aos][data-aos-duration="1750"],body[data-aos-duration="1750"] [data-aos]{transition-duration:1.75s}
+[data-aos][data-aos][data-aos-delay="1750"],body[data-aos-delay="1750"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1750"].aos-animate,body[data-aos-delay="1750"] [data-aos].aos-animate{transition-delay:1.75s}
+[data-aos][data-aos][data-aos-duration="1800"],body[data-aos-duration="1800"] [data-aos]{transition-duration:1.8s}
+[data-aos][data-aos][data-aos-delay="1800"],body[data-aos-delay="1800"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1800"].aos-animate,body[data-aos-delay="1800"] [data-aos].aos-animate{transition-delay:1.8s}
+[data-aos][data-aos][data-aos-duration="1850"],body[data-aos-duration="1850"] [data-aos]{transition-duration:1.85s}
+[data-aos][data-aos][data-aos-delay="1850"],body[data-aos-delay="1850"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1850"].aos-animate,body[data-aos-delay="1850"] [data-aos].aos-animate{transition-delay:1.85s}
+[data-aos][data-aos][data-aos-duration="1900"],body[data-aos-duration="1900"] [data-aos]{transition-duration:1.9s}
+[data-aos][data-aos][data-aos-delay="1900"],body[data-aos-delay="1900"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1900"].aos-animate,body[data-aos-delay="1900"] [data-aos].aos-animate{transition-delay:1.9s}
+[data-aos][data-aos][data-aos-duration="1950"],body[data-aos-duration="1950"] [data-aos]{transition-duration:1.95s}
+[data-aos][data-aos][data-aos-delay="1950"],body[data-aos-delay="1950"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1950"].aos-animate,body[data-aos-delay="1950"] [data-aos].aos-animate{transition-delay:1.95s}
+[data-aos][data-aos][data-aos-duration="2000"],body[data-aos-duration="2000"] [data-aos]{transition-duration:2s}
+[data-aos][data-aos][data-aos-delay="2000"],body[data-aos-delay="2000"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2000"].aos-animate,body[data-aos-delay="2000"] [data-aos].aos-animate{transition-delay:2s}
+[data-aos][data-aos][data-aos-duration="2050"],body[data-aos-duration="2050"] [data-aos]{transition-duration:2.05s}
+[data-aos][data-aos][data-aos-delay="2050"],body[data-aos-delay="2050"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2050"].aos-animate,body[data-aos-delay="2050"] [data-aos].aos-animate{transition-delay:2.05s}
+[data-aos][data-aos][data-aos-duration="2100"],body[data-aos-duration="2100"] [data-aos]{transition-duration:2.1s}
+[data-aos][data-aos][data-aos-delay="2100"],body[data-aos-delay="2100"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2100"].aos-animate,body[data-aos-delay="2100"] [data-aos].aos-animate{transition-delay:2.1s}
+[data-aos][data-aos][data-aos-duration="2150"],body[data-aos-duration="2150"] [data-aos]{transition-duration:2.15s}
+[data-aos][data-aos][data-aos-delay="2150"],body[data-aos-delay="2150"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2150"].aos-animate,body[data-aos-delay="2150"] [data-aos].aos-animate{transition-delay:2.15s}
+[data-aos][data-aos][data-aos-duration="2200"],body[data-aos-duration="2200"] [data-aos]{transition-duration:2.2s}
+[data-aos][data-aos][data-aos-delay="2200"],body[data-aos-delay="2200"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2200"].aos-animate,body[data-aos-delay="2200"] [data-aos].aos-animate{transition-delay:2.2s}
+[data-aos][data-aos][data-aos-duration="2250"],body[data-aos-duration="2250"] [data-aos]{transition-duration:2.25s}
+[data-aos][data-aos][data-aos-delay="2250"],body[data-aos-delay="2250"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2250"].aos-animate,body[data-aos-delay="2250"] [data-aos].aos-animate{transition-delay:2.25s}
+[data-aos][data-aos][data-aos-duration="2300"],body[data-aos-duration="2300"] [data-aos]{transition-duration:2.3s}
+[data-aos][data-aos][data-aos-delay="2300"],body[data-aos-delay="2300"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2300"].aos-animate,body[data-aos-delay="2300"] [data-aos].aos-animate{transition-delay:2.3s}
+[data-aos][data-aos][data-aos-duration="2350"],body[data-aos-duration="2350"] [data-aos]{transition-duration:2.35s}
+[data-aos][data-aos][data-aos-delay="2350"],body[data-aos-delay="2350"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2350"].aos-animate,body[data-aos-delay="2350"] [data-aos].aos-animate{transition-delay:2.35s}
+[data-aos][data-aos][data-aos-duration="2400"],body[data-aos-duration="2400"] [data-aos]{transition-duration:2.4s}
+[data-aos][data-aos][data-aos-delay="2400"],body[data-aos-delay="2400"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2400"].aos-animate,body[data-aos-delay="2400"] [data-aos].aos-animate{transition-delay:2.4s}
+[data-aos][data-aos][data-aos-duration="2450"],body[data-aos-duration="2450"] [data-aos]{transition-duration:2.45s}
+[data-aos][data-aos][data-aos-delay="2450"],body[data-aos-delay="2450"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2450"].aos-animate,body[data-aos-delay="2450"] [data-aos].aos-animate{transition-delay:2.45s}
+[data-aos][data-aos][data-aos-duration="2500"],body[data-aos-duration="2500"] [data-aos]{transition-duration:2.5s}
+[data-aos][data-aos][data-aos-delay="2500"],body[data-aos-delay="2500"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2500"].aos-animate,body[data-aos-delay="2500"] [data-aos].aos-animate{transition-delay:2.5s}
+[data-aos][data-aos][data-aos-duration="2550"],body[data-aos-duration="2550"] [data-aos]{transition-duration:2.55s}
+[data-aos][data-aos][data-aos-delay="2550"],body[data-aos-delay="2550"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2550"].aos-animate,body[data-aos-delay="2550"] [data-aos].aos-animate{transition-delay:2.55s}
+[data-aos][data-aos][data-aos-duration="2600"],body[data-aos-duration="2600"] [data-aos]{transition-duration:2.6s}
+[data-aos][data-aos][data-aos-delay="2600"],body[data-aos-delay="2600"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2600"].aos-animate,body[data-aos-delay="2600"] [data-aos].aos-animate{transition-delay:2.6s}
+[data-aos][data-aos][data-aos-duration="2650"],body[data-aos-duration="2650"] [data-aos]{transition-duration:2.65s}
+[data-aos][data-aos][data-aos-delay="2650"],body[data-aos-delay="2650"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2650"].aos-animate,body[data-aos-delay="2650"] [data-aos].aos-animate{transition-delay:2.65s}
+[data-aos][data-aos][data-aos-duration="2700"],body[data-aos-duration="2700"] [data-aos]{transition-duration:2.7s}
+[data-aos][data-aos][data-aos-delay="2700"],body[data-aos-delay="2700"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2700"].aos-animate,body[data-aos-delay="2700"] [data-aos].aos-animate{transition-delay:2.7s}
+[data-aos][data-aos][data-aos-duration="2750"],body[data-aos-duration="2750"] [data-aos]{transition-duration:2.75s}
+[data-aos][data-aos][data-aos-delay="2750"],body[data-aos-delay="2750"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2750"].aos-animate,body[data-aos-delay="2750"] [data-aos].aos-animate{transition-delay:2.75s}
+[data-aos][data-aos][data-aos-duration="2800"],body[data-aos-duration="2800"] [data-aos]{transition-duration:2.8s}
+[data-aos][data-aos][data-aos-delay="2800"],body[data-aos-delay="2800"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2800"].aos-animate,body[data-aos-delay="2800"] [data-aos].aos-animate{transition-delay:2.8s}
+[data-aos][data-aos][data-aos-duration="2850"],body[data-aos-duration="2850"] [data-aos]{transition-duration:2.85s}
+[data-aos][data-aos][data-aos-delay="2850"],body[data-aos-delay="2850"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2850"].aos-animate,body[data-aos-delay="2850"] [data-aos].aos-animate{transition-delay:2.85s}
+[data-aos][data-aos][data-aos-duration="2900"],body[data-aos-duration="2900"] [data-aos]{transition-duration:2.9s}
+[data-aos][data-aos][data-aos-delay="2900"],body[data-aos-delay="2900"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2900"].aos-animate,body[data-aos-delay="2900"] [data-aos].aos-animate{transition-delay:2.9s}
+[data-aos][data-aos][data-aos-duration="2950"],body[data-aos-duration="2950"] [data-aos]{transition-duration:2.95s}
+[data-aos][data-aos][data-aos-delay="2950"],body[data-aos-delay="2950"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2950"].aos-animate,body[data-aos-delay="2950"] [data-aos].aos-animate{transition-delay:2.95s}
+[data-aos][data-aos][data-aos-duration="3000"],body[data-aos-duration="3000"] [data-aos]{transition-duration:3s}
+[data-aos][data-aos][data-aos-delay="3000"],body[data-aos-delay="3000"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="3000"].aos-animate,body[data-aos-delay="3000"] [data-aos].aos-animate{transition-delay:3s}
+[data-aos][data-aos][data-aos-easing=linear],body[data-aos-easing=linear] [data-aos]{transition-timing-function:cubic-bezier(.25,.25,.75,.75)}
+[data-aos][data-aos][data-aos-easing=ease],body[data-aos-easing=ease] [data-aos]{transition-timing-function:ease}
+[data-aos][data-aos][data-aos-easing=ease-in],body[data-aos-easing=ease-in] [data-aos]{transition-timing-function:ease-in}
+[data-aos][data-aos][data-aos-easing=ease-out],body[data-aos-easing=ease-out] [data-aos]{transition-timing-function:ease-out}
+[data-aos][data-aos][data-aos-easing=ease-in-out],body[data-aos-easing=ease-in-out] [data-aos]{transition-timing-function:ease-in-out}
+[data-aos][data-aos][data-aos-easing=ease-in-back],body[data-aos-easing=ease-in-back] [data-aos]{transition-timing-function:cubic-bezier(.6,-.28,.735,.045)}
+[data-aos][data-aos][data-aos-easing=ease-out-back],body[data-aos-easing=ease-out-back] [data-aos]{transition-timing-function:cubic-bezier(.175,.885,.32,1.275)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-back],body[data-aos-easing=ease-in-out-back] [data-aos]{transition-timing-function:cubic-bezier(.68,-.55,.265,1.55)}
+[data-aos][data-aos][data-aos-easing=ease-in-sine],body[data-aos-easing=ease-in-sine] [data-aos]{transition-timing-function:cubic-bezier(.47,0,.745,.715)}
+[data-aos][data-aos][data-aos-easing=ease-out-sine],body[data-aos-easing=ease-out-sine] [data-aos]{transition-timing-function:cubic-bezier(.39,.575,.565,1)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-sine],body[data-aos-easing=ease-in-out-sine] [data-aos]{transition-timing-function:cubic-bezier(.445,.05,.55,.95)}
+[data-aos][data-aos][data-aos-easing=ease-in-quad],body[data-aos-easing=ease-in-quad] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}
+[data-aos][data-aos][data-aos-easing=ease-out-quad],body[data-aos-easing=ease-out-quad] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-quad],body[data-aos-easing=ease-in-out-quad] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}
+[data-aos][data-aos][data-aos-easing=ease-in-cubic],body[data-aos-easing=ease-in-cubic] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}
+[data-aos][data-aos][data-aos-easing=ease-out-cubic],body[data-aos-easing=ease-out-cubic] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-cubic],body[data-aos-easing=ease-in-out-cubic] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}
+[data-aos][data-aos][data-aos-easing=ease-in-quart],body[data-aos-easing=ease-in-quart] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}
+[data-aos][data-aos][data-aos-easing=ease-out-quart],body[data-aos-easing=ease-out-quart] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-quart],body[data-aos-easing=ease-in-out-quart] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}
+[data-aos^=fade][data-aos^=fade]{opacity:0;transition-property:opacity,transform}
+[data-aos=fade-down]{transform:translate3d(0,-100px,0)}
+[data-aos=fade-right]{transform:translate3d(-100px,0,0)}
+[data-aos=fade-up-left]{transform:translate3d(100px,100px,0)}</style>
+  <link rel="stylesheet" href="./dist/home.89d9bea1.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="./dist/home.89d9bea1.css"></noscript>
+
+  <!-- C4: preconnect para os terceiros que restam na janela inicial
+       (jquery, lenis/ionicons no unpkg, gsap/countUp no cdnjs) — 1 RTT
+       simulado cada. GTM/Meta saem da janela no C5; Zendesk e o selo já
+       só entram sob demanda. -->
+  <link rel="preload" href="./css/fonts/NCS%20Radhiumz.hero.woff2?v=0e788b94" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./css/fonts/TT%20Fors%20Trial%20Light.hero.woff2?v=fd1b1135" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./css/fonts/TT%20Fors%20Trial%20Regular.hero.woff2?v=840598f7" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./css/fonts/TT%20Fors%20Trial%20Medium.hero.woff2?v=dc8c5375" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./css/fonts/TT%20Fors%20Trial%20DemiBold.hero.woff2?v=56adbf06" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./css/fonts/TT%20Fors%20Trial%20Bold.hero.woff2?v=f479efb1" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./css/fonts/TT%20Fors%20Trial%20ExtraBold.hero.woff2?v=ab6e9c88" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.</title>
   <meta name="title" content="Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade." />
   <meta name="description"
-    content="Uma mesa proprietária para desenvolver sua carreira como trader de qualquer lugar do mundo, operando em grande volume na bolsa de valores e lucrando em uma das profissões mais rentáveis do mundo." />
-  <meta name="keywords"
-    content="zero7 tesouraria, gestão de capital, gestão para traders, alocação de patrimônio, inteligência financeira, mesa proprietária, capital para trader, tesouraria para day trade, mentoria para traders, gerenciamento de risco, trader profissional, empresa de trading, mesa de capital, zero7 investimentos, daytrade, daytrade, zero7, zero 7, zero7 mesa proprietaria, mesa proprietaria, investimento" />
+    content="Mesa proprietária de day trade. Planos a partir de R$ 130, avaliação em 60 dias e operação em mini índice, mini dólar e Bitcoin." />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://zero7.com.br/" />
+  <meta property="og:url" content="https://zero7.com.br/home/" />
   <meta property="og:title" content="Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade." />
   <meta property="og:description"
-    content="Uma mesa proprietária para desenvolver sua carreira como trader de qualquer lugar do mundo, operando em grande volume na bolsa de valores e lucrando em uma das profissões mais rentáveis do mundo." />
+    content="Mesa proprietária de day trade. Planos a partir de R$ 130, avaliação em 60 dias e operação em mini índice, mini dólar e Bitcoin." />
   <meta property="og:image" content="https://zero7.com.br/home/assets/banner.webp" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://zero7.com.br/" />
+  <meta property="twitter:url" content="https://zero7.com.br/home/" />
   <meta property="twitter:title" content="Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade." />
   <meta property="twitter:description"
-    content="Uma mesa proprietária para desenvolver sua carreira como trader de qualquer lugar do mundo, operando em grande volume na bolsa de valores e lucrando em uma das profissões mais rentáveis do mundo." />
+    content="Mesa proprietária de day trade. Planos a partir de R$ 130, avaliação em 60 dias e operação em mini índice, mini dólar e Bitcoin." />
   <meta property="twitter:image" content="https://zero7.com.br/home/assets/banner.webp" />
 
   <!-- Autor e Indexação -->
   <meta name="author" content="LocalBoost" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://zero7.com.br/">
 
   <script type="application/ld+json">
 {
@@ -62,7 +626,7 @@
   "@type": "Organization",
   "name": "Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade.",
   "url": "https://zero7.com.br",
-  "logo": "https://zero7.com.br/caminho-da-logo.png",
+  "logo": "https://zero7.com.br/home/assets/logo-zero7-512.png",
   "description": "Uma mesa proprietária para desenvolver sua carreira como trader de qualquer lugar do mundo, operando em grande volume na bolsa de valores e lucrando em uma das profissões mais rentáveis do mundo.",
   "sameAs": [
     "https://www.instagram.com/zero7tesouraria",
@@ -71,156 +635,10 @@
   ]
 }
     </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Após ser aprovado na avaliação, qual a próxima etapa?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Você deverá acessar sua Área do Trader, clicar em Solicitar aprovação no plano em que foi aprovado. A resposta chega em até 3 dias úteis, por e-mail e na plataforma."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qual é a data do pagamento?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "O pagamento é feito ao fim de cada ciclo de 30 dias, nos dias 10, 20 ou 30 de cada mês."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quais as taxas e valores descontados?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A Zero7 cobra apenas taxas da B3: R$ 0,37 (WIN), R$ 1,47 (WDO) e 0,0250% em ações. Não há taxa de corretagem da Zero7."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Existe lugar físico para operar?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Atualmente, todos os operadores atuam remotamente. Um espaço físico está nos planos futuros."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Posso operar utilizando minha própria técnica?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sim! A Zero7 valoriza a autonomia do trader. Você pode usar sua própria técnica, respeitando os limites do plano."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Após comprar o plano, quando começo minha avaliação?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Após o pagamento, você escolhe a data de início da avaliação em sua Área do Trader."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Depois de aprovado em quanto tempo eu começo a operar em conta real?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Você passa até 2 ciclos na incubadora, sendo remunerado em ambiente simulado. Depois, é migrado automaticamente para a conta real com base no desempenho."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "A Zero7 Tesouraria possui Drawdown?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Não há drawdown tradicional. Há limite de perda diária e total, mas seu saldo positivo aumenta o limite total permitido."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Vou operar minha própria conta?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Não. Você será operador cadastrado pela Zero7 e emitirá ordens na conta institucional da empresa."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Tenho que pagar mensalidade para operar?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Não. O valor pago no plano cobre toda a avaliação e operação real. Não existe mensalidade."
-          },
-          {
-      "@type": "Question",
-      "name": "O que é uma mesa proprietária de day trade?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "É uma empresa que fornece capital para traders operarem em day trade. Na Zero7 você opera com capital da mesa, aproveitando alta alavancagem sem arriscar seu próprio dinheiro."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Como funciona o plano de avaliação de 60 dias da Zero7?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Você tem até 60 dias corridos para alcançar a meta estipulada no plano contratado, respeitando o gerenciamento de risco definido no regulamento."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Qual é a alavancagem máxima oferecida pela Zero7?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A Zero7 oferece até 15× de alavancagem na fase de avaliação e até 20× na conta real para traders aprovados."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Como funciona a incubadora da Zero7?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Na incubadora, o trader opera em ambiente simulado por dois ciclos de 30 dias, recebe até 90 % dos lucros e segue sob monitoramento até passar para conta real."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Qual é o repasse aos traders aprovados?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Traders aprovados recebem até 90 % dos lucros líquidos em cada ciclo de 30 dias, conforme o plano contratado."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "O que é aprovação permanente na Zero7?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Com a aprovação permanente, você não precisa refazer avaliação se for desligado: basta contratar o plano novamente e voltar a operar diretamente."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Quais os benefícios educacionais da Área do Trader da Zero7?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Você tem acesso gratuito a morning calls, salas ao vivo, cursos e materiais exclusivos para desenvolver sua carreira como trader."
-      }
-    }
 
-        }
-      ]
-    }
-    </script>
-
-  <link rel="sitemap" type="application/xml" href="./sitemap.xml">
 </head>
 
-<body id="body" class="smooth-scroll-wrapper">
+<body id="body" class="smooth-scroll-wrapper home">
 
   <!-- Tarja promo (timer resetando a cada 24h até 30/set — datas em
        prazosPromo, no script do countdown no fim da página). Para desativar,
@@ -249,8 +667,28 @@
     </div>
 
    <a href="#plan">
-      <img decoding="async" class="desktop" src="./assets/tarjapopup/TARJA DESK PROFIT.avif" alt="">
-      <img decoding="async" class="mobile" src="./assets/tarjapopup/TARJA MOBILE PROFIT.avif" alt="">
+      <!-- <picture> e não duas <img>: display:none NÃO impede download, e em
+           390 o navegador baixava as duas artes — 161KB da de desktop jogados
+           fora em todo celular. O media bate com o breakpoint de 1080 do
+           tarjaImage.css. A arte, o link e o contador não mudam. -->
+      <picture>
+        <!-- o caminho vai com %20: em srcset o espaço separa a URL do
+             descritor, e com espaço cru o candidato é inválido e o navegador
+             cai no src da <img> -->
+        <!-- campanha PROFIT (out/2026, trazida do ar): artes oficiais sem
+             variantes de srcset — gerar tamanhos é otimização de imagem e
+             só entra com autorização (regra 6). A arte mobile é a CHEIA
+             (4053x554): a campanha não tem a versão de altura reduzida da
+             fase 22; se o design produzir uma, troque aqui e refaça as
+             razões no tarjaImage.css (regras 17 e 21). -->
+        <!-- F3a: width/height da PRÓPRIA arte em CADA entrada do <picture>.
+             O C4 reprovou attrs só na <img> porque a razão do mobile valia
+             para o desktop; com o <source> carregando os dele, cada
+             viewport reserva com a razão certa (o aspect-ratio do CSS
+             continua de cinto). Trocou a arte, troque os números. -->
+        <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/TARJA%20DESK%20PROFIT.avif" width="14012" height="554">
+        <img decoding="async" width="4053" height="554" src="./assets/tarjapopup/TARJA MOBILE PROFIT.avif" alt="">
+      </picture>
     </a>
   </div>
 
@@ -275,17 +713,24 @@
   </div>
   -->
 
-  <nav data-aos="fade-down" id="navigation" class="">
+  <!-- C4: a classe activeCountdown nasce NO MARKUP — campanha no ar =
+       classe no HTML, como a tarja já está no HTML. O script do contador
+       (protegido, regra 5) não muda: o caminho de expiração dele REMOVE a
+       classe, e o de ativação vira no-op. Quem desligar a campanha no HTML
+       tira a tarja E esta classe. Sem isso, a classe chegava ~2,9s depois
+       do primeiro paint e a nav saltava 121px (CLS medido no lote B). -->
+  <nav data-aos="fade-down" data-aos-once="true" id="navigation" class="activeCountdown">
     <div class="wrapper">
 
       <a class="logo" href="#home">
-        <img  src="./assets/logo zero7.svg" alt="Zero7 Tesouraria">
+        <img width="176" height="55"  src="./assets/logo zero7.svg" alt="Zero7 Tesouraria">
+        <img class="logo__icone" width="22" height="12" src="./assets/logo-icon.svg" alt="Zero7 Tesouraria">
       </a>
 
       <div class="menu">
 
         <ul>
-          <li data-aos="fade-right"><a onclick="closeMenu()" href="#home">Home</a></li>
+          <li data-aos="fade-right"><a onclick="closeMenu()" href="#home" aria-current="page">Home</a></li>
           <li data-aos="fade-right"><a onclick="closeMenu()" href="https://blog.zero7.com.br/">Blog</a></li>
           <li data-aos="fade-right"><a onclick="closeMenu()" href="#plan">Planos</a></li>
           <li data-aos="fade-right"><a onclick="closeMenu()" href="https://zero7.com.br/regulamento/">Regulamento</a>
@@ -294,24 +739,24 @@
           <div data-aos="fade-right" class="buttons">
             <a onclick="closeMenu()" target="_blank" rel="noopener noreferrer"
               href="https://chat.whatsapp.com/G9ma9v4zI77BBvvhdswF2r" id="navButtonComunidade"
-              class="z7-btnx z7-btnx--nav z7-btnx--wpp" role="button"
+              class="z7-btnx z7-btnx--nav z7-btnx--wpp btn btn--nav btn--primaria btn--wpp" role="button"
               aria-label="Entrar na comunidade do WhatsApp">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">Comunidade</span>
-              <span class="z7-btnx__cap" aria-hidden="true">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">Comunidade</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </span>
             </a>
 
             <a onclick="closeMenu()" target="_blank" rel="noopener noreferrer"
-              href="https://app.zero7.com.br/login" id="navButton" class="z7-btnx z7-btnx--nav" role="button"
+              href="https://app.zero7.com.br/login" id="navButton" class="z7-btnx z7-btnx--nav btn btn--nav btn--primaria" role="button"
               aria-label="Acessar a Área do Trader">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">Área do Trader</span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">Área do Trader</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -320,16 +765,17 @@
 
       </div>
 
-      <button aria-expanded="false" aria-label="Abrir menu" onclick="openMenu()" class="open-menu">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 20H30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M20 12H30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <button aria-expanded="false" aria-label="Abrir menu" onclick="openMenu()" class="open-menu btn btn--md btn--texto btn--icone">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFAF1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 6h16" />
+          <path d="M4 12h16" />
+          <path d="M4 18h16" />
         </svg>
       </button>
-      <button aria-expanded="true" aria-label="Fechar menu" onclick="closeMenu()" class="close-menu">
-        <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M30 10L10 30M10 10L30 30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" />
+      <button aria-expanded="true" aria-label="Fechar menu" onclick="closeMenu()" class="close-menu btn btn--md btn--texto btn--icone">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18 6 6 18" />
+          <path d="M6 6l12 12" />
         </svg>
       </button>
 
@@ -339,7 +785,9 @@
   <header class="header boxpromotion" id="home">
     <div class="wrapper">
       <div class="content">
-        <div data-aos="fade-up" class="text">
+        <!-- Sem data-aos: o h1 e o CTA são candidatos a LCP, e o pai com
+             opacity 0 do AOS os tirava do primeiro frame (item 1 do lote A). -->
+        <div class="text">
           <h1>
             O ECOSSISTEMA <span class="reveal-wrapper">
               <span class="reveal-word">acessível</span>
@@ -349,14 +797,14 @@
           <p>Uma mesa proprietária para desenvolver sua carreira como trader de qualquer lugar do mundo, operando em
             grande volume na bolsa de valores e lucrando em uma das profissões mais rentáveis do mundo.</p>
 
-           <a class="z7-btnx" href="#plan" role="button" aria-label="Começar agora mesmo">
-  <span class="z7-btnx__bg" aria-hidden="true"></span>
-  <span class="z7-btnx__shine" aria-hidden="true"></span>
+           <a class="z7-btnx btn btn--lg btn--primaria" href="#plan" role="button" aria-label="Começar agora mesmo">
+  <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+  <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
 
-  <span class="z7-btnx__label">Começar agora mesmo</span>
+  <span class="z7-btnx__label btn__label">Começar agora mesmo</span>
 
-  <span class="z7-btnx__cap" aria-hidden="true">
-    <span class="z7-btnx__arrow">→</span>
+  <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+    <span class="z7-btnx__arrow btn__arrow">→</span>
   </span>
         </a>
         </div>
@@ -364,8 +812,20 @@
     </div>
     <div class="image">
 
-      <img fetchpriority="high" rel="preload" data-aos="zoom-out" class="desktop" src="./assets/bg desktop.avif" alt="" media="(min-width: 1081px)">
-      <img fetchpriority="high" rel="preload" class="mobile" src="./assets/bg mobile.avif" alt="" media="(max-width: 1080px)">
+      <!-- Sem o zoom-out: esta img É o elemento LCP no desktop, e o AOS a
+           segurava invisível — 718ms de render delay medidos no Lighthouse.
+           O LCP não pode esperar enfeite de entrada (item 1 do lote A). -->
+      <!-- <picture> e não duas <img>: o atributo media em <img> NÃO existe —
+           era decorativo — e display:none não impede download, então as duas
+           artes baixavam em toda largura (mesmo mecanismo da tarja, commit
+           544daee). O media bate com o breakpoint de 1080 do home.css. O
+           width/height vai no <source>: as artes têm razões opostas
+           (1920x900 e 979x1741) e o navegador usa o par da source que casou.
+           %20 no srcset: espaço cru invalida o candidato. -->
+      <picture>
+        <source media="(min-width: 1080px)" srcset="./assets/bg%20desktop.avif" width="1920" height="900">
+        <img width="979" height="1741" fetchpriority="high" src="./assets/bg mobile.avif" alt="">
+      </picture>
 
     </div>
 
@@ -410,7 +870,7 @@
        ============================================================ -->
   <!--
   <section id="cards">
-    <img class="bgsection" src="./assets/bg2.webp" alt="">
+    <img class="bgsection" src="./assets/bg2-1920.webp" alt="">
 
     <div class="wrapper">
       <div class="content">
@@ -512,8 +972,10 @@
   </section>
   -->
 
-  <section id="ba">
-    <img class="bgsection" loading="lazy" decoding="async" aria-hidden="true" src="./assets/bgsection v2.avif" alt="">
+  <section id="ba" class="secao--divisor secao--divisor-candles">
+    <!-- Divisor de seção (fase 9, css/divisor.css): o topo do #ba sobe por
+         cima do #divisa, recortado em barras de candle. -->
+    <img width="1920" height="885" class="bgsection" loading="lazy" decoding="async" aria-hidden="true" src="./assets/bgsection v2-1920.avif" alt="">
 
     <div class="ba-ambient" aria-hidden="true">
       <div class="ba-blob ba-blob--1"></div>
@@ -530,7 +992,7 @@
         <!-- Vídeo esquerda -->
         <div class="ba-card ba-card--video ba-card--video-a">
           <div class="ba-card__overlay"></div>
-          <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+          <video width="720" height="1280" poster="./assets/poster-academy-1-560.avif" muted loop playsinline webkit-playsinline preload="none">
             <source src="./assets/academy 1.webm" type="video/webm" />
             <source src="./assets/academy 1.mp4" type="video/mp4" />
           </video>
@@ -539,10 +1001,10 @@
         <!-- Card hero -->
         <div class="ba-card ba-card--hero">
           <div class="ba-card__inner">
-            <h2 class="ba-hero__title">ACADEMY PASS</h2>
+            <h3 class="ba-hero__title">ACADEMY PASS</h3>
             <p class="ba-hero__desc">Seu crescimento com conteúdos, livros e treinamentos personalizados pra quem vive de Day Trade</p>
           </div>
-          <video class="ba-hero__bg-video" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true">
+          <video class="ba-hero__bg-video" width="1920" height="900" poster="./assets/poster-tela-carregamento.avif" muted loop playsinline webkit-playsinline preload="none" aria-hidden="true">
             <source src="./assets/TELA CARREGAMENTO.webm" type="video/webm" />
             <source src="./assets/TELA CARREGAMENTO.mp4" type="video/mp4" />
           </video>
@@ -551,7 +1013,7 @@
         <!-- Vídeo direita -->
         <div class="ba-card ba-card--video ba-card--video-b">
           <div class="ba-card__overlay"></div>
-          <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+          <video width="720" height="1280" poster="./assets/poster-academy-2-560.avif" muted loop playsinline webkit-playsinline preload="none">
             <source src="./assets/academy 2.webm" type="video/webm" />
             <source src="./assets/academy 2.mp4" type="video/mp4" />
           </video>
@@ -562,39 +1024,42 @@
       <!-- Trio de benefícios — 3 colunas iguais -->
       <div class="ba-trio">
 
-        <div class="ba-card ba-card--info">
-          <img class="ba-card__bg" loading="lazy" decoding="async" src="./assets/magnific_photo-a-30yearold-black-m_WMnzkqhcXe.png" alt="Alavancagem">
-          <div class="ba-card__overlay"></div>
-          <div class="ba-card__inner">
-            <div class="ba-info__head">
-              <h3 class="ba-info__title">Alavancagem</h3>
-              <ion-icon class="ba-info__arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+        <div class="ba-card ba-card--info card-beneficio">
+          <!-- os degraus 400/800 saem do sharp; a variante 1200 saiu MAIOR que a
+           original (73KB x 53KB — a original já foi codificada dura), então o
+           topo do srcset é a própria original -->
+          <img width="1536" height="2752" class="ba-card__bg card-beneficio__fundo" loading="lazy" decoding="async" src="./assets/magnific_photo-a-30yearold-black-m_WMnzkqhcXe.avif" srcset="./assets/magnific_photo-a-30yearold-black-m_WMnzkqhcXe-400.avif 400w, ./assets/magnific_photo-a-30yearold-black-m_WMnzkqhcXe-800.avif 800w, ./assets/magnific_photo-a-30yearold-black-m_WMnzkqhcXe.avif 1536w" sizes="(min-width: 1080px) 26vw, (min-width: 640px) 46vw, 87vw" alt="">
+          <div class="ba-card__overlay card-beneficio__veu"></div>
+          <div class="ba-card__inner card-beneficio__corpo">
+            <div class="ba-info__head card-beneficio__cabeca">
+              <h3 class="ba-info__title card-beneficio__titulo">Alavancagem</h3>
+              <ion-icon class="ba-info__arrow card-beneficio__seta" name="arrow-forward-outline" aria-hidden="true"></ion-icon>
             </div>
-            <p class="ba-info__desc">A maneira mais inteligente e segura de entrar no mercado de Day Trade. Na Zero7 você opera contas <span>20x maiores</span> em relação ao capital alocado em sua conta pessoal.</p>
+            <p class="ba-info__desc card-beneficio__descricao">A maneira mais inteligente e segura de entrar no mercado de Day Trade. Na Zero7 você opera contas <span>20x maiores</span> em relação ao capital alocado em sua conta pessoal.</p>
           </div>
         </div>
 
-        <div class="ba-card ba-card--info">
-          <img class="ba-card__bg" loading="lazy" decoding="async" src="./assets/magnific_photo-a-man-wearing-a-blu_brHFYEu5Y2.png" alt="Conta real">
-          <div class="ba-card__overlay"></div>
-          <div class="ba-card__inner">
-            <div class="ba-info__head">
-              <h3 class="ba-info__title">Conta real</h3>
-              <ion-icon class="ba-info__arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+        <div class="ba-card ba-card--info card-beneficio">
+          <img width="1086" height="1448" class="ba-card__bg card-beneficio__fundo" loading="lazy" decoding="async" src="./assets/magnific_photo-a-man-wearing-a-blu_brHFYEu5Y2.avif" srcset="./assets/magnific_photo-a-man-wearing-a-blu_brHFYEu5Y2-400.avif 400w, ./assets/magnific_photo-a-man-wearing-a-blu_brHFYEu5Y2.avif 1086w" sizes="(min-width: 1080px) 26vw, (min-width: 640px) 46vw, 87vw" alt="">
+          <div class="ba-card__overlay card-beneficio__veu"></div>
+          <div class="ba-card__inner card-beneficio__corpo">
+            <div class="ba-info__head card-beneficio__cabeca">
+              <h3 class="ba-info__title card-beneficio__titulo">Conta real</h3>
+              <ion-icon class="ba-info__arrow card-beneficio__seta" name="arrow-forward-outline" aria-hidden="true"></ion-icon>
             </div>
-            <p class="ba-info__desc">A estrutura da Zero7 foi desenvolvida para que os traders realmente operem em conta real e se tornem profissionais. Além de receberem prêmios como incentivo durante as fases de avaliação, no ambiente de conta real ficam com <span>100% dos lucros</span>.</p>
+            <p class="ba-info__desc card-beneficio__descricao">A estrutura da Zero7 foi desenvolvida para que os traders realmente operem em conta real e se tornem profissionais. Além de receberem prêmios como incentivo durante as fases de avaliação, no ambiente de conta real ficam com <span>100% dos lucros</span>.</p>
           </div>
         </div>
 
-        <div class="ba-card ba-card--info">
-          <img class="ba-card__bg" loading="lazy" decoding="async" src="./assets/o4rijghi4rugh4riuhjg.png" alt="Plano de carreira">
-          <div class="ba-card__overlay"></div>
-          <div class="ba-card__inner">
-            <div class="ba-info__head">
-              <h3 class="ba-info__title">Plano de carreira</h3>
-              <ion-icon class="ba-info__arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+        <div class="ba-card ba-card--info card-beneficio">
+          <img width="1856" height="1607" class="ba-card__bg card-beneficio__fundo" loading="lazy" decoding="async" src="./assets/o4rijghi4rugh4riuhjg.avif" srcset="./assets/o4rijghi4rugh4riuhjg-400.avif 400w, ./assets/o4rijghi4rugh4riuhjg-800.avif 800w, ./assets/o4rijghi4rugh4riuhjg-1200.avif 1200w, ./assets/o4rijghi4rugh4riuhjg.avif 1856w" sizes="(min-width: 1080px) 26vw, (min-width: 640px) 46vw, 87vw" alt="">
+          <div class="ba-card__overlay card-beneficio__veu"></div>
+          <div class="ba-card__inner card-beneficio__corpo">
+            <div class="ba-info__head card-beneficio__cabeca">
+              <h3 class="ba-info__title card-beneficio__titulo">Plano de carreira</h3>
+              <ion-icon class="ba-info__arrow card-beneficio__seta" name="arrow-forward-outline" aria-hidden="true"></ion-icon>
             </div>
-            <p class="ba-info__desc">Cresça aqui dentro da Zero7, <span>sem pagar mais nenhum real</span> por isso. A cada 3 meses consistentes de forma consecutiva e com lucro líquido em um dos nossos planos, solicite migração para o plano subsequente. A partir do Plano Sênior, a cada 3 meses consistentes de forma consecutiva e com lucro líquido, solicite aumento de 10 contratos, onde proporcionalmente aumentará seus limites de perda diária e total.</p>
+            <p class="ba-info__desc card-beneficio__descricao">Cresça aqui dentro da Zero7, <span>sem pagar mais nenhum real</span> por isso. A cada 3 meses consistentes de forma consecutiva e com lucro líquido em um dos nossos planos, solicite migração para o plano subsequente. A partir do Plano Sênior, a cada 3 meses consistentes de forma consecutiva e com lucro líquido, solicite aumento de 10 contratos, onde proporcionalmente aumentará seus limites de perda diária e total.</p>
           </div>
         </div>
 
@@ -603,7 +1068,7 @@
   </section>
 
   <section id="topicos">
-    <img loading="lazy" decoding="async" aria-hidden="true" class="bgsection" src="./assets/bg planos white.avif" alt="">
+    <img width="1920" height="1080" loading="lazy" decoding="async" aria-hidden="true" class="bgsection" src="./assets/bg planos white.avif" alt="">
 
     <div class="wrapper">
       <div class="content">
@@ -614,45 +1079,45 @@
 
       <div class="cards">
         <div data-aos="fade-up-right" class="card">
-          <img alt="Processo de avaliação da Zero7" loading="lazy" src="./assets/PROCESSODEAVALIACAO.webp">
+          <img width="1920" height="1080" alt="Processo de avaliação da Zero7" loading="lazy" src="./assets/PROCESSODEAVALIACAO-1300.avif">
 
           <div class="text">
             <p>Etapa para <span>aplicar sua técnica de operações</span> e <span>alcançar a meta estipulada</span> no plano contratado. Todos os planos contam com um gerenciamento de risco específico, e os traders que alcançam a meta <span>respeitando o nosso GR</span>, alcançam altos voos no universo do trading, já que ele foi validado para que os traders cheguem mais longe. Todos os planos contam com um <span>prazo em dias corridos para chegar até a meta</span>. Após completar esta etapa, os traders <span>passam para a fase de incubadora</span>.</p>
 
-            <a class="z7-btnx" target="_blank" href="https://zero7.com.br/regulamento/" role="button" aria-label="Ver Regulamento">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
+            <a class="z7-btnx btn btn--md btn--primaria btn--bloco btn--centro btn--acento" target="_blank" rel="noopener" href="https://zero7.com.br/regulamento/" role="button" aria-label="Ver Regulamento">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
 
-              <span class="z7-btnx__label">Ver Regulamento</span>
+              <span class="z7-btnx__label btn__label">Ver Regulamento</span>
 
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
         </div>
 
         <div data-aos="fade-up" class="card">
-          <img alt="Incubadora Zero7" loading="lazy" src="./assets/INCUBADORA.webp">
+          <img width="1920" height="1080" alt="Incubadora Zero7" loading="lazy" src="./assets/INCUBADORA.avif">
 
           <div class="text">
             <p>Só de estar nesta etapa, os traders já <span>demonstram muito talento</span>. E esse é o ambiente ideal para, agora, <span>provar a sua consistência</span>. O ambiente de operações ainda é simulado, e o objetivo dos traders é <span>construir margem para ir para conta real</span>. Nesta etapa ainda podem receber um prêmio em dinheiro pela sua performance a cada ciclo de 30 dias. Suas contas são monitoradas, e ao final de cada ciclo e o alcance da margem para conta real, os <span>traders são analisados pelo nosso time de risco</span>, e então, avançam para nossa conta real.</p>
 
-            <a class="z7-btnx" target="_blank" href="https://zero7.com.br/regulamento/" role="button" aria-label="Ver Regulamento">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
+            <a class="z7-btnx btn btn--md btn--primaria btn--bloco btn--centro btn--acento" target="_blank" rel="noopener" href="https://zero7.com.br/regulamento/" role="button" aria-label="Ver Regulamento">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
 
-              <span class="z7-btnx__label">Ver Regulamento</span>
+              <span class="z7-btnx__label btn__label">Ver Regulamento</span>
 
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
         </div>
 
         <div data-aos="fade-up-left" class="card">
-          <img  alt="Conta Real Zero7" loading="lazy" src="./assets/CONTAREAL.webp">
+          <img width="1920" height="1080"  alt="Conta Real Zero7" loading="lazy" src="./assets/CONTAREAL.avif">
 
           <div class="text">
             <p>Ambiente para os verdadeiros traders que demonstraram que <span>suas habilidades valem muito dinheiro</span>. O
@@ -662,14 +1127,14 @@
               quantidade de dias operados ou valor financeiro alcançado. E avançando em nosso plano de carreira, os
               traders <span>não precisam investir</span> nem mais um real, para operarem contratos ilimitados dentro da Zero7.</p>
 
-            <a class="z7-btnx" target="_blank" href="https://zero7.com.br/regulamento/" role="button" aria-label="Ver Regulamento">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
+            <a class="z7-btnx btn btn--md btn--primaria btn--bloco btn--centro btn--acento" target="_blank" rel="noopener" href="https://zero7.com.br/regulamento/" role="button" aria-label="Ver Regulamento">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
 
-              <span class="z7-btnx__label">Ver Regulamento</span>
+              <span class="z7-btnx__label btn__label">Ver Regulamento</span>
 
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -679,34 +1144,34 @@
   </section>
   
   <section id="depoimentos">
-    <img loading="lazy" decoding="async" aria-hidden="true" class="bgsection mobile" src="./assets/bg depo mobile.avif" alt="">
-    <img loading="lazy" decoding="async" aria-hidden="true" class="bgsection desktop" src="./assets/bg depo desktop.avif" alt="">
+    <img width="1080" height="2122" loading="lazy" decoding="async" aria-hidden="true" class="bgsection mobile" src="./assets/bg depo mobile.avif" alt="">
+    <img width="1920" height="714" loading="lazy" decoding="async" aria-hidden="true" class="bgsection desktop" src="./assets/bg depo desktop.avif" alt="">
 
     <div class="wrapper header">
       <div class="content">
         <div data-aos="fade-up" class="cards">
           <div class="card depoimento" data-video="https://www.youtube.com/embed/ShcucfOriyI">
-            <img alt="Depoimento de trader da Zero7" loading="lazy" decoding="async" src="./assets/depoimentos/1.avif" alt="">
+            <img width="476" height="590" alt="Depoimento em vídeo de Jhone Mayco: +R$ 47.179,57" loading="lazy" decoding="async" src="./assets/depoimentos/1.avif">
           </div>
 
           <div class="card depoimento" data-video="https://www.youtube.com/embed/QVpL1JFxrw0">
-            <img alt="Depoimento de trader da Zero7" loading="lazy" decoding="async" src="./assets/depoimentos/2.avif" alt="">
+            <img width="476" height="590" alt="Depoimento em vídeo de Josivan Lima: +R$ 4.492,87" loading="lazy" decoding="async" src="./assets/depoimentos/2.avif">
           </div>
 
           <div class="card depoimento" data-video="https://www.youtube.com/embed/ugqDbiOHej8">
-            <img alt="Depoimento de trader da Zero7" loading="lazy" decoding="async" src="./assets/depoimentos/3.avif" alt="">
+            <img width="476" height="590" alt="Depoimento em vídeo de Luiz G. Neves Jesus: +R$ 22.971,86" loading="lazy" decoding="async" src="./assets/depoimentos/3.avif">
           </div>
 
           <div class="card depoimento" data-video="https://www.youtube.com/embed/xhlykTHDCzU">
-            <img alt="Depoimento de trader da Zero7" loading="lazy" decoding="async" src="./assets/depoimentos/4.avif" alt="">
+            <img width="476" height="590" alt="Depoimento em vídeo de Fernando T. Silva: +R$ 20.001,92" loading="lazy" decoding="async" src="./assets/depoimentos/4.avif">
           </div>
 
           <div class="card depoimento" data-video="https://www.youtube.com/embed/cHUaUY76x9U">
-            <img alt="Depoimento de trader da Zero7" loading="lazy" decoding="async" src="./assets/depoimentos/5.avif" alt="">
+            <img width="476" height="590" alt="Depoimento em vídeo de Marcelo Augusto Lima: +R$ 5.974,33" loading="lazy" decoding="async" src="./assets/depoimentos/5.avif">
           </div>
 
           <div class="card depoimento" data-video="https://www.youtube.com/embed/8OK7I1S1URY">
-            <img alt="Depoimento de trader da Zero7" loading="lazy" decoding="async" src="./assets/depoimentos/6.avif" alt="">
+            <img width="476" height="590" alt="Depoimento em vídeo de Iago Zandone Silva: +R$ 7.500,17" loading="lazy" decoding="async" src="./assets/depoimentos/6.avif">
           </div>
         </div>
 
@@ -715,14 +1180,14 @@
           <p>A Zero7 desenvolveu um <span>modelo totalmente único</span> para se operar. Aqui, traders podem ter acesso a grandes contas, com muitos lotes, mas <span>pagando até 20 vezes</span> menos do que o valor que teriam que disponibilizar em suas contas pessoais. Depois de aprovados na avaliação - com 60 dias para finalizar -, os traders iniciam sua jornada na mesa através da Incubadora, onde podem operar em ambiente simulado mas <span>recebendo prêmios pela sua performance</span>, sem risco nenhum ao seu próprio capital. Depois, podem progredir para a conta real e avançarem com um plano de carreira <span>desenhado para terem cada vez mais lucros</span>. A <span>Zero7 conta ainda com inúmeros benefícios</span>, como Aprovação Permanente, treinamentos e cursos completos disponíveis na Área do Trader.
 </p>
 
-          <a class="z7-btnx" href="#plan" role="button" aria-label="Contrate um plano">
-            <span class="z7-btnx__bg" aria-hidden="true"></span>
-            <span class="z7-btnx__shine" aria-hidden="true"></span>
+          <a class="z7-btnx btn btn--lg btn--primaria" href="#plan" role="button" aria-label="Contrate um plano">
+            <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+            <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
 
-            <span class="z7-btnx__label">Contrate um plano</span>
+            <span class="z7-btnx__label btn__label">Contrate um plano</span>
 
-            <span class="z7-btnx__cap" aria-hidden="true">
-              <span class="z7-btnx__arrow">→</span>
+            <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+              <span class="z7-btnx__arrow btn__arrow">→</span>
             </span>
           </a>
         </header>
@@ -738,15 +1203,26 @@
   </div>
 
     <!-- PLANOS — Mini Índice/Dólar + Bitcoin (dobra unificada) -->
-  <section id="plan" class="planos tema" data-asset="indice">
-    <img class="bg bg--ativo bg--indice" src="./assets/bgsection v2.avif" alt="">
-    <img class="bg bg--ativo bg--bit" loading="lazy" decoding="async" aria-hidden="true" src="./assets/bg planos white.webp" alt="">
+  <section id="plan" class="planos tema secao--divisor-candles secao--divisor-desce" data-asset="indice">
+    <img width="1920" height="1080" class="bg bg--ativo bg--indice" src="./assets/bg2-1920.webp" alt="">
+    <img width="1920" height="1080" class="bg bg--ativo bg--bit" loading="lazy" decoding="async" aria-hidden="true" src="./assets/bg planos white.webp" alt="">
 
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
+          <!-- Estes 507KB nunca vieram do popup: o popup está comentado lá em
+               cima, e a arte dele nem existe mais na pasta. São o par do
+               cross-fade black x white desta seção, achados pelo PARSER aos
+               337ms — a milhares de pixels da primeira tela, no celular.
+               loading=lazy tira os dois da janela inicial, igual ao par de
+               fundos .bg--ativo duas linhas acima. O width/height é a razão
+               real de cada arte (4138x1137 e 4138x1118, razões diferentes):
+               sem ele a célula nasceria com altura 0 e o cupom empurraria o
+               layout ao chegar. A largura continua vindo do CSS (30rem), a
+               caixa medida não muda, e a arte, o link e a lógica da campanha
+               ficam como estão. -->
           <div class="cupom-wrap">
-            <img class="cupom" src="./assets/tarjapopup/cupom profit white.avif" alt="">
-            <img class="cupom white" src="./assets/tarjapopup/cupom profit black.avif" alt="" aria-hidden="true">
+            <img class="cupom" width="4483" height="1630" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom profit white.avif" alt="">
+            <img class="cupom white" width="4351" height="1433" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom profit black.avif" alt="" aria-hidden="true">
           </div>
       </div>
 
@@ -795,31 +1271,31 @@
             <div class="title"><h3>TRAINEE</h3></div>
 
             <div class="topics">
-              <div class="topic-box"><span class="topic-label">Limite por operação</span><span class="topic-value">8 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WIN</span><span class="topic-value">5 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WDO</span><span class="topic-value">3 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda diária</span><span class="topic-value">R$ 247,00</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda total</span><span class="topic-value">R$ 997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Meta de aprovação</span><span class="topic-value">R$ 997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Máximo de dias</span><span class="topic-value js-max-dias">60</span></div>
-              <div class="topic-box"><span class="topic-label">Repasse</span><span class="topic-value">100% em conta real</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">8 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">5 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">3 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 247,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
+              <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
             </div>
 
             <div class="oldPrice">
-              <h4>de <span class="js-old-price">R$ 567,00</span> por</h4>
+              <p class="oldPrice__texto">de <span class="js-old-price">R$ 567,00</span> por</p>
             </div>
 
             <div class="price">
-              <h4 class="js-price-parcel"><span>12x</span> R$15,11</h4>
-              <h5 class="js-price-avista"><span>ou</span> R$151,11 <span>à vista</span></h5>
+              <p class="js-price-parcel"><span>12x</span> R$13,04</p>
+              <p class="js-price-avista"><span>ou</span> R$130,41 <span>à vista</span></p>
             </div>
 
-            <a target="_blank" href="" class="z7-btnx js-checkout link4Selet" role="button" aria-label="Contratar plano Trainee">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">CONTRATAR PLANO <span>(TRAINEE)</span></span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+            <a target="_blank" rel="noopener" href="" class="z7-btnx js-checkout link4Selet btn btn--lg btn--primaria btn--bloco" role="button" aria-label="Contratar plano Trainee">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">CONTRATAR PLANO <span>(TRAINEE)</span></span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -829,31 +1305,31 @@
             <div class="title"><h3>JÚNIOR</h3></div>
 
             <div class="topics">
-              <div class="topic-box"><span class="topic-label">Limite por operação</span><span class="topic-value">16 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WIN</span><span class="topic-value">10 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WDO</span><span class="topic-value">6 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda diária</span><span class="topic-value">R$ 497,00</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda total</span><span class="topic-value">R$ 1.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Meta de aprovação</span><span class="topic-value">R$ 1.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Máximo de dias</span><span class="topic-value js-max-dias">60</span></div>
-              <div class="topic-box"><span class="topic-label">Repasse</span><span class="topic-value">100% em conta real</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">16 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">10 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">6 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 497,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 1.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 1.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
+              <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
             </div>
 
             <div class="oldPrice">
-              <h4>de <span class="js-old-price">R$ 827,00</span> por</h4>
+              <p class="oldPrice__texto">de <span class="js-old-price">R$ 827,00</span> por</p>
             </div>
 
             <div class="price">
-              <h4 class="js-price-parcel"><span>12x</span> R$22,01</h4>
-              <h5 class="js-price-avista"><span>ou</span> R$220,11 <span>à vista</span></h5>
+              <p class="js-price-parcel"><span>12x</span> R$19,02</p>
+              <p class="js-price-avista"><span>ou</span> R$190,21 <span>à vista</span></p>
             </div>
 
-            <a target="_blank" href="" class="z7-btnx js-checkout link4Selet" role="button" aria-label="Contratar plano Trainee">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">CONTRATAR PLANO <span>(JUNIOR)</span></span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+            <a target="_blank" rel="noopener" href="" class="z7-btnx js-checkout link4Selet btn btn--lg btn--primaria btn--bloco" role="button" aria-label="Contratar plano Júnior">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">CONTRATAR PLANO <span>(JUNIOR)</span></span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -864,31 +1340,31 @@
             <div class="title"><h3>PLENO</h3></div>
 
             <div class="topics">
-              <div class="topic-box"><span class="topic-label">Limite por operação</span><span class="topic-value">40 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WIN</span><span class="topic-value">25 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WDO</span><span class="topic-value">15 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda diária</span><span class="topic-value">R$ 1.247,00</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda total</span><span class="topic-value">R$ 4.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Meta de aprovação</span><span class="topic-value">R$ 4.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Máximo de dias</span><span class="topic-value js-max-dias">60</span></div>
-              <div class="topic-box"><span class="topic-label">Repasse</span><span class="topic-value">100% em conta real</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">40 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">25 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">15 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 1.247,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 4.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 4.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
+              <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
             </div>
 
             <div class="oldPrice">
-              <h4>de <span class="js-old-price">R$ 1.667,00</span> por</h4>
+              <p class="oldPrice__texto">de <span class="js-old-price">R$ 1.667,00</span> por</p>
             </div>
 
             <div class="price">
-              <h4 class="js-price-parcel"><span>12x</span> R$44,09</h4>
-              <h5 class="js-price-avista"><span>ou</span> R$440,91 <span>à vista</span></h5>
+              <p class="js-price-parcel"><span>12x</span> R$38,34</p>
+              <p class="js-price-avista"><span>ou</span> R$383,41 <span>à vista</span></p>
             </div>
 
-            <a target="_blank" href="" class="z7-btnx js-checkout link4Selet" role="button" aria-label="Contratar plano Pleno">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">CONTRATAR PLANO <span>(PLENO)</span></span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+            <a target="_blank" rel="noopener" href="" class="z7-btnx js-checkout link4Selet btn btn--lg btn--primaria btn--bloco" role="button" aria-label="Contratar plano Pleno">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">CONTRATAR PLANO <span>(PLENO)</span></span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -901,31 +1377,31 @@
             <div class="card-tarja">Nossos traders mais positivos operam o plano Sênior</div>
 
             <div class="topics">
-              <div class="topic-box"><span class="topic-label">Limite por operação</span><span class="topic-value">80 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WIN</span><span class="topic-value">50 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WDO</span><span class="topic-value">30 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda diária</span><span class="topic-value">R$ 2.497,00</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda total</span><span class="topic-value">R$ 9.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Meta de aprovação</span><span class="topic-value">R$ 9.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Máximo de dias</span><span class="topic-value js-max-dias">60</span></div>
-              <div class="topic-box"><span class="topic-label">Repasse</span><span class="topic-value">100% em conta real</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">80 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">50 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">30 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 2.497,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 9.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 9.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
+              <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
             </div>
 
             <div class="oldPrice">
-              <h4>de <span class="js-old-price">R$ 2.767,00</span> por</h4>
+              <p class="oldPrice__texto">de <span class="js-old-price">R$ 2.767,00</span> por</p>
             </div>
 
             <div class="price">
-              <h4 class="js-price-parcel"><span>12x</span> R$73,30</h4>
-              <h5 class="js-price-avista"><span>ou</span> R$733,01 <span>à vista</span></h5>
+              <p class="js-price-parcel"><span>12x</span> R$63,64</p>
+              <p class="js-price-avista"><span>ou</span> R$636,41 <span>à vista</span></p>
             </div>
 
-            <a target="_blank" href="" class="z7-btnx js-checkout link4Selet" role="button" aria-label="Contratar plano Trainee">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">CONTRATAR PLANO <span>(SÊNIOR)</span></span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+            <a target="_blank" rel="noopener" href="" class="z7-btnx js-checkout link4Selet btn btn--lg btn--primaria btn--bloco" role="button" aria-label="Contratar plano Sênior">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">CONTRATAR PLANO <span>(SÊNIOR)</span></span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -935,31 +1411,31 @@
             <div class="title"><h3>EXPERT</h3></div>
 
             <div class="topics">
-              <div class="topic-box"><span class="topic-label">Limite por operação</span><span class="topic-value">120 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WIN</span><span class="topic-value">75 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WDO</span><span class="topic-value">45 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda diária</span><span class="topic-value">R$ 3.747,00</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda total</span><span class="topic-value">R$ 14.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Meta de aprovação</span><span class="topic-value">R$ 14.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Máximo de dias</span><span class="topic-value js-max-dias">60</span></div>
-              <div class="topic-box"><span class="topic-label">Repasse</span><span class="topic-value">100% em conta real</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">120 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">75 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">45 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 3.747,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 14.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 14.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
+              <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
             </div>
 
             <div class="oldPrice">
-              <h4>de <span class="js-old-price">R$ 4.417,00</span> por</h4>
+              <p class="oldPrice__texto">de <span class="js-old-price">R$ 4.417,00</span> por</p>
             </div>
 
             <div class="price">
-              <h4 class="js-price-parcel"><span>12x</span> R$116,77</h4>
-              <h5 class="js-price-avista"><span>ou</span> R$1.167,71 <span>à vista</span></h5>
+              <p class="js-price-parcel"><span>12x</span> R$101,59</p>
+              <p class="js-price-avista"><span>ou</span> R$1.015,91 <span>à vista</span></p>
             </div>
 
-            <a target="_blank" href="" class="z7-btnx js-checkout link4Selet" role="button" aria-label="Contratar plano Trainee">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">CONTRATAR PLANO <span>(EXPERT)</span></span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+            <a target="_blank" rel="noopener" href="" class="z7-btnx js-checkout link4Selet btn btn--lg btn--primaria btn--bloco" role="button" aria-label="Contratar plano Expert">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">CONTRATAR PLANO <span>(EXPERT)</span></span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -969,41 +1445,43 @@
             <div class="title"><h3>MASTER</h3></div>
 
             <div class="topics">
-              <div class="topic-box"><span class="topic-label">Limite por operação</span><span class="topic-value">160 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WIN</span><span class="topic-value">100 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite para WDO</span><span class="topic-value">60 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda diária</span><span class="topic-value">R$ 4.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda total</span><span class="topic-value">R$ 19.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Meta de aprovação</span><span class="topic-value">R$ 19.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Máximo de dias</span><span class="topic-value js-max-dias">60</span></div>
-              <div class="topic-box"><span class="topic-label">Repasse</span><span class="topic-value">100% em conta real</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">160 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">100 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">60 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 4.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 19.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 19.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
+              <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
             </div>
 
             <div class="oldPrice">
-              <h4>de <span class="js-old-price">R$ 5.397,00</span> por</h4>
+              <p class="oldPrice__texto">de <span class="js-old-price">R$ 5.397,00</span> por</p>
             </div>
 
             <div class="price">
-              <h4 class="js-price-parcel"><span>12x</span> R$142,76</h4>
-              <h5 class="js-price-avista"><span>ou</span> R$1.427,61 <span>à vista</span></h5>
+              <p class="js-price-parcel"><span>12x</span> R$124,13</p>
+              <p class="js-price-avista"><span>ou</span> R$1.241,31 <span>à vista</span></p>
             </div>
 
-            <a target="_blank" href="" class="z7-btnx js-checkout link4Selet" role="button" aria-label="Contratar plano Trainee">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">CONTRATAR PLANO <span>(MASTER)</span></span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+            <a target="_blank" rel="noopener" href="" class="z7-btnx js-checkout link4Selet btn btn--lg btn--primaria btn--bloco" role="button" aria-label="Contratar plano Master">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">CONTRATAR PLANO <span>(MASTER)</span></span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
 
         </div>
 
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev btn btn--md btn--secundaria btn--icone"></div>
+        <div class="swiper-button-next btn btn--md btn--secundaria btn--icone"></div>
       </div>
+
+      <!-- Indicadores de plano: o global.js monta aqui um botão por plano -->
+      <div class="swiper-pagination"></div>
     </div>
 
     <p class="obs">
@@ -1025,29 +1503,29 @@
             <div class="title"><h3>BIT 8</h3></div>
 
             <div class="topics">
-              <div class="topic-box"><span class="topic-label">Limite por operação</span><span class="topic-value">8 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda diária</span><span class="topic-value">R$ 247,00</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda total</span><span class="topic-value">R$ 997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Meta de aprovação</span><span class="topic-value">R$ 997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Máximo de dias</span><span class="topic-value js-max-dias">60</span></div>
-              <div class="topic-box"><span class="topic-label">Repasse</span><span class="topic-value">100% em conta real</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">8 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 247,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
+              <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
             </div>
 
             <div class="oldPrice">
-              <h4>de <span class="js-old-price">R$ 567,00</span> por</h4>
+              <p class="oldPrice__texto">de <span class="js-old-price">R$ 567,00</span> por</p>
             </div>
 
             <div class="price">
-              <h4 class="js-price-parcel"><span>12x</span> R$15,11</h4>
-              <h5 class="js-price-avista"><span>ou</span> R$151,11 <span>à vista</span></h5>
+              <p class="js-price-parcel"><span>12x</span> R$13,04</p>
+              <p class="js-price-avista"><span>ou</span> R$130,41 <span>à vista</span></p>
             </div>
 
-             <a target="_blank" href="" class="z7-btnx js-checkout" role="button" aria-label="Contratar plano BIT 8">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">CONTRATAR PLANO <span>(BIT 8)</span></span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+             <a target="_blank" rel="noopener" href="" class="z7-btnx js-checkout btn btn--lg btn--primaria btn--bloco" role="button" aria-label="Contratar plano BIT 8">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">CONTRATAR PLANO <span>(BIT 8)</span></span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -1057,46 +1535,48 @@
             <div class="title"><h3>BIT 16</h3></div>
 
             <div class="topics">
-              <div class="topic-box"><span class="topic-label">Limite por operação</span><span class="topic-value">16 contratos</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda diária</span><span class="topic-value">R$ 497,00</span></div>
-              <div class="topic-box"><span class="topic-label">Limite de perda total</span><span class="topic-value">R$ 1.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Meta de aprovação</span><span class="topic-value">R$ 1.997,00</span></div>
-              <div class="topic-box"><span class="topic-label">Máximo de dias</span><span class="topic-value js-max-dias">60</span></div>
-              <div class="topic-box"><span class="topic-label">Repasse</span><span class="topic-value">100% em conta real</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">16 contratos</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 497,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 1.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 1.997,00</span></div>
+              <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
+              <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
             </div>
 
             <div class="oldPrice">
-              <h4>de <span class="js-old-price">R$ 827,00</span> por</h4>
+              <p class="oldPrice__texto">de <span class="js-old-price">R$ 827,00</span> por</p>
             </div>
 
             <div class="price">
-              <h4 class="js-price-parcel"><span>12x</span> R$22,01</h4>
-              <h5 class="js-price-avista"><span>ou</span> R$220,11 <span>à vista</span></h5>
+              <p class="js-price-parcel"><span>12x</span> R$19,02</p>
+              <p class="js-price-avista"><span>ou</span> R$190,21 <span>à vista</span></p>
             </div>
 
-             <a target="_blank" href="" class="z7-btnx js-checkout" role="button" aria-label="Contratar plano BIT 8">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">CONTRATAR PLANO <span>(BIT 16)</span></span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+             <a target="_blank" rel="noopener" href="" class="z7-btnx js-checkout btn btn--lg btn--primaria btn--bloco" role="button" aria-label="Contratar plano BIT 16">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">CONTRATAR PLANO <span>(BIT 16)</span></span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
 
         </div>
 
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev btn btn--md btn--secundaria btn--icone"></div>
+        <div class="swiper-button-next btn btn--md btn--secundaria btn--icone"></div>
       </div>
+
+      <!-- Indicadores de plano: o global.js monta aqui um botão por plano -->
+      <div class="swiper-pagination"></div>
     </div>
 
     </div><!-- /.plano-asset--bit -->
   </section>
 
-  <section id="faq">
-    <img loading="lazy" decoding="async" aria-hidden="true" class="bg" src="./assets/bgsection v2.avif" alt="">
+  <section id="faq" class="secao--divisor-recebe">
+    
 
     <div class="wrapper">
       <div class="content">
@@ -1122,7 +1602,7 @@
         <div class="faq__results" id="faqResults" hidden>
           <div class="faq__results-header">
             <span id="faqResultsCount">0 resultados</span>
-            <button type="button" class="faq__clear" id="faqClearSearch">Limpar busca</button>
+            <button type="button" class="faq__clear btn btn--md btn--texto" id="faqClearSearch">Limpar busca</button>
           </div>
           <ul class="faq__results-list" id="faqResultsList"></ul>
         </div>
@@ -1135,42 +1615,17 @@
             <div class="faq__skeleton-card"></div>
           </div>
         </div>
-
-        <div class="faq__pagination" id="faqPagination" hidden>
-          <button type="button" class="faq__pagination-btn" id="faqPrev" aria-label="Página anterior">
-            <ion-icon name="chevron-back-outline"></ion-icon>
-          </button>
-          <span class="faq__pagination-info">
-            <span id="faqPageCurrent">1</span> / <span id="faqPageTotal">1</span>
-          </span>
-          <button type="button" class="faq__pagination-btn" id="faqNext" aria-label="Próxima página">
-            <ion-icon name="chevron-forward-outline"></ion-icon>
-          </button>
-        </div>
-
-        <div class="faq__cta" data-aos="fade-up">
-          <a
-            href="https://ajuda.zero7.com.br/hc/pt-br"
-            target="_blank"
-            rel="noopener"
-            class="faq__cta-link"
-          >
-            Acessar a Central de Ajuda completa
-            <ion-icon name="arrow-forward-outline"></ion-icon>
-          </a>
-        </div>
       </div>
     </div>
 
-    <div class="faq__modal" id="faqModal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="faqModalTitle">
-      <div class="faq__modal-backdrop" data-faq-close></div>
+    <dialog class="faq__modal" id="faqModal" aria-labelledby="faqModalTitle">
       <div class="faq__modal-panel" data-lenis-prevent>
-        <button type="button" class="faq__modal-close" data-faq-close aria-label="Fechar">
+        <button type="button" class="faq__modal-close faq__seta" data-faq-close aria-label="Fechar">
           <ion-icon name="close-outline"></ion-icon>
         </button>
         <div class="faq__modal-content">
           <span class="faq__modal-breadcrumb" id="faqModalBreadcrumb"></span>
-          <h3 class="faq__modal-title" id="faqModalTitle"></h3>
+          <h3 class="faq__modal-title" id="faqModalTitle" hidden></h3>
           <div class="faq__modal-body" id="faqModalBody"></div>
           <a
             class="faq__modal-source"
@@ -1181,10 +1636,12 @@
           >Abrir no Zendesk <ion-icon name="open-outline"></ion-icon></a>
         </div>
       </div>
-    </div>
+    </dialog>
   </section>
 
-  <section id="contato">
+  <section id="contato" class="secao--divisor secao--divisor-candles secao--divisor-contato">
+    <img width="1920" height="885" loading="lazy" decoding="async" aria-hidden="true" class="bg" src="./assets/bgsection v2-1920.avif" alt="">
+    
     <div class="wrapper">
       <div class="content">
         <header data-aos="fade-up">
@@ -1232,12 +1689,12 @@
                 <span><ion-icon name="notifications-outline"></ion-icon> Fique por dentro</span>
                 <p>Faça parte da comunidade oficial da Zero7 no WhatsApp</p>
                 <a target="_blank" rel="noopener noreferrer"
-                  href="https://chat.whatsapp.com/G9ma9v4zI77BBvvhdswF2r" class="z7-btnx z7-btnx--wpp"
+                  href="https://chat.whatsapp.com/G9ma9v4zI77BBvvhdswF2r" class="z7-btnx z7-btnx--wpp btn btn--md btn--primaria btn--wpp"
                   role="button" aria-label="Entrar na comunidade oficial da Zero7 no WhatsApp">
-                  <span class="z7-btnx__bg" aria-hidden="true"></span>
-                  <span class="z7-btnx__shine" aria-hidden="true"></span>
-                  <span class="z7-btnx__label">Entrar agora</span>
-                  <span class="z7-btnx__cap" aria-hidden="true">
+                  <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+                  <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+                  <span class="z7-btnx__label btn__label">Entrar agora</span>
+                  <span class="z7-btnx__cap btn__cap" aria-hidden="true">
                     <ion-icon name="logo-whatsapp"></ion-icon>
                   </span>
                 </a>
@@ -1246,7 +1703,7 @@
 
             <div data-aos="fade-up" class="border">
               <div class="image">
-                <img loading="lazy" decoding="async" src="./assets/banner.webp" alt="">
+                <img width="1920" height="1080" loading="lazy" decoding="async" src="./assets/banner.webp" alt="">
               </div>
             </div>
 
@@ -1255,7 +1712,7 @@
                 <span><ion-icon name="flash-outline"></ion-icon> Suporte rápido</span>
                 <h3>Precisa de <span>ajuda?</span></h3>
                 <p>Nossa equipe está <span>pronta para conversar com você</span>!</p>
-                <a target="_blank" href="https://app.zero7.com.br/login"><button>Fale Conosco</button></a>
+                <a target="_blank" rel="noopener" href="https://app.zero7.com.br/login"><button class="btn btn--md btn--secundaria">Fale Conosco</button></a>
               </div>
             </div>
           </div>
@@ -1268,14 +1725,42 @@
     <div class="wrapper">
       <div class="content">
         <div class="logo">
-          <img class="logo" src="./assets/logo zero7.svg" alt="">
+          <img width="176" height="55" class="logo" src="./assets/logo zero7.svg" alt="">
+          <p class="rodape__cnpj">Zero7 Tesouraria LTDA | CNPJ: 49.452.697/0001-20</p>
           <p>Av. Dep. Jamel Cecílio, nº 2929 - Jardim Goiás, Goiânia - GO, 74810-240</p>
           <p>Segunda a sexta-feira, 8h às 18h</p>
           <div id="ra-verified-seal">
-            <script type="text/javascript" id="ra-embed-verified-seal"
-              src="https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js"
-              data-id="WDRYanlCUWlyT0xFUTFZeDp6ZXJvNy10ZXNvdXJhcmlh" data-target="ra-verified-seal"
-              data-model="2"></script>
+            <!-- C3: o selo custava 91KB de Google Fonts (Inter Tight + Open Sans,
+                 puxados pelo styles.css do raichu) + o bundle, tudo na
+                 janela inicial de quem nunca chega ao rodapé. O script
+                 agora entra quando o selo se APROXIMA (IO, 600px de
+                 folga), injetado com o MESMO id e data-* — o bundle do RA
+                 lê a própria tag por id. Sem IO, injeta direto (selo >
+                 performance nesse navegador). Markup da div intocado. -->
+            <script>
+              (function () {
+                var alvo = document.getElementById('ra-verified-seal');
+                var entrou = false;
+                function injetar() {
+                  if (entrou) return;
+                  entrou = true;
+                  var s = document.createElement('script');
+                  s.type = 'text/javascript';
+                  s.id = 'ra-embed-verified-seal';
+                  s.src = 'https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js';
+                  s.setAttribute('data-id', 'WDRYanlCUWlyT0xFUTFZeDp6ZXJvNy10ZXNvdXJhcmlh');
+                  s.setAttribute('data-target', 'ra-verified-seal');
+                  s.setAttribute('data-model', '2');
+                  alvo.appendChild(s);
+                }
+                if (!alvo) return;
+                if (!('IntersectionObserver' in window)) { injetar(); return; }
+                var obs = new IntersectionObserver(function (es) {
+                  if (es.some(function (e) { return e.isIntersecting; })) { obs.disconnect(); injetar(); }
+                }, { rootMargin: '600px 0px 600px 0px' });
+                obs.observe(alvo);
+              })();
+            </script>
           </div>
         </div>
 
@@ -1286,7 +1771,8 @@
           <p><a href="https://blog.zero7.com.br/">Blog</a></p>
           <p><a href="#plan">Planos</a></p>
           <p><a href="https://zero7.com.br/regulamento/">Regulamento</a></p>
-          <p><a target="_blank" href="https://app.zero7.com.br/login">Área do Trader</a></p>
+          <p><a href="https://zero7.com.br/quem-somos/">Quem Somos</a></p>
+          <p><a target="_blank" rel="noopener" href="https://app.zero7.com.br/login">Área do Trader</a></p>
         </div>
 
         <div class="contato">
@@ -1297,10 +1783,10 @@
         <div class="redes-sociais">
           <h3>Social</h3>
           <div class="icons">
-            <a target="_blank" href="https://www.instagram.com/zero7tesouraria/"><ion-icon
+            <a aria-label="Zero7 no Instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/zero7tesouraria/"><ion-icon
                 name="logo-instagram"></ion-icon></a>
-            <a target="_blank" href="https://www.tiktok.com/@zero7_mesa"><ion-icon name="logo-tiktok"></ion-icon></a>
-            <a target="_blank" href="https://www.facebook.com/zero7tesouraria"><ion-icon
+            <a aria-label="Zero7 no TikTok" target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@zero7_mesa"><ion-icon name="logo-tiktok"></ion-icon></a>
+            <a aria-label="Zero7 no Facebook" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/zero7tesouraria"><ion-icon
                 name="logo-facebook"></ion-icon></a>
           </div>
         </div>
@@ -1312,12 +1798,12 @@
     <div class="wrapper">
       <div class="content">
         <p>Formas de Pagamento</p>
-        <img src="./assets/pagamento/1.webp" alt="">
-        <img src="./assets/pagamento/2.webp" alt="">
-        <img src="./assets/pagamento/3.webp" alt="">
-        <img src="./assets/pagamento/4.webp" alt="">
-        <img src="./assets/pagamento/5.webp" alt="">
-        <img src="./assets/pagamento/6.webp" alt="">
+        <img width="150" height="76" src="./assets/pagamento/1.avif" alt="">
+        <img width="150" height="76" src="./assets/pagamento/2.avif" alt="">
+        <img width="150" height="76" src="./assets/pagamento/3.avif" alt="">
+        <img width="150" height="76" src="./assets/pagamento/4.avif" alt="">
+        <img width="150" height="76" src="./assets/pagamento/5.avif" alt="">
+        <img width="150" height="76" src="./assets/pagamento/6.avif" alt="">
       </div>
     </div>
   </section>
@@ -1325,11 +1811,11 @@
   <section id="author">
     <div class="wrapper">
       <div class="content">
-        <p>© 2025 | Todos os direitos reservados.</p>
+        <p>© <span class="js-ano">2025</span> | Todos os direitos reservados.</p>
         <p><a href="https://zero7.com.br/politica-de-privacidade/">Política de Privacidade</a></p>
         <p><a href="">Cookie</a></p>
         <p><a href="">Políticas de Uso</a></p>
-        <p>Zero7 Tesouraria LTDA | CNPJ: 49.452.697/0001-20</p>
+        <p class="autor__cnpj">Zero7 Tesouraria LTDA | CNPJ: 49.452.697/0001-20</p>
       </div>
 
       <p class="disclaimer">Todas as informações aqui apresentadas são destinadas exclusivamente a fins educacionais
@@ -1343,7 +1829,86 @@
   </section>
 
   <!-- Start of zero7support Zendesk Widget script -->
-  <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=9d7c25de-f931-4cef-9b11-536a3552365d"> </script>
+  <!-- A tag era clássica e sem async/defer: o parser PARAVA aqui, e as 520
+       linhas seguintes (GSAP, Lenis, Swiper, jQuery e os nossos seis scripts)
+       só começavam depois. Medido em 390 com throttling: 398KB em 11
+       requisições, achadas pelo parser aos 1.084ms, e 916ms de main thread
+       entre o snippet.js e o web-widget-main.
+
+       Agora o mesmo arquivo, com a mesma key, entra no PRIMEIRO de dois
+       eventos: interação do visitante, ou ocioso com teto. O (b) garante que
+       o canal de suporte existe para quem nunca interage; o (a) garante que
+       quem quer falar não espera. Nenhum dos dois compete com a primeira
+       pintura.
+
+       Não é gambiarra por escolha: o Zendesk NÃO publica caminho oficial para
+       isto. O autorender:false do cookbook deles desliga o render e não o
+       download, e o connectOnPageLoad é do Web Widget Classic — o nosso é o
+       Messaging. A única orientação oficial de performance é "ponha o snippet
+       no fim do body", que já estava feito, e "qualquer script que use a API
+       zE tem que vir depois do snippet" — que é exatamente o acoplamento que
+       o zero7LigarZendesk resolve.
+
+       Configuração, conta, key, comportamento do chat e histórico ficam
+       intocados: muda só QUANDO o arquivo entra. -->
+  <script>
+    (function () {
+      var SNIPPET = 'https://static.zdassets.com/ekr/snippet.js?key=9d7c25de-f931-4cef-9b11-536a3552365d';
+      var entrou = false;
+
+      // O load do ARQUIVO não garante o zE: o snippet ainda monta a API depois
+      // de executar. Por isso a espera, com intervalo curto e teto — sem teto
+      // isto viraria um timer eterno em quem bloqueia o domínio do Zendesk.
+      function quandoOzEEstiverPronto(tentativa) {
+        if (typeof window.zE === 'function') {
+          // MODO DE FALHA SEGURO: esconde incondicionalmente, aqui, antes de
+          // qualquer lógica de dobra. Se o zero7LigarZendesk sumir do
+          // global.js, for renomeado ou quebrar, o botão fica ESCONDIDO — que
+          // é o pedido do cliente — em vez de aparecer sobre o CTA do herói.
+          // O estado conhecido passa a ser "escondido", e a dobra decide a
+          // partir dali.
+          try { window.zE('messenger', 'hide'); } catch (e) { }
+          if (typeof window.zero7LigarZendesk === 'function') window.zero7LigarZendesk();
+          return;
+        }
+        if (tentativa >= 40) return;   // 40 x 150ms = 6s e desiste
+        setTimeout(function () { quandoOzEEstiverPronto(tentativa + 1); }, 150);
+      }
+
+      function carregar() {
+        if (entrou) return;
+        entrou = true;
+        var s = document.createElement('script');
+        s.id = 'ze-snippet';
+        s.src = SNIPPET;
+        s.async = true;
+        s.addEventListener('load', function () { quandoOzEEstiverPronto(0); });
+        document.head.appendChild(s);
+      }
+
+      /* B2: o snippet só entra quando a condição de MOSTRAR o botão fica
+         verdadeira pela primeira vez — o topo do #ba subiu da base da tela,
+         a MESMA leitura do observer do ligarBotaoDoZendesk (a margem de topo
+         enorme faz "intersecta" valer exatamente isso). Quem fica no herói
+         não baixa os ~400KB do widget; quem cai direto numa âncora (#plan,
+         #faq) tem o observer disparando já na criação, porque a condição já
+         é verdadeira. SEM fallback por tempo, de propósito. E sem
+         IntersectionObserver o snippet não entra — que falha para o lado
+         seguro (botão escondido), coerente com o hide incondicional. */
+      var ba = document.getElementById('ba');
+      if (!ba || !('IntersectionObserver' in window)) return;
+      var obs = new IntersectionObserver(function (entradas) {
+        for (var i = 0; i < entradas.length; i++) {
+          if (entradas[i].isIntersecting) {
+            obs.disconnect();
+            carregar();
+            return;
+          }
+        }
+      }, { rootMargin: '100000px 0px 0px 0px' });
+      obs.observe(ba);
+    })();
+  </script>
   <!-- End of zero7support Zendesk Widget script -->
 
   <!-- Google Tag Manager (noscriptt) -->
@@ -1353,187 +1918,51 @@
 
   <script>
 (() => {
+  /* B1 do lote B: o hover "magnético" saiu. O radial que deveria seguir o
+     mouse estava MORTO desde sempre (--mx/--my são @property inherits:false
+     e nunca chegavam a quem as consumia — 0,0% de diferença de pixels
+     movendo --mx, medido nas duas versões), e o rastreio de pointermove por
+     botão rodava um requestAnimationFrame com escrita de estilo inline a
+     cada quadro, em 16 botões. Com o handler de move foi junto o tilt
+     (rotateX/rotateY seguindo o cursor) — decisão do lote, registrada.
+     Fica o que o olho sente no hover: subida + escala (aqui, com transição
+     no CSS), a sombra do :hover (button.css) e o ripple do clique. */
   const btns = document.querySelectorAll('.z7-btnx');
   if (!btns.length) return;
 
-  const canFancyGlobal = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  // sem efeito com movimento reduzido ou sem ponteiro fino, como antes
+  const canFancyGlobal = matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion: no-preference)').matches;
   if (!canFancyGlobal) return;
-
-  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
-  const lerp = (a, b, t) => a + (b - a) * t;
 
   const pxPerRem = () =>
     parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
-
   const pxToRem = (px) => px / pxPerRem();
 
   btns.forEach((btn) => {
-    let tx = 0, ty = 0, x = 0, y = 0;
-    let trx = 0, try_ = 0, rx = 0, ry = 0;
-
-    let tmx = 50, tmy = 50, mx = 50, my = 50;
-
-    let tsh1x = 0, tsh1y = 0, sh1x = 0, sh1y = 0;
-    let tsh2x = 0, tsh2y = 0, sh2x = 0, sh2y = 0;
-
     let hovering = false;
     let pressed = false;
 
-    let rafId = null;
-    let isAnimating = false;
-
-    const perspectiveRem = 90;
-    const liftRem = -0.75;
-    const magnetRem = 1.05;
-    const tiltDeg = 7;
-
-    const shadowMax1 = 1.2;
-    const shadowMax2 = 2.4;
-
-    const epsilon = 0.001;
-
-    function isNear(a, b, e = epsilon) {
-      return Math.abs(a - b) < e;
-    }
-
-    function stopAnimationIfIdle() {
-      const atRest =
-        isNear(x, 0) &&
-        isNear(y, 0) &&
-        isNear(rx, 0) &&
-        isNear(ry, 0) &&
-        isNear(mx, 50) &&
-        isNear(my, 50) &&
-        isNear(sh1x, 0) &&
-        isNear(sh1y, 0) &&
-        isNear(sh2x, 0) &&
-        isNear(sh2y, 0) &&
-        !hovering &&
-        !pressed;
-
-      if (atRest) {
-        isAnimating = false;
-        rafId = null;
-
-        btn.style.removeProperty('--mx');
-        btn.style.removeProperty('--my');
-        btn.style.removeProperty('--sh1x');
-        btn.style.removeProperty('--sh1y');
-        btn.style.removeProperty('--sh2x');
-        btn.style.removeProperty('--sh2y');
+    function aplicar() {
+      if (!hovering && !pressed) {
         btn.style.removeProperty('transform');
-
-        return true;
+        return;
       }
-
-      return false;
-    }
-
-    function update() {
-      const t = pressed ? 0.18 : 0.12;
-
-      x = lerp(x, tx, t);
-      y = lerp(y, ty, t);
-      rx = lerp(rx, trx, t);
-      ry = lerp(ry, try_, t);
-
-      mx = lerp(mx, tmx, 0.10);
-      my = lerp(my, tmy, 0.10);
-
-      const ts = pressed ? 0.2 : 0.18;
-      sh1x = lerp(sh1x, tsh1x, ts);
-      sh1y = lerp(sh1y, tsh1y, ts);
-      sh2x = lerp(sh2x, tsh2x, ts);
-      sh2y = lerp(sh2y, tsh2y, ts);
-
-      btn.style.setProperty('--mx', mx.toFixed(2) + '%');
-      btn.style.setProperty('--my', my.toFixed(2) + '%');
-
-      const pressFactor = pressed ? 0.25 : 1;
-
-      btn.style.setProperty('--sh1x', (sh1x * pressFactor).toFixed(3) + 'rem');
-      btn.style.setProperty('--sh1y', (sh1y * pressFactor).toFixed(3) + 'rem');
-      btn.style.setProperty('--sh2x', (sh2x * pressFactor).toFixed(3) + 'rem');
-      btn.style.setProperty('--sh2y', (sh2y * pressFactor).toFixed(3) + 'rem');
-
-      const lift = hovering ? liftRem : 0;
+      const lift = hovering ? -0.75 : 0;
       const scale = pressed ? 0.985 : (hovering ? 1.01 : 1);
-
-      btn.style.transform =
-        `perspective(${perspectiveRem}rem)
-         translate3d(${x.toFixed(3)}rem, ${(y + lift).toFixed(3)}rem, 0)
-         rotateX(${rx.toFixed(2)}deg)
-         rotateY(${ry.toFixed(2)}deg)
-         scale(${scale})`;
-
-      if (stopAnimationIfIdle()) return;
-
-      rafId = requestAnimationFrame(update);
+      btn.style.transform = 'translate3d(0, ' + lift + 'rem, 0) scale(' + scale + ')';
     }
 
-    function startAnimation() {
-      if (isAnimating) return;
-      isAnimating = true;
-      rafId = requestAnimationFrame(update);
-    }
-
-    function resetTargets() {
-      tx = 0;
-      ty = 0;
-      trx = 0;
-      try_ = 0;
-      tmx = 50;
-      tmy = 50;
-      tsh1x = 0;
-      tsh1y = 0;
-      tsh2x = 0;
-      tsh2y = 0;
-    }
-
-    function setTargets(e) {
-      const r = btn.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width;
-      const py = (e.clientY - r.top) / r.height;
-
-      tmx = clamp(px * 100, 0, 100);
-      tmy = clamp(py * 100, 0, 100);
-
-      const dx = px - 0.5;
-      const dy = py - 0.5;
-
-      tx = dx * magnetRem;
-      ty = dy * magnetRem;
-
-      trx = clamp(-dy * tiltDeg, -tiltDeg, tiltDeg);
-      try_ = clamp(dx * tiltDeg, -tiltDeg, tiltDeg);
-
-      tsh1x = dx * shadowMax1;
-      tsh1y = dy * shadowMax1;
-      tsh2x = dx * shadowMax2;
-      tsh2y = dy * shadowMax2;
-    }
-
-    btn.addEventListener('pointerenter', () => {
-      hovering = true;
-      startAnimation();
-    });
-
-    btn.addEventListener('pointermove', (e) => {
-      hovering = true;
-      setTargets(e);
-      startAnimation();
-    });
+    btn.addEventListener('pointerenter', () => { hovering = true; aplicar(); });
 
     btn.addEventListener('pointerleave', () => {
       hovering = false;
       pressed = false;
-      resetTargets();
-      startAnimation();
+      aplicar();
     });
 
     btn.addEventListener('pointerdown', (e) => {
       pressed = true;
-      startAnimation();
+      aplicar();
 
       const r = btn.getBoundingClientRect();
       const ripple = document.createElement('span');
@@ -1545,16 +1974,12 @@
       ripple.addEventListener('animationend', () => ripple.remove());
     });
 
-    btn.addEventListener('pointerup', () => {
-      pressed = false;
-      startAnimation();
-    });
+    btn.addEventListener('pointerup', () => { pressed = false; aplicar(); });
 
     btn.addEventListener('blur', () => {
       hovering = false;
       pressed = false;
-      resetTargets();
-      startAnimation();
+      aplicar();
     });
   });
 })();
@@ -1646,31 +2071,98 @@
       })
     }();
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- B4: GSAP, ScrollTrigger e AOS deixaram de ser tags bloqueantes.
+       Abaixo de 1080 (o mesmo breakpoint da raiz tipográfica) eles NEM
+       BAIXAM: o celular não tem animação de entrada, e tudo que esperava
+       animação é visível por padrão (o estado escondido só existe sob
+       html.anim, que só o desktop recebe). No desktop, as três entram em
+       sequência DEPOIS do LCP (PerformanceObserver; reserva em load +
+       requestIdleCallback), e antes de armar o AOS o carregador tira o
+       data-aos de quem já está na primeira tela — quem o visitante já vê
+       não pode piscar quando a classe entra. -->
+  <script>
+    (function () {
+      var mq = matchMedia('(min-width: 1080px)');
+      var LIBS = [
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
+        './vendor/aos-2.3.1/aos.js'
+      ];
+      var comecou = false;
+
+      function armar() {
+        var vh = window.innerHeight;
+        document.querySelectorAll('[data-aos]').forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < vh && r.bottom > 0) el.removeAttribute('data-aos');
+        });
+        document.documentElement.classList.add('anim');
+        if (window.zero7ArmarAnimacoes) window.zero7ArmarAnimacoes();
+        if (window.zero7ArmarBa) window.zero7ArmarBa();
+      }
+
+      function carregarLibs() {
+        if (comecou) return;
+        comecou = true;
+        var i = 0;
+        (function proxima() {
+          if (i >= LIBS.length) { armar(); return; }
+          var s = document.createElement('script');
+          s.src = LIBS[i++];
+          s.onload = proxima;
+          s.onerror = proxima; // CDN falhou: segue sem — as guardas de typeof seguram
+          document.head.appendChild(s);
+        })();
+      }
+
+      var disparado = false;
+      function aposLcp() {
+        if (disparado || !mq.matches) return;
+        disparado = true;
+        carregarLibs();
+      }
+
+      try {
+        new PerformanceObserver(function (l) {
+          if (l.getEntries().length) setTimeout(aposLcp, 80);
+        }).observe({ type: 'largest-contentful-paint', buffered: true });
+      } catch (e) { }
+      window.addEventListener('load', function () {
+        if (typeof requestIdleCallback === 'function') requestIdleCallback(aposLcp, { timeout: 2000 });
+        else setTimeout(aposLcp, 800);
+      }, { once: true });
+      // janela redimensionada de celular para desktop com a página aberta
+      if (mq.addEventListener) mq.addEventListener('change', function (e) { if (e.matches) aposLcp(); });
+    })();
+  </script>
   <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
   <script>
-    // Initialize Lenis with options
-    const lenis = new Lenis({
-      smooth: true, // Ativa o scroll suave
-      duration: 1.1, // Define a duração do scroll (maior valor deixa mais lento)
-      easing: (t) => 1 - Math.pow(1 - t, 4), // Função de easing para suavidade
-    });
+    // Movimento reduzido: sem Lenis, a rolagem fica nativa e sem animação.
+    // Nada depende dele existir: o sectionFaq.js trata window.lenis como
+    // opcional e cai no scrollTo.
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Initialize Lenis with options
+      const lenis = new Lenis({
+        smooth: true, // Ativa o scroll suave
+        duration: 1.1, // Define a duração do scroll (maior valor deixa mais lento)
+        easing: (t) => 1 - Math.pow(1 - t, 4), // Função de easing para suavidade
+      });
 
-    window.lenis = lenis;
+      window.lenis = lenis;
 
-    // Listen for the scroll event and log the event data
-    lenis.on("scroll", (e) => {
-      console.log(e);
-    });
+      // Listen for the scroll event and log the event data
+      lenis.on("scroll", (e) => {
+        console.log(e);
+      });
 
-    // Use requestAnimationFrame to continuously update the scroll
-    function raf(time) {
-      lenis.raf(time);
+      // Use requestAnimationFrame to continuously update the scroll
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
       requestAnimationFrame(raf);
     }
-
-    requestAnimationFrame(raf);
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
@@ -1680,7 +2172,9 @@
    sempre o próximo prazo futuro de prazosPromo (um por dia, 23:59:59). Após
    o último prazo (31/out), tudo se desliga sozinho e o nav volta ao topo.
    Se o bloco .tarjaImage for comentado, o `if (!root) return` abaixo encerra
-   o script sem efeito. */
+   o script sem efeito.
+   Prazos = DADO de campanha, trazidos do ar em 01/10 (campanha PROFIT,
+   out/2026) — a LÓGICA abaixo não muda (regra 5). */
 (() => {
 const prazosPromo = [
   new Date("2026-10-01T23:59:59-03:00"),
@@ -1822,10 +2316,15 @@ const prazosPromo = [
         useGrouping: true
       };
 
+      // Movimento reduzido: a contagem já começa no número final, então nada
+      // gira — o número aparece pronto e fica parado.
+      const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const de = (fim) => (semMovimento ? fim : 0);
+
       const createAnimations = () => {
-        const ano = new CountUp("ano", 0, 2023, 0, 3, optionsAno);
-        const traders = new CountUp("traders", 0, 30, 0, 3, optionsTraders);
-        const pagamentos = new CountUp("pagamentos", 0, 20, 0, 3, optionsPagamentos);
+        const ano = new CountUp("ano", de(2023), 2023, 0, 3, optionsAno);
+        const traders = new CountUp("traders", de(30), 30, 0, 3, optionsTraders);
+        const pagamentos = new CountUp("pagamentos", de(20), 20, 0, 3, optionsPagamentos);
 
         if (!ano.error) ano.start();
         if (!traders.error) traders.start();
@@ -1844,16 +2343,16 @@ const prazosPromo = [
     });
   </script>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./vendor/swiper-11.2.10/swiper-bundle.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <script src="./script/global.js?v=v94-outubro-out01"></script>
-  <script src="./script/4selet.js?v=v94-outubro-out01"></script>
-  <script src="./script/blackPlanos.js?v=v94-outubro-out01"></script>
-  <script src="./script/planosAtivo.js?v=v94-outubro-out01"></script>
-  <script src="./script/limiteAlta.js?v=v94-outubro-out01"></script>
-  <script src="./script/sectionFaq.js?v=v94-outubro-out01" defer></script>
-  <script src="./script/sectionBa.js?v=v94-outubro-out01" defer></script>
+  <script src="./dist/script/global.38417c2f.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./dist/script/4selet.40684e8a.js"></script>
+  <script src="./dist/script/blackPlanos.bcbaae1a.js"></script>
+  <script src="./dist/script/planosAtivo.3f368f05.js"></script>
+  <script src="./dist/script/sectionFaq.adee23fd.js" defer></script>
+  <script src="./dist/script/sectionBa.a0c76aa6.js" defer></script>
+<script id="fontes-completas">(function(){var c="@font-face { font-family: 'NCS Radhiumz'; font-style: normal; font-weight: 400; font-display: swap; src: url(\"./css/fonts/NCS%20Radhiumz.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 300; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Light.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 400; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 500; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Medium.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 600; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20DemiBold.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 700; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Bold.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 800; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20ExtraBold.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }";function go(){requestAnimationFrame(function(){var s=document.createElement('style');s.textContent=c;document.head.appendChild(s)})}if(document.readyState==='complete'){go()}else{addEventListener('load',go)}})();</script>
 </body>
 </html>

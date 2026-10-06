@@ -1,0 +1,271 @@
+/* ==========================================================================
+   TOKENS — fonte única de valores da home Zero7
+   Primeiro @import do index.css: tudo depois disto pode usar var().
+
+   Regra desta fase: o arquivo CONSOLIDA, não redesenha. Cor, raio, espaço
+   e elevação foram encostados na escala mais próxima (deltas de 1–4px, sem
+   efeito visível). Os degraus de tipografia preservam exatamente o que
+   renderiza hoje — colapsar a escala tipográfica move 62% dos elementos de
+   texto no mobile e cresce a página em 127px, o que é retipografia e não
+   refatoração. Está documentado no AUDITORIA-CONTEXTO.
+
+   ATENÇÃO: o projeto já tinha 45 custom properties espalhadas. Os nomes
+   antigos sobrevivem no fim deste arquivo como apelidos dos tokens novos,
+   porque pedido-registrado/* e cert/ carregam este mesmo CSS.
+
+   REGRA: token no :root não pode depender de variável que só existe dentro
+   de um componente. var() resolve onde a propriedade é DECLARADA; no :root a
+   variável do componente não existe, o token nasce inválido e tudo que o usa
+   cai no valor inicial. Foi assim que o --raio-botao da fase 3 zerou o canto
+   de todos os botões sem ninguém notar.
+   ========================================================================== */
+
+:root {
+  /* ── COR · texto sobre fundo escuro ────────────────────────────────────
+     Cinco níveis. Antes eram 21 valores, 15 deles tons de quase-branco que
+     ninguém distingue lado a lado (#f2fffb, #f8fffd, #e7e7e7, #d8d8d8,
+     #d2d2d2, #c1c1c1, branco a .96/.92/.9…). */
+  --cor-titulo: #ffffff;
+  --cor-corpo: rgba(255, 255, 255, .90);
+  --cor-secundario: rgba(255, 255, 255, .70);
+  --cor-desabilitado: rgba(255, 255, 255, .58);
+  --cor-marca: #0080c9;
+
+  /* Mesma escala invertida: #topicos e parte de #plan são seções claras. */
+  --cor-titulo-inverso: #070c11;
+  --cor-corpo-inverso: rgba(7, 12, 17, .78);
+
+  /* ── COR · superfície ─────────────────────────────────────────────────
+     Quatro níveis. Antes eram 12. */
+  --sup-fundo: #000205;   /* fundo da página */
+  --sup-card: #070c11;    /* card sobre o fundo */
+  --sup-elevada: #081c31;  /* card destacado, campo de formulário */
+  --sup-clara: #f2fffb;   /* seção clara */
+
+  /* Superfície em gradiente da central de ajuda — cards, painel, modal,
+     busca e fallback. Antes, o mesmo gradiente literal em seis regras. */
+  --sup-ajuda: linear-gradient(130deg, #010b15, #01050b);
+
+  /* Linhas e bordas — hairlines que não são superfície nem texto. */
+  --borda-sutil: rgba(255, 255, 255, .14);
+  --borda-media: rgba(255, 255, 255, .30);
+  --borda-dourada: rgba(255, 194, 90, .55);
+  --borda-marca: rgba(0, 128, 201, .40);
+
+  /* A borda que acende no hover dos cards — de plano e da central de ajuda
+     (fase 10): o azul-claro da marca a 50%. Uma linguagem de interação só
+     para a página. */
+  --borda-acesa: rgb(29 164 243 / .5);
+
+  /* Véus translúcidos sobre a superfície (chips, campos, overlays). */
+  --vidro-claro: rgba(255, 255, 255, .18);
+  --vidro-escuro: rgba(36, 36, 36, .18);
+
+  /* ── MARCA ────────────────────────────────────────────────────────────
+     Um azul só, com as variações que ele realmente usa. */
+  --marca: #0080c9;
+  --marca-escura: #023c83;
+  --marca-clara: #1da4f3;
+  --marca-gradiente: linear-gradient(to right, #023c83, #0080c9);
+
+  /* Dourado — exclusivo do plano recomendado (card--copa). É o único
+     dourado da página e deve continuar sendo. */
+  --dourado: #ffb830;
+  --dourado-claro: #ffd166;
+  --dourado-escuro: #e8951b;
+
+  /* Acentos intencionais, fora da escala de texto: a paleta oficial do
+     WhatsApp (botão Comunidade e card de contato) e o neon dos cards de
+     tópicos. Documentados como decisão, não como sobra. */
+  --acento-wpp: #25d366;
+  --acento-wpp-meio: #128c7e;
+  --acento-wpp-fundo: #075e54;
+  --acento-neon: #57ff6d;
+
+  /* ── RAIO ─────────────────────────────────────────────────────────────
+     Quatro degraus, mais círculo e pílula. Antes eram 24 valores, com
+     10.1333px, 13.4px, 18.6667px e 10.8px sendo o mesmo canto escrito de
+     formas diferentes. */
+  --raio-sm: 1rem;   /*  8px */
+  --raio-md: 2rem;   /* 16px */
+  --raio-lg: 3rem;   /* 24px */
+  --raio-xl: 5rem;   /* 40px */
+  --raio-circulo: 50%;
+  --raio-pilula: 999rem;
+
+  /* Assinatura visual: o canto assimétrico (dois cantos vivos, dois
+     arredondados) do botão principal e dos cards de tópicos. Preservado
+     como token nomeado — a assinatura é a FORMA, não a medida. No botão, o
+     raio sai de --raio-md ou --raio-sm conforme o tamanho (button.css). */
+  --raio-assinatura: var(--raio-md) 0 var(--raio-md) 0;
+
+  --raio-assinatura-xl: var(--raio-xl) 0 var(--raio-xl) 0;
+
+  /* ── ESPAÇO ───────────────────────────────────────────────────────────
+     Múltiplos de 4. Antes eram 14 gaps, incluindo 2.8, 4.4, 4.8, 6.4, 9.6
+     e 12.8px — diferenças que o olho não separa. */
+  --esp-1: 0.5rem;  /*  4px */
+  --esp-2: 1rem;    /*  8px */
+  --esp-3: 1.5rem;  /* 12px */
+  --esp-4: 2rem;    /* 16px */
+  --esp-5: 3rem;    /* 24px */
+  --esp-6: 4rem;    /* 32px */
+  --esp-7: 6rem;    /* 48px */
+  --esp-8: 8rem;    /* 64px */
+
+  /* ── ELEVAÇÃO ─────────────────────────────────────────────────────────
+     Três níveis, mais os dois glows de identidade. Antes eram 65
+     declarações de box-shadow com 10+ receitas distintas. */
+  --elev-1: 0 2px 8px rgba(0, 0, 0, .25);
+  --elev-2:
+    0 20px 60px rgba(0, 0, 0, .35),
+    0 0 0 1px rgba(255, 255, 255, .06) inset;
+  --elev-3:
+    0 30px 80px rgba(0, 0, 0, .45),
+    0 0 0 1px rgba(255, 255, 255, .10) inset;
+
+  --glow-marca:
+    0 12px 30px rgba(0, 128, 201, .22),
+    0 0 24px rgba(0, 128, 201, .12);
+  --glow-dourado:
+    0 0 0 1px rgba(255, 209, 102, .40),
+    0 0 22px rgba(255, 184, 48, .32),
+    0 0 60px rgba(232, 149, 27, .26),
+    0 14px 42px rgba(0, 0, 0, .38);
+
+  /* ── INTERAÇÃO ────────────────────────────────────────────────────────
+     Alvo de toque mínimo e anel de foco (acessibilidade.css). O alvo é em
+     px e não em rem: é medida de dedo, não de tipografia — em 1600+ a raiz
+     vira 10,4px e um alvo em rem cresceria à toa. A cor do anel precisa de
+     3:1 contra o fundo em volta; o inverso é para as seções claras. */
+  --alvo-toque: 44px;
+  --foco-largura: 2px;
+  --foco-recuo: 3px;
+  --foco-cor: var(--marca-clara);          /* 7,6:1 sobre o fundo escuro */
+  --foco-cor-inverso: var(--marca-escura); /* 10:1 sobre a seção clara */
+
+  /* ── MOVIMENTO ────────────────────────────────────────────────────────
+     Micro-interações — hover e troca de estado. Curtas e sem rebote: a
+     curva desacelera e para, nada passa do ponto e volta. Com
+     prefers-reduced-motion a rede do acessibilidade.css encurta tudo. */
+  --dur-rapida: 150ms;                    /* cor e borda */
+  --dur-media: 200ms;                     /* sombra, brilho e deslocamento */
+  --curva-saida: cubic-bezier(.2, 0, 0, 1);
+
+  /* Rótulo em caixa alta — botão, indicador de plano, título de coluna do
+     rodapé: um espaçamento só, em em para acompanhar o corpo. Eram 0,
+     .029, .04, .05 e .059em conforme o componente (medido na fase 6). */
+  --ls-rotulo: .05em;
+
+  /* ── TIPOGRAFIA ───────────────────────────────────────────────────────
+     Famílias e pesos. Os degraus de tamanho vêm abaixo. */
+  --fonte-display: 'NCS Radhiumz', 'NCS fallback', sans-serif;
+  --fonte-corpo: 'TT Fors Trial', 'TT Fors fallback', sans-serif;
+
+  --peso-leve: 300;
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-semi: 600;
+  --peso-forte: 700;
+  --peso-black: 800;
+  --peso-max: 900;
+
+  /* Degraus de tamanho. Nomeados pelo px que rendem com a raiz de 8px —
+     a raiz sobe para 10,4px acima de 1600, então o px do nome é o do
+     desktop padrão, não uma promessa absoluta.
+
+     Canônicos: os sete degraus dos papéis de texto da página. Código novo
+     usa só estes. Acima de 24px não há canônico — os números herói
+     (preço, #divisa) e o H1 são display e têm tamanho próprio. */
+  --fs-300:            1.2rem;  /*  9,6px  legenda e navegação do desktop */
+  --fs-400:            1.3rem;  /* 10,4px  texto de interface (seletor de mercado); foi o corpo do celular até a fase 8 */
+  --fs-500:            1.4rem;  /* 11,2px  texto de card no desktop (#topicos, central de ajuda) */
+  --fs-650:            1.6rem;  /* 12,8px  corpo e subtítulo do lg em diante; botão; no celular, piso de rótulo e de texto legal */
+  --fs-850:            2rem;    /* 16,0px  corpo no celular e no tablet (fase 8); título de card, preço */
+  --fs-900:            2.2rem;  /* 17,6px  título de card no celular */
+  --fs-1300:           3rem;    /* 24,0px  título de seção em todas as larguras; nome do plano */
+
+  /* Legado — dívida de tipografia. Os outros 34 degraus seguem com o
+     valor que já renderizavam: colapsá-los mexe em 62% dos textos no
+     celular (medido na fase 3), e isso é retipografia, com aprovação.
+     Só mudaram de nome, para que código novo não alcance um deles sem
+     perceber. Quem mexer num componente que usa um legado troca pelo
+     canônico do papel. */
+  --corpo-legado-050:  0.8rem;  /*  6,4px */
+  --corpo-legado-100:  1rem;    /*  8,0px */
+  --corpo-legado-150:  1.05rem; /*  8,4px */
+  --corpo-legado-200:  1.1rem;  /*  8,8px */
+  --corpo-legado-250:  1.15rem; /*  9,2px */
+  --corpo-legado-350:  1.25rem; /* 10,0px */
+  --corpo-legado-450:  1.35rem; /* 10,8px */
+  --corpo-legado-550:  1.5rem;  /* 12,0px */
+  --corpo-legado-600:  1.55rem; /* 12,4px */
+  --corpo-legado-700:  1.7rem;  /* 13,6px */
+  --corpo-legado-725:  1.75rem; /* 14,0px */
+  --corpo-legado-750:  1.8rem;  /* 14,4px */
+  --corpo-legado-800:  1.9rem;  /* 15,2px */
+  --corpo-legado-875:  2.1rem;  /* 16,8px */
+  --corpo-legado-925:  2.25rem; /* 18,0px */
+  --corpo-legado-950:  2.4rem;  /* 19,2px */
+  --corpo-legado-1000: 2.5rem;  /* 20,0px */
+  --corpo-legado-1100: 2.6rem;  /* 20,8px */
+  --corpo-legado-1150: 2.7rem;  /* 21,6px */
+  --corpo-legado-1200: 2.8rem;  /* 22,4px */
+  --corpo-legado-1325: 3.2rem;  /* 25,6px */
+  --corpo-legado-1350: 3.4rem;  /* 27,2px */
+  --corpo-legado-1360: 3.5rem;  /* 28,0px */
+  --corpo-legado-1375: 3.6rem;  /* 28,8px */
+  --corpo-legado-1400: 3.75rem; /* 30,0px */
+  --corpo-legado-1450: 4rem;    /* 32,0px */
+  --corpo-legado-1500: 4.2rem;  /* 33,6px */
+  --corpo-legado-1550: 4.5rem;  /* 36,0px */
+  --corpo-legado-1600: 4.6rem;  /* 36,8px */
+  --corpo-legado-1700: 5rem;    /* 40,0px */
+  --corpo-legado-1800: 5.2rem;  /* 41,6px */
+  --corpo-legado-1900: 6rem;    /* 48,0px */
+  --corpo-legado-2000: 7rem;    /* 56,0px */
+  --corpo-legado-2100: 8rem;    /* 64,0px */
+
+  /* Medida de linha. Na TT Fors o ch — a largura do "0" — rende ~1,23
+     caractere de texto corrido: 65ch davam ~80 caracteres por linha,
+     56ch dão ~69. O herói fica mais largo de propósito: o bloco compacto
+     ali é intencional. */
+  --medida-texto: 56ch;
+  --medida-heroi: 65ch;
+}
+
+/* ==========================================================================
+   APELIDOS DE COMPATIBILIDADE
+   Os nomes que já existiam no projeto, agora apontando para os tokens.
+   Servem aos arquivos ainda não migrados; some cada um quando o último
+   arquivo que o usa for migrado. Dois nasceram com erro de grafia e ficam
+   aqui como lembrete: --secondy-color (de "secondary") e --orange-blac,
+   que além de faltar o "k" não é laranja nem é usado por ninguém além do
+   irmão --orange-black.
+   ========================================================================== */
+:root {
+  --color-text: var(--cor-titulo);  /* era #f2fffb: cor de TEXTO, não de superfície */
+  --primary-color: var(--marca);
+  --secondy-color: var(--marca-escura);
+  --orange-black: var(--sup-fundo);
+  --orange-blac: #000b1c;
+  --gradient: var(--marca-gradiente);
+  --bg-black: var(--sup-fundo);
+  --bg-white: var(--sup-clara);
+  --nav-height: 7.2rem;
+
+  --wpp-deep: var(--acento-wpp-fundo);
+  --wpp-teal: var(--acento-wpp-meio);
+  --wpp-green: var(--acento-wpp);
+
+  --ncs: var(--fonte-display);
+  --tts: var(--fonte-corpo);
+
+  /* moravam no :root do button.css até a fase 4 */
+  --z7-deep: var(--marca-escura);
+  --z7-sky: var(--marca-clara);
+  --z7-green-dark: #046b3a;
+  --z7-green: #00c86f;
+  --z7-green-light: #3cff9b;
+  --z7-green-neon: #73ffb8;
+}

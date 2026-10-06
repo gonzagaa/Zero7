@@ -3,13 +3,14 @@
 }
 
 #pagamento p {
-    color: #fff;
-    font-size: 1.3rem;
-    font-weight: 400;
+    color: var(--cor-titulo);
+    font-size: var(--fs-400);
+    font-weight: var(--peso-normal);
 }
 
 #pagamento img {
     width: 5rem;
+    height: auto;
 }
 
 @media (min-width: 1080px) {
@@ -18,5 +19,30 @@
         width: 100%;
         justify-content: space-between;
         align-items: center;
+    }
+}
+
+/* Celular e tablet (fase 8): o rótulo no corpo de 16px, numa linha própria,
+   e a fileira das bandeiras alinhada embaixo, com os logos em 16px de altura
+   — nos 20px de antes eles competiam com os links do rodapé logo acima. */
+@media (max-width: 1079.98px) {
+    #pagamento .content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--esp-3);
+    }
+
+    /* à esquerda, como a fileira das bandeiras e o resto do rodapé (o body
+       centraliza) */
+    #pagamento p {
+        flex-basis: 100%;
+        font-size: var(--fs-850);
+        text-align: left;
+    }
+
+    #pagamento img {
+        width: auto;
+        height: var(--esp-4);
     }
 }

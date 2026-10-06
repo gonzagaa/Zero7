@@ -19,6 +19,7 @@ footer::before {
 
 footer img.logo {
     width: 15rem;
+    height: auto;
     margin-bottom: 2rem;
 }
 
@@ -27,33 +28,46 @@ footer .content {
 
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: var(--esp-5);
     align-items: start;
+}
+
+/* sm — o rodapé empilhava as quatro colunas em quatro blocos até 1080,
+   deixando uma coluna de texto estreita no meio de uma tela larga.
+   Duas colunas de sm a lg; as quatro do desktop continuam em lg. */
+@media (min-width: 640px) and (max-width: 1079.98px) {
+    footer .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--esp-5) var(--esp-6);
+        align-items: start;
+    }
 }
 
 footer div {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: var(--esp-1);
 }
 
 footer .content h3 {
-    font-size: 1.6rem;
-    color: #ffffff;  
+    font-size: var(--fs-650);
+    color: var(--cor-titulo);  
     font-family: var(--ncs);
     text-transform: uppercase;
-    font-weight: 500;
-    font-weight: 900;
+    font-weight: var(--peso-medio);
+    font-weight: var(--peso-max);
+    letter-spacing: var(--ls-rotulo);
 }
 
 footer .content p {
-    font-weight: 300;
-    font-size: 1.6rem;
-    color: #d2d2d2;
+    font-weight: var(--peso-leve);
+    font-size: var(--fs-650);
+    color: var(--cor-secundario);
 }
 
 footer .content p a {
-    color: #d2d2d2;
+    color: var(--cor-secundario);
     text-decoration: none;
 }
 
@@ -64,7 +78,7 @@ a[href^="tel"] {
 
 footer div.redes-sociais .icons {
     display: flex;
-    gap: 1rem;
+    gap: var(--esp-2);
     flex-direction: row;
     align-items: center;
 }
@@ -74,8 +88,8 @@ footer div.redes-sociais a {
 }
 
 footer .redes-sociais ion-icon {
-    color: #d2d2d2;
-    font-size: 2rem;
+    color: var(--cor-secundario);
+    font-size: var(--fs-850);
 } 
 
 @media (min-width: 1080px) {
@@ -88,11 +102,11 @@ footer .redes-sociais ion-icon {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         align-content: center;
         justify-items: center;
-        gap: 10rem;
+        gap: var(--esp-8);
     }
 
     footer#footer .wrapper div {
-        gap: 1rem;
+        gap: var(--esp-2);
     }
 
     footer#footer .wrapper div.redes-sociais {
@@ -107,25 +121,135 @@ footer .redes-sociais ion-icon {
     }
 
     footer#footer a:hover {
-        color: #fff;
+        color: var(--cor-titulo);
         transform: scale(1.1);
         cursor: pointer;
     }
 
     footer#footer .redes-sociais ion-icon {
-        font-size: 3rem;
+        font-size: var(--fs-1300);
         transition: all 400ms ease-in-out;
-        border-radius: 50%;
+        border-radius: var(--raio-circulo);
 
         padding: .8rem;
     }
 
     footer#footer div.redes-sociais .icons {
-        gap: .5rem;
+        gap: var(--esp-1);
     }
 
     footer#footer .redes-sociais ion-icon:hover {
         background: var(--gradient);
         line-height: 0;
     }
-}  
+}
+
+/* Alvo de toque (celular, tablet e qualquer tela de toque): os links de
+   navegação tinham 17px de altura e os ícones sociais 16px. Cada um vira uma
+   caixa de 44px com o texto no mesmo corpo e alinhamento — a coluna cresce
+   em altura, a letra não. */
+@media (max-width: 1079.98px), (pointer: coarse) {
+    footer .navigation {
+        gap: 0;
+    }
+
+    footer .content p a {
+        display: inline-flex;
+        align-items: center;
+        min-width: var(--alvo-toque);
+        min-height: var(--alvo-toque);
+    }
+
+    footer div.redes-sociais a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: var(--alvo-toque);
+        min-height: var(--alvo-toque);
+    }
+}
+
+/* Abaixo de lg a coluna é alinhada à esquerda: as caixas de 44 se encostam
+   (no lugar do gap) e a primeira recua metade da folga, para o ícone
+   continuar alinhado ao título "Social". */
+@media (max-width: 1079.98px) {
+    footer div.redes-sociais .icons {
+        gap: 0;
+        margin-inline-start: calc((var(--fs-850) - var(--alvo-toque)) / 2);
+    }
+}
+
+/* ── Rodapé no celular e no tablet (fase 8) ───────────────────────────────
+   Era uma coluna só — marca, endereço, horário, selo, cinco links, e-mail e
+   ícones, um embaixo do outro —, alta, sem agrupamento, e com endereço e
+   horário repetidos do #contato logo acima. Agora: bloco de marca (logo,
+   CNPJ e o selo do Reclame Aqui) na primeira linha; NAVEGAÇÃO e SUPORTE lado
+   a lado; SOCIAL numa linha só, rótulo e ícones. Os links seguem com alvo de
+   44px (fase 5), então o passo entre eles não desce disso: o que encurta o
+   rodapé são as duas colunas. */
+@media (max-width: 1079.98px) {
+    /* 32px aqui + 32px no fim do #contato = os 64px entre seções, com o
+       filete do topo do rodapé no meio */
+    footer {
+        padding-top: var(--esp-6);
+    }
+
+    footer .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--esp-6) var(--esp-5);
+        align-items: start;
+    }
+
+    footer .content > .logo,
+    footer .content > .redes-sociais {
+        grid-column: 1 / -1;
+    }
+
+    /* Endereço e horário: já estão no #contato, logo acima. Só onde o bloco
+       de marca tem o CNPJ — a home; as páginas de pedido e de certificado
+       usam este rodapé sem #contato, e lá eles ficam. */
+    footer .logo:has(.rodape__cnpj) > p:not(.rodape__cnpj) {
+        display: none;
+    }
+
+    footer .logo {
+        gap: var(--esp-3);
+    }
+
+    footer img.logo {
+        margin-bottom: 0;
+    }
+
+    /* contraste: secundário no peso normal (o leve, 300, apagava a letra) e
+       o corpo de 16px dos links e do e-mail */
+    footer .content p,
+    footer .content p a {
+        font-size: var(--fs-850);
+        font-weight: var(--peso-normal);
+        color: var(--cor-secundario);
+    }
+
+    /* o CNPJ é dado legal: fica no piso de 12px, com o aviso da barra legal */
+    footer .content p.rodape__cnpj {
+        font-size: var(--fs-650);
+    }
+
+    footer div.redes-sociais {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--esp-2);
+    }
+
+    footer div.redes-sociais .icons {
+        margin-inline-start: 0;
+    }
+}
+
+/* o CNPJ no bloco de marca só existe abaixo de lg; no desktop ele segue na
+   barra legal (#author) */
+@media (min-width: 1080px) {
+    footer .rodape__cnpj {
+        display: none;
+    }
+}

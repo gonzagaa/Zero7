@@ -7,7 +7,7 @@
   overflow: hidden;
   position: relative;
 
-  border-radius: 6rem 0 6rem 0;
+  border-radius: var(--raio-assinatura-xl);
 }
 
 /* overlay premium por cima do bg (sem mudar a imagem) */
@@ -49,10 +49,10 @@
 
 }
 
+/* tamanho: o de head.css, igual ao de toda seção (ver .ba-header h2) */
 #topicos header h2 {
-  color: #070C11;
+  color: var(--cor-titulo-inverso);
   letter-spacing: -0.04em;
-  font-size: clamp(3rem, 3.2vw, 4.6rem);
   line-height: 1.05;
 }
 
@@ -76,9 +76,30 @@
   align-items: stretch;
 }
 
+/* md — os três passos empilhavam em três linhas até 1080. Aqui viram
+   2 colunas. Três colunas nesta faixa dariam ~230px por card, pouco para
+   número, título, parágrafo e botão; três só a partir de lg.
+
+   O terceiro card ocupa as duas colunas mas mantém a largura de uma,
+   centralizado. Esticá-lo de verdade não funciona: a arte do topo é um
+   <img width:100%> com proporção fixa, então dobrar a largura dobra a
+   altura e o card vira um campo vazio de 700px com o título perdido no
+   meio. Centralizado, ele fica idêntico aos irmãos. */
+@media (min-width: 768px) and (max-width: 1079.98px) {
+  #topicos .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #topicos .cards .card:nth-child(3) {
+    grid-column: 1 / -1;
+    width: calc(50% - clamp(1.6rem, 2vw, 2.4rem) / 2);
+    justify-self: center;
+  }
+}
+
 #topicos .cards .card {
   position: relative;
-  border-radius: 38px 0 38px 0;
+  border-radius: var(--raio-assinatura-xl);
   overflow: hidden;
 
   /* gradient border premium sem pseudo (pra sobrar pseudo pro “01/02/03”) */
@@ -89,10 +110,15 @@
     /* camada da borda */
     linear-gradient(135deg, var(--acc1), var(--acc2)) border-box;
 
+  /* elevação por papel (fase 6): card de conteúdo, nível 1. A sombra de
+     60px virava uma mancha escura em volta de cada card na seção clara. */
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.35),
+    var(--elev-1),
     0 0 0 1px rgba(255, 255, 255, 0.06) inset;
 
+  transition:
+    translate var(--dur-media) var(--curva-saida),
+    box-shadow var(--dur-media) var(--curva-saida);
 }
 
 /* textura interna + vinheta do card */
@@ -145,16 +171,26 @@
     linear-gradient(135deg, var(--acc1), var(--acc2)) border-box;
 }
 
-#topicos .cards .card:hover {
-  transform: translateY(-7px);
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+/* hover sóbrio (fase 6): sobe 4px em 200ms. Antes subia 7px de uma vez,
+   sem transição, e também no toque, onde o hover fica preso. */
+@media (hover: hover) {
+  #topicos .cards .card:hover {
+    box-shadow:
+      var(--elev-2),
+      0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #topicos .cards .card:hover {
+    translate: 0 -.4rem;
+  }
 }
 
 /* imagem com acabamento melhor */
 #topicos .cards .card img {
   width: 100%;
+  height: auto;
   display: block;
   position: relative;
   z-index: 2;
@@ -172,54 +208,61 @@
 
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: var(--esp-3);
 }
 
+/* Centralizado, como o título da etapa — decisão do cliente (fase 8; a fase
+   7 tinha alinhado à esquerda). Medida do token — o texto passava dela no
+   card de uma coluna (640 a 767) e em 1024. O card segue com a largura
+   toda. */
 #topicos .cards .card .text p {
-  font-size: 1.4rem;
+  font-size: var(--fs-500);
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.90);
+  color: var(--cor-corpo);
   margin: 0;
+  max-width: var(--medida-texto);
+  margin-inline: auto;
+  text-align: center;
 
   text-wrap: pretty;
 }
 
 #topicos .cards .card .text p span {
-  font-weight: 700;
+  font-weight: var(--peso-forte);
 }
 
-/* botão: largura total, sem mudar estrutura nem texto */
-#topicos .cards .card .z7-btnx {
-  width: 100%;
-  justify-content: center;
+/* Celular e tablet (fase 8): 14px. Em 11,2px o texto das etapas era quase
+   ilegível no aparelho; em 16px (o piso do texto de conteúdo) ficou grande
+   demais nos cards, e o cliente pediu um pouco menos. 14px fica entre os
+   degraus canônicos (12,8 e 16) — exceção pedida, por isso o legado. */
+@media (max-width: 1079.98px) {
+  #topicos .cards .card .text p {
+    font-size: var(--corpo-legado-725);
+  }
+}
+
+/* O botão de cada card é .btn--lg.btn--primaria.btn--bloco.btn--centro
+   .btn--acento (button.css). Aqui fica só o que é do card: a cor que o
+   acento lê e o empurrão para o fim da coluna. O primeiro card tem glow
+   próprio porque o azul padrão brigava com o verde-água. */
+#topicos .cards .card .btn {
   margin-top: auto;
 }
 
-/* agora sim: gradientes por card (seu CSS antigo não aplicava) */
-#topicos .cards .card:nth-child(1) .z7-btnx__bg {
-  background: linear-gradient(to right, #00dfc1, #00B49D);
+#topicos .cards .card:nth-child(1) {
+  --btn-acento-1: #00dfc1;
+  --btn-acento-2: #00b49d;
+  --btn-acento-rgb: 0 180 156;
 }
 
-#topicos .cards .card:nth-child(1) .z7-btnx {
-  box-shadow:
-    0 0rem 4.5rem #00b49c43,
-    0 0rem 4.6rem #00b49c1b,
-    0 0 0 .4rem #00b49c3f;
+#topicos .cards .card:nth-child(2) {
+  --btn-acento-1: #00a1ff;
+  --btn-acento-2: #007ec7;
 }
 
-#topicos .cards .card:nth-child(2) .z7-btnx__bg {
-  background: linear-gradient(to right, #00A1FF, #007EC7);
-}
-
-#topicos .cards .card:nth-child(3) .z7-btnx__bg {
-  background: linear-gradient(to right, #0021FF, #0015A0);
-}
-
-
-/* cap (bolinha da seta) com leve destaque */
-#topicos .cards .card .z7-btnx__cap {
-  background: rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(10px);
+#topicos .cards .card:nth-child(3) {
+  --btn-acento-1: #0021ff;
+  --btn-acento-2: #0015a0;
 }
 
 
@@ -233,7 +276,7 @@
 
   #topicos .cards {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2.2rem;
+    gap: var(--esp-4);
   }
 
   #topicos .cards::before {
@@ -258,7 +301,7 @@
   }
 
   #topicos .cards .card::before {
-    font-size: 8rem;
+    font-size: var(--corpo-legado-2100);
   }
 
    #topicos .cards .card {
@@ -274,12 +317,8 @@
     flex-direction: column;  /* p -> em cima, botão -> embaixo */
   }
 
-  /* empurra o botão pro final do card */
-  #topicos .cards .card .z7-btnx {
-    margin-top: auto;
-  }
 
   #topicos .cards .card:nth-child(3) p {
-    font-size: 1.3rem;
+    font-size: var(--fs-400);
   }
 }

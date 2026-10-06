@@ -1,0 +1,232 @@
+/* ==========================================================================
+   DIVISOR DE SEÇÃO — candles (fase 9)
+   A transição #divisa → #ba: o topo do #ba sobe por cima do fim do #divisa,
+   recortado em barras de candle. A forma é o RECORTE DA PRÓPRIA SEÇÃO DE
+   BAIXO — não há tira nem fundo próprio. As barras são o próprio #ba (a
+   imagem de fundo dele, recortada), então leem como a seção subindo; entre e
+   acima delas aparece o #divisa de verdade. Não existe emenda para alinhar.
+
+   Na seção:  class="secao--divisor secao--divisor-candles"
+
+   A seção sobe a altura da fita (margin-top negativa) e a devolve num
+   espaçador no topo (::before), então o conteúdo dela fica onde estava. O
+   espaçador faz o papel do padding-top compensatório sem precisar saber o
+   padding de cada seção — no #ba ele vem de uma regra de id, que uma classe
+   não sobrescreve. A altura é fixa por escala: a fita não mexe no CLS.
+
+   A seção de cima precisa de folga embaixo para a fita subir: o
+   padding-bottom dela é a folga desejada MAIS a altura da barra mais alta
+   (--divisor-folga + --candles-pico), para a folga real contar do pico da
+   fita, não da base. No #divisa, em sectionDivisa.css.
+   ========================================================================== */
+
+/* Tokens da fita, no :root porque a seção de cima também os lê. A folga vai
+   de --esp-7 (48px) no celular a --esp-8 (64px) a partir de 1080 — o ritmo
+   das seções no desktop —, em linha reta: 5.16rem + 2.1vw passa por 48px em
+   320 e por 64px em 1080. */
+:root {
+  --candles-altura: 44px;   /* o ladrilho */
+  --candles-pico: 36px;     /* a barra mais alta */
+  --divisor-folga: clamp(var(--esp-7), 5.16rem + 2.1vw, var(--esp-8));
+
+  /* As duas formas do ladrilho, declaradas UMA vez: a grande (336×44, 21
+     barras) e a pequena (144×30, as 12 primeiras escaladas). Quem escolhe é
+     a instância — o celular usa a pequena, e o divisor de cima do #faq
+     também, na faixa em que a seção de cima não tem folga de sobra. */
+  --candles-barras-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M4 30h7v14H4zM20 22h7v22h-7zM36 33h7v11h-7zM52 14h7v30h-7zM68 26h7v18h-7zM84 35h7v9h-7zM100 19h7v25h-7zM116 8h7v36h-7zM132 24h7v20h-7zM148 31h7v13h-7zM164 16h7v28h-7zM180 28h7v16h-7zM196 34h7v10h-7zM212 11h7v33h-7zM228 23h7v21h-7zM244 32h7v12h-7zM260 18h7v26h-7zM276 25h7v19h-7zM292 36h7v8h-7zM308 13h7v31h-7zM324 27h7v17h-7z'/%3E%3C/svg%3E");
+  --candles-topos-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M116 8h7v3h-7z'/%3E%3Cpath fill-opacity='.35' d='M212 11h7v2h-7zM308 13h7v2h-7z'/%3E%3C/svg%3E");
+  --candles-barras-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M3 20h5v10H3zM15 15h5v15h-5zM27 22h5v8h-5zM39 10h5v20h-5zM51 18h5v12h-5zM63 24h5v6h-5zM75 13h5v17h-5zM87 5h5v25h-5zM99 16h5v14h-5zM111 21h5v9h-5zM123 11h5v19h-5zM135 19h5v11h-5z'/%3E%3C/svg%3E");
+  --candles-topos-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M87 5h5v3h-5z'/%3E%3Cpath fill-opacity='.35' d='M39 10h5v2h-5zM123 11h5v2h-5z'/%3E%3C/svg%3E");
+
+  /* As mesmas formas de cabeça para baixo, para a variante em que a seção de
+     CIMA desce e os dentes entram na de baixo. Geradas do próprio SVG acima
+     trocando y por (altura - y - h): a barra passa a pendurar do topo do
+     ladrilho, e o desenho é barra por barra o mesmo. */
+  --candles-barras-inv-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M4 0h7v14H4zM20 0h7v22h-7zM36 0h7v11h-7zM52 0h7v30h-7zM68 0h7v18h-7zM84 0h7v9h-7zM100 0h7v25h-7zM116 0h7v36h-7zM132 0h7v20h-7zM148 0h7v13h-7zM164 0h7v28h-7zM180 0h7v16h-7zM196 0h7v10h-7zM212 0h7v33h-7zM228 0h7v21h-7zM244 0h7v12h-7zM260 0h7v26h-7zM276 0h7v19h-7zM292 0h7v8h-7zM308 0h7v31h-7zM324 0h7v17h-7z'/%3E%3C/svg%3E");
+  --candles-topos-inv-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M116 33h7v3h-7z'/%3E%3Cpath fill-opacity='.35' d='M212 31h7v2h-7zM308 29h7v2h-7z'/%3E%3C/svg%3E");
+  --candles-barras-inv-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M3 0h5v10H3zM15 0h5v15h-5zM27 0h5v8h-5zM39 0h5v20h-5zM51 0h5v12h-5zM63 0h5v6h-5zM75 0h5v17h-5zM87 0h5v25h-5zM99 0h5v14h-5zM111 0h5v9h-5zM123 0h5v19h-5zM135 0h5v11h-5z'/%3E%3C/svg%3E");
+  --candles-topos-inv-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M87 22h5v3h-5z'/%3E%3Cpath fill-opacity='.35' d='M39 18h5v2h-5zM123 17h5v2h-5z'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 639.98px) {
+  :root {
+    --candles-altura: 30px;
+    --candles-pico: 25px;
+  }
+}
+
+.secao--divisor {
+  --divisor-aresta: var(--marca);
+  margin-top: calc(-1 * var(--divisor-altura));
+}
+
+/* devolve a altura da subida: o conteúdo fica onde estava */
+.secao--divisor::before {
+  content: "";
+  display: block;
+  height: var(--divisor-altura);
+}
+
+/* os topos acesos: uma faixa no topo, por cima de tudo o que a seção pinta */
+.secao--divisor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--divisor-altura);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── candles ───────────────────────────────────────────────────────────────
+   O ladrilho é longo, para o olho não pegar a repetição: 21 barras de 7px a
+   cada 16px (336 × 44px), com alturas de 8 a 36px — 4,5:1 entre a menor e a
+   maior, a variação que faz parecer mercado. No celular, as 12 primeiras,
+   escaladas para 30px de altura, em barras de 5px a cada 12px (144 × 30px).
+   Ladrilho em px reais, repetido na horizontal a partir da borda esquerda,
+   sem esticar — centralizado, em largura ímpar (375, 393, o desktop com
+   barra de rolagem) ele caía em meio pixel e borrava as barras. As barras
+   são o próprio #ba, na cor da seção de baixo.
+
+   O azul marca os picos, não barras soltas: a mais alta do ladrilho ganha
+   topo de 3px no azul da marca; a segunda e a terceira, 2px no mesmo azul a
+   35%. As outras ficam sem topo. Os topos são o ::after, pintado com o token
+   de marca e recortado pela mesma geometria.
+
+   A faixa das barras é a intersecção do ladrilho com um degradê de 24px nas
+   duas pontas: o ladrilho não fecha conta com a largura da tela, e assim a
+   fita nasce e morre em vez de terminar numa meia barra. O resto da seção
+   fica inteiro — a camada de baixo, que sobrepõe 1px à faixa para não abrir
+   fresta. */
+.secao--divisor-candles,
+.secao--divisor-desce {
+  --divisor-altura: var(--candles-altura);
+  --candles-barras: var(--candles-barras-g);
+  --candles-topos: var(--candles-topos-g);
+  --candles-ladrilho: 336px 44px;
+  /* deslocamento horizontal do ladrilho. Duas faixas na mesma página com
+     fase 0 são idênticas barra por barra, e a repetição salta aos olhos; a
+     segunda anda meia telha. */
+  --candles-meia-telha: 168px;
+  --candles-fase: 0px;
+  /* de que borda a fita pende. 0 = do topo (a seção de baixo sobe, dentes
+     para cima); 100% = da base (a seção de cima desce, dentes para baixo) */
+  --candles-ancora: 0px;
+  --candles-corpo-pos: 0 calc(var(--divisor-altura) - 1px);
+  --candles-pontas: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+
+  /* de baixo para cima: as barras, cortadas pelas pontas; somado a isso, o
+     resto da seção inteiro */
+  -webkit-mask-image: linear-gradient(#000, #000), var(--candles-pontas), var(--candles-barras);
+  mask-image: linear-gradient(#000, #000), var(--candles-pontas), var(--candles-barras);
+  -webkit-mask-size: 100% calc(100% - var(--divisor-altura) + 1px), 100% var(--divisor-altura), var(--candles-ladrilho);
+  mask-size: 100% calc(100% - var(--divisor-altura) + 1px), 100% var(--divisor-altura), var(--candles-ladrilho);
+  -webkit-mask-position: var(--candles-corpo-pos), 0 var(--candles-ancora), var(--candles-fase) var(--candles-ancora);
+  mask-position: var(--candles-corpo-pos), 0 var(--candles-ancora), var(--candles-fase) var(--candles-ancora);
+  -webkit-mask-repeat: no-repeat, no-repeat, repeat-x;
+  mask-repeat: no-repeat, no-repeat, repeat-x;
+  -webkit-mask-composite: source-over, source-in;
+  mask-composite: add, intersect;
+}
+
+.secao--divisor-candles::after,
+.secao--divisor-recebe::after {
+  background: var(--divisor-aresta);
+  -webkit-mask-image: var(--candles-pontas), var(--candles-topos);
+  mask-image: var(--candles-pontas), var(--candles-topos);
+  -webkit-mask-size: 100% 100%, var(--candles-ladrilho);
+  mask-size: 100% 100%, var(--candles-ladrilho);
+  -webkit-mask-position: 0 0, var(--candles-fase) var(--candles-ancora);
+  mask-position: 0 0, var(--candles-fase) var(--candles-ancora);
+  -webkit-mask-repeat: no-repeat, repeat-x;
+  mask-repeat: no-repeat, repeat-x;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+@media (max-width: 639.98px) {
+  .secao--divisor-candles,
+  .secao--divisor-desce {
+    --candles-barras: var(--candles-barras-p);
+    --candles-topos: var(--candles-topos-p);
+    --candles-ladrilho: 144px 30px;
+    --candles-meia-telha: 72px;
+  }
+}
+
+/* ── As duas faixas do #faq (fase 24) ──────────────────────────────────────
+   Mesmo componente, três modificadores. A escolha foi o dente ENTRANDO no
+   #faq dos dois lados:
+
+     .secao--divisor-desce    no #plan    — desce e é recortado; o dente
+                                            entra no #faq por cima
+     .secao--divisor-recebe   no #faq     — devolve a altura em padding e
+                                            acende a aresta sobre o dente
+     .secao--divisor-contato  no #contato — sobe e é recortado; o dente
+                                            entra no #faq por baixo
+
+   Quem é recortado é sempre a seção que invade a outra. Em cima quem invade
+   é o #plan, e ele é regra 7: só a caixa externa muda — margem de baixo
+   negativa e máscara. Cards, chips, preço, destaque dourado e CTA não são
+   tocados. A compensação de altura não pode ficar nele (empurraria o próprio
+   conteúdo), então vira padding-top no #faq.
+
+   O #faq leva ainda um degrau a mais de respiro dos dois lados (--esp-5):
+   com a fita entrando na seção, o título e o último card ficavam perto
+   demais dos dentes. */
+.secao--divisor-contato {
+  /* a segunda faixa anda meia telha: sem isso as duas são idênticas */
+  --candles-fase: var(--candles-meia-telha);
+}
+
+/* --- em cima: o #plan desce, com a forma de cabeça para baixo --- */
+.secao--divisor-desce {
+  --divisor-aresta: var(--marca);
+  --candles-ancora: 100%;
+  --candles-corpo-pos: 0 0;
+  --candles-barras: var(--candles-barras-inv-g);
+  --candles-topos: var(--candles-topos-inv-g);
+  margin-bottom: calc(-1 * var(--divisor-altura));
+}
+
+@media (max-width: 639.98px) {
+  .secao--divisor-desce {
+    --candles-barras: var(--candles-barras-inv-p);
+    --candles-topos: var(--candles-topos-inv-p);
+  }
+}
+
+/* --- o #faq recebe o dente de cima --- */
+.secao--divisor-recebe {
+  /* 8rem é o ritmo de section (global.css); a altura da fita vem por cima,
+     e não no lugar dela */
+  padding-top: calc(8rem + var(--esp-5) + var(--candles-altura));
+  padding-bottom: calc(var(--divisor-folga) + var(--candles-pico) + var(--esp-5));
+}
+
+/* A aresta acesa fica no #faq, não no #plan: o ::after do #plan já é o fio
+   de 2px da seção de planos (sectionPlanos.css), e substituí-lo apagaria um
+   elemento dela. Como o #plan desce exatamente a altura da fita, os
+   primeiros --candles-altura do #faq são a mesma faixa dos dentes, e a
+   aresta cai em cima deles. */
+.secao--divisor-recebe::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--candles-altura);
+  z-index: 3;
+  pointer-events: none;
+  --candles-barras: var(--candles-barras-inv-g);
+  --candles-topos: var(--candles-topos-inv-g);
+  --candles-ancora: 0px;
+}
+
+@media (max-width: 639.98px) {
+  .secao--divisor-recebe::after {
+    --candles-topos: var(--candles-topos-inv-p);
+  }
+}
+

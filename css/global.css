@@ -6,30 +6,13 @@
     font-family: var(--tts);
 }
 
-@import url('https://fonts.cdnfonts.com/css/tt-fors-trial');
-@import url('https://fonts.cdnfonts.com/css/ncs-radhiumz');
-
+/* As custom properties que moravam aqui foram para css/tokens.css, que é o
+   primeiro @import do index.css. Os nomes antigos continuam existindo lá
+   como apelidos dos tokens, então nada que ainda não foi migrado quebra.
+   Só a raiz fica: mexer nela é fase de tipografia, não de tokens. */
 :root {
     font-size: 50%;
-
-    --color-text: #f2fffb;
-    --primary-color: #0080c9;
-    --secondy-color: #023c83;
-    --orange-black: #000205;
-    --orange-blac: #000b1c;
-    --gradient: linear-gradient(to right, #023c83, #0080c9);
-    --bg-black: #000205;
-    --bg-white: #f2fffb;
-    --nav-height: 7.2rem;
-
-    /* paleta oficial do WhatsApp (botão Comunidade na nav + card de contato) */
-    --wpp-deep: #075E54;
-    --wpp-teal: #128C7E;
-    --wpp-green: #25D366;
-
-    --ncs: 'NCS Radhiumz', sans-serif;
-    --tts: 'TT Fors Trial', sans-serif;                                             
-}  
+}
 
 html {
     scroll-behavior: smooth;
@@ -82,7 +65,7 @@ html {
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
+    border-radius: var(--raio-circulo);
     z-index: 150;
     pointer-events: none;
   } */
@@ -96,45 +79,87 @@ html {
   }
 
   ::selection {
-  color: #000000;
+  color: var(--cor-titulo-inverso);
   background: #d8d8d8;
 }
 
+  /* ==================================================================
+     MAPA DE BREAKPOINTS — quatro valores, um papel cada.
+
+       base   <640    1 coluna, 1 card por vez
+       sm      640    cards estreitos vão a 2 colunas
+                      (planos, trio de benefícios, rodapé)
+       md      768    conteúdo de prosa vai a 2 colunas
+                      (#topicos, FAQ, contato)
+       lg     1080    desktop completo: 3 colunas, 3 cards
+       xl     1600    raiz sobe para 65%, nav e tarjas recuam
+
+     Não use outro valor. Antes eram doze (480, 640, 700, 720, 1079,
+     1080, 1200, 1280, 1500, 1600, 1700, 2500) mais um décimo terceiro
+     escondido no JS dos carrosséis (800). O que era 1200/1280 virou
+     container fluido; 1500 virou clamp(); 1700 e 2500 vieram para xl.
+
+     Media query não aceita var(), então os valores aparecem literais.
+     Estas custom properties existem para consulta e para o JS ler.
+     ================================================================== */
+  :root {
+    /* O container é medida de layout, não de tipografia: fica em px para
+       não acompanhar a raiz (fase 11). 1120px é o que 140rem rendia com a
+       raiz de 8px, e 1456px o que rende com 10,4px acima de 1600 — os dois
+       valores aprovados, agora presos. */
+    --container-max: 1120px;
+
+    --bp-sm: 640px;
+    --bp-md: 768px;
+    --bp-lg: 1080px;
+    --bp-xl: 1600px;
+  }
+
+  /* Container fluido: cresce com a tela até o teto de 140rem, em vez de
+     congelar em 400px entre 720 e 1080. O padding-inline segue 2.4rem em
+     todas as larguras — é o que mantém 320/375 e 1280+ idênticos ao que
+     já estava aprovado; só a faixa 720–1200 muda de comportamento. */
   .wrapper {
-    width: min(50rem, 100%);
+    width: min(var(--container-max), 100%);
     margin-inline: auto;
-  
+
     padding-inline: 2.4rem;
   }
 
+  /* lg — a raiz sobe para 62,5% (1rem = 10px) na mesma largura em que os
+     tokens de texto trocam. Ela era 50% (8px) até 1600, e por isso a faixa
+     1080–1599 renderizava o corpo em 12,8px e o card da central em
+     12,8 / 11,2 / 9,6 — os mesmos tokens que acima de 1600 davam
+     16,64 / 14,56 / 12,48. O container e o h1 não acompanham: a fase 11 os
+     congelou em px, de propósito. */
   @media (min-width: 1080px) {
-    .wrapper {
-      width: min(110rem, 100%);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .wrapper {
-      width: min(140rem, 100%);
-    }
-  }
-
-  @media (min-width: 1600px) {
-    .wrapper {
-      width: min(140rem, 100%);
-    }
-
     :root {
-      font-size: 65%;
+      font-size: 62.5%;
+
+      /* Container FLUIDO entre 1080 e 1600 (design, out/2026): fixo em
+         1120px, um notebook de 1536 de viewport sobrava ~208px de margem
+         por lado e o conteúdo ficava apertado. O clamp dá piso 1120
+         (92vw de 1080 = 993, por isso o piso), teto 1456, e NÃO há
+         degrau em 1600: 92vw de 1599 = 1471 > 1456, o teto já valia.
+         Abaixo de 1080 nada muda (o wrapper já era 100% lá). O bloco de
+         1600 abaixo continua por documentação — vale o mesmo 1456. */
+      --container-max: clamp(1120px, 92vw, 1456px);
     }
   }
 
-  @media (min-width: 1700px) {
-    .wrapper {
-      width: min(140rem, 100%);
+  /* xl — o container vai a 1456px, o valor que 140rem rendia aqui com a
+     raiz de 65%. A raiz não muda mais neste degrau: de 1080 em diante ela é
+     62,5%, e o texto do xl encolhe 3,85% (16,64 → 16px) — previsto, e
+     abaixo do limiar de percepção. */
+  @media (min-width: 1600px) {
+    :root {
+      --container-max: 1456px;
     }
   }
-  
+
+  /* Ritmo vertical de 64px — intocado de propósito (AUDITORIA-CONTEXTO,
+     "o que já está certo"). Os clamps de espaçamento desta fase estão nas
+     seções que trocavam padding por breakpoint, não aqui. */
   section {
     padding-block: 8rem;
   }
@@ -142,13 +167,13 @@ html {
   /*====  scrollbar ============================ */
 ::-webkit-scrollbar {
   width: .6rem;
-  background-color: #0f0f0f;
+  background-color: var(--sup-card);
 }
 
 ::-webkit-scrollbar-thumb {
   width: .6rem;
   background: var(--gradient);
-  border-radius: 1rem;
+  border-radius: var(--raio-sm);
 }
 
   /* buttonWhatsapp =================== */
@@ -180,3 +205,18 @@ html {
   #buttonWhatsapp svg:hover {
     transform: scale(1.1);
   }
+
+/* B4: elemento animado é VISÍVEL POR PADRÃO. O estado escondido das
+   entradas (o opacity 0 do aos.css e afins) só vale sob html.anim — a
+   classe que o carregador do index.html põe DEPOIS do LCP, e só no
+   desktop. Sem a classe (celular, JS morto, CDN fora), o CSS final é o
+   que se vê. */
+html:not(.anim) [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  /* transition NÃO se anula aqui: as transições do aos.css só existem sob
+     body[data-aos-easing], que sem AOS nunca chega — e um none !important
+     mataria também transições legítimas de quem carrega data-aos (a nav
+     transiciona top quando a tarja entra). */
+}

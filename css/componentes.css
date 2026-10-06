@@ -1,0 +1,476 @@
+/* ==========================================================================
+   COMPONENTES REPETIDOS — chip de especificação, card da central de ajuda,
+   card de benefício. Os botões ficam em button.css.
+
+   Cada componente reúne o que antes estava escopado e espalhado na seção
+   (.planos .card .topics .topic-box, #faq .faq__category-card,
+   .ba-card--info). A seção agora cuida só de layout — grade, posição,
+   largura — e de conteúdo; a aparência mora aqui.
+
+   Este arquivo é importado DEPOIS dos arquivos de seção. É de propósito:
+   onde uma regra genérica da seção (.ba-card, .ba-card__overlay) toca o
+   mesmo elemento com a mesma especificidade, o componente vence.
+   ========================================================================== */
+
+/* ── Chip de especificação ──────────────────────────────────────────────────
+   Rótulo + valor — os oito dados de cada card de plano. A cor vem de custom
+   properties para a seção poder trocar a superfície (a variante clara do
+   Bitcoin) sem classe por chip. */
+/* Elevação por papel (fase 6): no card escuro o chip é só um campo de dado
+   — fica o fundo, sai o contorno. Eram 48 caixas com borda por carrossel,
+   competindo com a borda do próprio card. A borda segue transparente (e não
+   zero) para o chip não mudar de tamanho. Na variante clara o fundo branco
+   sobre o card azul-claro quase não se separa, então lá ela fica. */
+.chip {
+  --chip-fundo: rgb(255 255 255 / .035);
+  --chip-borda: transparent;
+  --chip-rotulo: var(--cor-desabilitado);
+  --chip-valor: var(--cor-titulo);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--esp-1);
+
+  padding: 1.2rem .6rem;
+  border-radius: var(--raio-sm);
+
+  background: var(--chip-fundo);
+  border: 1px solid var(--chip-borda);
+  text-align: center;
+}
+
+.chip__rotulo {
+  font-size: var(--corpo-legado-150);
+  line-height: 1.3;
+  color: var(--chip-rotulo);
+}
+
+/* algarismos tabulares (fase 6): nos três chips de uma linha os valores
+   em R$ ficam com os dígitos na mesma largura, coluna com coluna */
+.chip__valor {
+  font-size: var(--corpo-legado-550);
+  font-weight: var(--peso-semi);
+  color: var(--chip-valor);
+  font-variant-numeric: tabular-nums;
+}
+
+/* No desktop o card de plano ocupa 1/3 da tela: o texto escala com o
+   viewport e nunca quebra linha. */
+@media (min-width: 1080px) {
+  .chip {
+    padding-inline: .4rem;
+  }
+
+  .chip__rotulo {
+    font-size: clamp(0.9rem, 0.9vw - 0.17rem, 1.3rem);
+    white-space: nowrap;
+  }
+
+  .chip__valor {
+    font-size: clamp(1.1rem, 0.95vw + 0.02rem, 1.6rem);
+    white-space: nowrap;
+  }
+}
+
+/* superfície clara (seção Bitcoin) */
+.planos.white .chip {
+  --chip-fundo: rgb(255 255 255 / .55);
+  --chip-borda: rgb(0 0 0 / .078);
+  --chip-rotulo: var(--cor-corpo-inverso);
+  --chip-valor: var(--cor-titulo-inverso);
+}
+
+/* ── Card da central de ajuda ───────────────────────────────────────────────
+   Categoria e resultado de busca da central (#faq). Na fase 10 o card ganhou
+   a forma da família — o canto assimétrico dos botões (--raio-assinatura) —,
+   superfície lisa, borda de 1px e nenhuma sombra em repouso. Saíram o trilho
+   azul da borda esquerda (igual em todos, não distinguia nada), a pílula da
+   contagem e o chevron.
+
+   O card inteiro é o controle: um <button>, sem nada focável dentro. A seta
+   do rodapé não é botão — é o sinal de que o card abre.
+
+   Hierarquia: título um degrau acima do que era (12 → 12,8px no desktop),
+   peso 600, tinta cheia; descrição um degrau abaixo, no secundário, em até
+   duas linhas; contagem no menor degrau, no terciário, com algarismos
+   tabulares. No celular e no tablet o título fica nos 17,6px — um degrau
+   acima seria o tamanho do título da seção — e a descrição, no piso de 16px.
+
+   Interação: a do card de plano (fase 6) — a borda acende em 150ms e o card
+   sobe .2rem em 200ms, sem rebote; aqui a seta também desliza e acende. Só
+   em ponteiro com hover, e com movimento reduzido nada se desloca. O foco é
+   o anel único (acessibilidade.css), que segue o canto. */
+.card-ajuda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-4);
+  width: 100%;
+  padding: var(--esp-5);
+
+  text-align: left;
+  color: var(--cor-titulo);
+  font-family: var(--fonte-corpo);
+
+  background: var(--sup-card);
+  border: 1px solid var(--borda-sutil);
+  border-radius: var(--raio-assinatura);
+
+  cursor: pointer;
+  transition:
+    border-color var(--dur-rapida) var(--curva-saida),
+    translate var(--dur-media) var(--curva-saida);
+}
+
+.card-ajuda__texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+}
+
+.card-ajuda__titulo {
+  font-size: var(--fs-650);
+  font-weight: var(--peso-semi);
+  line-height: 1.3;
+  color: var(--cor-titulo);
+}
+
+.card-ajuda__descricao {
+  font-size: var(--fs-500);
+  font-weight: var(--peso-normal);
+  line-height: 1.5;
+  color: var(--cor-secundario);
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* contagem à esquerda, seta à direita, sempre na base do card */
+.card-ajuda__rodape {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--esp-3);
+}
+
+.card-ajuda__contagem {
+  font-size: var(--fs-300);
+  line-height: 1.4;
+  color: var(--cor-desabilitado);
+  font-variant-numeric: tabular-nums;
+}
+
+/* A seta é afordância, não enfeite: é ela que diz que o card abre. Por isso
+   sai do cinza e vai para o azul da marca — a 45% em repouso, cheio no
+   hover, junto com o deslize de 0,3rem que já existia abaixo. */
+.card-ajuda__seta {
+  flex-shrink: 0;
+  font-size: var(--fs-650);
+  color: var(--marca-clara);
+  opacity: .45;
+  transition:
+    color var(--dur-rapida) var(--curva-saida),
+    opacity var(--dur-rapida) var(--curva-saida),
+    translate var(--dur-media) var(--curva-saida);
+}
+
+/* aberta: a categoria cujo painel está embaixo da grade */
+.card-ajuda.is-active {
+  border-color: var(--borda-acesa);
+}
+
+@media (hover: hover) {
+  .card-ajuda:hover {
+    border-color: var(--borda-acesa);
+  }
+
+  .card-ajuda:hover .card-ajuda__seta {
+    color: var(--marca-clara);
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card-ajuda:hover {
+    translate: 0 -.2rem;
+  }
+
+  .card-ajuda:hover .card-ajuda__seta {
+    translate: .3rem 0;
+  }
+}
+
+/* resultado de busca: título + trecho empilhados, mais denso na vertical */
+.card-ajuda--compacto {
+  display: block;
+  padding: var(--esp-3) var(--esp-4);
+}
+
+/* celular e tablet: o piso de 16px da fase 8 no texto de conteúdo; a
+   contagem é rótulo, no piso de 12,8px */
+@media (max-width: 1079.98px) {
+  .card-ajuda__titulo {
+    font-size: var(--fs-900);
+  }
+
+  .card-ajuda__descricao {
+    font-size: var(--fs-850);
+  }
+
+  .card-ajuda__contagem {
+    font-size: var(--fs-650);
+  }
+
+  .card-ajuda__seta {
+    font-size: var(--fs-850);
+  }
+}
+
+/* ── Card de benefício ──────────────────────────────────────────────────────
+   Imagem de fundo, véu escuro, cabeça com título e seta, descrição que se
+   revela no hover — no toque, pelo mouseenter que o navegador emula; no
+   teclado, pelo foco (sectionBa.js). Mora nos três cards do #ba.
+
+   Havia uma segunda implementação deste mesmo card: a seção #cards ("A mesa
+   proprietária feita por um Trader para Traders"), com sectionCards.css
+   próprio. Ela está dentro de um comentário HTML no index.html — fora do
+   DOM — e não foi migrada. Ver AUDITORIA-CONTEXTO, fase 4. */
+.card-beneficio {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  min-height: 272px;
+  padding: 3.5rem 3rem;
+
+  border-radius: var(--raio-md);
+  border: .1rem solid rgb(29 164 243 / .14);
+  background: rgb(0 11 28 / .55);
+  box-shadow: inset 0 .1rem 0 rgb(29 164 243 / .10);
+}
+
+.card-beneficio__fundo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* Scrim firme na faixa do texto e leve no miolo, para não apagar o neon das
+   imagens — que já têm fundo praticamente preto. */
+.card-beneficio__veu {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(to top,
+    rgb(0 2 5 / .99) 0%,
+    rgb(0 2 5 / .97) 42%,
+    rgb(0 2 5 / .82) 62%,
+    rgb(0 4 12 / .45) 80%,
+    rgb(0 11 28 / .15) 100%);
+}
+
+/* hairline de destaque no topo, acima da imagem e do véu */
+.card-beneficio::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 3rem;
+  right: 3rem;
+  z-index: 3;
+  height: .2rem;
+  border-radius: var(--raio-pilula);
+  background: linear-gradient(90deg, var(--marca-clara), rgb(2 60 131 / 0));
+}
+
+/* véu extra que entra no hover, para o texto revelado seguir legível sobre a
+   parte clara da imagem */
+.card-beneficio::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(to top,
+    rgb(0 2 5 / .99) 0%,
+    rgb(0 2 5 / .94) 55%,
+    rgb(0 2 5 / .72) 100%);
+  opacity: 0;
+  transition: opacity .75s ease;
+}
+
+.card-beneficio__corpo {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--esp-2);
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* A seta alinha com a primeira linha do título, não com o bloco: quando
+   "Plano de carreira" quebra em duas linhas, o centro do bloco deixava a
+   seta 12–15px abaixo da primeira (medido na fase 6). */
+.card-beneficio__cabeca {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--esp-3);
+  width: 100%;
+}
+
+.card-beneficio__titulo {
+  font-family: var(--fonte-display);
+  font-size: var(--corpo-legado-950);
+  font-weight: var(--peso-medio);
+  text-transform: uppercase;
+  line-height: 1.15;
+  letter-spacing: .03rem;
+  background: radial-gradient(ellipse at 0% 0%, #ffffff 0%, #b2b2b2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* margem = (linha do título − caixa da seta) / 2: centro da seta no centro
+   da primeira linha (line-height 1.15 do título) */
+.card-beneficio__seta {
+  flex-shrink: 0;
+  margin-top: calc((1.15 * var(--corpo-legado-950) - var(--fs-900)) / 2);
+  font-size: var(--fs-900);
+  color: var(--marca-clara);
+  transition: transform .6s cubic-bezier(.22, .61, .36, 1);
+}
+
+/* Três linhas visíveis (line-height 1.6 × 3); o resto se revela. O corte é
+   por linha, com reticências (line-clamp): o max-height sozinho cortava no
+   meio da palavra ("…e com luc"), sem sinal de que havia mais. O max-height
+   fica para a transição de abrir. */
+.card-beneficio__descricao {
+  font-family: var(--fonte-corpo);
+  font-size: var(--fs-650);
+  line-height: 1.6;
+  color: var(--cor-desabilitado);
+  max-height: 4.8em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  transition: max-height .75s cubic-bezier(.22, .61, .36, 1);
+}
+
+.card-beneficio__descricao span {
+  color: var(--cor-corpo);
+}
+
+/* Aberto: pelo .is-open (o sectionBa.js aplica no hover com mouse e no toque
+   em tela de toque), pelo foco de teclado, e pelo :hover só onde há hover de
+   verdade — em tela de toque o :hover gruda no dedo que passa rolando. A
+   seta ao lado do título é o sinal de que o card abre, e gira ao abrir. */
+.card-beneficio:focus-visible .card-beneficio__descricao,
+.card-beneficio.is-open .card-beneficio__descricao {
+  max-height: 40em;
+  -webkit-line-clamp: unset;
+  line-clamp: none;
+}
+
+.card-beneficio:focus-visible::after,
+.card-beneficio.is-open::after {
+  opacity: 1;
+}
+
+.card-beneficio:focus-visible .card-beneficio__seta,
+.card-beneficio.is-open .card-beneficio__seta {
+  transform: rotate(90deg);
+}
+
+@media (hover: hover) {
+  .card-beneficio:hover .card-beneficio__descricao {
+    max-height: 40em;
+    -webkit-line-clamp: unset;
+    line-clamp: none;
+  }
+
+  .card-beneficio:hover::after {
+    opacity: 1;
+  }
+
+  .card-beneficio:hover .card-beneficio__seta {
+    transform: rotate(90deg);
+  }
+}
+
+@media (min-width: 1080px) {
+  .card-beneficio {
+    padding: 4rem 3.5rem;
+  }
+
+  .card-beneficio::before {
+    left: 3.5rem;
+    right: 3.5rem;
+  }
+
+  .card-beneficio__titulo {
+    font-size: var(--corpo-legado-1200);
+  }
+
+  .card-beneficio__seta {
+    margin-top: calc((1.15 * var(--corpo-legado-1200) - var(--fs-900)) / 2);
+  }
+
+  .card-beneficio__descricao {
+    font-size: var(--corpo-legado-700);
+  }
+}
+
+/* xl — a raiz vira 10,4px, então as medidas voltam à escala base para o
+   card não estourar de tamanho */
+@media (min-width: 1600px) {
+  .card-beneficio {
+    min-height: 291.2px;
+    padding: 3.2rem 2.8rem;
+  }
+
+  .card-beneficio::before {
+    left: 2.8rem;
+    right: 2.8rem;
+  }
+
+  .card-beneficio__titulo {
+    font-size: var(--fs-900);
+  }
+
+  .card-beneficio__seta {
+    margin-top: calc((1.15 * var(--fs-900) - var(--fs-900)) / 2);
+  }
+
+  .card-beneficio__descricao {
+    font-size: var(--corpo-legado-450);
+  }
+}
+
+/* ── Celular e tablet (fase 8): piso de 16px no texto de conteúdo ─────────
+   O texto do card de benefício vai para o corpo de 16px; as três linhas do
+   card acompanham, porque o corte é em em. O chip fica como era: em 16px os
+   valores quebravam em duas linhas na grade de três colunas e o card de
+   plano crescia (decisão do cliente, fase 8). */
+@media (max-width: 1079.98px) {
+  .card-beneficio__descricao {
+    font-size: var(--fs-850);
+  }
+}

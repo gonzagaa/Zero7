@@ -38,13 +38,13 @@
 }
 
 #verificado h1 {
-    color: #ffffff;
-    font-size: 3.5rem;
+    color: var(--cor-titulo);
+    font-size: var(--corpo-legado-1360);
   
     margin-top: 1rem;
     font-family: var(--ncs);
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: var(--peso-medio);
     line-height: 1;
 }
 
@@ -57,9 +57,9 @@
 
 @media (min-width: 1080px) {
     section#verificado .content h1 {
-      font-size: 4rem;
+      font-size: var(--corpo-legado-1450);
       line-height: 1;
-      color: #f4fffc;
+      color: var(--cor-corpo);
       margin-bottom: 0;
     }
 

@@ -41,23 +41,50 @@
 #depoimentos::before {
 }
 
+/* O conteúdo fica acima da imagem de fundo (absolute, z-index 0). Até a
+   fase 6 quem o levantava era o transform que o AOS deixa no bloco; sem ele
+   — com movimento reduzido, que desliga o AOS desde a fase 5, ou sem JS — o
+   título e o parágrafo sumiam atrás da imagem. */
+#depoimentos .wrapper {
+    position: relative;
+    z-index: 1;
+}
+
 #depoimentos header {
     margin-top: 4rem;
 }
 
-#depoimentos header h2 {
-    font-size: 2rem;
+/* Hierarquia (fase 6): o título era o menor da página — 16px no celular e
+   21,6px no desktop, contra 17,6/24px das outras seções de head.css — e o
+   parágrafo ficava em 9,6px, abaixo do corpo do site. Os dois voltam ao
+   padrão: o título pelo header h2 de head.css, o texto no corpo (fs-400),
+   na medida do token. */
+#depoimentos header p {
+    font-size: var(--fs-400);
+    margin-top: 1rem;
+    max-width: var(--medida-texto);
+    text-wrap: pretty;
 }
 
-#depoimentos header p {
-    font-size: 1.2rem;
-    margin-top: 1rem;
+/* Celular e tablet (fase 8): o texto no corpo de 16px, e o CTA na largura
+   do wrapper, como os CTAs dos cards do #topicos e dos planos. A medida de
+   56ch prendia o parágrafo em 430 com a letra de 10,4px — 368px numa coluna
+   de 392, mais estreito que qualquer outro texto da página. Com 16px os 56ch
+   passam da coluna, e o parágrafo ocupa a largura toda. */
+@media (max-width: 1079.98px) {
+    #depoimentos header p {
+        font-size: var(--fs-850);
+    }
+
+    #depoimentos header .btn {
+        width: 100%;
+    }
 }
 
 #depoimentos .cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
+    gap: var(--esp-2);
 }
 
 #depoimentos .cards .card {
@@ -65,7 +92,7 @@
     user-select: none;
     cursor: pointer;
     overflow: hidden;
-    border-radius: 1rem;
+    border-radius: var(--raio-sm);
 
 }
 
@@ -74,7 +101,9 @@
     height: 100%;
     object-fit: cover;
 
-    transition: all 300ms ease-in-out;
+    transition:
+        transform var(--dur-media) var(--curva-saida),
+        filter var(--dur-media) var(--curva-saida);
 }
 
 #depoimentos .cards .card:hover img {
@@ -102,21 +131,17 @@
         display: none;
     }
 
-    section#depoimentos header h2 {
-        font-size: 3rem;
-    }
-
     section#depoimentos .content {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 8rem;
+        gap: var(--esp-8);
         align-items: center;
     }
 
     section#depoimentos .cards {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 1.8rem;
+        gap: var(--esp-4);
     }
 
     section#depoimentos .cards .card {
@@ -127,12 +152,8 @@
         align-items: start;
     }
 
-    section#depoimentos header h2 {
-        font-size: 2.7rem;
-    }
-
     section#depoimentos header p {
-        font-size: 1.6rem;
+        font-size: var(--fs-650);
         line-height: 1.6;
     }
 

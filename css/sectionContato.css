@@ -3,6 +3,16 @@
   overflow: hidden;
 }
 
+#contato img.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
 #contato .content {
   position: relative;
   z-index: 1;
@@ -16,7 +26,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--esp-4);
 }
 
 /* =========================
@@ -27,7 +37,7 @@
   position: relative;
   overflow: hidden;
   height: 100%;
-  border-radius: 1.8rem;
+  border-radius: var(--raio-md);
   padding: 1px;
   isolation: isolate;
 
@@ -41,9 +51,9 @@
       rgba(0, 0, 0, 0.18) 100%
     );
 
-  box-shadow:
-    0 0 0 1px rgba(0, 128, 201, 0.06),
-    0 18px 40px rgba(0, 0, 0, 0.28);
+  /* elevação por papel (fase 6): endereço, horário e atalhos são
+     informação, não destaque — fica o contorno, sai a sombra de queda */
+  box-shadow: 0 0 0 1px rgba(0, 128, 201, 0.06);
 }
 
 #contato .border::before,
@@ -65,17 +75,10 @@
   content: "";
   position: absolute;
   inset: 1px;
-  border-radius: calc(1.8rem - 1px);
+  border-radius: calc(var(--raio-md) - 1px);
   pointer-events: none;
   z-index: 1;
   border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-#contato .border:hover,
-#suporte .content .border:hover {
-  box-shadow:
-    0 0 0 1px rgba(0, 128, 201, 0.12),
-    0 22px 50px rgba(0, 0, 0, 0.34);
 }
 
 /* variações leves por posição */
@@ -111,25 +114,25 @@
   z-index: 2;
   overflow: hidden;
   cursor: default;
-  border-radius: calc(1.8rem - 1px);
+  border-radius: calc(var(--raio-md) - 1px);
   padding: 2.2rem;
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  gap: var(--esp-3);
 
   background:
     linear-gradient(180deg, rgba(6, 17, 29, 0.98) 0%, rgba(2, 7, 13, 0.98) 100%);
 }
 
 #contato .card ion-icon {
-  color: #18a9ff;
-  font-size: 2.8rem;
+  color: var(--marca-clara);
+  font-size: var(--corpo-legado-1200);
   min-width: 5.6rem;
   min-height: 5.6rem;
   width: 5.6rem;
   height: 5.6rem;
   padding: 1.2rem;
-  border-radius: 1.3rem;
+  border-radius: var(--raio-sm);
   flex-shrink: 0;
 
   background:
@@ -144,26 +147,26 @@
 #contato .card .text {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: var(--esp-1);
 }
 
 #contato .card h3 {
-  font-size: 1.9rem;
-  color: #fff;
+  font-size: var(--corpo-legado-800);
+  color: var(--cor-titulo);
   text-align: left;
   margin: 0;
 }
 
 #contato .cards .card p {
-  font-size: 1.3rem;
+  font-size: var(--fs-400);
   line-height: 1.5;
   text-align: left;
-  color: #b9c5d3;
+  color: var(--cor-secundario);
   margin: 0;
 }
 
 #contato .cards .card p a {
-  color: #fff;
+  color: var(--cor-titulo);
   text-decoration: none;
 }
 
@@ -182,7 +185,25 @@
 #suporte .content {
   display: grid;
   grid-template-rows: auto;
-  gap: 2rem;
+  gap: var(--esp-4);
+}
+
+/* md — os três blocos do suporte empilhavam até 1080. Aqui o WhatsApp e a
+   ajuda dividem a linha e a imagem ocupa a largura toda embaixo; as três
+   colunas 1fr/1.5fr/1fr continuam sendo coisa de lg. */
+@media (min-width: 768px) and (max-width: 1079.98px) {
+  #suporte .content {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #suporte .image {
+    grid-column: 1 / -1;
+  }
+
+  #suporte .whatsapp,
+  #suporte .ajuda {
+    min-height: 24rem;
+  }
 }
 
 #suporte .whatsapp,
@@ -191,7 +212,7 @@
   position: relative;
   z-index: 2;
   height: 100%;
-  border-radius: calc(1.8rem - 1px);
+  border-radius: calc(var(--raio-md) - 1px);
   background:
     linear-gradient(180deg, rgba(6, 17, 29, 0.98) 0%, rgba(2, 7, 13, 0.98) 100%);
 }
@@ -201,37 +222,25 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1.4rem;
+  gap: var(--esp-3);
   padding: 2.4rem;
   text-align: center;
 }
 
 #suporte .whatsapp p {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: var(--corpo-legado-550);
+  font-weight: var(--peso-medio);
   line-height: 1.5;
   text-align: center;
-  color: #fff;
+  color: var(--cor-titulo);
   margin: 0;
 }
 
-/* o card usa o próprio .z7-btnx--wpp da nav, só numa escala intermediária:
-   os 7rem do CTA padrão dominariam um card de 22rem de altura */
-#suporte .whatsapp .z7-btnx {
+/* .btn--md.btn--primaria.btn--wpp: os 7rem do CTA padrão dominariam um card
+   de 22rem de altura. Aqui fica só a posição dentro do card. */
+#suporte .whatsapp .btn {
   align-self: center;
   margin-top: .6rem;
-
-  --h: 5.4rem;
-  --in: .7rem;
-  --capw: 4.8rem;
-
-  padding-left: 2.6rem;
-  padding-right: calc(var(--capw) + (var(--in) * 2) + .8rem);
-  font-size: 1.35rem;
-}
-
-#suporte .whatsapp .z7-btnx .z7-btnx__cap ion-icon {
-  font-size: 2rem;
 }
 
 /* o card inteiro passa a puxar para o verde: a moldura e o glow herdados
@@ -272,8 +281,11 @@
   content: "";
   position: absolute;
   inset: 0;
+  /* Hierarquia (fase 6): o logo gravado na foto era a coisa mais forte do
+     #contato e roubava o olho dos dois cards de ação ao lado. O véu mais
+     denso baixa o peso dele sem mexer na imagem (.06/.22 → .30/.50). */
   background:
-    linear-gradient(180deg, rgba(2, 7, 13, 0.06), rgba(2, 7, 13, 0.22));
+    linear-gradient(180deg, rgba(2, 7, 13, 0.30), rgba(2, 7, 13, 0.50));
   pointer-events: none;
   z-index: 1;
 }
@@ -284,6 +296,7 @@
   object-fit: cover;
   border-radius: inherit;
   display: block;
+  transition: transform var(--dur-media) var(--curva-saida);
 }
 
 #suporte .border:hover .image img {
@@ -302,25 +315,28 @@
 #suporte .ajuda > span,
 #suporte .whatsapp > span {
   width: fit-content;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #57ff6d;
+  font-size: var(--fs-300);
+  font-weight: var(--peso-semi);
+  color: var(--acento-neon);
 
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--esp-1);
 
   padding: 0.6rem 1rem;
   margin-bottom: 1.2rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
 
   background: rgba(87, 255, 109, 0.05);
   border: 1px solid rgba(87, 255, 109, 0.12);
 }
 
+/* alinhamento óptico (fase 6): centrado pela caixa da linha, o ícone ficava
+   3,5px abaixo do centro das maiúsculas do rótulo ao lado */
 #suporte .ajuda > span ion-icon,
 #suporte .whatsapp > span ion-icon {
-  font-size: 1.5rem;
+  font-size: var(--corpo-legado-550);
+  translate: 0 -.25em;
 }
 
 /* o card da comunidade é centralizado e já tem gap no flex column,
@@ -337,9 +353,9 @@
 }
 
 #suporte .ajuda h3 {
-  color: #fff;
-  font-size: 2.8rem;
-  font-weight: 700;
+  color: var(--cor-titulo);
+  font-size: var(--corpo-legado-1200);
+  font-weight: var(--peso-forte);
   line-height: 1.1;
   margin: 0 0 1rem 0;
 }
@@ -349,40 +365,63 @@
 }
 
 #suporte .ajuda p {
-  font-size: 1.55rem;
-  font-weight: 400;
+  font-size: var(--corpo-legado-600);
+  font-weight: var(--peso-normal);
   line-height: 1.6;
-  color: #95a2b1;
+  color: var(--cor-desabilitado);
   margin: 0;
 }
 
 #suporte .ajuda p span {
-  color: #d7e2ee;
+  color: var(--cor-corpo);
 }
 
 #suporte .ajuda a {
   text-decoration: none;
 }
 
-#suporte .ajuda a button {
+/* "Fale Conosco" é .btn--md.btn--secundaria: a primária da linha é o
+   WhatsApp ao lado. */
+#suporte .ajuda .btn {
   margin-top: 2rem;
-  border: none;
-  background: linear-gradient(135deg, #0c77d6, #18a9ff);
-  padding: 1.2rem 2.8rem;
-  border-radius: 1.2rem;
-  font-size: 1.55rem;
-  font-weight: 600;
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
-#suporte .ajuda a button:hover {
-  cursor: pointer;
-  transform: translateY(-2px);
-  filter: brightness(1.05);
-  box-shadow: 0 12px 30px rgba(0, 128, 201, 0.22);
+/* Celular e tablet (fase 8): "Fale Conosco" na largura do card. O card
+   existe para gerar contato, e o botão do tamanho do texto, encostado à
+   esquerda, era o CTA mais fraco da página. Continua md e secundário: a
+   primária da linha é o WhatsApp. */
+@media (max-width: 1079.98px) {
+  #suporte .ajuda a {
+    display: block;
+  }
+
+  #suporte .ajuda .btn {
+    width: 100%;
+  }
+
+  /* piso de 16px no texto de conteúdo; o título do card logo acima dele, e
+     a pílula ("Fique por dentro", "Suporte rápido"), que é rótulo, em 12,8 */
+  #contato .card h3 {
+    font-size: var(--fs-900);
+  }
+
+  #contato .cards .card p,
+  #suporte .whatsapp p,
+  #suporte .ajuda p {
+    font-size: var(--fs-850);
+  }
+
+  #suporte .ajuda > span,
+  #suporte .whatsapp > span {
+    font-size: var(--fs-650);
+  }
+
+  /* O #contato e o rodapé são pretos e colados: os 64px de cada lado davam
+     128px de preto sem nada no meio. Aqui são 32 + 32 — os 64px do ritmo
+     entre seções —, com o filete do rodapé no meio (ver footer.css). */
+  #contato {
+    padding-bottom: var(--esp-6);
+  }
 }
 
 /* =========================
@@ -408,7 +447,9 @@
   #suporte .whatsapp,
   #suporte .ajuda,
   #suporte .image {
-    min-height: 25rem;
+    /* em px: a foto do card do meio é object-fit: cover, e a altura da
+       fileira define o enquadramento dela (fase 11) */
+    min-height: 200px;
   }
 
   #suporte .whatsapp {
@@ -418,5 +459,18 @@
   #suporte .image img {
     aspect-ratio: 16 / 7;
     height: 100%;
+  }
+}
+
+/* xl — a contraparte do piso que a fase 11 congelou no bloco de 1080: com
+   a raiz de 10,4px, 25rem rendia 260px. Sem esta regra, acima de 1600 o
+   piso valeria os 200px da faixa de baixo. Hoje quem manda na fileira é o
+   conteúdo do .ajuda (264,8px), a 4,8px do piso — quando o texto encolher,
+   é este valor que segura a fileira. */
+@media (min-width: 1600px) {
+  #suporte .whatsapp,
+  #suporte .ajuda,
+  #suporte .image {
+    min-height: 260px;
   }
 }

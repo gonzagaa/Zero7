@@ -1,0 +1,30 @@
+fase 0: inventário…
+ablação baseline … score 56 | FCP 4356 | LCP 5798 | TBT 464 | SI 4356 | -0KB
+ablação a-terceiros-todos … score 65 | FCP 4655 | LCP 7055 | TBT 0 | SI 4655 | -1109KB
+ablação b-gtm-e-injetados … score 67 | FCP 4355 | LCP 6080 | TBT 0 | SI 4355 | -917KB
+ablação c-imgs-abaixo-da-dobra … score 56 | FCP 4354 | LCP 5629 | TBT 517 | SI 4354 | -147KB
+ablação d-videos-e-posters … score 56 | FCP 4355 | LCP 5555 | TBT 504 | SI 4355 | -57KB
+ablação e-fontes-todas … score 62 | FCP 3458 | LCP 4583 | TBT 522 | SI 3458 | -369KB
+ablação f-google-fonts-do-selo-ra … score 55 | FCP 4357 | LCP 6082 | TBT 490 | SI 4357 | -89KB
+ablação g-css-alem-do-critico … score 65 | FCP 2553 | LCP 4055 | TBT 728 | SI 3596 | -186KB
+ablação h-js-proprio … score 54 | FCP 4355 | LCP 6080 | TBT 533 | SI 4355 | -38KB
+ablação i-swiper-e-lenis … score 55 | FCP 4354 | LCP 5779 | TBT 506 | SI 4354 | -155KB
+  raiz do herói: placeholder de 7KB
+ablação j-heroi-20kb … score 55 | FCP 4354 | LCP 5713 | TBT 498 | SI 4354 | -3KB
+ablação k-tudo-junto … score 90 | FCP 2582 | LCP 3111 | TBT 0 | SI 2582 | -1914KB
+
+categoria                     -KB   score   FCP    LCP    TBT   SI
+baseline                         0     56   4356   5798    464  4356
+a-terceiros-todos             1109     65   4655   7055      0  4655
+b-gtm-e-injetados              917     67   4355   6080      0  4355
+c-imgs-abaixo-da-dobra         147     56   4354   5629    517  4354
+d-videos-e-posters              57     56   4355   5555    504  4355
+e-fontes-todas                 369     62   3458   4583    522  3458
+f-google-fonts-do-selo-ra       89     55   4357   6082    490  4357
+g-css-alem-do-critico          186     65   2553   4055    728  3596
+h-js-proprio                    38     54   4355   6080    533  4355
+i-swiper-e-lenis               155     55   4354   5779    506  4354
+j-heroi-20kb                     3     55   4354   5713    498  4354
+k-tudo-junto                  1914     90   2582   3111      0  2582
+
+-> medidas/ablacao.json

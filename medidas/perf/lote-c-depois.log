@@ -1,0 +1,34 @@
+
+depois-c mobile: score 66 (66–68)
+  FCP 4355ms | LCP 6985ms | TBT 0ms | CLS 0.0079 | SI 4355ms
+  não compostas 0 | image-delivery 49KB | render-blocking 0 | render delay do LCP 146.1ms
+  LCP: header#home > div.image > picture > img  <img width="979" height="1741" fetchpriority="high" src="./assets/bg mobile.avif" alt="">
+
+depois-c desktop: score 97 (97–97)
+  FCP 884ms | LCP 1150ms | TBT 0ms | CLS 0.002 | SI 884ms
+  não compostas 4 | image-delivery 99KB | render-blocking 0 | render delay do LCP 207.3ms
+  LCP: header#home > div.image > picture > img  <img width="979" height="1741" fetchpriority="high" src="http://127.0.0.1:59697/assets/bg%20desktop.avif" alt="">
+  depois-c 390 lento carga 9/9: LCP 1564ms, 1632KB
+depois-c 390px lento: n=9 abortos=0 repetições=0
+  LCP 1564 (1544–2532) | FCP 1044 (1032–1096) | TTFB 2 (2–7) | TBT 699 (614–814)
+  CLS carga 0.0083 (0.0079–0.0145) | CLS total 0.0251 (0.0247–0.0313) | main thread 1566 (1409–1703)ms
+  bytes inicial 1632KB em 87 req | após rolar 2104KB em 129 req
+  elemento do LCP: img [bg%20mobile.avif]
+  depois-c 390 livre carga 9/9: LCP 204ms, 1715KB
+depois-c 390px livre: n=9 abortos=0 repetições=0
+  LCP 172 (140–208) | FCP 120 (108–168) | TTFB 2 (2–7) | TBT 0 (0–2)
+  CLS carga 0 (0–0) | CLS total 0.0632 (0.0171–0.0659) | main thread 174 (120–259)ms
+  bytes inicial 1715KB em 92 req | após rolar 7612KB em 156 req
+  elemento do LCP: img [bg%20mobile.avif]
+  depois-c 1474 lento carga 9/9: LCP 2864ms, 1264KB
+depois-c 1474px lento: n=9 abortos=0 repetições=0
+  LCP 2864 (1900–2920) | FCP 1052 (1032–1060) | TTFB 2 (1–6) | TBT 356 (317–402)
+  CLS carga 0.0035 (0.0035–0.0042) | CLS total 0.0123 (0.0121–0.013) | main thread 1049 (971–1142)ms
+  bytes inicial 1264KB em 78 req | após rolar 1640KB em 117 req
+  elemento do LCP: img [bg%20desktop.avif]
+  depois-c 1474 livre carga 9/9: LCP 200ms, 1240KB
+depois-c 1474px livre: n=9 abortos=0 repetições=0
+  LCP 204 (200–228) | FCP 136 (128–204) | TTFB 2 (2–6) | TBT 0 (0–0)
+  CLS carga 0.0041 (0.0013–0.0041) | CLS total 0.0116 (0.0091–0.0122) | main thread 181 (167–241)ms
+  bytes inicial 1370KB em 89 req | após rolar 7589KB em 154 req
+  elemento do LCP: img [bg%20desktop.avif]

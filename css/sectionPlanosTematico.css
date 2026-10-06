@@ -16,15 +16,15 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 }
 
 .planos.tema header h2 {
-    color: #ffffff;
+    color: var(--cor-titulo);
 }
 
 .planos.tema header .textBotoes p {
-    color: #ffffff;
+    color: var(--cor-titulo);
 }
 
 .planos.tema p.obs {
-    color: #ffffff;
+    color: var(--cor-titulo);
 }
 
 .planos.tema .card .title {
@@ -32,13 +32,13 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 }
 
 .planos.tema .card .title h3 {
-    color: #ffffff;
+    color: var(--cor-titulo);
 }
 
 /* .planos.tema .card a button {
     background: radial-gradient(at center bottom, #ffffff, #a9a9a9);
     filter: drop-shadow(0 0 20px #f6f6f649);
-    color: #000;
+    color: var(--cor-titulo-inverso);
 }
 
 .planos.tema .card a button:hover {
@@ -49,8 +49,8 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     background: linear-gradient(to right, transparent, #ffffff, transparent);
 }
   
-.planos.tema .card .price h4 span,
-.planos.tema .card .price h5 span {
+.planos.tema .card .price .js-price-parcel span,
+.planos.tema .card .price .js-price-avista span {
     background: linear-gradient(45deg, #cdcdcd, #636363);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -65,40 +65,40 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 }
 
 .planos.tema .card .topics p {
-    color: #ffffff;
+    color: var(--cor-titulo);
 }
 
 .planos.tema .card .topics p span {
-    color: #ffffff;
+    color: var(--cor-titulo);
 }
 
-.planos.tema .card .oldPrice h4 {
-    color: #ffffff;
+.planos.tema .card .oldPrice p {
+    color: var(--cor-titulo);
 }
 
-.planos.tema .card .price h4 {
-    color: #ffffff;
+.planos.tema .card .price .js-price-parcel {
+    color: var(--cor-titulo);
 }
 
-.planos.tema .card .price h4 span {
+.planos.tema .card .price .js-price-parcel span {
     font-family: var(--ncs);
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 2rem;
+    font-size: var(--fs-850);
 }
 
-.planos.tema .card .price h5 {
+.planos.tema .card .price .js-price-avista {
     font-family: var(--ncs);
-    color: #ffffff;
-    font-size: 2rem;
+    color: var(--cor-titulo);
+    font-size: var(--fs-850);
 }
 
-.planos.tema .card .price h5 span {
+.planos.tema .card .price .js-price-avista span {
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 1.7rem;
+    font-size: var(--corpo-legado-700);
 }
 
 .planos.tema .card a button {
@@ -110,22 +110,23 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     filter: drop-shadow(0 0 20px #42a1dc35);
 }
 
-.planos.tema .swiper-pagination-bullet-active {
-    background-color: #ffffff; 
+/* indicador de plano aceso: no tema a barra é clara, como era a bolinha */
+.planos.tema .plano .swiper-pagination .is-na-tela {
+    border-bottom-color: var(--sup-clara);
 }
 
 .planos .botoes {
     display: flex;
-    gap: 1rem .5rem; 
+    gap: var(--esp-2) var(--esp-1); 
 
     margin-top: 2rem;
 }
 
 .planos .botoes button {
     padding: 1rem;
-    border-radius: .5rem;
-    color: #000000;
-    font-size: 1.3rem;
+    border-radius: var(--raio-sm);
+    color: var(--cor-titulo-inverso);
+    font-size: var(--fs-400);
 
     border: none;
     background: linear-gradient(45deg, #ffffff, #cbcbcb);
@@ -139,12 +140,12 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 
 .planos .botoes button.selecionado {
     background: linear-gradient(45deg, #10A36A, #34D399);
-    color: #000000;
+    color: var(--cor-titulo-inverso);
 }
 
 .planos.bit .botoes button {
     background: #081c31;
-    color: #ffffff;
+    color: var(--cor-titulo);
     border: 1px solid #46464647;
 }
 
@@ -155,12 +156,12 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 
 .planos.bit .botoes button.selecionado {
     background: linear-gradient(45deg, #10A36A, #34D399);
-    color: #000000;
+    color: var(--cor-titulo-inverso);
 }
 
 .planos .textBotoes p {
-    font-size: 1.4rem;
-    color: #ffffffba;
+    font-size: var(--fs-500);
+    color: var(--cor-secundario);
 
     position: relative;
     z-index: 1;
@@ -169,7 +170,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 }
 
 .planos .textBotoes p.reinicio {
-    font-size: 1.2rem;
+    font-size: var(--fs-300);
 }
 
 /* deixa tudo escondido por padrão... */
@@ -184,11 +185,11 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 
 @keyframes flashChange {
   0% {
-    color: #0080c9;
+    color: var(--marca);
     text-shadow: 0 0 8px #007fc959;
   }
   50% {
-    color: #0080c9;
+    color: var(--marca);
     text-shadow: 0 0 4px #007fc959;
   }
   100% {
@@ -204,13 +205,13 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 
 /* estado ativo rápido: destaque */
 .flash-active {
-  color: #0080c9; /* amarelo destaque */
+  color: var(--marca); /* amarelo destaque */
   text-shadow: 0 0 8px #007fc98e,
                0 0 16px #007fc99c;
 }
 
 .planos.bit .flash-active {
-  color: #0080c9; /* amarelo destaque */
+  color: var(--marca); /* amarelo destaque */
   text-shadow: 0 0 8px #007fc925,
                0 0 16px #007fc927;
 }
@@ -228,11 +229,11 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 @media (min-width: 1080px) {
     section.planos .botoes button {
         padding: 1rem 3rem;
-        font-size: 1.6rem;
+        font-size: var(--fs-650);
     }
     
     section.planos .textBotoes p {
-        font-size: 1.6rem;
+        font-size: var(--fs-650);
         padding-inline: 20%;
     }
 
@@ -241,14 +242,14 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     }
 
     section.planos .textBotoes p.reinicio {
-        font-size: 1.6rem;
+        font-size: var(--fs-650);
         padding-inline: 10%;
     }
 
     section.planos.tema .swiper-button-next,
     section.planos.tema .swiper-button-prev {
         border: 2px solid #fff;
-        color: #fff;
+        color: var(--cor-titulo);
     }
 }
 
@@ -288,9 +289,9 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     transform: rotate(35deg);
     transform-origin: center;
     background: linear-gradient(135deg, var(--z7-green) 0%, var(--z7-green-dark) 100%);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 800;
+    color: var(--cor-titulo);
+    font-size: var(--fs-500);
+    font-weight: var(--peso-black);
     letter-spacing: 0.8px;
     padding: 6px 38px;
     text-transform: uppercase;
@@ -299,14 +300,14 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: var(--esp-1);
     white-space: nowrap;
     z-index: 6;
     pointer-events: none;
 }
 
 .planos .card.card--promo .card-promo-ribbon ion-icon {
-    font-size: 13px;
+    font-size: var(--fs-650);
 }
 
 .planos .card.card--promo .title h3 {
@@ -318,15 +319,15 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 .planos .card.card--promo .card-promo-hint {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--esp-2);
     
     padding: 6px 14px;
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-size: var(--corpo-legado-250);
+    font-weight: var(--peso-semi);
     color: var(--z7-green-light);
     background: rgba(0, 200, 111, 0.08);
     border: 1px solid rgba(0, 200, 111, 0.38);
-    border-radius: 999px;
+    border-radius: var(--raio-pilula);
     text-align: center;
     line-height: 1.2;
 
@@ -334,112 +335,26 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 }
 
 .planos .card.card--promo .card-promo-hint ion-icon {
-    font-size: 1.3rem;
+    font-size: var(--fs-400);
     color: var(--z7-green);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 767.98px) { /* md-1 — era 720 */
     .planos .card.card--promo .card-promo-ribbon {
-        font-size: 10px;
+        font-size: var(--corpo-legado-350);
         padding: 5px 32px;
         right: -42px;
         top: 18px;
     }
 
     .planos .card.card--promo .card-promo-hint {
-        font-size: 1rem;
+        font-size: var(--corpo-legado-100);
         padding: 5px 12px;
     }
 }
 
-/* ===== Botão verde (variante PROMO) =====
-   Override escopado: só o .z7-btnx dentro do .card--promo vira verde.
-   Reaproveita estrutura e animações de button.css, troca apenas a paleta. */
-.planos .card.card--promo .z7-btnx {
-    box-shadow:
-        0 0rem 4.5rem rgba(0, 200, 111, 0.34),
-        0 0rem 4.6rem rgba(60, 255, 155, 0.22),
-        0 0 0 .4rem rgba(0, 200, 111, 0.12);
-}
-
-.planos .card.card--promo .z7-btnx::before {
-    background:
-        radial-gradient(130% 160% at var(--mx) var(--my),
-            rgba(60, 255, 155, 0.68) 0%,
-            rgba(0, 200, 111, 0.30) 34%,
-            rgba(2, 60, 131, 0.18) 58%,
-            rgba(0, 0, 0, 0) 74%),
-        radial-gradient(140% 120% at 20% 30%,
-            rgba(255, 255, 255, 0.18) 0%,
-            rgba(255, 255, 255, 0) 55%);
-}
-
-.planos .card.card--promo .z7-btnx::after {
-    background:
-        conic-gradient(from var(--spin),
-            rgba(60, 255, 155, 0) 0deg,
-            rgba(60, 255, 155, 0.90) 60deg,
-            rgba(255, 255, 255, 0.38) 95deg,
-            rgba(0, 200, 111, 0.85) 170deg,
-            rgba(29, 164, 243, 0.46) 250deg,
-            rgba(60, 255, 155, 0) 360deg);
-}
-
-.planos .card.card--promo .z7-btnx .z7-btnx__bg {
-    background:
-        radial-gradient(140% 180% at var(--mx) var(--my),
-            rgba(255, 255, 255, 0.22) 0%,
-            rgba(255, 255, 255, 0.08) 22%,
-            rgba(255, 255, 255, 0) 56%),
-        linear-gradient(90deg,
-            #034b2b 0%,
-            var(--z7-green-dark) 30%,
-            var(--z7-green) 62%,
-            var(--z7-green-light) 100%);
-    background-size: 130% 130%;
-    background-position: 0% 50%;
-    filter: saturate(1.14) contrast(1.08);
-}
-
-.planos .card.card--promo .z7-btnx .z7-btnx__cap {
-    background:
-        radial-gradient(120% 120% at 30% 30%,
-            rgba(255, 255, 255, 0.24) 0%,
-            rgba(255, 255, 255, 0.09) 40%,
-            rgba(255, 255, 255, 0) 72%),
-        linear-gradient(90deg,
-            rgba(255, 255, 255, 0.10) 0%,
-            rgba(255, 255, 255, 0.05) 42%,
-            rgba(255, 255, 255, 0.02) 100%),
-        linear-gradient(135deg,
-            rgba(115, 255, 184, 0.34),
-            rgba(2, 60, 131, 0.16));
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow:
-        inset 0 .1rem 0 rgba(255, 255, 255, 0.18),
-        0 1.2rem 2.6rem rgba(0, 0, 0, 0.20);
-}
-
-.planos .card.card--promo .z7-btnx:hover {
-    box-shadow:
-        var(--sh1x, 0rem) var(--sh1y, 0rem) 7.5rem rgba(0, 200, 111, 0.58),
-        var(--sh2x, 0rem) var(--sh2y, 0rem) 4.6rem rgba(60, 255, 155, 0.42),
-        0 0 0 .4rem rgba(60, 255, 155, 0.18);
-}
-
-.planos .card.card--promo .z7-btnx:focus-visible {
-    box-shadow:
-        0 2.8rem 7.5rem rgba(0, 200, 111, 0.58),
-        0 1.8rem 4.6rem rgba(60, 255, 155, 0.42),
-        0 0 0 .5rem rgba(60, 255, 155, 0.26);
-}
-
-.planos .card.card--promo .z7-btnx .z7x-ripple {
-    background: radial-gradient(circle,
-        rgba(255, 255, 255, 0.58) 0%,
-        rgba(60, 255, 155, 0.38) 35%,
-        rgba(60, 255, 155, 0) 70%);
-}
+/* O CTA verde de campanha virou .btn--promo (button.css). O gancho continua:
+   um card marcado com .card--promo pinta o próprio CTA de verde. */
 
 /* ===========================================================
    Card COPA ZERO7 (SÊNIOR) — apenas a bandeira como backdrop
@@ -449,7 +364,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     isolation: isolate;
 
     /* borda dourada substituindo o white 30% padrão */
-    border-color: rgba(255, 194, 90, .55);
+    border-color: var(--borda-dourada);
 
     /* halo dourado externo em 3 camadas + sombra de profundidade */
     box-shadow:
@@ -471,7 +386,7 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     height: 55%;
     z-index: -1;
     pointer-events: none;
-    border-radius: 3.5rem 3.5rem 0 0;
+    border-radius: var(--raio-lg) var(--raio-lg) 0 0;
     background: radial-gradient(ellipse at 50% 0%,
         rgba(255, 184, 48, .22) 0%,
         rgba(232, 149, 27, .10) 35%,
@@ -494,13 +409,13 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
 
     padding: .85rem 1.4rem;
 
-    font-size: 1.25rem;
-    font-weight: 800;
+    font-size: var(--corpo-legado-350);
+    font-weight: var(--peso-black);
     line-height: 1.2;
-    letter-spacing: .5px;
+    letter-spacing: var(--ls-rotulo);
     text-transform: uppercase;
     text-align: center;
-    color: #fff;
+    color: var(--cor-titulo);
     text-shadow:
         0 1px 2px rgba(80, 40, 0, .75),
         0 0 6px rgba(0, 0, 0, .25);
@@ -513,9 +428,10 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
         #ffd166 72%,
         #b8730c 100%);
     background-size: 220% 100%;
-    animation: seniorTarjaShift 9s ease-in-out infinite;
+    /* o deslize saiu daqui: background-position anima na main thread. O
+       fundo estático fica como primeiro frame; quem desliza é o ::after. */
 
-    border-radius: 1rem;
+    border-radius: var(--raio-sm);
     box-shadow:
         inset 0 -1px 0 rgba(90, 55, 0, .55),
         inset 0 1px 0 rgba(255, 245, 200, .55),
@@ -536,15 +452,47 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
         rgba(255, 255, 255, .55) 50%,
         transparent 62%);
     transform: translateX(-100%);
-    animation: seniorTarjaShine 5.5s ease-in-out infinite;
     pointer-events: none;
     z-index: 1;
 }
 
-@keyframes seniorTarjaShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* A MESMA arte do gradiente, numa camada de 220% movida com translateX —
+   com background-size 220%, position 0->100% desloca -1,2 largura, que em
+   % do próprio pseudo (2,2 larguras) dá -54,5455%. z-index -1 dentro do
+   isolation:isolate: acima do fundo estático do elemento, abaixo do texto
+   e do brilho (::before, z-index 1). O overflow:hidden do elemento recorta. */
+/* As duas animações da tarja atrás do MESMO portão dos botões (button.css):
+   só armam com body.anima-ociosas, ligada pelo global.js depois do load. */
+body:where(.anima-ociosas) .planos .card--copa .card-tarja::before {
+    animation: seniorTarjaShine 5.5s ease-in-out infinite;
+}
+
+body:where(.anima-ociosas) .planos .card--copa .card-tarja::after {
+    animation: seniorTarjaDesliza 9s ease-in-out infinite;
+}
+
+.planos .card--copa .card-tarja::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 220%;
+    height: 100%;
+    z-index: -1;
+
+    background: linear-gradient(100deg,
+        #7a4a00 0%,
+        #b8730c 18%,
+        #e8951b 38%,
+        #ffb830 56%,
+        #ffd166 72%,
+        #b8730c 100%);
+}
+
+@keyframes seniorTarjaDesliza {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(-54.5455%); }
+    100% { transform: translateX(0); }
 }
 
 @keyframes seniorTarjaShine {
@@ -558,96 +506,4 @@ background: linear-gradient(to bottom, #02060f, #0a121a);
     .planos .card--copa .card-tarja::before {
         animation: none;
     }
-}
-
-/* ===== Variantes de cor verde (escopadas ao card promo) ===== */
-.planos .card.card--promo {
-    --z7-green-dark: #046b3a;
-    --z7-green: #00c86f;
-    --z7-green-light: #3cff9b;
-    --z7-green-neon: #73ffb8;
-}
-
-/* Botão verde apenas no PLENO (sobrescreve azul de button.css) */
-.planos .card.card--promo .z7-btnx {
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow:
-        0 0 4.5rem rgba(0, 200, 111, 0.34),
-        0 0 4.6rem rgba(60, 255, 155, 0.22),
-        0 0 0 0.4rem rgba(0, 200, 111, 0.12);
-}
-
-.planos .card.card--promo .z7-btnx::before {
-    background:
-        radial-gradient(130% 160% at var(--mx) var(--my),
-            rgba(60, 255, 155, 0.68) 0%,
-            rgba(0, 200, 111, 0.30) 34%,
-            rgba(2, 60, 131, 0.18) 58%,
-            rgba(0, 0, 0, 0) 74%),
-        radial-gradient(140% 120% at 20% 30%,
-            rgba(255, 255, 255, 0.18) 0%,
-            rgba(255, 255, 255, 0) 55%);
-}
-
-.planos .card.card--promo .z7-btnx::after {
-    background:
-        conic-gradient(from var(--spin),
-            rgba(60, 255, 155, 0) 0deg,
-            rgba(60, 255, 155, 0.90) 60deg,
-            rgba(255, 255, 255, 0.38) 95deg,
-            rgba(0, 200, 111, 0.85) 170deg,
-            rgba(29, 164, 243, 0.46) 250deg,
-            rgba(60, 255, 155, 0) 360deg);
-}
-
-.planos .card.card--promo .z7-btnx .z7-btnx__bg {
-    background:
-        radial-gradient(140% 180% at var(--mx) var(--my),
-            rgba(255, 255, 255, 0.22) 0%,
-            rgba(255, 255, 255, 0.08) 22%,
-            rgba(255, 255, 255, 0) 56%),
-        linear-gradient(90deg,
-            #034b2b 0%,
-            var(--z7-green-dark) 30%,
-            var(--z7-green) 62%,
-            var(--z7-green-light) 100%);
-    background-size: 130% 130%;
-    background-position: 0% 50%;
-    filter: saturate(1.14) contrast(1.08);
-}
-
-.planos .card.card--promo .z7-btnx .z7-btnx__cap {
-    background:
-        radial-gradient(120% 120% at 30% 30%,
-            rgba(255, 255, 255, 0.24) 0%,
-            rgba(255, 255, 255, 0.09) 40%,
-            rgba(255, 255, 255, 0) 72%),
-        linear-gradient(90deg,
-            rgba(255, 255, 255, 0.10) 0%,
-            rgba(255, 255, 255, 0.05) 42%,
-            rgba(255, 255, 255, 0.02) 100%),
-        linear-gradient(135deg,
-            rgba(115, 255, 184, 0.34),
-            rgba(2, 60, 131, 0.16));
-}
-
-.planos .card.card--promo .z7-btnx:hover {
-    box-shadow:
-        var(--sh1x, 0rem) var(--sh1y, 0rem) 7.5rem rgba(0, 200, 111, 0.58),
-        var(--sh2x, 0rem) var(--sh2y, 0rem) 4.6rem rgba(60, 255, 155, 0.42),
-        0 0 0 0.4rem rgba(60, 255, 155, 0.18);
-}
-
-.planos .card.card--promo .z7-btnx:focus-visible {
-    box-shadow:
-        0 2.8rem 7.5rem rgba(0, 200, 111, 0.58),
-        0 1.8rem 4.6rem rgba(60, 255, 155, 0.42),
-        0 0 0 0.5rem rgba(60, 255, 155, 0.26);
-}
-
-.planos .card.card--promo .z7-btnx .z7x-ripple {
-    background: radial-gradient(circle,
-        rgba(255, 255, 255, 0.58) 0%,
-        rgba(60, 255, 155, 0.38) 35%,
-        rgba(60, 255, 155, 0) 70%);
 }

@@ -8,12 +8,12 @@ header {
 }
 
 header h2 {
-    color: #ffffff;
-    font-size: 2.2rem;
+    color: var(--cor-titulo);
+    font-size: var(--fs-900);
   
     font-family: var(--ncs);
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: var(--peso-medio);
 }
 
 header h2 span {
@@ -24,24 +24,73 @@ header h2 span {
 }
 
 header p {
-    font-size: 1.4rem;
+    font-size: var(--fs-500);
     line-height: 1.4;
-    color: #d1e0ff;
+    color: var(--cor-corpo);
 
     margin-bottom: 2rem;
 }
 
 header p span {
-    color: #d1e0ff;
-    font-weight: 600;
+    color: var(--cor-corpo);
+    font-weight: var(--peso-semi);
 }
 
 @media (min-width: 1080px) {
     header h2 {
-        font-size: 3rem;
+        font-size: var(--fs-1300);
     }
 
     header p {
-        font-size: 1.6rem;
+        font-size: var(--fs-650);
+    }
+}
+
+/* Título de seção no celular e no tablet (fase 8). Nos 17,6px de antes,
+   "CONHEÇA OS BENEFÍCIOS ZERO7" deixava o ZERO7 sozinho na linha, e o
+   título mal passava do texto de 16px das seções. Agora é um tamanho só,
+   fluido: 24px, mas nunca maior do que a coluna comporta para "GRANDES
+   PAGAMENTOS" — a frase mais longa dos títulos, 15,9em na NCS — numa linha,
+   com ~3% de folga. Dá 17,2px em 320, 20,5 em 375, 21,4 em 390, 23,9 em 430
+   e 24 do 440 em diante. Em 24px fixos o #depoimentos quebrava com
+   PAGAMENTOS sozinho em 375 e 390; assim o balance fecha em "TRANSFORME SUAS
+   / HABILIDADES EM / GRANDES PAGAMENTOS". Só nas seções da home: as páginas
+   de pedido e de certificado usam este mesmo header h2. */
+@media (max-width: 1079.98px) {
+    :is(#ba, #topicos, #depoimentos, #plan, #faq, #contato) header h2 {
+        font-size: min(var(--fs-1300), calc((100vw - 4.8rem) / 16.4));
+        text-wrap: balance;
+    }
+
+    /* o subtítulo da seção no corpo de 16px, como todo texto de conteúdo */
+    :is(#ba, #topicos, #depoimentos, #plan, #faq, #contato) header p {
+        font-size: var(--fs-850);
+    }
+}
+
+/* ── Ritmo dentro das seções (fase 6) ─────────────────────────────────────
+   Um degrau da escala por passo, igual em toda seção: título → subtítulo
+   --esp-2; texto → botão --esp-4; cabeçalho → conteúdo --esp-6 no celular e
+   --esp-7 do lg em diante. Antes, cabeçalho → conteúdo ia de 32 a 52px
+   conforme a seção tivesse subtítulo (a margem do <p> somava à do header),
+   e no #contato título e subtítulo encostavam (0px).
+   Os planos ficam de fora: lá o respiro sob o título já soma o padding que
+   abriga o nome flutuante dos cards. */
+:is(#ba, #topicos, #depoimentos, #faq, #contato) header {
+    margin-bottom: var(--esp-6);
+}
+
+:is(#ba, #topicos, #depoimentos, #faq, #contato) header h2 + p {
+    margin-top: var(--esp-2);
+    margin-bottom: 0;
+}
+
+:is(#ba, #topicos, #depoimentos, #faq, #contato) header p + .btn {
+    margin-top: var(--esp-4);
+}
+
+@media (min-width: 1080px) {
+    :is(#ba, #topicos, #depoimentos, #faq, #contato) header {
+        margin-bottom: var(--esp-7);
     }
 }

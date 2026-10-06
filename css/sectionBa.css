@@ -42,7 +42,7 @@
 
 .ba-blob {
   position: absolute;
-  border-radius: 50%;
+  border-radius: var(--raio-circulo);
   filter: blur(12.5rem);
 }
 
@@ -75,7 +75,7 @@
 .ba-kicker {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--esp-3);
   margin-bottom: 3rem;
 }
 
@@ -85,16 +85,16 @@
   width: 3.75rem;
   height: .2rem;
   background: linear-gradient(90deg, var(--z7-sky), transparent);
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
 }
 
 .ba-kicker__text {
   font-family: var(--tts);
-  font-size: 1.3rem;
+  font-size: var(--fs-400);
   letter-spacing: .28rem;
   text-transform: uppercase;
-  color: rgba(158,206,243,.7);
-  font-weight: 500;
+  color: var(--cor-secundario);
+  font-weight: var(--peso-medio);
 }
 
 /* ------------------------------------------------------------------
@@ -105,10 +105,13 @@
   text-align: center;
 }
 
+/* Tamanho: o de head.css (17,6 → 24px), o mesmo de toda seção. O clamp
+   de 24 → 36,8px daqui e do #topicos não marcava seção principal — os
+   planos usam o menor — e no celular punha o título acima do H1 (20px).
+   Tracking e entrelinha da dobra ficam. */
 .ba-header h2 {
   font-family: var(--ncs);
-  font-size: clamp(3rem, 3.2vw, 4.6rem);
-  font-weight: 500;
+  font-weight: var(--peso-medio);
   line-height: 1.05;
   letter-spacing: -0.04em;
   color: var(--color-text);
@@ -138,7 +141,7 @@
 .ba-bento {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: var(--esp-3);
 }
 
 /* ------------------------------------------------------------------
@@ -147,7 +150,7 @@
 .ba-card {
   position: relative;
   overflow: hidden;
-  border-radius: 2rem;
+  border-radius: var(--raio-md);
   border: .1rem solid rgba(29,164,243,.14);
   background: rgba(0, 11, 28, .55);
   min-height: 32rem;
@@ -177,22 +180,22 @@
   z-index: 6;
   display: flex;
   flex-direction: column;
-  gap: .45rem;
+  gap: var(--esp-1);
 }
 
 .ba-caption__label {
   font-family: var(--tts);
-  font-size: 1.25rem;
+  font-size: var(--corpo-legado-350);
   letter-spacing: .25rem;
   text-transform: uppercase;
-  color: rgba(158,206,243,.62);
-  font-weight: 500;
+  color: var(--cor-secundario);
+  font-weight: var(--peso-medio);
 }
 
 .ba-caption__value {
   font-family: var(--ncs);
-  font-size: 2.25rem;
-  font-weight: 500;
+  font-size: var(--corpo-legado-925);
+  font-weight: var(--peso-medio);
   line-height: 1.2;
   color: var(--color-text);
 }
@@ -203,7 +206,7 @@
   z-index: 4;
   display: flex;
   flex-direction: column;
-  gap: 2.25rem;
+  gap: var(--esp-4);
 }
 
 /* ------------------------------------------------------------------
@@ -212,9 +215,9 @@
 .ba-card__badge {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--esp-2);
   padding: .7rem 1.7rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background: rgba(2,60,131,.28);
   border: .1rem solid rgba(29,164,243,.28);
   backdrop-filter: blur(.6rem);
@@ -225,7 +228,7 @@
   flex-shrink: 0;
   width: .7rem;
   height: .7rem;
-  border-radius: 50%;
+  border-radius: var(--raio-circulo);
   background: var(--z7-sky);
   box-shadow: 0 0 .9rem rgba(29,164,243,.8);
   animation: ba-dot-pulse 2.4s ease-in-out infinite;
@@ -238,11 +241,11 @@
 
 .ba-card__badge span:last-child {
   font-family: var(--tts);
-  font-size: 1.25rem;
+  font-size: var(--corpo-legado-350);
   letter-spacing: .18rem;
   text-transform: uppercase;
-  color: rgba(200,230,255,.78);
-  font-weight: 500;
+  color: var(--cor-secundario);
+  font-weight: var(--peso-medio);
 }
 
 /* ------------------------------------------------------------------
@@ -288,16 +291,32 @@
     linear-gradient(to top, rgba(0,2,5,.5) 0%, rgba(0,4,12,.16) 45%, rgba(0,11,28,.26) 100%);
 }
 
+/* Celular e tablet (fase 8): o vídeo do Academy Pass tem texto próprio
+   ("Grandes Nomes do Mercado", "Capítulo 4 de 11") bem atrás da legenda, e
+   as duas camadas se embaralhavam. O véu fica firme na faixa do texto e se
+   abre para as bordas, onde a imagem continua à vista. */
+@media (max-width: 1079.98px) {
+  .ba-card--hero::after {
+    background:
+      radial-gradient(ellipse 96% 60% at 50% 50%, rgba(0,2,5,.86) 0%, rgba(0,2,5,.7) 45%, rgba(0,2,5,.3) 78%, transparent 100%),
+      linear-gradient(to top, rgba(0,2,5,.5) 0%, rgba(0,4,12,.16) 45%, rgba(0,11,28,.26) 100%);
+  }
+}
+
 .ba-card--hero .ba-card__inner {
   align-items: center;
   max-width: 102rem;
   width: 100%;
 }
 
+/* Escada antiga: 2.5rem base, 3rem em 640, 3.4rem em 1080, 3.75rem em 1280,
+   4.25rem em 1500 — cinco degraus para ir de 20px a 34px. O clamp faz a
+   subida inteira; acima de 1600 o bloco xl reassume, porque lá o rem muda
+   de valor e a conta deixa de fechar. */
 .ba-hero__title {
   font-family: var(--ncs);
-  font-size: 2.5rem;
-  font-weight: 500;
+  font-size: clamp(2.5rem, 2rem + 0.95vw, 3.75rem);
+  font-weight: var(--peso-medio);
   text-transform: uppercase;
   line-height: 1.1;
   letter-spacing: .03rem;
@@ -310,15 +329,23 @@
 }
 
 .ba-hero__desc {
-  /* cancela parte do gap de 2.25rem do .ba-card__inner, mantendo título e
-     descrição como um par sem colar um no outro */
-  margin-top: -1.7rem;
+  /* cancela o gap do .ba-card__inner até sobrar um --esp-2 entre título e
+     descrição (fase 6: sobravam 2,4px — colados). O comentário antigo dizia
+     que o gap era 2.25rem; medido, é 2rem (--esp-4), o mesmo do xl. */
+  margin-top: calc(var(--esp-2) - var(--esp-4));
   max-width: 60rem;
   font-family: var(--tts);
-  font-size: 1.75rem;
+  font-size: var(--corpo-legado-725);
   line-height: 1.45;
-  color: rgba(255,255,255,.68);
+  color: var(--cor-secundario);
   text-shadow: 0 .2rem 1.2rem rgba(0,2,5,.9);
+}
+
+/* celular e tablet (fase 8): a legenda do Academy Pass no corpo de 16px */
+@media (max-width: 1079.98px) {
+  .ba-hero__desc {
+    font-size: var(--fs-850);
+  }
 }
 
 /* Barra de stats */
@@ -326,7 +353,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2.25rem;
+  gap: var(--esp-4);
   padding-top: 2.5rem;
   border-top: .1rem solid rgba(29,164,243,.14);
   width: 100%;
@@ -336,13 +363,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .45rem;
+  gap: var(--esp-1);
 }
 
 .ba-stat__value {
   font-family: var(--ncs);
-  font-size: 2.6rem;
-  font-weight: 700;
+  font-size: var(--corpo-legado-1100);
+  font-weight: var(--peso-forte);
   line-height: 1;
   background: linear-gradient(180deg, #ffffff 0%, #9ecef3 100%);
   -webkit-background-clip: text;
@@ -352,8 +379,8 @@
 
 .ba-stat__label {
   font-family: var(--tts);
-  font-size: 1.25rem;
-  color: rgba(158,206,243,.45);
+  font-size: var(--corpo-legado-350);
+  color: var(--cor-desabilitado);
   letter-spacing: .11rem;
   text-transform: uppercase;
 }
@@ -389,145 +416,13 @@
 .ba-trio {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--esp-3);
   margin-top: 1.5rem;
 }
 
-.ba-card--info {
-  /* texto ancorado embaixo, deixando a imagem respirar na parte de cima */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 34rem;
-  padding: 3.5rem 3rem;
-  box-shadow: inset 0 .1rem 0 rgba(29,164,243,.1);
-}
+/* Cards de benefício (.ba-card--info): a aparência mora em .card-beneficio
+   (componentes.css). Aqui fica só o layout do trio. */
 
-.ba-card__bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  border-radius: inherit;
-}
-
-/* Scrim firme na faixa do texto e leve no miolo, para não apagar o neon
-   das imagens — que já têm fundo praticamente preto. */
-.ba-card--info .ba-card__overlay {
-  background: linear-gradient(
-    to top,
-    rgba(0,2,5,.99) 0%,
-    rgba(0,2,5,.97) 42%,
-    rgba(0,2,5,.82) 62%,
-    rgba(0,4,12,.45) 80%,
-    rgba(0,11,28,.15) 100%
-  );
-}
-
-/* hairline de destaque no topo do card — z-index acima da imagem e do scrim */
-.ba-card--info::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 3rem;
-  right: 3rem;
-  z-index: 3;
-  height: .2rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--z7-sky), rgba(2,60,131,0));
-}
-
-.ba-card--info .ba-card__inner {
-  gap: 1.2rem;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.ba-info__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-.ba-info__arrow {
-  flex-shrink: 0;
-  font-size: 2.2rem;
-  color: var(--z7-sky);
-  transition: transform .6s cubic-bezier(.22,.61,.36,1);
-}
-
-.ba-info__title {
-  font-family: var(--ncs);
-  font-size: 2.4rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  line-height: 1.15;
-  letter-spacing: .03rem;
-  background: radial-gradient(ellipse at 0% 0%, #ffffff 0%, #b2b2b2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.ba-info__desc {
-  font-family: var(--tts);
-  font-size: 1.6rem;
-  line-height: 1.6;
-  color: rgba(255,255,255,.58);
-}
-
-.ba-info__desc span {
-  color: rgba(255,255,255,.92);
-}
-
-/* Véu extra que entra no hover, para o texto revelado continuar legível
-   sobre a parte clara da imagem. */
-.ba-card--info::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  border-radius: inherit;
-  background: linear-gradient(
-    to top,
-    rgba(0,2,5,.99) 0%,
-    rgba(0,2,5,.94) 55%,
-    rgba(0,2,5,.72) 100%
-  );
-  opacity: 0;
-  transition: opacity .75s ease;
-}
-
-/* Revelação — sem media query de propósito. As queries de hover consultam
-   o apontador primário e, em notebooks com touchscreen, o navegador pode
-   reportar o toque como primário e descartar o bloco inteiro mesmo havendo
-   mouse. Em touch, o .is-open (via JS) faz o papel do hover. */
-.ba-info__desc {
-  /* 3 linhas: line-height 1.6 × 3 */
-  max-height: 4.8em;
-  overflow: hidden;
-  transition: max-height .75s cubic-bezier(.22,.61,.36,1);
-}
-
-.ba-card--info:hover .ba-info__desc,
-.ba-card--info.is-open .ba-info__desc {
-  max-height: 40em;
-}
-
-.ba-card--info:hover::after,
-.ba-card--info.is-open::after {
-  opacity: 1;
-}
-
-.ba-card--info:hover .ba-info__arrow,
-.ba-card--info.is-open .ba-info__arrow {
-  transform: rotate(90deg);
-}
 
 /* ------------------------------------------------------------------
    Posicionamento até 1079px — hero em cima ocupando as duas colunas,
@@ -545,7 +440,7 @@
    ------------------------------------------------------------------ */
 @media (min-width: 640px) and (max-width: 1079px) {
   .ba-bento {
-    gap: 1.75rem;
+    gap: var(--esp-4);
   }
 
   .ba-card--hero {
@@ -557,8 +452,24 @@
     min-height: 37.5rem;
   }
 
-  .ba-hero__title {
-    font-size: 3rem;
+  /* O trio empilhava em três linhas em toda a faixa abaixo de 1080. Aqui
+     vira 2 colunas, com o terceiro card ocupando as duas — três colunas
+     nessa largura dariam ~225px por card, apertado demais para título,
+     parágrafo e seta. */
+  .ba-trio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--esp-4);
+  }
+
+  .ba-trio > .ba-card--info:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  /* ocupando as duas colunas, o texto do terceiro chegava a 109–154
+     caracteres por linha; fica na medida do token */
+  .ba-trio > .ba-card--info:nth-child(3) .card-beneficio__descricao {
+    max-width: var(--medida-texto);
   }
 }
 
@@ -570,36 +481,20 @@
     padding-block: 12.5rem;
   }
 
+  /* A altura do bento subia em degraus: 45rem em 1080, 48rem em 1280,
+     51rem em 1500. O clamp cobre os três e apaga dois breakpoints. */
   .ba-bento {
     display: grid;
     grid-template-columns: 1fr 4.3fr 1fr;
-    grid-template-rows: 45rem;
-    gap: 2rem;
+    grid-template-rows: clamp(45rem, 29.6rem + 11.43vw, 51rem);
+    gap: var(--esp-4);
   }
 
   .ba-trio {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: var(--esp-4);
     margin-top: 2rem;
-  }
-
-  .ba-card--info {
-    min-height: 34rem;
-    padding: 4rem 3.5rem;
-  }
-
-  .ba-card--info::before {
-    left: 3.5rem;
-    right: 3.5rem;
-  }
-
-  .ba-info__title {
-    font-size: 2.8rem;
-  }
-
-  .ba-info__desc {
-    font-size: 1.7rem;
   }
 
   /* Altura passa a ser definida pela linha do grid */
@@ -618,37 +513,23 @@
     padding: 6% 5%;
   }
 
-  .ba-hero__title {
-    font-size: 3.4rem;
-  }
+  /* font-size saiu: o clamp da regra base cobre 1080 em diante. */
 
   .ba-hero__desc {
-    font-size: 2rem;
+    font-size: var(--fs-850);
   }
 
   .ba-stat__value {
-    font-size: 3rem;
+    font-size: var(--fs-1300);
   }
 }
 
-@media (min-width: 1280px) {
+/* Os blocos de 1280 e 1500 saíram: font-size e grid-template-rows viraram
+   clamp() nas regras base. Sobrou só a largura do título, que não é escala
+   e sim quebra de linha — ela continua sendo uma decisão de layout. */
+@media (min-width: 1080px) {
   .ba-hero__title {
-    font-size: 3.75rem;
     width: 60%;
-  }
-
-  .ba-bento {
-    grid-template-rows: 48rem;
-  }
-}
-
-@media (min-width: 1500px) {
-  .ba-hero__title {
-    font-size: 4.25rem;
-  }
-
-  .ba-bento {
-    grid-template-rows: 51rem;
   }
 }
 
@@ -662,55 +543,43 @@
   }
 
   .ba-card {
-    border-radius: 1.6rem;
+    border-radius: var(--raio-md);
     min-height: unset;
   }
 
   .ba-bento {
     grid-template-rows: 42rem;
-    gap: 1.6rem;
+    gap: var(--esp-3);
   }
 
   .ba-trio {
-    gap: 1.6rem;
-    margin-top: 1.6rem;
+    gap: var(--esp-3);
+    margin-top: var(--esp-3);
   }
 
-  .ba-card--info {
-    min-height: 28rem;
-    padding: 3.2rem 2.8rem;
-  }
-
-  .ba-card--info::before {
-    left: 2.8rem;
-    right: 2.8rem;
-  }
-
-  .ba-info__title { font-size: 2.2rem; }
-  .ba-info__desc  { font-size: 1.35rem; }
 
   .ba-card__caption {
     bottom: 2rem;
     left: 2.4rem;
   }
 
-  .ba-caption__label { font-size: 1rem; }
-  .ba-caption__value { font-size: 1.8rem; }
+  .ba-caption__label { font-size: var(--corpo-legado-100); }
+  .ba-caption__value { font-size: var(--corpo-legado-750); }
 
-  .ba-card__inner { gap: 1.8rem; }
+  .ba-card__inner { gap: var(--esp-4); }
 
-  .ba-hero__title { font-size: 3.4rem; }
+  .ba-hero__title { font-size: var(--corpo-legado-1350); }
 
   .ba-hero__desc {
-    /* aqui o gap do .ba-card__inner é 1.8rem */
-    margin-top: -1.4rem;
+    /* aqui o gap do .ba-card__inner é --esp-4; sobra um --esp-2 */
+    margin-top: calc(var(--esp-2) - var(--esp-4));
     max-width: 48rem;
-    font-size: 1.6rem;
+    font-size: var(--fs-650);
   }
 
-  .ba-hero__stats     { gap: 1.8rem; padding-top: 2rem; }
-  .ba-stat__value     { font-size: 2.4rem; }
-  .ba-stat__label     { font-size: 1rem; }
+  .ba-hero__stats     { gap: var(--esp-4); padding-top: 2rem; }
+  .ba-stat__value     { font-size: var(--corpo-legado-950); }
+  .ba-stat__label     { font-size: var(--corpo-legado-100); }
   .ba-stat__divider   { height: 3.2rem; }
 
   .ba-blob { filter: blur(10rem); }

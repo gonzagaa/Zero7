@@ -3,13 +3,39 @@
 # Aplicado somente na pasta /home
 # ==============================
 
+# ==============================
+# FERRAMENTA NÃO VAI AO AR
+# ==============================
+# Tudo que é nosso de desenvolvimento responde 404, suba ou não suba. 404 e
+# não 403: o 403 confirma que o arquivo existe. O AUDITORIA-CONTEXTO.md, por
+# exemplo, é a lista de pontos fracos do site — não pode ser legível.
+#
+# RedirectMatch é do mod_alias e só exige AllowOverride FileInfo, a mesma
+# classe que o Header abaixo já usa no ar. "Require all denied" não foi usado
+# de propósito: exige AuthConfig, e se ela não estiver liberada a pasta
+# inteira devolve 500.
+#
+# backend/ é a função da Vercel (API de Conversões do Meta): roda lá, não
+# aqui, e o código-fonte não precisa ficar legível em /home/.
+#
+# NÃO bloqueie aqui: vendor/, assets/, css/, script/ nem nada que o site
+# carrega. "scripts/" (com s, o harness) é diferente de "script/" (o JS do site).
+<IfModule mod_alias.c>
+  RedirectMatch 404 (?i)\.md$
+  RedirectMatch 404 (?i)/comparacao[^/]*\.html?$
+  RedirectMatch 404 (?i)/(medidas|scripts|shots|node_modules|\.vscode|\.git|backend)(/|$)
+  RedirectMatch 404 (?i)/package(-lock)?\.json$
+  RedirectMatch 404 (?i)/\.(gitignore|env)(\.[^/]*)?$
+</IfModule>
+
 <IfModule mod_headers.c>
 
-  # HTML sempre atualizado
-  <FilesMatch "\.(html|htm)$">
-    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
-    Header always set Pragma "no-cache"
-    Header always set Expires "0"
+  # HTML: 5 minutos com revalidacao (SEO-06, fase 18). O no-store anterior
+  # obrigava a baixar a pagina inteira a cada visita, inclusive no F5.
+  <FilesMatch "\.html?$">
+    Header always set Cache-Control "max-age=300, must-revalidate"
+    Header always unset Pragma
+    Header always unset Expires
   </FilesMatch>
 
   # JSON de planos/preços sempre atualizado
@@ -19,7 +45,12 @@
     Header always set Expires "0"
   </FilesMatch>
 
-  # CSS e JS podem cachear, pois usam ?v=
+  # CSS e JS podem cachear: os de dist/ trazem hash de conteúdo no NOME
+  # (home.<hash8>.css, script/<nome>.<hash8>.js — mudou o conteúdo, muda a
+  # URL), e os demais usam ?v=. O RedirectMatch 404 lá de cima NÃO alcança
+  # dist/ (conferido: a lista é medidas|scripts|shots|node_modules|.vscode|
+  # .git|backend). O dist/manifest.json cai na regra de JSON no-store, o
+  # que está certo: é mapa de build, ninguém precisa cachear.
   <FilesMatch "\.(css|js)$">
     Header always set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
@@ -30,3 +61,6 @@
   </FilesMatch>
 
 </IfModule>
+
+# ETag por data e tamanho: deixa a revalidacao do HTML barata (304).
+FileETag MTime Size

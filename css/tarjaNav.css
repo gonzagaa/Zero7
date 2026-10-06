@@ -15,8 +15,8 @@
 }
 
 .tarjaTimerNav h3 {
-    color: #000000;
-    font-size: 1rem;
+    color: var(--cor-titulo-inverso);
+    font-size: var(--corpo-legado-100);
     padding: .5rem;
     width: 100%;
     background: #ffffff;
@@ -28,13 +28,13 @@
 
 .tarjaTimerNav a {
     text-decoration: none;
-    color: #ffffff;
+    color: var(--cor-titulo);
 }
 
 .tarjaTimerNav .wrapper {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: var(--esp-4);
 }
 
 .tarjaTimerNav.active {
@@ -44,20 +44,20 @@
 }
 
 .tarjaTimerNav p {
-    font-size: 1rem;
+    font-size: var(--corpo-legado-100);
     text-align: left;
 }
 
 .tarjaTimerNav p span {
-    font-weight: 600;
+    font-weight: var(--peso-semi);
 }
 
 .tarjaTimerNav .countdown {
       display: flex;
       justify-content: center;
-      gap: 13px;
-      font-size: 1.7rem;
-      font-weight: 700;
+      gap: var(--esp-3);
+      font-size: var(--corpo-legado-700);
+      font-weight: var(--peso-forte);
 }
 
 .tarjaTimerNav .countdown div {
@@ -67,9 +67,9 @@
 }
 
 .tarjaTimerNav .label {
-      font-size: .8rem;
+      font-size: var(--corpo-legado-050);
       margin-top: -5px;
-      font-weight: 400;
+      font-weight: var(--peso-normal);
 }
 
 #home.activeTarjaHome {
@@ -84,21 +84,21 @@
 
     display: flex;
       justify-content: center;
-      gap: 5px;
+      gap: var(--esp-1);
 }
 
 .countdown.dois span {
-    font-size: 1.3rem;
-    color: #fff;
+    font-size: var(--fs-400);
+    color: var(--cor-titulo);
 }
 
 .countdown.dois span {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: var(--fs-400);
+    font-weight: var(--peso-semi);
 }
 
 .countdown.dois span.label {
-    font-size: 1.1rem;
+    font-size: var(--corpo-legado-200);
 }
 
 @media (min-width: 1080px) {
@@ -122,18 +122,18 @@
         position: absolute;
         width: max-content;
         padding: 1rem 3rem;
-        font-size: 1rem;
+        font-size: var(--corpo-legado-100);
         top: 50%;
         z-index: 101;
         left: 15%;
         transform: translate(0, -50%);
-        border-radius: .5rem;
+        border-radius: var(--raio-sm);
 
         margin-top: 0;
     }
 
     div.tarjaTimerNav p {
-        font-size: 1.3rem;
+        font-size: var(--fs-400);
     }
 
     div.tarjaTimerNav .wrapper {
@@ -151,7 +151,7 @@
 
     nav#navigation.activeTarja {
         top: 6rem;
-        border-radius: 0 0 2rem 2rem;
+        border-radius: 0 0 var(--raio-md) var(--raio-md);
     }
 
     header#home.activeTarjaHome {
@@ -164,15 +164,15 @@
     }
 
     .countdown.dois span {
-        font-size: 1.8rem;
+        font-size: var(--corpo-legado-750);
     }
 
     .countdown.dois span.label {
-        font-size: 1.4rem;
+        font-size: var(--fs-500);
     }
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 1600px) /* xl — era 1700 */ {
     div.tarjaTimerNav {
         width: calc(100% - 340px);
         left: 170px;

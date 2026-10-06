@@ -168,6 +168,14 @@
     rafResize = requestAnimationFrame(reposicionarSemAnimar);
   });
 
+  // F1: o blob mede a largura da opção ativa, e a medida muda quando uma
+  // fonte chega (as completas entram DEPOIS do load desde o E1) — sem
+  // remedir, ficava 2,5px largo, travado na métrica do subconjunto/fallback.
+  // loadingdone cobre toda leva de fontes, incluindo as pós-load.
+  if (document.fonts && typeof document.fonts.addEventListener === "function") {
+    document.fonts.addEventListener("loadingdone", reposicionarSemAnimar);
+  }
+
   // a troca de modo (30/60/reinício) muda a altura dos cards e pode
   // mudar a largura do seg em telas estreitas
   window.addEventListener("zero7:planModeChanged", () => {

@@ -1,0 +1,15 @@
+— largura do wrapper por carga —
+   320: wrapper 165px    h1 296px 3 linha(s)  erros: nenhum
+   375: wrapper 195px    h1 351px 3 linha(s)  erros: nenhum
+   390: wrapper 203px    h1 366px 3 linha(s)  erros: nenhum
+   430: wrapper 225px    h1 406px 3 linha(s)  erros: nenhum
+   768: wrapper 239px    h1 729.6px 2 linha(s)  erros: nenhum
+  1024: wrapper 239px    h1 985.6px 2 linha(s)  erros: nenhum
+  1280: wrapper 298px    h1 911.2px 2 linha(s)  erros: nenhum
+  1474: wrapper 298px    h1 911.2px 2 linha(s)  erros: nenhum
+  1920: wrapper 461px    h1 1196.8px 2 linha(s)  erros: nenhum
+
+— ciclo 1920 -> 390 -> 1920 na mesma página —
+  carga em 1920:    {"wrapperStyle":"461px","wrapperPx":461,"h1Px":1196.8,"h1Linhas":2,"erros":[]}
+  depois de -> 390: {"wrapperStyle":"203px","wrapperPx":203,"h1Px":366,"h1Linhas":3,"erros":[]}
+  de volta a 1920:  {"wrapperStyle":"461px","wrapperPx":461,"h1Px":1196.8,"h1Linhas":2,"erros":[]}

@@ -13,13 +13,18 @@
     line-height: 0;
 }
 
-.tarjaImage img {
-    width: 100%;
-    display: block;
+/* o <picture> não entra no layout: quem se posiciona é a <img> */
+.tarjaImage picture {
+    display: contents;
 }
 
-.tarjaImage img.desktop {
-    display: none;
+.tarjaImage img {
+    width: 100%;
+    /* height:auto é OBRIGATÓRIO com os width/height do markup (F3a): o
+       hint de altura é CSS de apresentação e, sem isto, a tarja nasceria
+       com os 554px LITERAIS do atributo — a mesma lição do cupom. */
+    height: auto;
+    display: block;
 }
 
 #home.activeTarjaImage {
@@ -41,78 +46,26 @@
 }
 
 .countdown--promo {
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      font-size: 1.5rem;
-      font-weight: 800;
+      gap: var(--esp-3);
+      font-size: var(--corpo-legado-550);
+      font-weight: var(--peso-black);
       letter-spacing: .3px;
-      color: #ffffff;
+      color: var(--cor-titulo-inverso);
 
-      /* gradiente azul da identidade — navy profundo -> azul primário ->
-         ciano vibrante (usa as variáveis --secondy-color / --primary-color
-         e dá contraste forte com o fundo branco da tarja PROFIT). */
-      background: linear-gradient(100deg,
-        #011a3d 0%,
-        #023c83 22%,
-        #0080c9 52%,
-        #1da4f3 72%,
-        #023c83 100%);
-      background-size: 220% 100%;
-      animation: promoGradientShift 9s ease-in-out infinite;
+      /* timer branco, texto preto */
+      background: #ffffff;
 
-      padding-block: .75rem;
+      padding-block: .65rem;
       padding-inline: 1rem;
-      box-shadow:
-        inset 0 -1px 0 rgba(0, 0, 0, .35),
-        inset 0 1px 0 rgba(255, 255, 255, .18),
-        0 2px 14px rgba(0, 128, 201, .35);
-}
-
-/* faixa de brilho diagonal que atravessa de tempos em tempos */
-.countdown--promo::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(
-        115deg,
-        transparent 40%,
-        rgba(255, 255, 255, .28) 50%,
-        transparent 60%
-      );
-      transform: translateX(-100%);
-      animation: promoShine 5.5s ease-in-out infinite;
-      z-index: 1;
-}
-
-/* pulso radial sutil pra dar sensação de "ao vivo" */
-.countdown--promo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(ellipse at center, rgba(29, 164, 243, .40), transparent 65%);
-      opacity: 0;
-      animation: promoPulse 2.6s ease-in-out infinite;
-      z-index: 0;
-}
-
-.countdown--promo > * {
-      position: relative;
-      z-index: 2;
 }
 
 .countdown--promo div {
       display: flex;
       align-items: end;
-      color: #ffffff;
-      text-shadow: 0 1px 2px rgba(1, 20, 50, .6);
+      color: var(--cor-titulo-inverso);
 }
 
 .countdown--promo span:not(.label) {
@@ -123,72 +76,51 @@
 }
 
 .countdown--promo .label {
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-size: var(--fs-300);
+      font-weight: var(--peso-forte);
       margin-top: -1px;
       margin-left: 1px;
       opacity: .9;
 }
 
 .tarjaImage h3 {
-    color: #000000;
-    font-size: 1rem;
+    color: var(--cor-titulo-inverso);
+    font-size: var(--corpo-legado-100);
     padding: .5rem;
     width: 100%;
     background: rgb(255, 255, 255);
 }
 
 .tarjaImage p.text {
-    color: #ffffff;
-    font-size: 1.25rem;
-    font-weight: 700;
+    color: var(--cor-titulo-inverso);
+    font-size: var(--corpo-legado-350);
+    font-weight: var(--peso-forte);
     text-transform: uppercase;
     letter-spacing: .6px;
-    text-shadow: 0 1px 2px rgba(0, 50, 25, .55);
     display: inline-flex;
     align-items: center;
-    gap: .55rem;
+    gap: var(--esp-1);
     margin-right: .35rem;
 }
 
-/* bolinha pulsante ao lado do texto "Essa oferta se encerra em:" */
+/* bolinha pulsante ao lado do texto “Essa oferta se encerra em:” */
 .tarjaImage p.text::before {
       content: "";
       width: 9px;
       height: 9px;
-      border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, .8);
+      border-radius: var(--raio-circulo);
+      background: #000000;
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, .6);
       animation: promoDot 1.6s ease-out infinite;
 }
 
-@keyframes promoGradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-}
-
-@keyframes promoShine {
-      0%   { transform: translateX(-100%); }
-      55%  { transform: translateX(100%); }
-      100% { transform: translateX(100%); }
-}
-
-@keyframes promoPulse {
-      0%, 100% { opacity: 0; }
-      50%      { opacity: .55; }
-}
-
 @keyframes promoDot {
-      0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, .8); }
-      70%  { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(0, 0, 0, .55); }
+      70%  { box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-      .countdown--promo,
-      .countdown--promo::before,
-      .countdown--promo::after,
       .tarjaImage p.text::before {
             animation: none;
       }
@@ -197,7 +129,7 @@
 @media (min-width: 1080px) {
     nav#navigation.activeTarjaImage {
         top: 5rem;
-        border-radius: 0 0 2rem 2rem;
+        border-radius: 0 0 var(--raio-md) var(--raio-md);
     }
 
     header#home.activeTarjaImage {
@@ -211,28 +143,20 @@
     }
 
     div.tarjaImage img {
-        border-radius: 2rem 2rem 0 0;
+        border-radius: var(--raio-md) var(--raio-md) 0 0;
         border-radius: 0;
-    }
-
-    div.tarjaImage img.mobile {
-        display: none;
-    }
-
-    div.tarjaImage img.desktop {
-        display: inherit;
     }
 
     div.tarjaImage h3 {
         position: absolute;
         width: max-content;
         padding: .5rem 3rem;
-        font-size: 1rem;
+        font-size: var(--corpo-legado-100);
         top: 13.2%;
         z-index: 101;
         left: 45%;
         transform: translate(0, -50%);
-        border-radius: .5rem;
+        border-radius: var(--raio-sm);
 
         margin-top: 0;
     }
@@ -240,19 +164,165 @@
     /* asasa */
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 1600px) /* xl — era 1700 */ {
       div.tarjaImage {
         width: calc(100% - 340px);
         left: 170px;
       } 
 
+      /* A tarja cresce com a tela, então a nav precisa descer junto. Isso
+         era um degrau de 6rem para 8rem num @media de 2500px — o último
+         breakpoint fora do mapa. O clamp cobre a mesma faixa: 6rem em 1600,
+         chegando aos 8rem por volta de 2600 e parando ali. */
       nav#navigation.activeTarjaImage {
-        top: 6rem;
+        top: clamp(6rem, 2rem + 2.4vw, 8rem);
     }
 }
 
-@media (min-width: 2500px) {
-    nav#navigation.activeTarjaImage {
-        top: 8rem;
+/* ── Tarja na largura do conteúdo (fase 21) ─────────────────────────────
+   A tarja acompanha a nav, que agora tem a largura da caixa de conteúdo do
+   .wrapper. O conteúdo da arte fica sempre no meio, então quando a caixa
+   fica mais estreita que a tarja de antes, a arte NÃO encolhe: mantém a
+   escala de antes (100vw - 200px; 100vw - 340px no xl) e o container corta
+   as laterais por igual. Onde a caixa é mais larga que isso (1600 a ~1770),
+   a arte só acompanha a largura, sem corte nenhum em cima ou embaixo.
+   Nada aqui depende da proporção da arte: vale para qualquer campanha.
+   A altura continua sendo medida pelo JS e entregue à nav em --tarja-offset. */
+@media (min-width: 1080px) {
+    div.tarjaImage {
+        left: 0;
+        right: 0;
+        margin-inline: auto;
+        width: calc(min(var(--container-max), 100%) - 4.8rem);
+        overflow: hidden;
+    }
+
+    div.tarjaImage a {
+        display: flex;
+        justify-content: center;
+    }
+
+    div.tarjaImage img {
+        display: block;
+        flex: none;
+        max-width: none;
+        width: max(100%, calc(100vw - 200px));
+    }
+}
+
+@media (min-width: 1600px) {
+    div.tarjaImage img {
+        width: max(100%, calc(100vw - 340px));
+    }
+}
+
+/* ── Tarja flutuante no celular (fase 22) ───────────────────────────────
+   A tarja acompanha a barra, que agora flutua (navigation.css, fase 22):
+   um balão só, na largura da caixa de conteúdo do .wrapper, com o timer em
+   cima e a arte embaixo, recortados pelo canto de assinatura.
+
+   A arte do celular é a de altura reduzida: num balão flutuante, a de antes
+   (554px de altura na origem, ~48px na tela) ocupava metade do topo.
+
+   O vão entre este balão e a barra sai do --vao da nav, que soma a altura
+   medida aqui em --tarja-offset. Nada aqui mexe no contador (regra 5). */
+@media (max-width: 1079.98px) {
+    div.tarjaImage {
+        left: 0;
+        right: 0;
+        margin-inline: auto;
+        top: 1.2rem;
+        width: calc(min(var(--container-max), 100%) - 4.8rem);
+        /* --raio-sm, não o --raio-md da barra: o botão da arte encosta na
+           ponta de baixo à direita, e um canto maior comeria um pedaço dele */
+        border-radius: var(--raio-sm) 0 var(--raio-sm) 0;
+        overflow: hidden;
+        box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+    }
+
+    /* o timer acompanha a largura do balão; com menos espaço que a tela
+       inteira, o respiro entre os blocos encolhe para o relógio não quebrar
+       em duas linhas */
+    .countdown--promo {
+        gap: var(--esp-2);
+        padding-inline: .6rem;
+    }
+}
+
+/* Nas telas mais estreitas o relógio não cabe numa linha: pedia 314px e a
+   caixa do balão tem 282 em 320. Em vez de deixar o texto quebrar em duas
+   linhas — que dobra a altura do balão —, o respiro e o corpo encolhem.
+   O texto é o mesmo, palavra por palavra. */
+@media (max-width: 359.98px) {
+    .countdown--promo {
+        gap: .4rem;
+        padding-inline: .4rem;
+        font-size: var(--corpo-legado-450);
+    }
+
+    .tarjaImage p.text {
+        font-size: var(--corpo-legado-200);
+        letter-spacing: .3px;
+        margin-right: .2rem;
+    }
+
+    .tarjaImage p.text::before {
+        width: 7px;
+        height: 7px;
+    }
+}
+
+
+/* ── E2: a tarja nasce na altura certa ─────────────────────────────────
+   Dois movimentos de carga que o Lighthouse cobrava (0,115 do CLS mobile):
+
+   1. A <img> da arte não tem dimensão intrínseca e nascia com altura 0,
+      crescendo quando a arte chega. O `aspect-ratio: auto R` reserva a
+      altura pela razão da arte de cada breakpoint (o MESMO media do
+      <picture>) sem width/height no markup — o C4 mediu que os atributos
+      pioram 1474. O `auto` na frente: chegou a arte, vale a razão
+      intrínseca dela — trocou a campanha, o ajuste é de subpixel e o
+      fallback aqui não trava a arte nova numa razão errada.
+   2. No fallback métrico (Arial ~25% mais largo) o relógio quebrava em
+      duas linhas e desquebrava quando a TT Fors chega — tarja 139px →
+      78px filmado em 412. O white-space: nowrap segura a linha única;
+      na janela do fallback o excesso é cortado pelo overflow:hidden do
+      balão (transitório de ~0,5s), a altura NÃO muda.
+   Mudou a arte, refaça as razões (como no fallback do --tarja-offset
+   abaixo). */
+.tarjaImage img {
+    aspect-ratio: auto 4053 / 554; /* TARJA MOBILE PROFIT (out/2026) */
+}
+
+.countdown--promo,
+.tarjaImage p.text {
+    white-space: nowrap;
+}
+
+@media (min-width: 1080px) {
+    div.tarjaImage img {
+        aspect-ratio: auto 14012 / 554; /* TARJA DESK PROFIT (out/2026) */
+    }
+}
+
+/* C4: fallback do --tarja-offset ANTES de o JS medir (o script protegido
+   continua mandando: o valor inline dele vence este). A conta vem da
+   razão das artes (PROFIT out/2026: mobile 4053/554 = 7,3159; desk 14012/554 = 25,2924)
+   mais a barra do timer (27,4px < 1080; 34px de 1080 em diante). Medido:
+   erro de 0,2px em 390 e 0,0px em 1474; entre 1080 e ~1200 o desvio chega
+   a ~6px e o ResizeObserver do script corrige no primeiro layout. */
+nav#navigation.activeCountdown {
+    --tarja-offset: calc((100vw - 38px) / 7.3159 + 27.4px);
+}
+
+@media (min-width: 1080px) {
+    nav#navigation.activeCountdown {
+        --tarja-offset: calc((100vw - 200px) / 25.2924 + 34px);
+    }
+}
+
+@media (min-width: 1600px) {
+    nav#navigation.activeCountdown {
+        --tarja-offset: calc((100vw - 340px) / 25.2924 + 34px);
     }
 }

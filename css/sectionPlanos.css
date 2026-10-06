@@ -16,15 +16,15 @@
 }
 
 .planos.white header h2 {
-    color: #070C11;
+    color: var(--cor-titulo-inverso);
 }
 
 .planos.white header p {
-    color: #070C11;
+    color: var(--cor-titulo-inverso);
 }
 
 .planos.white header p span {
-    color: #070C11;
+    color: var(--cor-titulo-inverso);
 }
 
 .planos img.bg {
@@ -81,7 +81,7 @@
 
     position: relative;
 
-    border-radius: 3.5rem 3.5rem 3.5rem 0;
+    border-radius: var(--raio-lg) var(--raio-lg) var(--raio-lg) 0;
 
     background: linear-gradient(to bottom, #02060f, #0a121a);
 
@@ -90,19 +90,34 @@
     border: 2px solid #ffffff30;
 }
 
+/* Medida: a nota corria na largura toda — 147 a 182 caracteres por linha
+   do tablet em diante. Fica na medida do token, centrada. Ela não mora num
+   .wrapper, e no celular ia de borda a borda da tela: o limite desconta o
+   respiro do .wrapper (2 × 2.4rem) e a alinha com o resto da seção (fase 8).
+   No desktop quem manda continua sendo os 56ch. */
 .planos p.obs {
-    font-size: 1.4rem;
-    color: #ffffff80;
+    font-size: var(--fs-500);
+    color: var(--cor-desabilitado);
 
     position: relative;
     z-index: 1;
 
+    max-width: min(var(--medida-texto), 100% - 4.8rem);
     margin-top: 2rem;
+    margin-inline: auto;
+}
+
+/* celular e tablet: corpo de 16px e quebra sem palavra sozinha */
+@media (max-width: 1079.98px) {
+    .planos p.obs {
+        font-size: var(--fs-850);
+        text-wrap: pretty;
+    }
 }
 
 .planos p.escolha {
-    color: #fff;
-    font-weight: 600;
+    color: var(--cor-titulo);
+    font-weight: var(--peso-semi);
     margin-bottom: 1rem;
     background: linear-gradient(45deg, #10A36A, #34D399);
     -webkit-background-clip: text;
@@ -110,8 +125,8 @@
 }
 
 .planos.white p.escolha {
-    color: #fff;
-    font-weight: 600;
+    color: var(--cor-titulo);
+    font-weight: var(--peso-semi);
     margin-bottom: 1rem;
     background: linear-gradient(45deg, #121212, #002421);
     -webkit-background-clip: text;
@@ -123,6 +138,36 @@
     border: 2px solid #cfe2fc;
 }
 
+/* Hover do card de plano (fase 6): a borda acende em 150ms e o card sobe
+   2px em 200ms — o bastante para dizer qual está sob o cursor. O
+   recomendado não troca de papel: o dourado só fica mais vivo. Só em
+   ponteiro com hover, para o toque não deixar o card aceso depois. */
+.planos .card {
+    transition:
+        border-color var(--dur-rapida) var(--curva-saida),
+        translate var(--dur-media) var(--curva-saida);
+}
+
+@media (hover: hover) {
+    .planos .plano .card:hover {
+        border-color: var(--borda-acesa);
+    }
+
+    .planos.white .plano .card:hover {
+        border-color: rgb(0 128 201 / .45);
+    }
+
+    .planos .plano .card.card--copa:hover {
+        border-color: rgb(255 209 102 / .85);
+    }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .planos .plano .card:hover {
+        translate: 0 -.2rem;
+    }
+}
+
 .planos .card .title {
     position: absolute;
     background: linear-gradient(to bottom, #01040A, #070C11);
@@ -131,7 +176,7 @@
 
     top: -4%;
     width: 80%;
-    border-radius: 2rem;
+    border-radius: var(--raio-md);
 }
 
 .planos.white .card .title {
@@ -150,15 +195,15 @@
 }
 
 .planos .card .title h3 {
-    color: #fff;
+    color: var(--cor-titulo);
     font-family: var(--ncs);
     text-transform: uppercase;
-    font-weight: 500;
-    font-size: 3rem;
+    font-weight: var(--peso-medio);
+    font-size: var(--fs-1300);
 }
 
 .planos.bit .card .title h3 {
-    font-size: 2.5rem;
+    font-size: var(--corpo-legado-1000);
 }
 
 .planos.bit .card a button {
@@ -169,7 +214,7 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 2rem;
+    gap: var(--esp-4);
 
     margin-block: 3rem;
 
@@ -177,8 +222,8 @@
 }
 
 .planos .card .topics p {
-    color: #dae1e6;
-    font-size: 1.3rem;
+    color: var(--cor-corpo);
+    font-size: var(--fs-400);
     width: 100%;
     text-align: left;
     position: relative;
@@ -186,29 +231,29 @@
 
 .planos .card .topics .js-taxa-ativacao {
     background: linear-gradient(to right, #023c83a7, #007fc9af);
-    color: #fff;
+    color: var(--cor-titulo);
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: var(--raio-sm);
     width: max-content;
 }
 
 .planos .card .topics p.js-taxa-ativacao,
 .planos .card .topics p.js-taxa-ativacao span,
 .planos .card .topics p.js-taxa-ativacao ion-icon {
-    color: #fff !important;
+    color: var(--cor-titulo) !important;
 }
 
 .planos.white .card .topics p {
-    color: #070C11;
+    color: var(--cor-titulo-inverso);
 }
 
 .planos .card .topics p span {
-    color: #e7e7e7;
-    font-weight: 500;
+    color: var(--cor-corpo);
+    font-weight: var(--peso-medio);
 }
 
 .planos.white .card .topics p span {
-    color: #070C11;
+    color: var(--cor-titulo-inverso);
 }
 
 .planos .card .topics p::before {
@@ -231,23 +276,32 @@
 }
 
 .planos .card .oldPrice {
-    font-size: 1.6rem;
+    font-size: var(--fs-650);
     margin-bottom: 1.5rem;
-    font-weight: 400;
-    color: #ffffffc2;
+    font-weight: var(--peso-normal);
+    color: var(--cor-secundario);
     width: 50%;
-    border-radius: 1rem;
-    font-weight: 300;
+    border-radius: var(--raio-sm);
+    font-weight: var(--peso-leve);
 }
 
-.planos .card .oldPrice h4 {
+.planos .card .oldPrice p {
     font-family: var(--tts);
-    font-weight: 500;
-    
+    font-weight: var(--peso-medio);
+
     position: relative;
 }
 
-.planos .card .oldPrice h4::before {
+/* Números tabulares (fase 6). Pegam no preço riscado, que é TT Fors; o
+   parcelado e o à vista são NCS Radhiumz, que não tem algarismos tabulares
+   — ali a propriedade fica declarada sem efeito. */
+.planos .card .oldPrice,
+.planos .card .price {
+    font-variant-numeric: tabular-nums;
+}
+
+
+.planos .card .oldPrice p::before {
     content: '';
     position: absolute;
     width: 40%;
@@ -259,64 +313,59 @@
     z-index: 2;
 }
 
-.planos.bit .card .oldPrice h4 {
-    color: #02060f;
+.planos.bit .card .oldPrice p {
+    color: var(--cor-titulo-inverso);
 }
 
-.planos.bit .card .oldPrice h4::before {
+.planos.bit .card .oldPrice p::before {
     background: #ff0000e5;
 }
 
 
-.planos .card .price h4 {
-    font-size: 3rem;
-    color: #fff;
+/* O peso vinha da folha do navegador: h4 e h5 nascem em negrito, e o CSS
+   nunca declarou isso. Com a troca por <p> (SEO-13) o peso caía para 400 e
+   o bloco .price, que tem a largura do conteúdo, encolhia 9px. Declarado,
+   o computado é o mesmo de antes. */
+.planos .card .price .js-price-parcel {
+    font-size: var(--fs-1300);
+    color: var(--cor-titulo);
     font-family: var(--ncs);
+    font-weight: var(--peso-forte);
     line-height: 1;
 }
 
-.planos.white .card .price h4 {
-    color: #081c31;
+.planos.white .card .price .js-price-parcel {
+    color: var(--cor-titulo-inverso);
 }
 
-.planos .card .price h4 span {
+.planos .card .price .js-price-parcel span {
     font-family: var(--ncs);
     background: linear-gradient(45deg, #1da4f3, #056ba6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 2rem;
+    font-size: var(--fs-850);
 }
 
-.planos .card .price h5 {
+.planos .card .price .js-price-avista {
     font-family: var(--ncs);
-    color: #fff;
-    font-size: 2rem;
+    color: var(--cor-titulo);
+    font-size: var(--fs-850);
+    font-weight: var(--peso-forte);
 }
 
-.planos.white .card .price h5 {
-    color: #081c31;
+.planos.white .card .price .js-price-avista {
+    color: var(--cor-titulo-inverso);
 }
 
-.planos .card .price h5 span {
+.planos .card .price .js-price-avista span {
     background: linear-gradient(45deg, #1da4f3, #056ba6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 1.7rem;
+    font-size: var(--corpo-legado-700);
 }
 
-.planos .card a {
-    width: 100%;
-}
-
-.planos .z7-btnx {
+.planos .card .btn {
     margin-top: 3rem;
-}
-
-.planos .card a button {
-    margin-top: 3rem;
-    width: 100%;
-    border-radius: 1.3rem;
-    filter: none;
 }
 
 /* .planos .swiper-button-next,
@@ -324,17 +373,107 @@
     display: none;
 } */
 
-.planos .swiper-pagination-bullet {
-    background-color: #ffffff2e; 
+/* ── Indicadores de plano ────────────────────────────────────────────────
+   No lugar das bolinhas de 8px, que eram o controle principal para trocar de
+   plano no celular e não diziam em qual plano você estava. Cada indicador é
+   um <button> com o nome do plano — o mesmo texto do título do card, montado
+   pelo renderBullet no global.js — e 44px de altura. Os planos que estão na
+   tela ficam acesos (.is-na-tela): um no celular, dois no tablet, três no
+   desktop.
+
+   O bloco mora logo depois do .swiper, no fluxo. A altura fica reservada
+   aqui porque os botões só nascem quando o Swiper monta, depois do primeiro
+   paint — sem a reserva, o que vem abaixo pularia. Seis planos são duas
+   linhas de três abaixo de sm e uma linha de sm em diante. O bitcoin tem
+   dois: uma linha no celular; de sm em diante os dois cards cabem na tela,
+   o Swiper trava o carrossel e o bloco some (.swiper-pagination-lock). */
+.planos .plano .swiper-pagination {
+    position: relative;
+    inset: auto;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 var(--esp-2);
+    width: 100%;
+    min-height: calc(var(--alvo-toque) * 2);
+    transform: none;
 }
 
-.planos.white .swiper-pagination-bullet {
-    background-color: #2424242e; 
+.planos .plano-asset--bit .plano .swiper-pagination {
+    min-height: var(--alvo-toque);
 }
 
-.planos .swiper-pagination-bullet-active,
-.planos.white .swiper-pagination-bullet-active {
-    background-color: #0080c9; 
+.planos .plano .swiper-pagination.swiper-pagination-lock {
+    display: none;
+}
+
+.planos .plano .swiper-pagination .swiper-pagination-bullet {
+    flex: 0 0 calc((100% - var(--esp-2) * 2) / 3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: var(--alvo-toque);
+    margin: 0;
+    padding: 0 var(--esp-1);
+
+    background: none;
+    border: 0;
+    border-bottom: .2rem solid var(--borda-sutil);
+    border-radius: 0;
+    opacity: 1;
+
+    font-family: var(--fonte-display);
+    font-size: var(--fs-500);
+    letter-spacing: var(--ls-rotulo);
+    line-height: 1;
+    color: var(--cor-desabilitado);
+    white-space: nowrap;
+
+    transition:
+        color var(--dur-rapida) var(--curva-saida),
+        border-color var(--dur-rapida) var(--curva-saida);
+}
+
+.planos .plano .swiper-pagination .swiper-pagination-bullet:not(.is-na-tela):hover {
+    color: var(--cor-corpo);
+}
+
+.planos .plano .swiper-pagination .is-na-tela {
+    color: var(--cor-titulo);
+    border-bottom-color: var(--marca-clara);
+}
+
+.planos.white .plano .swiper-pagination .swiper-pagination-bullet {
+    color: var(--cor-corpo-inverso);
+    border-bottom-color: rgb(7 12 17 / .14);
+}
+
+.planos.white .plano .swiper-pagination .swiper-pagination-bullet:not(.is-na-tela):hover {
+    color: var(--cor-titulo-inverso);
+}
+
+.planos.white .plano .swiper-pagination .is-na-tela {
+    color: var(--cor-titulo-inverso);
+    border-bottom-color: var(--marca);
+}
+
+@media (min-width: 640px) {
+    .planos .plano .swiper-pagination {
+        flex-wrap: nowrap;
+        max-width: 72rem;
+        min-height: var(--alvo-toque);
+        margin-inline: auto;
+    }
+
+    .planos .plano .swiper-pagination .swiper-pagination-bullet {
+        flex: 1 1 0;
+    }
+
+    .planos .plano-asset--bit .plano .swiper-pagination {
+        min-height: 0;
+    }
 }
 
 body section.planos .wrapper .swiper.mySwiper4 {
@@ -349,13 +488,13 @@ body section.planos .wrapper .swiper.mySwiper11 {
     display: flex;
     width: 100%;
     margin-top: 2rem;
-    gap: .5rem;
+    gap: var(--esp-1);
     align-items: center;
 }
 
 
 .planos .cupom p {
-    color: #fff;
+    color: var(--cor-titulo);
     width: 30%;
 }
 
@@ -365,35 +504,35 @@ body section.planos .wrapper .swiper.mySwiper11 {
     border: 1px solid #ffffff21;
 
     display: flex;
-    gap: 1rem;
+    gap: var(--esp-2);
     justify-content: center;
     align-items: center;
 
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: var(--raio-sm);
     cursor: pointer;
 }
 
 .planos .cupom .copy:hover h3 {
-    color: #d1dbea;
+    color: var(--cor-corpo);
 }
 
 .planos .cupom .copy:hover ion-icon {
-    color: #ccd5e3;
+    color: var(--cor-corpo);
 }
 
 .planos .cupom .copy h3 {
     font-family: var(--ncs);
     text-transform: uppercase;
-    font-weight: 500;
-    color: #8298b7;
+    font-weight: var(--peso-medio);
+    color: var(--cor-desabilitado);
 
     transition: all 300ms ease-in-out;
 }
 
 .planos .cupom .copy ion-icon {
-    font-size: 1.6rem;
-    color: #8298b7;
+    font-size: var(--fs-650);
+    color: var(--cor-desabilitado);
 
     transition: all 300ms ease-in-out;
 }
@@ -409,7 +548,7 @@ body section.planos .wrapper .swiper.mySwiper11 {
 .planos header button.corrida {
     margin-top: 1rem;
     margin-bottom: 3rem;
-    font-size: 1.8rem;
+    font-size: var(--corpo-legado-750);
     font-family: var(--ncs);
     background: linear-gradient(45deg, #1da4f3, #056ba6);
     -webkit-background-clip: text;
@@ -418,7 +557,7 @@ body section.planos .wrapper .swiper.mySwiper11 {
 
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: var(--esp-1);
     border: none;
 
     transition: all 300ms ease-in-out;
@@ -439,38 +578,45 @@ body section.planos .wrapper .swiper.mySwiper11 {
     margin-left: 1rem;
 }
 
+/* Setas: .btn--md.btn--secundaria.btn--icone (button.css). O Swiper
+   posiciona (absolute) e esconde (.swiper-button-lock); aqui ficam só o
+   lugar e o tamanho do glifo, que ele desenha no ::after. */
 .planos .swiper-button-next,
 .planos .swiper-button-prev {
-    display: inherit;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 10%;
-    background: var(--gradient);
-    padding: 4.5rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transform: scale(.30);
     top: 45%;
-
-    transition: all 300ms ease-in-out;
-
-    border: none;
-    color: #ffffff;
 }
 
+.planos .swiper-button-next::after,
+.planos .swiper-button-prev::after {
+    font-size: var(--btn-icone);
+}
+
+/* O deslocamento preserva o centro visual da seta antiga: uma caixa de
+   9rem (border-box, só padding) encolhida a 30% por transform. */
 .planos .swiper-button-next {
-    right: -16%;
+    right: calc(-16% + 1.8rem);
 }
 
 .planos .swiper-button-prev {
-    left: -16%;
+    left: calc(-16% + 1.8rem);
 }
 
-.planos .z7-btnx__label span {
-    display: none ;
+/* Abaixo de lg as setas saem, e os indicadores com o nome do plano (44px,
+   logo abaixo do carrossel) fazem o papel delas, junto com o arrasto. De sm
+   a lg elas ficavam inteiras fora da tela — o deslocamento de -16% foi
+   desenhado para o card único do celular — e o overflow da seção as cortava:
+   invisíveis, mas paradas de Tab. No celular ficavam metade para fora da
+   tela, cortadas na borda; trazê-las para dentro as poria sobre os chips do
+   card (fase 8: nenhum elemento passa da viewport). */
+@media (max-width: 1079.98px) {
+    .planos .swiper-button-prev,
+    .planos .swiper-button-next {
+        display: none;
+    }
+}
+
+.planos .btn__label span {
+    display: none;
 }
 
 @media (min-width: 1080px) {
@@ -480,9 +626,9 @@ body section.planos .wrapper .swiper.mySwiper11 {
         width: 100%;
     }
 
-    section.planos .z7-btnx__label span {
-    display: initial ;
-}
+    section.planos .btn__label span {
+        display: initial;
+    }
 
     section.planos img.bg.arraia.desktop {
         display: inherit;
@@ -519,59 +665,32 @@ body section.planos .wrapper .swiper.mySwiper11 {
     }
 
     section.planos .card .topics p {
-        font-size: 1.6rem;
+        font-size: var(--fs-650);
     }
 
-    section.planos .card .price h4 {
-        font-size: 5rem;
-    }
-    
-    section.planos .card .price h4 span {
-        font-size: 3rem;
+    section.planos .card .price .js-price-parcel {
+        font-size: var(--corpo-legado-1700);
     }
     
-    section.planos .card .price h5 {
-        font-size: 3rem;
+    section.planos .card .price .js-price-parcel span {
+        font-size: var(--fs-1300);
     }
     
-    section.planos .card .price h5 span {
-        font-size: 2rem;
+    section.planos .card .price .js-price-avista {
+        font-size: var(--fs-1300);
+    }
+    
+    section.planos .card .price .js-price-avista span {
+        font-size: var(--fs-850);
     }
 
-    section.planos .swiper-button-next,
-    section.planos .swiper-button-prev {
-        display: inherit;
-        width: 5rem;
-        height: 5rem;
-        border: 5px solid var(--primary-color);
-        border-radius: 50%;
-        padding: 5.5rem;
-        background: transparent;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        transform: scale(.5);
-        top: 45%;
-
-        transition: all 300ms ease-in-out;
-    }
-
-    section.planos .swiper-button-next:hover,
-    section.planos .swiper-button-prev:hover {
-        background: #007fc91c;
-        transform: scale(.54);
-    }
-
+    /* centro visual da seta antiga: caixa de 11rem + 10px encolhida a 50% */
     section.planos .swiper-button-next {
-        right: 29.45%;
-        color: var(--primary-color);
+        right: calc(29.45% + 2.8rem + 5px);
     }
 
     section.planos .swiper-button-prev {
-        left: 29.45%;
-        color: var(--primary-color);
+        left: calc(29.45% + 2.8rem + 5px);
     }
 
     body section.planos .wrapper .swiper.mySwiper4 {
@@ -620,9 +739,9 @@ body section.planos .wrapper .swiper.mySwiper11 {
         filter: drop-shadow(0 0 40px #1da5f376);
     }
 
+    /* sem o padding-inline de 25%: a medida do token (acima) faz a largura */
     section.planos p.obs {
-        font-size: 1.6rem;
-        padding-inline: 25%;
+        font-size: var(--fs-650);
     }
 
     section.planos.bit {
@@ -637,15 +756,15 @@ body section.planos .wrapper .swiper.mySwiper11 {
         display: none;
     }
 
-    section.planos .card .oldPrice h4::before {
+    section.planos .card .oldPrice p::before {
         width: 30%;
     }
 
-    section.planos.bit .card .oldPrice h4::before {
+    section.planos.bit .card .oldPrice p::before {
     }
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 1600px) /* xl — era 1700 */ {
     section.planos.bit {
         padding-inline: 20%;
     }
@@ -655,55 +774,18 @@ body section.planos .wrapper .swiper.mySwiper11 {
 .planos .card .topics {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: .8rem;
+    gap: var(--esp-2);
     align-items: stretch;
 }
 
-.planos .card .topics .topic-box {
+.planos .card .topics .chip {
     grid-column: span 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: .5rem;
-
-    padding: 1.2rem .6rem;
-    border-radius: .8rem;
-
-    background: #ffffff09;
-    border: 1px solid #ffffff14;
-    text-align: center;
 }
 
 /* cards com 8 tópicos: os 2 últimos ocupam meia linha cada */
-.planos .card .topics .topic-box:nth-child(7),
-.planos .card .topics .topic-box:nth-child(8) {
+.planos .card .topics .chip:nth-child(7),
+.planos .card .topics .chip:nth-child(8) {
     grid-column: span 3;
-}
-
-.planos .card .topics .topic-label {
-    font-size: 1.05rem;
-    line-height: 1.3;
-    color: #ffffff99;
-}
-
-.planos .card .topics .topic-value {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-/* variante clara (seção Bitcoin / .white) */
-.planos.white .card .topics .topic-box {
-    background: #ffffff8c;
-    border: 1px solid #00000014;
-}
-
-.planos.white .card .topics .topic-label {
-    color: #070c11a6;
-}
-
-.planos.white .card .topics .topic-value {
-    color: #070C11;
 }
 
 @media (min-width: 1080px) {
@@ -715,23 +797,8 @@ body section.planos .wrapper .swiper.mySwiper11 {
         width: 100%;
     }
 
-    section.planos .card .topics .topic-box {
-        padding-inline: .4rem;
-    }
-
-    /* escala com o viewport (card = 1/3 da tela), sem nunca quebrar linha */
-    section.planos .card .topics .topic-label {
-        font-size: clamp(0.9rem, 0.9vw - 0.17rem, 1.3rem);
-        white-space: nowrap;
-    }
-
-    section.planos .card .topics .topic-value {
-        font-size: clamp(1.1rem, 0.95vw + 0.02rem, 1.6rem);
-        white-space: nowrap;
-    }
-
     /* bitcoin: 2 caixinhas por linha (textos longos em caixa de 1/3 não cabem) */
-    section.planos.bit .card .topics .topic-box {
+    section.planos.bit .card .topics .chip {
         grid-column: span 3;
     }
 }
@@ -742,24 +809,35 @@ body section.planos .wrapper .swiper.mySwiper11 {
         padding-inline: 1.2rem;
     }
 
-    section.planos .card .topics .topic-value {
-        font-size: 1.5rem;
-    }
-
     /* preço maior (seletores com .plano pra vencer os overrides do tematico) */
-    section.planos .plano .card .price h4 {
-        font-size: 3.6rem;
+    section.planos .plano .card .price .js-price-parcel {
+        font-size: var(--corpo-legado-1375);
     }
 
-    section.planos .plano .card .price h4 span {
-        font-size: 2.4rem;
+    /* o "12x" um pouco maior (fase 8, pedido do cliente): 19,2 → 22,4px */
+    section.planos .plano .card .price .js-price-parcel span {
+        font-size: var(--corpo-legado-1200);
     }
 
-    section.planos .plano .card .price h5 {
-        font-size: 2.4rem;
+    section.planos .plano .card .price .js-price-avista {
+        font-size: var(--corpo-legado-950);
     }
 
-    section.planos .plano .card .price h5 span {
-        font-size: 2rem;
+    section.planos .plano .card .price .js-price-avista span {
+        font-size: var(--fs-850);
+    }
+}
+
+/* A linha do à vista um pouco maior do 375 em diante (fase 8, pedido do
+   cliente): o valor de 19,2 para 20,8px, "ou" e "à vista" de 16 para 17,6.
+   Em 320 ela passaria da largura do card e quebraria — e o card cresceria.
+   Preço é display: fica fora da escala canônica, como os números herói. */
+@media (min-width: 375px) and (max-width: 1079px) {
+    section.planos .plano .card .price .js-price-avista {
+        font-size: var(--corpo-legado-1100);
+    }
+
+    section.planos .plano .card .price .js-price-avista span {
+        font-size: var(--fs-900);
     }
 }

@@ -1,0 +1,29 @@
+  antes 390 lento carga 9/9: LCP 4684ms, 2721KB
+antes 390px lento: n=9 abortos=0 repetições=0
+  LCP 4580 (3960–4748) | FCP 4484 (3936–4748) | TTFB 3 (2–9) | TBT 4909 (3197–9525)
+  CLS carga 0.0007 (0.0007–0.0007) | CLS total 0.0007 (0.0007–0.0007) | main thread 16799 (11958–25509)ms
+  bytes inicial 3002KB em 176 req | após rolar 3371KB em 196 req
+  elemento do LCP: img.mobile [bg%20mobile.avif]
+  antes 390 livre carga 9/9: LCP 184ms, 3202KB
+antes 390px livre: n=8 abortos=1 repetições=0
+  LCP 178 (136–288) | FCP 178 (136–288) | TTFB 2.5 (2–3) | TBT 73 (0–212)
+  CLS carga 0.00025 (0.0002–0.0003) | CLS total 0.00025 (0.0002–0.0003) | main thread 289 (89–592)ms
+  bytes inicial 3197KB em 179.5 req | após rolar 8042KB em 194.5 req
+  elemento do LCP: img.mobile [bg%20mobile.avif]
+  antes 1474 lento carga 9/9: LCP 15172ms, 3249KB
+antes 1474px lento: n=8 abortos=1 repetições=0
+  LCP 16462 (13536–17632) | FCP 4812 (4304–5092) | TTFB 3 (3–6) | TBT 8666.5 (7854–13530)
+  CLS carga 0 (0–0) | CLS total 0.0008 (0–0.001) | main thread 22642 (20949–26376)ms
+  bytes inicial 3258KB em 165 req | após rolar 3454KB em 183 req
+  elemento do LCP: img.desktop [bg%20desktop.avif] / h1
+  antes 1474 livre carga 9/9: LCP 1212ms, 3369KB
+antes 1474px livre: n=9 abortos=0 repetições=0
+  LCP 1272 (1212–1444) | FCP 184 (152–244) | TTFB 3 (2–8) | TBT 113 (38–150)
+  CLS carga 0.0003 (0–0.0003) | CLS total 0.001 (0.0006–0.0013) | main thread 323 (276–583)ms
+  bytes inicial 3369KB em 176 req | após rolar 8130KB em 183 req
+  elemento do LCP: img.desktop [bg%20desktop.avif]
+
+
+Salvo em medidas/lote-antes.md
+retrato antes 390 ok
+retrato antes 1474 ok

@@ -52,7 +52,7 @@
     height: auto;
     max-width: min(94vw, 40rem);
     max-height: 86svh;
-    border-radius: 1rem;
+    border-radius: var(--raio-sm);
 }
 
 .popupClose {
@@ -69,7 +69,7 @@
 
     background: rgba(0, 0, 0, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 50%;
+    border-radius: var(--raio-circulo);
     cursor: pointer;
     transition: background 200ms ease-in-out, transform 200ms ease-in-out;
 }

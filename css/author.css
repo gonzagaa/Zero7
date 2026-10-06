@@ -8,29 +8,29 @@
 #author .content {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--esp-2);
     text-align: left;
     align-items: start;
 }
 
 #author p,
 #author a {
-    color: #fff;
-    font-size: 1.2rem;
+    color: var(--cor-titulo);
+    font-size: var(--fs-300);
     text-decoration: none;
 }
 
 #author p.ocult {   
-    color: #8f8e8e;
-    font-size: 1.2rem;
+    color: var(--cor-desabilitado);
+    font-size: var(--fs-300);
 }
 
 #author p.disclaimer {
-    font-size: 1rem;
+    font-size: var(--corpo-legado-100);
     text-align: center;
     margin-top: 2rem;
-    color: #c6c6c6;
-    font-weight: 300;
+    color: var(--cor-secundario);
+    font-weight: var(--peso-leve);
 }
 
 @media (min-width: 1080px) {
@@ -58,5 +58,72 @@
 
     section#author .content p:nth-child(5) {
         text-align: right;
+    }
+}
+
+/* Alvo de toque: "Política de Privacidade", "Cookie" e "Políticas de Uso"
+   tinham 13px de altura. Cada link vira uma caixa de 44 × no mínimo 44px com
+   o texto no mesmo lugar; no celular o gap sai, porque as caixas já dão o
+   respiro entre as linhas. */
+@media (max-width: 1079.98px), (pointer: coarse) {
+    #author .content a {
+        display: inline-flex;
+        align-items: center;
+        min-width: var(--alvo-toque);
+        min-height: var(--alvo-toque);
+    }
+}
+
+@media (max-width: 1079.98px) {
+    #author .content {
+        gap: 0;
+    }
+}
+
+/* ── Barra legal no celular e no tablet (fase 8) ──────────────────────────
+   O © numa linha e os três links de política numa só, separados por um
+   divisor, em vez de empilhados com o alvo de 44px entre eles. O CNPJ vai
+   para o bloco de marca do rodapé. O aviso legal, centralizado em 8px e no
+   peso leve, fica alinhado à esquerda, em 12,8px e no peso normal. */
+@media (max-width: 1079.98px) {
+    #author .content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    #author .content > p:first-child {
+        flex-basis: 100%;
+    }
+
+    #author .autor__cnpj {
+        display: none;
+    }
+
+    #author p,
+    #author a {
+        font-size: var(--fs-650);
+    }
+
+    #author .content p:has(> a) {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    #author .content p:has(> a) + p:has(> a)::before {
+        content: "";
+        display: inline-block;
+        width: 1px;
+        height: 1.2em;
+        margin-inline: var(--esp-3);
+        background: currentColor;
+        opacity: .4;
+    }
+
+    #author p.disclaimer {
+        font-size: var(--fs-650);
+        font-weight: var(--peso-normal);
+        text-align: left;
+        color: var(--cor-secundario);
     }
 }

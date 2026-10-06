@@ -61,7 +61,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: var(--esp-4);
 }
 
 #cards .cards .row-1,
@@ -70,12 +70,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: var(--esp-4);
 }
 
 #cards .card {
     overflow: hidden;
-    border-radius: 2rem;
+    border-radius: var(--raio-md);
     position: relative;
     border: 2px solid #ffffff12;
 
@@ -105,7 +105,7 @@
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
     background-color: rgba(14, 14, 14, 0.534);
-    border-radius: 2rem;
+    border-radius: var(--raio-md);
 
     transition: all 500ms ease-in-out;
 
@@ -124,8 +124,8 @@
 }
 
 #cards .card .head ion-icon {
-    color: #fff;
-    font-size: 2rem;
+    color: var(--cor-titulo);
+    font-size: var(--fs-850);
     transform: rotate(-45deg);
 
     transition: all 500ms ease-in-out;
@@ -133,19 +133,19 @@
     background: #fff;
     color: var(--primary-color);
     padding: .5rem;
-    border-radius: 50%;
+    border-radius: var(--raio-circulo);
 }
 
 #cards .card:hover .head ion-icon {
     transform: rotate(90deg);
     background: linear-gradient(45deg, #1da4f3, #056ba6);
-    color: #fff;
+    color: var(--cor-titulo);
 }
 
 #cards .card h3 {
-    color: #cddbe4;
-    font-size: 1.6rem;
-    font-weight: 600;
+    color: var(--cor-corpo);
+    font-size: var(--fs-650);
+    font-weight: var(--peso-semi);
 
     transition: all 500ms ease-in-out;
 }
@@ -160,8 +160,8 @@
 }
 
 #cards .card .reveal p {
-    font-size: 1.3rem;
-    color: #Fff;
+    font-size: var(--fs-400);
+    color: var(--cor-titulo);
     line-height: 0;
     text-align: left;
 
@@ -190,7 +190,7 @@
     section#cards .cards .row-1 {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+        gap: var(--esp-4);
     }
 
     section#cards .cards .row-1 .card {
@@ -211,7 +211,7 @@
     section#cards .cards .row-2 {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: 2rem;
+        gap: var(--esp-4);
     }
 
     section#cards .cards .row-2 .card {
@@ -229,15 +229,15 @@
     }
 
     section#cards .card h3 {
-        font-size: 2rem;
+        font-size: var(--fs-850);
     }
 
     section#cards .cards .row-2 .card h3 {
-        font-size: 1.8rem;
+        font-size: var(--corpo-legado-750);
     }
 }
 
-@media (min-width: 1700px) {
+@media (min-width: 1600px) /* xl — era 1700 */ {
     section#cards header h2 {
         width: 60%;
     }

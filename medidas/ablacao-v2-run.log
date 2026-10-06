@@ -1,0 +1,40 @@
+fase 0: inventário…
+ablação baseline … score 78 | FCP 1803 | LCP 4661 | TBT 76 | SI 1803 | -0KB
+ablação fonte NCS Radhiumz … score 79 | FCP 2705 | LCP 4586 | TBT 0 | SI 2705 | -22KB
+ablação fonte TT Light … score 78 | FCP 1804 | LCP 4885 | TBT 109 | SI 1804 | -32KB
+ablação fonte TT Regular … score 79 | FCP 1804 | LCP 4584 | TBT 73 | SI 1804 | -63KB
+ablação fonte TT Medium … score 78 | FCP 2555 | LCP 4883 | TBT 0 | SI 2555 | -32KB
+ablação fonte TT DemiBold … score 79 | FCP 2705 | LCP 4588 | TBT 0 | SI 2705 | -65KB
+ablação fonte TT Bold … score 79 | FCP 2705 | LCP 4737 | TBT 0 | SI 2705 | -66KB
+ablação fonte TT ExtraBold … score 79 | FCP 2704 | LCP 4583 | TBT 18 | SI 2704 | -66KB
+ablação fontes todas … score 90 | FCP 1956 | LCP 3462 | TBT 0 | SI 1956 | -346KB
+ablação swiper … score 79 | FCP 2555 | LCP 4661 | TBT 0 | SI 2555 | -40KB
+ablação jquery … score 79 | FCP 2704 | LCP 4734 | TBT 0 | SI 2704 | -31KB
+ablação lenis … score 79 | FCP 2556 | LCP 4659 | TBT 0 | SI 2556 | -4KB
+ablação img TARJA MOBILE MARGEM TAMANHO REDUZI … score 78 | FCP 2704 | LCP 4734 | TBT 0 | SI 2704 | -0KB
+ablação img logo-icon.svg … score 80 | FCP 2554 | LCP 4585 | TBT 0 | SI 2554 | -1KB
+ablação img bg mobile.avif … score 78 | FCP 2705 | LCP 4883 | TBT 0 | SI 2705 | -11KB
+ablação critico pela metade … score 83 | FCP 2255 | LCP 4284 | TBT 0 | SI 2255 | -0KB
+  raiz do herói: placeholder de 7KB
+ablação teto v2 (tudo removível) … score 98 | FCP 1531 | LCP 2273 | TBT 0 | SI 1531 | -1038KB
+
+categoria                     -KB   score   FCP    LCP    TBT   SI
+baseline                         0     78   1803   4661     76  1803
+fonte NCS Radhiumz              22     79   2705   4586      0  2705
+fonte TT Light                  32     78   1804   4885    109  1804
+fonte TT Regular                63     79   1804   4584     73  1804
+fonte TT Medium                 32     78   2555   4883      0  2555
+fonte TT DemiBold               65     79   2705   4588      0  2705
+fonte TT Bold                   66     79   2705   4737      0  2705
+fonte TT ExtraBold              66     79   2704   4583     18  2704
+fontes todas                   346     90   1956   3462      0  1956
+swiper                          40     79   2555   4661      0  2555
+jquery                          31     79   2704   4734      0  2704
+lenis                            4     79   2556   4659      0  2556
+img TARJA MOBILE MARGEM TAMANHO REDUZI     0     78   2704   4734      0  2704
+img logo-icon.svg                1     80   2554   4585      0  2554
+img bg mobile.avif              11     78   2705   4883      0  2705
+critico pela metade              0     83   2255   4284      0  2255
+teto v2 (tudo removível)      1038     98   1531   2273      0  1531
+
+-> medidas/ablacao.json

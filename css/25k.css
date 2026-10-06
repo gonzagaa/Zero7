@@ -5,13 +5,13 @@
 .planos .planos-topo-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
+    gap: var(--esp-5);
 }
 
 .planos .planos-topo-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--esp-4);
     align-items: center;
     justify-items: center;
 }
@@ -39,11 +39,11 @@
     justify-content: center;
     width: 5.2rem;
     height: 5.2rem;
-    border-radius: 50%;
+    border-radius: var(--raio-circulo);
     font-family: var(--ncs);
-    font-size: 3.2rem;
+    font-size: var(--corpo-legado-1325);
     line-height: 1;
-    color: #fff;
+    color: var(--cor-titulo);
     background: linear-gradient(to bottom, #01040A, #070C11);
     border: 1px solid rgba(255, 255, 255, 0.10);
     box-shadow: 0 0 24px rgba(0, 128, 201, 0.12);
@@ -53,28 +53,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.planos .bonus-25k-box {
-    position: relative;
-    width: 100%;
-    max-width: 48rem;
-    padding: 2rem 1.8rem;
-    border-radius: 2rem;
-    overflow: hidden;
-    isolation: isolate;
-
-    background: url("./assets/eua.avif");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.22),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
-
-    transition: transform 300ms ease, box-shadow 300ms ease;
 }
 
 .planos .bonus-25k-box:hover {
@@ -107,12 +85,12 @@
     justify-content: center;
     padding: 0.55rem 1rem;
     margin-bottom: 1.1rem;
-    border-radius: 999px;
+    border-radius: var(--raio-pilula);
     font-family: var(--ncs);
-    font-size: 1.05rem;
+    font-size: var(--corpo-legado-150);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #fff;
+    color: var(--cor-titulo);
     background: linear-gradient(45deg, #023c83, #0080c9);
     box-shadow: 0 0 16px rgba(0, 128, 201, 0.16);
 }
@@ -120,8 +98,8 @@
 .planos .bonus-25k-box h2 {
     width: 100%;
     text-align: left;
-    color: #fff;
-    font-size: 2.6rem;
+    color: var(--cor-titulo);
+    font-size: var(--corpo-legado-1100);
     line-height: 1.05;
     margin-bottom: 1.2rem;
     text-transform: uppercase;
@@ -130,8 +108,8 @@
 .planos .bonus-25k-box p {
     width: 100%;
     text-align: left;
-    color: #e7edf5;
-    font-size: 1.24rem;
+    color: var(--cor-corpo);
+    font-size: var(--corpo-legado-350);
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -143,10 +121,10 @@
     align-items: center;
     justify-content: flex-start;
     font-family: var(--ncs);
-    font-size: 1.15rem;
+    font-size: var(--corpo-legado-250);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #1da4f3;
+    color: var(--marca-clara);
     transition: filter 300ms ease, transform 300ms ease;
 }
 
@@ -164,7 +142,7 @@
 }
 
 .planos .planos-topo-conteudo h2 {
-    color: #fff;
+    color: var(--cor-titulo);
 }
 
 .planos .planos-topo-conteudo .botoes,
@@ -229,7 +207,7 @@
     }
 
     .planos .bonus-25k-box h2 {
-        font-size: 3rem;
+        font-size: var(--fs-1300);
     }
 }
 
@@ -237,26 +215,26 @@
     .planos .planos-topo-plus {
         width: 4.6rem;
         height: 4.6rem;
-        font-size: 2.8rem;
+        font-size: var(--corpo-legado-1200);
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 639.98px) { /* sm-1 — era 700 */
     .planos .planos-topo-wrapper {
-        gap: 2.4rem;
+        gap: var(--esp-4);
     }
 
     .planos .bonus-25k-box {
         padding: 1.8rem 1.5rem;
-        border-radius: 1.8rem;
+        border-radius: var(--raio-md);
     }
 
     .planos .bonus-25k-box h2 {
-        font-size: 2.1rem;
+        font-size: var(--corpo-legado-875);
     }
 
     .planos .bonus-25k-box p {
-        font-size: 1.14rem;
+        font-size: var(--corpo-legado-250);
     }
 
     .planos .planos-topo-desconto img.cupom {

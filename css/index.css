@@ -1,33 +1,177 @@
-@import url("./global.css?v=v94-outubro-out01");
-@import url("./home.css?v=v94-outubro-out01");
-@import url("./sectionDivisa.css?v=v94-outubro-out01");
-@import url("./sectionCards.css?v=v94-outubro-out01");
-@import url("./sectionTopicos.css?v=v94-outubro-out01");
-@import url("./sectionDepoimentos.css?v=v94-outubro-out01");
-@import url("./sectionBa.css?v=v94-outubro-out01");
-@import url("./sectionPlanos.css?v=v94-outubro-out01");
-@import url("./sectionPlanosTematico.css?v=v94-outubro-out01");
-@import url("./planosAtivo.css?v=v94-outubro-out01");
-@import url("./sectionFaq.css?v=v94-outubro-out01");
-@import url("./sectionContato.css?v=v94-outubro-out01");
-@import url("./divSuporte.css?v=v94-outubro-out01");
+@import url("./tokens.css?v=v94-anim04");
+@import url("./global.css?v=v94-anim04");
+@import url("./acessibilidade.css?v=v94-anim04");
+@import url("./home.css?v=v94-anim04");
+@import url("./sectionDivisa.css?v=v94-anim04");
+@import url("./sectionCards.css?v=v94-anim04");
+@import url("./sectionTopicos.css?v=v94-anim04");
+@import url("./sectionDepoimentos.css?v=v94-anim04");
+@import url("./sectionBa.css?v=v94-anim04");
+@import url("./sectionPlanos.css?v=v94-anim04");
+@import url("./sectionPlanosTematico.css?v=v94-anim04");
+@import url("./planosAtivo.css?v=v94-anim04");
+@import url("./sectionFaq.css?v=v94-anim04");
+@import url("./sectionContato.css?v=v94-anim04");
+@import url("./divSuporte.css?v=v94-anim04");
 
-@import url("./navigation.css?v=v94-outubro-out01");
-@import url("./button.css?v=v94-outubro-out01");
-@import url("./buttonNav.css?v=v94-outubro-out01");
-@import url("./head.css?v=v94-outubro-out01");
-@import url("./buttonWpp.css?v=v94-outubro-out01");
-@import url("./modalDepoimento.css?v=v94-outubro-out01");
-@import url("./tarja.css?v=v94-outubro-out01");
-@import url("./tarjaNav.css?v=v94-outubro-out01");
-@import url("./tarjaImage.css?v=v94-outubro-out01");
-@import url("./popup.css?v=v94-outubro-out01");
+@import url("./navigation.css?v=v94-anim04");
+@import url("./button.css?v=v94-anim04");
+@import url("./componentes.css?v=v94-anim04");
+@import url("./divisor.css?v=v94-anim04");
+@import url("./head.css?v=v94-anim04");
+@import url("./buttonWpp.css?v=v94-anim04");
+@import url("./modalDepoimento.css?v=v94-anim04");
+@import url("./tarja.css?v=v94-anim04");
+@import url("./tarjaNav.css?v=v94-anim04");
+@import url("./tarjaImage.css?v=v94-anim04");
+@import url("./popup.css?v=v94-anim04");
 
-@import url("./author.css?v=v94-outubro-out01");
-@import url("./footer.css?v=v94-outubro-out01");
-@import url("./footerPagamento.css?v=v94-outubro-out01");
-@import url("./coutdownDois.css?v=v94-outubro-out01");
+@import url("./author.css?v=v94-anim04");
+@import url("./footer.css?v=v94-anim04");
+@import url("./footerPagamento.css?v=v94-anim04");
+@import url("./coutdownDois.css?v=v94-anim04");
 
-@import url("./obrigado.css?v=v94-outubro-out01");
-@import url("./verificado.css?v=v94-outubro-out01");
-@import url("./25k.css?v=v94-outubro-out01");
+@import url("./obrigado.css?v=v94-anim04");
+@import url("./verificado.css?v=v94-anim04");
+@import url("./25k.css?v=v94-anim04");
+
+/* Lenis 1.1.14 (MIT) — o lenis.css do unpkg tinha 244 bytes e era
+   <link> no <head>: uma requisição cross-origin, com DNS e TLS, para
+   duzentos bytes que bloqueavam a pintura. Copiado aqui na íntegra.
+   Fica no fim do index.css, e não em arquivo próprio, porque arquivo
+   próprio seria mais um @import, ou seja, mais uma requisição — que é
+   exatamente o que este bloco existe para eliminar.
+   Fonte: https://unpkg.com/lenis@1.1.14/dist/lenis.css */
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-stopped{overflow:hidden}.lenis.lenis-smooth iframe{pointer-events:none}
+
+/* ── Fontes auto-hospedadas ────────────────────────────────────────────────
+   Saíram do fonts.cdnfonts.com, que era o último domínio bloqueando a
+   pintura. WOFF2 e sem subconjunto — subsetting é outra rodada, medida à
+   parte. Os nomes de família são, letra por letra, os que o CDN declarava e
+   os que o tokens.css pede: nome diferente faz o texto cair em outra face
+   sem aviso nenhum.
+
+   NCS Radhiumz é UM arquivo, declarado só como peso 400, exatamente como no
+   CDN. Os pesos 500, 600, 700 e 900 dos títulos são negrito sintetizado pelo
+   navegador. Uma segunda face, um intervalo de peso ou declarar este arquivo
+   como bold mudaria a aparência de todos os títulos do site.
+
+   Sem local(): o CDN usava local('TT Fors Trial') — o nome da família — em
+   todos os pesos, e numa máquina com a fonte instalada isso podia trocar a
+   face de todos eles pela mesma.
+
+   A URL leva ?v= e precisa bater byte a byte com a dos <link rel="preload">
+   das páginas; se não bater, o navegador baixa o arquivo duas vezes. */
+@font-face {
+  font-family: 'NCS Radhiumz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/NCS%20Radhiumz.sub.woff2?v=v94-anim04") format("woff2");
+  /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
+     Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
+     mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265;
+}
+@font-face {
+  font-family: 'TT Fors Trial';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/TT%20Fors%20Trial%20Light.sub.woff2?v=v94-anim04") format("woff2");
+  /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
+     Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
+     mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265;
+}
+@font-face {
+  font-family: 'TT Fors Trial';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v94-anim04") format("woff2");
+  /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
+     Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
+     mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265;
+}
+@font-face {
+  font-family: 'TT Fors Trial';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/TT%20Fors%20Trial%20Medium.sub.woff2?v=v94-anim04") format("woff2");
+  /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
+     Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
+     mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265;
+}
+@font-face {
+  font-family: 'TT Fors Trial';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/TT%20Fors%20Trial%20DemiBold.sub.woff2?v=v94-anim04") format("woff2");
+  /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
+     Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
+     mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265;
+}
+@font-face {
+  font-family: 'TT Fors Trial';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/TT%20Fors%20Trial%20Bold.sub.woff2?v=v94-anim04") format("woff2");
+  /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
+     Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
+     mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265;
+}
+@font-face {
+  font-family: 'TT Fors Trial';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("fonts/TT%20Fors%20Trial%20ExtraBold.sub.woff2?v=v94-anim04") format("woff2");
+  /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
+     Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
+     mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265;
+}
+
+/* Fallbacks com as MÉTRICAS das webfonts (B3; recalibrados no E2 pela
+   CONTAGEM DE LINHAS real — ver o comentário da NCS abaixo. TT: 124,83%
+   vinha do avgWidth OS2, mas o subtítulo do herói ganhava uma linha no
+   fallback em 390; 110% MEDIDO casa as alturas nas larguras
+   do protocolo): o Arial local é esticado
+   para ocupar o mesmo espaço, e o swap deixa de mexer no layout — o CLS de
+   carga tinha ido a 0,0069 no lote A porque o primeiro paint passou a vir
+   antes das fontes. Números medidos das tabelas hhea/OS2 pelo
+   scripts/fontes.mjs (Arial: upm 2048, avgWidth 904). */
+@font-face {
+  font-family: 'TT Fors fallback';
+  src: local('Arial');
+  size-adjust: 110%;
+  ascent-override: 105%;
+  descent-override: 35%;
+  line-gap-override: 0%;
+}
+/* E2: 165,83% vinha da razão avgWidth NCS/Arial das tabelas OS2 — média de
+   CAIXA BAIXA. Só que a NCS aparece SEMPRE em uppercase (títulos com
+   text-transform), e as caps da Arial já têm quase a largura das caps da
+   NCS: com 165,83% o fallback ficava ~65% mais largo, o h1 quebrava em
+   até 2 linhas a mais no primeiro layout e o relayout na chegada da NCS
+   era um shift de 0,15 (sempre marcado com hadRecentInput espúrio, por
+   isso nenhuma sonda via). 127% MEDIDO por DOIS eixos (F3a): mesma contagem de linhas do h1
+   que a webfont nas 8 larguras do protocolo (320–1920), palavra rotativa
+   mais longa. Trocou a fonte de display, recalibre pelo mesmo método
+   (varredura de size-adjust comparando a altura do h1). */
+@font-face {
+  font-family: 'NCS fallback';
+  src: local('Arial');
+  size-adjust: 127%;
+  ascent-override: 95%;
+  descent-override: 40%;
+  line-gap-override: 0%;
+}

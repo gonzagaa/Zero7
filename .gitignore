@@ -1,0 +1,8 @@
+# Dependências e saídas de ferramenta — o site publicado não precisa delas
+node_modules/
+shots/
+deploy/
+medidas/*.json
+medidas/retrato-*
+.env
+.env.*

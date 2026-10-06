@@ -33,12 +33,19 @@ nav {
     stroke: var(--color-text);
   }
 
+  /* Alvo de toque: a imagem tem 23px de altura; o link cresce até 44 dentro
+     da barra, sem mexer nela. No desktop o reset do nav volta o link a
+     inline e o min-height não pega. */
   nav a.logo {
     width: initial;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--alvo-toque);
   }
   
   nav .logo img {
     width: 8rem;
+    height: auto;
   }
   
   nav button {
@@ -96,7 +103,7 @@ nav {
   
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
-    background-color: rgb(0, 0, 0);
+    background-color: var(--sup-fundo);
     border-radius: 0;
     border: 1px solid rgba(63, 63, 63, 0.125);
   
@@ -124,18 +131,18 @@ nav {
   .menu ul:nth-child(1) {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    font-weight: 400;
-    font-size: 1.6rem;
+    gap: var(--esp-5);
+    font-weight: var(--peso-normal);
+    font-size: var(--fs-650);
   } 
   
   .menu ul li a {
     position: relative;
     display: inline-block;
 
-    color: #ffffffd9;
+    color: var(--cor-corpo);
     font-family: var(--tts);
-    font-weight: 500;
+    font-weight: var(--peso-medio);
     text-decoration: none;
 
     transition:
@@ -147,7 +154,7 @@ nav {
   .menu ul li a:hover,
   .menu ul li a:focus-visible,
   .menu ul li a:active {
-    color: #ffffff;
+    color: var(--cor-titulo);
     transform: translateX(.6rem);
   }
 
@@ -155,15 +162,23 @@ nav {
   .menu .buttons {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--esp-4);
+  }
+
+  /* no overlay mobile os botões ocupam a linha inteira */
+  @media (max-width: 1079.98px) {
+    .menu .buttons .btn,
+    .menu .buttons .z7-btnx {
+      width: 100%;
+    }
   }
   
   .menu .buttons button {
     padding: 1.5rem 2.5rem;
-    font-size: 1.8rem;
-    border-radius: 1rem;
+    font-size: var(--corpo-legado-750);
+    border-radius: var(--raio-sm);
     border: none;
-    font-weight: 600;
+    font-weight: var(--peso-semi);
   }
   
   .menu .buttons button:hover {
@@ -176,7 +191,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3.2rem;
+    gap: var(--esp-5);
   }
   
   body.menu-expanded .logo,
@@ -190,10 +205,10 @@ nav {
   }
 
   body nav#navigation button#navButton {
-    color: #Fff;
+    color: var(--cor-titulo);
     filter: none;
     font-family: var(--tts);
-    font-weight: 500;
+    font-weight: var(--peso-medio);
     background: var(--gradient);
   }
 
@@ -203,19 +218,24 @@ nav {
 
   nav .button.navMobile {
     padding: 1rem 2.5rem;
-    font-size: 1.2rem;
+    font-size: var(--fs-300);
     width: initial;
-    border-radius: .5rem;
+    border-radius: var(--raio-sm);
   }
 
   nav .button.navMobile:hover {
     background: #fff;
-    color: #000;
+    color: var(--cor-titulo-inverso);
   }
   
   @media (min-width: 1080px) {
-    /* reset =================== */
-      nav#navigation .wrapper * {
+    /* reset ===================
+       O botão (.btn e o legado .z7-btnx) fica fora do reset. Sem isso o
+       reset zerava position/display/font-size/color das camadas, e o
+       buttonNav.css precisava restaurar tudo com seletores (1,2,1). A
+       exceção vai dentro de :where() para o reset manter a especificidade
+       de sempre: as regras da nav que venciam o reset continuam vencendo. */
+      nav#navigation .wrapper *:where(:not(.btn, .z7-btnx, :is(.btn, .z7-btnx) *)) {
         margin: 0;
         padding: 0;
         visibility: initial;
@@ -233,7 +253,7 @@ nav {
       nav#navigation {
         width: calc(100% - 200px);
         left: 100px;
-        border-radius: 0 0 2rem 2rem;
+        border-radius: 0 0 var(--raio-md) var(--raio-md);
         top: 0rem;
         height: 6rem;
       }
@@ -242,12 +262,23 @@ nav {
     display: none;
   }
 
+      /* O reset de *:where() logo acima zera o display de tudo dentro do
+         wrapper, e com ele o a.logo perde o inline-flex com align-items:
+         center. O link continua com os 44px de alvo de toque, mas a imagem
+         de 28,1px passa a encostar no topo: medido em 1474, 8px acima e 23,9
+         abaixo. Devolver o flex recentraliza — a especificidade aqui
+         (1 id, 1 classe, 2 tipos) vence a do reset. */
+      nav#navigation a.logo {
+        display: flex;
+        align-items: center;
+      }
+
       nav#navigation .logo img {
         width: 9rem;
       }
 
       body nav#navigation button#navButton {
-        font-size: 1.2rem;
+        font-size: var(--fs-300);
       }
     
       nav#navigation .close-menu,
@@ -266,7 +297,7 @@ nav {
         display: flex;
         align-items: center;
         /* gap menor que os 3.2rem antigos: as pílulas trazem respiro próprio */
-        gap: .6rem;
+        gap: var(--esp-1);
       }
 
       nav#navigation .menu ul li {
@@ -281,12 +312,12 @@ nav {
         align-items: center;
 
         padding: .7rem 1.4rem;
-        border-radius: 999rem;
+        border-radius: var(--raio-pilula);
 
-        color: #ffffffb3;
+        color: var(--cor-secundario);
         font-family: var(--tts);
-        font-weight: 500;
-        font-size: 1.2rem;
+        font-weight: var(--peso-medio);
+        font-size: var(--fs-300);
         letter-spacing: .02em;
         text-decoration: none;
         white-space: nowrap;
@@ -302,7 +333,7 @@ nav {
 
       nav#navigation .menu ul li a:hover,
       nav#navigation .menu ul li a:focus-visible {
-        color: #ffffff;
+        color: var(--cor-titulo);
 
         background-color: rgba(255, 255, 255, .07);
         box-shadow:
@@ -310,31 +341,28 @@ nav {
           0 .8rem 2rem rgba(2, 60, 131, .35);
       }
 
-      nav#navigation .menu ul li a:focus-visible {
-        outline: none;
-        box-shadow:
-          inset 0 0 0 1px rgba(29, 164, 243, .55),
-          0 .8rem 2rem rgba(2, 60, 131, .35);
-      }
-  
+      /* foco: o anel único (acessibilidade.css) por cima do visual de hover.
+         Aqui havia um outline: none com um contorno interno de 1px a 55%. */
+
       nav#navigation .menu a {
-        color: #fff;
+        color: var(--cor-titulo);
         text-decoration: none;
       }
   
+      /* dois botões lado a lado: o gap de 2rem apertava o menu */
       nav#navigation .menu .buttons {
         display: flex;
-        gap: 2rem;
+        gap: var(--esp-2);
       }
 
   
       nav#navigation .menu a button {
         background: var(--gradient);
-        border-radius: .5rem;
+        border-radius: var(--raio-sm);
         padding: 1rem 3rem;
   
         transition: all 300ms ease-in-out;
-        font-weight: 700;
+        font-weight: var(--peso-forte);
         
         box-shadow:  10px 10px 50px #292929a8,
              -10px -10px 50px #373737ad;
@@ -373,7 +401,7 @@ nav {
     
     }
   
-    @media (min-width: 1700px) {
+    @media (min-width: 1600px) /* xl — era 1700 */ {
       nav#navigation {
         width: calc(100% - 340px);
         left: 170px;
@@ -412,3 +440,640 @@ nav {
       transition: none;
     }
   }
+
+/* ── Menu mobile e nav no celular (fase 8) ─────────────────────────────── */
+
+/* Scrim: escurece a página atrás do painel e fecha o menu no toque (o
+   global.js cria o elemento, direto no body). Não mora na nav: o
+   backdrop-filter dela vira bloco de contenção do position: fixed, e um
+   scrim lá dentro cobriria só a barra. */
+.menu-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 99; /* logo abaixo da nav (100), que leva o painel */
+  background: rgb(0 0 0 / .6);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--dur-media) var(--curva-saida),
+    visibility 0s linear var(--dur-media);
+}
+
+body.menu-expanded .menu-scrim {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--dur-media) var(--curva-saida);
+}
+
+@media (min-width: 1080px) {
+  .menu-scrim {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-scrim,
+  body.menu-expanded .menu-scrim {
+    transition: none;
+  }
+}
+
+@media (max-width: 1079.98px) {
+  /* O painel ia até right: -5%, com 60vw fixos e respiro só à esquerda: os
+     botões COMUNIDADE e ÁREA DO TRADER passavam da borda, e o ícone do
+     WhatsApp e a seta ficavam fora da tela. Agora ele encosta na borda,
+     cresce até o botão mais largo caber — nunca abaixo dos 60vw de antes nem
+     acima da tela —, tem respiro dos dois lados, e a lista estica na largura
+     do painel. Altura: no mínimo 60vh — com os 50vh de antes o painel
+     acabava no meio da tela, e o cliente pediu um pouco mais (fase 8) —, e
+     cresce com o conteúdo onde ele não cabe (em 320×568 não cabia nem nos
+     50vh), com rolagem própria se passar da tela. */
+  body.menu-expanded .menu {
+    right: 0;
+    width: max-content;
+    min-width: 60vw;
+    max-width: 100vw;
+    height: auto;
+    min-height: 60vh;
+    max-height: 100dvh;
+    overflow-y: auto;
+    padding-inline: 2rem;
+    align-items: stretch;
+  }
+
+  /* Nav rolada: fundo sólido do token de superfície. O vidro (blur com
+     saturate de 180%) sobre o #topicos, que é claro, virava uma faixa
+     cinza-esverdeada. Sólido serve sobre qualquer seção, sem detectar qual
+     está embaixo. No topo da página, sobre o herói escuro, o vidro fica. */
+  nav#navigation.scroll {
+    background-color: var(--sup-fundo);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ── Barra do desktop no desenho do blog (fase 21) ────────────────────────
+   O menu do blog novo (Blog - Zero7, components/site/Cabecalho), trazido
+   para a home com o vocabulário da casa. Mesma estrutura: pastilha do logo à
+   esquerda; à direita, itens | divisor | ações. Pastilhas de vidro, a de
+   "Área do Trader" em azul sólido.
+
+   O que muda em relação ao blog, e por quê:
+   - O canto. O blog é todo pílula; aqui a barra, o logo e as duas ações
+     levam o CANTO DE ASSINATURA da casa (dois cantos arredondados, dois
+     vivos). A barra usa --raio-md e as pastilhas --raio-sm, com recuo de 1rem
+     por igual entre a borda da barra e as pastilhas: raio de dentro = raio de
+     fora - recuo (2rem - 1rem), e por isso as curvas ficam concêntricas no
+     canto de cima à esquerda (logo) e no de baixo à direita (Área do
+     Trader). Os quatro itens de navegação ficam em pílula, como no blog.
+   - A tarja. Com a tarja e o contador ativos (#navigation.activeCountdown),
+     a barra encosta embaixo dela e o canto de cima também fica vivo, para
+     encaixar. Sem tarja, flutua a 1,8rem do topo, como no blog.
+   - A altura. A barra segue com os 6rem de sempre: o herói não se move.
+   - Os botões são o .z7-btnx da casa (o markup é o mesmo do menu mobile);
+     aqui, só na barra, as camadas de neon saem e ficam as pastilhas do blog.
+
+   O menu mobile (abaixo de 1080) não muda. */
+nav .logo .logo__icone {
+  display: none;
+}
+
+@media (min-width: 1080px) {
+  /* Largura: a MESMA caixa de conteúdo do .wrapper das seções,
+     min(--container-max, 100%) menos os 2,4rem de cada lado, centrada. Assim
+     o logo alinha com a borda esquerda dos cards e a Área do Trader com a
+     direita, em todas as larguras. Centrada por left/right/margin, não por
+     transform: o AOS anima o transform da nav. Substitui os 100px e 170px
+     fixos de antes, que não batiam com o conteúdo em nenhuma largura. */
+  nav#navigation {
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: calc(min(var(--container-max), 100%) - 4.8rem);
+    top: 1.8rem;
+    height: 6rem;
+    border: .1rem solid rgb(255 255 255 / .10);
+    border-radius: var(--raio-md) 0 var(--raio-md) 0;
+    background-color: rgb(10 10 10 / .32);
+    -webkit-backdrop-filter: blur(1.8rem) saturate(1.3);
+    backdrop-filter: blur(1.8rem) saturate(1.3);
+    box-shadow:
+      .25rem .3rem .8rem rgb(0 0 0 / .18),
+      -.2rem -.25rem .7rem rgb(255 255 255 / .012),
+      inset 0 .1rem 0 rgb(255 255 255 / .03);
+  }
+
+  /* com a tarja: encosta embaixo dela, topo reto dos dois lados */
+  nav#navigation.activeCountdown {
+    border-radius: 0 0 var(--raio-md) 0;
+    border-top-color: transparent;
+  }
+
+  /* rolada: o vidro fica mais denso, para não acinzentar sobre seção clara */
+  nav#navigation.scroll {
+    background-color: rgb(4 6 11 / .86);
+    border-width: .1rem;
+    border-color: rgb(255 255 255 / .10);
+  }
+  nav#navigation.scroll.activeCountdown {
+    border-top-color: transparent;
+  }
+
+  nav#navigation .wrapper,
+  nav#navigation.scroll .wrapper {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    padding: 0 1rem;
+    gap: 1.6rem;
+  }
+
+  /* --- logo: pastilha com o ícone G7 (só onde o markup tem o ícone) --- */
+  nav#navigation a.logo:has(.logo__icone) {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    min-height: 0;
+    border: .1rem solid rgb(255 255 255 / .06);
+    border-radius: var(--raio-sm) 0 var(--raio-sm) 0;
+    background-color: rgb(255 255 255 / .04);
+    box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+    transition:
+      background-color var(--dur-rapida) var(--curva-saida),
+      border-color var(--dur-rapida) var(--curva-saida);
+  }
+  nav#navigation a.logo:has(.logo__icone):hover {
+    background-color: rgb(255 255 255 / .08);
+    border-color: rgb(255 255 255 / .12);
+  }
+  nav#navigation a.logo:has(.logo__icone) img:not(.logo__icone) {
+    display: none;
+  }
+  nav#navigation a.logo .logo__icone {
+    display: block;
+    width: 2.2rem;
+    height: auto;
+  }
+
+  /* --- itens: pastilhas de vidro --- */
+  nav#navigation .menu ul:nth-child(1) {
+    gap: .4rem;
+  }
+
+  nav#navigation .menu ul li a {
+    height: 4rem;
+    padding: 0 1.6rem;
+    border: .1rem solid rgb(255 255 255 / .06);
+    border-radius: var(--raio-pilula);
+    color: rgb(255 255 255 / .80);
+    font-family: var(--tts);
+    font-size: var(--fs-500);
+    font-weight: var(--peso-semi);
+    letter-spacing: normal;
+    background-color: rgb(255 255 255 / .04);
+    box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+    transition:
+      color var(--dur-rapida) var(--curva-saida),
+      background-color var(--dur-rapida) var(--curva-saida),
+      border-color var(--dur-rapida) var(--curva-saida);
+  }
+
+  nav#navigation .menu ul li a:hover,
+  nav#navigation .menu ul li a:focus-visible {
+    color: var(--cor-titulo);
+    background-color: rgb(255 255 255 / .08);
+    border-color: rgb(255 255 255 / .12);
+    box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+  }
+
+  /* página atual: véu de acento, como o "Blog" no menu do blog */
+  nav#navigation .menu ul li a[aria-current="page"],
+  nav#navigation .menu ul li a[aria-current="page"]:hover {
+    color: var(--marca-clara);
+    background-color: rgb(29 164 243 / .12);
+    border-color: rgb(29 164 243 / .12);
+  }
+
+  /* --- divisor entre os itens e as ações --- */
+  nav#navigation .menu .buttons {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    margin-left: .7rem;
+  }
+  nav#navigation .menu .buttons::before {
+    content: "";
+    flex: none;
+    width: .1rem;
+    height: 3.4rem;
+    margin-right: .4rem;
+    background-color: rgb(255 255 255 / .10);
+  }
+
+
+}
+
+/* --- ações: o .z7-btnx vira pastilha ------------------------------------
+   Fora do @media de propósito: a mesma receita serve a barra do desktop e a
+   gaveta do celular (fase 22). O que muda entre as duas é só o tamanho, e
+   isso cada bloco ajusta. Junto vem o degradê parado da Área do Trader, que
+   é o que segura o contraste do rótulo nos dois lugares. */
+nav#navigation .menu .buttons .z7-btnx {
+  height: 4rem;
+  padding: 0 1.6rem;
+  gap: .8rem;
+  border: .1rem solid transparent;
+  border-radius: var(--raio-sm) 0 var(--raio-sm) 0;
+  font-family: var(--tts);
+  font-size: var(--fs-500);
+  font-weight: var(--peso-semi);
+  letter-spacing: normal;
+  text-transform: none;
+  box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+  filter: none;
+  animation: none;
+  will-change: auto;
+  transition:
+    color var(--dur-rapida) var(--curva-saida),
+    background-color var(--dur-rapida) var(--curva-saida),
+    border-color var(--dur-rapida) var(--curva-saida);
+}
+nav#navigation .menu .buttons .z7-btnx::before,
+nav#navigation .menu .buttons .z7-btnx::after,
+nav#navigation .menu .buttons .z7-btnx__bg,
+nav#navigation .menu .buttons .z7-btnx__shine {
+  display: none;
+}
+nav#navigation .menu .buttons .z7-btnx__label {
+  font-family: inherit;
+  text-shadow: none;
+}
+nav#navigation .menu .buttons .z7-btnx__cap {
+  position: static;
+  width: auto;
+  height: auto;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+}
+nav#navigation .menu .buttons .z7-btnx__cap ion-icon {
+  font-size: 1.8rem;
+  color: inherit;
+  transform: none;
+}
+
+/* Comunidade: vidro neutro, ícone do WhatsApp à esquerda do rótulo */
+nav#navigation .menu .buttons #navButtonComunidade {
+  color: rgb(255 255 255 / .80);
+  background-color: rgb(255 255 255 / .04);
+  border-color: rgb(255 255 255 / .06);
+}
+nav#navigation .menu .buttons #navButtonComunidade .z7-btnx__cap {
+  order: -1;
+}
+nav#navigation .menu .buttons #navButtonComunidade:hover {
+  color: var(--cor-titulo);
+  background-color: rgb(255 255 255 / .08);
+  border-color: rgb(255 255 255 / .12);
+  box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+}
+
+/* Área do Trader: a ação principal, com o MESMO gradiente dos botões da
+   casa. Em vez de copiar a receita, a camada .z7-btnx__bg volta a aparecer
+   só aqui. O halo, o anel e a faixa de luz continuam fora — na barra seriam
+   demais.
+
+   O degradê fica PARADO na ponta escura, como no menu do blog. Deslizando
+   (z7x-gradient), a ponta clara (--marca-clara, #1da4f3) passa sob o
+   rótulo, e branco sobre ela dá ~3:1, abaixo do mínimo de 4,5:1. Pelo mesmo
+   motivo sai o brilho radial que segue o mouse: ele clareia justamente o
+   ponto onde o texto está. Parado e sem o brilho, o ponto mais claro sob o
+   rótulo é o #0b5fbe. A sombra do rótulo fica, de reforço. */
+nav#navigation .menu .buttons #navButton {
+  color: var(--cor-titulo);
+  background-color: transparent;
+}
+nav#navigation .menu .buttons #navButton .z7-btnx__bg {
+  display: block;
+  background: var(--btn-grad);
+  background-size: 130% 100%;
+  background-position: 0% 50%;
+  filter: none;
+  animation: none;
+}
+
+/* A pintura dos CTAs mudou para o __bg::before (lote A, item 3) — aqui ela
+   NÃO entra: o pseudo deslizante passaria a ponta clara sob o rótulo e
+   derrubaria o contraste que esta regra existe para garantir (4,5:1, fase
+   21). E o anel injetado (.z7x-anel) fica fora da barra pelo mesmo motivo
+   de sempre: halo, anel e faixa de luz "na barra seriam demais". */
+nav#navigation .menu .buttons .z7-btnx__bg::before {
+  content: none;
+}
+
+nav#navigation .menu .buttons .z7x-anel {
+  display: none;
+}
+nav#navigation .menu .buttons #navButton .z7-btnx__label {
+  text-shadow: 0 .6rem 1.6rem rgb(0 0 0 / .35);
+}
+nav#navigation .menu .buttons #navButton .z7-btnx__cap {
+  display: none;
+}
+nav#navigation .menu .buttons #navButton:hover {
+  filter: saturate(1.22) contrast(1.08);
+  box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+}
+
+@media (min-width: 1080px) and (prefers-reduced-motion: reduce) {
+  nav#navigation a.logo:has(.logo__icone),
+  nav#navigation .menu ul li a,
+  nav#navigation .menu .buttons .z7-btnx {
+    transition: none;
+  }
+}
+
+
+/* ── Menu do celular no desenho do blog (fase 22) ─────────────────────────
+   A barra é a cápsula flutuante do blog, com o logo em pastilha e o
+   hambúrguer em pastilha. Abrir NÃO traz painel nenhum por cima: o balão
+   cresce para baixo e a lista aparece dentro dele, centralizada. Mesma
+   largura, mesmo fundo, mesmos cantos.
+
+   A pilha do topo inteira flutua, toda na mesma largura: o balão da tarja
+   (timer + arte, em tarjaImage.css), um vão de 0,8rem, e a barra. Por isso a
+   arte da tarja no celular é a de altura reduzida — a de antes, com 48px,
+   fazia um balão alto demais para o conjunto.
+
+   Como a barra desce com a tarja: o JS do contador mede a altura do balão e
+   entrega em --tarja-offset (regra 5: o script não é tocado). Aqui só se
+   soma a esse número o recuo do topo e o vão, num único --topo-barra — assim
+   nada precisa saber se a campanha está no ar.
+
+   O teclado e o Esc continuam no global.js, sem mudança. */
+@media (max-width: 1079.98px) {
+  /* --- a barra --- */
+  nav#navigation {
+    --recuo-topo: 1.2rem;
+    --vao: .8rem;
+    /* distância entre o topo da tela e o topo da barra */
+    --topo-barra: var(--recuo-topo);
+
+    top: var(--topo-barra);
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: calc(min(var(--container-max), 100%) - 4.8rem);
+    border: .1rem solid rgb(255 255 255 / .10);
+    border-radius: var(--raio-md) 0 var(--raio-md) 0;
+    background-color: rgb(10 10 10 / .32);
+    -webkit-backdrop-filter: blur(1.8rem) saturate(1.3);
+    backdrop-filter: blur(1.8rem) saturate(1.3);
+    box-shadow:
+      .25rem .3rem .8rem rgb(0 0 0 / .18),
+      inset 0 .1rem 0 rgb(255 255 255 / .03);
+  }
+
+  /* com a campanha no ar, a barra desce o balão inteiro mais o vão. O `top`
+     vem repetido aqui de propósito: em tarjaImage.css a regra
+     #navigation.activeCountdown já define top, e sem esta o cálculo perderia
+     para ela. */
+  nav#navigation.activeCountdown {
+    --topo-barra: calc(var(--tarja-offset, 0px) + var(--recuo-topo) + var(--vao));
+    top: var(--topo-barra);
+  }
+
+  nav#navigation .wrapper {
+    /* a quebra vale SEMPRE: a lista é um item de largura 100% e precisa
+       ficar na linha de baixo já fechada, senão espreme o logo e a pastilha
+       do hambúrguer na linha de cima */
+    flex-wrap: wrap;
+    /* centraliza a linha de cima na altura da barra; aberta, a altura é a do
+       conteúdo e isto deixa de ter efeito */
+    /* start, não center: aberta, a altura do wrapper é a do conteúdo e não
+       sobra espaço para centralizar — a linha de cima subiria e as pastilhas
+       encostariam na borda do balão. O lugar dela vem do recuo abaixo, que
+       vale nos dois estados. */
+    align-content: start;
+    padding-top: calc((var(--nav-height) - .2rem - var(--alvo-toque)) / 2);
+    padding-inline: 1rem;
+    /* só entre o logo e a pastilha: um gap de linha somaria 1,6rem à altura
+       das duas linhas e empurraria a de cima para fora da barra */
+    column-gap: 1.6rem;
+    row-gap: 0;
+  }
+
+  /* --- logo: a pastilha do ícone G7, como no blog, no tamanho do alvo de
+         toque. Só onde o markup tem o ícone — os satélites seguem com o logo
+         por extenso. --- */
+  nav#navigation a.logo:has(.logo__icone) {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: var(--alvo-toque);
+    height: var(--alvo-toque);
+    min-height: 0;
+    border: .1rem solid rgb(255 255 255 / .06);
+    border-radius: var(--raio-sm) 0 var(--raio-sm) 0;
+    background-color: rgb(255 255 255 / .04);
+    box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+    transition:
+      background-color var(--dur-rapida) var(--curva-saida),
+      border-color var(--dur-rapida) var(--curva-saida);
+  }
+  nav#navigation a.logo:has(.logo__icone):hover,
+  nav#navigation a.logo:has(.logo__icone):active {
+    background-color: rgb(255 255 255 / .08);
+    border-color: rgb(255 255 255 / .12);
+  }
+  nav#navigation a.logo:has(.logo__icone) img:not(.logo__icone) {
+    display: none;
+  }
+  nav#navigation a.logo .logo__icone {
+    display: block;
+    width: 2.8rem;
+    height: auto;
+  }
+
+  /* --- hambúrguer: pastilha na ponta de baixo à direita, concêntrica com o
+         canto da barra. 44px, que é o alvo de toque da casa --- */
+  nav#navigation .open-menu,
+  nav#navigation .close-menu {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: var(--alvo-toque);
+    height: var(--alvo-toque);
+    padding: 0;
+    border: .1rem solid rgb(255 255 255 / .06);
+    border-radius: var(--raio-sm) 0 var(--raio-sm) 0;
+    background-color: rgb(255 255 255 / .04);
+    box-shadow: .25rem .3rem .8rem rgb(0 0 0 / .18);
+    transition:
+      background-color var(--dur-rapida) var(--curva-saida),
+      border-color var(--dur-rapida) var(--curva-saida);
+  }
+  nav#navigation .open-menu:hover,
+  nav#navigation .open-menu:active,
+  nav#navigation .close-menu:hover,
+  nav#navigation .close-menu:active {
+    background-color: rgb(255 255 255 / .08);
+    border-color: rgb(255 255 255 / .12);
+  }
+  nav#navigation .open-menu svg,
+  nav#navigation .close-menu svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  /* --- aberto: o balão cresce para baixo ------------------------------
+     Não é um painel que entra por cima: é a própria barra que fica mais
+     alta. Mesma largura, mesmo fundo, mesmos cantos; o logo fica onde
+     estava e o X ocupa exatamente a casa do hambúrguer — as duas pastilhas
+     têm o mesmo tamanho, então basta uma sumir e a outra aparecer no lugar.
+
+     A altura anima pelo truque do grid (0fr → 1fr), que é o único jeito de
+     transicionar de "fechado" até "a altura que o conteúdo pedir" sem
+     chutar um max-height. Quem não tem suporte vê o menu abrir direto, que
+     é o comportamento de sempre.
+
+     Se o conteúdo passar da tela (telas curtas, com a tarja no ar), o balão
+     rola por dentro em vez de vazar. */
+  body.menu-expanded nav#navigation {
+    height: auto;
+    max-height: calc(100dvh - var(--topo-barra) - var(--recuo-topo));
+    overflow-y: auto;
+  }
+
+  body.menu-expanded nav#navigation .wrapper {
+    height: auto;
+    min-height: var(--nav-height);
+    padding-bottom: 1.2rem;
+  }
+
+  /* a lista desce para a linha de baixo, na largura inteira do balão */
+  nav#navigation .menu {
+    position: static;
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    display: grid;
+    /* a coluna precisa ser declarada: a implícita fica do tamanho do
+       conteúdo e a lista não ocuparia a largura do balão */
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--dur-media) var(--curva-saida);
+  }
+
+  body.menu-expanded nav#navigation .menu {
+    grid-template-rows: 1fr;
+    top: auto;
+    right: auto;
+    max-width: none;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    transform: none;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  /* o filho do grid é quem esconde o conteúdo enquanto a linha tem 0fr */
+  nav#navigation .menu ul:nth-child(1) {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* o X entra na casa do hambúrguer: um sai do fluxo, o outro entra */
+  nav#navigation .close-menu {
+    display: none;
+    position: static;
+  }
+  body.menu-expanded nav#navigation .close-menu {
+    display: grid;
+  }
+  body.menu-expanded nav#navigation .open-menu {
+    display: none;
+  }
+
+  /* --- a lista --- */
+  body.menu-expanded .menu ul:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: .4rem;
+    padding: 1.2rem 0 0;
+    font-size: inherit;
+  }
+
+  body.menu-expanded .menu ul li {
+    display: block;
+  }
+
+  /* itens centralizados, a linha inteira como alvo de toque */
+  body.menu-expanded .menu ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--alvo-toque);
+    padding: 0 1.6rem;
+    border-radius: var(--raio-sm);
+    color: var(--cor-corpo);
+    font-family: var(--tts);
+    font-size: var(--fs-850);
+    font-weight: var(--peso-semi);
+    text-align: center;
+    background-color: transparent;
+    transition:
+      color var(--dur-rapida) var(--curva-saida),
+      background-color var(--dur-rapida) var(--curva-saida);
+  }
+  body.menu-expanded .menu ul li a:hover,
+  body.menu-expanded .menu ul li a:focus-visible,
+  body.menu-expanded .menu ul li a:active {
+    color: var(--cor-titulo);
+    background-color: rgb(255 255 255 / .06);
+    /* o deslocamento de 0,6rem do menu antigo sai: agora acende a pastilha
+       inteira, que é o que o dedo cobre */
+    transform: none;
+  }
+  body.menu-expanded .menu ul li a[aria-current="page"],
+  body.menu-expanded .menu ul li a[aria-current="page"]:hover {
+    color: var(--marca-clara);
+    background-color: rgb(29 164 243 / .12);
+  }
+
+  /* ações: no pé da lista, separadas por um fio, cada uma na linha inteira */
+  body.menu-expanded .menu .buttons {
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: .1rem solid rgb(255 255 255 / .10);
+    gap: .8rem;
+  }
+  body.menu-expanded .menu .buttons .z7-btnx {
+    min-height: var(--alvo-toque);
+    height: auto;
+    /* ocupando a linha inteira, o rótulo vai para o meio, como os itens */
+    justify-content: center;
+    font-size: var(--fs-650);
+  }
+}
+
+@media (max-width: 1079.98px) and (prefers-reduced-motion: reduce) {
+  nav#navigation .open-menu,
+  nav#navigation .close-menu,
+  body.menu-expanded .menu ul li a {
+    transition: none;
+  }
+}

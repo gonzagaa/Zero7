@@ -41,13 +41,13 @@
 }
 
 #obrigado h1 {
-    color: #ffffff;
-    font-size: 4.5rem;
+    color: var(--cor-titulo);
+    font-size: var(--corpo-legado-1550);
   
     margin-top: 1rem;
     font-family: var(--ncs);
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: var(--peso-medio);
     line-height: 1;
 
     background: linear-gradient(45deg, #1da4f3, #056ba6);
@@ -62,30 +62,30 @@
 }
 
 #obrigado header p {
-    font-size: 1.7rem;
-    font-weight: 600;
-    color: #ffffff;
+    font-size: var(--corpo-legado-700);
+    font-weight: var(--peso-semi);
+    color: var(--cor-titulo);
     line-height: 1.4;
 
     margin-bottom: 1rem;
 }
 
 #obrigado.natal header p {
-    color: #000;
+    color: var(--cor-titulo-inverso);
 }
 
 #obrigado .text p {
-    font-size: 1.4rem;
-    color: #d0d0d0;
+    font-size: var(--fs-500);
+    color: var(--cor-secundario);
     margin-top: .5rem;
 }
 
 #obrigado.natal .text p {
-    color: #000;
+    color: var(--cor-titulo-inverso);
 }
 
 #obrigado .text p span {
-    font-weight: 600;
+    font-weight: var(--peso-semi);
 }
 
 #obrigado .content .cards {
@@ -93,7 +93,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--esp-2);
 
     margin-block: 4rem;
 }
@@ -101,7 +101,7 @@
 #obrigado .card {
     background: linear-gradient(to right, #001120, #01050b);
     position: relative;
-    border-radius: 1rem;
+    border-radius: var(--raio-sm);
 
     height: 100%;
 }
@@ -115,11 +115,11 @@
 }
 
 #obrigado .card.destaque .text h3 {
-    color: #fff;
+    color: var(--cor-titulo);
 }
 
 #obrigado .card.destaque .text p {
-    color: #fff;
+    color: var(--cor-titulo);
 }
 
 #obrigado .card img {
@@ -140,31 +140,31 @@
 }
 
 #obrigado .card .text h3 {
-    color: #ffffff;
-    font-size: 1.5rem;
+    color: var(--cor-titulo);
+    font-size: var(--corpo-legado-550);
   
     font-family: var(--ncs);
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: var(--peso-medio);
 
     margin-bottom: .5rem;
 }
 
 #obrigado.natal .card h3 {
-    color: #000;
+    color: var(--cor-titulo-inverso);
 }
 
 #obrigado .card .text p {
-    font-size: 1.2rem;
+    font-size: var(--fs-300);
 }
 
 #obrigado.natal .card p {
-    color: #000;
+    color: var(--cor-titulo-inverso);
 }
 
 #obrigado .card .text button {
     margin-top: 2rem;
-    font-size: 1.4rem;
+    font-size: var(--fs-500);
     padding-block: 1.4rem;
     padding-inline: 2rem;
 }
@@ -179,11 +179,11 @@
 }
 
 #obrigado header h2 {
-    font-size: 2rem;
+    font-size: var(--fs-850);
 }
 
 #obrigado.natal header h2 {
-    color: #000;
+    color: var(--cor-titulo-inverso);
 }
 
 #obrigado header button {
@@ -221,7 +221,7 @@
     overflow: hidden;
     position: relative;
   background: #fff;
-  border-radius: 10px;
+  border-radius: var(--raio-sm);
   max-width: 800px;
   width: 90%;
   transform: translateY(-50px);
@@ -249,14 +249,14 @@
   position: absolute;
   top: 10px;
   right: 15px;
-  font-size: 24px;
+  font-size: var(--fs-1300);
   font-weight: bold;
-  color: #333;
+  color: var(--cor-corpo-inverso);
   cursor: pointer;
   transition: color 0.2s;
 }
 .close:hover {
-  color: #000;
+  color: var(--cor-titulo-inverso);
 }
 
 @media (min-width: 1080px) {
@@ -265,20 +265,20 @@
     }
 
     section#obrigado .content h1 {
-      font-size: 7rem;
+      font-size: var(--corpo-legado-2000);
       line-height: 1;
-      color: #f8fffd;
+      color: var(--cor-titulo);
       margin-bottom: 0;
     }
 
     section#obrigado .content h1 span {
-      font-size: 5rem;
+      font-size: var(--corpo-legado-1700);
       min-width: 27rem;
     }
 
     section#obrigado .content header p {
-      font-weight: 500;
-      font-size: 2.5rem;
+      font-weight: var(--peso-medio);
+      font-size: var(--corpo-legado-1000);
     }
 
     section#obrigado .content .cards {

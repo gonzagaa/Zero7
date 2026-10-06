@@ -13,19 +13,19 @@
 }
 
 .tarjaTimer p {
-    font-size: 1.3rem;
+    font-size: var(--fs-400);
     padding-block: 1rem;
 }
 
 .tarjaTimer p span {
-    font-weight: 600;
+    font-weight: var(--peso-semi);
 }
 
 .tarjaTimer .countdown {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      font-size: 25px;
+      gap: var(--esp-5);
+      font-size: var(--fs-1300);
 }
 
 .tarjaTimer .countdown div {
@@ -35,7 +35,7 @@
 }
 
 .tarjaTimer .label {
-      font-size: 12px;
+      font-size: var(--corpo-legado-550);
       margin-top: -7px;
 }
 

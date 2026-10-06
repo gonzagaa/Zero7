@@ -1,0 +1,69 @@
+/* ==========================================================================
+   ACESSIBILIDADE DE INTERAÇÃO — foco de teclado e movimento reduzido
+   Vale para a página inteira. Os alvos de toque moram em cada componente
+   (procure "alvo de toque"); os tokens, em tokens.css (INTERAÇÃO).
+   ========================================================================== */
+
+/* ── Foco ───────────────────────────────────────────────────────────────────
+   Um anel só para tudo que recebe foco. :focus-visible e não :focus: o
+   clique de mouse não acende o anel, o Tab sempre acende. O outline segue o
+   border-radius, então acompanha o canto assimétrico de botões e cards.
+
+   A cor sai do contexto: azul-claro sobre fundo escuro, azul-escuro onde o
+   fundo é claro — lá o azul-claro cai para 2,7:1, abaixo dos 3:1 que um
+   indicador de foco precisa. */
+:focus-visible {
+  outline: var(--foco-largura) solid var(--foco-cor);
+  outline-offset: var(--foco-recuo);
+}
+
+.planos.white {
+  --foco-cor: var(--foco-cor-inverso);
+}
+
+/* Selo do Reclame Aqui: o script deles injeta o link com outline: none, e o
+   contêiner corta o que passa da borda. O anel entra por dentro, escuro
+   sobre o branco do selo. Só o foco muda — o script e o selo ficam como
+   estão. */
+#ra-verified-seal a:focus-visible {
+  outline: var(--foco-largura) solid var(--foco-cor-inverso) !important;
+  outline-offset: calc(var(--foco-largura) * -2) !important;
+}
+
+/* O Tab rola só o necessário e deixa o elemento colado na borda de baixo —
+   dentro dos 120px em que o AOS ainda não revelou o bloco (offset padrão).
+   Na volta de teclado da fase 5, o CTA da central de ajuda recebeu foco com
+   opacity 0. Com o respiro, a rolagem do foco para acima dessa faixa — e
+   acima do botão do Zendesk, que cobre o canto de baixo. Âncoras alinham
+   pelo topo, então os links internos não mudam. */
+html {
+  scroll-padding-bottom: 120px;
+}
+
+/* ── Movimento reduzido ─────────────────────────────────────────────────────
+   Rede de segurança do CSS inteiro: com prefers-reduced-motion toda animação
+   e transição termina num instante. 0,01ms e não 0 para que transitionend e
+   animationend continuem disparando — o Swiper e os painéis da central de
+   ajuda esperam por eles.
+
+   Os blocos locais que já existiam (nav, planos, #ba, #divisa, tarja) ficam:
+   eles desligam a animação de vez, o que é mais limpo que encurtá-la. Este
+   bloco pega o que eles não pegavam — as entradas do AOS, as transições de
+   hover, o scroll suave do html.
+
+   O que é movido por JS tem guarda no próprio script: AOS e carrosséis
+   (global.js), GSAP e vídeos do #ba (sectionBa.js), rolagens da central de
+   ajuda (sectionFaq.js), Lenis, contadores e hover magnético (index.html).
+   A palavra do herói já trocava sem animar (global.js). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

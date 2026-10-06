@@ -46,21 +46,25 @@
     margin-bottom: 1.5rem;
   }
 
+  /* O h1 saltava de 2.5rem para 5rem em 1080 — 20px virava 40px de uma vez.
+     O clamp cobre a subida inteira: trava em 20px até ~770, sobe junto com a
+     tela e para em 40px, que é o tamanho aprovado do desktop. A palavra
+     rotativa (span) acompanha, senão o herói desalinha no meio da frase. */
   #home h1 {
-    color: #ffffff;
-    font-size: 2.5rem;
-  
+    color: var(--cor-titulo);
+    font-size: clamp(20px, 3.9vw - 10px, 40px);
+
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-family: var(--ncs);
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: var(--peso-medio);
     line-height: 1.2;
 
   }
-  
+
   #home h1 span {
-    font-size: 2.5rem;
+    font-size: clamp(20px, 3.9vw - 10px, 40px);
     font-family: var(--ncs);
     color: var(--primary-color);
 
@@ -92,16 +96,22 @@
   left:0; top:0;
 }
   
+  /* Medida de linha: a do herói (65ch, ~81 caracteres), mais larga que a
+     do texto corrido — o bloco compacto ali é intencional. Sem medida o
+     parágrafo chegava a 188 caracteres por linha em 1024 e a 103 no
+     desktop. text-wrap: pretty evita a palavra sozinha no fim. */
   #home p {
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: #c1c1c1;
+    font-size: var(--fs-400);
+    font-weight: var(--peso-normal);
+    color: var(--cor-secundario);
     line-height: 1.4;
+    max-width: var(--medida-heroi);
+    text-wrap: pretty;
   }
 
   #home p span {
-    font-weight: 600;
-    color: #e7e7e7;
+    font-weight: var(--peso-semi);
+    color: var(--cor-corpo);
   }
   
   #home a {
@@ -115,9 +125,20 @@
   
   #home .image img {
     width: 100%;
+
+  
+    height: auto;
   }
   
-  #home .image img.mobile {
+  /* O herói virou um <picture> com uma <img> só (lote A, item 6): a arte
+     troca pela <source>, e o CSS deixou de ligar/desligar por classe. O
+     <picture> fica fora do layout (display: contents); quem se posiciona é
+     a <img>. */
+  #home .image picture {
+    display: contents;
+  }
+
+  #home .image picture img {
     position: absolute;
     top: 6%;
     left: 50%;
@@ -140,10 +161,6 @@
     filter: brightness(.5);
   }
   
-  #home .image img.desktop {
-    display: none;
-  }
-
   .custom-shape-divider-bottom-1736960517 {
     display: inherit;
     position: absolute;
@@ -168,21 +185,32 @@
 
   /* Ajuste que vinha do heroPromotion.css (removido junto com os pills
      "Avance na Avaliação / Receba prêmios / 100% dos lucros"). Sem ele o
-     mobile volta ao margin-top: 70% da regra base de #home .text. */
-  @media (max-width: 480px) {
+     mobile volta ao margin-top: 70% da regra base de #home .text.
+     Limite migrado de 480 para sm-1: o herói empilhado vale até 640. */
+  @media (max-width: 639.98px) {
     #home.boxpromotion .text {
       margin-top: 60%;
     }
   }
 
 
+  /* C4: os 6rem saíram da MARGEM do header para o PADDING do body.home.
+     A causa, filmada no plano-90: o Chrome pinta um frame no meio do
+     streaming do HTML antes de o header existir; quando ele entra, a
+     margem COLAPSA através do body e tudo desce 60px (CLS 0,04 em 1474).
+     Padding no body não colapsa e existe desde o primeiro frame — e
+     body.home (classe nova, só na home) porque o home.css também é
+     importado pelas satélites, que têm o mesmo id="body" e outro layout.
+     Padding no PRÓPRIO header moveria a arte absoluta do herói. */
   @media (min-width: 1080px) {
+    body.home {
+      padding-top: 6rem;
+    }
+
     header#home {
       justify-content: center;
       position: relative;
       mask-image: linear-gradient(to top, #000 90%, transparent);
-
-      margin-top: 6rem;
 
       padding-block: 10%;
     }
@@ -191,7 +219,7 @@
       width: 700px;
       height: 170%;
       background: radial-gradient(#EAFFFA, #BEFFF0 , #03CE95, transparent 50%);
-      border-radius: 50%;
+      border-radius: var(--raio-circulo);
       position: absolute;
       z-index: 1;
       top: 50%;
@@ -221,16 +249,21 @@
       display: none;
     }
   
-    header#home .image img.mobile {
-      display: none;
-    }
-  
-    header#home .image img.desktop {
-      display: inherit;
+    /* A MESMA <img> agora mostra a arte de desktop; os três "novos" anulam
+       o que a regra base do celular deixaria vazar (left 50% + translate +
+       max-width 100vw — sem eles a arte descentrava). */
+    header#home .image picture img {
+      /* "inherit" herdava block do div.image; agora o pai é o <picture>
+      com display:contents, e inherit fazia a img sumir (0x0 medido).
+      block é o valor que a img sempre computou aqui. */
+      display: block;
       width: 100%;
       position: absolute;
       top: 0;
       right:0;
+      left: auto;
+      transform: none;
+      max-width: none;
       filter: saturate(130%);
       mask-image: linear-gradient(to bottom, #000 60%, transparent);
     }
@@ -262,23 +295,26 @@
       width: 15rem;
     }
   
+    /* font-size saiu daqui: quem manda agora é o clamp da regra base. */
     header#home .content h1 {
-      font-size: 5rem;
       width: 85%;
       line-height: 1;
-      color: #f8fffd;
+      color: var(--cor-titulo);
       margin-bottom: 0;
     }
 
     header#home .reveal-wrapper {
-      margin-bottom: -1.1rem;
+      margin-bottom: -8.8px;
     }
 
     header#home .content h1 span {
-      font-size: 5rem;
-
-      min-width: 27rem;
-      text-align: left;
+      min-width: 216px;
+      /* center, não left (container fluido, out/2026): o wrapper trava a
+         largura na palavra mais longa ("acessível") e, com o container
+         fluido, a quebra de linha que escondia a sobra sumiu — "SEGURO"
+         à esquerda deixava um vão feio antes do "PARA" a 1366-1600.
+         Centrada, a sobra divide igual dos dois lados. */
+      text-align: center;
 
     }
 
@@ -286,39 +322,125 @@
       width: initial;
     }
 
+    /* a largura sai do max-width de 65ch da regra base, não mais de 65% da
+       tela — que em 1920 dava 914px */
     header#home .content p {
-      font-weight: 500;
+      font-weight: var(--peso-medio);
       margin-top: 1rem;
-      font-size: 1.6rem;
-      width: 65%;
+      font-size: var(--fs-650);
     }
   
     header#home .content a button {
-      font-size: 2rem;
+      font-size: var(--fs-850);
       margin-top: 0rem;
     }
   }
   
-  @media (min-width: 1700px) {
+  /* xl — migrado de 1700 para 1600, junto com a virada da raiz para 65%.
+     O tamanho do h1 vira um segundo clamp em vez de um degrau de 6rem:
+     acima de 1600 o rem vale 10,4px, então 5rem já são 52px e o teto de
+     6rem entrega os 62,4px que o desktop grande tinha antes. */
+  @media (min-width: 1600px) {
     header#home {
       padding-block: 5%;
     }
 
-    header#home .image img.desktop {
-      display: inherit;
+    header#home .image picture img {
+      /* "inherit" herdava block do div.image; agora o pai é o <picture>
+      com display:contents, e inherit fazia a img sumir (0x0 medido).
+      block é o valor que a img sempre computou aqui. */
+      display: block;
       width: 100%;
       position: absolute;
       top: 0;
       right:0;
+      left: auto;
+      transform: none;
+      max-width: none;
+    }
+
+    header#home .content h1,
+    header#home .content h1 span {
+      font-size: clamp(52px, 1.6vw + 31.2px, 62.4px);
+    }
+
+    /* Os dois acompanhantes do h1 foram congelados no bloco de 1080 com o
+       que rendiam na raiz de 8px (216px e -8.8px). Aqui a raiz é 10,4px e
+       eles rendiam 280,8px e -11,44px: o xl recupera os valores dele, senão
+       a fatia da palavra rotativa encolheria e o herói subiria 3px
+       (fase 11). */
+    header#home .content h1 span {
+      min-width: 280.8px;
+    }
+
+    header#home .reveal-wrapper {
+      margin-bottom: -11.44px;
     }
 
     header#home .content h1 {
-      font-size: 6rem;
       width: 85%;
     }
+  }
 
-    header#home .content h1 span {
-      font-size: 6rem;
+  /* ── Herói no celular e no tablet (fase 8) ─────────────────────────── */
+  @media (max-width: 1079.98px) {
+    /* H1 em três linhas no celular (fase 8, pedido do cliente): "O
+       ECOSSISTEMA / ACESSÍVEL PARA / OPERAR DAY TRADE.". Com estas palavras
+       é a única divisão em três linhas num tamanho legível, e quem manda é a
+       linha mais longa: "OPERAR DAY TRADE." mede 13,08em na NCS. O tamanho
+       é o maior em que ela cabe na coluna, com ~3% de folga — 22px em 320,
+       26,1 em 375, 27,2 em 390, 30,1 em 430 — até o teto de 32px, que
+       encosta na curva do desktop em 1080. No tablet o balance fecha em
+       duas: "O ECOSSISTEMA ACESSÍVEL / PARA OPERAR DAY TRADE.". Entrelinha
+       de 1,1: o título fecha num bloco. */
+    #home h1,
+    #home h1 span {
+      font-size: min(4rem, calc((100vw - 2 * var(--esp-3)) / 13.47));
+    }
+
+    #home h1 {
+      text-wrap: balance;
+      line-height: 1.1;
+    }
+
+    /* a descrição no corpo de 16px; em 10,4px era a menor letra do herói */
+    #home p {
+      font-size: var(--fs-850);
+    }
+  }
+
+  @media (max-width: 639.98px) {
+    /* Menos respiro lateral: com os 2.4rem do .wrapper o título quebrava
+       antes da hora. 12px de cada lado dão ~14px a mais de linha. */
+    #home .wrapper {
+      padding-inline: var(--esp-3);
+    }
+
+    /* O botão, porém, volta para a caixa do .wrapper da página (2,4rem). O
+       recuo menor acima existe para o TÍTULO ganhar linha; o botão não ganha
+       nada com isso, e como a tarja e a barra agora flutuam nessa caixa
+       (navigation.css, fase 22), um botão mais largo que elas parecia vazar
+       para os lados. Título e descrição seguem com o recuo do herói. */
+    #home .text .z7-btnx {
+      width: calc(100% - 2 * (2.4rem - var(--esp-3)));
+      margin-inline: auto;
+    }
+
+    /* O rosto ficava atrás da faixa da tarja com a nav. A imagem do herói
+       não é object-fit — é posicionada —, então o object-position não tem
+       efeito; o que desce o ponto focal é o deslocamento dela. Em 108px o
+       cabelo fica ~25px abaixo da nav de 375 a 430 (~11px em 320).
+       O texto sobe o quanto dá sem encostar no rosto: o H1 fica ~18px abaixo
+       do queixo, que desce junto com a largura (a imagem ocupa a tela toda).
+       Assim o botão aparece sem rolar na área visível do navegador do
+       Instagram, que é menor que a tela (medido em medidas/fase8-dobra.md).
+       Pedido do cliente, fase 8; só no celular. */
+    #home .image picture img {
+      top: 13.5rem;
+    }
+
+    #home.boxpromotion .text {
+      margin-top: calc(14.75rem + 30.5vw);
     }
   }
   

@@ -1,117 +1,353 @@
-:root{
-  --z7-deep:#023c83;
-  --z7-sky:#1da4f3;
+/* ==========================================================================
+   .btn — sistema de botões da Zero7
 
-  /* variante verde (usada em CTAs em promoção, ex: PLENO Recovery) */
-  --z7-green-dark:#046b3a;
-  --z7-green:#00c86f;
-  --z7-green-light:#3cff9b;
-  --z7-green-neon:#73ffb8;
-}
+   Uma família, três tamanhos, três ênfases, um conjunto de estados.
 
-/* anima vars */
-@property --mx   { syntax: "<percentage>"; inherits: false; initial-value: 50%; }
-@property --my   { syntax: "<percentage>"; inherits: false; initial-value: 50%; }
+     tamanho   .btn--sm · .btn--md · .btn--lg (padrão)
+     ênfase    .btn--primaria · .btn--secundaria · .btn--texto
+     forma     .btn--icone  quadrado, só ícone
+               .btn--bloco  largura cheia
+               .btn--centro rótulo centralizado
+     cor       .btn--wpp    paleta oficial do WhatsApp
+               .btn--promo  verde de campanha (dormente — ver abaixo)
+               .btn--acento a cor vem do contexto (cards de #topicos)
+     contexto  .btn--nav    md no menu mobile, sm na barra desktop
+
+   Onde cada combinação mora na home:
+     lg primária    herói, 3× #topicos, #depoimentos, 8× CONTRATAR PLANO
+     md primária    "Entrar agora" do suporte; nav dentro do menu mobile
+     sm primária    nav na barra desktop
+     md secundária  "Fale Conosco", "Acessar a Central", paginação e setas
+     md texto       hambúrguer
+
+   O CANTO ASSIMÉTRICO é propriedade da família: todo botão tem
+   `border-radius: var(--btn-raio) 0 var(--btn-raio) 0`, e --btn-raio sai da
+   escala de raio (md nos tamanhos md e lg, sm no sm). Não há conta. Antes era
+   calc(--h / 3) por instância; na fase 3 esse cálculo foi para o :root, onde
+   --h não existe, o token nasceu inválido e o canto de todos os botões caiu
+   para 0. Custom property resolve var() onde é DECLARADA — por isso nada aqui
+   depende de valor que só existe dentro do componente.
+
+   ANATOMIA da primária (spans filhos; todos aria-hidden, menos o rótulo):
+     .btn__bg     gradiente de fundo
+     .btn__shine  faixa de luz que passa
+     .btn__label  rótulo
+     .btn__cap    cápsula do ícone, à direita
+     .btn__arrow  seta dentro do cap (ou um <ion-icon>)
+   Secundária e texto não têm camadas: só o conteúdo.
+
+   CAIXA ALTA só na primária. As outras ênfases não aplicam text-transform,
+   porque o texto delas já aparece em caixa mista — forçar maiúsculas
+   mudaria a capitalização visível (regra 1).
+
+   APELIDO LEGADO: .z7-btnx e suas partes seguem estilizadas aqui, iguais a
+   .btn.btn--lg.btn--primaria, e .z7-btnx--nav igual a .btn--nav. Não é
+   descuido: pedido-registrado/* e cert/ carregam este mesmo CSS e só têm as
+   classes antigas. Na home, as classes antigas ficam no HTML ao lado das
+   novas porque o checkout (blackPlanos.js acha o CTA por .z7-btnx), o hover
+   magnético (script inline do index.html) e possíveis gatilhos de clique do
+   GTM dependem delas. Quando as outras páginas migrarem, os seletores
+   .z7-btnx* saem deste arquivo; do HTML, não.
+   ========================================================================== */
+
+/* --mx/--my saíram (B1): eram inherits:false e NUNCA chegaram a quem as
+   consumia — o radial "magnético" sempre pintou congelado em 50% 50%, que
+   agora é literal nos dois radiais. O --spin fica: o ::after estático do
+   anel (fallback sem JS) lê a inicial de 0deg. */
 @property --spin { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 
-.z7-btnx{
-  /* FORMATO (igual ao print) */
-  --h: 7rem;                 /* altura */
-  --in: 0.9rem;                /* “moldura” interna do cap */
-  --capw: 6.3rem;              /* largura do cap */
-  --r: calc(var(--h) / 3);     /* raio do botão (meia altura) */
-
-  --sh1x: 0rem;
-  --sh1y: 0rem;
-  --sh2x: 0rem;
-  --sh2y: 0rem;
-
+/* ── Estrutura, com especificidade zero ─────────────────────────────────────
+   position e display ficam em :where() para qualquer contexto vencer sem
+   briga: o Swiper posiciona as setas em absolute e as esconde com
+   .swiper-button-lock; o menu mobile fixa o .close-menu. */
+:where(.btn, .z7-btnx) {
   position: relative;
   display: inline-flex;
+}
+
+/* ── Família ────────────────────────────────────────────────────────────────
+   Tamanho e cor são só conjuntos de custom properties que os modificadores
+   trocam. O padrão é lg + azul — que é também o que o .z7-btnx sempre foi. */
+.btn,
+.z7-btnx {
+  /* tamanho: lg */
+  --btn-h: 7rem;
+  --btn-in: .9rem;              /* moldura entre a borda e o cap */
+  --btn-cap: 6.3rem;            /* largura do cap */
+  --btn-pad: 3.6rem;
+  --btn-folga: 1rem;            /* respiro entre rótulo e cap */
+  --btn-fs: var(--fs-650);
+  --btn-peso: var(--peso-semi);
+  --btn-ls: var(--ls-rotulo);
+  --btn-seta: var(--fs-900);
+  --btn-icone: var(--fs-900);
+  --btn-raio: var(--raio-md);
+  --btn-halo: 2.4rem;           /* quanto o brilho externo transborda */
+  --btn-halo-blur: 2.8rem;
+  --btn-sombra-1: 4.5rem;
+  --btn-sombra-2: 4.6rem;
+  --btn-sombra-hover: 7.5rem;
+  --btn-anel: .4rem;
+  --btn-sombra-rotulo: 0 1.4rem 3.6rem;
+
+  /* cor: azul da marca. Escuro e claro são trincas RGB para glow, anel e
+     cap poderem variar a opacidade sem uma receita por cor. */
+  --btn-grad: linear-gradient(90deg,
+    #012b60 0%,
+    var(--marca-escura) 44%,
+    #0b5fbe 72%,
+    var(--marca-clara) 100%);
+  --btn-escuro: 2 60 131;
+  --btn-claro: 29 164 243;
+
   align-items: center;
+  gap: var(--esp-2);
+  height: var(--btn-h);
+  margin: 0;
+  padding: 0 var(--btn-pad);
 
-  height: var(--h);
+  border: 0;
+  border-radius: var(--btn-raio) 0 var(--btn-raio) 0;
+  background: none;
 
-  /* padding MAIOR (mais “parrudo”) */
-  padding-left: 3.6rem;
-  padding-right: calc(var(--capw) + (var(--in) * 2) + 1.0rem);
-
-  /* TL arredondado, TR reto, BR arredondado, BL reto */
-  border-radius: var(--r) 0 var(--r) 0;
+  font-family: var(--fonte-corpo);
+  font-size: var(--btn-fs);
+  font-weight: var(--btn-peso);
+  letter-spacing: var(--btn-ls);
+  line-height: 1;
+  white-space: nowrap;
 
   text-decoration: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
 
-  font-family: var(--ncs);
-  font-weight: 600;
-  font-size: 1.6rem;
-  letter-spacing: 0.08rem;
+/* ── Tamanhos ───────────────────────────────────────────────────────────────
+   md unifica os dois tamanhos intermediários que existiam — 5.4rem no card
+   de suporte e 5.2rem no menu mobile —, que eram o mesmo botão escalado à
+   mão em dois lugares. */
+.btn--lg {
+  --btn-h: 7rem;
+}
+
+/* O md tinha 43,2px com a raiz de 8px — 0,8px abaixo do alvo de toque. O
+   piso em px leva a 44 só onde faltava; de 1600 em diante 5.4rem já passa. */
+.btn--md,
+.btn--nav,
+.z7-btnx--nav {
+  --btn-h: max(5.4rem, var(--alvo-toque));
+  --btn-in: .7rem;
+  --btn-cap: 4.8rem;
+  --btn-pad: 2.6rem;
+  --btn-folga: .8rem;
+  --btn-fs: var(--corpo-legado-450);
+  --btn-seta: var(--corpo-legado-750);
+  --btn-icone: var(--fs-850);
+  --btn-halo: 1.8rem;
+  --btn-halo-blur: 2rem;
+  --btn-sombra-1: 3.4rem;
+  --btn-sombra-2: 3.6rem;
+  --btn-sombra-hover: 5.8rem;
+  --btn-anel: .3rem;
+  --btn-sombra-rotulo: 0 1rem 2.6rem;
+}
+
+/* sm: a NCS é uma display larga — em 8px, 600 pesa demais, daí o 500 */
+.btn--sm {
+  --btn-h: 3.8rem;
+  --btn-in: .45rem;
+  --btn-cap: 3.2rem;
+  --btn-pad: 1.8rem;
+  --btn-folga: .6rem;
+  --btn-fs: var(--corpo-legado-100);
+  --btn-peso: var(--peso-medio);
+  --btn-seta: var(--fs-400);
+  --btn-icone: var(--fs-650);
+  --btn-raio: var(--raio-sm);
+  --btn-halo: 1.2rem;
+  --btn-halo-blur: 1.4rem;
+  --btn-sombra-1: 2.6rem;
+  --btn-sombra-2: 2.8rem;
+  --btn-sombra-hover: 4.2rem;
+  --btn-anel: .25rem;
+  --btn-sombra-rotulo: 0 .6rem 1.6rem;
+}
+
+/* .btn--nav: md dentro do menu mobile (alvo de toque confortável), sm na
+   barra desktop de 6rem. Os valores abaixo são os mesmos do .btn--sm — CSS
+   não troca classe por media query, então eles se repetem aqui uma vez. */
+@media (min-width: 1080px) {
+  .btn--nav,
+  .z7-btnx--nav {
+    --btn-h: 3.8rem;
+    --btn-in: .45rem;
+    --btn-cap: 3.2rem;
+    --btn-pad: 1.8rem;
+    --btn-folga: .6rem;
+    --btn-fs: var(--corpo-legado-100);
+    --btn-peso: var(--peso-medio);
+    --btn-seta: var(--fs-400);
+    --btn-icone: var(--fs-650);
+    --btn-raio: var(--raio-sm);
+    --btn-halo: 1.2rem;
+    --btn-halo-blur: 1.4rem;
+    --btn-sombra-1: 2.6rem;
+    --btn-sombra-2: 2.8rem;
+    --btn-sombra-hover: 4.2rem;
+    --btn-anel: .25rem;
+    --btn-sombra-rotulo: 0 .6rem 1.6rem;
+  }
+}
+
+/* ── Cores ────────────────────────────────────────────────────────────────── */
+.btn--wpp {
+  --btn-grad: linear-gradient(90deg,
+    #064e46 0%,
+    var(--acento-wpp-fundo) 30%,
+    var(--acento-wpp-meio) 66%,
+    var(--acento-wpp) 100%);
+  --btn-escuro: 7 94 84;
+  --btn-claro: 37 211 102;
+}
+
+/* Verde de campanha (ex.: PLENO Recovery). Nenhum card da home tem
+   .card--promo hoje; o gancho abaixo mantém a capacidade que existia —
+   marcar o card com .card--promo pinta o CTA dele de verde. Antes eram dois
+   blocos de ~90 linhas, quase idênticos, em sectionPlanosTematico.css. */
+.btn--promo,
+.planos .card.card--promo .btn {
+  --btn-grad: linear-gradient(90deg,
+    #034b2b 0%,
+    #046b3a 30%,
+    #00c86f 62%,
+    #3cff9b 100%);
+  --btn-escuro: 0 200 111;
+  --btn-claro: 60 255 155;
+}
+
+/* A cor vem de quem contém o botão: o card define --btn-acento-1/-2 (e,
+   se quiser glow próprio, --btn-acento-rgb). Sem contexto, cai no azul. */
+.btn--acento {
+  --btn-grad: linear-gradient(to right,
+    var(--btn-acento-1, var(--marca-escura)),
+    var(--btn-acento-2, var(--marca)));
+  --btn-escuro: var(--btn-acento-rgb, 2 60 131);
+  --btn-claro: var(--btn-acento-rgb, 29 164 243);
+}
+
+/* ── Formas ───────────────────────────────────────────────────────────────── */
+.btn--bloco {
+  width: 100%;
+}
+
+.btn--centro {
+  justify-content: center;
+}
+
+.btn--icone {
+  width: var(--btn-h);
+  padding: 0;
+  justify-content: center;
+}
+
+.btn--icone ion-icon {
+  font-size: var(--btn-icone);
+}
+
+/* Alvo de toque do sm quadrado (os "fechar" da central de ajuda): 30px de
+   caixa e 44px de alvo, por um pseudo invisível — crescer o botão mudaria o
+   cabeçalho do painel e o canto do modal. Só fora da primária, onde o
+   ::before é o glow. */
+@media (max-width: 1079.98px), (pointer: coarse) {
+  .btn--sm.btn--icone:not(.btn--primaria)::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--alvo-toque);
+    height: var(--alvo-toque);
+    translate: -50% -50%;
+  }
+}
+
+/* ── Ênfase: primária ───────────────────────────────────────────────────────
+   Gradiente, glow, anel girando, faixa de luz e cap. É a única ênfase com
+   animação ociosa e a única que o hover magnético do index.html atinge (ele
+   seleciona .z7-btnx, que só existe nos botões primários). */
+.btn--primaria,
+.z7-btnx {
+  padding-right: calc(var(--btn-cap) + var(--btn-in) * 2 + var(--btn-folga));
+
+  font-family: var(--fonte-display);
   text-transform: uppercase;
+  color: var(--cor-titulo);
 
-  color: rgba(255,255,255,.96);
-
-  border: 0.1rem solid rgba(255,255,255,.10);
+  border: .1rem solid rgba(255, 255, 255, .10);
   overflow: hidden;
   isolation: isolate;
 
   will-change: transform, filter, box-shadow;
+  /* hover em 200ms (tokens MOVIMENTO) — era .55–.60s, e a resposta ao
+     cursor chegava depois do cursor */
   transition:
-    filter .55s cubic-bezier(.16,1,.3,1),
-    box-shadow .60s cubic-bezier(.16,1,.3,1);
+    filter var(--dur-media) var(--curva-saida),
+    box-shadow var(--dur-media) var(--curva-saida),
+    /* B1: o lift/scale do hover é JS seco agora; a suavidade vem daqui
+       (antes era um rAF com lerp por quadro) */
+    transform var(--dur-rapida) var(--curva-saida);
 
   box-shadow:
-    0 0rem 4.5rem rgba(2, 60, 131, 0.395),
-    0 0rem 4.6rem rgba(29, 165, 243, 0.257),
-    0 0 0 .4rem rgba(29, 165, 243, 0.113);
+    0 0 var(--btn-sombra-1) rgb(var(--btn-escuro) / .40),
+    0 0 var(--btn-sombra-2) rgb(var(--btn-claro) / .26),
+    0 0 0 var(--btn-anel) rgb(var(--btn-claro) / .11);
 }
 
 /* glow externo */
-.z7-btnx::before{
-  content:"";
-  position:absolute;
-  inset:-2.4rem;
-
-  /* segue o mesmo recorte do botão */
-  border-radius: calc(var(--r) + 2.4rem) 0 calc(var(--r) + 2.4rem) 0;
-
+.btn--primaria::before,
+.z7-btnx::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--btn-halo) * -1);
+  border-radius:
+    calc(var(--btn-raio) + var(--btn-halo)) 0
+    calc(var(--btn-raio) + var(--btn-halo)) 0;
   z-index: 0;
 
   background:
-    radial-gradient(130% 160% at var(--mx) var(--my),
-      rgba(29,164,243,.72) 0%,
-      rgba(29,164,243,.24) 34%,
-      rgba(2,60,131,.12) 58%,
-      rgba(0,0,0,0) 74%),
+    radial-gradient(130% 160% at 50% 50%,
+      rgb(var(--btn-claro) / .72) 0%,
+      rgb(var(--btn-claro) / .24) 34%,
+      rgb(var(--btn-escuro) / .12) 58%,
+      rgba(0, 0, 0, 0) 74%),
     radial-gradient(140% 120% at 20% 30%,
-      rgba(255,255,255,.16) 0%,
-      rgba(255,255,255,0) 55%);
+      rgba(255, 255, 255, .16) 0%,
+      rgba(255, 255, 255, 0) 55%);
 
-  filter: blur(2.8rem);
+  filter: blur(var(--btn-halo-blur));
   opacity: .92;
-  transition: opacity .60s cubic-bezier(.16,1,.3,1);
+  transition: opacity var(--dur-media) var(--curva-saida);
 }
 
-/* ring premium seguindo o formato */
-.z7-btnx::after{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  border-radius: var(--r) 0 var(--r) 0;
-
+/* anel que segue o recorte */
+.btn--primaria::after,
+.z7-btnx::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   padding: .1rem;
   z-index: 5;
-  pointer-events:none;
+  pointer-events: none;
 
   background:
     conic-gradient(from var(--spin),
-      rgba(29,164,243,0) 0deg,
-      rgba(29,164,243,.85) 60deg,
-      rgba(255,255,255,.34) 95deg,
-      rgba(2,60,131,.85) 170deg,
-      rgba(29,164,243,.62) 250deg,
-      rgba(29,164,243,0) 360deg);
+      rgb(var(--btn-claro) / 0) 0deg,
+      rgb(var(--btn-claro) / .85) 60deg,
+      rgba(255, 255, 255, .34) 95deg,
+      rgb(var(--btn-escuro) / .85) 170deg,
+      rgb(var(--btn-claro) / .62) 250deg,
+      rgb(var(--btn-claro) / 0) 360deg);
 
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -122,301 +358,405 @@
   opacity: .90;
 }
 
-/* fundo base */
-.z7-btnx__bg{
-  position:absolute;
-  inset:0;
-
-  border-radius: var(--r) 0 var(--r) 0;
-
+/* O __bg virou moldura de recorte; a PINTURA desceu para o ::before, uma
+   camada 130% maior movida com translateX — porque animar
+   background-position roda na main thread (o Lighthouse acusava 12 botões),
+   e transform roda no compositor. A conta da equivalência: com
+   background-size 130%, position X% desloca (100%-130%) * X/100 = -0,3W;
+   em % do próprio pseudo (1,3W), -0,3/1,3 = -23,0769%. O top de -15%
+   reproduz o position Y de 50%. O radial fica congelado em 50% 50%, que é
+   onde ele sempre esteve (B1). */
+.btn__bg,
+.z7-btnx__bg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   z-index: 1;
+  overflow: hidden;
+}
 
-  /* camada 1: highlight que “respira” */
+.btn__bg::before,
+.z7-btnx__bg::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -15%;
+  width: 130%;
+  height: 130%;
+
   background:
-    radial-gradient(140% 180% at var(--mx) var(--my),
-      rgba(255,255,255,.20) 0%,
-      rgba(255,255,255,.07) 22%,
-      rgba(255,255,255,0) 56%),
-
-    /* camada 2: gradiente principal (vai se mover) */
-    linear-gradient(90deg,
-      #012b60 0%,
-      var(--z7-deep) 44%,
-      #0b5fbe 72%,
-      var(--z7-sky) 100%);
-
-  background-size: 130% 130%;
-  background-position: 0% 50%;
+    radial-gradient(140% 180% at 50% 50%,
+      rgba(255, 255, 255, .20) 0%,
+      rgba(255, 255, 255, .07) 22%,
+      rgba(255, 255, 255, 0) 56%),
+    var(--btn-grad);
   filter: saturate(1.10) contrast(1.05);
 }
 
-/* shine que passa (agora em loop também) */
-.z7-btnx__shine{
-  position:absolute;
-  inset:-35% -55%;
+.btn__shine,
+.z7-btnx__shine {
+  position: absolute;
+  inset: -35% -55%;
   z-index: 2;
-  pointer-events:none;
+  pointer-events: none;
 
   background: linear-gradient(115deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0) 44%,
-    rgba(255,255,255,.18) 50%,
-    rgba(255,255,255,0) 56%,
-    rgba(255,255,255,0) 100%);
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 44%,
+    rgba(255, 255, 255, .18) 50%,
+    rgba(255, 255, 255, 0) 56%,
+    rgba(255, 255, 255, 0) 100%);
 
   transform: translateX(-60%);
-  opacity: 1; /* visível antes do hover, mas elegante */
 }
 
-.z7-btnx__label{
+.btn__label,
+.z7-btnx__label {
   position: relative;
   z-index: 6;
   white-space: nowrap;
   line-height: 1;
-  text-shadow: 0 1.4rem 3.6rem rgba(0,0,0,.35);
+  text-shadow: var(--btn-sombra-rotulo) rgba(0, 0, 0, .35);
 }
 
-/* CAP do ícone */
-.z7-btnx__cap{
-  position:absolute;
-  top: var(--in);
-  right: var(--in);
-  height: calc(100% - (var(--in) * 2));
-  width: var(--capw);
+/* A NCS da raiz não chega ao rótulo: o * { font-family: var(--tts) } do
+   global.css declara a TT Fors em todo elemento e vence a herança. Na nav o
+   rótulo sempre foi NCS (o antigo buttonNav.css devolvia inherit); nos CTAs,
+   sempre TT Fors. Mantido assim nesta fase: unificar muda a fonte do CTA que
+   converte, e é decisão de tipografia. */
+.btn--nav .btn__label,
+.z7-btnx--nav .z7-btnx__label {
+  font-family: inherit;
+}
 
-  /* raio do cap: metade da altura do cap */
-  --cr: calc((var(--h) - (var(--in) * 2)) / 2);
+.btn__cap,
+.z7-btnx__cap {
+  position: absolute;
+  top: var(--btn-in);
+  right: var(--btn-in);
+  height: calc(100% - var(--btn-in) * 2);
+  width: var(--btn-cap);
 
-  /* esquerda arredondada, topo direito reto, baixo direito arredondado, baixo esquerdo arredondado */
-  border-radius: var(--cr) 0 var(--cr) var(--cr);
+  /* Pílula à esquerda, canto superior direito vivo. O navegador reduz o raio
+     da pílula à metade da altura do cap — exatamente o que o antigo
+     calc((h - 2·in) / 2) calculava, só que sem conta e sem variável local. */
+  border-radius: var(--raio-pilula) 0 var(--raio-pilula) var(--raio-pilula);
 
-  display:grid;
-  place-items:center;
+  display: grid;
+  place-items: center;
   z-index: 7;
+  color: var(--cor-titulo);
 
   background:
     radial-gradient(120% 120% at 30% 30%,
-      rgba(255,255,255,.20) 0%,
-      rgba(255,255,255,.08) 40%,
-      rgba(255,255,255,0) 72%),
+      rgba(255, 255, 255, .20) 0%,
+      rgba(255, 255, 255, .08) 40%,
+      rgba(255, 255, 255, 0) 72%),
     linear-gradient(90deg,
-      rgba(255,255,255,.08) 0%,
-      rgba(255,255,255,.04) 42%,
-      rgba(255,255,255,.02) 100%),
+      rgba(255, 255, 255, .08) 0%,
+      rgba(255, 255, 255, .04) 42%,
+      rgba(255, 255, 255, .02) 100%),
     linear-gradient(135deg,
-      rgba(29,164,243,.36),
-      rgba(2,60,131,.10));
+      rgb(var(--btn-claro) / .36),
+      rgb(var(--btn-escuro) / .10));
 
-  border: 0.1rem solid rgba(255,255,255,.12);
+  border: .1rem solid rgba(255, 255, 255, .12);
   box-shadow:
-    inset 0 .1rem 0 rgba(255,255,255,.16),
-    0 1.2rem 2.6rem rgba(0,0,0,.20);
+    inset 0 .1rem 0 rgba(255, 255, 255, .16),
+    0 1.2rem 2.6rem rgba(0, 0, 0, .20);
 }
 
-.z7-btnx__arrow{
-  font-size: 2.2rem;
+.btn__arrow,
+.z7-btnx__arrow {
+  font-size: var(--btn-seta);
   line-height: 1;
   transform: translateX(0);
-  transition: transform .60s cubic-bezier(.16,1,.3,1);
+  transition: transform var(--dur-media) var(--curva-saida);
 }
 
-/* hover */
-.z7-btnx:hover{
-  filter: saturate(1.22) contrast(1.08);
-
-  /* sombra “segue o cursor” */
-  box-shadow:
-    var(--sh1x, 0rem) var(--sh1y, 0rem) 7.5rem rgba(2,60,131,.60),
-    var(--sh2x, 0rem) var(--sh2y, 0rem) 4.6rem rgba(29,164,243,.44),
-    0 0 0 .4rem rgba(29,164,243,.18);
+/* ícone no lugar da seta (ex.: WhatsApp) */
+.btn__cap ion-icon,
+.z7-btnx__cap ion-icon {
+  display: block;
+  font-size: var(--btn-icone);
+  line-height: 1;
+  color: var(--cor-titulo);
+  transform: scale(1);
+  transition: transform var(--dur-media) var(--curva-saida);
 }
 
-.z7-btnx:hover::before{ opacity: 1; }
-.z7-btnx:hover .z7-btnx__arrow{ transform: translateX(.35rem); }
-.z7-btnx:hover::before{ opacity: 1; }
-.z7-btnx:hover .z7-btnx__arrow{ transform: translateX(.35rem); }
-
-/* no hover, o shine fica mais forte e faz um passe “especial” */
-.z7-btnx:hover .z7-btnx__shine{
-  opacity: .95;
-  animation: z7x-shineHover .95s cubic-bezier(.16,1,.3,1) forwards;
+/* no .btn--acento o cap vira vidro neutro, para não brigar com a cor do card */
+.btn--acento .btn__cap {
+  background: var(--vidro-claro);
+  backdrop-filter: blur(10px);
 }
 
-@keyframes z7x-shineHover{
-  to{ transform: translateX(60%); opacity: 0; }
-}
-
-/* ripple */
-.z7-btnx .z7x-ripple{
-  position:absolute;
+/* ripple criado pelo script inline no pointerdown */
+.btn .z7x-ripple,
+.z7-btnx .z7x-ripple {
+  position: absolute;
   z-index: 8;
   width: 1.4rem;
   height: 1.4rem;
-  border-radius: 999rem;
-  pointer-events:none;
+  border-radius: var(--raio-pilula);
+  pointer-events: none;
 
   background: radial-gradient(circle,
-    rgba(255,255,255,.55) 0%,
-    rgba(29,164,243,.35) 35%,
-    rgba(29,164,243,0) 70%);
+    rgba(255, 255, 255, .55) 0%,
+    rgb(var(--btn-claro) / .35) 35%,
+    rgb(var(--btn-claro) / 0) 70%);
 
-  transform: translate(-50%,-50%) scale(0);
+  transform: translate(-50%, -50%) scale(0);
   opacity: .95;
-  animation: z7x-ripple .82s cubic-bezier(.16,1,.3,1) forwards;
-}
-@keyframes z7x-ripple{
-  to{ transform: translate(-50%,-50%) scale(28); opacity: 0; }
+  animation: z7x-ripple .82s cubic-bezier(.16, 1, .3, 1) forwards;
 }
 
-/* foco */
-.z7-btnx:focus-visible{
-  outline:none;
+@keyframes z7x-ripple {
+  to { transform: translate(-50%, -50%) scale(28); opacity: 0; }
+}
+
+/* ── Ênfase: secundária ─────────────────────────────────────────────────────
+   Mesmo recorte, sem gradiente nem glow: vidro azul com contorno. É a ação
+   que acompanha uma primária, e o botão de ícone dos controles. */
+.btn--secundaria {
+  color: var(--cor-titulo);
+  background: rgb(0 128 201 / .08);
+  border: .1rem solid var(--borda-marca);
+  transition:
+    background-color var(--dur-rapida) var(--curva-saida),
+    border-color var(--dur-rapida) var(--curva-saida);
+}
+
+/* ── Ênfase: texto ──────────────────────────────────────────────────────────
+   Sem caixa. Mantém a altura do tamanho para o alvo de toque não encolher. */
+.btn--texto {
+  padding-inline: var(--esp-2);
+  color: var(--marca-clara);
+  transition: color var(--dur-rapida) var(--curva-saida);
+}
+
+/* ── Estados ────────────────────────────────────────────────────────────────
+   hover */
+.btn--primaria:hover,
+.z7-btnx:hover {
+  filter: saturate(1.22) contrast(1.08);
+
+  /* a sombra segue o cursor: --sh1x/--sh1y vêm do script inline */
   box-shadow:
-    0 2.8rem 7.5rem rgba(2,60,131,.60),
-    0 1.8rem 4.6rem rgba(29,164,243,.44),
-    0 0 0 .5rem rgba(29,164,243,.26);
+    var(--sh1x, 0rem) var(--sh1y, 0rem) var(--btn-sombra-hover) rgb(var(--btn-escuro) / .60),
+    var(--sh2x, 0rem) var(--sh2y, 0rem) var(--btn-sombra-2) rgb(var(--btn-claro) / .44),
+    0 0 0 var(--btn-anel) rgb(var(--btn-claro) / .18);
 }
 
-/* ===========================
-   ANIMAÇÕES “IDLE” (antes do hover)
-   =========================== */
-@media (prefers-reduced-motion: no-preference){
-  /* ring rodando */
-  .z7-btnx{ animation: z7x-ring 2.2s linear infinite, z7x-breathe 3.8s ease-in-out infinite; }
-
-  /* gradiente se movimentando */
-  .z7-btnx__bg{ animation: z7x-gradient 7.5s ease-in-out infinite; }
-
-  /* raio de luz passando em loop */
-  .z7-btnx__shine{ animation: z7x-shineLoop 3.2s ease-in-out infinite; }
-
-  /* glow pulsando sutil */
-  .z7-btnx::before{ animation: z7x-glow 3.8s ease-in-out infinite; }
+.btn--primaria:hover::before,
+.z7-btnx:hover::before {
+  opacity: 1;
 }
 
-@keyframes z7x-ring{ to { --spin: 360deg; } }
-
-/* dá “vida” sem ficar carnaval */
-@keyframes z7x-breathe{
-  0%,100%{ filter: saturate(1.00) contrast(1.00); }
-  50%    { filter: saturate(1.14) contrast(1.08); }
+.btn--primaria:hover .btn__arrow,
+.z7-btnx:hover .z7-btnx__arrow {
+  transform: translateX(.35rem);
 }
 
-/* movimento do gradiente pra aumentar contraste */
-@keyframes z7x-gradient{
-  0%   { background-position: 0% 50%; filter: saturate(1.08) contrast(1.04); }
-  50%  { background-position: 100% 50%; filter: saturate(1.16) contrast(1.10); }
-  100% { background-position: 0% 50%; filter: saturate(1.08) contrast(1.04); }
+/* com um logo no lugar da seta, um leve zoom diz o mesmo que o deslize */
+.btn--primaria:hover .btn__cap ion-icon,
+.z7-btnx:hover .z7-btnx__cap ion-icon {
+  transform: scale(1.12);
 }
 
-/* loop do sheen (raio de luz) */
-@keyframes z7x-shineLoop{
+.btn--primaria:hover .btn__shine,
+.z7-btnx:hover .z7-btnx__shine {
+  opacity: .95;
+  animation: z7x-shineHover .95s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+@keyframes z7x-shineHover {
+  to { transform: translateX(60%); opacity: 0; }
+}
+
+.btn--secundaria:hover {
+  background-color: rgb(0 128 201 / .18);
+  border-color: var(--marca-clara);
+}
+
+.btn--texto:hover {
+  color: var(--cor-titulo);
+}
+
+/* active — `scale` e não `transform`: o script inline escreve transform no
+   botão, e as duas propriedades se compõem em vez de uma apagar a outra */
+.btn:active,
+.z7-btnx:active {
+  scale: .98;
+}
+
+/* focus-visible — o contorno é o anel único da página (acessibilidade.css).
+   Até a fase 4 ele seguia a cor de cada botão: dourado sobre o glow dourado
+   e verde sobre verde se perdiam, e na seção clara o azul-claro ficava
+   abaixo de 3:1. Na primária o glow ainda cresce junto, como no hover. */
+.btn--primaria:focus-visible,
+.z7-btnx:focus-visible {
+  box-shadow:
+    0 0 var(--btn-sombra-hover) rgb(var(--btn-escuro) / .60),
+    0 0 var(--btn-sombra-2) rgb(var(--btn-claro) / .44),
+    0 0 0 var(--btn-anel) rgb(var(--btn-claro) / .18);
+}
+
+/* disabled — <button disabled>, âncora com aria-disabled, ou a seta do
+   Swiper no fim da trilha */
+.btn:disabled,
+.btn[aria-disabled="true"],
+.btn.is-disabled,
+.btn.swiper-button-disabled,
+.z7-btnx[aria-disabled="true"] {
+  opacity: .4;
+  filter: saturate(.4);
+  box-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  animation: none;
+}
+
+/* ── Animação ociosa da primária ──────────────────────────────────────────── */
+/* As ociosas só armam com body.anima-ociosas, que o global.js liga DEPOIS
+   do load, em idle. Sem o portão, cada animação composta virava camada e
+   era rasterizada na PRIMEIRA pintura — 16 gradientes + 16 discos de anel
+   custaram +1s de main thread na carga (medido em 390 livre: 289ms ->
+   1.303ms; TBT 73 -> 694ms). Com o portão, esse custo sai da janela que o
+   Google mede e cai só sobre quem está com a página aberta. O :where()
+   mantém a especificidade: o animation:none do disabled continua vencendo.
+   Antes do portão os botões ficam no primeiro frame — o mesmo que o
+   prefers-reduced-motion sempre mostrou. */
+@media (prefers-reduced-motion: no-preference) {
+  body:where(.anima-ociosas) .btn--primaria,
+  body:where(.anima-ociosas) .z7-btnx {
+    animation: z7x-breathe 3.8s ease-in-out infinite;
+  }
+
+  body:where(.anima-ociosas) .btn__bg::before,
+  body:where(.anima-ociosas) .z7-btnx__bg::before {
+    animation: z7x-gradiente-desliza 7.5s ease-in-out infinite;
+  }
+
+  body:where(.anima-ociosas) .z7x--rotor .z7x-anel::before {
+    animation: z7x-anel-gira 2.2s linear infinite;
+  }
+
+  body:where(.anima-ociosas) .btn__shine,
+  body:where(.anima-ociosas) .z7-btnx__shine {
+    animation: z7x-shineLoop 3.2s ease-in-out infinite;
+  }
+
+  body:where(.anima-ociosas) .btn--primaria::before,
+  body:where(.anima-ociosas) .z7-btnx::before {
+    animation: z7x-glow 3.8s ease-in-out infinite;
+  }
+}
+
+/* O anel não gira mais por --spin (custom property anima na main thread):
+   gira um DISCO com o mesmo conic dentro do span .z7x-anel, que carrega a
+   máscara parada. O ::after estático continua no CSS como primeiro frame e
+   fallback sem JS; quando o global.js injeta o span, a classe .z7x--rotor
+   troca um pelo outro. */
+@keyframes z7x-anel-gira {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes z7x-breathe {
+  0%, 100% { filter: saturate(1.00) contrast(1.00); }
+  50%      { filter: saturate(1.14) contrast(1.08); }
+}
+
+@keyframes z7x-gradiente-desliza {
+  0%   { transform: translateX(0);         filter: saturate(1.08) contrast(1.04); }
+  50%  { transform: translateX(-23.0769%); filter: saturate(1.16) contrast(1.10); }
+  100% { transform: translateX(0);         filter: saturate(1.08) contrast(1.04); }
+}
+
+@keyframes z7x-shineLoop {
   0%   { transform: translateX(-75%); opacity: .12; }
   40%  { opacity: .30; }
   60%  { opacity: .18; }
-  100% { transform: translateX(75%); opacity: .10; }
+  100% { transform: translateX(75%);  opacity: .10; }
 }
 
-/* pulso do glow */
-@keyframes z7x-glow{
-  0%,100%{ opacity: .86; }
-  50%    { opacity: 1.00; }
+/* O span injetado pelo global.js: mesma geometria e mesma máscara XOR do
+   ::after — a máscara fica PARADA aqui, e quem gira é o disco do ::before
+   (160% de largura + aspect-ratio 1 cobre a diagonal de qualquer botão
+   deitado). O conic é o mesmo, from 0deg: girar o disco equivale a animar o
+   from. */
+.z7x-anel {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: .1rem;
+  z-index: 5;
+  pointer-events: none;
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity: .90;
+  overflow: hidden;
 }
-/* ===========================
-   Ícone no lugar da seta (ex.: WhatsApp)
-   =========================== */
-.z7-btnx__cap ion-icon{
-  display: block;
-  font-size: 2.2rem;
-  line-height: 1;
-  color: #fff;
 
-  transform: scale(1);
-  transition: transform .60s cubic-bezier(.16,1,.3,1);
-}
+.z7x-anel::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(0deg);
 
-/* a seta do botão original desloca no hover; com um logo, um leve zoom
-   comunica a mesma intenção sem parecer que o ícone está escapando do cap */
-.z7-btnx:hover .z7-btnx__cap ion-icon{ transform: scale(1.12); }
-
-/* ===========================
-   .z7-btnx--wpp — mesma anatomia, paleta oficial do WhatsApp
-
-   Troca só as camadas que carregam cor (bg, glow, ring, cap). Formato,
-   escala, shine e animações continuam vindo do .z7-btnx.
-   =========================== */
-.z7-btnx--wpp .z7-btnx__bg{
   background:
-    radial-gradient(140% 180% at var(--mx) var(--my),
-      rgba(255,255,255,.20) 0%,
-      rgba(255,255,255,.07) 22%,
-      rgba(255,255,255,0) 56%),
-
-    linear-gradient(90deg,
-      #064e46 0%,
-      var(--wpp-deep) 30%,
-      var(--wpp-teal) 66%,
-      var(--wpp-green) 100%);
-
-  background-size: 130% 130%;
-  background-position: 0% 50%;
+    conic-gradient(from 0deg,
+      rgb(var(--btn-claro) / 0) 0deg,
+      rgb(var(--btn-claro) / .85) 60deg,
+      rgba(255, 255, 255, .34) 95deg,
+      rgb(var(--btn-escuro) / .85) 170deg,
+      rgb(var(--btn-claro) / .62) 250deg,
+      rgb(var(--btn-claro) / 0) 360deg);
 }
 
-.z7-btnx--wpp::before{
-  background:
-    radial-gradient(130% 160% at var(--mx) var(--my),
-      rgba(37,211,102,.72) 0%,
-      rgba(37,211,102,.24) 34%,
-      rgba(7,94,84,.12) 58%,
-      rgba(0,0,0,0) 74%),
-    radial-gradient(140% 120% at 20% 30%,
-      rgba(255,255,255,.16) 0%,
-      rgba(255,255,255,0) 55%);
+/* com o rotor no lugar, o anel estático sai de cena */
+.z7x--rotor::after,
+.btn--primaria.z7x--rotor::after {
+  content: none;
 }
 
-.z7-btnx--wpp::after{
-  background:
-    conic-gradient(from var(--spin),
-      rgba(37,211,102,0) 0deg,
-      rgba(37,211,102,.85) 60deg,
-      rgba(255,255,255,.34) 95deg,
-      rgba(7,94,84,.85) 170deg,
-      rgba(37,211,102,.62) 250deg,
-      rgba(37,211,102,0) 360deg);
+/* botão desabilitado não gira (o animation:none do bloco disabled só
+   alcança o elemento; o span é filho) */
+.btn:disabled .z7x-anel::before,
+.btn[aria-disabled="true"] .z7x-anel::before,
+.btn.is-disabled .z7x-anel::before,
+.btn.swiper-button-disabled .z7x-anel::before,
+.z7-btnx[aria-disabled="true"] .z7x-anel::before {
+  animation: none;
 }
 
-.z7-btnx--wpp .z7-btnx__cap{
-  background:
-    radial-gradient(120% 120% at 30% 30%,
-      rgba(255,255,255,.20) 0%,
-      rgba(255,255,255,.08) 40%,
-      rgba(255,255,255,0) 72%),
-    linear-gradient(90deg,
-      rgba(255,255,255,.08) 0%,
-      rgba(255,255,255,.04) 42%,
-      rgba(255,255,255,.02) 100%),
-    linear-gradient(135deg,
-      rgba(37,211,102,.38),
-      rgba(7,94,84,.10));
+/* Fora da viewport, tudo pausa: 24 botões animando a 3 telas de distância
+   era main thread e bateria pagos por ninguém. O global.js liga/desliga a
+   classe com IntersectionObserver. */
+.anim-fora,
+.anim-fora::before,
+.anim-fora::after,
+.anim-fora .btn__bg::before,
+.anim-fora .z7-btnx__bg::before,
+.anim-fora .btn__shine,
+.anim-fora .z7-btnx__shine,
+.anim-fora .z7x-anel::before {
+  /* !important de propósito: o shorthand animation das regras com portão
+     (body:where(.anima-ociosas) …) reseta o play-state para running com
+     especificidade maior que a desta classe — medido: a tarja fora da tela
+     seguia "running". Ninguém mais escreve play-state; a pausa é a dona. */
+  animation-play-state: paused !important;
 }
 
-.z7-btnx--wpp{
-  box-shadow:
-    0 0rem 4.5rem rgba(7,94,84,.40),
-    0 0rem 4.6rem rgba(37,211,102,.26),
-    0 0 0 .4rem rgba(37,211,102,.11);
-}
-
-.z7-btnx--wpp:hover{
-  box-shadow:
-    var(--sh1x, 0rem) var(--sh1y, 0rem) 7.5rem rgba(7,94,84,.60),
-    var(--sh2x, 0rem) var(--sh2y, 0rem) 4.6rem rgba(37,211,102,.44),
-    0 0 0 .4rem rgba(37,211,102,.18);
-}
-
-.z7-btnx--wpp:focus-visible{
-  box-shadow:
-    0 2.8rem 7.5rem rgba(7,94,84,.60),
-    0 1.8rem 4.6rem rgba(37,211,102,.44),
-    0 0 0 .5rem rgba(37,211,102,.26);
+@keyframes z7x-glow {
+  0%, 100% { opacity: .86; }
+  50%      { opacity: 1.00; }
 }

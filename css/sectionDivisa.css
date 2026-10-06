@@ -5,6 +5,10 @@
 #divisa {
   position: relative;
   padding-top: 0;
+  /* Folga para o divisor candles do #ba subir (divisor.css): a folga
+     desejada mais a altura da barra mais alta, para a folga real contar do
+     pico da fita, não da base. Vale em todas as larguras. */
+  padding-bottom: calc(var(--divisor-folga) + var(--candles-pico));
   overflow: hidden;
 
   /* palette */
@@ -31,7 +35,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: var(--esp-4);
 }
 
 /* BORDER WRAPPER (a borda de verdade acontece aqui) */
@@ -48,9 +52,9 @@
     linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0)) ,
     linear-gradient(135deg, rgba(29,164,243,.55), rgba(2,60,131,.25), rgba(0,0,0,.35));
 
-  box-shadow:
-    0 18px 55px rgba(0,0,0,.55),
-    0 2px 0 rgba(255,255,255,.06) inset;
+  /* sem sombra de queda (fase 6): número de prova não é elevação — e a
+     sombra preta sobre o fundo preto só engrossava a moldura */
+  box-shadow: 0 2px 0 rgba(255,255,255,.06) inset;
 }
 
 /* glow/aurora por trás (profundidade) */
@@ -86,7 +90,8 @@
       rgba(29,164,243,0) 100%);
   filter: blur(10px);
   opacity: .55;
-  animation: borderSpin 4.5s linear infinite;
+  /* ciclo de 12s (era 4,5s): é movimento de fundo, não chamada */
+  animation: borderSpin 12s linear infinite;
   pointer-events: none;
 }
 
@@ -122,9 +127,7 @@
 
   border: 1px solid rgba(255,255,255,.06);
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.45),
-    0 1px 0 rgba(255,255,255,.06) inset;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset;
   overflow: hidden;
 }
 
@@ -181,17 +184,17 @@
 
 /* TIPOGRAFIA */
 #divisa .cards .card h3 {
-  font-size: 3rem;
+  font-size: var(--fs-1300);
   margin-top: 1rem;
   line-height: .9;
-  color: #d8d8d8;
+  color: var(--cor-secundario);
   font-family: var(--ncs);
   text-transform: uppercase;
   letter-spacing: .02em;
 }
 
 #divisa .cards .card h3 span {
-  font-size: 4.2rem;
+  font-size: var(--corpo-legado-1500);
   background: linear-gradient(110deg, #6ad0ff 0%, var(--blue1) 35%, #2a67ff 65%, var(--blue2) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -201,10 +204,10 @@
 }
 
 #divisa .cards .card p {
-  font-size: 1.5rem;
+  font-size: var(--corpo-legado-550);
   margin-top: 1rem;
-  font-weight: 300;
-  color: rgba(220,220,220,.70);
+  font-weight: var(--peso-leve);
+  color: var(--cor-secundario);
 }
 
 /* animações */
@@ -230,19 +233,18 @@
   section#divisa {
     padding-top: 0;
     margin-top: 0;
-    padding-bottom: 6rem;
     overflow: initial;
   }
 
   section#divisa img.bg {
-    border-radius: 10rem;
+    border-radius: var(--raio-xl);
   }
 
   section#divisa .cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
-    gap: 4rem;
+    gap: var(--esp-6);
   }
 
   section#divisa .cards .card {
@@ -250,8 +252,20 @@
     padding-block: 5.2rem;
   }
 
-  section#divisa .cards .card h3 { font-size: 3rem; }
-  section#divisa .cards .card h3 span { font-size: 5.2rem; }
+  section#divisa .cards .card h3 { font-size: var(--fs-1300); }
+  section#divisa .cards .card h3 span { font-size: var(--corpo-legado-1800); }
+
+  /* A reserva de altura que morava aqui (fase 11, commit 2) valia para os
+     TRÊS h3 e em qualquer largura acima de 1080 — e o preço disso era 27,2px
+     de vão morto entre o número e a descrição em quase todo o desktop, que
+     é o que aparecia na tela. Medido card a card, o h3 só passa de duas para
+     três linhas em:
+       .um  ("Desde 2023")     de 1080 a ~1110
+       .dois ("+30 mil")        nunca
+       .tres ("+20 milhões")    de 1080 a 1599
+     Fora dessas faixas o h3 fecha em 46,8px com e sem o número, então não há
+     deslocamento a evitar e reservar 74px só abre buraco. A reserva agora
+     mora nas duas faixas medidas, no fim do arquivo. */
 
   section#divisa .cards .borderCard.um,
   section#divisa .cards .borderCard.tres {
@@ -305,7 +319,8 @@
     will-change: transform;
     transform-origin: center center;
     transform: scale(1.03) translateZ(0);
-    animation: borderSpinDesktopGPU 5s linear infinite !important;
+    /* 12s, como no celular (era 5s) */
+    animation: borderSpinDesktopGPU 12s linear infinite !important;
   }
 
   /* desliga sheen interno no desktop */
@@ -325,6 +340,22 @@
   }
 }
 
+/* Números da faixa: tabular-nums (fase 6). A NCS Radhiumz não tem
+   algarismos tabulares, então hoje a propriedade não muda nada aqui; fica
+   declarada para quando a fonte, ou o fallback, tiver. */
+#divisa .cards .card h3 {
+  font-variant-numeric: tabular-nums;
+}
+
+/* O giro da borda no desktop (acima) é !important com seletor mais forte, e
+   passava por cima do bloco de movimento reduzido do começo do arquivo: com
+   prefers-reduced-motion as três bordas continuavam girando. */
+@media (min-width: 1080px) and (prefers-reduced-motion: reduce) {
+  section#divisa .cards .borderCard::after {
+    animation: none !important;
+  }
+}
+
 @keyframes borderSpinDesktopGPU {
   from { transform: scale(1.03) rotate(0deg) translateZ(0); }
   to   { transform: scale(1.03) rotate(360deg) translateZ(0); }
@@ -341,3 +372,47 @@
 
 }
 
+
+/* celular e tablet (fase 8): a legenda de cada número no corpo de 16px */
+@media (max-width: 1079.98px) {
+  #divisa .cards .card p {
+    font-size: var(--fs-850);
+  }
+}
+
+/* Reserva de LARGURA do countUp (F3a): o span nasce em "0" e conta até
+   2023/+30/+20 — o h3 alargava 223→252px no meio da contagem e, nas
+   larguras onde os cards entram na dobra (1920: y1014 < 1080), isso era
+   um shift de 0,049 na carga. O min-width em ch reserva o espaço do
+   número FINAL desde o primeiro frame; o texto segue centrado e o
+   visual depois da contagem é idêntico. Mudou o número no script do
+   countUp, ajuste os ch. */
+/* Em EM, nunca em ch: o ch é o avanço do "0" da fonte CORRENTE, e na
+   chegada da NCS o 4ch inicial alargava 28px — virava outro shift.
+   Valores MEDIDOS do texto final na NCS (2,65em / 1,99em) + folga. */
+#ano {
+  display: inline-block;
+  min-width: 2.7em;
+  text-align: center;
+}
+
+#traders,
+#pagamentos {
+  display: inline-block;
+  min-width: 2em; /* +30 / +20: o prefixo entra junto do número */
+  text-align: center;
+}
+
+/* Reserva de altura do countUp, só onde o h3 de fato cresce (ver o comentário
+   no bloco de 1080). Mantém o CLS em zero sem abrir vão onde não há ganho. */
+@media (min-width: 1080px) and (max-width: 1119.98px) {
+  section#divisa .cards .borderCard.um .card h3 {
+    min-height: 7.4rem;
+  }
+}
+
+@media (min-width: 1080px) and (max-width: 1599.98px) {
+  section#divisa .cards .borderCard.tres .card h3 {
+    min-height: 7.4rem;
+  }
+}
