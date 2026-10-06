@@ -25,6 +25,7 @@
   RedirectMatch 404 (?i)/comparacao[^/]*\.html?$
   RedirectMatch 404 (?i)/(medidas|scripts|shots|node_modules|\.vscode|\.git|backend)(/|$)
   RedirectMatch 404 (?i)/package(-lock)?\.json$
+  RedirectMatch 404 (?i)/dist/manifest\.json$
   RedirectMatch 404 (?i)/\.(gitignore|env)(\.[^/]*)?$
 </IfModule>
 
@@ -49,8 +50,8 @@
   # (home.<hash8>.css, script/<nome>.<hash8>.js — mudou o conteúdo, muda a
   # URL), e os demais usam ?v=. O RedirectMatch 404 lá de cima NÃO alcança
   # dist/ (conferido: a lista é medidas|scripts|shots|node_modules|.vscode|
-  # .git|backend). O dist/manifest.json cai na regra de JSON no-store, o
-  # que está certo: é mapa de build, ninguém precisa cachear.
+  # .git|backend). O dist/manifest.json responde 404 pelo RedirectMatch lá
+  # de cima: é mapa do build, não precisa ficar legível no ar.
   <FilesMatch "\.(css|js)$">
     Header always set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
