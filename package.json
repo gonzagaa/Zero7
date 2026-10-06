@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "prepare": "git config core.hooksPath .githooks",
     "build": "node scripts/build.mjs",
     "watch": "node scripts/build.mjs --watch",
     "check": "node scripts/build.mjs && node -e \"if(require('./dist/manifest.json').criticoDesatualizado){console.error('dist/critico.css nasceu de outro bundle: rode node scripts/critico.mjs e npm run build');process.exit(1)}\" && git diff --exit-code -- dist index.html css/fonts",

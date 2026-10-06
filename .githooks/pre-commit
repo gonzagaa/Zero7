@@ -1,0 +1,25 @@
+#!/bin/sh
+# Bloqueia o commit quando o build/check não está verde.
+#
+# Vale também para o commit feito pela interface do VS Code: o hook é achado
+# por core.hooksPath, apontado para .githooks pelo script "prepare" do
+# package.json (roda sozinho no npm install, então sobrevive a um clone novo).
+#
+# O check roda `node scripts/build.mjs` e depois compara dist/, index.html e
+# css/fonts com o que está commitado: se o build gerou algo diferente do que
+# está no índice, o commit para aqui.
+
+if npm run --silent check; then
+  exit 0
+fi
+
+echo ""
+echo "pre-commit: 'npm run check' falhou — commit cancelado."
+echo ""
+echo "  Rode 'npm run build' e inclua o que mudou em dist/, index.html e"
+echo "  css/fonts no commit (git add). Depois commite de novo."
+echo ""
+echo "  Para commitar assim mesmo (use só se souber o que está fazendo):"
+echo "  git commit --no-verify"
+echo ""
+exit 1
