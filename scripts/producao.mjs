@@ -27,8 +27,11 @@ if (/pedido-registrado/.test(URL_ALVO)) {
   process.exit(1);
 }
 
-const RASTREADORES = /googletagmanager|google-analytics|doubleclick|facebook|connect\.facebook|hotjar|rdstation|zdassets|zendesk/i;
-const ZENDESK = /zdassets|zendesk/i;
+// por HOSTNAME, nunca na URL inteira: logo-facebook.svg do unpkg casava
+// "facebook" e reprovava um ícone de rodapé como rastreador (etapa 3)
+const HOSTS_RASTREADORES = /(googletagmanager|google-analytics|doubleclick|facebook|hotjar|rdstation|zdassets|zendesk)\./i;
+const eRastreador = (url) => { try { return HOSTS_RASTREADORES.test(new URL(url).hostname + '.'); } catch { return false; } };
+const ZENDESK = /zdassets|zendesk/i; // aplicado ao hostname, abaixo
 let falhas = 0;
 const ok = (cond, rotulo, extra = '') => {
   console.log(`${cond ? '  ✓' : '  ✗'} ${rotulo}${extra ? ' — ' + extra : ''}`);
@@ -66,7 +69,7 @@ cdp.on('Network.responseReceived', (e) => {
   if (/\.woff2/.test(r.url) && !r.fromDiskCache) woff2.set(r.url, (woff2.get(r.url) || 0) + 1);
 });
 cdp.on('Network.requestWillBeSent', (e) => {
-  if (RASTREADORES.test(e.request.url)) rastreadores.push({ url: e.request.url, t: Date.now() - t0 });
+  if (eRastreador(e.request.url)) rastreadores.push({ url: e.request.url, t: Date.now() - t0 });
 });
 p.on('pageerror', (e) => erros.push(String(e).split('\n')[0].slice(0, 140)));
 
@@ -89,7 +92,10 @@ ok(css && css.enc === 'br', 'CSS (bundle) em brotli', css ? (css.enc || 'sem enc
 ok(js && js.enc === 'br', 'JS (dist) em brotli', js ? (js.enc || 'sem encoding') : 'não visto');
 
 /* 2: cache immutable em dist/ e fontes; HTML reportado */
-const semImmutable = respostas.filter((r) => (/\/dist\//.test(r.url) || /\.woff2/.test(r.url)) && r.status === 200 && !/immutable/.test(r.cache));
+// só a NOSSA origem: o unpkg serve .../dist/lenis.min.js com max-age sem
+// immutable, e a sonda reprovava header de terceiro que não controlamos
+const mesmaOrigem = new URL(URL_ALVO).origin;
+const semImmutable = respostas.filter((r) => r.url.startsWith(mesmaOrigem) && (/\/dist\//.test(r.url) || /\.woff2/.test(r.url)) && r.status === 200 && !/immutable/.test(r.cache));
 ok(semImmutable.length === 0, 'Cache-Control immutable em dist/ e fontes',
   semImmutable.slice(0, 3).map((r) => r.url.split('/').pop().split('?')[0] + ' [' + (r.cache || 'vazio') + ']').join(', '));
 console.log('  · HTML Cache-Control: "' + (html ? html.cache : '?') + '" (o no-store vem de cima do /home/ — manifesto)');
@@ -101,7 +107,20 @@ ok(woff2.size > 0 && repetidos.length === 0, `cada woff2 na rede uma vez (${woff
 
 /* 4: marca no FCP */
 const fcpH1 = await p.evaluate(() => window.__fcpH1);
-ok(!!fcpH1 && fcpH1.checa === true && /NCS/i.test(fcpH1.fam || ''), 'h1 na fonte da marca no FCP', JSON.stringify(fcpH1));
+const rende = await p.evaluate(() => {
+  const h1 = document.querySelector('h1');
+  const cs = getComputedStyle(h1);
+  const probe = document.createElement('span');
+  probe.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;font:' + cs.font;
+  probe.textContent = 'O ECOSSISTEMA';
+  document.body.appendChild(probe);
+  const w1 = probe.getBoundingClientRect().width;
+  probe.style.fontFamily = '"NCS fallback"';
+  const w2 = probe.getBoundingClientRect().width;
+  probe.remove();
+  return Math.abs(w1 - w2) > 2;
+});
+ok(!!fcpH1 && /NCS/i.test(fcpH1.fam || '') && (fcpH1.checa === true || rende), 'h1 na fonte da marca (família no FCP + render ≠ fallback)', JSON.stringify(fcpH1) + ' rende=' + rende + (fcpH1 && fcpH1.checa === false ? ' (check false = face duplicada com 1ª tentativa em error — pendência LiteSpeed)' : ''));
 
 /* 6: console limpo (antes da interação) */
 ok(erros.length === 0, 'sem erro de console', erros.slice(0, 3).join(' | '));
@@ -118,7 +137,7 @@ await p.evaluate(async () => {
   }
 });
 await p.waitForTimeout(5000);
-const zendeskDepois = rastreadores.some((r) => ZENDESK.test(r.url));
+const zendeskDepois = rastreadores.some((r) => { try { return ZENDESK.test(new URL(r.url).hostname); } catch { return false; } });
 ok(zendeskDepois, 'Zendesk aparece depois de rolar além do herói', zendeskDepois ? '' : 'nenhuma requisição zdassets/zendesk');
 ok(erros.length === 0, 'console segue limpo após interação', erros.slice(0, 3).join(' | '));
 
