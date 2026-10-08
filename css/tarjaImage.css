@@ -27,6 +27,16 @@
     position: relative;
     display: block;
     width: 100%;
+    /* Camada própria: pôster e vídeo compostos pelo mesmo caminho, com o
+       mesmo encaixe no pixel. Sem isto, onde a tarja cai em x fracionário
+       (1366: x = 78,64) a <img> era desenhada no subpixel e o <video>
+       encaixado no pixel inteiro — ~0,45 px de diferença que acendia toda
+       borda de texto na troca (1,77% com texto no quadro 0, LIBERDADE-2).
+       Medido com ela: 0,71–0,82% nas quatro larguras. translateZ(0) NÃO
+       resolve (1,77% igual). Custo: uma faixa de ≤ 1580×63 px (≈ 0,4 MB;
+       ≈ 0,6 MB em 390 a 3×); o pôster perde ~8% de nitidez medida, que não
+       se vê ampliado 4×. */
+    will-change: transform;
 }
 
 .tarjaImage .tarjaMidia img {

@@ -311,3 +311,59 @@ novo, e a captura do "quadro 0" pegava a animação andando. Agora o `play()`
 daquela instância vira no-op durante a medida, e a captura só vale se o vídeo
 seguir parado em t = 0; se não seguir, mede de novo, até 3 vezes. Três rodadas
 seguidas deram exatamente os mesmos valores.
+
+## Troca pôster → vídeo em 1366: camada própria no contêiner (out/2026)
+
+A `liberdade-2` é a primeira arte com texto nítido já no quadro 0. Com ela, a
+prova reprovou só em 1366, com 1,769%. O conteúdo era o mesmo quadro, com a
+mesma nitidez e indistinguível ampliado 4×. Diagnóstico:
+
+- **Meio pixel.** Em 1366 a tarja começa em x = 78,64 px. A `<img>` era
+  desenhada no subpixel e o `<video>` encaixado no pixel inteiro. O diff
+  mínimo aparece com o vídeo deslocado −0,45 px; em 390 e 1920 o mínimo é
+  com deslocamento 0.
+- **Filtro de escala.** Mesmo realinhado, sobrava 1,27%: a imagem e o vídeo
+  são reduzidos por filtros diferentes, na escala de 0,51, sobre bordas de
+  texto.
+
+Antes da decisão, a régua de 1% também mostrou um limite nesta arte: o vídeo
+num momento qualquer fica só 0,84–1,08% longe do pôster em 390/1079/1920,
+porque o texto fica parado e só o fundo se mexe. Em arte com texto parado,
+1% quase não separa o quadro certo do errado.
+
+**Conserto (decisão do Gustavo, ordem a: eliminar a causa):**
+`will-change: transform` no `.tarjaImage .tarjaMidia`. Com isso, pôster e
+vídeo são compostos pelo mesmo caminho e com o mesmo encaixe de pixel.
+
+| diff pôster × quadro 0 (liberdade-2) | 390 | 1079 | 1366 | 1920 |
+|---|---:|---:|---:|---:|
+| sem camada | 0,568% | 0,579% | **1,769%** | 0,573% |
+| `will-change: transform` | 0,788% | 0,810% | **0,708%** | 0,823% |
+| `transform: translateZ(0)` | 0,569% | 0,579% | 1,769% | 0,573% |
+
+- **Por que a régua não mudou.** Ficou em 1% (o plano b, alinhar e subir
+  para 1,5%, não foi preciso). A caixa idêntica e o pôster ≤ 0,5% do
+  quadro 0 continuam bloqueantes.
+- **Efeito colateral medido.** A camada aproxima o *pôster* do vídeo, não o
+  contrário: a renderização do vídeo não muda e o pôster perde nitidez
+  medida (laplaciano −8% em 390 e 1079, −10% em 1920, −2% em 1366).
+  Ampliado 4×, não se vê.
+- **Memória da camada.** Uma faixa de ≤ 1580×63 px CSS ≈ 0,4 MB em DPR 1
+  (1366: ≈ 0,23 MB). Em 390 a 3×, ≈ 0,6 MB.
+- **Conferências com a camada:**
+  - Lighthouse mobile 93 (92–94), desktop 100, 1920 100 (antes 92/100/100).
+  - CLS de carga 0,0000 / 0,0000 / 0,0004 / 0,0003 / 0,0002.
+  - FOUC 0,00%, console limpo.
+  - LIBERDADE atual: 0,519 / 0,562 / 0,916 / 0,867%.
+
+**Pôsteres da liberdade-2 em q70–q75.** Ampliados 4×, ficam indistinguíveis
+do quadro 0 no texto; só o grão do fundo fica um pouco mais liso. Mas
+violam a regra bloqueante do pôster ≤ 0,5% do quadro 0:
+
+| | q70 | q75 | q80 | q85 |
+|---|---|---|---|---|
+| desk | 14,2 KB · 0,561% | 17,1 KB · 0,503% | **20,4 KB · 0,439%** | 23,8 KB · 0,389% |
+| mob | 12,4 KB · 0,675% | 14,4 KB · 0,608% | 17,1 KB · 0,535% | **19,7 KB · 0,472%** |
+
+Ficam q80 no desk e q85 no mob, os menores dentro da regra. É o que o
+encoder já escolhe.
