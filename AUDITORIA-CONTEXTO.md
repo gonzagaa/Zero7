@@ -2592,6 +2592,12 @@ justamente o que a NCS não foi desenhada para fazer.
     Zero .webm/.mp4 antes do LCP e antes do load — o juiz é a
     scripts/tarja-video-prova.mjs (rede, cenarios, visual, iphone); em
     produção, o producao.mjs confere Range 206 nos quatro arquivos. Trocar
-    campanha = rodar `node scripts/tarja-video.mjs <campanha>` com os
-    masters novos (nome NOVO por campanha: cache imutável de 1 ano),
-    trocar os caminhos no index.html e refazer as razões (regras 17/21).
+    campanha = `npm run tarja -- <pasta>` (scripts/tarja-ingestao.mjs):
+    valida a pasta (desktop.mp4 3160×126, mobile.mp4 2080×284, 15 s, sem
+    áudio, emenda ≤ 1%, campanha.json com slug), recusa slug já usado
+    (cache imutável de 1 ano), encoda com os parâmetros aprovados de
+    scripts/lib/tarja.mjs, troca o index.html, roda build + check + a
+    prova e deixa no stage; o commit é de quem rodou. A razão da arte é a
+    do CSS: mudar a proporção da tarja é OUTRA tarefa (tarjaImage.css,
+    regras 17/21, e scripts/lib/tarja.mjs juntos). Prazos do contador só
+    com --contador e só as datas de prazosPromo (regra 5).

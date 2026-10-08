@@ -229,3 +229,85 @@ no código novo e no HEAD anterior, 4× cada, listando vídeos e long tasks:
 91/93/93/93 × 90/92/93/93. As duas versões baixam o mesmo mob.webm dentro da
 janela do Lighthouse, porque o Chrome dele informa 4g e o portão antigo também
 liberava. As long tasks são as mesmas. Era ruído; a re-medição oficial deu 92.
+
+## Troca de campanha num comando: `npm run tarja -- <pasta>` (out/2026)
+
+`scripts/tarja-ingestao.mjs` faz cinco passos e aborta com mensagem clara em
+qualquer falha. Quando a falha vem depois do encode, ele desfaz o que fez: apaga
+os arquivos novos e volta o index.html e o dist/ ao HEAD.
+
+1. **Valida a pasta:**
+   - `desktop.mp4` 3160×126 e `mobile.mp4` 2080×284, sem áudio, 15 s ± 0,1;
+   - `campanha.json` com slug;
+   - emenda do loop (quadro 0 × último, escala cheia) ≤ 1%;
+   - as razões do CSS (`.tarjaMidia`) iguais às do encoder.
+2. **Encoda** com o `tarja-video.mjs`. Os parâmetros aprovados agora moram
+   num lugar só, `scripts/lib/tarja.mjs`: VP9 CRF 38 fixo nas duas variantes,
+   H.264 no menor CRF de 26–30 que caiba, 24 fps. Slug já usado (no disco,
+   no histórico do git ou no index.html) é recusado.
+3. **index.html:** troca os 2 pôsteres (com width/height) e os 4 `data-*`. Com
+   `"fim"`, mostra o diff de `prazosPromo` e só aplica com `--contador`.
+4. **Build, check e prova:** `npm run build`, `git add` do que mudou,
+   `npm run check` e `tarja-video-prova.mjs tudo`. A prova agora dá veredito e
+   sai com código 1 se algo reprovar.
+5. **Resumo:** pesos, emenda, o diff do index.html, os arquivos de tarja que
+   ficaram órfãos (com o `git rm` pronto) e "pronto para commit". O script
+   não commita.
+
+**A razão do master é a do CSS, com tolerância de 1 px.** Mesmo a entrega
+oficial do desktop (3160×126, razão 25,08) não bate exatamente com a do CSS
+(2370/94 = 25,21): o encode aprovado já cortava 1 linha. A regra virou: a
+escala de cobertura até o tamanho de saída pode cortar no máximo 1 px. Além
+disso, o master não pode ser menor que o tamanho de entrega.
+
+**Teste com a LIBERDADE reconstruída.** Os masters originais
+(`zero7-tarjas-projetos/liberdade/export-web-v1/master/`, 30 fps, mobile
+2082×286) foram copiados para uma pasta temporária no formato novo e passados
+por `npm run tarja -- <pasta> --ensaio <saída>`:
+
+| arquivo | no ar × reconstruído |
+|---|---|
+| tarja-liberdade-desk.mp4 | **byte-idêntico** |
+| tarja-liberdade-mob.mp4 | **byte-idêntico** |
+| tarja-liberdade-desk-poster.avif | **byte-idêntico** |
+| tarja-liberdade-mob-poster.avif | **byte-idêntico** |
+| tarja-liberdade-desk.webm | mesmo tamanho (255 018 B), os 360 pacotes idênticos (framemd5); diferem 16 bytes |
+| tarja-liberdade-mob.webm | mesmo tamanho (186 170 B), os 360 pacotes idênticos (framemd5); diferem 16 bytes |
+
+Os 16 bytes são o **TrackUID** do Matroska, gravado duas vezes (elementos
+0x73C5 e 0x63C5, 8 bytes cada). O muxer do ffmpeg sorteia esse número a cada
+gravação: duas execuções seguidas do MESMO comando também diferem nele. O
+vídeo em si é idêntico. Os pôsteres byte-idênticos confirmam isso de outro
+jeito, porque são o quadro 0 decodificado do webm.
+
+**Ponta a ponta** (num worktree descartável, com os masters originais, slug
+`ensaio-e2e`, `"fim": "2026-11-15"` e `--contador`), os cinco passos verdes:
+- **Pesos:** 249,0 / 247,0 / 6,0 KB no desk e 181,8 / 178,9 / 4,2 KB no mob.
+- **Contador:** 39 prazos diários, de 2026-10-08 a 2026-11-15.
+- **Prova:** zero vídeo antes do LCP e do load; os oito cenários certos;
+  troca pôster → quadro 0 em 0,487 / 0,547 / 0,897 / 0,838%; iPhone ok no
+  Chromium.
+- **Fim:** tudo no stage, sem commit. O worktree foi apagado.
+
+**Casos de falha** (vídeos sintéticos), todos abortam com a explicação:
+- pasta sem campanha.json, slug inválido, slug já usado, `--contador` sem `fim`;
+- trilha de áudio, mobile.mp4 ausente;
+- desktop 3160×200 ("cortaria 56 px na altura — outra proporção");
+- mobile 1040×142 ("abaixo do tamanho de entrega");
+- 10 s de duração;
+- loop com 45,9% de diferença entre o quadro 0 e o último.
+
+**O export novo da pasta `zero7-tarjas/liberdade`** (24 fps, 2080×284, outra
+exportação, não a que está no ar) passa no passo 1, com emendas de 0,56% e 0,52%.
+**É recusado no passo 2:** com o CRF 38 aprovado, o VP9 dá 296,4 KB no desk
+(alvo 250) e 217,7 KB no mob (alvo 200). O pôster precisou de AVIF q90 (52 KB,
+contra 6 KB do aprovado). Ele tem bem mais grão que o master original. Ou o
+designer reexporta com menos grão, ou os parâmetros aprovados mudam.
+
+**A sonda corrigida no caminho.** Na primeira ponta a ponta, o visual em 1366
+deu 5,96% com os mesmos arquivos que antes deram 0,897%. O screenshot rola o
+alvo para a vista, o IntersectionObserver do tarjaVideo.js dispara `play()` de
+novo, e a captura do "quadro 0" pegava a animação andando. Agora o `play()`
+daquela instância vira no-op durante a medida, e a captura só vale se o vídeo
+seguir parado em t = 0; se não seguir, mede de novo, até 3 vezes. Três rodadas
+seguidas deram exatamente os mesmos valores.

@@ -43,6 +43,14 @@ const UA_MOVEL = 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (K
 const VIDEO = /\.(webm|mp4)(\?|$)/i;
 const VIDEO_TARJA = /tarjapopup\/tarja-[^/]*\.(webm|mp4)/i;
 
+// Veredito: cada modo empurra aqui o que reprovou; no fim, código 1 se
+// houver algo (a ingestão — npm run tarja — aborta por ele).
+const reprovas = [];
+const reprova = (m) => { reprovas.push(m); console.log('  ✗ ' + m); };
+// erro de console que NÃO é da tarja: o CAPI (tracking intocado) dá CORS no
+// localhost porque esta sonda não bloqueia terceiros
+const ERRO_CONHECIDO = /backend-api-zero7|Failed to fetch|ERR_FAILED|Failed to load resource|CORS|sendCapiPageView/i;
+
 const med = (xs) => { const a = [...xs].sort((x, y) => x - y); return a.length ? (a.length % 2 ? a[(a.length - 1) / 2] : (a[a.length / 2 - 1] + a[a.length / 2]) / 2) : null; };
 const faixa = (xs) => xs.length ? `${med(xs)} (${Math.min(...xs)}–${Math.max(...xs)})` : '—';
 
@@ -143,6 +151,8 @@ async function modoRede(nav, url) {
       await ctx.close();
     }
     saida[largura] = { abortos, linhas };
+    if (linhas.some((l) => l.videoAntesLcp || l.videoAntesLoad)) reprova(`rede ${largura}: vídeo antes do LCP ou do load`);
+    if (!linhas.length) reprova(`rede ${largura}: nenhuma carga válida`);
     const L = linhas;
     console.log(`\n${rotulo} rede ${largura}px lento (n=${L.length}, abortos=${abortos})`);
     console.log(`  LCP ${faixa(L.map((l) => l.lcp))} ms | load ${faixa(L.map((l) => l.load))} ms`);
@@ -168,7 +178,7 @@ async function estadoTarja(p) {
   });
 }
 
-async function cenario(nav, url, nome, largura, { contexto = {}, init = [], depois } = {}) {
+async function cenario(nav, url, nome, largura, { contexto = {}, init = [], depois, espera } = {}) {
   const ctx = await contextoDe(nav, largura, contexto);
   for (const [fn, arg] of init) await ctx.addInitScript(fn, arg);
   const p = await ctx.newPage();
@@ -183,22 +193,41 @@ async function cenario(nav, url, nome, largura, { contexto = {}, init = [], depo
   const videos = [...reqs.values()].filter((r) => VIDEO_TARJA.test(r.url)).map((r) => decodeURIComponent(r.url.split('/').pop()));
   await ctx.close();
   const r = { nome, largura, reqVideo: [...new Set(videos)], ...estado, extra, erros };
+  const ok = {
+    toca: () => r.reqVideo.length > 0 && r.video && !r.video.paused && r.video.opacidade === '1',
+    poster: () => r.reqVideo.length === 0 && r.tarjaVisivel,
+    expirada: () => r.reqVideo.length === 0 && !r.tarjaVisivel,
+    pausa: () => !!extra && extra.pausadoEscondida === true && extra.pausadoAoVoltar === false,
+  }[espera];
+  const errosTarja = erros.filter((e) => !ERRO_CONHECIDO.test(e));
   console.log(`  ${nome.padEnd(34)} vídeo baixado: ${r.reqVideo.join(', ') || 'nenhum'} | ${r.video ? `paused=${r.video.paused} readyState=${r.video.readyState} opacidade=${r.video.opacidade}` : 'sem <video>'} | tarja ${r.tarjaVisivel ? 'visível' : 'oculta'}${extra ? ' | ' + JSON.stringify(extra) : ''}${erros.length ? ' | ERROS: ' + erros.join(' / ') : ''}`);
+  if (ok && !ok()) reprova(`cenário "${nome}": esperado ${espera}`);
+  if (errosTarja.length) reprova(`cenário "${nome}": erro de console ${errosTarja[0]}`);
   return r;
+}
+
+// prazo final do contador lido do index.html (o último new Date de
+// prazosPromo) + 2 dias: a Date mockada da "campanha expirada" acompanha a
+// campanha em vez de uma data fixa
+function posUltimoPrazo() {
+  const html = fs.readFileSync(path.join(RAIZ, 'index.html'), 'utf8');
+  const bloco = /const prazosPromo = \[([\s\S]*?)\];/.exec(html);
+  const datas = bloco ? [...bloco[1].matchAll(/new Date\("([^"]+)"\)/g)].map((m) => Date.parse(m[1])) : [];
+  return (datas.length ? Math.max(...datas) : Date.parse('2026-11-02T12:00:00-03:00')) + 2 * 864e5;
 }
 
 async function modoCenarios(nav, url) {
   console.log(`\n${rotulo} cenários`);
-  const pos31out = Date.parse('2026-11-02T12:00:00-03:00');
+  const pos31out = posUltimoPrazo();
   return [
-    await cenario(nav, url, 'desktop 1474 (deve tocar)', 1474),
-    await cenario(nav, url, 'desktop movimento reduzido', 1474, { contexto: { reducedMotion: 'reduce' } }),
-    await cenario(nav, url, 'desktop saveData', 1474, { init: [[conexao, { saveData: true, effectiveType: '4g' }]] }),
-    await cenario(nav, url, 'celular 390 4g (deve tocar)', 390, { init: [[conexao, { saveData: false, effectiveType: '4g' }]] }),
-    await cenario(nav, url, 'celular 390 3g (fica o pôster)', 390, { init: [[conexao, { saveData: false, effectiveType: '3g' }]] }),
-    await cenario(nav, url, 'celular 390 sem connection (toca)', 390, { init: [[semConexao]] }),
-    await cenario(nav, url, 'campanha expirada (Date mockada)', 1474, { init: [[dataMockada, pos31out]] }),
-    await cenario(nav, url, 'tarja escondida com vídeo rodando', 1474, {
+    await cenario(nav, url, 'desktop 1474 (deve tocar)', 1474, { espera: 'toca' }),
+    await cenario(nav, url, 'desktop movimento reduzido', 1474, { contexto: { reducedMotion: 'reduce' }, espera: 'poster' }),
+    await cenario(nav, url, 'desktop saveData', 1474, { init: [[conexao, { saveData: true, effectiveType: '4g' }]], espera: 'poster' }),
+    await cenario(nav, url, 'celular 390 4g (deve tocar)', 390, { init: [[conexao, { saveData: false, effectiveType: '4g' }]], espera: 'toca' }),
+    await cenario(nav, url, 'celular 390 3g (fica o pôster)', 390, { init: [[conexao, { saveData: false, effectiveType: '3g' }]], espera: 'poster' }),
+    await cenario(nav, url, 'celular 390 sem connection (toca)', 390, { init: [[semConexao]], espera: 'toca' }),
+    await cenario(nav, url, 'campanha expirada (Date mockada)', 1474, { init: [[dataMockada, pos31out]], espera: 'expirada' }),
+    await cenario(nav, url, 'tarja escondida com vídeo rodando', 1474, { espera: 'pausa',
       depois: async (p) => {
         const antes = await p.evaluate(() => document.querySelector('.tarjaImage video')?.paused);
         await p.evaluate(() => { document.querySelector('.tarjaImage').style.display = 'none'; });
@@ -276,21 +305,37 @@ async function modoVisual(nav, url) {
         // headless pode terminar o seek sem PINTAR o quadro novo, e a captura
         // pegava o quadro de antes da pausa (medido: 1,04% numa execução,
         // 1,54% na outra, o texto da arte em fases diferentes).
-        linha.mediaTimeTroca = await p.evaluate(async () => {
-          const v = document.querySelector('.tarjaImage video');
-          v.pause();
-          v.style.transition = 'none';
-          v.style.opacity = '1';
-          const t = await new Promise((r) => { v.requestVideoFrameCallback((agora, meta) => r(meta.mediaTime)); v.currentTime = 0; });
-          await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
-          return t;
-        });
+        // play() vira no-op nesta instância durante a medida: o screenshot
+        // rola o alvo para a vista, o IntersectionObserver do tarjaVideo.js
+        // dispara e chamava play() de novo — a captura do "quadro 0" pegava
+        // a animação andando (5,96% em 1366, com os MESMOS arquivos que
+        // tinham dado 0,897%). Depois da captura, confere que o vídeo seguiu
+        // parado no 0; se não, mede de novo (até 3 vezes) em vez de inventar.
         const fTroca = path.join(pasta, `${largura}-video-quadro0.png`);
-        await alvo.screenshot({ path: fTroca });
-        linha.diffTroca = await diffPct(fPoster, fTroca);
+        for (let tentativa = 1; tentativa <= 3; tentativa++) {
+          linha.mediaTimeTroca = await p.evaluate(async () => {
+            const v = document.querySelector('.tarjaImage video');
+            v.play = () => Promise.resolve();
+            v.pause();
+            v.style.transition = 'none';
+            v.style.opacity = '1';
+            const t = await new Promise((r) => { v.requestVideoFrameCallback((agora, meta) => r(meta.mediaTime)); v.currentTime = 0; });
+            await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+            return t;
+          });
+          await alvo.screenshot({ path: fTroca });
+          const parado = await p.evaluate(() => { const v = document.querySelector('.tarjaImage video'); return v.paused && v.currentTime === 0; });
+          linha.tentativasTroca = tentativa;
+          if (parado) { linha.diffTroca = await diffPct(fPoster, fTroca); break; }
+          linha.diffTroca = { erro: 'o vídeo saiu do quadro 0 durante a captura' };
+        }
       }
     }
     saida.push(linha);
+    const mesmaCaixa = linha.caixaVideo && ['x', 'y', 'w', 'h'].every((k) => Math.abs(linha.caixaVideo[k] - caixa[k]) <= 0.5);
+    if (!linha.tocou) reprova(`visual ${largura}: o vídeo não chegou a tocar`);
+    else if (!mesmaCaixa) reprova(`visual ${largura}: caixa do vídeo ≠ caixa do pôster`);
+    else if (!linha.diffTroca || linha.diffTroca.erro || linha.diffTroca.maePct > 1) reprova(`visual ${largura}: diff pôster × quadro 0 ${JSON.stringify(linha.diffTroca)} (régua ≤ 1%)`);
     console.log(`  ${largura}px caixa ${JSON.stringify(caixa)}${linha.caixaVideo ? ' | vídeo ' + JSON.stringify(linha.caixaVideo) : ''}${'tocou' in linha ? ' | tocou=' + linha.tocou : ''}${linha.diffTroca ? ` | quadro em ${linha.mediaTimeTroca}s | diff pôster×quadro0 ` + JSON.stringify(linha.diffTroca) : ''}`);
     await ctx.close();
   }
@@ -371,7 +416,7 @@ async function modoIphone(url) {
   }
   saida.falhas = falhas;
   console.log(falhas.length ? `  FALHOU: ${falhas.join('; ')}` : '  aceite ok em: ' + Object.entries(saida.motores).filter(([, L]) => Array.isArray(L)).map(([m]) => m).join(', '));
-  if (falhas.length) process.exitCode = 1;
+  for (const f of falhas) reprovas.push('iphone: ' + f);
   return saida;
 }
 
@@ -388,3 +433,5 @@ try {
   await nav.close();
   await servidor.fechar();
 }
+console.log(reprovas.length ? `\nREPROVADO (${reprovas.length}): ${reprovas.join('; ')}` : '\nprova da tarja: tudo dentro da régua');
+process.exitCode = reprovas.length ? 1 : 0;

@@ -1,18 +1,25 @@
 // Reencoda a tarja em vídeo a partir dos masters — reprodutível.
 //
-//   node scripts/tarja-video.mjs <campanha> [--masters <pasta>] [--so desk|mob]
-//                                [--denoise auto|leve|nao] [--analisar]
+//   node scripts/tarja-video.mjs <campanha> --masters <pasta> [--so desk|mob]
+//        [--denoise auto|leve|nao] [--analisar] [--destino <pasta>]
+//        [--relatorio <arquivo.json>]
 //
-// Entrada: <pasta>/tarja-desktop-master.mp4 e tarja-mobile-master.mp4 (os
-// masters do designer, ~CRF 6). Padrão: $TARJA_MASTERS ou
-// C:/Users/gusta/Videos/zero7-tarjas/export/master.
-// Saída: assets/tarjapopup/tarja-<campanha>-<desk|mob>.webm/.mp4/-poster.avif
-// e medidas/tarja-video-encode-<campanha>.json (parâmetros, pesos, diffs).
+// Quem troca campanha usa `npm run tarja -- <pasta>` (tarja-ingestao.mjs),
+// que valida a pasta, chama este encoder e mexe no index.html. Este script
+// é só o encode.
+//
+// Entrada: <pasta>/desktop.mp4 e mobile.mp4 (os masters do designer; os
+// nomes antigos tarja-desktop-master.mp4/tarja-mobile-master.mp4 também
+// valem). Padrão da pasta: $TARJA_MASTERS.
+// Saída: <destino>/tarja-<campanha>-<desk|mob>.webm/.mp4/-poster.avif
+// (padrão assets/tarjapopup) e o relatório (padrão
+// medidas/tarja-video-encode-<campanha>.json: parâmetros, pesos, diffs).
+// Sai com código 2 se algum arquivo passar do alvo ou a emenda passar de 1%.
 //
 // Regras (lote "tarja em vídeo", out/2026):
-//   - 24 fps; VP9 em duas passadas, CRF 34–38 (o menor que caiba no alvo;
-//     o mob tem CRF fixo, ver VARIANTES); H.264 de reserva (libx264,
-//     CRF 26–30, high, yuv420p, +faststart).
+//   - 24 fps; VP9 em duas passadas, CRF 38 fixo (parâmetros aprovados, em
+//     scripts/lib/tarja.mjs); H.264 de reserva (libx264, o menor CRF de
+//     26–30 que caiba no alvo, high, yuv420p, +faststart).
 //   - Alvo: desk ≤ 250 KB, mob ≤ 200 KB.
 //   - Denoise (hqdn3d fraco) SÓ se o grão domina o peso: em `auto`, mede o
 //     mesmo CRF com e sem; entra se cortar ≥ 25% E o alvo não couber sem ele.
@@ -32,34 +39,24 @@ import { fileURLToPath } from 'node:url';
 import ffmpeg from 'ffmpeg-static';
 import ffprobeStatic from 'ffprobe-static';
 import sharp from 'sharp';
+import { FPS, VARIANTES, cobertura } from './lib/tarja.mjs';
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
 const opc = (nome, padrao) => { const i = argv.indexOf(nome); return i >= 0 ? argv.splice(i, 2)[1] : padrao; };
 const flag = (nome) => { const i = argv.indexOf(nome); if (i >= 0) { argv.splice(i, 1); return true; } return false; };
-const MASTERS = opc('--masters', process.env.TARJA_MASTERS || 'C:/Users/gusta/Videos/zero7-tarjas/export/master');
+const MASTERS = opc('--masters', process.env.TARJA_MASTERS || '');
+const DESTINO = path.resolve(opc('--destino', path.join(RAIZ, 'assets', 'tarjapopup')));
 const SO = opc('--so', null);
 const DENOISE = opc('--denoise', 'auto');
 const ANALISAR = flag('--analisar');
+const RELATORIO = opc('--relatorio', null);
 const campanha = (argv[0] || '').toLowerCase();
-if (!/^[a-z0-9-]+$/.test(campanha)) { console.error('uso: node scripts/tarja-video.mjs <campanha> [--masters <pasta>] [--so desk|mob] [--denoise auto|leve|nao] [--analisar]'); process.exit(1); }
+if (!/^[a-z0-9-]+$/.test(campanha) || !MASTERS) { console.error('uso: node scripts/tarja-video.mjs <campanha> --masters <pasta> [--so desk|mob] [--denoise auto|leve|nao] [--analisar] [--destino <pasta>] [--relatorio <arquivo>]'); process.exit(1); }
 
-const FPS = 24;
 const CRF_264 = [26, 27, 28, 29, 30];
 const HQDN3D_LEVE = 'hqdn3d=1.5:1.5:3:3';
-// Resoluções e alvos decididos medindo (LIBERDADE, out/2026 — ver
-// medidas/tarja-video.md):
-//  - desk 2370×94 (1,5×): a 3160×126 do master dava 502 KB em CRF 38 e
-//    emenda de 1,29%; a 1,5× dá 246 KB e 0,98%. Na tela de 1920 (DPR 1) a
-//    tarja é exibida com ≤ 1580 px — sobra resolução.
-//  - mob 1040×142 em CRF 38 FIXO (182 KB), alvo revisado para ≤ 200 KB: a
-//    728×100 cabia mais perto dos 100 KB, mas borra o texto num iPhone
-//    (390 px a 3×). O vídeo do celular só baixa pós-load/idle e em 4g.
-const VARIANTES = {
-  desk: { master: 'tarja-desktop-master.mp4', w: 2370, h: 94, alvoKB: 250, crfs: [34, 35, 36, 37, 38] },
-  mob: { master: 'tarja-mobile-master.mp4', w: 1040, h: 142, alvoKB: 200, crfs: [38] },
-};
-const DESTINO = path.join(RAIZ, 'assets', 'tarjapopup');
+fs.mkdirSync(DESTINO, { recursive: true });
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'tarja-video-'));
 
 function rodar(bin, args, { binario = false } = {}) {
@@ -98,9 +95,7 @@ function cadeia(v, { denoise, duracao }) {
     // excedente sai num crop centrado. O master mobile é 2082×286 (7,28:1)
     // e o alvo 1040×142 (7,32:1): vira 1040×143 e perde 1 linha. Em 4:4:4
     // durante a escala — altura ímpar no meio da cadeia não esbarra no 4:2:0.
-    let sw, sh;
-    if (v.w / m.w >= v.h / m.h) { sw = v.w; sh = Math.ceil(m.h * v.w / m.w - 1e-9); }
-    else { sh = v.h; sw = Math.ceil(m.w * v.h / m.h - 1e-9); }
+    const { sw, sh } = cobertura(m.w, m.h, v.w, v.h);
     partes.push('format=yuv444p', `scale=${sw}:${sh}:flags=lanczos`);
     if (sw !== v.w || sh !== v.h) partes.push(`crop=${v.w}:${v.h}:${Math.floor((sw - v.w) / 2)}:${Math.floor((sh - v.h) / 2)}`);
   }
@@ -206,7 +201,9 @@ const relatorio = { campanha, masters: MASTERS, fps: FPS, hqdn3d: HQDN3D_LEVE, v
 
 for (const [nome, v] of Object.entries(VARIANTES)) {
   if (SO && SO !== nome) continue;
-  const entrada = path.join(MASTERS, v.master);
+  const nomeMaster = v.masters.find((n) => fs.existsSync(path.join(MASTERS, n)));
+  if (!nomeMaster) throw new Error(`${nome}: nenhum de ${v.masters.join(' / ')} em ${MASTERS}`);
+  const entrada = path.join(MASTERS, nomeMaster);
   v.masterInfo = sondar(entrada);
   const alvo = v.alvoKB * 1024;
   const base = `tarja-${campanha}-${nome}`;
@@ -226,7 +223,7 @@ for (const [nome, v] of Object.entries(VARIANTES)) {
     const comparacao = await comparacaoDenoise(v, nome);
     if (DENOISE === 'auto') {
       denoise = corte >= 0.25 && sem > alvo; // grão domina E o alvo não cabe sem ele
-      decisaoDenoise = `auto: CRF ${crfTeste} sem ${(sem / 1024).toFixed(0)} KB × com ${(com / 1024).toFixed(0)} KB (−${(corte * 100).toFixed(0)}%) → ${denoise ? 'COM' : 'SEM'} denoise`;
+      decisaoDenoise = `auto: CRF ${crfTeste} sem ${(sem / 1024).toFixed(0)} KB × com ${(com / 1024).toFixed(0)} KB (${corte >= 0 ? '−' : '+'}${Math.abs(corte * 100).toFixed(0)}%) → ${denoise ? 'COM' : 'SEM'} denoise`;
     }
     v.denoiseTeste = { crf: crfTeste, semKB: +(sem / 1024).toFixed(1), comKB: +(com / 1024).toFixed(1), cortePct: +(corte * 100).toFixed(1), comparacao };
     console.log(`   denoise: ${decisaoDenoise} | comparação ampliada: ${comparacao}`);
@@ -253,7 +250,7 @@ for (const [nome, v] of Object.entries(VARIANTES)) {
   console.log(`   pôster: AVIF q${poster.quality} ${poster.kb} KB, diff × quadro 0 = ${poster.diff}% | quadro 0 mp4 × webm = ${diffMp4}%`);
 
   relatorio.variantes[nome] = {
-    master: { arquivo: v.master, ...v.masterInfo }, saida: { w: v.w, h: v.h, fps: FPS },
+    master: { arquivo: nomeMaster, ...v.masterInfo }, saida: { w: v.w, h: v.h, fps: FPS },
     filtro: vfFinal, denoise: { usado: denoise, decisao: decisaoDenoise, teste: v.denoiseTeste || null },
     webm: { arquivo: path.relative(RAIZ, webm), crf: r9.crf, kb: +(r9.bytes / 1024).toFixed(1), noAlvo: r9.coube, tentativas: r9.tentativas },
     mp4: { arquivo: path.relative(RAIZ, mp4), crf: r264.crf, kb: +(r264.bytes / 1024).toFixed(1), noAlvo: r264.coube, tentativas: r264.tentativas },
@@ -263,6 +260,9 @@ for (const [nome, v] of Object.entries(VARIANTES)) {
 }
 
 fs.rmSync(TMP, { recursive: true, force: true });
-const arqRel = path.join(RAIZ, 'medidas', `tarja-video-encode-${campanha}.json`);
+const arqRel = RELATORIO ? path.resolve(RELATORIO) : path.join(RAIZ, 'medidas', `tarja-video-encode-${campanha}.json`);
+const fora = Object.entries(relatorio.variantes).filter(([, r]) => !r.webm.noAlvo || !r.mp4.noAlvo || r.loop.cheio.finalX0 > 1).map(([n]) => n);
+if (fora.length) { console.error(`
+FORA DA RÉGUA (alvo de peso ou emenda > 1%): ${fora.join(', ')}`); process.exitCode = 2; }
 fs.writeFileSync(arqRel, JSON.stringify(relatorio, null, 1));
 console.log(`\nrelatório: ${path.relative(RAIZ, arqRel)}`);
