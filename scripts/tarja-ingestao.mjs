@@ -95,6 +95,15 @@ for (const [nome, v] of Object.entries(VARIANTES)) {
   if (Number(m[1]) * v.h !== Number(m[2]) * v.w) aborta(`o CSS reserva ${m[1]}/${m[2]} para ${nome}, mas o encoder gera ${v.w}×${v.h}`, 'CSS e scripts/lib/tarja.mjs divergem — acerte os dois juntos (regras 17/21) antes de trocar campanha');
 }
 
+// HEAD de quando começou: um commit feito NO MEIO da execução (o encode leva
+// minutos) leva arquivos pela metade — já aconteceu, um .mp4 de 0 bytes
+const HEAD_INICIAL = String(git('rev-parse', 'HEAD').out).trim();
+const conferirHead = () => {
+  const agora = String(git('rev-parse', 'HEAD').out).trim();
+  if (agora !== HEAD_INICIAL) aborta(`houve commit durante a execução (HEAD ${HEAD_INICIAL.slice(0, 7)} → ${agora.slice(0, 7)})`,
+    'não commite enquanto o npm run tarja roda: o commit pode levar vídeo pela metade.\nConfira o commit novo (git show --stat HEAD) e rode de novo.');
+};
+
 if (!ENSAIO) {
   // index.html limpo: o passo 4 dá git add nele, e alteração de outra mão
   // entraria junto sem ninguém ver
@@ -173,6 +182,7 @@ if (ENSAIO) {
 }
 
 /* ================================ 3 ================================ */
+conferirHead();
 passo(3, 'index.html');
 const arqHtml = path.join(RAIZ, 'index.html');
 let html = fs.readFileSync(arqHtml, 'utf8');
@@ -227,6 +237,9 @@ if (campanha.fim) {
 }
 fs.writeFileSync(arqHtml, html);
 limpar = () => {
+  // tira do stage ANTES de apagar: sem isto os arquivos novos ficavam no
+  // índice como "AD" depois de um aborto no passo 4
+  git('reset', '-q', '--', ...arquivosNovos.map((f) => path.relative(RAIZ, f)));
   for (const f of arquivosNovos) fs.rmSync(f, { force: true });
   git('restore', '--staged', '--worktree', '--', 'index.html', 'dist');
   git('clean', '-fdq', '--', 'dist');
@@ -238,6 +251,7 @@ passo(4, 'build, check e prova');
 // comando inteiro numa string: com shell (o npm do Windows é .cmd), args em
 // array é depreciado no Node (DEP0190)
 const npm = (s) => ({ ok: spawnSync(`npm run ${s}`, { cwd: RAIZ, shell: true, stdio: 'inherit' }).status === 0 });
+conferirHead();
 if (!npm('build').ok) aborta('npm run build falhou — ver acima');
 const add = git('add', '-A', '--', 'index.html', 'dist', ...arquivosNovos.map((f) => path.relative(RAIZ, f)));
 if (!add.ok) aborta(`git add falhou: ${add.err}`);
@@ -245,6 +259,7 @@ if (!npm('check').ok) aborta('npm run check falhou — ver acima');
 const rotulo = `tarja-${slug}`;
 const prova = rodar(process.execPath, ['scripts/tarja-video-prova.mjs', rotulo, 'tudo', CARGAS], { herda: true });
 if (!prova.ok) aborta('a prova da tarja reprovou — ver acima', `shots em shots/tarja-video-${rotulo}/, medidas em medidas/tarja-video-${rotulo}-*.json`);
+conferirHead();
 limpar = null;
 
 /* ================================ 5 ================================ */
