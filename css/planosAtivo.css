@@ -36,6 +36,11 @@
        nasce com 17x a altura certa. Com ele, sobra a razão — que é o que a
        gente queria. Medido: 240 x 65,9 antes e depois. */
     height: auto;
+    /* A razão REAL dos arquivos no ar (LIBERDADE out/2026: as duas artes
+       700x366). Com a arte nova (3540x1850) e o atributo antigo (3482x1850)
+       a caixa nascia 2–3px mais alta e encolhia quando a arte chegava.
+       Trocou o cupom, refaça junto com o width/height do index.html. */
+    aspect-ratio: 700 / 366;
 }
 
 #plan[data-asset="indice"] .cupom.white,

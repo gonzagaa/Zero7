@@ -178,8 +178,7 @@ body section.planos .wrapper .swiper.mySwiper11{overflow:inherit}
 .planos .cupom{display:flex;width:100%;margin-top:2rem;gap:var(--esp-1);align-items:center}
 @media (max-width: 1079.98px){.planos .swiper-button-prev,.planos .swiper-button-next{display:none}}
 .planos .btn__label span{display:none}
-@media (min-width: 1080px){section.planos img.cupom{width:35rem;margin-bottom:5rem}
-body section.planos .wrapper .swiper.mySwiper4{overflow:hidden}
+@media (min-width: 1080px){body section.planos .wrapper .swiper.mySwiper4{overflow:hidden}
 body section.planos .wrapper .swiper.mySwiper11{overflow:hidden}
 section.planos .swiper:before,section.planos .swiper:after{content:"";position:absolute;top:0;width:20rem;height:100%;z-index:2;display:none}}
 .planos.tema:before,.planos.tema:after{content:"";position:absolute;width:100%;height:2px;top:0;left:0;right:0;background:linear-gradient(to right,transparent,#ffffff24,#ffffff,#ffffff1d,transparent);z-index:2}
@@ -188,7 +187,7 @@ body:where(.anima-ociosas) .planos .card--copa .card-tarja:before{animation:seni
 body:where(.anima-ociosas) .planos .card--copa .card-tarja:after{animation:seniorTarjaDesliza 9s ease-in-out infinite}
 @keyframes seniorTarjaDesliza{0%{transform:translate(0)}50%{transform:translate(-54.5455%)}to{transform:translate(0)}}
 @keyframes seniorTarjaShine{0%{transform:translate(-100%)}55%{transform:translate(100%)}to{transform:translate(100%)}}
-.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto}
+.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto;aspect-ratio:700 / 366}
 .plano-asset[hidden]{display:none!important}
 #faq [hidden]{display:none!important}
 .faq__search-loading[hidden]{display:none}
@@ -579,8 +578,8 @@ html.lenis,html.lenis body{height:auto}
 [data-aos=fade-down]{transform:translate3d(0,-100px,0)}
 [data-aos=fade-right]{transform:translate3d(-100px,0,0)}
 [data-aos=fade-up-left]{transform:translate3d(100px,100px,0)}</style>
-  <link rel="stylesheet" href="./dist/home.7e092dc3.css" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="./dist/home.7e092dc3.css"></noscript>
+  <link rel="stylesheet" href="./dist/home.baa9d2ac.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="./dist/home.baa9d2ac.css"></noscript>
 
   <!-- C4: preconnect para os terceiros que restam na janela inicial
        (jquery, lenis/ionicons no unpkg, gsap/countUp no cdnjs) — 1 RTT
@@ -1225,10 +1224,17 @@ html.lenis,html.lenis body{height:auto}
                sem ele a célula nasceria com altura 0 e o cupom empurraria o
                layout ao chegar. A largura continua vindo do CSS (30rem), a
                caixa medida não muda, e a arte, o link e a lógica da campanha
-               ficam como estão. -->
+               ficam como estão.
+               LIBERDADE (out/2026): a arte do designer é 3540x1850; o que vai
+               ao ar é a reexportação a 700px de largura (2x dos 350px exibidos
+               no desktop; AVIF q60 4:4:4, com alfa) = 700x366 nas duas, e o
+               width/height e o aspect-ratio do planosAtivo.css seguem ESSE
+               arquivo. Nome por campanha (cupom-<campanha>-black|white): o
+               cache dos assets é immutable de 1 ano e o nome antigo já servia
+               outra arte. -->
           <div class="cupom-wrap">
-            <img class="cupom" width="3482" height="1850" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom LIBERDADE black.avif" alt="">
-            <img class="cupom white" width="3482" height="1850" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom LIBERDADE white.avif" alt="" aria-hidden="true">
+            <img class="cupom" width="700" height="366" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-liberdade-black.avif" alt="">
+            <img class="cupom white" width="700" height="366" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-liberdade-white.avif" alt="" aria-hidden="true">
           </div>
       </div>
 
