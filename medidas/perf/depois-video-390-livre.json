@@ -1,0 +1,2069 @@
+{
+ "rotulo": "depois-video",
+ "largura": 390,
+ "rede": "livre",
+ "cargas": 9,
+ "abortos": 0,
+ "repeticoes": 0,
+ "linhas": [
+  {
+   "carga": 1,
+   "lcp": 528,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 528,
+   "ttfb": 380,
+   "load": 703,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0169,
+   "tbt": 0,
+   "mainThread": 303,
+   "longtasks": [
+    {
+     "dur": 66,
+     "t": 4615,
+     "de": "unknown"
+    },
+    {
+     "dur": 65,
+     "t": 512,
+     "de": "unknown"
+    },
+    {
+     "dur": 63,
+     "t": 4546,
+     "de": "unknown"
+    },
+    {
+     "dur": 58,
+     "t": 4682,
+     "de": "unknown"
+    },
+    {
+     "dur": 51,
+     "t": 4743,
+     "de": "about:blank"
+    }
+   ],
+   "bytesIniciais": 987609,
+   "reqIniciais": 81,
+   "bytesFinais": 7218694,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120363.945,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23437,
+     "req": 21,
+     "primeira": -1789990119973.283,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1906,
+     "req": 1,
+     "primeira": -1789990119973.235,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31244,
+     "req": 1,
+     "primeira": -1789990119973.073,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990119845.278,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 21348,
+     "req": 3,
+     "primeira": -1789990119666.929,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990119664.213,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539148,
+     "req": 3,
+     "primeira": -1789990116483.533,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410413,
+     "req": 11,
+     "primeira": -1789990116330.109,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1791,
+     "req": 1,
+     "primeira": -1789990116216.797,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289519,
+     "req": 3,
+     "primeira": -1789990116012.894,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6864,
+     "req": 1,
+     "primeira": -1789990116010.836,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116007.241,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116006.935,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75054,
+     "req": 5,
+     "primeira": -1789990116002.134,
+     "iniciador": "script"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990115889.447,
+     "iniciador": "script"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10247,
+     "req": 3,
+     "primeira": -1789990115692.002,
+     "iniciador": "script"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990115626.486,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 548,
+     "req": 1,
+     "primeira": -1789990115625.837,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 778,
+     "req": 4,
+     "primeira": -1789990115623.559,
+     "iniciador": "other"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990115517.139,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 620,
+     "req": 3,
+     "primeira": -1789990115514.875,
+     "iniciador": "other"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1757,
+     "req": 3,
+     "primeira": -1789990115493.94,
+     "iniciador": "preflight"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990115395.913,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56888,
+     "req": 1,
+     "primeira": -1789990115394.762,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1663,
+     "req": 1,
+     "primeira": -1789990115389.093,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115327.39,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990113931.656,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 747,
+     "req": 1,
+     "primeira": -1789990113424.792,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990112982.728,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88567,
+     "req": 2,
+     "primeira": -1789990112796.918,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 2,
+   "lcp": 120,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 84,
+   "ttfb": 2,
+   "load": 271,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0172,
+   "tbt": 0,
+   "mainThread": 341,
+   "longtasks": [
+    {
+     "dur": 64,
+     "t": 4107,
+     "de": "unknown"
+    },
+    {
+     "dur": 60,
+     "t": 4247,
+     "de": "unknown"
+    },
+    {
+     "dur": 59,
+     "t": 81,
+     "de": "unknown"
+    },
+    {
+     "dur": 55,
+     "t": 4311,
+     "de": "unknown"
+    },
+    {
+     "dur": 53,
+     "t": 4031,
+     "de": "unknown"
+    },
+    {
+     "dur": 50,
+     "t": 3970,
+     "de": "about:blank"
+    }
+   ],
+   "bytesIniciais": 987041,
+   "reqIniciais": 81,
+   "bytesFinais": 7218396,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120365.145,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23339,
+     "req": 21,
+     "primeira": -1789990120356.625,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1896,
+     "req": 1,
+     "primeira": -1789990120356.578,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120356.426,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990120279.336,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20887,
+     "req": 3,
+     "primeira": -1789990120102.047,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990120097.942,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539164,
+     "req": 3,
+     "primeira": -1789990116902.689,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410369,
+     "req": 11,
+     "primeira": -1789990116700.013,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1799,
+     "req": 1,
+     "primeira": -1789990116588.951,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289557,
+     "req": 3,
+     "primeira": -1789990116509.246,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6865,
+     "req": 1,
+     "primeira": -1789990116506.761,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116503.028,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116502.654,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75055,
+     "req": 5,
+     "primeira": -1789990116497.327,
+     "iniciador": "script"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990116338.532,
+     "iniciador": "script"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1750,
+     "req": 3,
+     "primeira": -1789990116259.188,
+     "iniciador": "preflight"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10202,
+     "req": 3,
+     "primeira": -1789990116203.984,
+     "iniciador": "script"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116060.739,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 557,
+     "req": 1,
+     "primeira": -1789990116060.186,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 778,
+     "req": 4,
+     "primeira": -1789990116058.266,
+     "iniciador": "other"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116000.95,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 894,
+     "req": 3,
+     "primeira": -1789990115998.892,
+     "iniciador": "other"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990115901.212,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56908,
+     "req": 1,
+     "primeira": -1789990115900.31,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1662,
+     "req": 1,
+     "primeira": -1789990115893.075,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115836.306,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990114399.01,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 748,
+     "req": 1,
+     "primeira": -1789990113742.245,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990113470.181,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88566,
+     "req": 2,
+     "primeira": -1789990113267.101,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 3,
+   "lcp": 128,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 112,
+   "ttfb": 2,
+   "load": 233,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0197,
+   "tbt": 0,
+   "mainThread": 295,
+   "longtasks": [
+    {
+     "dur": 68,
+     "t": 4103,
+     "de": "unknown"
+    },
+    {
+     "dur": 61,
+     "t": 85,
+     "de": "unknown"
+    },
+    {
+     "dur": 58,
+     "t": 3998,
+     "de": "unknown"
+    },
+    {
+     "dur": 56,
+     "t": 4177,
+     "de": "unknown"
+    },
+    {
+     "dur": 52,
+     "t": 3940,
+     "de": "about:blank"
+    }
+   ],
+   "bytesIniciais": 987085,
+   "reqIniciais": 81,
+   "bytesFinais": 7218189,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120364.912,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23385,
+     "req": 21,
+     "primeira": -1789990120354.16,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1900,
+     "req": 1,
+     "primeira": -1789990120354.091,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120353.872,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990120274.478,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20881,
+     "req": 3,
+     "primeira": -1789990120135.742,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990120134.051,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539155,
+     "req": 3,
+     "primeira": -1789990116944.868,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410398,
+     "req": 11,
+     "primeira": -1789990116742.483,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1801,
+     "req": 1,
+     "primeira": -1789990116646.79,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289521,
+     "req": 3,
+     "primeira": -1789990116551.137,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6865,
+     "req": 1,
+     "primeira": -1789990116548.876,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116545.425,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116544.857,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75061,
+     "req": 5,
+     "primeira": -1789990116537.921,
+     "iniciador": "script"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990116367.939,
+     "iniciador": "script"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1751,
+     "req": 3,
+     "primeira": -1789990116292.254,
+     "iniciador": "preflight"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10234,
+     "req": 3,
+     "primeira": -1789990116205.35,
+     "iniciador": "script"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116134.313,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 557,
+     "req": 1,
+     "primeira": -1789990116133.781,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 778,
+     "req": 4,
+     "primeira": -1789990116131.837,
+     "iniciador": "other"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116003.093,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 619,
+     "req": 3,
+     "primeira": -1789990116001.249,
+     "iniciador": "other"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990115933.379,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56908,
+     "req": 1,
+     "primeira": -1789990115932.294,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1661,
+     "req": 1,
+     "primeira": -1789990115921.847,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115848.733,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990114391.48,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 748,
+     "req": 1,
+     "primeira": -1789990113812.139,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990113535.358,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88566,
+     "req": 2,
+     "primeira": -1789990113323.554,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 4,
+   "lcp": 104,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 104,
+   "ttfb": 2,
+   "load": 219,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0213,
+   "tbt": 0,
+   "mainThread": 289,
+   "longtasks": [
+    {
+     "dur": 66,
+     "t": 79,
+     "de": "unknown"
+    },
+    {
+     "dur": 64,
+     "t": 4144,
+     "de": "unknown"
+    },
+    {
+     "dur": 58,
+     "t": 4244,
+     "de": "unknown"
+    },
+    {
+     "dur": 51,
+     "t": 4039,
+     "de": "unknown"
+    },
+    {
+     "dur": 50,
+     "t": 3917,
+     "de": "about:blank"
+    }
+   ],
+   "bytesIniciais": 987054,
+   "reqIniciais": 81,
+   "bytesFinais": 7218797,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120365.29,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23357,
+     "req": 21,
+     "primeira": -1789990120356.078,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1896,
+     "req": 1,
+     "primeira": -1789990120356.034,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31244,
+     "req": 1,
+     "primeira": -1789990120355.869,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990120278.133,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20883,
+     "req": 3,
+     "primeira": -1789990120151.329,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990120149.069,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539610,
+     "req": 3,
+     "primeira": -1789990116950.756,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410560,
+     "req": 11,
+     "primeira": -1789990116747.777,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1795,
+     "req": 1,
+     "primeira": -1789990116657.117,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289520,
+     "req": 3,
+     "primeira": -1789990116516.985,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6865,
+     "req": 1,
+     "primeira": -1789990116515.375,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116511.615,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116511.279,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75050,
+     "req": 5,
+     "primeira": -1789990116504.213,
+     "iniciador": "script"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1752,
+     "req": 3,
+     "primeira": -1789990116260.094,
+     "iniciador": "preflight"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990116222.795,
+     "iniciador": "script"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10270,
+     "req": 3,
+     "primeira": -1789990116166.448,
+     "iniciador": "script"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116065.294,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 557,
+     "req": 1,
+     "primeira": -1789990116064.762,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 778,
+     "req": 4,
+     "primeira": -1789990116062.936,
+     "iniciador": "other"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116020.021,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 619,
+     "req": 3,
+     "primeira": -1789990116017.929,
+     "iniciador": "other"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990115954.897,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56908,
+     "req": 1,
+     "primeira": -1789990115953.573,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1663,
+     "req": 1,
+     "primeira": -1789990115812.595,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115762.283,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990114416.156,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 748,
+     "req": 1,
+     "primeira": -1789990113892.43,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990113453.237,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88567,
+     "req": 2,
+     "primeira": -1789990113146.253,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 5,
+   "lcp": 148,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 148,
+   "ttfb": 2,
+   "load": 191,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0171,
+   "tbt": 0,
+   "mainThread": 234,
+   "longtasks": [
+    {
+     "dur": 69,
+     "t": 4164,
+     "de": "unknown"
+    },
+    {
+     "dur": 64,
+     "t": 4093,
+     "de": "unknown"
+    },
+    {
+     "dur": 51,
+     "t": 3838,
+     "de": "about:blank"
+    },
+    {
+     "dur": 50,
+     "t": 3958,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 974499,
+   "reqIniciais": 80,
+   "bytesFinais": 7218313,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120364.881,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23357,
+     "req": 21,
+     "primeira": -1789990120356.711,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1898,
+     "req": 1,
+     "primeira": -1789990120356.657,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120356.468,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990120315.225,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20890,
+     "req": 3,
+     "primeira": -1789990120177.849,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990120176.159,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539060,
+     "req": 3,
+     "primeira": -1789990116987.535,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410471,
+     "req": 11,
+     "primeira": -1789990116834.64,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1803,
+     "req": 1,
+     "primeira": -1789990116745.386,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289542,
+     "req": 3,
+     "primeira": -1789990116575.973,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6875,
+     "req": 1,
+     "primeira": -1789990116574.59,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116569.761,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116569.326,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75056,
+     "req": 5,
+     "primeira": -1789990116562.097,
+     "iniciador": "script"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990116439.259,
+     "iniciador": "script"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1747,
+     "req": 3,
+     "primeira": -1789990116413.203,
+     "iniciador": "script"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10229,
+     "req": 3,
+     "primeira": -1789990116218.704,
+     "iniciador": "script"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116134.305,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 557,
+     "req": 1,
+     "primeira": -1789990116133.714,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 778,
+     "req": 4,
+     "primeira": -1789990116131.687,
+     "iniciador": "other"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116092.706,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 823,
+     "req": 3,
+     "primeira": -1789990116090.059,
+     "iniciador": "other"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990115979.781,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56908,
+     "req": 1,
+     "primeira": -1789990115978.738,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1663,
+     "req": 1,
+     "primeira": -1789990115948.108,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115802.307,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47910,
+     "req": 3,
+     "primeira": -1789990114467.45,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 749,
+     "req": 1,
+     "primeira": -1789990113850.029,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990113561.934,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88567,
+     "req": 2,
+     "primeira": -1789990113366.212,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 6,
+   "lcp": 108,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 108,
+   "ttfb": 2,
+   "load": 215,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0197,
+   "tbt": 0,
+   "mainThread": 293,
+   "longtasks": [
+    {
+     "dur": 64,
+     "t": 4055,
+     "de": "unknown"
+    },
+    {
+     "dur": 61,
+     "t": 78,
+     "de": "unknown"
+    },
+    {
+     "dur": 61,
+     "t": 4233,
+     "de": "unknown"
+    },
+    {
+     "dur": 55,
+     "t": 4121,
+     "de": "unknown"
+    },
+    {
+     "dur": 52,
+     "t": 3930,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 987059,
+   "reqIniciais": 81,
+   "bytesFinais": 7218293,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120364.571,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23357,
+     "req": 21,
+     "primeira": -1789990120356.341,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1892,
+     "req": 1,
+     "primeira": -1789990120356.302,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120356.173,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990120281.852,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20891,
+     "req": 3,
+     "primeira": -1789990120153.969,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990120151.306,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539134,
+     "req": 3,
+     "primeira": -1789990116962.064,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410445,
+     "req": 11,
+     "primeira": -1789990116761.986,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1801,
+     "req": 1,
+     "primeira": -1789990116667.479,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289542,
+     "req": 3,
+     "primeira": -1789990116576.324,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6865,
+     "req": 1,
+     "primeira": -1789990116573.994,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116570.671,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116570.374,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75058,
+     "req": 5,
+     "primeira": -1789990116565.628,
+     "iniciador": "script"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990116463.562,
+     "iniciador": "script"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10270,
+     "req": 3,
+     "primeira": -1789990116254.567,
+     "iniciador": "script"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116190.517,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 619,
+     "req": 3,
+     "primeira": -1789990116188.577,
+     "iniciador": "other"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1746,
+     "req": 3,
+     "primeira": -1789990116167.911,
+     "iniciador": "script"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116073.891,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 557,
+     "req": 1,
+     "primeira": -1789990116073.24,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 778,
+     "req": 4,
+     "primeira": -1789990116071.127,
+     "iniciador": "other"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116011.219,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56908,
+     "req": 1,
+     "primeira": -1789990116009.919,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1664,
+     "req": 1,
+     "primeira": -1789990115968.135,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115887.78,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47910,
+     "req": 3,
+     "primeira": -1789990114411.405,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 750,
+     "req": 1,
+     "primeira": -1789990113855.93,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3139,
+     "req": 2,
+     "primeira": -1789990113553.399,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88567,
+     "req": 2,
+     "primeira": -1789990113360.101,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 7,
+   "lcp": 144,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 144,
+   "ttfb": 2,
+   "load": 222,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0218,
+   "tbt": 0,
+   "mainThread": 284,
+   "longtasks": [
+    {
+     "dur": 66,
+     "t": 4081,
+     "de": "unknown"
+    },
+    {
+     "dur": 58,
+     "t": 4291,
+     "de": "unknown"
+    },
+    {
+     "dur": 55,
+     "t": 4021,
+     "de": "unknown"
+    },
+    {
+     "dur": 54,
+     "t": 4234,
+     "de": "unknown"
+    },
+    {
+     "dur": 51,
+     "t": 3963,
+     "de": "about:blank"
+    }
+   ],
+   "bytesIniciais": 974494,
+   "reqIniciais": 80,
+   "bytesFinais": 7218590,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120364.547,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23357,
+     "req": 21,
+     "primeira": -1789990120356.348,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1895,
+     "req": 1,
+     "primeira": -1789990120356.293,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120356.138,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990120318.193,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20888,
+     "req": 3,
+     "primeira": -1789990120146.873,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990120143.955,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539135,
+     "req": 3,
+     "primeira": -1789990116942.399,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410417,
+     "req": 11,
+     "primeira": -1789990116739.439,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1795,
+     "req": 1,
+     "primeira": -1789990116635.74,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289604,
+     "req": 3,
+     "primeira": -1789990116547.125,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6857,
+     "req": 1,
+     "primeira": -1789990116545.776,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116541.965,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116541.249,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75056,
+     "req": 5,
+     "primeira": -1789990116535.305,
+     "iniciador": "script"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990116407.728,
+     "iniciador": "script"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10240,
+     "req": 3,
+     "primeira": -1789990116228.677,
+     "iniciador": "script"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1911,
+     "req": 3,
+     "primeira": -1789990116204.245,
+     "iniciador": "preflight"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116079.067,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 894,
+     "req": 3,
+     "primeira": -1789990116076.739,
+     "iniciador": "other"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116017.961,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 557,
+     "req": 1,
+     "primeira": -1789990116017.258,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 778,
+     "req": 4,
+     "primeira": -1789990116014.896,
+     "iniciador": "other"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990115979.429,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56888,
+     "req": 1,
+     "primeira": -1789990115978.186,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1662,
+     "req": 1,
+     "primeira": -1789990115944.856,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115900.035,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47910,
+     "req": 3,
+     "primeira": -1789990114454.979,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 749,
+     "req": 1,
+     "primeira": -1789990113944.387,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990113683.054,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88567,
+     "req": 2,
+     "primeira": -1789990113487.703,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 8,
+   "lcp": 152,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 152,
+   "ttfb": 2,
+   "load": 222,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0208,
+   "tbt": 0,
+   "mainThread": 237,
+   "longtasks": [
+    {
+     "dur": 70,
+     "t": 4146,
+     "de": "unknown"
+    },
+    {
+     "dur": 59,
+     "t": 4262,
+     "de": "unknown"
+    },
+    {
+     "dur": 55,
+     "t": 3992,
+     "de": "about:blank"
+    },
+    {
+     "dur": 53,
+     "t": 4327,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 974489,
+   "reqIniciais": 80,
+   "bytesFinais": 7218266,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120364.655,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23357,
+     "req": 21,
+     "primeira": -1789990120356.716,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1898,
+     "req": 1,
+     "primeira": -1789990120356.675,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120356.545,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990120311.191,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20880,
+     "req": 3,
+     "primeira": -1789990120147.546,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990120145.003,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539125,
+     "req": 3,
+     "primeira": -1789990116968.456,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410579,
+     "req": 11,
+     "primeira": -1789990116765.65,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1794,
+     "req": 1,
+     "primeira": -1789990116688.958,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289515,
+     "req": 3,
+     "primeira": -1789990116484.944,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6862,
+     "req": 1,
+     "primeira": -1789990116483.281,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116479.573,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116479.277,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75065,
+     "req": 5,
+     "primeira": -1789990116474.449,
+     "iniciador": "script"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1746,
+     "req": 3,
+     "primeira": -1789990116254.918,
+     "iniciador": "preflight"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990116244.166,
+     "iniciador": "script"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10272,
+     "req": 3,
+     "primeira": -1789990116161.39,
+     "iniciador": "script"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116046.872,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 548,
+     "req": 1,
+     "primeira": -1789990116046.277,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 778,
+     "req": 4,
+     "primeira": -1789990116044.121,
+     "iniciador": "other"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990115859.353,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 620,
+     "req": 3,
+     "primeira": -1789990115857.25,
+     "iniciador": "other"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990115791.904,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56908,
+     "req": 1,
+     "primeira": -1789990115790.934,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1663,
+     "req": 1,
+     "primeira": -1789990115786.186,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115673.573,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47910,
+     "req": 3,
+     "primeira": -1789990114482.209,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 749,
+     "req": 1,
+     "primeira": -1789990113959.89,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990113674.973,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88567,
+     "req": 2,
+     "primeira": -1789990113464.245,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 9,
+   "lcp": 144,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 144,
+   "ttfb": 2,
+   "load": 213,
+   "clsCarga": 0.0001,
+   "clsTotal": 0.0197,
+   "tbt": 0,
+   "mainThread": 133,
+   "longtasks": [
+    {
+     "dur": 69,
+     "t": 4169,
+     "de": "unknown"
+    },
+    {
+     "dur": 64,
+     "t": 4047,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 974500,
+   "reqIniciais": 80,
+   "bytesFinais": 7218268,
+   "reqFinais": 159,
+   "porDominio": {
+    "127.0.0.1:53312": {
+     "bytes": 5604165,
+     "req": 63,
+     "primeira": -1789990120364.588,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23357,
+     "req": 21,
+     "primeira": -1789990120356.315,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1897,
+     "req": 1,
+     "primeira": -1789990120356.268,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120356.138,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990120314.762,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20892,
+     "req": 3,
+     "primeira": -1789990120154.866,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990120153.151,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 539144,
+     "req": 3,
+     "primeira": -1789990116970.489,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 410546,
+     "req": 11,
+     "primeira": -1789990116768.475,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1792,
+     "req": 1,
+     "primeira": -1789990116690.687,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 289521,
+     "req": 3,
+     "primeira": -1789990116574.07,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6854,
+     "req": 1,
+     "primeira": -1789990116572.792,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 192,
+     "req": 9,
+     "primeira": -1789990116567.691,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116567.374,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 75063,
+     "req": 5,
+     "primeira": -1789990116562.24,
+     "iniciador": "script"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990116410.274,
+     "iniciador": "script"
+    },
+    "sl-11a463aaedf44600a99367660fd6fa70.ecs.us-east-1.on.aws": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116325.793,
+     "iniciador": "script"
+    },
+    "www.facebook.com": {
+     "bytes": 620,
+     "req": 3,
+     "primeira": -1789990116322.871,
+     "iniciador": "other"
+    },
+    "analytics.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116257.602,
+     "iniciador": "script"
+    },
+    "stats.g.doubleclick.net": {
+     "bytes": 557,
+     "req": 1,
+     "primeira": -1789990116256.5,
+     "iniciador": "script"
+    },
+    "www.google.com.br": {
+     "bytes": 734,
+     "req": 4,
+     "primeira": -1789990116253.696,
+     "iniciador": "other"
+    },
+    "googleads.g.doubleclick.net": {
+     "bytes": 10251,
+     "req": 3,
+     "primeira": -1789990116134.968,
+     "iniciador": "script"
+    },
+    "mpc-prod-21-1053047382554.us-central1.run.app": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990116106.794,
+     "iniciador": "script"
+    },
+    "capi-automation.s3.us-east-2.amazonaws.com": {
+     "bytes": 56908,
+     "req": 1,
+     "primeira": -1789990116105.736,
+     "iniciador": "script"
+    },
+    "zero7support.zendesk.com": {
+     "bytes": 1749,
+     "req": 3,
+     "primeira": -1789990116090.397,
+     "iniciador": "preflight"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1665,
+     "req": 1,
+     "primeira": -1789990115958.766,
+     "iniciador": "script"
+    },
+    "popups.rdstation.com.br": {
+     "bytes": 248,
+     "req": 1,
+     "primeira": -1789990115905.305,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990114518.035,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 751,
+     "req": 1,
+     "primeira": -1789990113960.465,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990113695.336,
+     "iniciador": "parser"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 88567,
+     "req": 2,
+     "primeira": -1789990113449.903,
+     "iniciador": "parser"
+    }
+   }
+  }
+ ]
+}

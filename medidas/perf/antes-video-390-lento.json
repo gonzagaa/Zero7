@@ -1,0 +1,1486 @@
+{
+ "rotulo": "antes-video",
+ "largura": 390,
+ "rede": "lento",
+ "cargas": 9,
+ "abortos": 0,
+ "repeticoes": 0,
+ "linhas": [
+  {
+   "carga": 1,
+   "lcp": 1596,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1188,
+   "ttfb": 39,
+   "load": 3488,
+   "clsCarga": 0.0032,
+   "clsTotal": 0.0199,
+   "tbt": 3366,
+   "mainThread": 7818,
+   "longtasks": [
+    {
+     "dur": 807,
+     "t": 4653,
+     "de": "unknown"
+    },
+    {
+     "dur": 744,
+     "t": 5484,
+     "de": "unknown"
+    },
+    {
+     "dur": 736,
+     "t": 1565,
+     "de": "unknown"
+    },
+    {
+     "dur": 479,
+     "t": 13822,
+     "de": "unknown"
+    },
+    {
+     "dur": 455,
+     "t": 14314,
+     "de": "unknown"
+    },
+    {
+     "dur": 382,
+     "t": 4074,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 854659,
+   "reqIniciais": 73,
+   "bytesFinais": 1361649,
+   "reqFinais": 116,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1034255,
+     "req": 61,
+     "primeira": -1789990120356.756,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23471,
+     "req": 21,
+     "primeira": -1789990120018.818,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1897,
+     "req": 1,
+     "primeira": -1789990120009.993,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31243,
+     "req": 1,
+     "primeira": -1789990120007.292,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118706.904,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 21782,
+     "req": 3,
+     "primeira": -1789990117232.559,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990117182.412,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 168037,
+     "req": 3,
+     "primeira": -1789990110421.876,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5019,
+     "req": 2,
+     "primeira": -1789990110031.638,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1795,
+     "req": 1,
+     "primeira": -1789990109725.137,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990107386.587,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990105707.743,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6866,
+     "req": 1,
+     "primeira": -1789990105699.625,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990105599.107,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990105591.517,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 746,
+     "req": 1,
+     "primeira": -1789990105480.108,
+     "iniciador": "script"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 16355,
+     "req": 5,
+     "primeira": -1789990105441.619,
+     "iniciador": "script"
+    },
+    "pageview-notify.rdstation.com.br": {
+     "bytes": 550,
+     "req": 1,
+     "primeira": -1789990104401.741,
+     "iniciador": "script"
+    },
+    "d1sag09wwfbul8.cloudfront.net": {
+     "bytes": 1663,
+     "req": 1,
+     "primeira": -1789990104220.99,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990103262.047,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 2,
+   "lcp": 2700,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1344,
+   "ttfb": 4,
+   "load": 3511,
+   "clsCarga": 0.0032,
+   "clsTotal": 0.0199,
+   "tbt": 3248,
+   "mainThread": 8983,
+   "longtasks": [
+    {
+     "dur": 750,
+     "t": 16875,
+     "de": "unknown"
+    },
+    {
+     "dur": 721,
+     "t": 16105,
+     "de": "unknown"
+    },
+    {
+     "dur": 690,
+     "t": 1801,
+     "de": "unknown"
+    },
+    {
+     "dur": 673,
+     "t": 4844,
+     "de": "unknown"
+    },
+    {
+     "dur": 668,
+     "t": 6531,
+     "de": "unknown"
+    },
+    {
+     "dur": 499,
+     "t": 17656,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 853736,
+   "reqIniciais": 73,
+   "bytesFinais": 1463257,
+   "reqFinais": 112,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1159164,
+     "req": 61,
+     "primeira": -1789990120361.011,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23403,
+     "req": 21,
+     "primeira": -1789990119978.675,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1896,
+     "req": 1,
+     "primeira": -1789990119967.002,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990119962.626,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118484.153,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20926,
+     "req": 3,
+     "primeira": -1789990116929.669,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116902.153,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 168056,
+     "req": 3,
+     "primeira": -1789990110456,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5020,
+     "req": 2,
+     "primeira": -1789990110327.275,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1800,
+     "req": 1,
+     "primeira": -1789990109932.907,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990107005.366,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 747,
+     "req": 1,
+     "primeira": -1789990105722.046,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990103520.766,
+     "iniciador": "parser"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102882.747,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102812.572,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102742.302,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102737.273,
+     "iniciador": "script"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990102672.18,
+     "iniciador": "parser"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102101.875,
+     "iniciador": "script"
+    }
+   }
+  },
+  {
+   "carga": 3,
+   "lcp": 1584,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1200,
+   "ttfb": 5,
+   "load": 3492,
+   "clsCarga": 0.0032,
+   "clsTotal": 0.0199,
+   "tbt": 3430,
+   "mainThread": 9381,
+   "longtasks": [
+    {
+     "dur": 847,
+     "t": 16344,
+     "de": "unknown"
+    },
+    {
+     "dur": 773,
+     "t": 6514,
+     "de": "unknown"
+    },
+    {
+     "dur": 733,
+     "t": 4721,
+     "de": "unknown"
+    },
+    {
+     "dur": 678,
+     "t": 15548,
+     "de": "unknown"
+    },
+    {
+     "dur": 639,
+     "t": 1549,
+     "de": "unknown"
+    },
+    {
+     "dur": 494,
+     "t": 3508,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 853750,
+   "reqIniciais": 73,
+   "bytesFinais": 1345213,
+   "reqFinais": 112,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1034255,
+     "req": 61,
+     "primeira": -1789990120362.316,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23406,
+     "req": 21,
+     "primeira": -1789990120017.856,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1901,
+     "req": 1,
+     "primeira": -1789990120011.281,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120010.113,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118742.921,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20932,
+     "req": 3,
+     "primeira": -1789990117427.783,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990117376.118,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 168037,
+     "req": 3,
+     "primeira": -1789990110487.246,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5021,
+     "req": 2,
+     "primeira": -1789990110316.589,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1800,
+     "req": 1,
+     "primeira": -1789990109907.905,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990107017.901,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 751,
+     "req": 1,
+     "primeira": -1789990105819.711,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990104093.021,
+     "iniciador": "parser"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103379.422,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6865,
+     "req": 1,
+     "primeira": -1789990103349.427,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103183.896,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103176.058,
+     "iniciador": "script"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990103087.066,
+     "iniciador": "parser"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102724.293,
+     "iniciador": "script"
+    }
+   }
+  },
+  {
+   "carga": 4,
+   "lcp": 1576,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1160,
+   "ttfb": 4,
+   "load": 3487,
+   "clsCarga": 0.0032,
+   "clsTotal": 0.0199,
+   "tbt": 3071,
+   "mainThread": 8927,
+   "longtasks": [
+    {
+     "dur": 775,
+     "t": 6336,
+     "de": "unknown"
+    },
+    {
+     "dur": 661,
+     "t": 17145,
+     "de": "unknown"
+    },
+    {
+     "dur": 660,
+     "t": 15965,
+     "de": "unknown"
+    },
+    {
+     "dur": 623,
+     "t": 1538,
+     "de": "unknown"
+    },
+    {
+     "dur": 623,
+     "t": 4781,
+     "de": "unknown"
+    },
+    {
+     "dur": 430,
+     "t": 4014,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 853735,
+   "reqIniciais": 73,
+   "bytesFinais": 1472074,
+   "reqFinais": 114,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1159164,
+     "req": 61,
+     "primeira": -1789990120362.104,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23403,
+     "req": 21,
+     "primeira": -1789990120032.946,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1896,
+     "req": 1,
+     "primeira": -1789990120023.352,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120020.763,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118755.028,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20925,
+     "req": 3,
+     "primeira": -1789990117260.342,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990117229.306,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 168052,
+     "req": 3,
+     "primeira": -1789990110492.689,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5026,
+     "req": 2,
+     "primeira": -1789990110236.684,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1791,
+     "req": 1,
+     "primeira": -1789990109781.643,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47910,
+     "req": 3,
+     "primeira": -1789990106917.735,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 749,
+     "req": 1,
+     "primeira": -1789990105762.733,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103940.438,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6863,
+     "req": 1,
+     "primeira": -1789990103925.043,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103761.688,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103745.56,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990103716.274,
+     "iniciador": "parser"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 2020,
+     "req": 3,
+     "primeira": -1789990103601.594,
+     "iniciador": "script"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990103167.511,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 5,
+   "lcp": 1616,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1220,
+   "ttfb": 4,
+   "load": 3565,
+   "clsCarga": 0.0032,
+   "clsTotal": 0.0199,
+   "tbt": 3892,
+   "mainThread": 9461,
+   "longtasks": [
+    {
+     "dur": 897,
+     "t": 16208,
+     "de": "unknown"
+    },
+    {
+     "dur": 833,
+     "t": 1562,
+     "de": "unknown"
+    },
+    {
+     "dur": 714,
+     "t": 6598,
+     "de": "unknown"
+    },
+    {
+     "dur": 703,
+     "t": 4768,
+     "de": "unknown"
+    },
+    {
+     "dur": 642,
+     "t": 15397,
+     "de": "unknown"
+    },
+    {
+     "dur": 532,
+     "t": 4206,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 853735,
+   "reqIniciais": 73,
+   "bytesFinais": 1347225,
+   "reqFinais": 112,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1034255,
+     "req": 61,
+     "primeira": -1789990120362.794,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23403,
+     "req": 21,
+     "primeira": -1789990120029.527,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1902,
+     "req": 1,
+     "primeira": -1789990120024.477,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120021.847,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118672.159,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20919,
+     "req": 3,
+     "primeira": -1789990117187.39,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990117153.046,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 168056,
+     "req": 3,
+     "primeira": -1789990110309.345,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5017,
+     "req": 2,
+     "primeira": -1789990110186.414,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1788,
+     "req": 1,
+     "primeira": -1789990109762.375,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990106929.776,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 746,
+     "req": 1,
+     "primeira": -1789990105593.21,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103395.453,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6865,
+     "req": 1,
+     "primeira": -1789990103368.191,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103272.546,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103261.35,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990103239.83,
+     "iniciador": "parser"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 2029,
+     "req": 1,
+     "primeira": -1789990103129.207,
+     "iniciador": "script"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990102648.984,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 6,
+   "lcp": 1556,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1112,
+   "ttfb": 6,
+   "load": 3548,
+   "clsCarga": 0.0029,
+   "clsTotal": 0.0197,
+   "tbt": 3531,
+   "mainThread": 9816,
+   "longtasks": [
+    {
+     "dur": 651,
+     "t": 15069,
+     "de": "unknown"
+    },
+    {
+     "dur": 632,
+     "t": 5233,
+     "de": "unknown"
+    },
+    {
+     "dur": 624,
+     "t": 15844,
+     "de": "unknown"
+    },
+    {
+     "dur": 623,
+     "t": 1532,
+     "de": "unknown"
+    },
+    {
+     "dur": 587,
+     "t": 6158,
+     "de": "unknown"
+    },
+    {
+     "dur": 467,
+     "t": 4749,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 853743,
+   "reqIniciais": 73,
+   "bytesFinais": 1350198,
+   "reqFinais": 114,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1034255,
+     "req": 61,
+     "primeira": -1789990120361.779,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23403,
+     "req": 21,
+     "primeira": -1789990120030.952,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1893,
+     "req": 1,
+     "primeira": -1789990120020.945,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120017.879,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118742.777,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20936,
+     "req": 3,
+     "primeira": -1789990117442.412,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990117383.297,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 168037,
+     "req": 3,
+     "primeira": -1789990110396.804,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5015,
+     "req": 2,
+     "primeira": -1789990109959.527,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1791,
+     "req": 1,
+     "primeira": -1789990109420.962,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47910,
+     "req": 3,
+     "primeira": -1789990107076.959,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 748,
+     "req": 1,
+     "primeira": -1789990105751.919,
+     "iniciador": "script"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990104117.979,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6865,
+     "req": 1,
+     "primeira": -1789990104053.605,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103905.771,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103896.465,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990103888.463,
+     "iniciador": "parser"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 5070,
+     "req": 3,
+     "primeira": -1789990103813.335,
+     "iniciador": "script"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990103282.944,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 7,
+   "lcp": 1536,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1172,
+   "ttfb": 5,
+   "load": 3561,
+   "clsCarga": 0.0032,
+   "clsTotal": 0.0199,
+   "tbt": 3085,
+   "mainThread": 7606,
+   "longtasks": [
+    {
+     "dur": 874,
+     "t": 15745,
+     "de": "unknown"
+    },
+    {
+     "dur": 787,
+     "t": 6148,
+     "de": "unknown"
+    },
+    {
+     "dur": 697,
+     "t": 16636,
+     "de": "unknown"
+    },
+    {
+     "dur": 628,
+     "t": 1514,
+     "de": "unknown"
+    },
+    {
+     "dur": 448,
+     "t": 3569,
+     "de": "unknown"
+    },
+    {
+     "dur": 409,
+     "t": 4717,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 853735,
+   "reqIniciais": 73,
+   "bytesFinais": 1338333,
+   "reqFinais": 112,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1034255,
+     "req": 61,
+     "primeira": -1789990120363.278,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23403,
+     "req": 21,
+     "primeira": -1789990120033.425,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1897,
+     "req": 1,
+     "primeira": -1789990120027.24,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120024.954,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118769.8,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20924,
+     "req": 3,
+     "primeira": -1789990117479.507,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990117460.19,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 168052,
+     "req": 3,
+     "primeira": -1789990110283.457,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5014,
+     "req": 2,
+     "primeira": -1789990110084.527,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1795,
+     "req": 1,
+     "primeira": -1789990109657.269,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990107226.389,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 748,
+     "req": 1,
+     "primeira": -1789990105950.58,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990103741.402,
+     "iniciador": "parser"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103246.958,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103162.555,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103041.304,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103035.499,
+     "iniciador": "script"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990102923.524,
+     "iniciador": "parser"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102494.363,
+     "iniciador": "script"
+    }
+   }
+  },
+  {
+   "carga": 8,
+   "lcp": 1860,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1496,
+   "ttfb": 4,
+   "load": 3829,
+   "clsCarga": 0.0032,
+   "clsTotal": 0.0199,
+   "tbt": 3570,
+   "mainThread": 9880,
+   "longtasks": [
+    {
+     "dur": 894,
+     "t": 17547,
+     "de": "unknown"
+    },
+    {
+     "dur": 842,
+     "t": 16562,
+     "de": "unknown"
+    },
+    {
+     "dur": 764,
+     "t": 1848,
+     "de": "unknown"
+    },
+    {
+     "dur": 605,
+     "t": 7149,
+     "de": "unknown"
+    },
+    {
+     "dur": 437,
+     "t": 4993,
+     "de": "unknown"
+    },
+    {
+     "dur": 431,
+     "t": 3844,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 853756,
+   "reqIniciais": 73,
+   "bytesFinais": 1604711,
+   "reqFinais": 111,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1298906,
+     "req": 61,
+     "primeira": -1789990120362.175,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23419,
+     "req": 21,
+     "primeira": -1789990120035.941,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1899,
+     "req": 1,
+     "primeira": -1789990120024.18,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31245,
+     "req": 1,
+     "primeira": -1789990120021.942,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118431.743,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20927,
+     "req": 3,
+     "primeira": -1789990116620.169,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990116591.834,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 169750,
+     "req": 3,
+     "primeira": -1789990110231.444,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5019,
+     "req": 2,
+     "primeira": -1789990110047.206,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1797,
+     "req": 1,
+     "primeira": -1789990109534.49,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47970,
+     "req": 3,
+     "primeira": -1789990106652.035,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 749,
+     "req": 1,
+     "primeira": -1789990105405.124,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990102946.023,
+     "iniciador": "parser"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102115.579,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102067.521,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990101929.677,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990101923.769,
+     "iniciador": "script"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990101849.976,
+     "iniciador": "parser"
+    }
+   }
+  },
+  {
+   "carga": 9,
+   "lcp": 2536,
+   "lcpEl": "img [bg%20mobile.avif]",
+   "fcp": 1344,
+   "ttfb": 5,
+   "load": 3371,
+   "clsCarga": 0.0032,
+   "clsTotal": 0.0199,
+   "tbt": 3289,
+   "mainThread": 10108,
+   "longtasks": [
+    {
+     "dur": 844,
+     "t": 6428,
+     "de": "unknown"
+    },
+    {
+     "dur": 786,
+     "t": 15454,
+     "de": "unknown"
+    },
+    {
+     "dur": 775,
+     "t": 16413,
+     "de": "unknown"
+    },
+    {
+     "dur": 742,
+     "t": 1615,
+     "de": "unknown"
+    },
+    {
+     "dur": 618,
+     "t": 4576,
+     "de": "unknown"
+    },
+    {
+     "dur": 547,
+     "t": 17244,
+     "de": "unknown"
+    }
+   ],
+   "bytesIniciais": 853728,
+   "reqIniciais": 73,
+   "bytesFinais": 1470038,
+   "reqFinais": 112,
+   "porDominio": {
+    "127.0.0.1:64940": {
+     "bytes": 1159164,
+     "req": 61,
+     "primeira": -1789990120362.074,
+     "iniciador": "other"
+    },
+    "unpkg.com": {
+     "bytes": 23419,
+     "req": 21,
+     "primeira": -1789990119994.863,
+     "iniciador": "parser"
+    },
+    "cdnjs.cloudflare.com": {
+     "bytes": 1898,
+     "req": 1,
+     "primeira": -1789990119978.948,
+     "iniciador": "parser"
+    },
+    "code.jquery.com": {
+     "bytes": 31212,
+     "req": 1,
+     "primeira": -1789990119973.012,
+     "iniciador": "parser"
+    },
+    "": {
+     "bytes": 0,
+     "req": 4,
+     "primeira": -1789990118671.48,
+     "iniciador": "parser"
+    },
+    "ajuda.zero7.com.br": {
+     "bytes": 20933,
+     "req": 3,
+     "primeira": -1789990117102.761,
+     "iniciador": "script"
+    },
+    "backend-api-zero7.vercel.app": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990117073.106,
+     "iniciador": "preflight"
+    },
+    "www.googletagmanager.com": {
+     "bytes": 168037,
+     "req": 3,
+     "primeira": -1789990110561.301,
+     "iniciador": "script"
+    },
+    "static.zdassets.com": {
+     "bytes": 5020,
+     "req": 2,
+     "primeira": -1789990110312.536,
+     "iniciador": "script"
+    },
+    "ekr.zdassets.com": {
+     "bytes": 1802,
+     "req": 1,
+     "primeira": -1789990109913.942,
+     "iniciador": "script"
+    },
+    "s3.amazonaws.com": {
+     "bytes": 47910,
+     "req": 3,
+     "primeira": -1789990107334.618,
+     "iniciador": "script"
+    },
+    "api.reclameaqui.com.br": {
+     "bytes": 748,
+     "req": 1,
+     "primeira": -1789990105994.087,
+     "iniciador": "script"
+    },
+    "fonts.googleapis.com": {
+     "bytes": 3030,
+     "req": 2,
+     "primeira": -1789990104109.661,
+     "iniciador": "parser"
+    },
+    "connect.facebook.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103346.048,
+     "iniciador": "script"
+    },
+    "static.hotjar.com": {
+     "bytes": 6865,
+     "req": 1,
+     "primeira": -1789990103319.851,
+     "iniciador": "script"
+    },
+    "www.google.com": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103188.024,
+     "iniciador": "script"
+    },
+    "ad.doubleclick.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990103179.049,
+     "iniciador": "script"
+    },
+    "fonts.gstatic.com": {
+     "bytes": 0,
+     "req": 2,
+     "primeira": -1789990103071.778,
+     "iniciador": "parser"
+    },
+    "d335luupugsy2.cloudfront.net": {
+     "bytes": 0,
+     "req": 1,
+     "primeira": -1789990102472.641,
+     "iniciador": "script"
+    }
+   }
+  }
+ ]
+}
