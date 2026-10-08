@@ -1,6 +1,6 @@
 // Sonda da tarja em vídeo (troca imagem → vídeo, out/2026).
 //
-//   node scripts/tarja-video-prova.mjs <rótulo> [rede|cenarios|visual|tudo] [cargas=9]
+//   node scripts/tarja-video-prova.mjs <rótulo> [rede|cenarios|visual|iphone|tudo] [cargas=9]
 //
 // rede      — protocolo do perf.mjs (cache frio, terceiros liberados, rede
 //             `lento` + CPU 4×, asserção de carga, N cargas) em 390 e 1474,
@@ -10,15 +10,21 @@
 // cenarios  — o que o script da tarja faz em cada condição: desktop normal
 //             (toca), movimento reduzido e saveData (nenhuma requisição de
 //             vídeo), celular 4g (toca) e 3g (fica o pôster), campanha
-//             expirada com Date mockada (tarja some, nada baixa) e tarja
+//             expirada com Date mockada (tarja some, nada baixa), celular
+//             sem navigator.connection (toca — Safari/Firefox) e tarja
 //             escondida com o vídeo rodando (pausa; voltou, retoma).
 // visual    — em 390/1079/1366/1920: pôster (camada do vídeo escondida na
 //             captura), vídeo rodando (opacidade 1) e o quadro 0 pintado
 //             por cima do pôster. Caixa idêntica e diff pôster × quadro 0
 //             no instante da troca (régua: ≤ 1%).
 //
+// iphone    — iPhone 14 emulado no WebKit (motor do Safari) e, se ele não
+//             abrir na máquina, no Chromium com a UA do iPhone e sem
+//             navigator.connection: toca o mp4, ?tarjaDebug=1 mostra o
+//             quadro, 3g/saveData ficam no pôster. Sai com código 1 se falhar.
+//
 // Saída: medidas/tarja-video-<rótulo>-<modo>.json + resumo no console.
-import { chromium } from 'playwright';
+import { chromium, webkit, devices } from 'playwright';
 import sharp from 'sharp';
 import path from 'node:path';
 import fs from 'node:fs';
@@ -28,7 +34,7 @@ import { conferirCarga } from './lib/pagina.mjs';
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [rotulo, modo = 'tudo', cargasArg] = process.argv.slice(2);
-if (!rotulo) { console.error('uso: node scripts/tarja-video-prova.mjs <rótulo> [rede|cenarios|visual|tudo] [cargas]'); process.exit(1); }
+if (!rotulo) { console.error('uso: node scripts/tarja-video-prova.mjs <rótulo> [rede|cenarios|visual|iphone|tudo] [cargas]'); process.exit(1); }
 const CARGAS = Number(cargasArg || 9);
 const SAIDA = 'medidas';
 fs.mkdirSync(SAIDA, { recursive: true });
@@ -71,6 +77,9 @@ const conexao = (cfg) => {
     get: () => ({ saveData: cfg.saveData, effectiveType: cfg.effectiveType, addEventListener() {}, removeEventListener() {} }),
   });
 };
+
+// navigator.connection AUSENTE, como no Safari e no Firefox
+const semConexao = () => { delete Navigator.prototype.connection; };
 
 // Date deslocada para depois do último prazo da campanha (31/out)
 const dataMockada = (alvoMs) => {
@@ -187,6 +196,7 @@ async function modoCenarios(nav, url) {
     await cenario(nav, url, 'desktop saveData', 1474, { init: [[conexao, { saveData: true, effectiveType: '4g' }]] }),
     await cenario(nav, url, 'celular 390 4g (deve tocar)', 390, { init: [[conexao, { saveData: false, effectiveType: '4g' }]] }),
     await cenario(nav, url, 'celular 390 3g (fica o pôster)', 390, { init: [[conexao, { saveData: false, effectiveType: '3g' }]] }),
+    await cenario(nav, url, 'celular 390 sem connection (toca)', 390, { init: [[semConexao]] }),
     await cenario(nav, url, 'campanha expirada (Date mockada)', 1474, { init: [[dataMockada, pos31out]] }),
     await cenario(nav, url, 'tarja escondida com vídeo rodando', 1474, {
       depois: async (p) => {
@@ -287,13 +297,91 @@ async function modoVisual(nav, url) {
   return saida;
 }
 
+/* =============================== IPHONE =============================== */
+// iPhone 14 emulado. WebKit primeiro (o motor do Safari: sem
+// navigator.connection, sem requestIdleCallback, decode do mp4 pelo motor
+// dele). Se o WebKit não abre nesta máquina — no Windows com Smart App
+// Control ligado as DLLs sem assinatura do build do Playwright são barradas
+// (saída 0xC0E90002) —, o motivo vai para o relatório e o mesmo roteiro
+// roda no Chromium com a UA do iPhone e navigator.connection removido: prova
+// o portão e a escolha do formato, NÃO o decode do WebKit.
+async function cenarioIphone(b, motor, url, nome, { init = [], query = '' } = {}) {
+  const ctx = await b.newContext({ ...devices['iPhone 14'], locale: 'pt-BR' });
+  if (motor !== 'webkit') await ctx.addInitScript(semConexao);
+  for (const [fn, arg] of init) await ctx.addInitScript(fn, arg);
+  const p = await ctx.newPage();
+  const videos = [];
+  const erros = [];
+  p.on('request', (r) => { if (VIDEO_TARJA.test(r.url())) videos.push(decodeURIComponent(r.url().split('/').pop())); });
+  p.on('pageerror', (e) => erros.push('pageerror: ' + String(e).slice(0, 160)));
+  p.on('console', (m) => { if (m.type() === 'error' && !/backend-api-zero7|Failed to fetch|ERR_FAILED|Failed to load resource|CORS/i.test(m.text())) erros.push(m.text().slice(0, 160)); });
+  await p.goto(url + query, { waitUntil: 'load', timeout: 120_000 });
+  const tocou = await p.waitForFunction(() => document.querySelector('.tarjaImage video')?.classList.contains('is-tocando'), null, { timeout: 15_000 }).then(() => true).catch(() => false);
+  if (!tocou) await p.waitForTimeout(1000);
+  const r = await p.evaluate(() => {
+    const v = document.querySelector('.tarjaImage video');
+    const d = document.getElementById('tarjaDebug');
+    return {
+      temConnection: !!navigator.connection,
+      ric: typeof requestIdleCallback === 'function',
+      webmDiz: v.canPlayType('video/webm; codecs="vp9"'),
+      mp4Diz: v.canPlayType('video/mp4; codecs="avc1.640028"'),
+      src: (v.getAttribute('src') || '').split('/').pop(),
+      readyState: v.readyState, paused: v.paused, erroMidia: v.error && v.error.code,
+      opacidade: getComputedStyle(v).opacity,
+      painel: d ? d.textContent : null,
+    };
+  });
+  await ctx.close();
+  const linha = { motor, nome, tocou, reqVideo: [...new Set(videos)], ...r, erros };
+  console.log(`  [${motor}] ${nome.padEnd(30)} tocou=${tocou} src=${r.src || '—'} req=${linha.reqVideo.join(',') || 'nenhuma'} connection=${r.temConnection} rs=${r.readyState} paused=${r.paused}${r.erroMidia ? ' erroMidia=' + r.erroMidia : ''} painel=${r.painel ? 'SIM' : 'não'}${erros.length ? ' | ERROS: ' + erros.join(' / ') : ''}`);
+  return linha;
+}
+
+async function modoIphone(url) {
+  console.log(`\n${rotulo} iphone (iPhone 14 emulado)`);
+  const saida = { motores: {} };
+  for (const motor of ['webkit', 'chromium']) {
+    let b;
+    try { b = await (motor === 'webkit' ? webkit : chromium).launch(); } catch (e) {
+      const motivo = String(e.message).split('\n').filter(Boolean).slice(0, 3).join(' ');
+      saida.motores[motor] = { indisponivel: motivo };
+      console.log(`  [${motor}] NÃO ABRIU nesta máquina: ${motivo}`);
+      continue;
+    }
+    try {
+      saida.motores[motor] = [
+        await cenarioIphone(b, motor, url, 'padrão (deve tocar o mp4)'),
+        await cenarioIphone(b, motor, url, '?tarjaDebug=1 (quadro)', { query: '?tarjaDebug=1' }),
+        await cenarioIphone(b, motor, url, 'connection 3g (fica o pôster)', { init: [[conexao, { saveData: false, effectiveType: '3g' }]] }),
+        await cenarioIphone(b, motor, url, 'saveData (fica o pôster)', { init: [[conexao, { saveData: true, effectiveType: '4g' }]] }),
+      ];
+    } finally { await b.close(); }
+  }
+  // aceite: em cada motor que abriu, o padrão toca o mp4 sem quadro de
+  // debug, o ?tarjaDebug mostra o quadro, 3g e saveData não pedem vídeo
+  const falhas = [];
+  for (const [motor, L] of Object.entries(saida.motores)) {
+    if (!Array.isArray(L)) continue;
+    const [pad, dbg, g3, sd] = L;
+    if (!pad.tocou || !/\.mp4$/.test(pad.src) || pad.painel !== null || pad.temConnection) falhas.push(`${motor}: padrão`);
+    if (!dbg.painel || !/liberado/.test(dbg.painel)) falhas.push(`${motor}: quadro de debug`);
+    if (g3.reqVideo.length || sd.reqVideo.length) falhas.push(`${motor}: 3g/saveData pediram vídeo`);
+    if (L.some((l) => l.erros.length)) falhas.push(`${motor}: erro no console`);
+  }
+  saida.falhas = falhas;
+  console.log(falhas.length ? `  FALHOU: ${falhas.join('; ')}` : '  aceite ok em: ' + Object.entries(saida.motores).filter(([, L]) => Array.isArray(L)).map(([m]) => m).join(', '));
+  if (falhas.length) process.exitCode = 1;
+  return saida;
+}
+
 /* ================================ MAIN ================================ */
 const servidor = await iniciarServidor(RAIZ);
 const nav = await chromium.launch();
 try {
-  const modos = modo === 'tudo' ? ['rede', 'cenarios', 'visual'] : [modo];
+  const modos = modo === 'tudo' ? ['rede', 'cenarios', 'visual', 'iphone'] : [modo];
   for (const m of modos) {
-    const r = m === 'rede' ? await modoRede(nav, servidor.url) : m === 'cenarios' ? await modoCenarios(nav, servidor.url) : await modoVisual(nav, servidor.url);
+    const r = m === 'rede' ? await modoRede(nav, servidor.url) : m === 'cenarios' ? await modoCenarios(nav, servidor.url) : m === 'iphone' ? await modoIphone(servidor.url) : await modoVisual(nav, servidor.url);
     fs.writeFileSync(path.join(SAIDA, `tarja-video-${rotulo}-${m}.json`), JSON.stringify(r, null, 1));
   }
 } finally {

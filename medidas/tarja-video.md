@@ -165,3 +165,67 @@ rodando a opacidade 1 e quadro 0 em cada largura.
   Por isso o diff oscilava entre 0,8% e 3,2%. Agora a camada do vídeo fica
   escondida durante a captura, e o quadro 0 só é capturado depois de
   realmente pintado (requestVideoFrameCallback).
+
+## Correção: iPhone ficava no pôster (out/2026)
+
+**Causa.** O portão exigia `desktop ≥ 1080 OU navigator.connection.effectiveType === '4g'`.
+O Safari (e o Firefox) não têm `navigator.connection`, então todo iPhone
+caía no "não" e ficava no pôster.
+
+**Regra nova** (script/tarjaVideo.js, regra 26):
+- **O que bloqueia:** só movimento reduzido, ou a API EXISTINDO e dizendo
+  saveData ou effectiveType slow-2g/2g/3g.
+- **API ausente:** desconhecido = libera.
+- **Formato:** webm só quando `canPlayType('video/webm; codecs="vp9"') === 'probably'` E
+  a UA traz `Chrome/`, `Chromium/` ou `Firefox/` (Blink/Gecko). Todo o resto leva mp4.
+  O resto inclui todo navegador do iOS: CriOS e FxiOS são WebKit e não trazem esses tokens.
+
+**MP4 para iOS** (ffprobe): H.264 profile High, nível 3.1 (≤ 4.1), yuv420p,
+`moov` antes do `mdat` (faststart: ftyp@0, moov@32, mdat@4484/4627). Nada a reencodar.
+
+**Range em produção** (producao.mjs, item 8 novo): os 4 arquivos respondem
+206 a `Range: bytes=0-1`, com `Content-Range: bytes 0-1/<tamanho>` e Content-Type
+`video/mp4`/`video/webm` certos. O `Accept-Ranges: bytes` vem na resposta
+200 e o LiteSpeed não repete na 206. A RFC 9110 não exige o cabeçalho na 206,
+e o Content-Range basta para o Safari. Nada a ajustar no .htaccess. Em 2 de
+~12 HEADs em rajada a resposta veio vazia; em 9 GETs seguidos, todos deram 206.
+
+**Depuração no celular:** `?tarjaDebug=1` abre um quadro fixo no canto inferior
+esquerdo. Ele mostra a variante, o motor, a resposta do canPlayType e o formato,
+cada condição do portão, o src, readyState/networkState/paused, o resultado do
+play() (com o motivo da rejeição) e os últimos eventos do `<video>`. Sem o
+parâmetro, nenhum nó e nenhum timer. Não entra no crítico e não faz requisição
+a mais (vive no próprio tarjaVideo.js).
+
+**Teste iPhone** (`tarja-video-prova.mjs <rótulo> iphone`), no iPhone 14 emulado:
+
+| motor | padrão | ?tarjaDebug=1 | connection 3g | saveData |
+|---|---|---|---|---|
+| WebKit | **não abriu nesta máquina** ¹ | — | — | — |
+| Chromium (UA do iPhone, sem connection) | toca `mob.mp4`, readyState 4, sem quadro | quadro com "liberado" | pôster, 0 req | pôster, 0 req |
+
+¹ O Windows desta máquina está com o **Smart App Control ligado**. Ele barra
+as DLLs sem assinatura do build do WebKit do Playwright (`icutu77.dll`,
+`nghttp2.dll`), e o processo sai com 0xC0E90002 (violação de política de
+integridade). Desligar o Smart App Control não tem volta sem reinstalar o
+Windows, e não foi feito. O modo `iphone` tenta o WebKit primeiro e registra
+o motivo quando ele não abre. Numa máquina sem esse bloqueio (macOS, Linux, CI),
+o mesmo comando cobre o motor do Safari. O Chromium com a UA do iPhone prova o
+portão e a escolha do mp4, mas não prova o decode do WebKit.
+
+**Aceites:**
+
+| item | resultado |
+|---|---|
+| Lighthouse mobile / desktop / 1920 | 92 (77–93) / 100 / 100 — antes 93 / 100 / 100 ² |
+| zero .webm/.mp4 antes do LCP e do load (390, 1474, lento, 9 cargas) | 0 / 0 |
+| cenários (desktop, reduzido, saveData, 4g, 3g, **sem connection**, expirada, escondida) | todos como esperado |
+| CLS de carga 390/1079/1366/1536/1920 | 0,0000 / 0,0000 / 0,0004 / 0,0003 / 0,0002 |
+| fouc / console-limpa | 0,00% / limpo |
+| npm run build + check | verde |
+
+² Uma rodada da bateria deu mediana 82, com TBT 386. Então rodei o Lighthouse
+no código novo e no HEAD anterior, 4× cada, listando vídeos e long tasks:
+91/93/93/93 × 90/92/93/93. As duas versões baixam o mesmo mob.webm dentro da
+janela do Lighthouse, porque o Chrome dele informa 4g e o portão antigo também
+liberava. As long tasks são as mesmas. Era ruído; a re-medição oficial deu 92.

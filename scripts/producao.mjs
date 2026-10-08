@@ -15,6 +15,8 @@
 //   6. nenhum erro de console;
 //   7. PSI API, mobile e desktop, 3 execuções com MEDIANA (a API pública
 //      do PageSpeed, sem chave; se estourar cota, roda de novo depois).
+//   8. vídeo da tarja: cada arquivo do <video> responde "Range: bytes=0-1"
+//      com 206, Content-Type de vídeo e Accept-Ranges (o iOS exige Range).
 import { chromium } from 'playwright';
 
 const URL_ALVO = process.argv[2];
@@ -140,6 +142,39 @@ await p.waitForTimeout(5000);
 const zendeskDepois = rastreadores.some((r) => { try { return ZENDESK.test(new URL(r.url).hostname); } catch { return false; } });
 ok(zendeskDepois, 'Zendesk aparece depois de rolar além do herói', zendeskDepois ? '' : 'nenhuma requisição zdassets/zendesk');
 ok(erros.length === 0, 'console segue limpo após interação', erros.slice(0, 3).join(' | '));
+
+/* 8: vídeo da tarja servido com Range (o Safari do iOS só toca mp4 se o
+   servidor responder 206 a "Range: bytes=0-1"). Os arquivos vêm dos data-*
+   do <video> da página no ar. Accept-Ranges: o LiteSpeed manda na 200 e não
+   repete na 206 — a RFC 9110 não exige na 206 (o Content-Range basta);
+   aceita em qualquer uma das duas, e diz onde viu. */
+const videosTarja = await p.evaluate(() => {
+  const v = document.querySelector('.tarjaImage video');
+  return v ? Object.values(v.dataset).map((s) => new URL(s, location.href).href) : [];
+});
+ok(videosTarja.length > 0, 'tarja em vídeo: <video> com data-* no ar', videosTarja.length + ' arquivos');
+for (const u of videosTarja) {
+  const nome = decodeURIComponent(u.split('/').pop());
+  const tipoEsperado = /\.webm$/.test(u) ? 'video/webm' : 'video/mp4';
+  try {
+    const r = await fetch(u, { headers: { Range: 'bytes=0-1' } });
+    const corpo = Buffer.from(await r.arrayBuffer());
+    const tipo = r.headers.get('content-type') || '';
+    const faixa = r.headers.get('content-range') || '';
+    let ar = r.headers.get('accept-ranges');
+    let ondeAr = '206';
+    if (!/bytes/i.test(ar || '')) {
+      const h = await fetch(u, { method: 'HEAD' });
+      ar = h.headers.get('accept-ranges');
+      ondeAr = '200 (não vem na 206)';
+    }
+    ok(r.status === 206 && corpo.length === 2 && /^bytes 0-1\/\d+$/.test(faixa) && tipo.startsWith(tipoEsperado) && /bytes/i.test(ar || ''),
+      `Range em ${nome}: 206 + ${tipoEsperado} + Accept-Ranges`,
+      `status ${r.status}, ${corpo.length} B, Content-Range "${faixa}", Content-Type "${tipo}", Accept-Ranges "${ar || '—'}" na ${ondeAr}`);
+  } catch (e) {
+    ok(false, `Range em ${nome}`, String(e).slice(0, 80));
+  }
+}
 
 await nav.close();
 

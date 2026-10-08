@@ -2582,10 +2582,16 @@ justamente o que a NCS não foi desenhada para fazer.
     verdade: entra no crítico com o contêiner e é o que o Lighthouse
     vê. O `<video muted playsinline loop preload="none">` nasce SEM src
     e SEM autoplay, transparente por cima; o script/tarjaVideo.js só dá
-    src depois do load + requestIdleCallback, e só sem movimento
-    reduzido, sem saveData e com (desktop ≥ 1080 OU 4g). Zero .webm/.mp4
-    antes do LCP e antes do load — o juiz é a
-    scripts/tarja-video-prova.mjs (rede, cenarios, visual). Trocar
+    src depois do load + requestIdleCallback (setTimeout no Safari), e
+    só sem movimento reduzido e sem a Network Information API DIZENDO
+    saveData ou 2g/3g. API ausente = desconhecido = libera: o Safari (e
+    o Firefox) não têm navigator.connection, e a 1ª versão, que exigia
+    "desktop OU 4g", deixava TODO iPhone no pôster. Formato: webm só com
+    canPlayType 'probably' em Blink/Gecko; WebKit (todo navegador do
+    iOS) leva mp4 H.264 faststart. Depurar no celular: ?tarjaDebug=1.
+    Zero .webm/.mp4 antes do LCP e antes do load — o juiz é a
+    scripts/tarja-video-prova.mjs (rede, cenarios, visual, iphone); em
+    produção, o producao.mjs confere Range 206 nos quatro arquivos. Trocar
     campanha = rodar `node scripts/tarja-video.mjs <campanha>` com os
     masters novos (nome NOVO por campanha: cache imutável de 1 ano),
     trocar os caminhos no index.html e refazer as razões (regras 17/21).
