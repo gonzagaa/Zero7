@@ -82,6 +82,14 @@ GSAP + countUp (cdnjs.cloudflare.com). As fontes são servidas de `css/fonts/`
 5. Sincronize no painel do TurboCloud.
 6. `node scripts/producao.mjs https://zero7.com.br/home/` — a verificação pós-deploy.
 
+## Como trocar a tarja em vídeo
+
+1. Coloque os masters novos (`tarja-desktop-master.mp4` e `tarja-mobile-master.mp4`) numa pasta.
+2. `node scripts/tarja-video.mjs <campanha> --masters <pasta>` — gera webm/mp4/pôster AVIF em `assets/tarjapopup/tarja-<campanha>-{desk,mob}` e o relatório em `medidas/`. Nome NOVO por campanha (cache imutável de 1 ano).
+3. No `index.html`, troque os 4 `data-*` do `<video>` e os 2 pôsteres; se mudou a resolução, ajuste width/height e as razões em `css/tarjaImage.css` (aspect-ratio e `--tarja-offset`, regras 17/21).
+4. `npm run build:critico` e `npm run check`.
+5. `node scripts/tarja-video-prova.mjs <rótulo> tudo` — zero vídeo antes do LCP/load e troca pôster→vídeo ≤ 1% (regra 26).
+
 ## Publicação: o que sobe e o que NÃO sobe
 
 **Leia antes de publicar.** Não existe script nem configuração de deploy

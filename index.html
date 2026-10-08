@@ -341,7 +341,10 @@ header p{font-size:var(--fs-500);line-height:1.4;color:var(--cor-corpo);margin-b
 .tarjaImage{top:0;position:fixed;left:0;z-index:99}
 .tarjaImage a{display:block;line-height:0}
 .tarjaImage picture{display:contents}
-.tarjaImage img{width:100%;height:auto;display:block}
+.tarjaImage .tarjaMidia{position:relative;display:block;width:100%}
+.tarjaImage .tarjaMidia img{width:100%;height:100%;display:block}
+.tarjaImage .tarjaVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s ease;pointer-events:none}
+@media (prefers-reduced-motion: reduce){.tarjaImage .tarjaVideo{transition:none}}
 #navigation.activeCountdown{top:var(--tarja-offset, 0px)}
 .countdown--promo{display:flex;justify-content:center;align-items:center;gap:var(--esp-3);font-size:var(--corpo-legado-550);font-weight:var(--peso-black);letter-spacing:.3px;color:var(--cor-titulo-inverso);background:#fff;padding-block:.65rem;padding-inline:1rem}
 .countdown--promo div{display:flex;align-items:end;color:var(--cor-titulo-inverso)}
@@ -356,16 +359,16 @@ div.tarjaImage img{border-radius:var(--raio-md) var(--raio-md) 0 0;border-radius
 @media (min-width: 1600px){div.tarjaImage{width:calc(100% - 340px);left:170px}}
 @media (min-width: 1080px){div.tarjaImage{left:0;right:0;margin-inline:auto;width:calc(min(var(--container-max),100%) - 4.8rem);overflow:hidden}
 div.tarjaImage a{display:flex;justify-content:center}
-div.tarjaImage img{display:block;flex:none;max-width:none;width:max(100%,calc(100vw - 200px))}}
-@media (min-width: 1600px){div.tarjaImage img{width:max(100%,calc(100vw - 340px))}}
+div.tarjaImage .tarjaMidia{display:block;flex:none;max-width:none;width:max(100%,calc(100vw - 200px))}}
+@media (min-width: 1600px){div.tarjaImage .tarjaMidia{width:max(100%,calc(100vw - 340px))}}
 @media (max-width: 1079.98px){div.tarjaImage{left:0;right:0;margin-inline:auto;top:1.2rem;width:calc(min(var(--container-max),100%) - 4.8rem);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;overflow:hidden;box-shadow:.25rem .3rem .8rem #0000002e}
 .countdown--promo{gap:var(--esp-2);padding-inline:.6rem}}
-.tarjaImage img{aspect-ratio:auto 4053 / 555}
+.tarjaImage .tarjaMidia{aspect-ratio:1040 / 142}
 .countdown--promo,.tarjaImage p.text{white-space:nowrap}
-@media (min-width: 1080px){div.tarjaImage img{aspect-ratio:auto 14012 / 555}}
-nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 38px) / 7.3027 + 27.4px)}
-@media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 200px) / 25.2468 + 34px)}}
-@media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2468 + 34px)}}
+@media (min-width: 1080px){div.tarjaImage .tarjaMidia{aspect-ratio:2370 / 94}}
+nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 38px) / 7.3239 + 27.4px)}
+@media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 200px) / 25.2128 + 34px)}}
+@media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2128 + 34px)}}
 @media (max-width: 1079.98px){#author .autor__cnpj{display:none}}
 @media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
 @media (min-width: 1080px){footer .rodape__cnpj{display:none}}
@@ -576,8 +579,8 @@ html.lenis,html.lenis body{height:auto}
 [data-aos=fade-down]{transform:translate3d(0,-100px,0)}
 [data-aos=fade-right]{transform:translate3d(-100px,0,0)}
 [data-aos=fade-up-left]{transform:translate3d(100px,100px,0)}</style>
-  <link rel="stylesheet" href="./dist/home.fa36a045.css" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="./dist/home.fa36a045.css"></noscript>
+  <link rel="stylesheet" href="./dist/home.7e092dc3.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="./dist/home.7e092dc3.css"></noscript>
 
   <!-- C4: preconnect para os terceiros que restam na janela inicial
        (jquery, lenis/ionicons no unpkg, gsap/countUp no cdnjs) — 1 RTT
@@ -667,28 +670,31 @@ html.lenis,html.lenis body{height:auto}
     </div>
 
    <a href="#plan">
-      <!-- <picture> e não duas <img>: display:none NÃO impede download, e em
-           390 o navegador baixava as duas artes — 161KB da de desktop jogados
-           fora em todo celular. O media bate com o breakpoint de 1080 do
-           tarjaImage.css. A arte, o link e o contador não mudam. -->
-      <picture>
-        <!-- o caminho vai com %20: em srcset o espaço separa a URL do
-             descritor, e com espaço cru o candidato é inválido e o navegador
-             cai no src da <img> -->
-        <!-- campanha LIBERDADE (out/2026): artes oficiais sem
-             variantes de srcset — gerar tamanhos é otimização de imagem e
-             só entra com autorização (regra 6). A arte mobile é a CHEIA
-             (4053x555): a campanha não tem a versão de altura reduzida da
-             fase 22; se o design produzir uma, troque aqui e refaça as
-             razões no tarjaImage.css (regras 17 e 21). -->
-        <!-- F3a: width/height da PRÓPRIA arte em CADA entrada do <picture>.
-             O C4 reprovou attrs só na <img> porque a razão do mobile valia
-             para o desktop; com o <source> carregando os dele, cada
-             viewport reserva com a razão certa (o aspect-ratio do CSS
-             continua de cinto). Trocou a arte, troque os números. -->
-        <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/TARJA%20DESK%20LIBERDADE.avif" width="14012" height="555">
-        <img decoding="async" width="4053" height="555" src="./assets/tarjapopup/TARJA MOBILE LIBERDADE.avif" alt="">
-      </picture>
+      <!-- Tarja em vídeo (out/2026). A tarja de verdade é o PÔSTER: o
+           <picture> abaixo — uma arte por viewport (display:none NÃO impede
+           download, por isso <picture> e não duas <img>), media no mesmo
+           breakpoint de 1080 do tarjaImage.css, e width/height da PRÓPRIA
+           arte em CADA entrada (F3a). Ele nasce no HTML, entra no crítico e
+           é o que conta no LCP.
+           O <video> fica por cima, transparente, SEM src e SEM autoplay:
+           script/tarjaVideo.js dá o src depois do load + idle (o portão das
+           animações) e só se a visita aguenta — sem movimento reduzido, sem
+           saveData, e desktop ≥1080 ou 4g. Senão, fica o pôster.
+           Trocar a campanha: rodar scripts/tarja-video.mjs com os masters
+           novos (nome NOVO por campanha — assets são immutable de 1 ano) e
+           trocar os 6 caminhos abaixo. A razão do vídeo mora no
+           tarjaImage.css (regras 17 e 21). O link e o contador não mudam. -->
+      <span class="tarjaMidia">
+        <picture>
+          <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/tarja-liberdade-desk-poster.avif" width="2370" height="94">
+          <img decoding="async" width="1040" height="142" src="./assets/tarjapopup/tarja-liberdade-mob-poster.avif" alt="">
+        </picture>
+        <video class="tarjaVideo" muted playsinline loop preload="none" aria-hidden="true"
+          data-desk-webm="./assets/tarjapopup/tarja-liberdade-desk.webm"
+          data-desk-mp4="./assets/tarjapopup/tarja-liberdade-desk.mp4"
+          data-mob-webm="./assets/tarjapopup/tarja-liberdade-mob.webm"
+          data-mob-mp4="./assets/tarjapopup/tarja-liberdade-mob.mp4"></video>
+      </span>
     </a>
   </div>
 
@@ -2352,6 +2358,7 @@ const prazosPromo = [
   <script src="./dist/script/blackPlanos.bcbaae1a.js"></script>
   <script src="./dist/script/planosAtivo.3f368f05.js"></script>
   <script src="./dist/script/limiteAlta.ebdcf05d.js"></script>
+  <script src="./dist/script/tarjaVideo.be8d3494.js" defer></script>
   <script src="./dist/script/sectionFaq.adee23fd.js" defer></script>
   <script src="./dist/script/sectionBa.a0c76aa6.js" defer></script>
 <script id="fontes-completas">(function(){var c="@font-face { font-family: 'NCS Radhiumz'; font-style: normal; font-weight: 400; font-display: swap; src: url(\"./css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 300; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Light.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 400; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 500; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Medium.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 600; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20DemiBold.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 700; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Bold.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 800; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20ExtraBold.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }";function go(){requestAnimationFrame(function(){var s=document.createElement('style');s.textContent=c;document.head.appendChild(s)})}if(document.readyState==='complete'){go()}else{addEventListener('load',go)}})();</script>

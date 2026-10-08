@@ -56,11 +56,23 @@
     Header always set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
-  # Imagens, fontes e assets estáticos
-  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|otf)$">
+  # Imagens, fontes, vídeos e assets estáticos. webm/mp4 entraram com a
+  # tarja em vídeo (out/2026) — o harness já servia vídeo como immutable
+  # (regra 19: ele espelha a produção; agora a produção espelha ele).
+  # Consequência: vídeo, como imagem, troca SEMPRE de nome (nome por
+  # campanha — scripts/tarja-video.mjs).
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|otf|webm|mp4)$">
     Header always set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
+</IfModule>
+
+# Tipos de vídeo: Apache antigo não traz o .webm no mime.types, e vídeo com
+# Content-Type errado não toca. Range (206) é nativo do Apache para arquivo
+# estático — o <video> pede faixas.
+<IfModule mod_mime.c>
+  AddType video/webm .webm
+  AddType video/mp4 .mp4
 </IfModule>
 
 # ETag por data e tamanho: deixa a revalidacao do HTML barata (304).

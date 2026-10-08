@@ -18,13 +18,45 @@
     display: contents;
 }
 
-.tarjaImage img {
-    width: 100%;
-    /* height:auto é OBRIGATÓRIO com os width/height do markup (F3a): o
-       hint de altura é CSS de apresentação e, sem isto, a tarja nasceria
-       com os 554px LITERAIS do atributo — a mesma lição do cupom. */
-    height: auto;
+/* Tarja em vídeo (out/2026): o contêiner .tarjaMidia reserva a altura pela
+   razão do vídeo (regra 21, bloco E2 abaixo) e é ele que se posiciona no
+   layout. Dentro, o pôster (<picture>) é a tarja de verdade — crítico e
+   LCP — e o <video> fica por cima, transparente, até o script dar src
+   depois do load + idle e o 'playing' chegar (script/tarjaVideo.js). */
+.tarjaImage .tarjaMidia {
+    position: relative;
     display: block;
+    width: 100%;
+}
+
+.tarjaImage .tarjaMidia img {
+    width: 100%;
+    /* height pela caixa, não pelo atributo: os width/height do markup (F3a)
+       são hint de apresentação e, sem isto, a tarja nasceria com a altura
+       LITERAL do atributo — a mesma lição do cupom. */
+    height: 100%;
+    display: block;
+}
+
+.tarjaImage .tarjaVideo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    pointer-events: none;
+}
+
+.tarjaImage .tarjaVideo.is-tocando {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tarjaImage .tarjaVideo {
+        transition: none;
+    }
 }
 
 #home.activeTarjaImage {
@@ -202,7 +234,7 @@
         justify-content: center;
     }
 
-    div.tarjaImage img {
+    div.tarjaImage .tarjaMidia {
         display: block;
         flex: none;
         max-width: none;
@@ -211,7 +243,7 @@
 }
 
 @media (min-width: 1600px) {
-    div.tarjaImage img {
+    div.tarjaImage .tarjaMidia {
         width: max(100%, calc(100vw - 340px));
     }
 }
@@ -289,9 +321,12 @@
       na janela do fallback o excesso é cortado pelo overflow:hidden do
       balão (transitório de ~0,5s), a altura NÃO muda.
    Mudou a arte, refaça as razões (como no fallback do --tarja-offset
-   abaixo). */
-.tarjaImage img {
-    aspect-ratio: auto 4053 / 555; /* TARJA MOBILE LIBERDADE (out/2026) */
+   abaixo).
+   Tarja em vídeo (out/2026): quem reserva agora é o contêiner .tarjaMidia,
+   pela razão do VÍDEO (que é a mesma do pôster). Sem o `auto`: o contêiner
+   não é elemento substituído, então não há razão intrínseca para ceder. */
+.tarjaImage .tarjaMidia {
+    aspect-ratio: 1040 / 142; /* vídeo + pôster mob LIBERDADE (out/2026) */
 }
 
 .countdown--promo,
@@ -300,29 +335,29 @@
 }
 
 @media (min-width: 1080px) {
-    div.tarjaImage img {
-        aspect-ratio: auto 14012 / 555; /* TARJA DESK LIBERDADE (out/2026) */
+    div.tarjaImage .tarjaMidia {
+        aspect-ratio: 2370 / 94; /* vídeo + pôster desk LIBERDADE (out/2026) */
     }
 }
 
 /* C4: fallback do --tarja-offset ANTES de o JS medir (o script protegido
    continua mandando: o valor inline dele vence este). A conta vem da
-   razão das artes (LIBERDADE out/2026: mobile 4053/555 = 7,3027; desk 14012/555 = 25,2468)
+   razão do vídeo da tarja (LIBERDADE out/2026: mob 1040/142 = 7,3239; desk 2370/94 = 25,2128)
    mais a barra do timer (27,4px < 1080; 34px de 1080 em diante). Medido:
    erro de 0,2px em 390 e 0,0px em 1474; entre 1080 e ~1200 o desvio chega
    a ~6px e o ResizeObserver do script corrige no primeiro layout. */
 nav#navigation.activeCountdown {
-    --tarja-offset: calc((100vw - 38px) / 7.3027 + 27.4px);
+    --tarja-offset: calc((100vw - 38px) / 7.3239 + 27.4px);
 }
 
 @media (min-width: 1080px) {
     nav#navigation.activeCountdown {
-        --tarja-offset: calc((100vw - 200px) / 25.2468 + 34px);
+        --tarja-offset: calc((100vw - 200px) / 25.2128 + 34px);
     }
 }
 
 @media (min-width: 1600px) {
     nav#navigation.activeCountdown {
-        --tarja-offset: calc((100vw - 340px) / 25.2468 + 34px);
+        --tarja-offset: calc((100vw - 340px) / 25.2128 + 34px);
     }
 }

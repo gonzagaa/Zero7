@@ -2492,7 +2492,8 @@ justamente o que a NCS não foi desenhada para fazer.
     = classe no HTML). O script do contador só a REMOVE na expiração; o
     caminho de ativação é no-op. Quem desligar a campanha no HTML tira a
     tarja E a classe. O `--tarja-offset` tem fallback CSS pela razão das
-    artes (tarjaImage.css) — trocou a arte, refaça a conta.
+    artes (tarjaImage.css; desde a tarja em vídeo, a razão do VÍDEO, que
+    é a do pôster) — trocou a arte, refaça a conta.
 
 18. **O bundle CSS assíncrono usa `media="print"` + troca no onload**,
     nunca `rel="preload" as="style"`: o preload entra no grafo do Lantern
@@ -2524,10 +2525,11 @@ justamente o que a NCS não foi desenhada para fazer.
 
 21. **A tarja nasce na altura certa e a página nunca transborda na
     horizontal durante a carga** (lote E, E2). Três camadas, todas
-    medidas: (a) a `<img>` da arte reserva altura com
-    `aspect-ratio: auto <razão da arte>` por breakpoint (tarjaImage.css;
-    trocou a arte, refaça a razão — width/height no markup PIORAM 1474,
-    C4); o relógio segura linha única com `white-space: nowrap`; (b) o
+    medidas: (a) o contêiner `.tarjaMidia` reserva altura com
+    `aspect-ratio: <razão do vídeo>` por breakpoint (tarjaImage.css; o
+    pôster e o vídeo preenchem a caixa — trocou a arte, refaça a razão;
+    width/height do pôster acompanham a resolução do vídeo, regra 24);
+    o relógio segura linha única com `white-space: nowrap`; (b) o
     extrator do crítico mantém, em QUALQUER dobra, regra que segura
     width/height de alvo com hint de largura maior que a viewport (o
     cupom com width=4138 explodia o body a ~4157px na fase só-crítico, o
@@ -2574,3 +2576,16 @@ justamente o que a NCS não foi desenhada para fazer.
     2026-10-06.zip" ao lado das pastas. O script/planos.json e os
     arquivos de campanha continuam sendo editados DIRETO aqui/no ar por
     quem gere campanha — as regras 2, 5 e 17 seguem valendo.
+
+26. **Vídeo da tarja: pôster no crítico, vídeo só pós-load/idle**
+    (out/2026). O pôster AVIF (quadro 0 exato do vídeo) é a tarja de
+    verdade: entra no crítico com o contêiner e é o que o Lighthouse
+    vê. O `<video muted playsinline loop preload="none">` nasce SEM src
+    e SEM autoplay, transparente por cima; o script/tarjaVideo.js só dá
+    src depois do load + requestIdleCallback, e só sem movimento
+    reduzido, sem saveData e com (desktop ≥ 1080 OU 4g). Zero .webm/.mp4
+    antes do LCP e antes do load — o juiz é a
+    scripts/tarja-video-prova.mjs (rede, cenarios, visual). Trocar
+    campanha = rodar `node scripts/tarja-video.mjs <campanha>` com os
+    masters novos (nome NOVO por campanha: cache imutável de 1 ano),
+    trocar os caminhos no index.html e refazer as razões (regras 17/21).
