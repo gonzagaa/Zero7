@@ -84,56 +84,56 @@
     "oldPrice": "R$ 567,00",
     "parcel": "12x R$13,04",
     "avista": "ou R$130,41 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/469145",
+    "checkout": "https://app.zero7.com.br/checkout/e0d67d",
     "maxDias": "ilimitado*"
   },
   "junior": {
     "oldPrice": "R$ 827,00",
     "parcel": "12x R$19,02",
     "avista": "ou R$190,21 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/5055db",
+    "checkout": "https://app.zero7.com.br/checkout/b124d0",
     "maxDias": "ilimitado*"
   },
   "pleno": {
     "oldPrice": "R$ 1.667,00",
     "parcel": "12x R$38,34",
     "avista": "ou R$383,41 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/e04174",
+    "checkout": "https://app.zero7.com.br/checkout/35f3bc",
     "maxDias": "ilimitado*"
   },
   "senior": {
     "oldPrice": "R$ 2.767,00",
     "parcel": "12x R$63,64",
     "avista": "ou R$636,41 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/bb0320",
+    "checkout": "https://app.zero7.com.br/checkout/c3c682",
     "maxDias": "ilimitado*"
   },
   "expert": {
     "oldPrice": "R$ 4.417,00",
     "parcel": "12x R$101,59",
     "avista": "ou R$1.015,91 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/5aecd4",
+    "checkout": "https://app.zero7.com.br/checkout/99a0bc",
     "maxDias": "ilimitado*"
   },
   "master": {
     "oldPrice": "R$ 5.397,00",
     "parcel": "12x R$124,13",
     "avista": "ou R$1.241,31 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/029d91",
+    "checkout": "https://app.zero7.com.br/checkout/eb3375",
     "maxDias": "ilimitado*"
   },
   "bit_trainee": {
     "oldPrice": "R$ 567,00",
     "parcel": "12x R$13,04",
     "avista": "ou R$130,41 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/02aff1",
+    "checkout": "https://app.zero7.com.br/checkout/8dcd1a",
     "maxDias": "ilimitado*"
   },
   "bit_junior": {
     "oldPrice": "R$ 827,00",
     "parcel": "12x R$19,02",
     "avista": "ou R$190,21 à vista",
-    "checkout": "https://app.zero7.com.br/checkout/ae55bc",
+    "checkout": "https://app.zero7.com.br/checkout/f4da34",
     "maxDias": "ilimitado*"
   }
   },

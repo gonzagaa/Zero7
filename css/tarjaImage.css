@@ -291,7 +291,7 @@
    Mudou a arte, refaça as razões (como no fallback do --tarja-offset
    abaixo). */
 .tarjaImage img {
-    aspect-ratio: auto 4053 / 554; /* TARJA MOBILE PROFIT (out/2026) */
+    aspect-ratio: auto 4053 / 555; /* TARJA MOBILE LIBERDADE (out/2026) */
 }
 
 .countdown--promo,
@@ -301,28 +301,28 @@
 
 @media (min-width: 1080px) {
     div.tarjaImage img {
-        aspect-ratio: auto 14012 / 554; /* TARJA DESK PROFIT (out/2026) */
+        aspect-ratio: auto 14012 / 555; /* TARJA DESK LIBERDADE (out/2026) */
     }
 }
 
 /* C4: fallback do --tarja-offset ANTES de o JS medir (o script protegido
    continua mandando: o valor inline dele vence este). A conta vem da
-   razão das artes (PROFIT out/2026: mobile 4053/554 = 7,3159; desk 14012/554 = 25,2924)
+   razão das artes (LIBERDADE out/2026: mobile 4053/555 = 7,3027; desk 14012/555 = 25,2468)
    mais a barra do timer (27,4px < 1080; 34px de 1080 em diante). Medido:
    erro de 0,2px em 390 e 0,0px em 1474; entre 1080 e ~1200 o desvio chega
    a ~6px e o ResizeObserver do script corrige no primeiro layout. */
 nav#navigation.activeCountdown {
-    --tarja-offset: calc((100vw - 38px) / 7.3159 + 27.4px);
+    --tarja-offset: calc((100vw - 38px) / 7.3027 + 27.4px);
 }
 
 @media (min-width: 1080px) {
     nav#navigation.activeCountdown {
-        --tarja-offset: calc((100vw - 200px) / 25.2924 + 34px);
+        --tarja-offset: calc((100vw - 200px) / 25.2468 + 34px);
     }
 }
 
 @media (min-width: 1600px) {
     nav#navigation.activeCountdown {
-        --tarja-offset: calc((100vw - 340px) / 25.2924 + 34px);
+        --tarja-offset: calc((100vw - 340px) / 25.2468 + 34px);
     }
 }

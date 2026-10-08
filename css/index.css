@@ -1,39 +1,40 @@
-@import url("./tokens.css?v=v94-anim04");
-@import url("./global.css?v=v94-anim04");
-@import url("./acessibilidade.css?v=v94-anim04");
-@import url("./home.css?v=v94-anim04");
-@import url("./sectionDivisa.css?v=v94-anim04");
-@import url("./sectionCards.css?v=v94-anim04");
-@import url("./sectionTopicos.css?v=v94-anim04");
-@import url("./sectionDepoimentos.css?v=v94-anim04");
-@import url("./sectionBa.css?v=v94-anim04");
-@import url("./sectionPlanos.css?v=v94-anim04");
-@import url("./sectionPlanosTematico.css?v=v94-anim04");
-@import url("./planosAtivo.css?v=v94-anim04");
-@import url("./sectionFaq.css?v=v94-anim04");
-@import url("./sectionContato.css?v=v94-anim04");
-@import url("./divSuporte.css?v=v94-anim04");
+@import url("./tokens.css?v=v95-liberdade-out08");
+@import url("./global.css?v=v95-liberdade-out08");
+@import url("./acessibilidade.css?v=v95-liberdade-out08");
+@import url("./home.css?v=v95-liberdade-out08");
+@import url("./sectionDivisa.css?v=v95-liberdade-out08");
+@import url("./sectionCards.css?v=v95-liberdade-out08");
+@import url("./sectionTopicos.css?v=v95-liberdade-out08");
+@import url("./sectionDepoimentos.css?v=v95-liberdade-out08");
+@import url("./sectionBa.css?v=v95-liberdade-out08");
+@import url("./sectionPlanos.css?v=v95-liberdade-out08");
+@import url("./sectionPlanosTematico.css?v=v95-liberdade-out08");
+@import url("./planosAtivo.css?v=v95-liberdade-out08");
+@import url("./limiteAlta.css?v=v95-liberdade-out08");
+@import url("./sectionFaq.css?v=v95-liberdade-out08");
+@import url("./sectionContato.css?v=v95-liberdade-out08");
+@import url("./divSuporte.css?v=v95-liberdade-out08");
 
-@import url("./navigation.css?v=v94-anim04");
-@import url("./button.css?v=v94-anim04");
-@import url("./componentes.css?v=v94-anim04");
-@import url("./divisor.css?v=v94-anim04");
-@import url("./head.css?v=v94-anim04");
-@import url("./buttonWpp.css?v=v94-anim04");
-@import url("./modalDepoimento.css?v=v94-anim04");
-@import url("./tarja.css?v=v94-anim04");
-@import url("./tarjaNav.css?v=v94-anim04");
-@import url("./tarjaImage.css?v=v94-anim04");
-@import url("./popup.css?v=v94-anim04");
+@import url("./navigation.css?v=v95-liberdade-out08");
+@import url("./button.css?v=v95-liberdade-out08");
+@import url("./componentes.css?v=v95-liberdade-out08");
+@import url("./divisor.css?v=v95-liberdade-out08");
+@import url("./head.css?v=v95-liberdade-out08");
+@import url("./buttonWpp.css?v=v95-liberdade-out08");
+@import url("./modalDepoimento.css?v=v95-liberdade-out08");
+@import url("./tarja.css?v=v95-liberdade-out08");
+@import url("./tarjaNav.css?v=v95-liberdade-out08");
+@import url("./tarjaImage.css?v=v95-liberdade-out08");
+@import url("./popup.css?v=v95-liberdade-out08");
 
-@import url("./author.css?v=v94-anim04");
-@import url("./footer.css?v=v94-anim04");
-@import url("./footerPagamento.css?v=v94-anim04");
-@import url("./coutdownDois.css?v=v94-anim04");
+@import url("./author.css?v=v95-liberdade-out08");
+@import url("./footer.css?v=v95-liberdade-out08");
+@import url("./footerPagamento.css?v=v95-liberdade-out08");
+@import url("./coutdownDois.css?v=v95-liberdade-out08");
 
-@import url("./obrigado.css?v=v94-anim04");
-@import url("./verificado.css?v=v94-anim04");
-@import url("./25k.css?v=v94-anim04");
+@import url("./obrigado.css?v=v95-liberdade-out08");
+@import url("./verificado.css?v=v95-liberdade-out08");
+@import url("./25k.css?v=v95-liberdade-out08");
 
 /* Lenis 1.1.14 (MIT) — o lenis.css do unpkg tinha 244 bytes e era
    <link> no <head>: uma requisição cross-origin, com DNS e TLS, para
@@ -67,7 +68,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/NCS%20Radhiumz.sub.woff2?v=v94-anim04") format("woff2");
+  src: url("fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08") format("woff2");
   /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
      Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
      mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
@@ -78,7 +79,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url("fonts/TT%20Fors%20Trial%20Light.sub.woff2?v=v94-anim04") format("woff2");
+  src: url("fonts/TT%20Fors%20Trial%20Light.sub.woff2?v=v95-liberdade-out08") format("woff2");
   /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
      Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
      mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
@@ -89,7 +90,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v94-anim04") format("woff2");
+  src: url("fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08") format("woff2");
   /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
      Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
      mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
@@ -100,7 +101,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("fonts/TT%20Fors%20Trial%20Medium.sub.woff2?v=v94-anim04") format("woff2");
+  src: url("fonts/TT%20Fors%20Trial%20Medium.sub.woff2?v=v95-liberdade-out08") format("woff2");
   /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
      Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
      mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
@@ -111,7 +112,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url("fonts/TT%20Fors%20Trial%20DemiBold.sub.woff2?v=v94-anim04") format("woff2");
+  src: url("fonts/TT%20Fors%20Trial%20DemiBold.sub.woff2?v=v95-liberdade-out08") format("woff2");
   /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
      Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
      mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
@@ -122,7 +123,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("fonts/TT%20Fors%20Trial%20Bold.sub.woff2?v=v94-anim04") format("woff2");
+  src: url("fonts/TT%20Fors%20Trial%20Bold.sub.woff2?v=v95-liberdade-out08") format("woff2");
   /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
      Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
      mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */
@@ -133,7 +134,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url("fonts/TT%20Fors%20Trial%20ExtraBold.sub.woff2?v=v94-anim04") format("woff2");
+  src: url("fonts/TT%20Fors%20Trial%20ExtraBold.sub.woff2?v=v95-liberdade-out08") format("woff2");
   /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General
      Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs;
      mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */

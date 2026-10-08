@@ -314,12 +314,12 @@ div.tarjaImage img{display:block;flex:none;max-width:none;width:max(100%,calc(10
 @media (min-width: 1600px){div.tarjaImage img{width:max(100%,calc(100vw - 340px))}}
 @media (max-width: 1079.98px){div.tarjaImage{left:0;right:0;margin-inline:auto;top:1.2rem;width:calc(min(var(--container-max),100%) - 4.8rem);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;overflow:hidden;box-shadow:.25rem .3rem .8rem #0000002e}
 .countdown--promo{gap:var(--esp-2);padding-inline:.6rem}}
-.tarjaImage img{aspect-ratio:auto 4053 / 554}
+.tarjaImage img{aspect-ratio:auto 4053 / 555}
 .countdown--promo,.tarjaImage p.text{white-space:nowrap}
-@media (min-width: 1080px){div.tarjaImage img{aspect-ratio:auto 14012 / 554}}
-nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 38px) / 7.3159 + 27.4px)}
-@media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 200px) / 25.2924 + 34px)}}
-@media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2924 + 34px)}}
+@media (min-width: 1080px){div.tarjaImage img{aspect-ratio:auto 14012 / 555}}
+nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 38px) / 7.3027 + 27.4px)}
+@media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 200px) / 25.2468 + 34px)}}
+@media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2468 + 34px)}}
 @media (max-width: 1079.98px){#author .autor__cnpj{display:none}}
 @media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
 @media (min-width: 1080px){footer .rodape__cnpj{display:none}}

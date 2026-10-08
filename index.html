@@ -360,12 +360,12 @@ div.tarjaImage img{display:block;flex:none;max-width:none;width:max(100%,calc(10
 @media (min-width: 1600px){div.tarjaImage img{width:max(100%,calc(100vw - 340px))}}
 @media (max-width: 1079.98px){div.tarjaImage{left:0;right:0;margin-inline:auto;top:1.2rem;width:calc(min(var(--container-max),100%) - 4.8rem);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;overflow:hidden;box-shadow:.25rem .3rem .8rem #0000002e}
 .countdown--promo{gap:var(--esp-2);padding-inline:.6rem}}
-.tarjaImage img{aspect-ratio:auto 4053 / 554}
+.tarjaImage img{aspect-ratio:auto 4053 / 555}
 .countdown--promo,.tarjaImage p.text{white-space:nowrap}
-@media (min-width: 1080px){div.tarjaImage img{aspect-ratio:auto 14012 / 554}}
-nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 38px) / 7.3159 + 27.4px)}
-@media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 200px) / 25.2924 + 34px)}}
-@media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2924 + 34px)}}
+@media (min-width: 1080px){div.tarjaImage img{aspect-ratio:auto 14012 / 555}}
+nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 38px) / 7.3027 + 27.4px)}
+@media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 200px) / 25.2468 + 34px)}}
+@media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2468 + 34px)}}
 @media (max-width: 1079.98px){#author .autor__cnpj{display:none}}
 @media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
 @media (min-width: 1080px){footer .rodape__cnpj{display:none}}
@@ -576,8 +576,8 @@ html.lenis,html.lenis body{height:auto}
 [data-aos=fade-down]{transform:translate3d(0,-100px,0)}
 [data-aos=fade-right]{transform:translate3d(-100px,0,0)}
 [data-aos=fade-up-left]{transform:translate3d(100px,100px,0)}</style>
-  <link rel="stylesheet" href="./dist/home.89d9bea1.css" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="./dist/home.89d9bea1.css"></noscript>
+  <link rel="stylesheet" href="./dist/home.fa36a045.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="./dist/home.fa36a045.css"></noscript>
 
   <!-- C4: preconnect para os terceiros que restam na janela inicial
        (jquery, lenis/ionicons no unpkg, gsap/countUp no cdnjs) — 1 RTT
@@ -675,10 +675,10 @@ html.lenis,html.lenis body{height:auto}
         <!-- o caminho vai com %20: em srcset o espaço separa a URL do
              descritor, e com espaço cru o candidato é inválido e o navegador
              cai no src da <img> -->
-        <!-- campanha PROFIT (out/2026, trazida do ar): artes oficiais sem
+        <!-- campanha LIBERDADE (out/2026): artes oficiais sem
              variantes de srcset — gerar tamanhos é otimização de imagem e
              só entra com autorização (regra 6). A arte mobile é a CHEIA
-             (4053x554): a campanha não tem a versão de altura reduzida da
+             (4053x555): a campanha não tem a versão de altura reduzida da
              fase 22; se o design produzir uma, troque aqui e refaça as
              razões no tarjaImage.css (regras 17 e 21). -->
         <!-- F3a: width/height da PRÓPRIA arte em CADA entrada do <picture>.
@@ -686,8 +686,8 @@ html.lenis,html.lenis body{height:auto}
              para o desktop; com o <source> carregando os dele, cada
              viewport reserva com a razão certa (o aspect-ratio do CSS
              continua de cinto). Trocou a arte, troque os números. -->
-        <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/TARJA%20DESK%20PROFIT.avif" width="14012" height="554">
-        <img decoding="async" width="4053" height="554" src="./assets/tarjapopup/TARJA MOBILE PROFIT.avif" alt="">
+        <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/TARJA%20DESK%20LIBERDADE.avif" width="14012" height="555">
+        <img decoding="async" width="4053" height="555" src="./assets/tarjapopup/TARJA MOBILE LIBERDADE.avif" alt="">
       </picture>
     </a>
   </div>
@@ -1215,14 +1215,14 @@ html.lenis,html.lenis body{height:auto}
                337ms — a milhares de pixels da primeira tela, no celular.
                loading=lazy tira os dois da janela inicial, igual ao par de
                fundos .bg--ativo duas linhas acima. O width/height é a razão
-               real de cada arte (4138x1137 e 4138x1118, razões diferentes):
+               real de cada arte (3482x1850 nas duas, mesma razão):
                sem ele a célula nasceria com altura 0 e o cupom empurraria o
                layout ao chegar. A largura continua vindo do CSS (30rem), a
                caixa medida não muda, e a arte, o link e a lógica da campanha
                ficam como estão. -->
           <div class="cupom-wrap">
-            <img class="cupom" width="4483" height="1630" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom profit white.avif" alt="">
-            <img class="cupom white" width="4351" height="1433" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom profit black.avif" alt="" aria-hidden="true">
+            <img class="cupom" width="3482" height="1850" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom LIBERDADE black.avif" alt="">
+            <img class="cupom white" width="3482" height="1850" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom LIBERDADE white.avif" alt="" aria-hidden="true">
           </div>
       </div>
 
@@ -1275,7 +1275,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">5 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">3 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 247,00</span></div>
-              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 997,00</span></div>
+              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 997,00">R$ 1.200,00</span></span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1309,7 +1309,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">10 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">6 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 497,00</span></div>
-              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 1.997,00</span></div>
+              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 1.997,00">R$ 2.500,00</span></span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 1.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1344,7 +1344,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">25 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">15 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 1.247,00</span></div>
-              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 4.997,00</span></div>
+              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 4.997,00">R$ 6.500,00</span></span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 4.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1381,7 +1381,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">50 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">30 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 2.497,00</span></div>
-              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 9.997,00</span></div>
+              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 9.997,00">R$ 15.000,00</span></span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 9.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1415,7 +1415,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">75 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">45 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 3.747,00</span></div>
-              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 14.997,00</span></div>
+              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 14.997,00">R$ 17.500,00</span></span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 14.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1449,7 +1449,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">100 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">60 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 4.997,00</span></div>
-              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 19.997,00</span></div>
+              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 19.997,00">R$ 22.500,00</span></span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 19.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1505,7 +1505,7 @@ html.lenis,html.lenis body{height:auto}
             <div class="topics">
               <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">8 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 247,00</span></div>
-              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 997,00</span></div>
+              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 997,00">R$ 1.200,00</span></span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1537,7 +1537,7 @@ html.lenis,html.lenis body{height:auto}
             <div class="topics">
               <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">16 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 497,00</span></div>
-              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 1.997,00</span></div>
+              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 1.997,00">R$ 2.500,00</span></span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 1.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -2351,8 +2351,9 @@ const prazosPromo = [
   <script src="./dist/script/4selet.40684e8a.js"></script>
   <script src="./dist/script/blackPlanos.bcbaae1a.js"></script>
   <script src="./dist/script/planosAtivo.3f368f05.js"></script>
+  <script src="./dist/script/limiteAlta.ebdcf05d.js"></script>
   <script src="./dist/script/sectionFaq.adee23fd.js" defer></script>
   <script src="./dist/script/sectionBa.a0c76aa6.js" defer></script>
-<script id="fontes-completas">(function(){var c="@font-face { font-family: 'NCS Radhiumz'; font-style: normal; font-weight: 400; font-display: swap; src: url(\"./css/fonts/NCS%20Radhiumz.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 300; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Light.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 400; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 500; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Medium.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 600; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20DemiBold.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 700; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Bold.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 800; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20ExtraBold.sub.woff2?v=v94-anim04\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }";function go(){requestAnimationFrame(function(){var s=document.createElement('style');s.textContent=c;document.head.appendChild(s)})}if(document.readyState==='complete'){go()}else{addEventListener('load',go)}})();</script>
+<script id="fontes-completas">(function(){var c="@font-face { font-family: 'NCS Radhiumz'; font-style: normal; font-weight: 400; font-display: swap; src: url(\"./css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 300; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Light.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 400; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 500; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Medium.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 600; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20DemiBold.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 700; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20Bold.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }\n@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 800; font-display: swap; src: url(\"./css/fonts/TT%20Fors%20Trial%20ExtraBold.sub.woff2?v=v95-liberdade-out08\") format(\"woff2\"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }";function go(){requestAnimationFrame(function(){var s=document.createElement('style');s.textContent=c;document.head.appendChild(s)})}if(document.readyState==='complete'){go()}else{addEventListener('load',go)}})();</script>
 </body>
 </html>
