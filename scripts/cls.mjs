@@ -1,7 +1,9 @@
 // CLS no carregamento e ao rolar, por largura (padrão: 375 e 1474). Abaixo
 // de 1080 o contexto é de toque (isMobile + hasTouch). Lista as mudanças de
 // layout acima de 0,0005 com os nós que se mexeram.
-//   node scripts/cls.mjs [largura…]
+//   node scripts/cls.mjs [largura…] [--pagina home|regulamento]
+//
+// Páginas (regra 27): sem --pagina, mede a home e /regulamento/.
 //
 // A rede é a do harness (lib/pagina.mjs): só a origem e as dependências da
 // página; PAGINA_TERCEIROS=1 libera os terceiros. Aqui o contexto é novo a
@@ -15,11 +17,19 @@ import { iniciarServidor } from './lib/servidor.mjs';
 import { prepararContexto } from './lib/pagina.mjs';
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const larguras = process.argv.length > 2 ? process.argv.slice(2).map(Number) : [375, 1474];
+const args = process.argv.slice(2);
+const iPag = args.indexOf('--pagina');
+const soPagina = iPag >= 0 ? args.splice(iPag, 2)[1] : null;
+const larguras = args.length ? args.map(Number) : [375, 1474];
 
 const servidor = await iniciarServidor(RAIZ);
 const nav = await chromium.launch();
+const PAGINAS = [
+  { nome: 'home', url: servidor.url },
+  { nome: 'regulamento', url: new URL('/regulamento/index.html', servidor.url).href },
+].filter((p) => !soPagina || p.nome === soPagina);
 try {
+  for (const pagina of PAGINAS) {
   for (const largura of larguras) {
     const extra = largura < 1080 ? { isMobile: true, hasTouch: true } : {};
     const ctx = await nav.newContext({
@@ -52,7 +62,7 @@ try {
     });
     const page = await ctx.newPage();
     for (let t = 1; ; t++) {
-      try { await page.goto(servidor.url, { waitUntil: 'domcontentloaded', timeout: 30_000 }); break; } catch (e) { if (t >= 3) throw e; }
+      try { await page.goto(pagina.url, { waitUntil: 'domcontentloaded', timeout: 30_000 }); break; } catch (e) { if (t >= 3) throw e; }
     }
     // espera fixa no lugar do 'load': sem os terceiros, 3s bastam para a
     // carga assentar
@@ -67,9 +77,10 @@ try {
     });
     await page.waitForTimeout(1000);
     const r = await page.evaluate(() => window.__cls);
-    console.log(`${largura}px  CLS carga=${r.carga.toFixed(4)}  rolagem=${r.rolagem.toFixed(4)}`);
+    console.log(`${pagina.nome === 'home' ? '' : pagina.nome + ' '}${largura}px  CLS carga=${r.carga.toFixed(4)}  rolagem=${r.rolagem.toFixed(4)}`);
     for (const f of r.fontes) console.log(`    ${f.fase} ${f.valor}  ${f.nos.join(' | ')}`);
     await ctx.close();
+  }
   }
 } finally {
   await nav.close();

@@ -1,6 +1,10 @@
 // FOUC é a falha do item 5, e este é o juiz — medindo ESTILO, não conteúdo.
 //
-//   node scripts/fouc.mjs
+//   node scripts/fouc.mjs [--pagina home|regulamento]
+//
+// Páginas (regra 27): sem --pagina, mede a home e /regulamento/. No
+// regulamento, a carga "só crítico" aborta os DOIS bundles (o da home e o
+// regulamento.<hash>.css).
 //
 // Régua A (a pergunta certa): a MESMA página duas vezes, imagens e
 // terceiros bloqueados, animações congeladas — uma carga só com o crítico
@@ -20,6 +24,11 @@ import { iniciarServidor } from './lib/servidor.mjs';
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const servidor = await iniciarServidor(RAIZ);
 const nav = await chromium.launch();
+const iPag = process.argv.indexOf('--pagina');
+const PAGINAS = [
+  { nome: 'home', url: servidor.url, bundles: /dist\/home\.[0-9a-f]{8}\.css/ },
+  { nome: 'regulamento', url: new URL('/regulamento/index.html', servidor.url).href, bundles: /dist\/(home|regulamento)\.[0-9a-f]{8}\.css/ },
+].filter((p) => iPag < 0 || p.nome === process.argv[iPag + 1]);
 const TERCEIROS = /googletagmanager|zdassets|zendesk|facebook|hotjar|reclameaqui|rdstation|cloudfront|doubleclick|google\.com|unpkg\.com\/ionicons/i;
 
 const diffPct = async (a, b, altura) => {
@@ -40,6 +49,7 @@ let falhou = false;
 // F3a: 1280 e 1920 entraram — o crítico agora é extraído também a 1920.
 // Container fluido (out/2026): 1366 e 1536 entraram — são as larguras de
 // notebook que o clamp do --container-max passou a diferenciar.
+for (const pagina of PAGINAS) {
 for (const vp of [{ w: 390, h: 844 }, { w: 1280, h: 900 }, { w: 1366, h: 900 }, { w: 1474, h: 900 }, { w: 1536, h: 900 }, { w: 1920, h: 1080 }]) {
   const capturar = async (soCritico) => {
     const ctx = await nav.newContext({ viewport: { width: vp.w, height: vp.h }, reducedMotion: 'reduce' });
@@ -48,10 +58,10 @@ for (const vp of [{ w: 390, h: 844 }, { w: 1280, h: 900 }, { w: 1366, h: 900 }, 
       const url = rota.request().url();
       const tipo = rota.request().resourceType();
       if (tipo === 'image' || tipo === 'media' || TERCEIROS.test(url)) return rota.abort();
-      if (soCritico && /dist\/home\.[0-9a-f]{8}\.css/.test(url)) return rota.abort();
+      if (soCritico && pagina.bundles.test(url)) return rota.abort();
       return rota.continue();
     });
-    await p.goto(servidor.url, { waitUntil: 'load', timeout: 120_000 }).catch(() => {});
+    await p.goto(pagina.url, { waitUntil: 'load', timeout: 120_000 }).catch(() => {});
     await p.waitForTimeout(2500);
     await p.evaluate(() => { for (const a of document.getAnimations({ subtree: true })) { try { a.pause(); a.currentTime = 0; } catch (e) {} } }).catch(() => {});
     // congela os dígitos do contador: as duas capturas são tiradas com
@@ -68,13 +78,15 @@ for (const vp of [{ w: 390, h: 844 }, { w: 1280, h: 900 }, { w: 1366, h: 900 }, 
   for (let i = 0; i < 5; i++) {
     const so = await capturar(true);
     const cheio = await capturar(false);
-    await sharp(so).toFile(`shots/fouc-A-${vp.w}-c${i}-critico.png`);
-    await sharp(cheio).toFile(`shots/fouc-A-${vp.w}-c${i}-cheio.png`);
-    difs.push(await diffPct(`shots/fouc-A-${vp.w}-c${i}-critico.png`, `shots/fouc-A-${vp.w}-c${i}-cheio.png`, vp.h));
+    const pre = `shots/fouc-A-${pagina.nome === 'home' ? '' : pagina.nome + '-'}${vp.w}-c${i}`;
+    await sharp(so).toFile(`${pre}-critico.png`);
+    await sharp(cheio).toFile(`${pre}-cheio.png`);
+    difs.push(await diffPct(`${pre}-critico.png`, `${pre}-cheio.png`, vp.h));
   }
   const ok = difs.every((d) => d <= 0.5);
   if (!ok) falhou = true;
-  console.log(`A ${vp.w}: só-crítico x completo: ${difs.map((d) => d.toFixed(2)).join(' | ')}%  ${ok ? 'OK' : 'ESTOUROU'}`);
+  console.log(`${pagina.nome === 'home' ? '' : pagina.nome + ' '}A ${vp.w}: só-crítico x completo: ${difs.map((d) => d.toFixed(2)).join(' | ')}%  ${ok ? 'OK' : 'ESTOUROU'}`);
+}
 }
 await nav.close();
 await servidor.fechar();

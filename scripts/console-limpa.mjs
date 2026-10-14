@@ -2,6 +2,10 @@
 //
 //   node scripts/console-limpa.mjs
 //
+// Também /regulamento/ (regra 27): carga, rolagem até o rodapé, sumário do
+// celular (abrir, escolher seção), menu do celular (abrir, Esc), clique na
+// âncora de uma seção. Qualquer pageerror reprova.
+//
 // A lição que criou esta sonda: um ponto-e-vírgula faltando no global.js
 // (cbd4352, lote B) virou `window.zero7ArmarAnimacoes()(() => {…})` — o
 // retorno undefined chamado como função — e o TypeError matou TODO o
@@ -68,6 +72,62 @@ for (const vp of [{ w: 390, h: 844, mob: true }, { w: 1474, h: 900, mob: false }
   const ok = erros.length === 0;
   if (!ok) falhou = true;
   console.log(`${vp.w}px: ${ok ? 'console limpo, modal ok' : 'REPROVADO'}${erros.length ? '\n  - ' + erros.join('\n  - ') : ''}`);
+  await ctx.close();
+}
+
+/* ── /regulamento/ ─────────────────────────────────────────────────── */
+for (const vp of [{ w: 390, h: 844, mob: true }, { w: 1474, h: 900, mob: false }]) {
+  const ctx = await nav.newContext({
+    viewport: { width: vp.w, height: vp.h },
+    deviceScaleFactor: vp.mob ? 3 : 1, isMobile: vp.mob, hasTouch: vp.mob,
+  });
+  await prepararContexto(ctx);
+  const p = await ctx.newPage();
+  const erros = [];
+  p.on('pageerror', (e) => erros.push(String(e).split('\n')[0].slice(0, 160)));
+  await p.goto(new URL('/regulamento/index.html', servidor.url).href, { waitUntil: 'load', timeout: 120_000 });
+  await p.waitForTimeout(2000);
+  await p.evaluate(async () => {
+    const espera = (ms) => new Promise((r) => setTimeout(r, ms));
+    for (let y = 0; y < document.documentElement.scrollHeight; y += Math.round(innerHeight * 0.8)) { window.scrollTo(0, y); await espera(40); }
+    window.scrollTo(0, 0);
+    await espera(300);
+  });
+  const tentar = async (rotulo, fn) => { try { await fn(); } catch (e) { erros.push(`${rotulo}: ${String(e).split('\n')[0].slice(0, 100)}`); } };
+  if (vp.mob) {
+    await tentar('sumário do celular', async () => {
+      await p.click('.reg-sumario-movel > summary', { timeout: 5000 });
+      await p.click('.reg-sumario-movel a[href="#regulamento-06-processo-da-fase-incubadora"]', { timeout: 5000 });
+      await p.waitForTimeout(600);
+      if (await p.evaluate(() => document.querySelector('.reg-sumario-movel').open)) erros.push('o sumário do celular não fechou ao escolher a seção');
+    });
+    await tentar('menu do celular', async () => {
+      await p.evaluate(() => window.scrollTo(0, 0));
+      await p.click('#navigation .open-menu', { timeout: 5000 });
+      await p.waitForTimeout(300);
+      if (!(await p.evaluate(() => document.body.classList.contains('menu-expanded')))) erros.push('o menu do celular não abriu');
+      await p.keyboard.press('Escape');
+      await p.waitForTimeout(300);
+      if (await p.evaluate(() => document.body.classList.contains('menu-expanded'))) erros.push('Esc não fechou o menu');
+    });
+  } else {
+    await tentar('sumário lateral', async () => {
+      await p.click('.reg-sumario a[href="#regulamento-09-planos-de-avaliacao"]', { timeout: 5000 });
+      // espera a rolagem (suave, ~1,3s num salto longo) levar o título ao topo
+      await p.waitForFunction(() => { const t = document.getElementById('regulamento-09-planos-de-avaliacao').getBoundingClientRect().top; return t >= 0 && t < 260; }, null, { timeout: 8000 });
+      await p.waitForTimeout(400);
+      const ativo = await p.evaluate(() => document.querySelector('.reg-sumario a[aria-current="true"]')?.getAttribute('href'));
+      if (ativo !== '#regulamento-09-planos-de-avaliacao') erros.push(`sumário não marcou a seção lida (marcou ${ativo})`);
+    });
+  }
+  await tentar('âncora da seção', async () => {
+    await p.locator('.reg-ancora').nth(2).scrollIntoViewIfNeeded();
+    await p.locator('.reg-ancora').nth(2).click({ timeout: 5000 });
+    await p.waitForTimeout(400);
+  });
+  const ok = erros.length === 0;
+  if (!ok) falhou = true;
+  console.log(`regulamento ${vp.w}px: ${ok ? 'console limpo, sumário/menu/âncora ok' : 'REPROVADO'}${erros.length ? '\n  - ' + erros.join('\n  - ') : ''}`);
   await ctx.close();
 }
 

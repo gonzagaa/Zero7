@@ -82,6 +82,13 @@ GSAP + countUp (cdnjs.cloudflare.com). As fontes são servidas de `css/fonts/`
 5. Sincronize no painel do TurboCloud.
 6. `node scripts/producao.mjs https://zero7.com.br/home/` — a verificação pós-deploy.
 
+## Como atualizar o regulamento
+
+1. Edite só o texto em `regulamento/conteudo.html` (inclusive a data em `<time datetime>`); o layout fica em `regulamento/index.html`.
+2. `npm run build:critico` e `npm run check`.
+3. `node scripts/regulamento-fidelidade.mjs` — tem que acusar exatamente a mudança aprovada, nada além.
+4. Confirmada, grave o texto como o novo aprovado: `node scripts/regulamento-fidelidade.mjs --gravar-referencia --da-pagina`, e commite os dois juntos.
+
 ## Como trocar a tarja em vídeo
 
 1. Crie a pasta da campanha: `desktop.mp4` (3160×126), `mobile.mp4` (2080×284), 15 s, sem áudio, e `campanha.json` com `{ "slug": "nome-novo", "fim": "AAAA-MM-DD" }` (slug nunca repetido; `fim` opcional).

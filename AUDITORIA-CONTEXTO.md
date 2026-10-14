@@ -2601,3 +2601,23 @@ justamente o que a NCS não foi desenhada para fazer.
     do CSS: mudar a proporção da tarja é OUTRA tarefa (tarjaImage.css,
     regras 17/21, e scripts/lib/tarja.mjs juntos). Prazos do contador só
     com --contador e só as datas de prazosPromo (regra 5).
+
+27. **Páginas secundárias passam pelo MESMO build e pelas MESMAS réguas**
+    (/regulamento/, out/2026). O layout é regulamento/index.html, editado
+    fora dos marcadores `<!-- build:x -->`; o build preenche dentro: o
+    crítico DESTA página (critico.mjs extrai por página, para cada bundle
+    que ela carrega), o bundle da home + o CSS próprio no mesmo esquema
+    de hash, as faces .sub com preload, o sumário dos h2 e o nav e o
+    rodapé COPIADOS do index.html — um markup só; mudou o nav da home,
+    muda aqui no próximo build. O npm run check vigia a página (crítico
+    desatualizado + git diff em regulamento/). lh.mjs, fouc.mjs, cls.mjs
+    e console-limpa.mjs medem as duas páginas por padrão (`--pagina`
+    restringe); a scripts/regulamento-prova.mjs cobre o resto (axe,
+    terceiros antes de interação, teclado, impressão, shots). O TEXTO do
+    regulamento vive SÓ em regulamento/conteudo.html e só muda junto com
+    a sonda de fidelidade (scripts/regulamento-fidelidade.mjs): quem
+    manda é a referência aprovada (medidas/regulamento-referencia.txt);
+    texto novo aprovado = trocar o conteudo.html, ver a sonda acusar
+    EXATAMENTE a mudança aprovada, e só então gravar a referência nova
+    (`--gravar-referencia --da-pagina`). Os ids dos h2 são estáveis
+    (gente compartilha o link): não derive de novo do título.

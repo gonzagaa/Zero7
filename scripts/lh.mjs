@@ -1,5 +1,12 @@
 // Lighthouse programático contra o servidor local, nos dois presets.
-//   node scripts/lh.mjs <rótulo> [execuções=5]
+//   node scripts/lh.mjs <rótulo> [execuções=5] [--pagina home|regulamento]
+//
+// Páginas (regra 27): a home e /regulamento/ passam pela MESMA régua. Sem
+// --pagina, roda as duas. A home grava medidas/lh-<rótulo>-<preset>.json
+// (o nome de sempre); o regulamento, medidas/lh-<rótulo>-regulamento-
+// <preset>.json, com uma rodada a mais de ACESSIBILIDADE por preset
+// (separada das de performance: o axe roda depois da carga e não deve
+// pesar no tempo medido).
 // Mediana + intervalo de score, FCP, LCP, TBT, CLS, SI e o elemento LCP.
 // Sem extensões (Chromium headless limpo), cache frio (padrão do Lighthouse).
 // Salva em medidas/lh-<rótulo>-<mobile|desktop>.json.
@@ -22,6 +29,8 @@ const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
 const iDir = argv.indexOf('--dir');
 const RAIZ_SERVIDA = iDir >= 0 ? path.resolve(argv.splice(iDir, 2)[1]) : RAIZ;
+const iPag = argv.indexOf('--pagina');
+const SO_PAGINA = iPag >= 0 ? argv.splice(iPag, 2)[1] : null;
 const rotulo = argv[0];
 const execucoes = Number(argv[1] || 5);
 if (!rotulo) { console.error('uso: node scripts/lh.mjs <rótulo> [execuções] [--dir <pasta>]'); process.exit(1); }
@@ -31,14 +40,16 @@ const servidor = await iniciarServidor(RAIZ_SERVIDA);
 
 // Asserção de carga ANTES de medir (protocolo): uma carga com Playwright em
 // cada largura do preset. Falhou, aborta e nada é registrado.
-async function preflight(largura) {
+async function preflight(largura, pagina) {
   const nav = await chromium.launch();
   try {
     const ctx = await nav.newContext({ viewport: { width: largura, height: largura >= 1080 ? 900 : 844 } });
     const p = await ctx.newPage();
-    await p.goto(servidor.url, { waitUntil: 'load', timeout: 120_000 });
+    await p.goto(pagina.url, { waitUntil: 'load', timeout: 120_000 });
     await p.waitForTimeout(3000);
-    if (RAIZ_SERVIDA === RAIZ) await conferirCarga(p, largura);
+    if (pagina.nome === 'regulamento') {
+      if (!(await p.evaluate(() => document.querySelectorAll('article.regulamento h1, article.regulamento h2').length > 1))) throw new Error('regulamento sem article/h1/h2');
+    } else if (RAIZ_SERVIDA === RAIZ) await conferirCarga(p, largura);
     else if (!(await p.evaluate(() => !!document.querySelector('h1')))) throw new Error('página servida de --dir sem h1');
   } finally {
     await nav.close();
@@ -90,18 +101,21 @@ try {
   desktop1920.settings = desktop1920.settings || {};
   desktop1920.settings.screenEmulation = { mobile: false, width: 1920, height: 1080, deviceScaleFactor: 1, disabled: false };
 
+  const PAGINAS = [
+    { nome: 'home', url: servidor.url, arquivo: (preset) => `medidas/lh-${rotulo}-${preset}.json` },
+    { nome: 'regulamento', url: new URL('/regulamento/index.html', servidor.url).href, arquivo: (preset) => `medidas/lh-${rotulo}-regulamento-${preset}.json` },
+  ].filter((p) => !SO_PAGINA || p.nome === SO_PAGINA);
+  const configDe = (preset) => (preset === 'desktop-1920' ? desktop1920 : preset === 'desktop' ? desktopConfig : undefined);
+
+  for (const pagina of PAGINAS) {
   for (const preset of ['mobile', 'desktop', 'desktop-1920']) {
     const largura = preset === 'mobile' ? 390 : preset === 'desktop' ? 1474 : 1920;
-    await preflight(largura);
+    await preflight(largura, pagina);
 
     const linhas = [];
     for (let i = 0; i < execucoes; i++) {
       const opts = { port: chrome.port, output: 'json', logLevel: 'error', onlyCategories: ['performance'] };
-      const r = preset === 'desktop-1920'
-        ? await lighthouse(servidor.url, opts, desktop1920)
-        : preset === 'desktop'
-          ? await lighthouse(servidor.url, opts, desktopConfig)
-          : await lighthouse(servidor.url, opts);
+      const r = await lighthouse(pagina.url, opts, configDe(preset));
       const lhr = r.lhr;
       if (lhr.runtimeError) { console.error(`  ${preset} ${i + 1}: runtimeError ${lhr.runtimeError.message} — descartada`); continue; }
       const lcpq = quebraLCP(lhr);
@@ -121,11 +135,20 @@ try {
           .reduce((s, it) => s + (it.wastedBytes || 0), 0) / 1024),
         renderBlocking: (lhr.audits['render-blocking-insight']?.details?.items ?? []).length,
       });
-      process.stderr.write(`  ${rotulo} ${preset} ${i + 1}/${execucoes}: score ${linhas.at(-1).score}, LCP ${Math.round(linhas.at(-1).lcp)}ms\n`);
+      process.stderr.write(`  ${rotulo} ${pagina.nome === 'home' ? '' : pagina.nome + ' '}${preset} ${i + 1}/${execucoes}: score ${linhas.at(-1).score}, LCP ${Math.round(linhas.at(-1).lcp)}ms\n`);
+    }
+
+    // acessibilidade: uma rodada à parte, só nas páginas secundárias
+    let acessibilidade = null;
+    if (pagina.nome !== 'home') {
+      const ra = await lighthouse(pagina.url, { port: chrome.port, output: 'json', logLevel: 'error', onlyCategories: ['accessibility'] }, configDe(preset));
+      const a = ra.lhr;
+      const falhas = Object.values(a.audits).filter((x) => x.score !== null && x.score < 1 && x.scoreDisplayMode === 'binary').map((x) => ({ id: x.id, titulo: x.title, itens: (x.details?.items || []).length }));
+      acessibilidade = { score: Math.round((a.categories.accessibility.score ?? 0) * 100), falhas };
     }
 
     const saida = {
-      rotulo, preset, execucoes: linhas.length,
+      pagina: pagina.nome, rotulo, preset, execucoes: linhas.length,
       score: resumo(linhas.map((l) => l.score)),
       fcp: resumo(linhas.map((l) => l.fcp)),
       lcp: resumo(linhas.map((l) => l.lcp)),
@@ -137,13 +160,16 @@ try {
       renderBlocking: resumo(linhas.map((l) => l.renderBlocking)),
       lcpAtrasoRender: resumo(linhas.map((l) => l.lcpAtrasoRender), 1),
       elementoLCP: [...new Set(linhas.map((l) => l.lcpEl))],
+      acessibilidade,
       linhas,
     };
-    fs.writeFileSync(`medidas/lh-${rotulo}-${preset}.json`, JSON.stringify(saida, null, 1));
-    console.log(`\n${rotulo} ${preset}: score ${saida.score.mediana} (${saida.score.min}–${saida.score.max})`);
+    fs.writeFileSync(pagina.arquivo(preset), JSON.stringify(saida, null, 1));
+    console.log(`\n${rotulo} ${pagina.nome === 'home' ? '' : pagina.nome + ' '}${preset}: score ${saida.score.mediana} (${saida.score.min}–${saida.score.max})`);
     console.log(`  FCP ${Math.round(saida.fcp.mediana)}ms | LCP ${Math.round(saida.lcp.mediana)}ms | TBT ${Math.round(saida.tbt.mediana)}ms | CLS ${saida.cls.mediana} | SI ${Math.round(saida.si.mediana)}ms`);
     console.log(`  não compostas ${saida.naoCompostas.mediana} | image-delivery ${saida.imgDeliveryKB.mediana}KB | render-blocking ${saida.renderBlocking.mediana} | render delay do LCP ${saida.lcpAtrasoRender?.mediana}ms`);
     console.log(`  LCP: ${saida.elementoLCP.join(' | ').slice(0, 220)}`);
+    if (acessibilidade) console.log(`  acessibilidade: ${acessibilidade.score}${acessibilidade.falhas.length ? ' — falhas: ' + acessibilidade.falhas.map((x) => `${x.id} (${x.itens})`).join(', ') : ' — sem falhas'}`);
+  }
   }
 } finally {
   await chrome.kill();
