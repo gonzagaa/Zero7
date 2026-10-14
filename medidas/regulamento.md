@@ -211,3 +211,22 @@ Eles mudam junto com o redirecionamento, na próxima tarefa.
   canonical, mas o texto é quase o mesmo.
 - O `regulamento/conteudo.html` responde 404 em produção (`.htaccess`): é
   fonte, não página.
+
+## Revisão de 14/10/2026 (mesma data de atualização)
+
+Segundo export do Google Docs, com a mesma data. Pelo pedido do Gustavo,
+mudaram só o Objetivo e o "Máximo de dias".
+
+- **Diferença contra a referência anterior:** exatamente 9 trechos.
+  - **§1 Objetivo:** um parágrafo novo, "Em caso de campanhas verifique os
+    termos e condições no momento de sua compra."
+  - **§9, nos 8 planos:** "Máximo de dias: 60" virou "Máximo de dias:
+    Consulte o plano contratado".
+- **Documento × corpo da página:** 4853 palavras e 7 links, com 1 divergência,
+  que é de espaço e não de palavra. No plano Sênior o documento traz
+  "Máximo de dias:Consulte", colado. Na página, rótulo e valor são `<dt>` e
+  `<dd>` separados, então o espaço aparece como nos outros 7 planos. Fica na
+  lista de possíveis erros do texto, para o Gustavo decidir.
+- **Referência aprovada regravada:** 4858 palavras, 0 divergências.
+- **Réguas depois da troca:** axe 0 (390, 1366, 1366 a 200%); FOUC 0,00% nas
+  6 larguras; console limpo; teclado, impressão e rastreadores (0) ok.
