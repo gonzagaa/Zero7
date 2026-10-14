@@ -27,7 +27,13 @@ if (!manifest.css) { console.error('rode o build antes: não há bundle no manif
 const servidor = await iniciarServidor(RAIZ);
 const nav = await chromium.launch();
 
-// mapa rule-index -> manter, preenchido pelas duas viewports
+/* Páginas (regra 27): cada página tem o SEU crítico, extraído com ela
+   aberta, para cada bundle que ela carrega. A home: só o dela. O
+   regulamento: o bundle da home (nav, rodapé, tokens) + o regulamento.css
+   — sem as faces .hero e a do swiper (a página declara as .sub depois dos
+   links; face que não pinta não precisa estar no crítico). */
+async function decisoes(urlPagina, nomeBundle) {
+// mapa rule-index -> manter, preenchido pelas viewports
 let mantidas = null;
 
 /* F3a: 1920×1080 entrou na extração. Só 390 e 1474 deixavam TODA a faixa
@@ -38,7 +44,7 @@ let mantidas = null;
 for (const vp of [{ w: 390, h: 844 }, { w: 1280, h: 900 }, { w: 1474, h: 900 }, { w: 1920, h: 1080 }]) {
   const ctx = await nav.newContext({ viewport: { width: vp.w, height: vp.h }, reducedMotion: 'reduce' });
   const p = await ctx.newPage();
-  await p.goto(servidor.url, { waitUntil: 'load', timeout: 120_000 });
+  await p.goto(urlPagina, { waitUntil: 'load', timeout: 120_000 });
   await p.waitForTimeout(2500);
   const escolha = await p.evaluate((nomeBundle) => {
     const folha = [...document.styleSheets].find((s) => s.href && s.href.includes(nomeBundle));
@@ -160,8 +166,8 @@ for (const vp of [{ w: 390, h: 844 }, { w: 1280, h: 900 }, { w: 1474, h: 900 }, 
       return a === true || b === true;
     };
     return segunda ? primeira.map((x, i) => fundirLocal(x, segunda[i])) : primeira;
-  }, manifest.css.split('/').pop());
-  if (!escolha) { console.error('bundle não encontrado na página em ' + vp.w); process.exit(1); }
+  }, nomeBundle);
+  if (!escolha) { console.error(`bundle ${nomeBundle} não encontrado em ${urlPagina} a ${vp.w}`); process.exit(1); }
 
   // funde: true vence null/false; arrays fundem posição a posição
   const fundir = (a, b) => {
@@ -172,15 +178,17 @@ for (const vp of [{ w: 390, h: 844 }, { w: 1280, h: 900 }, { w: 1474, h: 900 }, 
   mantidas = mantidas === null ? escolha : escolha.map((x, i) => fundir(mantidas[i], x));
   await ctx.close();
 }
-await nav.close();
+return mantidas;
+}
 
 // segunda passada: reconstrói o texto na ordem do bundle
-const bundle = fs.readFileSync(path.join(RAIZ, manifest.css), 'utf8');
+async function emitirTexto(bundleRel, mantidas, semFaces) {
+const bundle = fs.readFileSync(path.join(RAIZ, bundleRel), 'utf8');
 const nav2 = await chromium.launch();
 const ctx2 = await nav2.newContext();
 const p2 = await ctx2.newPage();
 await p2.setContent('<!doctype html><meta charset="utf-8">');
-const resultado = await p2.evaluate(({ css, mantidas }) => {
+const resultado = await p2.evaluate(({ css, mantidas, semFaces }) => {
   const st = document.createElement('style');
   st.textContent = css;
   document.head.appendChild(st);
@@ -246,6 +254,7 @@ const resultado = await p2.evaluate(({ css, mantidas }) => {
 
   const emitir = (regra, decisao, fonte) => {
     if (regra.type === CSSRule.KEYFRAMES_RULE && !usados.has(regra.name)) return '';
+    if (semFaces && regra.type === CSSRule.FONT_FACE_RULE && new RegExp(semFaces).test(regra.cssText)) return '';
     if (decisao === true) return (fonte && fonte.texto) ? fonte.texto : (desalinhados++, regra.cssText);
     if (Array.isArray(decisao)) {
       const filhosCssom = [...regra.cssRules];
@@ -262,15 +271,40 @@ const resultado = await p2.evaluate(({ css, mantidas }) => {
   const topoFonte = fonteArvore.length === topoCssom.length ? fonteArvore : null;
   const saida = topoCssom.map((r, i) => emitir(r, mantidas[i], topoFonte ? topoFonte[i] : null)).filter(Boolean).join('\n');
   return { saida, desalinhados, topoAlinhado: !!topoFonte, contagem: [fonteArvore.length, topoCssom.length] };
-}, { css: bundle, mantidas });
+}, { css: bundle, mantidas, semFaces: semFaces || null });
 await nav2.close();
+
+if (!resultado.topoAlinhado) console.warn(`AVISO: ${bundleRel}: scanner (${resultado.contagem[0]}) e CSSOM (${resultado.contagem[1]}) desalinhados no topo — emitindo pelo cssText (shorthand com var() pode sair vazio)`);
+else if (resultado.desalinhados) console.warn(`AVISO: ${bundleRel}: ${resultado.desalinhados} regras emitidas pelo cssText por desalinhamento em nível interno`);
+return { texto: resultado.saida, bundle };
+}
+
+const hash8 = (s) => crypto.createHash('sha256').update(s).digest('hex').slice(0, 8);
+const paginas = [{ nome: 'home', url: servidor.url, bundles: [manifest.css], saida: 'dist/critico.css', meta: 'dist/critico.meta.json' }];
+if (manifest.regulamento) {
+  paginas.push({
+    nome: 'regulamento', url: new URL('/regulamento/index.html', servidor.url).href,
+    bundles: [manifest.css, manifest.regulamento.css], saida: 'dist/critico-regulamento.css', meta: 'dist/critico-regulamento.meta.json',
+    semFaces: '\\.hero\\.woff2|swiper-icons',
+  });
+}
+for (const pg of paginas) {
+  const partes = [];
+  const hashes = {};
+  for (const b of pg.bundles) {
+    const mantidas = await decisoes(pg.url, b.split('/').pop());
+    const { texto, bundle } = await emitirTexto(b, mantidas, pg.semFaces);
+    partes.push(texto);
+    hashes[b.includes('regulamento') ? 'regulamento' : 'home'] = hash8(bundle);
+  }
+  const texto = partes.filter(Boolean).join('\n');
+  fs.writeFileSync(path.join(RAIZ, pg.saida), texto);
+  // a meta da home mantém o formato de sempre (o build da home lê hashDoBundle)
+  const meta = pg.nome === 'home'
+    ? { bundle: manifest.css, hashDoBundle: hashes.home, bytes: texto.length }
+    : { bundles: pg.bundles, hashes, bytes: texto.length };
+  fs.writeFileSync(path.join(RAIZ, pg.meta), JSON.stringify(meta, null, 1) + '\n');
+  console.log(`${pg.saida}: ${(texto.length / 1024).toFixed(1)}KB, para ${pg.bundles.join(' + ')}`);
+}
+await nav.close();
 await servidor.fechar();
-
-if (!resultado.topoAlinhado) console.warn(`AVISO: scanner (${resultado.contagem[0]}) e CSSOM (${resultado.contagem[1]}) desalinhados no topo — emitindo pelo cssText (shorthand com var() pode sair vazio)`);
-else if (resultado.desalinhados) console.warn(`AVISO: ${resultado.desalinhados} regras emitidas pelo cssText por desalinhamento em nível interno`);
-const texto = resultado.saida;
-
-fs.writeFileSync(path.join(RAIZ, 'dist/critico.css'), texto);
-const meta = { bundle: manifest.css, hashDoBundle: crypto.createHash('sha256').update(bundle).digest('hex').slice(0, 8), bytes: texto.length };
-fs.writeFileSync(path.join(RAIZ, 'dist/critico.meta.json'), JSON.stringify(meta, null, 1) + '\n');
-console.log(`critico.css: ${(texto.length / 1024).toFixed(1)}KB (bundle ${(bundle.length / 1024).toFixed(1)}KB), para o bundle ${meta.bundle}`);

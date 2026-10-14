@@ -26,6 +26,9 @@
   RedirectMatch 404 (?i)/(medidas|scripts|shots|node_modules|\.vscode|\.git|backend)(/|$)
   RedirectMatch 404 (?i)/package(-lock)?\.json$
   RedirectMatch 404 (?i)/dist/manifest\.json$
+  # o texto do regulamento é FONTE (o build injeta em regulamento/index.html):
+  # servido sozinho seria um fragmento sem estilo e conteúdo duplicado
+  RedirectMatch 404 (?i)/regulamento/conteudo\.html$
   RedirectMatch 404 (?i)/\.(gitignore|env)(\.[^/]*)?$
 </IfModule>
 

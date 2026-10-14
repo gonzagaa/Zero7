@@ -42,5 +42,19 @@
   }
  },
  "css": "dist/home.88a7aecb.css",
- "criticoDesatualizado": false
+ "criticoDesatualizado": false,
+ "criticoRegulamentoDesatualizado": false,
+ "regulamento": {
+  "css": "dist/regulamento.f9c47e09.css",
+  "js": {
+   "script/regulamento.js": "dist/script/regulamento.94827c65.js"
+  },
+  "palavras": 4838,
+  "minutosDeLeitura": 24,
+  "secoes": 16,
+  "preload": [
+   "../css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08",
+   "../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08"
+  ]
+ }
 }
