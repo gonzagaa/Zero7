@@ -394,6 +394,25 @@ async function modoIphone(url) {
       console.log(`  [${motor}] NÃO ABRIU nesta máquina: ${motivo}`);
       continue;
     }
+    // O WebKit do Playwright no Windows (WinCairo) abre, mas não dispara o
+    // load da home: os <video preload="none"> do Academy com <source> webm
+    // seguram o evento para sempre (medido em out/2026: sem os webm, load em
+    // ~1 s). O Safari de verdade dispara — a tarja só toca depois do load e
+    // toca no iPhone. Sem load não há cenário a provar: vai para o relatório
+    // como motor indisponível, igual ao WebKit que não abre, e segue o Chromium.
+    if (motor === 'webkit') {
+      const ctx = await b.newContext({ ...devices['iPhone 14'], locale: 'pt-BR' });
+      const p = await ctx.newPage();
+      const carregou = await p.goto(url, { waitUntil: 'load', timeout: 30_000 }).then(() => true).catch(() => false);
+      await ctx.close();
+      if (!carregou) {
+        const motivo = 'abriu, mas o load não disparou em 30 s (WebKit do Playwright no Windows: <video preload=none> com <source> webm segura o load)';
+        saida.motores[motor] = { indisponivel: motivo };
+        console.log(`  [${motor}] SEM LOAD nesta máquina: ${motivo}`);
+        await b.close();
+        continue;
+      }
+    }
     try {
       saida.motores[motor] = [
         await cenarioIphone(b, motor, url, 'padrão (deve tocar o mp4)'),

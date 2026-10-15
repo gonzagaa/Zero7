@@ -187,7 +187,7 @@ body:where(.anima-ociosas) .planos .card--copa .card-tarja:before{animation:seni
 body:where(.anima-ociosas) .planos .card--copa .card-tarja:after{animation:seniorTarjaDesliza 9s ease-in-out infinite}
 @keyframes seniorTarjaDesliza{0%{transform:translate(0)}50%{transform:translate(-54.5455%)}to{transform:translate(0)}}
 @keyframes seniorTarjaShine{0%{transform:translate(-100%)}55%{transform:translate(100%)}to{transform:translate(100%)}}
-.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto;aspect-ratio:700 / 366}
+.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto;aspect-ratio:700 / 215}
 .plano-asset[hidden]{display:none!important}
 #faq [hidden]{display:none!important}
 .faq__search-loading[hidden]{display:none}
@@ -578,8 +578,8 @@ html.lenis,html.lenis body{height:auto}
 [data-aos=fade-down]{transform:translate3d(0,-100px,0)}
 [data-aos=fade-right]{transform:translate3d(-100px,0,0)}
 [data-aos=fade-up-left]{transform:translate3d(100px,100px,0)}</style>
-  <link rel="stylesheet" href="./dist/home.88a7aecb.css" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="./dist/home.88a7aecb.css"></noscript>
+  <link rel="stylesheet" href="./dist/home.6319b664.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="./dist/home.6319b664.css"></noscript>
 
   <!-- C4: preconnect para os terceiros que restam na janela inicial
        (jquery, lenis/ionicons no unpkg, gsap/countUp no cdnjs) — 1 RTT
@@ -685,14 +685,14 @@ html.lenis,html.lenis body{height:auto}
            tarjaImage.css (regras 17 e 21). O link e o contador não mudam. -->
       <span class="tarjaMidia">
         <picture>
-          <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/tarja-liberdade-2-desk-poster.avif" width="2370" height="94">
-          <img decoding="async" width="1040" height="142" src="./assets/tarjapopup/tarja-liberdade-2-mob-poster.avif" alt="">
+          <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/tarja-segunda-chance-desk-poster.avif" width="2370" height="94">
+          <img decoding="async" width="1040" height="142" src="./assets/tarjapopup/tarja-segunda-chance-mob-poster.avif" alt="">
         </picture>
         <video class="tarjaVideo" muted playsinline loop preload="none" aria-hidden="true"
-          data-desk-webm="./assets/tarjapopup/tarja-liberdade-2-desk.webm"
-          data-desk-mp4="./assets/tarjapopup/tarja-liberdade-2-desk.mp4"
-          data-mob-webm="./assets/tarjapopup/tarja-liberdade-2-mob.webm"
-          data-mob-mp4="./assets/tarjapopup/tarja-liberdade-2-mob.mp4"></video>
+          data-desk-webm="./assets/tarjapopup/tarja-segunda-chance-desk.webm"
+          data-desk-mp4="./assets/tarjapopup/tarja-segunda-chance-desk.mp4"
+          data-mob-webm="./assets/tarjapopup/tarja-segunda-chance-mob.webm"
+          data-mob-mp4="./assets/tarjapopup/tarja-segunda-chance-mob.mp4"></video>
       </span>
     </a>
   </div>
@@ -1225,16 +1225,16 @@ html.lenis,html.lenis body{height:auto}
                layout ao chegar. A largura continua vindo do CSS (30rem), a
                caixa medida não muda, e a arte, o link e a lógica da campanha
                ficam como estão.
-               LIBERDADE (out/2026): a arte do designer é 3540x1850; o que vai
-               ao ar é a reexportação a 700px de largura (2x dos 350px exibidos
-               no desktop; AVIF q60 4:4:4, com alfa) = 700x366 nas duas, e o
-               width/height e o aspect-ratio do planosAtivo.css seguem ESSE
-               arquivo. Nome por campanha (cupom-<campanha>-black|white): o
+               SEGUNDA CHANCE (out/2026): a arte do designer é 3581x1099; o que
+               vai ao ar é a reexportação a 700px de largura (2x dos 350px
+               exibidos no desktop; AVIF q60 4:4:4, com alfa) = 700x215 nas
+               duas, e o width/height e o aspect-ratio do planosAtivo.css seguem
+               ESSE arquivo. Nome por campanha (cupom-<campanha>-black|white): o
                cache dos assets é immutable de 1 ano e o nome antigo já servia
                outra arte. -->
           <div class="cupom-wrap">
-            <img class="cupom" width="700" height="366" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-liberdade-black.avif" alt="">
-            <img class="cupom white" width="700" height="366" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-liberdade-white.avif" alt="" aria-hidden="true">
+            <img class="cupom" width="700" height="215" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-segunda-chance-black.avif" alt="">
+            <img class="cupom white" width="700" height="215" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-segunda-chance-white.avif" alt="" aria-hidden="true">
           </div>
       </div>
 
@@ -1287,7 +1287,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">5 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">3 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 247,00</span></div>
-              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 997,00">R$ 1.200,00</span></span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1321,7 +1321,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">10 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">6 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 497,00</span></div>
-              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 1.997,00">R$ 2.500,00</span></span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 1.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 1.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1356,7 +1356,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">25 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">15 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 1.247,00</span></div>
-              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 4.997,00">R$ 6.500,00</span></span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 4.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 4.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1393,7 +1393,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">50 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">30 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 2.497,00</span></div>
-              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 9.997,00">R$ 15.000,00</span></span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 9.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 9.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1427,7 +1427,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">75 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">45 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 3.747,00</span></div>
-              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 14.997,00">R$ 17.500,00</span></span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 14.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 14.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1461,7 +1461,7 @@ html.lenis,html.lenis body{height:auto}
               <div class="chip"><span class="chip__rotulo">Limite para WIN</span><span class="chip__valor">100 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite para WDO</span><span class="chip__valor">60 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 4.997,00</span></div>
-              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 19.997,00">R$ 22.500,00</span></span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 19.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 19.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1517,7 +1517,7 @@ html.lenis,html.lenis body{height:auto}
             <div class="topics">
               <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">8 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 247,00</span></div>
-              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 997,00">R$ 1.200,00</span></span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
@@ -1549,7 +1549,7 @@ html.lenis,html.lenis body{height:auto}
             <div class="topics">
               <div class="chip"><span class="chip__rotulo">Limite por operação</span><span class="chip__valor">16 contratos</span></div>
               <div class="chip"><span class="chip__rotulo">Limite de perda diária</span><span class="chip__valor">R$ 497,00</span></div>
-              <div class="chip limite-alta"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor"><svg class="limite-alta__seta" viewBox="0 0 10 8" role="img" aria-label="Aumentou"><path d="M5 0 10 8H0z"/></svg><span class="limite-alta__valor" data-de="R$ 1.997,00">R$ 2.500,00</span></span></div>
+              <div class="chip"><span class="chip__rotulo">Limite de perda total</span><span class="chip__valor">R$ 1.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Meta de aprovação</span><span class="chip__valor">R$ 1.997,00</span></div>
               <div class="chip"><span class="chip__rotulo">Máximo de dias</span><span class="chip__valor js-max-dias">ilimitado*</span></div>
               <div class="chip"><span class="chip__rotulo">Repasse</span><span class="chip__valor">100% em conta real</span></div>
