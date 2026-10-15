@@ -49,8 +49,8 @@
   "js": {
    "script/regulamento.js": "dist/script/regulamento.94827c65.js"
   },
-  "palavras": 4876,
-  "minutosDeLeitura": 24,
+  "palavras": 5064,
+  "minutosDeLeitura": 25,
   "secoes": 16,
   "preload": [
    "../css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08",
