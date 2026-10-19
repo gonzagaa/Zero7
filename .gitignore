@@ -6,3 +6,6 @@ medidas/*.json
 medidas/retrato-*
 .env
 .env.*
+
+# pacotes de entrega para terceiros (ex.: roleta para a 4selet): NUNCA sobem
+handoff/

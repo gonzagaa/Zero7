@@ -30,6 +30,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="../css/index.css?v=v95-liberdade-out08">
 
+  <!-- Halloween (out/2026): dobra condicional (token da roleta na URL e
+       promoção no ar). O script fica no <head> sem defer de propósito:
+       decide antes da primeira pintura qual dobra aparece. A roleta é do
+       app e entra pelo roleta-obrigado.js, no fim do <body>. -->
+  <link rel="stylesheet" href="./halloween/dobra.css?v=hw-out26b">
+  <script src="./halloween/dobra.js?v=hw-out26b"></script>
+
   <!-- Primary Meta Tags -->
   <title>Zero7 Tesouraria - Obrigado.</title>
   <meta name="title" content="Zero7 Tesouraria - O Ecossistema lucrativo para operar day trade." />
@@ -289,6 +296,45 @@
     </div>
   </nav>
   <!-- /build:nav -->
+
+  <!-- Halloween: primeira dobra de quem chega com o token da roleta. Só
+       aparece com html.hw-on (posto pelo dobra.js); sem token válido,
+       depois do fim da promoção ou sem JS, vale a dobra original logo
+       abaixo. Para replicar num plano: copiar esta seção e os dois
+       includes do <head> trocando ./halloween/ por ../halloween/ e o
+       ../assets/ da logo por ../../assets/. -->
+  <section id="obrigado-halloween" class="hw" aria-labelledby="hw-titulo">
+    <div class="hw-atmos" aria-hidden="true">
+      <span class="hw-lua"></span>
+      <span class="hw-teia"></span>
+      <span class="hw-morcego hw-morcego--1"></span>
+      <span class="hw-morcego hw-morcego--2"></span>
+      <span class="hw-morcego hw-morcego--3"></span>
+      <span class="hw-nevoa"></span>
+      <span class="hw-nevoa hw-nevoa--2"></span>
+    </div>
+
+    <div class="wrapper hw-coluna">
+      <img class="hw-logo" width="176" height="55" src="../assets/logo zero7.svg" alt="Zero7">
+      <h1 class="hw-titulo" id="hw-titulo">OBRIGADO!</h1>
+      <p class="hw-sub">Seu plano foi contratado com sucesso.</p>
+      <p class="hw-par">Sua compra entrou na promoção de Halloween, então você ganhou um giro na roleta.</p>
+
+      <div class="hw-cta">
+        <p>Para começar sua avaliação, acesse a Área do Trader.</p>
+        <a class="z7-btnx hw-btn" target="_blank" rel="noopener" href="https://app.zero7.com.br/login" role="button" aria-label="Acessar a Área do Trader">
+          <span class="z7-btnx__bg" aria-hidden="true"></span>
+          <span class="z7-btnx__shine" aria-hidden="true"></span>
+          <span class="z7-btnx__label">Área do Trader</span>
+          <span class="z7-btnx__cap" aria-hidden="true">
+            <span class="z7-btnx__arrow">→</span>
+          </span>
+        </a>
+      </div>
+
+      <p class="hw-reabrir">Fechou a roleta? <a href="" data-hw-reabrir>Abrir de novo</a></p>
+    </div>
+  </section>
 
   <section id="obrigado" class="">
     <img class="bgsection" src="../assets/bg2.webp" alt="">
@@ -756,5 +802,6 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="../script/global.js?v=v95-liberdade-out08"></script>
   <script src="../script/4selet.js?v=v95-liberdade-out08"></script>
+  <script src="https://app.zero7.com.br/assets/js/roleta-obrigado.js" defer></script>
 </body>
 </html>

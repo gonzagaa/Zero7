@@ -1,0 +1,217 @@
+/* Dobra de Halloween das páginas de obrigado (ver dobra.js).
+
+   A troca é só CSS: o dobra.js põe html.hw-on quando a URL traz o token
+   da roleta e a promoção não acabou. Sem a classe, a seção do Halloween
+   some e a dobra original (#obrigado) aparece como sempre foi. A roleta é
+   do app e abre num iframe por cima (roleta-obrigado.js).
+
+   Unidades em px/clamp, não em rem: o rem da página muda de 8px para 10px
+   em 1080 e esta dobra tem medida própria. */
+
+.hw { display: none; }
+html.hw-on .hw { display: grid; }
+html.hw-on #obrigado { display: none; }
+
+.hw {
+  --hw-fundo: #07040d;
+  --hw-fundo-2: #0d0716;
+  --hw-roxo: #7c3aed;
+  --hw-roxo-claro: #a855f7;
+  --hw-slime: #39ff88;
+  --hw-slime-2: #7cff4f;
+  --hw-texto: #f3edff;
+  --hw-texto-2: rgb(226 214 255 / .78);
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100svh;
+  align-content: center;
+  padding: 112px 0 64px;
+  color: var(--hw-texto);
+  font-family: var(--fonte-corpo);
+  background:
+    radial-gradient(46% 40% at 50% 46%, rgb(124 58 237 / .24), transparent 70%),
+    radial-gradient(40% 30% at 12% 18%, rgb(168 85 247 / .08), transparent 70%),
+    linear-gradient(180deg, var(--hw-fundo) 0%, var(--hw-fundo-2) 55%, var(--hw-fundo) 100%);
+}
+
+/* ---------------------------- atmosfera ---------------------------- */
+.hw-atmos {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hw-lua {
+  position: absolute;
+  top: 96px;
+  right: 8%;
+  width: clamp(84px, 13vw, 180px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 62% 58%, rgb(60 120 90 / .35) 0 9%, transparent 10%),
+    radial-gradient(circle at 34% 66%, rgb(60 120 90 / .28) 0 6%, transparent 7%),
+    radial-gradient(circle at 46% 30%, rgb(60 120 90 / .22) 0 5%, transparent 6%),
+    radial-gradient(circle at 38% 34%, #eafff1 0%, #b6f7cf 36%, #63d996 70%, #23824f 100%);
+  opacity: .24;
+  filter: blur(1.5px);
+  box-shadow: 0 0 60px 16px rgb(57 255 136 / .28), 0 0 160px 60px rgb(57 255 136 / .1);
+}
+
+.hw-teia {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(150px, 21vw, 290px);
+  aspect-ratio: 1;
+  background: url("assets/teia.svg") no-repeat 0 0 / contain;
+  opacity: .12;
+}
+
+/* Posições escolhidas para o voo (até ~34px para cada lado) nunca passar
+   por cima da logo nem dos textos: no celular, um no alto à esquerda e
+   dois na névoa, abaixo do conteúdo; no desktop, nas laterais da coluna. */
+.hw-morcego {
+  position: absolute;
+  aspect-ratio: 64 / 30;
+  background: url("assets/morcego.svg") no-repeat center / contain;
+  animation: hwVoo 19s ease-in-out infinite alternate;
+}
+.hw-morcego--1 { top: 100px; left: 6%; width: 46px; opacity: .2; }
+.hw-morcego--2 { bottom: 34px; left: 10%; width: 34px; opacity: .14; animation-duration: 24s; animation-delay: -7s; }
+.hw-morcego--3 { bottom: 52px; right: 12%; width: 30px; opacity: .13; animation-duration: 28s; animation-delay: -15s; }
+
+@media (min-width: 1080px) {
+  .hw-morcego--1 { top: 15%; left: auto; right: 23%; width: 52px; opacity: .22; }
+  .hw-morcego--2 { top: 50%; bottom: auto; left: 9%; width: 40px; opacity: .15; }
+  .hw-morcego--3 { top: 68%; bottom: auto; right: 11%; }
+}
+
+@keyframes hwVoo {
+  0%   { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  35%  { transform: translate3d(-34px, 14px, 0) rotate(3deg); }
+  70%  { transform: translate3d(-12px, -18px, 0) rotate(-2deg); }
+  100% { transform: translate3d(26px, 6px, 0) rotate(5deg); }
+}
+
+.hw-nevoa {
+  position: absolute;
+  left: -25%;
+  bottom: -30px;
+  width: 150%;
+  height: 240px;
+  background:
+    radial-gradient(42% 55% at 18% 72%, rgb(167 139 250 / .14), transparent 70%),
+    radial-gradient(38% 50% at 56% 78%, rgb(124 58 237 / .13), transparent 70%),
+    radial-gradient(34% 45% at 88% 68%, rgb(57 255 136 / .05), transparent 70%);
+  animation: hwNevoa 40s ease-in-out infinite alternate;
+}
+.hw-nevoa--2 {
+  bottom: -60px;
+  height: 200px;
+  background:
+    radial-gradient(40% 50% at 30% 70%, rgb(124 58 237 / .12), transparent 70%),
+    radial-gradient(44% 55% at 74% 74%, rgb(167 139 250 / .1), transparent 70%);
+  animation-duration: 56s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes hwNevoa {
+  from { transform: translate3d(-7%, 0, 0); }
+  to   { transform: translate3d(7%, 0, 0); }
+}
+
+/* ------------------------- coluna centralizada ------------------------- */
+.hw-coluna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 680px;
+  text-align: center;
+}
+
+.hw-logo {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin: 0 0 22px;
+}
+
+.hw-titulo {
+  max-width: 100%;
+  margin: 0 0 12px;
+  font-family: var(--fonte-display);
+  font-size: clamp(40px, 11.4vw, 76px);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.hw-sub {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--hw-texto);
+}
+
+.hw-par {
+  margin: 12px 0 0;
+  max-width: 520px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--hw-texto-2);
+}
+
+.hw-cta { margin-top: 28px; }
+.hw-cta p {
+  margin: 0 0 16px;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--hw-texto-2);
+}
+
+/* O CTA é o mesmo .z7-btnx da página (gatilhos do GTM por classe seguem
+   valendo); só as variáveis de cor mudam para o verde da campanha. */
+.hw .hw-btn {
+  --btn-grad: linear-gradient(90deg, #04301a 0%, #0a6a37 42%, #18b85c 74%, var(--hw-slime) 100%);
+  --btn-escuro: 6 74 38;
+  --btn-claro: 57 255 136;
+}
+
+.hw-reabrir {
+  margin: 20px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgb(226 214 255 / .6);
+}
+.hw-reabrir a {
+  color: #b9ffd6;
+  text-decoration: underline;
+  text-decoration-color: rgb(57 255 136 / .45);
+  text-underline-offset: 3px;
+}
+.hw-reabrir a:hover { color: var(--hw-slime); text-decoration-color: currentColor; }
+.hw-reabrir a:focus-visible { outline: 2px solid var(--hw-slime); outline-offset: 3px; border-radius: 2px; }
+
+@media (min-width: 1080px) {
+  .hw { padding: 140px 0 96px; }
+  .hw-logo { width: 150px; margin-bottom: 28px; }
+  .hw-titulo { margin-bottom: 14px; font-size: clamp(64px, 5.6vw, 96px); }
+  .hw-sub { font-size: 24px; }
+  .hw-par { font-size: 17px; }
+  .hw-cta { margin-top: 30px; }
+  .hw-cta p { font-size: 17px; }
+  .hw-reabrir { margin-top: 22px; font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hw-morcego,
+  .hw-nevoa { animation: none; }
+}
