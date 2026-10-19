@@ -126,10 +126,13 @@ html.hw-on #obrigado { display: none; }
 }
 
 /* ------------------------- coluna centralizada ------------------------- */
+/* min-width 0: sem isso o grid da seção estica a coluna até a largura do
+   título (325px numa tela de 320) e tudo escorrega para a direita */
 .hw-coluna {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 0;
   max-width: 680px;
   text-align: center;
 }
@@ -141,8 +144,14 @@ html.hw-on #obrigado { display: none; }
   margin: 0 0 22px;
 }
 
+/* A caixa do título acompanha o texto (max-content). Com max-width 100%,
+   a partir de ~1600px o "OBRIGADO!" (96px) passava dos 632px úteis da
+   coluna e o excedente ia todo para a direita (26px em 1920). Agora a
+   coluna (flex, align-items: center) centra a caixa mesmo quando ela é
+   mais larga, e o excedente se divide pelos dois lados. */
 .hw-titulo {
-  max-width: 100%;
+  width: max-content;
+  max-width: none;
   margin: 0 0 12px;
   font-family: var(--fonte-display);
   font-size: clamp(40px, 11.4vw, 76px);
