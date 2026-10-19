@@ -18,8 +18,10 @@
 //         têm lógica protegida (regra 4). vendor/ e CDN não entram.
 // HTML -> o index.html tem as referências trocadas; a página secundária
 //         regulamento/index.html é montada pelos marcadores (ver
-//         construirRegulamento, regra 27); cert/ e pedido-registrado/*
-//         ficam como estão.
+//         construirRegulamento, regra 27); nas páginas de obrigado
+//         (pedido-registrado/*) o build só preenche nav, contato e rodapé
+//         com os da home (ver construirObrigado, regra 28); cert/ fica
+//         como está.
 import { transform } from 'esbuild';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -212,9 +214,10 @@ async function construir() {
 
   fs.writeFileSync(path.join(RAIZ, 'index.html'), html);
   const reg = await construirRegulamento({ manifest, nomeCssHome: nomeCss, facesCompletas, htmlHome: html });
+  const obrigado = construirObrigado({ htmlHome: html });
 
   fs.writeFileSync(path.join(DIST, 'manifest.json'), JSON.stringify(manifest, null, 1) + '\n');
-  console.log(`build ok: ${nomeCss} + ${tagsJs.length} js${reg ? ` | regulamento: ${reg}` : ''}`);
+  console.log(`build ok: ${nomeCss} + ${tagsJs.length} js${reg ? ` | regulamento: ${reg}` : ''}${obrigado ? ` | obrigado: ${obrigado}` : ''}`);
   return manifest;
 }
 
@@ -365,6 +368,60 @@ async function construirRegulamento({ manifest, nomeCssHome, facesCompletas, htm
   fs.writeFileSync(path.join(RAIZ, PASTA, 'index.html'), pag);
   manifest.regulamento = { css: nomeCssReg, js, palavras, minutosDeLeitura: minutos, secoes: itens.length, preload: preloadar };
   return `${nomeCssReg} + ${tags.length} js, ${itens.length} seções, ${palavras} palavras (${minutos} min)`;
+}
+
+/* ── Páginas de obrigado: pedido-registrado/ e as 8 subpastas por plano ──
+   O que elas têm em comum com a home — nav, #contato e o rodapé (footer,
+   #pagamento e #author) — vem DA HOME a cada build, entre os marcadores
+   <!-- build:nav|contato|rodape -->. Antes eram cópias à mão e ficaram
+   para trás (botão Comunidade, card do WhatsApp, CNPJ, selo do RA sob
+   demanda, .avif dos meios de pagamento, ano automático). O resto da
+   página (head, #obrigado, scripts) continua editado à mão, com o CSS e o
+   JS soltos e o ?v= de sempre (regra 25 do README) — só os blocos
+   compartilhados passaram a ser do build.
+   Adaptação: caminhos ./ viram ../ (ou ../../ nas subpastas), âncoras da
+   home (#plan) apontam para a home, a nav perde a classe da tarja (aqui
+   não há tarja) e o aria-current. O data-aos fica: estas páginas carregam
+   o AOS. O fim de linha de cada arquivo é preservado (CRLF). */
+function construirObrigado({ htmlHome }) {
+  const PASTA = 'pedido-registrado';
+  if (!fs.existsSync(path.join(RAIZ, PASTA))) return null;
+  const paginas = [`${PASTA}/index.html`, ...fs.readdirSync(path.join(RAIZ, PASTA), { withFileTypes: true })
+    .filter((d) => d.isDirectory() && fs.existsSync(path.join(RAIZ, PASTA, d.name, 'index.html')))
+    .map((d) => `${PASTA}/${d.name}/index.html`)];
+  const home = htmlHome.replace(/\r\n/g, '\n');
+  const blocos = {
+    nav: (home.match(/<nav\b[^>]*\bid="navigation"[^>]*>[\s\S]*?<\/nav>/) || [])[0],
+    contato: (home.match(/<section id="contato"[^>]*>[\s\S]*?\n {2}<\/section>/) || [])[0],
+    rodape: (home.match(/<footer id="footer">[\s\S]*?<section id="author">[\s\S]*?\n {2}<\/section>/) || [])[0],
+  };
+  for (const [nome, b] of Object.entries(blocos)) if (!b) throw new Error(`obrigado: não achei o bloco ${nome} no index.html`);
+  const adaptar = (h, pre) => h
+    .replace(/ aria-current="page"/g, '')
+    .replace(/href="#home"/g, `href="${pre}"`)
+    .replace(/href="#([^"]+)"/g, `href="${pre}#$1"`)
+    .replace(/(src|href|srcset)="\.\//g, `$1="${pre}`)
+    .replace(/^<nav\b[^>]*>/, (tag) => tag.replace(/\s+class="([^"]*)"/, (m, c) => {
+      const resto = c.split(/\s+/).filter((x) => x && !/^active/.test(x));
+      return resto.length ? ` class="${resto.join(' ')}"` : '';
+    }));
+  for (const rel of paginas) {
+    const arq = path.join(RAIZ, rel);
+    const original = fs.readFileSync(arq, 'utf8');
+    const crlf = original.includes('\r\n');
+    const pre = '../'.repeat(rel.split('/').length - 1);
+    let pag = original.replace(/\r\n/g, '\n');
+    for (const [nome, bloco] of Object.entries(blocos)) {
+      const ini = `<!-- build:${nome} -->`, fim = `<!-- /build:${nome} -->`;
+      const a = pag.indexOf(ini), b = pag.indexOf(fim);
+      if (a < 0 || b < a) throw new Error(`${rel}: marcador build:${nome} ausente`);
+      const recuo = (pag.slice(0, a).match(/[ \t]*$/) || [''])[0];
+      pag = pag.slice(0, a + ini.length) + '\n  ' + adaptar(bloco, pre) + '\n' + recuo + pag.slice(b);
+    }
+    if (crlf) pag = pag.replace(/\n/g, '\r\n');
+    if (pag !== original) fs.writeFileSync(arq, pag);
+  }
+  return `${paginas.length} páginas (nav, contato, rodapé da home)`;
 }
 
 await construir();

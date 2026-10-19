@@ -869,8 +869,8 @@ nav#navigation .menu .buttons #navButton:hover {
   }
 
   /* --- logo: a pastilha do ícone G7, como no blog, no tamanho do alvo de
-         toque. Só onde o markup tem o ícone — os satélites seguem com o logo
-         por extenso. --- */
+         toque. Só onde o markup tem o ícone — o cert/ segue com o logo por
+         extenso; as páginas de obrigado recebem a nav da home pelo build. --- */
   nav#navigation a.logo:has(.logo__icone) {
     flex: none;
     display: grid;

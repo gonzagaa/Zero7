@@ -76,7 +76,7 @@ GSAP + countUp (cdnjs.cloudflare.com). As fontes são servidas de `css/fonts/`
 ## Como alterar o site
 
 1. Edite `css/`, `script/` ou `index.html` NESTA pasta (a única de trabalho).
-2. `npm run build` — regenera `dist/`, o crítico embutido e os `.hero.woff2`.
+2. `npm run build` — regenera `dist/`, o crítico embutido e os `.hero.woff2` (e leva nav, contato e rodapé para as páginas de obrigado).
 3. `npm run check` — tem que sair verde (build determinístico + nada fora do commit).
 4. Commit e push (`master` → github.com/gonzagaa/Zero7).
 5. Sincronize no painel do TurboCloud.
@@ -168,7 +168,10 @@ usa `?v=`. **A fonte é `css/` e `script/`; ninguém edita `dist/`.**
 na hora). `npm run check` = rebuild + `git diff --exit-code`: falha se o
 `dist/` commitado estiver desatualizado. Sempre commitar `dist/` +
 `index.html` juntos (a hospedagem não roda build). `cert/` e
-`pedido-registrado/*` ficam fora, nos arquivos soltos com `?v=`.
+`pedido-registrado/*` ficam fora, nos arquivos soltos com `?v=` — mas
+nas páginas de obrigado o build copia da home a nav, o `#contato` e o
+rodapé (marcadores `<!-- build:x -->`, regra 28): mudou esses blocos na
+home, commite também `pedido-registrado/`.
 
 O CSS crítico (acima da dobra, extraído nas duas viewports do protocolo por
 `scripts/critico.mjs`) vai inline no `<head>`; o bundle completo carrega com

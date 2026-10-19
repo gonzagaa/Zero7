@@ -225,31 +225,45 @@
 
 <body id="body" class="smooth-scroll-wrapper">
 
-  <nav id="navigation" class="">
+  <!-- build:nav -->
+  <nav data-aos="fade-down" data-aos-once="true" id="navigation">
     <div class="wrapper">
 
-      <a class="logo" href="../index.html#home">
-        <img src="../assets/logo zero7.svg" alt="Logo">
+      <a class="logo" href="../">
+        <img width="176" height="55"  src="../assets/logo zero7.svg" alt="Zero7 Tesouraria">
+        <img class="logo__icone" width="22" height="12" src="../assets/logo-icon.svg" alt="Zero7 Tesouraria">
       </a>
 
       <div class="menu">
 
         <ul>
-          <li data-aos="fade-right"><a onclick="closeMenu()" href="../index.html#home">Home</a></li>
+          <li data-aos="fade-right"><a onclick="closeMenu()" href="../">Home</a></li>
           <li data-aos="fade-right"><a onclick="closeMenu()" href="https://blog.zero7.com.br/">Blog</a></li>
-          <li data-aos="fade-right"><a onclick="closeMenu()" href="../index.html#plan">Planos</a></li>
+          <li data-aos="fade-right"><a onclick="closeMenu()" href="../#plan">Planos</a></li>
           <li data-aos="fade-right"><a onclick="closeMenu()" href="https://zero7.com.br/regulamento/">Regulamento</a>
           </li>
 
-          <div data-aos="fade-right" class="buttons">
+          <div data-aos="fade-right" class="buttons" role="listitem">
             <a onclick="closeMenu()" target="_blank" rel="noopener noreferrer"
-              href="https://app.zero7.com.br/login" id="navButton" class="z7-btnx z7-btnx--nav" role="button"
+              href="https://chat.whatsapp.com/G9ma9v4zI77BBvvhdswF2r" id="navButtonComunidade"
+              class="z7-btnx z7-btnx--nav z7-btnx--wpp btn btn--nav btn--primaria btn--wpp" role="button"
+              aria-label="Entrar na comunidade do WhatsApp">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">Comunidade</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </span>
+            </a>
+
+            <a onclick="closeMenu()" target="_blank" rel="noopener noreferrer"
+              href="https://app.zero7.com.br/login" id="navButton" class="z7-btnx z7-btnx--nav btn btn--nav btn--primaria" role="button"
               aria-label="Acessar a Área do Trader">
-              <span class="z7-btnx__bg" aria-hidden="true"></span>
-              <span class="z7-btnx__shine" aria-hidden="true"></span>
-              <span class="z7-btnx__label">Área do Trader</span>
-              <span class="z7-btnx__cap" aria-hidden="true">
-                <span class="z7-btnx__arrow">→</span>
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">Área do Trader</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
               </span>
             </a>
           </div>
@@ -258,22 +272,23 @@
 
       </div>
 
-      <button aria-expanded="false" aria-label="Abrir menu" onclick="openMenu()" class="open-menu">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 20H30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M10 12H30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M18 28L30 28" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <button aria-expanded="false" aria-label="Abrir menu" onclick="openMenu()" class="open-menu btn btn--md btn--texto btn--icone">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFAF1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 6h16" />
+          <path d="M4 12h16" />
+          <path d="M4 18h16" />
         </svg>
       </button>
-      <button aria-expanded="true" aria-label="Fechar menu" onclick="closeMenu()" class="close-menu">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M30 10L10 30M10 10L30 30" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" />
+      <button aria-expanded="true" aria-label="Fechar menu" onclick="closeMenu()" class="close-menu btn btn--md btn--texto btn--icone">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18 6 6 18" />
+          <path d="M6 6l12 12" />
         </svg>
       </button>
 
     </div>
   </nav>
+  <!-- /build:nav -->
 
   <section id="obrigado" class="">
     <img class="bgsection" src="../assets/bg2.webp" alt="">
@@ -348,7 +363,10 @@
     </div>
   </section>
 
-  <section id="contato">
+  <!-- build:contato -->
+  <section id="contato" class="secao--divisor secao--divisor-candles secao--divisor-contato">
+    <img width="1920" height="885" loading="lazy" decoding="async" aria-hidden="true" class="bg" src="../assets/bgsection v2-1920.avif" alt="">
+    
     <div class="wrapper">
       <div class="content">
         <header data-aos="fade-up">
@@ -391,16 +409,26 @@
 
         <div id="suporte">
           <div class="content">
-            <div data-aos="fade-up-left" class="border">
+            <div data-aos="fade-up-left" class="border border--wpp">
               <div class="whatsapp">
-                <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-                <p>Suporte exclusivo e humano através da Área do Trader</p>
+                <span><ion-icon name="notifications-outline"></ion-icon> Fique por dentro</span>
+                <p>Faça parte da comunidade oficial da Zero7 no WhatsApp</p>
+                <a target="_blank" rel="noopener noreferrer"
+                  href="https://chat.whatsapp.com/G9ma9v4zI77BBvvhdswF2r" class="z7-btnx z7-btnx--wpp btn btn--md btn--primaria btn--wpp"
+                  role="button" aria-label="Entrar na comunidade oficial da Zero7 no WhatsApp">
+                  <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+                  <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+                  <span class="z7-btnx__label btn__label">Entrar agora</span>
+                  <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                  </span>
+                </a>
               </div>
             </div>
 
             <div data-aos="fade-up" class="border">
               <div class="image">
-                <img loading="lazy" decoding="async" src="../assets/banner.webp" alt="">
+                <img width="1920" height="1080" loading="lazy" decoding="async" src="../assets/banner.webp" alt="">
               </div>
             </div>
 
@@ -409,7 +437,7 @@
                 <span><ion-icon name="flash-outline"></ion-icon> Suporte rápido</span>
                 <h3>Precisa de <span>ajuda?</span></h3>
                 <p>Nossa equipe está <span>pronta para conversar com você</span>!</p>
-                <a target="_blank" href="https://app.zero7.com.br/login"><button>Fale Conosco</button></a>
+                <a target="_blank" rel="noopener" href="https://app.zero7.com.br/login"><button class="btn btn--md btn--secundaria">Fale Conosco</button></a>
               </div>
             </div>
           </div>
@@ -417,46 +445,76 @@
       </div>
     </div>
   </section>
+  <!-- /build:contato -->
 
+  <!-- build:rodape -->
   <footer id="footer">
     <div class="wrapper">
       <div class="content">
         <div class="logo">
-          <img class="logo" src="../assets/logo zero7.svg" alt="">
+          <img width="176" height="55" class="logo" src="../assets/logo zero7.svg" alt="">
+          <p class="rodape__cnpj">Zero7 Tesouraria LTDA | CNPJ: 49.452.697/0001-20</p>
           <p>Av. Dep. Jamel Cecílio, nº 2929 - Jardim Goiás, Goiânia - GO, 74810-240</p>
           <p>Segunda a sexta-feira, 8h às 18h</p>
           <div id="ra-verified-seal">
-            <script type="text/javascript" id="ra-embed-verified-seal"
-              src="https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js"
-              data-id="WDRYanlCUWlyT0xFUTFZeDp6ZXJvNy10ZXNvdXJhcmlh" data-target="ra-verified-seal"
-              data-model="2"></script>
+            <!-- C3: o selo custava 91KB de Google Fonts (Inter Tight + Open Sans,
+                 puxados pelo styles.css do raichu) + o bundle, tudo na
+                 janela inicial de quem nunca chega ao rodapé. O script
+                 agora entra quando o selo se APROXIMA (IO, 600px de
+                 folga), injetado com o MESMO id e data-* — o bundle do RA
+                 lê a própria tag por id. Sem IO, injeta direto (selo >
+                 performance nesse navegador). Markup da div intocado. -->
+            <script>
+              (function () {
+                var alvo = document.getElementById('ra-verified-seal');
+                var entrou = false;
+                function injetar() {
+                  if (entrou) return;
+                  entrou = true;
+                  var s = document.createElement('script');
+                  s.type = 'text/javascript';
+                  s.id = 'ra-embed-verified-seal';
+                  s.src = 'https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js';
+                  s.setAttribute('data-id', 'WDRYanlCUWlyT0xFUTFZeDp6ZXJvNy10ZXNvdXJhcmlh');
+                  s.setAttribute('data-target', 'ra-verified-seal');
+                  s.setAttribute('data-model', '2');
+                  alvo.appendChild(s);
+                }
+                if (!alvo) return;
+                if (!('IntersectionObserver' in window)) { injetar(); return; }
+                var obs = new IntersectionObserver(function (es) {
+                  if (es.some(function (e) { return e.isIntersecting; })) { obs.disconnect(); injetar(); }
+                }, { rootMargin: '600px 0px 600px 0px' });
+                obs.observe(alvo);
+              })();
+            </script>
           </div>
         </div>
 
         <div class="navigation">
           <h3>Navegação</h3>
 
-          <p><a href="../index.html#home">Home</a></p>
+          <p><a href="../">Home</a></p>
           <p><a href="https://blog.zero7.com.br/">Blog</a></p>
-          <p><a href="../index.html#plan">Planos</a></p>
+          <p><a href="../#plan">Planos</a></p>
           <p><a href="https://zero7.com.br/regulamento/">Regulamento</a></p>
-          <p><a target="_blank" href="https://app.zero7.com.br/login">Área do Trader</a></p>
+          <p><a href="https://zero7.com.br/quem-somos/">Quem Somos</a></p>
+          <p><a target="_blank" rel="noopener" href="https://app.zero7.com.br/login">Área do Trader</a></p>
         </div>
 
         <div class="contato">
           <h3>Suporte</h3>
-          <p><a target="_blank" href="tel:0800-191-2277">0800 191 2277</a></p>
-          <p>contato@zero7.com.br</p>
+          <p>suporte@zero7.com.br</p>
         </div>
 
         <div class="redes-sociais">
           <h3>Social</h3>
           <div class="icons">
-            <a target="_blank" href="https://www.instagram.com/zero7tesouraria/"><ion-icon
-                name="logo-instagram"></ion-icon></a>
-            <a target="_blank" href="https://www.tiktok.com/@zero7_mesa"><ion-icon name="logo-tiktok"></ion-icon></a>
-            <a target="_blank" href="https://www.facebook.com/zero7tesouraria"><ion-icon
-                name="logo-facebook"></ion-icon></a>
+            <a aria-label="Zero7 no Instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/zero7tesouraria/"><ion-icon
+                name="logo-instagram" aria-hidden="true"></ion-icon></a>
+            <a aria-label="Zero7 no TikTok" target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@zero7_mesa"><ion-icon name="logo-tiktok" aria-hidden="true"></ion-icon></a>
+            <a aria-label="Zero7 no Facebook" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/zero7tesouraria"><ion-icon
+                name="logo-facebook" aria-hidden="true"></ion-icon></a>
           </div>
         </div>
       </div>
@@ -467,12 +525,12 @@
     <div class="wrapper">
       <div class="content">
         <p>Formas de Pagamento</p>
-        <img src="../assets/pagamento/1.webp" alt="">
-        <img src="../assets/pagamento/2.webp" alt="">
-        <img src="../assets/pagamento/3.webp" alt="">
-        <img src="../assets/pagamento/4.webp" alt="">
-        <img src="../assets/pagamento/5.webp" alt="">
-        <img src="../assets/pagamento/6.webp" alt="">
+        <img width="150" height="76" src="../assets/pagamento/1.avif" alt="">
+        <img width="150" height="76" src="../assets/pagamento/2.avif" alt="">
+        <img width="150" height="76" src="../assets/pagamento/3.avif" alt="">
+        <img width="150" height="76" src="../assets/pagamento/4.avif" alt="">
+        <img width="150" height="76" src="../assets/pagamento/5.avif" alt="">
+        <img width="150" height="76" src="../assets/pagamento/6.avif" alt="">
       </div>
     </div>
   </section>
@@ -480,11 +538,11 @@
   <section id="author">
     <div class="wrapper">
       <div class="content">
-        <p>© 2025 | Todos os direitos reservados.</p>
+        <p>© <span class="js-ano">2025</span> | Todos os direitos reservados.</p>
         <p><a href="https://zero7.com.br/politica-de-privacidade/">Política de Privacidade</a></p>
         <p><a href="">Cookie</a></p>
         <p><a href="">Políticas de Uso</a></p>
-        <p>Zero7 Tesouraria LTDA | CNPJ: 49.452.697/0001-20</p>
+        <p class="autor__cnpj">Zero7 Tesouraria LTDA | CNPJ: 49.452.697/0001-20</p>
       </div>
 
       <p class="disclaimer">Todas as informações aqui apresentadas são destinadas exclusivamente a fins educacionais
@@ -496,6 +554,7 @@
         e a fonte de dados são fornecidas por terceiros.</p>
     </div>
   </section>
+  <!-- /build:rodape -->
 
   <a target="_blank" href="https://wa.link/9d2x9e" class="btn-whatsapp-pulse">
     <ion-icon name="logo-whatsapp"></ion-icon>

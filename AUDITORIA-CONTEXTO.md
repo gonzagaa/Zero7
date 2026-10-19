@@ -2621,3 +2621,17 @@ justamente o que a NCS não foi desenhada para fazer.
     EXATAMENTE a mudança aprovada, e só então gravar a referência nova
     (`--gravar-referencia --da-pagina`). Os ids dos h2 são estáveis
     (gente compartilha o link): não derive de novo do título.
+
+28. **As páginas de obrigado recebem da home o que é igual à home**
+    (pedido-registrado/ e as 8 subpastas por plano, out/2026). Nav,
+    #contato e o rodapé (footer + #pagamento + #author) ficam entre
+    marcadores `<!-- build:nav|contato|rodape -->` e o build
+    (construirObrigado) copia os blocos do index.html a cada execução,
+    com os caminhos em ../ ou ../../, âncoras apontando para a home, sem a
+    classe da tarja na nav e sem aria-current. Eram cópias à mão e tinham
+    ficado para trás. Mudou nav, contato ou rodapé da home: o build leva
+    para as 9 páginas, e o npm run check acusa se elas não foram
+    commitadas junto (git diff em pedido-registrado/). Fora dos
+    marcadores (head, #obrigado, scripts, o botão flutuante do WhatsApp)
+    a página continua à mão, com CSS e JS soltos e o ?v=. O cert/ não
+    entrou: tem outro layout.
