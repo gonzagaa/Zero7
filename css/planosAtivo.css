@@ -36,11 +36,11 @@
        nasce com 17x a altura certa. Com ele, sobra a razão — que é o que a
        gente queria. Medido: 240 x 65,9 antes e depois. */
     height: auto;
-    /* A razão REAL dos arquivos no ar (SEGUNDA CHANCE out/2026: as duas
-       artes 700x215). Com razão errada a caixa nasce num tamanho e muda
+    /* A razão REAL dos arquivos no ar (PROFIT PRO out/2026: as duas
+       artes 700x261). Com razão errada a caixa nasce num tamanho e muda
        quando a arte chega (LIBERDADE: 2–3px de CLS com o atributo antigo).
        Trocou o cupom, refaça junto com o width/height do index.html. */
-    aspect-ratio: 700 / 215;
+    aspect-ratio: 700 / 261;
 }
 
 #plan[data-asset="indice"] .cupom.white,

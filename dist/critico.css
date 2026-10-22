@@ -141,7 +141,7 @@ body:where(.anima-ociosas) .planos .card--copa .card-tarja:before{animation:seni
 body:where(.anima-ociosas) .planos .card--copa .card-tarja:after{animation:seniorTarjaDesliza 9s ease-in-out infinite}
 @keyframes seniorTarjaDesliza{0%{transform:translate(0)}50%{transform:translate(-54.5455%)}to{transform:translate(0)}}
 @keyframes seniorTarjaShine{0%{transform:translate(-100%)}55%{transform:translate(100%)}to{transform:translate(100%)}}
-.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto;aspect-ratio:700 / 215}
+.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto;aspect-ratio:700 / 261}
 .plano-asset[hidden]{display:none!important}
 #faq [hidden]{display:none!important}
 .faq__search-loading[hidden]{display:none}

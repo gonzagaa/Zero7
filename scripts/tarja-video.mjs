@@ -73,9 +73,16 @@ function sondar(arquivo) {
   return { w: s.width, h: s.height, fps: n / d, quadros: Number(s.nb_read_frames), duracao: Number(j.format.duration) };
 }
 
-// quadro n (0-based) de um arquivo, como PNG em memória
+// quadro n (0-based) de um arquivo, como PNG em memória. A conversão
+// YUV → RGB é BT.709 explícita (faixa TV → PC), a mesma do navegador para
+// os masters e encodes, que vêm etiquetados BT.709. Sem isso o ffmpeg
+// converte em BT.601 e o pôster (que nasce daqui) saía um pouco mais
+// escuro que o vídeo: em média −1,5/−1,9/−2,4 em R/G/B na arte dourada do
+// profit-pro-130 (out/2026), o que levou a troca pôster → vídeo da prova a
+// 1,01% (régua 1%).
+const DE_YUV_709 = 'scale=in_color_matrix=bt709:in_range=tv:out_range=pc:flags=accurate_rnd+full_chroma_int';
 const quadro = (arquivo, n, vf = '') => rodar(ffmpeg, ['-v', 'error', '-i', arquivo,
-  '-vf', `${vf ? vf + ',' : ''}select=eq(n\\,${n})`, '-vsync', '0', '-frames:v', '1', '-f', 'image2pipe', '-vcodec', 'png', '-'], { binario: true });
+  '-vf', `${vf ? vf + ',' : ''}${DE_YUV_709},select=eq(n\\,${n})`, '-vsync', '0', '-frames:v', '1', '-f', 'image2pipe', '-vcodec', 'png', '-'], { binario: true });
 
 async function diffPct(a, b) {
   const [ra, rb] = await Promise.all([sharp(a).removeAlpha().raw().toBuffer({ resolveWithObject: true }), sharp(b).removeAlpha().raw().toBuffer({ resolveWithObject: true })]);
