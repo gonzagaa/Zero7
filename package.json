@@ -7,7 +7,8 @@
     "check": "node scripts/build.mjs && node -e \"const m=require('./dist/manifest.json');if(m.criticoDesatualizado||m.criticoRegulamentoDesatualizado){console.error('crítico desatualizado (home ou regulamento): rode npm run build:critico');process.exit(1)}\" && git diff --exit-code -- dist index.html regulamento pedido-registrado css/fonts",
     "stamp": "node ./tools/stamp-assets.js --index-css \"./css/index.css\" --index-html \"./index.html\" --js \"./script/global.js\"",
     "build:critico": "node scripts/build.mjs && node scripts/critico.mjs && node scripts/build.mjs",
-    "tarja": "node scripts/tarja-ingestao.mjs"
+    "tarja": "node scripts/tarja-ingestao.mjs",
+    "teste:tarja": "node scripts/tarja-ingestao.teste.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
