@@ -1,10 +1,10 @@
 {
  "bundles": [
-  "dist/home.52942765.css",
+  "dist/home.09cc4b6c.css",
   "dist/regulamento.f9c47e09.css"
  ],
  "hashes": {
-  "home": "52942765",
+  "home": "09cc4b6c",
   "regulamento": "f9c47e09"
  },
  "bytes": 60529

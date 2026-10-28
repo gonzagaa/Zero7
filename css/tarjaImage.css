@@ -87,6 +87,23 @@
     top: var(--tarja-offset, 0px);
 }
 
+/* Desktop: a barra encosta na tarja com 1px de SOBREPOSIÇÃO, não de topo a
+   topo. A arte (camada própria, will-change) e a nav (camada própria,
+   backdrop-filter) terminavam na mesma coordenada fracionária; com zoom ou
+   DPR que não deixam essa coordenada em pixel inteiro de tela (110%, 125%,
+   150%), cada camada cobria só parte do pixel da emenda, e o que estava
+   atrás vazava numa linha de 1px — clara sobre seção clara (outubro/2026,
+   1536 a 110%). A nav está por cima (z-index 100 × 99) e o fundo dela pinta
+   sob a borda superior transparente: com 1px de sobra a emenda cai dentro
+   do vidro da nav, sobre a arte opaca. No celular há o vão de 0,8rem de
+   propósito (navigation.css), e esta regra não vale. O max() segura a nav
+   no topo se a tarja medir 0 com a classe ainda ligada. */
+@media (min-width: 1080px) {
+    #navigation.activeCountdown {
+        top: max(0px, var(--tarja-offset, 0px) - 1px);
+    }
+}
+
 .countdown--promo {
       display: flex;
       justify-content: center;
@@ -351,18 +368,24 @@
 }
 
 /* C4: fallback do --tarja-offset ANTES de o JS medir (o script protegido
-   continua mandando: o valor inline dele vence este). A conta vem da
-   razão do vídeo da tarja (LIBERDADE out/2026: mob 1040/142 = 7,3239; desk 2370/94 = 25,2128)
-   mais a barra do timer (27,4px < 1080; 34px de 1080 em diante). Medido:
-   erro de 0,2px em 390 e 0,0px em 1474; entre 1080 e ~1200 o desvio chega
-   a ~6px e o ResizeObserver do script corrige no primeiro layout. */
+   continua mandando: o valor inline dele vence este). A conta é a altura do
+   balão: a largura da arte dividida pela razão do vídeo da tarja, mais a
+   barra do timer (27,375px abaixo de 1080; 34px de 1080 em diante). A razão
+   é a do pipeline (scripts/lib/tarja.mjs: mob 1040/142 = 7,3239; desk
+   2370/94 = 25,2128) e vale para qualquer campanha — o npm run tarja recusa
+   arte com outra razão. A largura é a da própria tarja: até 1599 a da caixa
+   de conteúdo, min(--container-max, 100%) − 4,8rem (a de antes,
+   100vw − 200px, dava a nav até 3,7px por cima da tarja no primeiro meio
+   segundo, outubro/2026); de 1600 em diante, 100vw − 340px. 100vw em vez
+   de 100%: aqui o % seria da altura (top). Com barra de rolagem clássica o
+   erro é de < 1px até o JS medir. */
 nav#navigation.activeCountdown {
-    --tarja-offset: calc((100vw - 38px) / 7.3239 + 27.4px);
+    --tarja-offset: calc((min(var(--container-max), 100vw) - 4.8rem) / 7.3239 + 27.375px);
 }
 
 @media (min-width: 1080px) {
     nav#navigation.activeCountdown {
-        --tarja-offset: calc((100vw - 200px) / 25.2128 + 34px);
+        --tarja-offset: calc((min(var(--container-max), 100vw) - 4.8rem) / 25.2128 + 34px);
     }
 }
 
