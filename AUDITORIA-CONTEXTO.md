@@ -2635,3 +2635,56 @@ justamente o que a NCS não foi desenhada para fazer.
     marcadores (head, #obrigado, scripts, o botão flutuante do WhatsApp)
     a página continua à mão, com CSS e JS soltos e o ?v=. O cert/ não
     entrou: tem outro layout.
+
+29. **Véu de campanha sobre uma seção: o blur vai NOS FILHOS, nunca o
+    backdrop-filter sobre a camada** (out/2026, Black Friday —
+    veuPlanos.css + veuPlanos.js + guarda em global.js). Pedido do CEO:
+    durante a campanha, #plan fica tampada por um véu com o CTA pra uma
+    LP exclusiva; os cards continuam visíveis atrás, borrados.
+    `backdrop-filter` sobre uma camada que cobre conteúdo animado
+    (6 cards com anel/gradiente dos CTAs, Swiper, countUp) reavalia o
+    filtro A CADA FRAME e custa o rolagem do mobile: usamos
+    `filter: blur(7px) saturate(.7)` nos filhos da seção, que rasteriza
+    uma vez e vira camada estática. will-change SÓ no véu.
+    Protocolo:
+    • **Atributo em section**: `data-veu="black"` + `data-veu-fim`
+      (ISO 8601 com fuso, p.ex. `2026-11-30T23:59:59-03:00`). Sem
+      atributo, só a baseline `.veu-plano-black { display: none }`
+      entra (hide-rule que o critico.mjs mantém de qualquer jeito, 29
+      bytes); nenhuma regra decorativa do véu entra no HTML/CSS crítico.
+    • **Altura reduzida precisa do crítico**: a seção fica mais baixa
+      com o véu (padding/2 + max-height nos planos). Essas 3 regras
+      PRECISAM entrar no crítico — se chegarem só no bundle, o #plan
+      nasce com altura cheia e encolhe quando o bundle chega: shift
+      grande no CLS. Truque: prefixar com `body:has(section#plan[data-veu…])`
+      — a regra 102 do critico.mjs mantém TODO seletor que começa
+      com `body\b`, independentemente de o alvo estar na dobra.
+    • **Pausa de animações no bloco borrado**:
+      `animation-play-state: paused !important` em `> :not([data-veu-camada])`
+      e descendentes/pseudos. **ARMADILHA**: o `.plano-asset` tem
+      `animation: planoAssetIn 400ms` (planosAtivo.css) que começa com
+      `opacity:0`; pausar essa animação deixa o bloco invisível. A
+      regra do véu zera essa animação (`animation:none; opacity:1;
+      transform:none`) na mesma linha do max-height. O Swiper INICIA
+      normalmente — sem ele, as 6 slides com `width:100%` empilhariam
+      sob o blur; o custo de init paga só uma vez e o `paused` em cima
+      segura o blur estático dos frames seguintes.
+    • **Bloqueio real**: o veuPlanos.js liga `inert` + `aria-hidden="true"`
+      em cada filho da seção, menos o nó marcado com `data-veu-camada`.
+      `pointer-events: none` por garantia. Os hrefs de checkout
+      (regra 4) ficam intactos — só inalcançáveis.
+    • **Expiração dentro da sessão**: um `setTimeout` até `data-veu-fim`
+      (saturado em 24 dias — além disso, uma recarga pega a virada)
+      remove o atributo, tira o `inert` e derruba o nó do véu. O
+      Swiper já estava inicializado, então os cards voltam ao normal
+      e as animações ociosas voltam a rodar na hora.
+    • **Mockar a data no harness**: `window.__veuNow = <timestamp>` via
+      `page.addInitScript` antes do `goto`; o veuPlanos.js lê isso
+      primeiro.
+    • **CLS**: a seção não muda de altura (véu é absolute inset:0).
+    • **A regra 7 continua**: a arquitetura dos cards não é tocada,
+      só coberta.
+    Para desligar manualmente: tirar `data-veu` e `data-veu-fim` do
+    `<section id="plan">`. Quem tirar o atributo também tira a classe
+    `.veu-plano-black` do HTML e descomenta o `.cupom-wrap` que ficou
+    comentado por cima do véu — a seção volta ao estado normal da home.

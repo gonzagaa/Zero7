@@ -1,0 +1,285 @@
+/* Véu de campanha para a seção #plan — Black Friday 2026.
+   Tudo escopado sob section#plan[data-veu="black"]. Sem o atributo, nenhum
+   estilo entra: a baseline esconde o nó decorativo (.veu-plano-black) e
+   só isso. Para desligar a campanha, basta tirar data-veu de #plan;
+   para ligar outra, trocar o valor e redefinir o escopo.
+
+   Mecanismo (brief do CEO, out/2026):
+   • Blur mora nos FILHOS de #plan (não no véu com backdrop-filter): o
+     Chrome rasteriza uma vez e a camada vira estática. backdrop-filter
+     reavaliaria por frame de rolagem e aqui custa demais (6 cards no
+     DOM + anéis/gradientes animados dos CTAs). A regra 29 do AUDITORIA
+     formaliza isso.
+   • TODAS as animações do bloco pausadas enquanto o véu existe: anéis
+     dos botões, gradiente que desliza, shine, borderSpin do #divisa
+     (não entra aqui porque é outra seção), countUp já termina sozinho,
+     Swiper NÃO inicializa (ver script/global.js, guarda do data-veu).
+   • Bloqueio real: o script liga inert + aria-hidden="true" no bloco
+     dos planos. Aqui o pointer-events:none é só a cereja. Os hrefs de
+     checkout não mudam (regra 4) — ficam só inalcançáveis.
+   • Nada muda de altura: véu é overlay absolute inset:0. CLS igual. */
+
+
+/* ── Baseline (sem data-veu, nada do véu existe visualmente) ────────── */
+.veu-plano-black {
+  display: none;
+}
+
+
+/* ── Véu ligado ─────────────────────────────────────────────────────── */
+section#plan[data-veu="black"] {
+  /* overflow:hidden já vem de .planos (base), reforço aqui porque o blur
+     dos filhos espalha pixels além da caixa e sem overflow abriria
+     scrollbar horizontal em 390. */
+  overflow: hidden;
+}
+
+/* ── Altura reduzida — PRECISA ir no crítico (brief: CLS zero) ────────
+   O prefixo `body:has(section#plan[data-veu…])` é um truque de extração
+   do critico.mjs: a regra 102 do extrator mantém TODO seletor com
+   `body\b` no começo, independentemente de o alvo estar na dobra. Sem
+   isso, estas regras cairiam só no bundle, o #plan nasceria com a
+   altura normal no 1º frame e encolheria quando o bundle chegasse —
+   shift grande no CLS, exatamente o que o brief proíbe.
+
+   `justify-content` do véu é center, então encolher a seção não desloca
+   o conteúdo do véu (continua centralizado dentro do novo tamanho).
+   O divisor-candles usa margin-top negativo em cima do que vem depois,
+   então o #faq continua encaixando por 30 px (celular) / 44 px (desktop),
+   igual à seção na altura cheia — medido (ver relatório). */
+body:has(section#plan[data-veu="black"]) section#plan {
+  /* Metade do padding-block padrão do <section> (8rem em global.css):
+     em px dá 32 no celular (raiz 8) e 40 no desktop (raiz 10). */
+  padding-block: 4rem;
+}
+
+body:has(section#plan[data-veu="black"]) section#plan .plano-asset {
+  /* O overflow:hidden corta os cards por baixo mantendo o topo (nome +
+     chips + preço) atrás do blur. 520 px desktop, 400 px celular,
+     medidos para caber o título do card + ~2 chips de specs + começo
+     do preço nas cartas — pedido do brief. */
+  max-height: 520px;
+  overflow: hidden;
+
+  /* ARMADILHA: .plano-asset tem animation: planoAssetIn 400ms (planosAtivo.css)
+     que começa com opacity:0 + translateY. O animation-play-state:paused
+     que pausa as animações do bloco borrado pausaria TAMBÉM essa entrada
+     no frame zero → o bloco inteiro ficaria invisível. Zerar a animação
+     deixa o estado final em pé (opacity:1, transform:none) e os cards
+     renderizam atrás do blur. */
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 1079.98px) {
+  body:has(section#plan[data-veu="black"]) section#plan .plano-asset {
+    max-height: 400px;
+  }
+}
+
+section#plan[data-veu="black"] .veu-plano-black {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: auto;
+
+  align-items: center;
+  justify-content: center;
+  padding: var(--esp-5, 3.2rem) var(--esp-4, 2.4rem);
+  text-align: center;
+
+  /* Pedido da revisão (out/2026): o véu geral fica MAIS CLARO para o
+     usuário RECONHECER que existe um bloco de planos atrás — o
+     contraste do texto vem do scrim LOCAL atrás do conteúdo (ver
+     .veu-plano-black__conteudo::before abaixo), não de escurecer a
+     seção inteira.
+     Camadas 1 e 2: dois sóis quentes nas pontas inferiores (identidade
+     da tarja a-maior-black). Camada 3: preto translúcido mais tímido
+     (25% topo → 32% base). Os cards têm fundo quase preto no padrão,
+     então mesmo 35-42% já colapsava a forma deles com o fundo da seção
+     — este degrau mais baixo deixa as bordas dos cards e os números
+     brancos passarem pelo blur. */
+  background:
+    radial-gradient(60% 42% at 0% 100%,
+      rgba(229, 43, 36, .22),
+      rgba(255, 106, 26, .10) 35%,
+      transparent 65%),
+    radial-gradient(60% 42% at 100% 100%,
+      rgba(229, 43, 36, .22),
+      rgba(255, 138, 61, .10) 35%,
+      transparent 65%),
+    linear-gradient(180deg,
+      rgba(6, 2, 1, .25) 0%,
+      rgba(6, 2, 1, .32) 100%);
+  /* will-change SÓ no véu (camada do blur já é estática via containment
+     dos filhos). Isola o repaint quando o script liga/desliga. */
+  will-change: opacity, transform;
+}
+
+/* Scrim LOCAL atrás do bloco título+frase+botão: a vedação do contraste
+   do texto fica ALI, não na seção inteira. Radial dark que desaparece
+   nas bordas para o blur dos cards continuar aparecendo em volta. O
+   contraste final medido no título branco sobre esta camada passa de
+   4,5:1 nos 7 breakpoints (ver relatório; a seção #plan tem bg escuro
+   por padrão, o scrim só reforça para o pior caso de carta clara). */
+section#plan[data-veu="black"] .veu-plano-black__conteudo::before {
+  content: "";
+  position: absolute;
+  /* Folga de ~60 px em volta do bloco título+80%OFF+frase+botão, para
+     o scrim ENVOLVER o conteúdo sem cortar perto das letras. */
+  inset: -60px;
+  z-index: -1;
+  pointer-events: none;
+  /* Radial de 85% no centro caindo até 0 com transição larga: sem borda
+     dura visível, só uma vedação para o contraste. Elíptico (ellipse)
+     porque o bloco é mais largo que alto. Fora do scrim o véu fica
+     igual — este gradiente é só uma camada local. */
+  background: radial-gradient(ellipse at center,
+    rgba(0, 0, 0, .85) 0%,
+    rgba(0, 0, 0, .78) 20%,
+    rgba(0, 0, 0, .60) 45%,
+    rgba(0, 0, 0, .30) 70%,
+    rgba(0, 0, 0, .08) 88%,
+    transparent 100%);
+}
+
+@media (max-width: 1079.98px) {
+  section#plan[data-veu="black"] .veu-plano-black__conteudo::before {
+    /* Folga ligeiramente menor no celular para o scrim não sangrar
+       nas bordas do véu (que já ocupa a largura toda do viewport). */
+    inset: -40px;
+  }
+}
+
+/* Blur + pausa dos filhos de #plan (menos o véu). O :not(.veu-plano-black)
+   mantém o atributo-chave fora do blur. Pointer-events:none por garantia,
+   mas o bloqueio de verdade é o inert ligado pelo JS.
+   Revisão out/2026: blur sobe 7px→9px e a dessaturação sai de .7→.92
+   (quase nada) — formas e cores dos cards precisam continuar
+   reconhecíveis atrás do borrão.
+   `will-change: filter` promove cada filho borrado a uma compositor
+   layer própria: o Chrome rasteriza o blur UMA VEZ e nos frames
+   seguintes só compõe a layer já pronta. Medido no fps-veu-plan.mjs:
+   sem o will-change, 1474 tinha +1 long task de 104 ms durante o scroll
+   passando pelo #plan; com ele, iguala ao baseline (2 longas, pior 68). */
+section#plan[data-veu="black"] > :not(.veu-plano-black) {
+  filter: blur(9px) saturate(.92);
+  pointer-events: none;
+  will-change: filter;
+}
+
+/* animation-play-state: paused em TODAS as animações dentro do bloco
+   borrado. !important porque o portão de ociosas do button.css usa a
+   mesma força. Fica em todas as faixas, inclusive mobile. */
+section#plan[data-veu="black"] > :not(.veu-plano-black),
+section#plan[data-veu="black"] > :not(.veu-plano-black) *,
+section#plan[data-veu="black"] > :not(.veu-plano-black) *::before,
+section#plan[data-veu="black"] > :not(.veu-plano-black) *::after {
+  animation-play-state: paused !important;
+}
+
+
+/* ── Conteúdo do véu ───────────────────────────────────────────────── */
+section#plan[data-veu="black"] .veu-plano-black__conteudo {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 56rem);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--esp-3, 1.6rem);
+}
+
+/* H2 — NCS Radhiumz, display, caixa alta. Clamp porque a seção respira
+   em 7 larguras do protocolo; o teto não ultrapassa o H1 do herói. */
+section#plan[data-veu="black"] .veu-plano-black__titulo {
+  margin: 0;
+  color: #fff;
+  font-family: var(--ncs, 'NCS Radhiumz', sans-serif);
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: .01em;
+  font-size: clamp(2.4rem, 1.6rem + 1.9vw, 4.6rem);
+  text-shadow: 0 .2rem 1.6rem rgba(0, 0, 0, .55);
+}
+
+/* 80% OFF — gradient em text-clip, laranja → vermelho da Black. Entra
+   como texto para o leitor de tela (aria-label já conta "80% OFF"). */
+section#plan[data-veu="black"] .veu-plano-black__off {
+  margin: .2rem 0 .4rem;
+  font-family: var(--ncs, 'NCS Radhiumz', sans-serif);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .02em;
+  font-size: clamp(3.6rem, 2.4rem + 3.2vw, 7.8rem);
+
+  background: linear-gradient(100deg,
+    #FF8A3D 0%,
+    #FF6A1A 36%,
+    #F2441F 70%,
+    #E52B24 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 2rem rgba(255, 106, 26, .45));
+}
+
+/* Frase — TT Fors, cor clara mas com peso leve. */
+section#plan[data-veu="black"] .veu-plano-black__frase {
+  margin: 0;
+  color: #fffaf1;
+  font-family: var(--tts, 'TT Fors Trial', sans-serif);
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: clamp(1.4rem, 1rem + 1vw, 1.9rem);
+  max-width: 44rem;
+  text-wrap: pretty;
+  text-shadow: 0 .1rem .6rem rgba(0, 0, 0, .5);
+}
+
+/* CTA — reusa o .z7-btnx (todo o anel/shine/arrow pronto) e troca só as
+   três variáveis que o sistema .btn consome. Mesmo laranja do botão
+   "Começar agora mesmo" da hero--black e da tarja a-maior-black, para
+   fechar a identidade. */
+section#plan[data-veu="black"] .veu-plano-black__cta {
+  --btn-grad: linear-gradient(90deg,
+    #7a170d 0%,
+    #C8261C 40%,
+    #F2441F 70%,
+    #FF8A3D 100%);
+  --btn-escuro: 200 38 28;
+  --btn-claro: 255 106 26;
+
+  margin-top: var(--esp-3, 1.6rem);
+}
+
+
+/* ── Mobile (≤1079.98) ─────────────────────────────────────────────── */
+@media (max-width: 1079.98px) {
+  section#plan[data-veu="black"] .veu-plano-black {
+    padding: var(--esp-4, 2.4rem) var(--esp-3, 1.6rem);
+  }
+
+  section#plan[data-veu="black"] .veu-plano-black__conteudo {
+    gap: var(--esp-2, 1.2rem);
+  }
+
+  /* o H2 em 3 linhas no 320–390: "A MAIOR / BLACK / DA HISTÓRIA" fecha
+     em três linhas largas sem corte quando o clamp cai no piso. */
+  section#plan[data-veu="black"] .veu-plano-black__titulo {
+    line-height: 1.1;
+  }
+}
+
+
+/* ── prefers-reduced-motion ────────────────────────────────────────────
+   O véu já é estático (sem animação própria). A frase do CSS normal
+   do projeto que respeita reduced-motion continua valendo nos vizinhos
+   (não precisa de regra extra aqui), e a classe .anima-ociosas que
+   dispararia o breathe do CTA não arma neste botão porque o JS
+   pausa todas as animações do bloco borrado antes do portão. */

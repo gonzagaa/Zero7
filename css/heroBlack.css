@@ -1,0 +1,305 @@
+/* Identidade Black Friday — pedido do CEO, aprovado pelo Gustavo num protótipo
+   da LP a-maior-black. Toda a campanha vive atrás de UMA chave: a classe
+   .hero--black no <header id="home">. Tirar a classe = página volta ao normal,
+   byte a byte. Nada global. Escopo visual é só o herói e a nav; os botões
+   do resto da página (planos, tópicos etc.) continuam azuis.
+
+   A nav é irmã do #home: pego a classe pelo pai com :has() (body:has
+   (#home.hero--black) #navigation …). Mirror-class seria igualmente coerente,
+   mas o build (construirObrigado em scripts/build.mjs) tira classes que
+   começam com "active" da nav antes de copiar para pedido-registrado — uma
+   mirror-class com outro nome vazaria para lá. O :has() dá o escopo certo
+   sem depender dessa convenção.
+
+   A foto do fundo (bg desktop.avif / bg mobile.avif) NÃO muda — nada de
+   overlay, blend ou filter sobre ela. */
+
+
+/* ── Botões: hero (CTA "Começar agora mesmo") + nav (apenas "Área do Trader")
+   Redefinem as três variáveis que o .btn/.z7-btnx já consumem; o resto
+   (glow, anel, cap, shine) recalcula a cor sozinho. O "Comunidade" tem
+   .btn--wpp, que define o próprio --btn-grad e vence por cascata — fica
+   verde WhatsApp como está. Os botões de abrir/fechar menu são .btn--texto
+   (sem --btn-grad) e também não dependem destas variáveis. */
+#home.hero--black .btn,
+#home.hero--black .z7-btnx,
+body:has(#home.hero--black) #navigation .menu .buttons #navButton {
+  --btn-grad: linear-gradient(90deg,
+    #7a170d 0%,
+    #C8261C 40%,
+    #F2441F 70%,
+    #FF8A3D 100%);
+  --btn-escuro: 200 38 28;
+  --btn-claro: 255 106 26;
+}
+
+
+/* ── Palavra rotativa do H1 ────────────────────────────────────────────
+   Degradê da Black em text clip. As três palavras (acessível, lucrativo,
+   seguro) e a animação do reveal continuam iguais; é só a cor. O drop
+   shadow laranja dá o calor que o text clip não consegue. */
+#home.hero--black .reveal-word {
+  background: linear-gradient(120deg,
+    #FF8A3D 0%,
+    #FF6A1A 36%,
+    #F2441F 70%,
+    #E52B24 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 22px rgba(255, 106, 26, .4));
+}
+
+
+/* ── Nav: link ativo recebe o acento da Black; logo em branco ───────── */
+body:has(#home.hero--black) #navigation .menu ul li a[aria-current="page"],
+body:has(#home.hero--black) #navigation .menu ul li a[aria-current="page"]:hover {
+  color: #FF8A3D;
+  background-color: rgb(255 106 26 / .10);
+  border-color: rgb(255 106 26 / .45);
+}
+
+body:has(#home.hero--black) #navigation .logo img {
+  filter: brightness(0) invert(1);
+}
+
+
+/* ── Baseline dos decorativos ──────────────────────────────────────────
+   Sem a classe hero--black, estes divs ficam no DOM mas invisíveis — é o
+   que garante a reversão byte a byte. O .bf-selo tem um SVG dentro que
+   SEM esta regra renderizaria no tamanho replaced-element padrão (300×150
+   do SVG). O display:none aqui, fora do escopo, zera isso; os blocos de
+   display:block abaixo, dentro do escopo, ligam de volta.
+
+   A exceção de "regra que esconde" do critico.mjs mantém esta regra no
+   crítico em qualquer dobra (regra 21 do AUDITORIA): a caixa só não
+   existe JUSTAMENTE porque esta regra esconde. */
+.bf-horizonte,
+.bf-selo {
+  display: none;
+}
+
+
+/* ── Horizonte: arco de luz na borda inferior do herói ─────────────────
+   Geometria aprovada na revisão (out/2026): elipse de 120% × 4.48P, com
+   `top: calc(100% - P)`. Com width 120% (sai -10% nas duas pontas) e
+   altura 4.48P, a MATEMÁTICA do border-radius 50% faz a curva TOCAR o fim
+   do header EXATAMENTE em x=0 e x=100% da viewport: a elipse tem
+   rx = 60vw e ry = 2.24P, centro em (50vw, 100% + 1.24P), e no limite
+   da tela (dx = 50vw = 5rx/6) o y fica a 100% + 1.24P - ry·√(1-25/36)
+   ≈ 100% + 0.002P, encostando no fim do header. Nenhum brilho sobra pra
+   ser cortado pelo overflow:hidden das pontas do header — o problema do
+   desenho anterior, em que o box-shadow era cortado nas laterais e virava
+   uma linha reta.
+
+   P (distância do pico ao fim do header) por faixa de largura: 40 no
+   celular (hero mais baixa), 48 no desktop padrão, 56 em ≥1600 e 64 em
+   ≥1920. Em 1366 o vão CTA→fim do header é 68px, então P=48 deixa o pico
+   a ≥20 px abaixo do CTA.
+
+   z-index 1 fica atrás do .wrapper (3) e à frente da foto; pointer-events
+   none para não roubar clique. */
+#home.hero--black .bf-horizonte {
+  --bf-horizonte-p: 48px;
+  display: block;
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  top: calc(100% - var(--bf-horizonte-p));
+  height: calc(var(--bf-horizonte-p) * 4.48);
+  bottom: auto;
+  transform: none;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+  background: #000;
+  box-shadow:
+    0 -1px 0 rgba(255, 214, 170, .9),
+    0 -6px 18px rgba(255, 140, 60, .75),
+    0 -30px 80px rgba(255, 90, 25, .45),
+    0 -90px 160px rgba(229, 43, 36, .22);
+}
+
+@media (max-width: 1079.98px) {
+  #home.hero--black .bf-horizonte {
+    --bf-horizonte-p: 40px;
+  }
+}
+
+@media (min-width: 1600px) {
+  #home.hero--black .bf-horizonte {
+    --bf-horizonte-p: 56px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #home.hero--black .bf-horizonte {
+    --bf-horizonte-p: 64px;
+  }
+}
+
+
+/* ── Selo "A maior Black da história" ──────────────────────────────────
+   SVG inline no HTML (sem request externa) — a geometria é fixa (200×200
+   do viewBox) e o anel de texto é um <textPath>. O selo não pode:
+   • encostar no H1, no IBOV ou no rosto da foto — a posição acompanha a
+     escala da arte (17.4vw do topo, 23vw à direita do centro)
+   • virar candidato a LCP — ele é pequeno (até 230 px) perto do H1 e da
+     foto, e absoluto desde o HTML (CLS zero)
+   • rodar sem o portão: .selo-anel só anima com body.anima-ociosas, que
+     o global.js liga em idle DEPOIS do LCP (regra 11 do AUDITORIA).
+
+   O selo em si é .bf-selo (position+tamanho); o anel que gira é
+   .selo-anel dentro do SVG. */
+#home.hero--black .bf-selo {
+  display: block;
+  position: absolute;
+  z-index: 6;
+  width: clamp(150px, 13.2vw, 230px);
+  height: clamp(150px, 13.2vw, 230px);
+  left: calc(50% + 23vw);
+  top: 17.4vw;
+  transform: rotate(-10deg);
+  pointer-events: none;
+  /* Dois drop-shadows: um escuro para destacar do fundo da foto e um
+     laranja de calor para casar com a tarja/horizonte. */
+  filter:
+    drop-shadow(0 14px 30px rgba(0, 0, 0, .55))
+    drop-shadow(0 0 26px rgba(255, 106, 26, .45));
+}
+
+@media (max-width: 1079.98px) {
+  #home.hero--black .bf-selo {
+    width: 92px;
+    height: 92px;
+    left: auto;
+    right: 12px;
+    top: 148px;
+  }
+}
+
+/* ≥1600: pedido da revisão — manter o selo DENTRO da coluna do container
+   (1456px, centrado), não no canto da tela. A base viewport-based soltava
+   o selo demais e ele ficava fora da coluna do conteúdo.
+
+   Ancoragem por centro: `left: calc(50% + 430px)` em uma viewport de 1920
+   coloca a borda esquerda do selo em x=1390 e o centro em x=1490 (como
+   pedido na revisão). Em 1600 o container é 1456 centralizado (spans 72
+   a 1528), e o selo cai dentro: centro em x=1330, borda direita em 1430 —
+   sobra 98px até a borda direita do container. Em 1680, centro em 1370,
+   dentro do container também.
+
+   top:250 ⇒ centro em y=350 (como pedido). */
+@media (min-width: 1600px) {
+  #home.hero--black .bf-selo {
+    width: 200px;
+    height: 200px;
+    left: calc(50% + 430px);
+    right: auto;
+    top: 250px;
+  }
+}
+
+#home.hero--black .bf-selo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* O anel de texto gira. Mesmo portão das animações ociosas do projeto
+   (regra 11): sem anima-ociosas e com movimento reduzido, fica parado —
+   o SVG estático já lê, e a rotação só entra depois do LCP. 26 s é devagar
+   para o olho não brigar com o H1. transform-box:view-box para a rotação
+   usar as coordenadas do viewBox 200×200, não a caixa do <g>. */
+@media (prefers-reduced-motion: no-preference) {
+  body:where(.anima-ociosas) #home.hero--black .bf-selo .selo-anel {
+    transform-box: view-box;
+    transform-origin: 100px 100px;
+    animation: bf-selo-anel-gira 26s linear infinite;
+  }
+}
+
+@keyframes bf-selo-anel-gira {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+
+/* ── #divisa (cards da dobra) com hero--black ─────────────────────────
+   Revisão aprovada: cards VOLTAM à paleta azul da Zero7 — a pele laranja
+   da rodada anterior criava um deslocamento de identidade grande demais
+   nos cards de prova social (DESDE/traders/pagamentos). Só o DESNÍVEL
+   INVERTIDO fica: no padrão o .dois estava embaixo e as pontas em cima;
+   aqui o .dois sobe para seguir o pico do arco e as pontas descem. Só
+   desktop (lado a lado); no mobile empilhado nada muda.
+
+   Escopo: body:has(#home.hero--black) section#divisa … — o :has() leva o
+   gesto até fora do #home, para a seção irmã logo abaixo. Contador
+   (countUp) e animações de entrada (AOS, data-aos="fade-up-left" nos
+   borderCard) ficam intactos — ninguém mexe em transform via JS aqui.
+
+   Quanto o .dois sobe: X = P - 36, onde P é a altura do pico do arco por
+   faixa (ver --bf-horizonte-p lá em cima). Com o gap medido ≈ 0 entre
+   #home e #divisa, essa fórmula garante PICO→CARD ≥ 36 px:
+     • P 48 (1080-1479) → translateY(-12px)
+     • P 56 (1600-1919) → translateY(-20px)
+     • P 64 (≥1920)     → translateY(-28px)
+   Mobile empilhado: as duas regras ficam fora, o fluxo normal manda. */
+@media (min-width: 1080px) {
+  body:has(#home.hero--black) section#divisa .cards .borderCard.um,
+  body:has(#home.hero--black) section#divisa .cards .borderCard.tres {
+    transform: translateY(0);
+  }
+  body:has(#home.hero--black) section#divisa .cards .borderCard.dois {
+    transform: translateY(-12px);
+  }
+}
+
+@media (min-width: 1600px) {
+  body:has(#home.hero--black) section#divisa .cards .borderCard.dois {
+    transform: translateY(-20px);
+  }
+}
+
+@media (min-width: 1920px) {
+  body:has(#home.hero--black) section#divisa .cards .borderCard.dois {
+    transform: translateY(-28px);
+  }
+}
+
+
+/* ── Respiro de baixo do herói (CTA → pico do arco) ────────────────────
+   Pedido da revisão: em ≥1080 a meta é CTA_bottom a ≥ 56 px do pico do
+   arco. Medido no HEAD: 1080/1366/1440 já cumprem (60/89/96 px); 1600
+   e 1920 ficam curtos (24 e 32 px) porque o P do horizonte cresceu
+   nessas faixas (56 e 64 px) e a hero não ganhou respiro proporcional.
+
+   ATENÇÃO ao `padding-block` do home.css: ele é **5% em ≥1600**
+   (home.css linha 345), não 10%. A fórmula do override tem que partir
+   dessa base — foi por aí que a 1ª tentativa estourou (calc(10% + N)
+   adicionava os 80 px escondidos de diferença e devolvia +116 em vez
+   de +36).
+
+   Como `justify-content: center` do .content centraliza o conteúdo
+   entre padding-top e padding-top+content_height, o content_area não
+   cresce com padding-bottom: o CTA fica onde está e o header_bottom é
+   empurrado em Δ. Ganho líquido para CTA→pico = Δ (medido).
+
+     • 1600: calc(5% + 36px) → padding-bottom 116 (era 80), CTA→pico 60
+     • 1920: calc(5% + 28px) → padding-bottom 124 (era 96), CTA→pico 60
+
+   O padding-top não é tocado (regra da revisão: se não couber a dobra
+   em 1366×768 / 1440×900, reduzir padding-top; mas em 1080/1366/1440
+   nada muda, elas já cumprem a meta sem padding extra). */
+@media (min-width: 1600px) {
+  #home.hero--black {
+    padding-bottom: calc(5% + 36px);
+  }
+}
+
+@media (min-width: 1920px) {
+  #home.hero--black {
+    padding-bottom: calc(5% + 28px);
+  }
+}

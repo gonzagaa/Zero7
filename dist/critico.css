@@ -1,10 +1,10 @@
-@font-face{font-family:NCS Radhiumz;font-style:normal;font-weight:400;font-display:swap;src:url(../css/fonts/NCS%20Radhiumz.hero.woff2?v=0e788b94) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
-@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:300;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Light.hero.woff2?v=fd1b1135) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
-@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:400;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Regular.hero.woff2?v=840598f7) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
-@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:500;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Medium.hero.woff2?v=dc8c5375) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
-@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:600;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20DemiBold.hero.woff2?v=56adbf06) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
-@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:700;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Bold.hero.woff2?v=f479efb1) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
-@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:800;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20ExtraBold.hero.woff2?v=ab6e9c88) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4C-56,U+59,U+61-69,U+6C-76,U+79,U+C1,U+C7,U+CD,U+D5,U+E1,U+E7,U+ED,U+F5,U+2013-2014,U+2192}
+@font-face{font-family:NCS Radhiumz;font-style:normal;font-weight:400;font-display:swap;src:url(../css/fonts/NCS%20Radhiumz.hero.woff2?v=39c40dc9) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4B-56,U+59-5A,U+61-69,U+6B-76,U+79-7A,U+C1,U+C7,U+CD,U+D3,U+D5,U+E1,U+E7,U+ED,U+F3,U+F5,U+2013-2014,U+2192,U+2726}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:300;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Light.hero.woff2?v=57658536) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4B-56,U+59-5A,U+61-69,U+6B-76,U+79-7A,U+C1,U+C7,U+CD,U+D3,U+D5,U+E1,U+E7,U+ED,U+F3,U+F5,U+2013-2014,U+2192,U+2726}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:400;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Regular.hero.woff2?v=ae1ba3cd) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4B-56,U+59-5A,U+61-69,U+6B-76,U+79-7A,U+C1,U+C7,U+CD,U+D3,U+D5,U+E1,U+E7,U+ED,U+F3,U+F5,U+2013-2014,U+2192,U+2726}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:500;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Medium.hero.woff2?v=8c1510a3) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4B-56,U+59-5A,U+61-69,U+6B-76,U+79-7A,U+C1,U+C7,U+CD,U+D3,U+D5,U+E1,U+E7,U+ED,U+F3,U+F5,U+2013-2014,U+2192,U+2726}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:600;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20DemiBold.hero.woff2?v=e32dffd8) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4B-56,U+59-5A,U+61-69,U+6B-76,U+79-7A,U+C1,U+C7,U+CD,U+D3,U+D5,U+E1,U+E7,U+ED,U+F3,U+F5,U+2013-2014,U+2192,U+2726}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:700;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20Bold.hero.woff2?v=27852c04) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4B-56,U+59-5A,U+61-69,U+6B-76,U+79-7A,U+C1,U+C7,U+CD,U+D3,U+D5,U+E1,U+E7,U+ED,U+F3,U+F5,U+2013-2014,U+2192,U+2726}
+@font-face{font-family:TT Fors Trial;font-style:normal;font-weight:800;font-display:swap;src:url(../css/fonts/TT%20Fors%20Trial%20ExtraBold.hero.woff2?v=69f57d93) format("woff2");unicode-range:U+20,U+24-25,U+2B-2E,U+30-3A,U+41-49,U+4B-56,U+59-5A,U+61-69,U+6B-76,U+79-7A,U+C1,U+C7,U+CD,U+D3,U+D5,U+E1,U+E7,U+ED,U+F3,U+F5,U+2013-2014,U+2192,U+2726}
 @font-face{font-family:swiper-icons;src:url(data:application/font-woff;charset=utf-8;base64,\ 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);font-weight:400;font-style:normal}
 :root{--swiper-theme-color:#007aff}
 .swiper-backface-hidden .swiper-slide{transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
@@ -105,7 +105,6 @@ section#divisa .cards .card h3 span{filter:none;text-shadow:0 0 18px rgba(29,164
 @media (max-width: 1079.98px){#divisa .cards .card p{font-size:var(--fs-850)}}
 #ano{display:inline-block;min-width:2.7em;text-align:center}
 #traders,#pagamentos{display:inline-block;min-width:2em;text-align:center}
-@media (min-width: 1080px) and (max-width: 1599.98px){section#divisa .cards .borderCard.tres .card h3{min-height:7.4rem}}
 #topicos{overflow:hidden;position:relative;border-radius:var(--raio-assinatura-xl)}
 #topicos:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(1200px 500px at 50% 0%,rgba(7,12,17,.1),transparent 60%),radial-gradient(900px 500px at 15% 90%,rgba(7,12,17,.08),transparent 65%),repeating-linear-gradient(135deg,rgba(7,12,17,.03) 0px,rgba(7,12,17,.03) 1px,transparent 1px,transparent 10px);mix-blend-mode:multiply;opacity:1}
 #topicos img.bgsection{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
@@ -124,12 +123,10 @@ section#divisa .cards .card h3 span{filter:none;text-shadow:0 0 18px rgba(29,164
 .ba-card--hero:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 68% 58% at 50% 50%,rgba(0,2,5,.62) 0%,rgba(0,2,5,.24) 62%,transparent 100%),linear-gradient(to top,#00020580,#00040c29 45%,#000b1c42)}
 .ba-card--video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;border-radius:inherit}
 .planos{overflow:hidden;position:relative}
-.planos img.cupom{width:30rem;margin-bottom:6rem}
 .planos img.bg{position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;z-index:0}
 .planos:before,.planos:after{content:"";position:absolute;width:100%;height:2px;top:0;left:0;right:0;background:linear-gradient(to right,transparent,#023c83,#0080c9,#023c83,transparent);z-index:2}
 body section.planos .wrapper .swiper.mySwiper4{overflow:inherit}
 body section.planos .wrapper .swiper.mySwiper11{overflow:inherit}
-.planos .cupom{display:flex;width:100%;margin-top:2rem;gap:var(--esp-1);align-items:center}
 @media (max-width: 1079.98px){.planos .swiper-button-prev,.planos .swiper-button-next{display:none}}
 .planos .btn__label span{display:none}
 @media (min-width: 1080px){body section.planos .wrapper .swiper.mySwiper4{overflow:hidden}
@@ -141,7 +138,6 @@ body:where(.anima-ociosas) .planos .card--copa .card-tarja:before{animation:seni
 body:where(.anima-ociosas) .planos .card--copa .card-tarja:after{animation:seniorTarjaDesliza 9s ease-in-out infinite}
 @keyframes seniorTarjaDesliza{0%{transform:translate(0)}50%{transform:translate(-54.5455%)}to{transform:translate(0)}}
 @keyframes seniorTarjaShine{0%{transform:translate(-100%)}55%{transform:translate(100%)}to{transform:translate(100%)}}
-.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto;aspect-ratio:700 / 261}
 .plano-asset[hidden]{display:none!important}
 #faq [hidden]{display:none!important}
 .faq__search-loading[hidden]{display:none}
@@ -323,6 +319,29 @@ div.tarjaImage .tarjaMidia{display:block;flex:none;max-width:none;width:max(100%
 nav#navigation.activeCountdown{--tarja-offset: calc((min(var(--container-max), 100vw) - 4.8rem) / 7.3239 + 27.375px)}
 @media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((min(var(--container-max), 100vw) - 4.8rem) / 25.2128 + 34px)}}
 @media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2128 + 34px)}}
+#home.hero--black .btn,#home.hero--black .z7-btnx,body:has(#home.hero--black) #navigation .menu .buttons #navButton{--btn-grad: linear-gradient(90deg, #7a170d 0%, #C8261C 40%, #F2441F 70%, #FF8A3D 100%);--btn-escuro: 200 38 28;--btn-claro: 255 106 26}
+#home.hero--black .reveal-word{background:linear-gradient(120deg,#ff8a3d,#ff6a1a 36%,#f2441f 70%,#e52b24);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 22px rgba(255,106,26,.4))}
+body:has(#home.hero--black) #navigation .menu ul li a[aria-current=page],body:has(#home.hero--black) #navigation .menu ul li a[aria-current=page]:hover{color:#ff8a3d;background-color:#ff6a1a1a;border-color:#ff6a1a73}
+body:has(#home.hero--black) #navigation .logo img{filter:brightness(0) invert(1)}
+.bf-horizonte,.bf-selo{display:none}
+#home.hero--black .bf-horizonte{--bf-horizonte-p: 48px;display:block;position:absolute;left:-10%;width:120%;top:calc(100% - var(--bf-horizonte-p));height:calc(var(--bf-horizonte-p) * 4.48);bottom:auto;transform:none;border-radius:50%;z-index:1;pointer-events:none;background:#000;box-shadow:0 -1px #ffd6aae6,0 -6px 18px #ff8c3cbf,0 -30px 80px #ff5a1973,0 -90px 160px #e52b2438}
+@media (max-width: 1079.98px){#home.hero--black .bf-horizonte{--bf-horizonte-p: 40px}}
+@media (min-width: 1600px){#home.hero--black .bf-horizonte{--bf-horizonte-p: 56px}}
+@media (min-width: 1920px){#home.hero--black .bf-horizonte{--bf-horizonte-p: 64px}}
+#home.hero--black .bf-selo{display:block;position:absolute;z-index:6;width:clamp(150px,13.2vw,230px);height:clamp(150px,13.2vw,230px);left:calc(50% + 23vw);top:17.4vw;transform:rotate(-10deg);pointer-events:none;filter:drop-shadow(0 14px 30px rgba(0,0,0,.55)) drop-shadow(0 0 26px rgba(255,106,26,.45))}
+@media (max-width: 1079.98px){#home.hero--black .bf-selo{width:92px;height:92px;left:auto;right:12px;top:148px}}
+@media (min-width: 1600px){#home.hero--black .bf-selo{width:200px;height:200px;left:calc(50% + 430px);right:auto;top:250px}}
+#home.hero--black .bf-selo svg{display:block;width:100%;height:100%}
+@media (min-width: 1080px){body:has(#home.hero--black) section#divisa .cards .borderCard.um,body:has(#home.hero--black) section#divisa .cards .borderCard.tres{transform:translateY(0)}
+body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-12px)}}
+@media (min-width: 1600px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-20px)}}
+@media (min-width: 1920px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-28px)}}
+@media (min-width: 1600px){#home.hero--black{padding-bottom:calc(5% + 36px)}}
+@media (min-width: 1920px){#home.hero--black{padding-bottom:calc(5% + 28px)}}
+.veu-plano-black{display:none}
+body:has(section#plan[data-veu=black]) section#plan{padding-block:4rem}
+body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:520px;overflow:hidden;animation:none;opacity:1;transform:none}
+@media (max-width: 1079.98px){body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:400px}}
 @media (max-width: 1079.98px){#author .autor__cnpj{display:none}}
 @media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
 @media (min-width: 1080px){footer .rodape__cnpj{display:none}}

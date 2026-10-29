@@ -155,6 +155,16 @@ header p span{color:var(--cor-corpo);font-weight:var(--peso-semi)}
 :is(#ba,#topicos,#depoimentos,#faq,#contato) header h2+p{margin-top:var(--esp-2);margin-bottom:0}
 :is(#ba,#topicos,#depoimentos,#faq,#contato) header p+.btn{margin-top:var(--esp-4)}
 @media (min-width: 1080px){:is(#ba,#topicos,#depoimentos,#faq,#contato) header{margin-bottom:var(--esp-7)}}
+#home.hero--black .btn,#home.hero--black .z7-btnx,body:has(#home.hero--black) #navigation .menu .buttons #navButton{--btn-grad: linear-gradient(90deg, #7a170d 0%, #C8261C 40%, #F2441F 70%, #FF8A3D 100%);--btn-escuro: 200 38 28;--btn-claro: 255 106 26}
+body:has(#home.hero--black) #navigation .menu ul li a[aria-current=page],body:has(#home.hero--black) #navigation .menu ul li a[aria-current=page]:hover{color:#ff8a3d;background-color:#ff6a1a1a;border-color:#ff6a1a73}
+body:has(#home.hero--black) #navigation .logo img{filter:brightness(0) invert(1)}
+@media (min-width: 1080px){body:has(#home.hero--black) section#divisa .cards .borderCard.um,body:has(#home.hero--black) section#divisa .cards .borderCard.tres{transform:translateY(0)}
+body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-12px)}}
+@media (min-width: 1600px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-20px)}}
+@media (min-width: 1920px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-28px)}}
+body:has(section#plan[data-veu=black]) section#plan{padding-block:4rem}
+body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:520px;overflow:hidden;animation:none;opacity:1;transform:none}
+@media (max-width: 1079.98px){body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:400px}}
 @media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
 @media (min-width: 1080px){footer .rodape__cnpj{display:none}}
 html.lenis,html.lenis body{height:auto}
