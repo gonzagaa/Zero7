@@ -669,7 +669,7 @@ html.lenis,html.lenis body{height:auto}
       </div>
     </div>
 
-   <a href="https://zero7.com.br/a-maior-black/">
+   <a href="#plan">
       <!-- Tarja em vídeo (out/2026). A tarja de verdade é o PÔSTER: o
            <picture> abaixo — uma arte por viewport (display:none NÃO impede
            download, por isso <picture> e não duas <img>), media no mesmo
@@ -680,21 +680,20 @@ html.lenis,html.lenis body{height:auto}
            script/tarjaVideo.js dá o src depois do load + idle (o portão das
            animações) e só se a visita aguenta — sem movimento reduzido, sem
            saveData, e desktop ≥1080 ou 4g. Senão, fica o pôster.
-           Trocar a campanha: npm run tarja -- <pasta> (troca os 6 caminhos
-           abaixo e o href deste <a>: o "link" do campanha.json, interno e
-           sem UTM, ou #plan sem ele). Nome NOVO por campanha — assets são
-           immutable de 1 ano. A razão do vídeo mora no tarjaImage.css
-           (regras 17 e 21). O contador só muda com --contador. -->
+           Trocar a campanha: rodar scripts/tarja-video.mjs com os masters
+           novos (nome NOVO por campanha — assets são immutable de 1 ano) e
+           trocar os 6 caminhos abaixo. A razão do vídeo mora no
+           tarjaImage.css (regras 17 e 21). O link e o contador não mudam. -->
       <span class="tarjaMidia">
         <picture>
-          <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/tarja-a-maior-black-desk-poster.avif" width="2370" height="94">
-          <img decoding="async" width="1040" height="142" src="./assets/tarjapopup/tarja-a-maior-black-mob-poster.avif" alt="">
+          <source media="(min-width: 1080px)" srcset="./assets/tarjapopup/tarja-profit-pro-130-desk-poster.avif" width="2370" height="94">
+          <img decoding="async" width="1040" height="142" src="./assets/tarjapopup/tarja-profit-pro-130-mob-poster.avif" alt="">
         </picture>
         <video class="tarjaVideo" muted playsinline loop preload="none" aria-hidden="true"
-          data-desk-webm="./assets/tarjapopup/tarja-a-maior-black-desk.webm"
-          data-desk-mp4="./assets/tarjapopup/tarja-a-maior-black-desk.mp4"
-          data-mob-webm="./assets/tarjapopup/tarja-a-maior-black-mob.webm"
-          data-mob-mp4="./assets/tarjapopup/tarja-a-maior-black-mob.mp4"></video>
+          data-desk-webm="./assets/tarjapopup/tarja-profit-pro-130-desk.webm"
+          data-desk-mp4="./assets/tarjapopup/tarja-profit-pro-130-desk.mp4"
+          data-mob-webm="./assets/tarjapopup/tarja-profit-pro-130-mob.webm"
+          data-mob-mp4="./assets/tarjapopup/tarja-profit-pro-130-mob.mp4"></video>
       </span>
     </a>
   </div>

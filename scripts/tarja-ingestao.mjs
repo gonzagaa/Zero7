@@ -6,12 +6,8 @@
 // <pasta> é a da campanha, como o designer entrega:
 //   desktop.mp4    3160×126, 15 s, sem áudio
 //   mobile.mp4     2080×284, 15 s, sem áudio
-//   campanha.json  { "slug": "profit-pro", "nome": "...", "fim": "2026-11-30",
-//                    "link": "https://zero7.com.br/pagina/" }
-//                  ("fim" e "inicio" opcionais, AAAA-MM-DD: prazos do contador;
-//                   "link" opcional: href do <a> da tarja, desktop e mobile.
-//                   Só interno e sem UTM; sem "link", volta a HREF_PADRAO,
-//                   "#plan" — ver scripts/lib/tarja.mjs)
+//   campanha.json  { "slug": "profit-pro", "nome": "...", "fim": "2026-11-30" }
+//                  ("fim" e "inicio" opcionais, AAAA-MM-DD: prazos do contador)
 //
 // Passos, nesta ordem, abortando com mensagem clara em qualquer falha:
 //   1. valida a pasta: tamanhos (a razão tem que bater com a do CSS — a
@@ -22,9 +18,8 @@
 //      scripts/lib/tarja.mjs) para assets/tarjapopup/tarja-<slug>-{desk,mob}
 //      .{webm,mp4} + -poster.avif. Recusa slug já usado — o cache dos assets
 //      é immutable de 1 ano, nome NUNCA se reaproveita;
-//   3. index.html: troca os pôsteres (srcset/src + width/height), os quatro
-//      data-* do <video> e o href do <a> da tarja ("link" ou o padrão). O
-//      aspect-ratio do CSS não muda (validado no 1).
+//   3. index.html: troca os pôsteres (srcset/src + width/height) e os quatro
+//      data-* do <video>. O aspect-ratio do CSS não muda (validado no 1).
 //      Com "fim", mostra o diff proposto em prazosPromo (só as datas; a
 //      lógica do contador é intocada — regra 5) e só aplica com --contador;
 //   4. npm run build, git add do que mudou, npm run check,
@@ -44,7 +39,7 @@ import { fileURLToPath } from 'node:url';
 import ffmpeg from 'ffmpeg-static';
 import ffprobeStatic from 'ffprobe-static';
 import sharp from 'sharp';
-import { DURACAO, VARIANTES, cobertura, hrefDaCampanha, trocarHrefTarja } from './lib/tarja.mjs';
+import { DURACAO, VARIANTES, cobertura } from './lib/tarja.mjs';
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ASSETS = path.join(RAIZ, 'assets', 'tarjapopup');
@@ -86,9 +81,7 @@ if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) aborta(`slug inválido: "${slug}"`
 const reData = /^\d{4}-\d{2}-\d{2}$/;
 for (const k of ['inicio', 'fim']) if (campanha[k] !== undefined && !reData.test(campanha[k])) aborta(`"${k}" no campanha.json tem que ser AAAA-MM-DD (veio "${campanha[k]}")`);
 if (CONTADOR && !campanha.fim) aborta('--contador sem "fim" no campanha.json', 'acrescente "fim": "AAAA-MM-DD" (o último dia da campanha)');
-const link = hrefDaCampanha(campanha);
-if (link.erro) aborta(link.erro, link.dica || '');
-linha(`campanha.json: slug "${slug}"${campanha.nome ? ` (${campanha.nome})` : ''}${campanha.fim ? `, fim ${campanha.fim}` : ''}, link ${link.href} (${link.origem})`);
+linha(`campanha.json: slug "${slug}"${campanha.nome ? ` (${campanha.nome})` : ''}${campanha.fim ? `, fim ${campanha.fim}` : ''}`);
 
 // as razões que o CSS reserva (regras 17/21) têm que ser as do encoder
 const css = fs.readFileSync(path.join(RAIZ, 'css', 'tarjaImage.css'), 'utf8');
@@ -213,13 +206,6 @@ for (const [attr, n, e] of [['data-desk-webm', 'desk', '.webm'], ['data-desk-mp4
 html = html.slice(0, ini) + bloco + html.slice(fimBloco);
 linha(`tarja: ${antigo} → ${slug} (2 pôsteres com width/height ${D.w}×${D.h} e ${M.w}×${M.h}, 4 data-* do <video>)`);
 
-// href do <a> da tarja: o "link" do campanha.json ou o padrão (sem UTM)
-let trocaHref;
-try { trocaHref = trocarHrefTarja(html, link.href); } catch (e) { aborta(`index.html: ${e.message}`); }
-html = trocaHref.html;
-const hrefResumo = `href da tarja: ${trocaHref.depois} (${link.origem}${trocaHref.antes === trocaHref.depois ? ', igual ao que já estava' : `; antes ${trocaHref.antes}`})`;
-linha(hrefResumo);
-
 // contador: só as datas de prazosPromo (regra 5)
 let contadorResumo = 'sem "fim" no campanha.json — prazos do contador intocados';
 if (campanha.fim) {
@@ -290,7 +276,6 @@ for (const [nome, r] of Object.entries(rel.variantes)) {
 console.log('\n   index.html (stage):');
 const dif = String(git('diff', '--cached', '-U0', '--', 'index.html').out).split('\n').filter((l) => /^[-+]\s/.test(l) && !/^(---|\+\+\+)/.test(l) && l.length < 400);
 console.log(dif.map((l) => '     ' + l.trim()).join('\n'));
-linha(hrefResumo);
 linha(contadorResumo);
 
 const referenciados = new Set([...html.matchAll(/tarjapopup\/(tarja-[^"']+)/g)].map((m) => m[1]));
