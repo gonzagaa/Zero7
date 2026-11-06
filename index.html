@@ -2187,6 +2187,24 @@ html.lenis,html.lenis body{height:auto}
       })
     }();
   </script>
+  <!-- Indicação (gamification) na Black: o link de indicação é a home com ?promoter=<e-mail>, e o checkout recebe a
+       query da página (withCurrentQueryParams, script/blackPlanos.js). Com os planos da home atrás do véu da Black, o
+       visitante passa pela LP (/a-maior-black/), que repassa a query ao checkout do mesmo jeito. Então os links da home
+       para a LP levam a query inteira (promoter, UTMs etc.), crua como no withCurrentQueryParams. Não mexe no script
+       do prefix acima nem nos hrefs de checkout. -->
+  <script>
+    (function () {
+      var query = window.location.search.substring(1);
+      if (!query) return;
+      document.querySelectorAll('a[href^="https://zero7.com.br/a-maior-black"]').forEach(function (link) {
+        var href = link.getAttribute('href');
+        var hash = '';
+        var i = href.indexOf('#');
+        if (i >= 0) { hash = href.slice(i); href = href.slice(0, i); }
+        link.setAttribute('href', href + (href.indexOf('?') >= 0 ? '&' : '?') + query + hash);
+      });
+    })();
+  </script>
   <!-- B4: GSAP, ScrollTrigger e AOS deixaram de ser tags bloqueantes.
        Abaixo de 1080 (o mesmo breakpoint da raiz tipográfica) eles NEM
        BAIXAM: o celular não tem animação de entrada, e tudo que esperava
