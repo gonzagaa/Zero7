@@ -1,9 +1,10 @@
 // CLS no carregamento e ao rolar, por largura (padrão: 375 e 1474). Abaixo
 // de 1080 o contexto é de toque (isMobile + hasTouch). Lista as mudanças de
 // layout acima de 0,0005 com os nós que se mexeram.
-//   node scripts/cls.mjs [largura…] [--pagina home|regulamento]
+//   node scripts/cls.mjs [largura…] [--pagina home|regulamento|politica]
 //
-// Páginas (regra 27): sem --pagina, mede a home e /regulamento/.
+// Páginas (regra 27): sem --pagina, mede a home, /regulamento/ e
+// /politica-de-privacidade/.
 //
 // A rede é a do harness (lib/pagina.mjs): só a origem e as dependências da
 // página; PAGINA_TERCEIROS=1 libera os terceiros. Aqui o contexto é novo a
@@ -27,6 +28,7 @@ const nav = await chromium.launch();
 const PAGINAS = [
   { nome: 'home', url: servidor.url },
   { nome: 'regulamento', url: new URL('/regulamento/index.html', servidor.url).href },
+  { nome: 'politica', url: new URL('/politica-de-privacidade/index.html', servidor.url).href },
 ].filter((p) => !soPagina || p.nome === soPagina);
 try {
   for (const pagina of PAGINAS) {

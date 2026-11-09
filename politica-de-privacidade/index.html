@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Página secundária no MESMO build da home (regra 27), com o layout do
+       regulamento: o build injeta, entre os marcadores build:*, o CSS
+       crítico DESTA página, os dois bundles (o compartilhado da home + o
+       regulamento.css), as faces .sub e os preloads, o nav e o rodapé
+       COPIADOS do index.html da home (um markup só — mudou lá, muda aqui no
+       próximo build), o sumário gerado dos h2 e o texto de
+       politica-de-privacidade/conteudo.html. Edite este arquivo FORA dos
+       marcadores; dentro, quem escreve é o build. Sem Zendesk: a página do
+       WordPress só carregava o GTM. -->
+
+  <title>Política de Privacidade - Zero7 Tesouraria</title>
+  <meta name="description" content="Como a Zero7 Tesouraria coleta, usa e compartilha os dados pessoais de quem acessa o site, sob a Lei Geral de Proteção de Dados.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://zero7.com.br/home/politica-de-privacidade/">
+  <link rel="shortcut icon" href="../assets/favicon zero7.webp" type="image/x-icon">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Zero7 Tesouraria">
+  <meta property="og:url" content="https://zero7.com.br/home/politica-de-privacidade/">
+  <meta property="og:title" content="Política de Privacidade - Zero7 Tesouraria">
+  <meta property="og:description" content="Como a Zero7 Tesouraria coleta, usa e compartilha os dados pessoais de quem acessa o site, sob a Lei Geral de Proteção de Dados.">
+  <meta property="og:image" content="https://zero7.com.br/home/assets/banner.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Política de Privacidade - Zero7 Tesouraria">
+  <meta name="twitter:description" content="Como a Zero7 Tesouraria coleta, usa e compartilha os dados pessoais de quem acessa o site, sob a Lei Geral de Proteção de Dados.">
+  <meta name="twitter:image" content="https://zero7.com.br/home/assets/banner.webp">
+
+  <!-- Google Tag Manager — o MESMO portão da home (C5, regra 15): o
+       container só entra na primeira interação. É o mesmo GTM-KCJQPMC que a
+       página do WordPress carregava. Sem PageView server-side do Meta e sem
+       nada além disto antes de interação. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    (function () {
+      var injetado = false;
+      var EVENTOS = ['pointerdown', 'touchstart', 'keydown', 'scroll', 'mousemove'];
+      var OPTS = { once: true, passive: true, capture: true };
+      function injetar() {
+        if (injetado) return;
+        injetado = true;
+        for (var i = 0; i < EVENTOS.length; i++) window.removeEventListener(EVENTOS[i], injetar, OPTS);
+        var j = document.createElement('script');
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-KCJQPMC';
+        document.head.appendChild(j);
+      }
+      for (var i = 0; i < EVENTOS.length; i++) window.addEventListener(EVENTOS[i], injetar, OPTS);
+    })();
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- build:css -->
+  <link rel="preload" href="../css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08" as="font" type="font/woff2" crossorigin>
+  <style id="css-critico">:root{--swiper-theme-color:#007aff}
+:root{--swiper-navigation-size:44px}
+:root{--cor-titulo: #ffffff;--cor-corpo: rgba(255, 255, 255, .9);--cor-secundario: rgba(255, 255, 255, .7);--cor-desabilitado: rgba(255, 255, 255, .58);--cor-marca: #0080c9;--cor-titulo-inverso: #070c11;--cor-corpo-inverso: rgba(7, 12, 17, .78);--sup-fundo: #000205;--sup-card: #070c11;--sup-elevada: #081c31;--sup-clara: #f2fffb;--sup-ajuda: linear-gradient(130deg, #010b15, #01050b);--borda-sutil: rgba(255, 255, 255, .14);--borda-media: rgba(255, 255, 255, .3);--borda-dourada: rgba(255, 194, 90, .55);--borda-marca: rgba(0, 128, 201, .4);--borda-acesa: rgb(29 164 243 / .5);--vidro-claro: rgba(255, 255, 255, .18);--vidro-escuro: rgba(36, 36, 36, .18);--marca: #0080c9;--marca-escura: #023c83;--marca-clara: #1da4f3;--marca-gradiente: linear-gradient(to right, #023c83, #0080c9);--dourado: #ffb830;--dourado-claro: #ffd166;--dourado-escuro: #e8951b;--acento-wpp: #25d366;--acento-wpp-meio: #128c7e;--acento-wpp-fundo: #075e54;--acento-neon: #57ff6d;--raio-sm: 1rem;--raio-md: 2rem;--raio-lg: 3rem;--raio-xl: 5rem;--raio-circulo: 50%;--raio-pilula: 999rem;--raio-assinatura: var(--raio-md) 0 var(--raio-md) 0;--raio-assinatura-xl: var(--raio-xl) 0 var(--raio-xl) 0;--esp-1: .5rem;--esp-2: 1rem;--esp-3: 1.5rem;--esp-4: 2rem;--esp-5: 3rem;--esp-6: 4rem;--esp-7: 6rem;--esp-8: 8rem;--elev-1: 0 2px 8px rgba(0, 0, 0, .25);--elev-2: 0 20px 60px rgba(0, 0, 0, .35), 0 0 0 1px rgba(255, 255, 255, .06) inset;--elev-3: 0 30px 80px rgba(0, 0, 0, .45), 0 0 0 1px rgba(255, 255, 255, .1) inset;--glow-marca: 0 12px 30px rgba(0, 128, 201, .22), 0 0 24px rgba(0, 128, 201, .12);--glow-dourado: 0 0 0 1px rgba(255, 209, 102, .4), 0 0 22px rgba(255, 184, 48, .32), 0 0 60px rgba(232, 149, 27, .26), 0 14px 42px rgba(0, 0, 0, .38);--alvo-toque: 44px;--foco-largura: 2px;--foco-recuo: 3px;--foco-cor: var(--marca-clara);--foco-cor-inverso: var(--marca-escura);--dur-rapida: .15s;--dur-media: .2s;--curva-saida: cubic-bezier(.2, 0, 0, 1);--ls-rotulo: .05em;--fonte-display: "NCS Radhiumz", "NCS fallback", sans-serif;--fonte-corpo: "TT Fors Trial", "TT Fors fallback", sans-serif;--peso-leve: 300;--peso-normal: 400;--peso-medio: 500;--peso-semi: 600;--peso-forte: 700;--peso-black: 800;--peso-max: 900;--fs-300: 1.2rem;--fs-400: 1.3rem;--fs-500: 1.4rem;--fs-650: 1.6rem;--fs-850: 2rem;--fs-900: 2.2rem;--fs-1300: 3rem;--corpo-legado-050: .8rem;--corpo-legado-100: 1rem;--corpo-legado-150: 1.05rem;--corpo-legado-200: 1.1rem;--corpo-legado-250: 1.15rem;--corpo-legado-350: 1.25rem;--corpo-legado-450: 1.35rem;--corpo-legado-550: 1.5rem;--corpo-legado-600: 1.55rem;--corpo-legado-700: 1.7rem;--corpo-legado-725: 1.75rem;--corpo-legado-750: 1.8rem;--corpo-legado-800: 1.9rem;--corpo-legado-875: 2.1rem;--corpo-legado-925: 2.25rem;--corpo-legado-950: 2.4rem;--corpo-legado-1000: 2.5rem;--corpo-legado-1100: 2.6rem;--corpo-legado-1150: 2.7rem;--corpo-legado-1200: 2.8rem;--corpo-legado-1325: 3.2rem;--corpo-legado-1350: 3.4rem;--corpo-legado-1360: 3.5rem;--corpo-legado-1375: 3.6rem;--corpo-legado-1400: 3.75rem;--corpo-legado-1450: 4rem;--corpo-legado-1500: 4.2rem;--corpo-legado-1550: 4.5rem;--corpo-legado-1600: 4.6rem;--corpo-legado-1700: 5rem;--corpo-legado-1800: 5.2rem;--corpo-legado-1900: 6rem;--corpo-legado-2000: 7rem;--corpo-legado-2100: 8rem;--medida-texto: 56ch;--medida-heroi: 65ch}
+:root{--color-text: var(--cor-titulo);--primary-color: var(--marca);--secondy-color: var(--marca-escura);--orange-black: var(--sup-fundo);--orange-blac: #000b1c;--gradient: var(--marca-gradiente);--bg-black: var(--sup-fundo);--bg-white: var(--sup-clara);--nav-height: 7.2rem;--wpp-deep: var(--acento-wpp-fundo);--wpp-teal: var(--acento-wpp-meio);--wpp-green: var(--acento-wpp);--ncs: var(--fonte-display);--tts: var(--fonte-corpo);--z7-deep: var(--marca-escura);--z7-sky: var(--marca-clara);--z7-green-dark: #046b3a;--z7-green: #00c86f;--z7-green-light: #3cff9b;--z7-green-neon: #73ffb8}
+*{margin:0;padding:0;box-sizing:border-box;font-family:var(--tts)}
+:root{font-size:50%}
+html{scroll-behavior:smooth}
+html,body{width:100%;height:100%;text-align:center;background:var(--bg-black)}
+body{background:var(--bg-black)}
+button{cursor:url(),auto}
+ul{list-style:none}
+:root{--container-max: 1120px;--bp-sm: 640px;--bp-md: 768px;--bp-lg: 1080px;--bp-xl: 1600px}
+.wrapper{width:min(var(--container-max),100%);margin-inline:auto;padding-inline:2.4rem}
+@media (min-width: 1080px){:root{font-size:62.5%;--container-max: clamp(1120px, 92vw, 1456px)}}
+@media (min-width: 1600px){:root{--container-max: 1456px}}
+section{padding-block:8rem}
+html:not(.anim) [data-aos]{opacity:1!important;transform:none!important;visibility:visible!important}
+html{scroll-padding-bottom:120px}
+@media (prefers-reduced-motion: reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}}
+@media (min-width: 1080px){body.home{padding-top:6rem}}
+body section.planos .wrapper .swiper.mySwiper4{overflow:inherit}
+body section.planos .wrapper .swiper.mySwiper11{overflow:inherit}
+@media (min-width: 1080px){body section.planos .wrapper .swiper.mySwiper4{overflow:hidden}
+body section.planos .wrapper .swiper.mySwiper11{overflow:hidden}}
+body:where(.anima-ociosas) .planos .card--copa .card-tarja:before{animation:seniorTarjaShine 5.5s ease-in-out infinite}
+body:where(.anima-ociosas) .planos .card--copa .card-tarja:after{animation:seniorTarjaDesliza 9s ease-in-out infinite}
+@keyframes seniorTarjaDesliza{0%{transform:translate(0)}50%{transform:translate(-54.5455%)}to{transform:translate(0)}}
+@keyframes seniorTarjaShine{0%{transform:translate(-100%)}55%{transform:translate(100%)}to{transform:translate(100%)}}
+nav{display:flex;height:var(--nav-height);position:fixed;backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%);background-color:#17171746;border-radius:0;border:3px solid rgba(63,63,63,.125);width:100vw;z-index:100;transition:all .3s ease-in-out}
+nav .wrapper{display:flex;align-items:center;justify-content:space-between}
+nav button path{stroke:var(--color-text)}
+nav path{stroke:var(--color-text)}
+nav a.logo{width:initial;display:inline-flex;align-items:center;min-height:var(--alvo-toque)}
+nav .logo img{width:8rem;height:auto}
+nav button{background:none;border:none}
+nav .menu,nav .close-menu{position:fixed}
+nav.scroll{backdrop-filter:blur(10px) saturate(180%);-webkit-backdrop-filter:blur(10px) saturate(180%);background-color:#0000007c;border-radius:0;border:1px solid rgba(63,63,63,.125)}
+nav.scroll path{stroke:var(--color-text)}
+body.menu-expanded{overflow:hidden}
+.menu,.close-menu,body.menu-expanded .open-menu{opacity:0;visibility:hidden}
+body.menu-expanded .menu,body.menu-expanded .close-menu{opacity:1;visibility:visible}
+.menu{transform:translate(100%)}
+body.menu-expanded .menu{top:0;right:-5%;backdrop-filter:blur(10px) saturate(180%);-webkit-backdrop-filter:blur(10px) saturate(180%);background-color:var(--sup-fundo);border-radius:0;border:1px solid rgba(63,63,63,.125);width:60vw;height:50vh;display:flex;flex-direction:column;justify-content:center;align-items:start;text-align:start;padding-left:2rem;padding-top:var(--nav-height);transition:transform .4s ease-out;transform:translateY(0)}
+body.menu-expanded nav{background:#000}
+.menu ul:nth-child(1){display:flex;flex-direction:column;gap:var(--esp-5);font-weight:var(--peso-normal);font-size:var(--fs-650)}
+.menu ul li a{position:relative;display:inline-block;color:var(--cor-corpo);font-family:var(--tts);font-weight:var(--peso-medio);text-decoration:none;transition:color .28s cubic-bezier(.16,1,.3,1),transform .28s cubic-bezier(.16,1,.3,1)}
+.menu .buttons{display:flex;flex-direction:column;gap:var(--esp-4)}
+@media (max-width: 1079.98px){.menu .buttons .btn,.menu .buttons .z7-btnx{width:100%}}
+body.menu-expanded .logo,body.menu-expanded nav button{position:relative;z-index:100}
+body.menu-expanded button path{stroke:var(--color-text)}
+body nav#navigation button#navButton{color:var(--cor-titulo);filter:none;font-family:var(--tts);font-weight:var(--peso-medio);background:var(--gradient)}
+@media (min-width: 1080px){nav#navigation .wrapper *:where(:not(.btn,.z7-btnx,:is(.btn,.z7-btnx) *)){margin:0;padding:0;visibility:initial;display:initial;opacity:initial;flex-direction:initial;position:initial;font-weight:initial;font-size:initial;transform:initial;color:initial;background-color:initial}
+nav#navigation{width:calc(100% - 200px);left:100px;border-radius:0 0 var(--raio-md) var(--raio-md);top:0rem;height:6rem}
+nav#navigation a.logo{display:flex;align-items:center}
+nav#navigation .logo img{width:9rem}
+body nav#navigation button#navButton{font-size:var(--fs-300)}
+nav#navigation .close-menu,nav#navigation .open-menu,nav#navigation .social-links{display:none}
+nav#navigation .menu{display:flex;align-items:center;justify-content:space-between}
+nav#navigation .menu ul:nth-child(1){display:flex;align-items:center;gap:var(--esp-1)}
+nav#navigation .menu ul li{margin-top:0;display:flex}
+nav#navigation .menu ul li a{position:relative;display:inline-flex;align-items:center;padding:.7rem 1.4rem;border-radius:var(--raio-pilula);color:var(--cor-secundario);font-family:var(--tts);font-weight:var(--peso-medio);font-size:var(--fs-300);letter-spacing:.02em;text-decoration:none;white-space:nowrap;background-color:transparent;box-shadow:inset 0 0 0 1px transparent;transition:color .32s cubic-bezier(.16,1,.3,1),background-color .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}
+nav#navigation .menu a{color:var(--cor-titulo);text-decoration:none}
+nav#navigation .menu .buttons{display:flex;gap:var(--esp-2)}
+nav#navigation .menu ul li{animation:entering .42s cubic-bezier(.16,1,.3,1) backwards}
+nav#navigation .menu ul li:nth-child(1){animation-delay:40ms}
+nav#navigation .menu ul li:nth-child(2){animation-delay:.11s}
+nav#navigation .menu ul li:nth-child(3){animation-delay:.18s}
+nav#navigation .menu ul li:nth-child(4){animation-delay:.25s}}
+@media (min-width: 1600px){nav#navigation{width:calc(100% - 340px);left:170px}
+nav#navigation .wrapper{padding-inline:5rem}}
+@keyframes entering{0%{transform:translate(-1.6rem);opacity:0}to{transform:translate(0);opacity:1}}
+@media (prefers-reduced-motion: reduce){nav#navigation .menu ul li{animation:none}
+nav#navigation .menu ul li a{transition:none}}
+.menu-scrim{position:fixed;inset:0;z-index:99;background:#0009;opacity:0;visibility:hidden;transition:opacity var(--dur-media) var(--curva-saida),visibility 0s linear var(--dur-media)}
+body.menu-expanded .menu-scrim{opacity:1;visibility:visible;transition:opacity var(--dur-media) var(--curva-saida)}
+@media (min-width: 1080px){.menu-scrim{display:none}}
+@media (prefers-reduced-motion: reduce){.menu-scrim,body.menu-expanded .menu-scrim{transition:none}}
+@media (max-width: 1079.98px){body.menu-expanded .menu{right:0;width:max-content;min-width:60vw;max-width:100vw;height:auto;min-height:60vh;max-height:100dvh;overflow-y:auto;padding-inline:2rem;align-items:stretch}
+nav#navigation.scroll{background-color:var(--sup-fundo);backdrop-filter:none;-webkit-backdrop-filter:none}}
+nav .logo .logo__icone{display:none}
+@media (min-width: 1080px){nav#navigation{left:0;right:0;margin-inline:auto;width:calc(min(var(--container-max),100%) - 4.8rem);top:1.8rem;height:6rem;border:.1rem solid rgb(255 255 255 / .1);border-radius:var(--raio-md) 0 var(--raio-md) 0;background-color:#0a0a0a52;-webkit-backdrop-filter:blur(1.8rem) saturate(1.3);backdrop-filter:blur(1.8rem) saturate(1.3);box-shadow:.25rem .3rem .8rem #0000002e,-.2rem -.25rem .7rem #ffffff03,inset 0 .1rem #ffffff08}
+nav#navigation.scroll{background-color:#04060bdb;border-width:.1rem;border-color:#ffffff1a}
+nav#navigation .wrapper,nav#navigation.scroll .wrapper{width:100%;max-width:none;height:100%;margin:0;padding:0 1rem;gap:1.6rem}
+nav#navigation a.logo:has(.logo__icone){flex:none;display:flex;align-items:center;justify-content:center;width:4rem;height:4rem;min-height:0;border:.1rem solid rgb(255 255 255 / .06);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;background-color:#ffffff0a;box-shadow:.25rem .3rem .8rem #0000002e;transition:background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation a.logo:has(.logo__icone) img:not(.logo__icone){display:none}
+nav#navigation a.logo .logo__icone{display:block;width:2.2rem;height:auto}
+nav#navigation .menu ul:nth-child(1){gap:.4rem}
+nav#navigation .menu ul li a{height:4rem;padding:0 1.6rem;border:.1rem solid rgb(255 255 255 / .06);border-radius:var(--raio-pilula);color:#fffc;font-family:var(--tts);font-size:var(--fs-500);font-weight:var(--peso-semi);letter-spacing:normal;background-color:#ffffff0a;box-shadow:.25rem .3rem .8rem #0000002e;transition:color var(--dur-rapida) var(--curva-saida),background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation .menu .buttons{display:flex;align-items:center;gap:.8rem;margin-left:.7rem}
+nav#navigation .menu .buttons:before{content:"";flex:none;width:.1rem;height:3.4rem;margin-right:.4rem;background-color:#ffffff1a}}
+nav#navigation .menu .buttons .z7-btnx{height:4rem;padding:0 1.6rem;gap:.8rem;border:.1rem solid transparent;border-radius:var(--raio-sm) 0 var(--raio-sm) 0;font-family:var(--tts);font-size:var(--fs-500);font-weight:var(--peso-semi);letter-spacing:normal;text-transform:none;box-shadow:.25rem .3rem .8rem #0000002e;filter:none;animation:none;will-change:auto;transition:color var(--dur-rapida) var(--curva-saida),background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation .menu .buttons .z7-btnx:before,nav#navigation .menu .buttons .z7-btnx:after,nav#navigation .menu .buttons .z7-btnx__bg,nav#navigation .menu .buttons .z7-btnx__shine{display:none}
+nav#navigation .menu .buttons .z7-btnx__label{font-family:inherit;text-shadow:none}
+nav#navigation .menu .buttons .z7-btnx__cap{position:static;width:auto;height:auto;border:0;background:none;box-shadow:none;color:inherit}
+nav#navigation .menu .buttons .z7-btnx__cap ion-icon{font-size:1.8rem;color:inherit;transform:none}
+nav#navigation .menu .buttons #navButtonComunidade{color:#fffc;background-color:#ffffff0a;border-color:#ffffff0f}
+nav#navigation .menu .buttons #navButtonComunidade .z7-btnx__cap{order:-1}
+nav#navigation .menu .buttons #navButton{color:var(--cor-titulo);background-color:transparent}
+nav#navigation .menu .buttons #navButton .z7-btnx__bg{display:block;background:var(--btn-grad);background-size:130% 100%;background-position:0% 50%;filter:none;animation:none}
+nav#navigation .menu .buttons .z7-btnx__bg:before{content:none}
+nav#navigation .menu .buttons #navButton .z7-btnx__label{text-shadow:0 .6rem 1.6rem rgb(0 0 0 / .35)}
+nav#navigation .menu .buttons #navButton .z7-btnx__cap{display:none}
+@media (min-width: 1080px) and (prefers-reduced-motion: reduce){nav#navigation a.logo:has(.logo__icone),nav#navigation .menu ul li a,nav#navigation .menu .buttons .z7-btnx{transition:none}}
+@media (max-width: 1079.98px){nav#navigation{--recuo-topo: 1.2rem;--vao: .8rem;--topo-barra: var(--recuo-topo);top:var(--topo-barra);left:0;right:0;margin-inline:auto;width:calc(min(var(--container-max),100%) - 4.8rem);border:.1rem solid rgb(255 255 255 / .1);border-radius:var(--raio-md) 0 var(--raio-md) 0;background-color:#0a0a0a52;-webkit-backdrop-filter:blur(1.8rem) saturate(1.3);backdrop-filter:blur(1.8rem) saturate(1.3);box-shadow:.25rem .3rem .8rem #0000002e,inset 0 .1rem #ffffff08}
+nav#navigation .wrapper{flex-wrap:wrap;align-content:start;padding-top:calc((var(--nav-height) - .2rem - var(--alvo-toque)) / 2);padding-inline:1rem;column-gap:1.6rem;row-gap:0}
+nav#navigation a.logo:has(.logo__icone){flex:none;display:grid;place-items:center;width:var(--alvo-toque);height:var(--alvo-toque);min-height:0;border:.1rem solid rgb(255 255 255 / .06);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;background-color:#ffffff0a;box-shadow:.25rem .3rem .8rem #0000002e;transition:background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation a.logo:has(.logo__icone) img:not(.logo__icone){display:none}
+nav#navigation a.logo .logo__icone{display:block;width:2.8rem;height:auto}
+nav#navigation .open-menu,nav#navigation .close-menu{flex:none;display:grid;place-items:center;width:var(--alvo-toque);height:var(--alvo-toque);padding:0;border:.1rem solid rgb(255 255 255 / .06);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;background-color:#ffffff0a;box-shadow:.25rem .3rem .8rem #0000002e;transition:background-color var(--dur-rapida) var(--curva-saida),border-color var(--dur-rapida) var(--curva-saida)}
+nav#navigation .open-menu svg,nav#navigation .close-menu svg{width:2.4rem;height:2.4rem}
+body.menu-expanded nav#navigation{height:auto;max-height:calc(100dvh - var(--topo-barra) - var(--recuo-topo));overflow-y:auto}
+body.menu-expanded nav#navigation .wrapper{height:auto;min-height:var(--nav-height);padding-bottom:1.2rem}
+nav#navigation .menu{position:static;order:3;flex:0 0 100%;width:100%;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:0fr;transition:grid-template-rows var(--dur-media) var(--curva-saida)}
+body.menu-expanded nav#navigation .menu{grid-template-rows:1fr;top:auto;right:auto;max-width:none;height:auto;min-height:0;max-height:none;overflow:visible;transform:none;padding:0;border:0;border-radius:0;background-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+nav#navigation .menu ul:nth-child(1){overflow:hidden;min-height:0}
+nav#navigation .close-menu{display:none;position:static}
+body.menu-expanded nav#navigation .close-menu{display:grid}
+body.menu-expanded nav#navigation .open-menu{display:none}
+body.menu-expanded .menu ul:nth-child(1){display:flex;flex-direction:column;width:100%;gap:.4rem;padding:1.2rem 0 0;font-size:inherit}
+body.menu-expanded .menu ul li{display:block}
+body.menu-expanded .menu ul li a{display:flex;align-items:center;justify-content:center;min-height:var(--alvo-toque);padding:0 1.6rem;border-radius:var(--raio-sm);color:var(--cor-corpo);font-family:var(--tts);font-size:var(--fs-850);font-weight:var(--peso-semi);text-align:center;background-color:transparent;transition:color var(--dur-rapida) var(--curva-saida),background-color var(--dur-rapida) var(--curva-saida)}
+body.menu-expanded .menu ul li a:hover,body.menu-expanded .menu ul li a:focus-visible,body.menu-expanded .menu ul li a:active{color:var(--cor-titulo);background-color:#ffffff0f;transform:none}
+body.menu-expanded .menu ul li a[aria-current=page],body.menu-expanded .menu ul li a[aria-current=page]:hover{color:var(--marca-clara);background-color:#1da4f31f}
+body.menu-expanded .menu .buttons{margin-top:1.2rem;padding-top:1.2rem;border-top:.1rem solid rgb(255 255 255 / .1);gap:.8rem}
+body.menu-expanded .menu .buttons .z7-btnx{min-height:var(--alvo-toque);height:auto;justify-content:center;font-size:var(--fs-650)}}
+@media (max-width: 1079.98px) and (prefers-reduced-motion: reduce){nav#navigation .open-menu,nav#navigation .close-menu,body.menu-expanded .menu ul li a{transition:none}}
+@property --spin{syntax: "<angle>"; inherits: false; initial-value: 0deg;}
+:where(.btn,.z7-btnx){position:relative;display:inline-flex}
+.btn,.z7-btnx{--btn-h: 7rem;--btn-in: .9rem;--btn-cap: 6.3rem;--btn-pad: 3.6rem;--btn-folga: 1rem;--btn-fs: var(--fs-650);--btn-peso: var(--peso-semi);--btn-ls: var(--ls-rotulo);--btn-seta: var(--fs-900);--btn-icone: var(--fs-900);--btn-raio: var(--raio-md);--btn-halo: 2.4rem;--btn-halo-blur: 2.8rem;--btn-sombra-1: 4.5rem;--btn-sombra-2: 4.6rem;--btn-sombra-hover: 7.5rem;--btn-anel: .4rem;--btn-sombra-rotulo: 0 1.4rem 3.6rem;--btn-grad: linear-gradient(90deg, #012b60 0%, var(--marca-escura) 44%, #0b5fbe 72%, var(--marca-clara) 100%);--btn-escuro: 2 60 131;--btn-claro: 29 164 243;align-items:center;gap:var(--esp-2);height:var(--btn-h);margin:0;padding:0 var(--btn-pad);border:0;border-radius:var(--btn-raio) 0 var(--btn-raio) 0;background:none;font-family:var(--fonte-corpo);font-size:var(--btn-fs);font-weight:var(--btn-peso);letter-spacing:var(--btn-ls);line-height:1;white-space:nowrap;text-decoration:none;user-select:none;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.btn--md,.btn--nav,.z7-btnx--nav{--btn-h: max(5.4rem, var(--alvo-toque));--btn-in: .7rem;--btn-cap: 4.8rem;--btn-pad: 2.6rem;--btn-folga: .8rem;--btn-fs: var(--corpo-legado-450);--btn-seta: var(--corpo-legado-750);--btn-icone: var(--fs-850);--btn-halo: 1.8rem;--btn-halo-blur: 2rem;--btn-sombra-1: 3.4rem;--btn-sombra-2: 3.6rem;--btn-sombra-hover: 5.8rem;--btn-anel: .3rem;--btn-sombra-rotulo: 0 1rem 2.6rem}
+@media (min-width: 1080px){.btn--nav,.z7-btnx--nav{--btn-h: 3.8rem;--btn-in: .45rem;--btn-cap: 3.2rem;--btn-pad: 1.8rem;--btn-folga: .6rem;--btn-fs: var(--corpo-legado-100);--btn-peso: var(--peso-medio);--btn-seta: var(--fs-400);--btn-icone: var(--fs-650);--btn-raio: var(--raio-sm);--btn-halo: 1.2rem;--btn-halo-blur: 1.4rem;--btn-sombra-1: 2.6rem;--btn-sombra-2: 2.8rem;--btn-sombra-hover: 4.2rem;--btn-anel: .25rem;--btn-sombra-rotulo: 0 .6rem 1.6rem}}
+.btn--wpp{--btn-grad: linear-gradient(90deg, #064e46 0%, var(--acento-wpp-fundo) 30%, var(--acento-wpp-meio) 66%, var(--acento-wpp) 100%);--btn-escuro: 7 94 84;--btn-claro: 37 211 102}
+.btn--icone{width:var(--btn-h);padding:0;justify-content:center}
+.btn--primaria,.z7-btnx{padding-right:calc(var(--btn-cap) + var(--btn-in) * 2 + var(--btn-folga));font-family:var(--fonte-display);text-transform:uppercase;color:var(--cor-titulo);border:.1rem solid rgba(255,255,255,.1);overflow:hidden;isolation:isolate;will-change:transform,filter,box-shadow;transition:filter var(--dur-media) var(--curva-saida),box-shadow var(--dur-media) var(--curva-saida),transform var(--dur-rapida) var(--curva-saida);box-shadow:0 0 var(--btn-sombra-1) rgb(var(--btn-escuro) / .4),0 0 var(--btn-sombra-2) rgb(var(--btn-claro) / .26),0 0 0 var(--btn-anel) rgb(var(--btn-claro) / .11)}
+.btn--primaria:before,.z7-btnx:before{content:"";position:absolute;inset:calc(var(--btn-halo) * -1);border-radius:calc(var(--btn-raio) + var(--btn-halo)) 0 calc(var(--btn-raio) + var(--btn-halo)) 0;z-index:0;background:radial-gradient(130% 160% at 50% 50%,rgb(var(--btn-claro) / .72),rgb(var(--btn-claro) / .24) 34%,rgb(var(--btn-escuro) / .12) 58%,#0000 74%),radial-gradient(140% 120% at 20% 30%,#ffffff29,#fff0 55%);filter:blur(var(--btn-halo-blur));opacity:.92;transition:opacity var(--dur-media) var(--curva-saida)}
+.btn--primaria:after,.z7-btnx:after{content:"";position:absolute;inset:0;border-radius:inherit;padding:.1rem;z-index:5;pointer-events:none;background:conic-gradient(from var(--spin),rgb(var(--btn-claro) / 0) 0deg,rgb(var(--btn-claro) / .85) 60deg,rgba(255,255,255,.34) 95deg,rgb(var(--btn-escuro) / .85) 170deg,rgb(var(--btn-claro) / .62) 250deg,rgb(var(--btn-claro) / 0) 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.9}
+.btn__bg,.z7-btnx__bg{position:absolute;inset:0;border-radius:inherit;z-index:1;overflow:hidden}
+.btn__bg:before,.z7-btnx__bg:before{content:"";position:absolute;left:0;top:-15%;width:130%;height:130%;background:radial-gradient(140% 180% at 50% 50%,#fff3,#ffffff12 22%,#fff0 56%),var(--btn-grad);filter:saturate(1.1) contrast(1.05)}
+.btn__label,.z7-btnx__label{position:relative;z-index:6;white-space:nowrap;line-height:1;text-shadow:var(--btn-sombra-rotulo) rgba(0,0,0,.35)}
+.btn--nav .btn__label,.z7-btnx--nav .z7-btnx__label{font-family:inherit}
+.btn__cap,.z7-btnx__cap{position:absolute;top:var(--btn-in);right:var(--btn-in);height:calc(100% - var(--btn-in) * 2);width:var(--btn-cap);border-radius:var(--raio-pilula) 0 var(--raio-pilula) var(--raio-pilula);display:grid;place-items:center;z-index:7;color:var(--cor-titulo);background:radial-gradient(120% 120% at 30% 30%,#fff3,#ffffff14 40%,#fff0 72%),linear-gradient(90deg,#ffffff14,#ffffff0a 42%,#ffffff05),linear-gradient(135deg,rgb(var(--btn-claro) / .36),rgb(var(--btn-escuro) / .1));border:.1rem solid rgba(255,255,255,.12);box-shadow:inset 0 .1rem #ffffff29,0 1.2rem 2.6rem #0003}
+.btn__cap ion-icon,.z7-btnx__cap ion-icon{display:block;font-size:var(--btn-icone);line-height:1;color:var(--cor-titulo);transform:scale(1);transition:transform var(--dur-media) var(--curva-saida)}
+.btn--texto{padding-inline:var(--esp-2);color:var(--marca-clara);transition:color var(--dur-rapida) var(--curva-saida)}
+.btn:disabled,.btn[aria-disabled=true],.btn.is-disabled,.btn.swiper-button-disabled,.z7-btnx[aria-disabled=true]{opacity:.4;filter:saturate(.4);box-shadow:none;cursor:not-allowed;pointer-events:none;animation:none}
+:root{--candles-altura: 44px;--candles-pico: 36px;--divisor-folga: clamp(var(--esp-7), 5.16rem + 2.1vw, var(--esp-8));--candles-barras-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M4 30h7v14H4zM20 22h7v22h-7zM36 33h7v11h-7zM52 14h7v30h-7zM68 26h7v18h-7zM84 35h7v9h-7zM100 19h7v25h-7zM116 8h7v36h-7zM132 24h7v20h-7zM148 31h7v13h-7zM164 16h7v28h-7zM180 28h7v16h-7zM196 34h7v10h-7zM212 11h7v33h-7zM228 23h7v21h-7zM244 32h7v12h-7zM260 18h7v26h-7zM276 25h7v19h-7zM292 36h7v8h-7zM308 13h7v31h-7zM324 27h7v17h-7z'/%3E%3C/svg%3E");--candles-topos-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M116 8h7v3h-7z'/%3E%3Cpath fill-opacity='.35' d='M212 11h7v2h-7zM308 13h7v2h-7z'/%3E%3C/svg%3E");--candles-barras-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M3 20h5v10H3zM15 15h5v15h-5zM27 22h5v8h-5zM39 10h5v20h-5zM51 18h5v12h-5zM63 24h5v6h-5zM75 13h5v17h-5zM87 5h5v25h-5zM99 16h5v14h-5zM111 21h5v9h-5zM123 11h5v19h-5zM135 19h5v11h-5z'/%3E%3C/svg%3E");--candles-topos-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M87 5h5v3h-5z'/%3E%3Cpath fill-opacity='.35' d='M39 10h5v2h-5zM123 11h5v2h-5z'/%3E%3C/svg%3E");--candles-barras-inv-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M4 0h7v14H4zM20 0h7v22h-7zM36 0h7v11h-7zM52 0h7v30h-7zM68 0h7v18h-7zM84 0h7v9h-7zM100 0h7v25h-7zM116 0h7v36h-7zM132 0h7v20h-7zM148 0h7v13h-7zM164 0h7v28h-7zM180 0h7v16h-7zM196 0h7v10h-7zM212 0h7v33h-7zM228 0h7v21h-7zM244 0h7v12h-7zM260 0h7v26h-7zM276 0h7v19h-7zM292 0h7v8h-7zM308 0h7v31h-7zM324 0h7v17h-7z'/%3E%3C/svg%3E");--candles-topos-inv-g: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='336' height='44'%3E%3Cpath d='M116 33h7v3h-7z'/%3E%3Cpath fill-opacity='.35' d='M212 31h7v2h-7zM308 29h7v2h-7z'/%3E%3C/svg%3E");--candles-barras-inv-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M3 0h5v10H3zM15 0h5v15h-5zM27 0h5v8h-5zM39 0h5v20h-5zM51 0h5v12h-5zM63 0h5v6h-5zM75 0h5v17h-5zM87 0h5v25h-5zM99 0h5v14h-5zM111 0h5v9h-5zM123 0h5v19h-5zM135 0h5v11h-5z'/%3E%3C/svg%3E");--candles-topos-inv-p: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='30'%3E%3Cpath d='M87 22h5v3h-5z'/%3E%3Cpath fill-opacity='.35' d='M39 18h5v2h-5zM123 17h5v2h-5z'/%3E%3C/svg%3E")}
+@media (max-width: 639.98px){:root{--candles-altura: 30px;--candles-pico: 25px}}
+header{margin-bottom:4rem;display:flex;flex-direction:column;align-items:center;justify-content:center}
+header p{font-size:var(--fs-500);line-height:1.4;color:var(--cor-corpo);margin-bottom:2rem}
+header p span{color:var(--cor-corpo);font-weight:var(--peso-semi)}
+@media (min-width: 1080px){header p{font-size:var(--fs-650)}}
+@media (max-width: 1079.98px){:is(#ba,#topicos,#depoimentos,#plan,#faq,#contato) header h2{font-size:min(var(--fs-1300),calc((100vw - 4.8rem) / 16.4));text-wrap:balance}
+:is(#ba,#topicos,#depoimentos,#plan,#faq,#contato) header p{font-size:var(--fs-850)}}
+:is(#ba,#topicos,#depoimentos,#faq,#contato) header{margin-bottom:var(--esp-6)}
+:is(#ba,#topicos,#depoimentos,#faq,#contato) header h2+p{margin-top:var(--esp-2);margin-bottom:0}
+:is(#ba,#topicos,#depoimentos,#faq,#contato) header p+.btn{margin-top:var(--esp-4)}
+@media (min-width: 1080px){:is(#ba,#topicos,#depoimentos,#faq,#contato) header{margin-bottom:var(--esp-7)}}
+#home.hero--black .btn,#home.hero--black .z7-btnx,body:has(#home.hero--black) #navigation .menu .buttons #navButton{--btn-grad: linear-gradient(90deg, #7a170d 0%, #C8261C 40%, #F2441F 70%, #FF8A3D 100%);--btn-escuro: 200 38 28;--btn-claro: 255 106 26}
+body:has(#home.hero--black) #navigation .menu ul li a[aria-current=page],body:has(#home.hero--black) #navigation .menu ul li a[aria-current=page]:hover{color:#ff8a3d;background-color:#ff6a1a1a;border-color:#ff6a1a73}
+body:has(#home.hero--black) #navigation .logo img{filter:brightness(0) invert(1)}
+@media (min-width: 1080px){body:has(#home.hero--black) section#divisa .cards .borderCard.um,body:has(#home.hero--black) section#divisa .cards .borderCard.tres{transform:translateY(0)}
+body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-12px)}}
+@media (min-width: 1600px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-20px)}}
+@media (min-width: 1920px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-28px)}}
+body:has(section#plan[data-veu=black]) section#plan{padding-block:4rem}
+body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:520px;overflow:hidden;animation:none;opacity:1;transform:none}
+@media (max-width: 1079.98px){body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:400px}}
+@media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
+@media (min-width: 1080px){footer .rodape__cnpj{display:none}}
+html.lenis,html.lenis body{height:auto}
+@font-face{font-family:TT Fors fallback;src:local("Arial");size-adjust:110%;ascent-override:105%;descent-override:35%;line-gap-override:0%}
+@font-face{font-family:NCS fallback;src:local("Arial");size-adjust:127%;ascent-override:95%;descent-override:40%;line-gap-override:0%}
+[data-aos][data-aos][data-aos-duration="50"],body[data-aos-duration="50"] [data-aos]{transition-duration:50ms}
+[data-aos][data-aos][data-aos-delay="50"],body[data-aos-delay="50"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="50"].aos-animate,body[data-aos-delay="50"] [data-aos].aos-animate{transition-delay:50ms}
+[data-aos][data-aos][data-aos-duration="100"],body[data-aos-duration="100"] [data-aos]{transition-duration:.1s}
+[data-aos][data-aos][data-aos-delay="100"],body[data-aos-delay="100"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="100"].aos-animate,body[data-aos-delay="100"] [data-aos].aos-animate{transition-delay:.1s}
+[data-aos][data-aos][data-aos-duration="150"],body[data-aos-duration="150"] [data-aos]{transition-duration:.15s}
+[data-aos][data-aos][data-aos-delay="150"],body[data-aos-delay="150"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="150"].aos-animate,body[data-aos-delay="150"] [data-aos].aos-animate{transition-delay:.15s}
+[data-aos][data-aos][data-aos-duration="200"],body[data-aos-duration="200"] [data-aos]{transition-duration:.2s}
+[data-aos][data-aos][data-aos-delay="200"],body[data-aos-delay="200"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="200"].aos-animate,body[data-aos-delay="200"] [data-aos].aos-animate{transition-delay:.2s}
+[data-aos][data-aos][data-aos-duration="250"],body[data-aos-duration="250"] [data-aos]{transition-duration:.25s}
+[data-aos][data-aos][data-aos-delay="250"],body[data-aos-delay="250"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="250"].aos-animate,body[data-aos-delay="250"] [data-aos].aos-animate{transition-delay:.25s}
+[data-aos][data-aos][data-aos-duration="300"],body[data-aos-duration="300"] [data-aos]{transition-duration:.3s}
+[data-aos][data-aos][data-aos-delay="300"],body[data-aos-delay="300"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="300"].aos-animate,body[data-aos-delay="300"] [data-aos].aos-animate{transition-delay:.3s}
+[data-aos][data-aos][data-aos-duration="350"],body[data-aos-duration="350"] [data-aos]{transition-duration:.35s}
+[data-aos][data-aos][data-aos-delay="350"],body[data-aos-delay="350"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="350"].aos-animate,body[data-aos-delay="350"] [data-aos].aos-animate{transition-delay:.35s}
+[data-aos][data-aos][data-aos-duration="400"],body[data-aos-duration="400"] [data-aos]{transition-duration:.4s}
+[data-aos][data-aos][data-aos-delay="400"],body[data-aos-delay="400"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="400"].aos-animate,body[data-aos-delay="400"] [data-aos].aos-animate{transition-delay:.4s}
+[data-aos][data-aos][data-aos-duration="450"],body[data-aos-duration="450"] [data-aos]{transition-duration:.45s}
+[data-aos][data-aos][data-aos-delay="450"],body[data-aos-delay="450"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="450"].aos-animate,body[data-aos-delay="450"] [data-aos].aos-animate{transition-delay:.45s}
+[data-aos][data-aos][data-aos-duration="500"],body[data-aos-duration="500"] [data-aos]{transition-duration:.5s}
+[data-aos][data-aos][data-aos-delay="500"],body[data-aos-delay="500"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="500"].aos-animate,body[data-aos-delay="500"] [data-aos].aos-animate{transition-delay:.5s}
+[data-aos][data-aos][data-aos-duration="550"],body[data-aos-duration="550"] [data-aos]{transition-duration:.55s}
+[data-aos][data-aos][data-aos-delay="550"],body[data-aos-delay="550"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="550"].aos-animate,body[data-aos-delay="550"] [data-aos].aos-animate{transition-delay:.55s}
+[data-aos][data-aos][data-aos-duration="600"],body[data-aos-duration="600"] [data-aos]{transition-duration:.6s}
+[data-aos][data-aos][data-aos-delay="600"],body[data-aos-delay="600"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="600"].aos-animate,body[data-aos-delay="600"] [data-aos].aos-animate{transition-delay:.6s}
+[data-aos][data-aos][data-aos-duration="650"],body[data-aos-duration="650"] [data-aos]{transition-duration:.65s}
+[data-aos][data-aos][data-aos-delay="650"],body[data-aos-delay="650"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="650"].aos-animate,body[data-aos-delay="650"] [data-aos].aos-animate{transition-delay:.65s}
+[data-aos][data-aos][data-aos-duration="700"],body[data-aos-duration="700"] [data-aos]{transition-duration:.7s}
+[data-aos][data-aos][data-aos-delay="700"],body[data-aos-delay="700"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="700"].aos-animate,body[data-aos-delay="700"] [data-aos].aos-animate{transition-delay:.7s}
+[data-aos][data-aos][data-aos-duration="750"],body[data-aos-duration="750"] [data-aos]{transition-duration:.75s}
+[data-aos][data-aos][data-aos-delay="750"],body[data-aos-delay="750"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="750"].aos-animate,body[data-aos-delay="750"] [data-aos].aos-animate{transition-delay:.75s}
+[data-aos][data-aos][data-aos-duration="800"],body[data-aos-duration="800"] [data-aos]{transition-duration:.8s}
+[data-aos][data-aos][data-aos-delay="800"],body[data-aos-delay="800"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="800"].aos-animate,body[data-aos-delay="800"] [data-aos].aos-animate{transition-delay:.8s}
+[data-aos][data-aos][data-aos-duration="850"],body[data-aos-duration="850"] [data-aos]{transition-duration:.85s}
+[data-aos][data-aos][data-aos-delay="850"],body[data-aos-delay="850"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="850"].aos-animate,body[data-aos-delay="850"] [data-aos].aos-animate{transition-delay:.85s}
+[data-aos][data-aos][data-aos-duration="900"],body[data-aos-duration="900"] [data-aos]{transition-duration:.9s}
+[data-aos][data-aos][data-aos-delay="900"],body[data-aos-delay="900"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="900"].aos-animate,body[data-aos-delay="900"] [data-aos].aos-animate{transition-delay:.9s}
+[data-aos][data-aos][data-aos-duration="950"],body[data-aos-duration="950"] [data-aos]{transition-duration:.95s}
+[data-aos][data-aos][data-aos-delay="950"],body[data-aos-delay="950"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="950"].aos-animate,body[data-aos-delay="950"] [data-aos].aos-animate{transition-delay:.95s}
+[data-aos][data-aos][data-aos-duration="1000"],body[data-aos-duration="1000"] [data-aos]{transition-duration:1s}
+[data-aos][data-aos][data-aos-delay="1000"],body[data-aos-delay="1000"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1000"].aos-animate,body[data-aos-delay="1000"] [data-aos].aos-animate{transition-delay:1s}
+[data-aos][data-aos][data-aos-duration="1050"],body[data-aos-duration="1050"] [data-aos]{transition-duration:1.05s}
+[data-aos][data-aos][data-aos-delay="1050"],body[data-aos-delay="1050"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1050"].aos-animate,body[data-aos-delay="1050"] [data-aos].aos-animate{transition-delay:1.05s}
+[data-aos][data-aos][data-aos-duration="1100"],body[data-aos-duration="1100"] [data-aos]{transition-duration:1.1s}
+[data-aos][data-aos][data-aos-delay="1100"],body[data-aos-delay="1100"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1100"].aos-animate,body[data-aos-delay="1100"] [data-aos].aos-animate{transition-delay:1.1s}
+[data-aos][data-aos][data-aos-duration="1150"],body[data-aos-duration="1150"] [data-aos]{transition-duration:1.15s}
+[data-aos][data-aos][data-aos-delay="1150"],body[data-aos-delay="1150"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1150"].aos-animate,body[data-aos-delay="1150"] [data-aos].aos-animate{transition-delay:1.15s}
+[data-aos][data-aos][data-aos-duration="1200"],body[data-aos-duration="1200"] [data-aos]{transition-duration:1.2s}
+[data-aos][data-aos][data-aos-delay="1200"],body[data-aos-delay="1200"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1200"].aos-animate,body[data-aos-delay="1200"] [data-aos].aos-animate{transition-delay:1.2s}
+[data-aos][data-aos][data-aos-duration="1250"],body[data-aos-duration="1250"] [data-aos]{transition-duration:1.25s}
+[data-aos][data-aos][data-aos-delay="1250"],body[data-aos-delay="1250"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1250"].aos-animate,body[data-aos-delay="1250"] [data-aos].aos-animate{transition-delay:1.25s}
+[data-aos][data-aos][data-aos-duration="1300"],body[data-aos-duration="1300"] [data-aos]{transition-duration:1.3s}
+[data-aos][data-aos][data-aos-delay="1300"],body[data-aos-delay="1300"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1300"].aos-animate,body[data-aos-delay="1300"] [data-aos].aos-animate{transition-delay:1.3s}
+[data-aos][data-aos][data-aos-duration="1350"],body[data-aos-duration="1350"] [data-aos]{transition-duration:1.35s}
+[data-aos][data-aos][data-aos-delay="1350"],body[data-aos-delay="1350"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1350"].aos-animate,body[data-aos-delay="1350"] [data-aos].aos-animate{transition-delay:1.35s}
+[data-aos][data-aos][data-aos-duration="1400"],body[data-aos-duration="1400"] [data-aos]{transition-duration:1.4s}
+[data-aos][data-aos][data-aos-delay="1400"],body[data-aos-delay="1400"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1400"].aos-animate,body[data-aos-delay="1400"] [data-aos].aos-animate{transition-delay:1.4s}
+[data-aos][data-aos][data-aos-duration="1450"],body[data-aos-duration="1450"] [data-aos]{transition-duration:1.45s}
+[data-aos][data-aos][data-aos-delay="1450"],body[data-aos-delay="1450"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1450"].aos-animate,body[data-aos-delay="1450"] [data-aos].aos-animate{transition-delay:1.45s}
+[data-aos][data-aos][data-aos-duration="1500"],body[data-aos-duration="1500"] [data-aos]{transition-duration:1.5s}
+[data-aos][data-aos][data-aos-delay="1500"],body[data-aos-delay="1500"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1500"].aos-animate,body[data-aos-delay="1500"] [data-aos].aos-animate{transition-delay:1.5s}
+[data-aos][data-aos][data-aos-duration="1550"],body[data-aos-duration="1550"] [data-aos]{transition-duration:1.55s}
+[data-aos][data-aos][data-aos-delay="1550"],body[data-aos-delay="1550"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1550"].aos-animate,body[data-aos-delay="1550"] [data-aos].aos-animate{transition-delay:1.55s}
+[data-aos][data-aos][data-aos-duration="1600"],body[data-aos-duration="1600"] [data-aos]{transition-duration:1.6s}
+[data-aos][data-aos][data-aos-delay="1600"],body[data-aos-delay="1600"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1600"].aos-animate,body[data-aos-delay="1600"] [data-aos].aos-animate{transition-delay:1.6s}
+[data-aos][data-aos][data-aos-duration="1650"],body[data-aos-duration="1650"] [data-aos]{transition-duration:1.65s}
+[data-aos][data-aos][data-aos-delay="1650"],body[data-aos-delay="1650"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1650"].aos-animate,body[data-aos-delay="1650"] [data-aos].aos-animate{transition-delay:1.65s}
+[data-aos][data-aos][data-aos-duration="1700"],body[data-aos-duration="1700"] [data-aos]{transition-duration:1.7s}
+[data-aos][data-aos][data-aos-delay="1700"],body[data-aos-delay="1700"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1700"].aos-animate,body[data-aos-delay="1700"] [data-aos].aos-animate{transition-delay:1.7s}
+[data-aos][data-aos][data-aos-duration="1750"],body[data-aos-duration="1750"] [data-aos]{transition-duration:1.75s}
+[data-aos][data-aos][data-aos-delay="1750"],body[data-aos-delay="1750"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1750"].aos-animate,body[data-aos-delay="1750"] [data-aos].aos-animate{transition-delay:1.75s}
+[data-aos][data-aos][data-aos-duration="1800"],body[data-aos-duration="1800"] [data-aos]{transition-duration:1.8s}
+[data-aos][data-aos][data-aos-delay="1800"],body[data-aos-delay="1800"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1800"].aos-animate,body[data-aos-delay="1800"] [data-aos].aos-animate{transition-delay:1.8s}
+[data-aos][data-aos][data-aos-duration="1850"],body[data-aos-duration="1850"] [data-aos]{transition-duration:1.85s}
+[data-aos][data-aos][data-aos-delay="1850"],body[data-aos-delay="1850"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1850"].aos-animate,body[data-aos-delay="1850"] [data-aos].aos-animate{transition-delay:1.85s}
+[data-aos][data-aos][data-aos-duration="1900"],body[data-aos-duration="1900"] [data-aos]{transition-duration:1.9s}
+[data-aos][data-aos][data-aos-delay="1900"],body[data-aos-delay="1900"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1900"].aos-animate,body[data-aos-delay="1900"] [data-aos].aos-animate{transition-delay:1.9s}
+[data-aos][data-aos][data-aos-duration="1950"],body[data-aos-duration="1950"] [data-aos]{transition-duration:1.95s}
+[data-aos][data-aos][data-aos-delay="1950"],body[data-aos-delay="1950"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="1950"].aos-animate,body[data-aos-delay="1950"] [data-aos].aos-animate{transition-delay:1.95s}
+[data-aos][data-aos][data-aos-duration="2000"],body[data-aos-duration="2000"] [data-aos]{transition-duration:2s}
+[data-aos][data-aos][data-aos-delay="2000"],body[data-aos-delay="2000"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2000"].aos-animate,body[data-aos-delay="2000"] [data-aos].aos-animate{transition-delay:2s}
+[data-aos][data-aos][data-aos-duration="2050"],body[data-aos-duration="2050"] [data-aos]{transition-duration:2.05s}
+[data-aos][data-aos][data-aos-delay="2050"],body[data-aos-delay="2050"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2050"].aos-animate,body[data-aos-delay="2050"] [data-aos].aos-animate{transition-delay:2.05s}
+[data-aos][data-aos][data-aos-duration="2100"],body[data-aos-duration="2100"] [data-aos]{transition-duration:2.1s}
+[data-aos][data-aos][data-aos-delay="2100"],body[data-aos-delay="2100"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2100"].aos-animate,body[data-aos-delay="2100"] [data-aos].aos-animate{transition-delay:2.1s}
+[data-aos][data-aos][data-aos-duration="2150"],body[data-aos-duration="2150"] [data-aos]{transition-duration:2.15s}
+[data-aos][data-aos][data-aos-delay="2150"],body[data-aos-delay="2150"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2150"].aos-animate,body[data-aos-delay="2150"] [data-aos].aos-animate{transition-delay:2.15s}
+[data-aos][data-aos][data-aos-duration="2200"],body[data-aos-duration="2200"] [data-aos]{transition-duration:2.2s}
+[data-aos][data-aos][data-aos-delay="2200"],body[data-aos-delay="2200"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2200"].aos-animate,body[data-aos-delay="2200"] [data-aos].aos-animate{transition-delay:2.2s}
+[data-aos][data-aos][data-aos-duration="2250"],body[data-aos-duration="2250"] [data-aos]{transition-duration:2.25s}
+[data-aos][data-aos][data-aos-delay="2250"],body[data-aos-delay="2250"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2250"].aos-animate,body[data-aos-delay="2250"] [data-aos].aos-animate{transition-delay:2.25s}
+[data-aos][data-aos][data-aos-duration="2300"],body[data-aos-duration="2300"] [data-aos]{transition-duration:2.3s}
+[data-aos][data-aos][data-aos-delay="2300"],body[data-aos-delay="2300"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2300"].aos-animate,body[data-aos-delay="2300"] [data-aos].aos-animate{transition-delay:2.3s}
+[data-aos][data-aos][data-aos-duration="2350"],body[data-aos-duration="2350"] [data-aos]{transition-duration:2.35s}
+[data-aos][data-aos][data-aos-delay="2350"],body[data-aos-delay="2350"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2350"].aos-animate,body[data-aos-delay="2350"] [data-aos].aos-animate{transition-delay:2.35s}
+[data-aos][data-aos][data-aos-duration="2400"],body[data-aos-duration="2400"] [data-aos]{transition-duration:2.4s}
+[data-aos][data-aos][data-aos-delay="2400"],body[data-aos-delay="2400"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2400"].aos-animate,body[data-aos-delay="2400"] [data-aos].aos-animate{transition-delay:2.4s}
+[data-aos][data-aos][data-aos-duration="2450"],body[data-aos-duration="2450"] [data-aos]{transition-duration:2.45s}
+[data-aos][data-aos][data-aos-delay="2450"],body[data-aos-delay="2450"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2450"].aos-animate,body[data-aos-delay="2450"] [data-aos].aos-animate{transition-delay:2.45s}
+[data-aos][data-aos][data-aos-duration="2500"],body[data-aos-duration="2500"] [data-aos]{transition-duration:2.5s}
+[data-aos][data-aos][data-aos-delay="2500"],body[data-aos-delay="2500"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2500"].aos-animate,body[data-aos-delay="2500"] [data-aos].aos-animate{transition-delay:2.5s}
+[data-aos][data-aos][data-aos-duration="2550"],body[data-aos-duration="2550"] [data-aos]{transition-duration:2.55s}
+[data-aos][data-aos][data-aos-delay="2550"],body[data-aos-delay="2550"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2550"].aos-animate,body[data-aos-delay="2550"] [data-aos].aos-animate{transition-delay:2.55s}
+[data-aos][data-aos][data-aos-duration="2600"],body[data-aos-duration="2600"] [data-aos]{transition-duration:2.6s}
+[data-aos][data-aos][data-aos-delay="2600"],body[data-aos-delay="2600"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2600"].aos-animate,body[data-aos-delay="2600"] [data-aos].aos-animate{transition-delay:2.6s}
+[data-aos][data-aos][data-aos-duration="2650"],body[data-aos-duration="2650"] [data-aos]{transition-duration:2.65s}
+[data-aos][data-aos][data-aos-delay="2650"],body[data-aos-delay="2650"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2650"].aos-animate,body[data-aos-delay="2650"] [data-aos].aos-animate{transition-delay:2.65s}
+[data-aos][data-aos][data-aos-duration="2700"],body[data-aos-duration="2700"] [data-aos]{transition-duration:2.7s}
+[data-aos][data-aos][data-aos-delay="2700"],body[data-aos-delay="2700"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2700"].aos-animate,body[data-aos-delay="2700"] [data-aos].aos-animate{transition-delay:2.7s}
+[data-aos][data-aos][data-aos-duration="2750"],body[data-aos-duration="2750"] [data-aos]{transition-duration:2.75s}
+[data-aos][data-aos][data-aos-delay="2750"],body[data-aos-delay="2750"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2750"].aos-animate,body[data-aos-delay="2750"] [data-aos].aos-animate{transition-delay:2.75s}
+[data-aos][data-aos][data-aos-duration="2800"],body[data-aos-duration="2800"] [data-aos]{transition-duration:2.8s}
+[data-aos][data-aos][data-aos-delay="2800"],body[data-aos-delay="2800"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2800"].aos-animate,body[data-aos-delay="2800"] [data-aos].aos-animate{transition-delay:2.8s}
+[data-aos][data-aos][data-aos-duration="2850"],body[data-aos-duration="2850"] [data-aos]{transition-duration:2.85s}
+[data-aos][data-aos][data-aos-delay="2850"],body[data-aos-delay="2850"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2850"].aos-animate,body[data-aos-delay="2850"] [data-aos].aos-animate{transition-delay:2.85s}
+[data-aos][data-aos][data-aos-duration="2900"],body[data-aos-duration="2900"] [data-aos]{transition-duration:2.9s}
+[data-aos][data-aos][data-aos-delay="2900"],body[data-aos-delay="2900"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2900"].aos-animate,body[data-aos-delay="2900"] [data-aos].aos-animate{transition-delay:2.9s}
+[data-aos][data-aos][data-aos-duration="2950"],body[data-aos-duration="2950"] [data-aos]{transition-duration:2.95s}
+[data-aos][data-aos][data-aos-delay="2950"],body[data-aos-delay="2950"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="2950"].aos-animate,body[data-aos-delay="2950"] [data-aos].aos-animate{transition-delay:2.95s}
+[data-aos][data-aos][data-aos-duration="3000"],body[data-aos-duration="3000"] [data-aos]{transition-duration:3s}
+[data-aos][data-aos][data-aos-delay="3000"],body[data-aos-delay="3000"] [data-aos]{transition-delay:0}
+[data-aos][data-aos][data-aos-delay="3000"].aos-animate,body[data-aos-delay="3000"] [data-aos].aos-animate{transition-delay:3s}
+[data-aos][data-aos][data-aos-easing=linear],body[data-aos-easing=linear] [data-aos]{transition-timing-function:cubic-bezier(.25,.25,.75,.75)}
+[data-aos][data-aos][data-aos-easing=ease],body[data-aos-easing=ease] [data-aos]{transition-timing-function:ease}
+[data-aos][data-aos][data-aos-easing=ease-in],body[data-aos-easing=ease-in] [data-aos]{transition-timing-function:ease-in}
+[data-aos][data-aos][data-aos-easing=ease-out],body[data-aos-easing=ease-out] [data-aos]{transition-timing-function:ease-out}
+[data-aos][data-aos][data-aos-easing=ease-in-out],body[data-aos-easing=ease-in-out] [data-aos]{transition-timing-function:ease-in-out}
+[data-aos][data-aos][data-aos-easing=ease-in-back],body[data-aos-easing=ease-in-back] [data-aos]{transition-timing-function:cubic-bezier(.6,-.28,.735,.045)}
+[data-aos][data-aos][data-aos-easing=ease-out-back],body[data-aos-easing=ease-out-back] [data-aos]{transition-timing-function:cubic-bezier(.175,.885,.32,1.275)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-back],body[data-aos-easing=ease-in-out-back] [data-aos]{transition-timing-function:cubic-bezier(.68,-.55,.265,1.55)}
+[data-aos][data-aos][data-aos-easing=ease-in-sine],body[data-aos-easing=ease-in-sine] [data-aos]{transition-timing-function:cubic-bezier(.47,0,.745,.715)}
+[data-aos][data-aos][data-aos-easing=ease-out-sine],body[data-aos-easing=ease-out-sine] [data-aos]{transition-timing-function:cubic-bezier(.39,.575,.565,1)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-sine],body[data-aos-easing=ease-in-out-sine] [data-aos]{transition-timing-function:cubic-bezier(.445,.05,.55,.95)}
+[data-aos][data-aos][data-aos-easing=ease-in-quad],body[data-aos-easing=ease-in-quad] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}
+[data-aos][data-aos][data-aos-easing=ease-out-quad],body[data-aos-easing=ease-out-quad] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-quad],body[data-aos-easing=ease-in-out-quad] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}
+[data-aos][data-aos][data-aos-easing=ease-in-cubic],body[data-aos-easing=ease-in-cubic] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}
+[data-aos][data-aos][data-aos-easing=ease-out-cubic],body[data-aos-easing=ease-out-cubic] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-cubic],body[data-aos-easing=ease-in-out-cubic] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}
+[data-aos][data-aos][data-aos-easing=ease-in-quart],body[data-aos-easing=ease-in-quart] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}
+[data-aos][data-aos][data-aos-easing=ease-out-quart],body[data-aos-easing=ease-out-quart] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}
+[data-aos][data-aos][data-aos-easing=ease-in-out-quart],body[data-aos-easing=ease-in-out-quart] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}
+body.pag-regulamento{--reg-tinta: var(--cor-titulo-inverso);--reg-corpo: rgb(7 12 17 / .82);--reg-secundario: rgb(7 12 17 / .64);--reg-borda: rgb(7 12 17 / .12);--reg-borda-forte: rgb(7 12 17 / .22);--reg-zebra: rgb(7 12 17 / .035);--reg-superficie: rgb(7 12 17 / .045);--reg-link: var(--marca-escura);--reg-cartao: var(--reg-superficie);--reg-cartao-borda: rgb(7 12 17 / .07);--reg-cartao-cabeca: rgb(219 227 235);--reg-cartao-solido: rgb(227 236 243);--reg-detalhe: var(--marca);--reg-topo-nav: 9.6rem;background:transparent;color:var(--reg-corpo);text-align:left}
+html:has(body.pag-regulamento){background:#fff;text-align:left}
+body.pag-regulamento:before{content:"";position:fixed;inset:0;z-index:-1;background:#fff url("../assets/bg planos white.avif") center / cover no-repeat;pointer-events:none}
+@media (max-width: 1079.98px){body.pag-regulamento:before{background-position:8% 50%}}
+@media (prefers-reduced-motion: reduce){html:has(body.pag-regulamento){scroll-behavior:auto}}
+@media (min-width: 1080px){body.pag-regulamento{--reg-topo-nav: 10.4rem}}
+.reg-sumario nav,.reg-sumario-movel nav{display:block;position:static;width:auto;height:auto;z-index:auto;border:0;border-radius:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;transition:none}
+.regulamento .reg-cabeca{display:block;margin-bottom:1.6rem}
+.regulamento .reg-cabeca p{margin-bottom:0;color:inherit;font-size:inherit;line-height:inherit}
+.regulamento ul:not(.reg-conta,.reg-planos,.reg-sumario-lista){list-style:disc}
+@media (min-width: 1080px){.pag-regulamento nav#navigation.scroll{background-color:#04060bf5}}
+.reg-pular{position:absolute;left:1.6rem;top:1.6rem;z-index:200;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.pag-regulamento main{padding-top:calc(var(--reg-topo-nav) + 2.4rem);padding-bottom:8rem}
+.reg-layout{display:block}
+.reg-coluna{min-width:0}
+.reg-sumario{display:none}
+@media (min-width: 1080px){.pag-regulamento main{padding-top:calc(var(--reg-topo-nav) + 4.8rem)}
+.reg-layout{display:grid;grid-template-columns:28rem minmax(0,1fr);column-gap:clamp(6.4rem,7vw,12rem);align-items:start}
+.reg-sumario{display:block;position:sticky;top:calc(var(--reg-topo-nav) + 2rem);max-height:calc(100vh - var(--reg-topo-nav) - 4rem);overflow-y:auto;overscroll-behavior:contain;padding:2.4rem 1.6rem 2rem 2rem;border:1px solid var(--reg-cartao-borda);border-radius:var(--raio-assinatura);background:var(--reg-cartao);scrollbar-width:thin}
+.reg-coluna{grid-column:2}}
+.reg-cabeca{padding-bottom:3.2rem;margin-bottom:1.6rem;border-bottom:1px solid var(--reg-borda)}
+.pag-regulamento h1{margin:0;color:var(--reg-tinta);font-family:var(--fonte-display);font-weight:400;font-size:clamp(24px,8.4vw,60px);line-height:1.02;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
+.reg-meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1.2rem;margin-top:2rem;color:var(--reg-secundario);font-size:1.75rem;font-variant-numeric:tabular-nums}
+.reg-meta p{margin:0}
+.reg-tempo span{margin-right:1.2rem}
+@media (min-width: 1080px){.reg-meta{font-size:1.6rem}}
+.reg-sumario-titulo{margin:0 0 1.2rem;color:var(--reg-tinta);font-size:1.3rem;font-weight:var(--peso-semi);letter-spacing:.12em;text-transform:uppercase}
+.reg-sumario-lista{list-style:none;margin:0;padding:0;border-left:1px solid var(--reg-borda)}
+.reg-sumario-lista a,.regulamento .reg-sumario-lista a{position:relative;display:flex;gap:.6rem;padding:.6rem 0 .6rem 1.6rem;color:var(--reg-secundario);font-size:1.45rem;line-height:1.35;text-decoration:none;text-wrap:pretty;overflow-wrap:normal}
+.reg-sumario-lista .reg-sumario-num{flex:none;min-width:2.2ch;font-variant-numeric:tabular-nums}
+.reg-sumario-lista a:hover,.reg-sumario-lista a[aria-current=true]{color:var(--reg-tinta)}
+.reg-sumario-lista a[aria-current=true]:before{content:"";position:absolute;left:-1px;top:.4rem;bottom:.4rem;width:.3rem;border-radius:.2rem;background:var(--reg-detalhe)}
+.reg-sumario-movel{margin:0 0 3.2rem;border:1px solid var(--reg-cartao-borda);border-radius:var(--raio-assinatura);background:var(--reg-cartao)}
+.reg-sumario-movel>summary{display:flex;align-items:center;justify-content:space-between;gap:1.2rem;min-height:var(--alvo-toque);padding:1.2rem 1.6rem;color:var(--reg-tinta);font-size:2rem;font-weight:var(--peso-semi);cursor:pointer;list-style:none}
+.reg-sumario-movel>summary::-webkit-details-marker{display:none}
+.reg-sumario-movel>summary:after{content:"";flex:none;width:1rem;height:1rem;border-right:.2rem solid currentColor;border-bottom:.2rem solid currentColor;transform:translateY(-.25rem) rotate(45deg)}
+.reg-sumario-movel .reg-sumario-lista{border-left:0;border-top:1px solid var(--reg-borda);padding:.4rem 0}
+.reg-sumario-movel .reg-sumario-lista a{align-items:center;min-height:var(--alvo-toque);padding:.4rem 1.6rem;font-size:1.9rem}
+.reg-sumario-movel .reg-sumario-lista li{margin:0;padding:0}
+@media (min-width: 1080px){.reg-sumario-movel{display:none}}
+.regulamento{font-size:2.125rem;line-height:1.65}
+@media (min-width: 1080px){.regulamento{font-size:1.8rem}}
+.regulamento p,.regulamento li,.regulamento dd,.regulamento dt{text-wrap:pretty}
+.regulamento p{margin:0 0 1em}
+.regulamento strong{color:var(--reg-tinta);font-weight:var(--peso-forte)}
+.regulamento a{color:var(--reg-link);text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.18em;overflow-wrap:anywhere}
+.pag-regulamento .reg-secao{padding:0;margin-top:5.6rem}
+.pag-regulamento .reg-secao:first-of-type{margin-top:3.2rem}
+.reg-titulo{display:flex;align-items:baseline;gap:.8rem;margin:0 0 1.6rem}
+.regulamento h2{margin:0;color:var(--reg-tinta);font-family:var(--fonte-corpo);font-size:2.75rem;font-weight:var(--peso-forte);line-height:1.25;text-wrap:balance;scroll-margin-top:calc(var(--reg-topo-nav) + 2rem)}
+@media (min-width: 1080px){.regulamento h2{font-size:2.6rem}}
+.reg-ancora{flex:none;display:inline-grid;place-items:center;width:3.6rem;height:3.6rem;border-radius:var(--raio-sm);color:var(--reg-secundario);opacity:.55;transition:opacity var(--dur-rapida) var(--curva-saida),color var(--dur-rapida) var(--curva-saida),background-color var(--dur-rapida) var(--curva-saida)}
+.reg-ancora svg{width:1.8rem;height:1.8rem}
+@media (min-width: 1080px){.reg-ancora{width:3rem;height:3rem;opacity:0}
+.reg-ancora svg{width:1.6rem;height:1.6rem}}
+.regulamento ul,.regulamento ol{margin:0 0 1em;padding-left:1.4em}
+.regulamento li{margin:0 0 .5em;padding-left:.25em}
+.regulamento li::marker{color:var(--reg-detalhe)}
+.reg-topo{position:fixed;left:50%;bottom:2rem;z-index:90;display:inline-flex;align-items:center;gap:.8rem;min-height:var(--alvo-toque);padding:0 2rem;border:1px solid var(--reg-borda-forte);border-radius:var(--raio-pilula);background:var(--reg-cartao-solido);color:var(--reg-tinta);font-size:1.8rem;font-weight:var(--peso-semi);text-decoration:none;box-shadow:0 .6rem 2rem #070c1129;transform:translate(-50%);transition:opacity var(--dur-media) var(--curva-saida),transform var(--dur-media) var(--curva-saida),visibility 0s linear 0s}
+.reg-topo:not(.is-visivel){opacity:0;visibility:hidden;transform:translate(-50%,1.2rem);transition:opacity var(--dur-media) var(--curva-saida),transform var(--dur-media) var(--curva-saida),visibility 0s linear var(--dur-media)}
+@media (min-width: 1080px){.reg-topo{display:none}}
+@media (prefers-reduced-motion: reduce){.reg-topo,.reg-topo:not(.is-visivel),.reg-ancora{transition:none}}
+.reg-aviso:empty{display:none}
+.reg-impressao{display:none}</style>
+  <link rel="stylesheet" href="../dist/home.ecdc9b26.css" media="print" onload="this.media='all';this.onload=null">
+  <link rel="stylesheet" href="../dist/regulamento.f9c47e09.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="../dist/home.ecdc9b26.css"><link rel="stylesheet" href="../dist/regulamento.f9c47e09.css"></noscript>
+  <style id="fontes-regulamento">@font-face { font-family: 'NCS Radhiumz'; font-style: normal; font-weight: 400; font-display: swap; src: url("../css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08") format("woff2"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }
+@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 300; font-display: swap; src: url("../css/fonts/TT%20Fors%20Trial%20Light.sub.woff2?v=v95-liberdade-out08") format("woff2"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }
+@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 400; font-display: swap; src: url("../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08") format("woff2"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }
+@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 500; font-display: swap; src: url("../css/fonts/TT%20Fors%20Trial%20Medium.sub.woff2?v=v95-liberdade-out08") format("woff2"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }
+@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 600; font-display: swap; src: url("../css/fonts/TT%20Fors%20Trial%20DemiBold.sub.woff2?v=v95-liberdade-out08") format("woff2"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }
+@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 700; font-display: swap; src: url("../css/fonts/TT%20Fors%20Trial%20Bold.sub.woff2?v=v95-liberdade-out08") format("woff2"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }
+@font-face { font-family: 'TT Fors Trial'; font-style: normal; font-weight: 800; font-display: swap; src: url("../css/fonts/TT%20Fors%20Trial%20ExtraBold.sub.woff2?v=v95-liberdade-out08") format("woff2"); /* subconjunto (B3): Basic Latin + Latin-1 + Latin Ext-A + General Punctuation + a seta dos CTAs e o >=. Gerado por scripts/fontes.mjs; mudou a fonte, regenera. O original fica ao lado, fora do carregamento. */ unicode-range: U+0020-007E, U+00A0-00FF, U+0100-017F, U+2000-206F, U+2192, U+2265; }</style>
+  <!-- /build:css -->
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Política de Privacidade - Zero7 Tesouraria",
+  "url": "https://zero7.com.br/home/politica-de-privacidade/",
+  "inLanguage": "pt-BR",
+  "description": "Como a Zero7 Tesouraria coleta, usa e compartilha os dados pessoais de quem acessa o site, sob a Lei Geral de Proteção de Dados.",
+  "dateModified": "2026-11-06",
+  "isPartOf": { "@type": "WebSite", "name": "Zero7 Tesouraria", "url": "https://zero7.com.br/" },
+  "publisher": { "@type": "Organization", "name": "Zero7 Tesouraria", "url": "https://zero7.com.br", "logo": "https://zero7.com.br/home/assets/logo-zero7-512.png" }
+}
+  </script>
+</head>
+
+<body id="body" class="pag-regulamento">
+
+  <a class="reg-pular" href="#conteudo">Pular para a política</a>
+
+  <!-- build:nav -->
+  <nav id="navigation" class="scroll">
+    <div class="wrapper">
+
+      <a class="logo" href="../">
+        <img width="176" height="55"  src="../assets/logo zero7.svg" alt="Zero7 Tesouraria">
+        <img class="logo__icone" width="22" height="12" src="../assets/logo-icon.svg" alt="Zero7 Tesouraria">
+      </a>
+
+      <div class="menu">
+
+        <ul>
+          <li><a onclick="closeMenu()" href="../">Home</a></li>
+          <li><a onclick="closeMenu()" href="https://blog.zero7.com.br/">Blog</a></li>
+          <li><a onclick="closeMenu()" href="../#plan">Planos</a></li>
+          <li><a onclick="closeMenu()" href="../regulamento/">Regulamento</a>
+          </li>
+
+          <div class="buttons" role="listitem">
+            <a onclick="closeMenu()" target="_blank" rel="noopener noreferrer"
+              href="https://chat.whatsapp.com/G9ma9v4zI77BBvvhdswF2r" id="navButtonComunidade"
+              class="z7-btnx z7-btnx--nav z7-btnx--wpp btn btn--nav btn--primaria btn--wpp" role="button"
+              aria-label="Entrar na comunidade do WhatsApp">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">Comunidade</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </span>
+            </a>
+
+            <a onclick="closeMenu()" target="_blank" rel="noopener noreferrer"
+              href="https://app.zero7.com.br/login" id="navButton" class="z7-btnx z7-btnx--nav btn btn--nav btn--primaria" role="button"
+              aria-label="Acessar a Área do Trader">
+              <span class="z7-btnx__bg btn__bg" aria-hidden="true"></span>
+              <span class="z7-btnx__shine btn__shine" aria-hidden="true"></span>
+              <span class="z7-btnx__label btn__label">Área do Trader</span>
+              <span class="z7-btnx__cap btn__cap" aria-hidden="true">
+                <span class="z7-btnx__arrow btn__arrow">→</span>
+              </span>
+            </a>
+          </div>
+        </ul>
+
+
+      </div>
+
+      <button aria-expanded="false" aria-label="Abrir menu" onclick="openMenu()" class="open-menu btn btn--md btn--texto btn--icone">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFAF1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M4 6h16" />
+          <path d="M4 12h16" />
+          <path d="M4 18h16" />
+        </svg>
+      </button>
+      <button aria-expanded="true" aria-label="Fechar menu" onclick="closeMenu()" class="close-menu btn btn--md btn--texto btn--icone">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFAF1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18 6 6 18" />
+          <path d="M6 6l12 12" />
+        </svg>
+      </button>
+
+    </div>
+  </nav>
+  <!-- /build:nav -->
+
+  <p class="reg-impressao" aria-hidden="true" data-chrome>Política de Privacidade Zero7 — atualizada em 06/11/2026</p>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="wrapper reg-layout">
+
+      <aside class="reg-sumario" aria-labelledby="reg-sumario-titulo">
+        <nav aria-labelledby="reg-sumario-titulo">
+          <p class="reg-sumario-titulo" id="reg-sumario-titulo">Nesta política</p>
+          <!-- build:sumario -->
+          <ol class="reg-sumario-lista">
+            <li><a href="#politica-01-descadastramento-opt-out"><span class="reg-sumario-num">1.</span> <span>Importante: Política de Descadastramento (“Opt-out”)</span></a></li>
+            <li><a href="#politica-02-como-coletamos-informacoes"><span class="reg-sumario-num">2.</span> <span>Como coletamos informações a seu respeito?</span></a></li>
+            <li><a href="#politica-03-como-usamos-cookies"><span class="reg-sumario-num">3.</span> <span>Como usamos cookies?</span></a></li>
+            <li><a href="#politica-04-remarketing-do-google"><span class="reg-sumario-num">4.</span> <span>Remarketing do Google</span></a></li>
+            <li><a href="#politica-05-remarketing-do-facebook"><span class="reg-sumario-num">5.</span> <span>Remarketing do Facebook</span></a></li>
+            <li><a href="#politica-06-como-protegemos-e-armazenamos"><span class="reg-sumario-num">6.</span> <span>Como protegemos e armazenamos informações pessoais</span></a></li>
+            <li><a href="#politica-07-como-usamos-as-informacoes"><span class="reg-sumario-num">7.</span> <span>Como usamos as informações pessoais que coletamos</span></a></li>
+            <li><a href="#politica-08-marketing"><span class="reg-sumario-num">8.</span> <span>Marketing</span></a></li>
+            <li><a href="#politica-09-como-compartilhamos"><span class="reg-sumario-num">9.</span> <span>Como compartilhamos informações pessoais com outras partes</span></a></li>
+          </ol>
+          <!-- /build:sumario -->
+        </nav>
+      </aside>
+
+      <div class="reg-coluna">
+        <!-- build:conteudo -->
+<article class="regulamento" aria-labelledby="topo">
+  <header class="reg-cabeca">
+    <h1 id="topo">Política de Privacidade</h1>
+    <div class="reg-meta">
+      <p class="reg-atualizacao">Última atualização: <time datetime="2026-11-06">06/11/2026</time></p>
+      <p class="reg-tempo" data-chrome><span aria-hidden="true">·</span>9 min de leitura</p>
+    </div>
+  </header>
+
+  <details class="reg-sumario-movel" data-chrome>
+    <summary>Nesta política</summary>
+    <nav aria-label="Nesta política">
+      <ol class="reg-sumario-lista">
+        <li><a href="#politica-01-descadastramento-opt-out"><span class="reg-sumario-num">1.</span> <span>Importante: Política de Descadastramento (“Opt-out”)</span></a></li>
+        <li><a href="#politica-02-como-coletamos-informacoes"><span class="reg-sumario-num">2.</span> <span>Como coletamos informações a seu respeito?</span></a></li>
+        <li><a href="#politica-03-como-usamos-cookies"><span class="reg-sumario-num">3.</span> <span>Como usamos cookies?</span></a></li>
+        <li><a href="#politica-04-remarketing-do-google"><span class="reg-sumario-num">4.</span> <span>Remarketing do Google</span></a></li>
+        <li><a href="#politica-05-remarketing-do-facebook"><span class="reg-sumario-num">5.</span> <span>Remarketing do Facebook</span></a></li>
+        <li><a href="#politica-06-como-protegemos-e-armazenamos"><span class="reg-sumario-num">6.</span> <span>Como protegemos e armazenamos informações pessoais</span></a></li>
+        <li><a href="#politica-07-como-usamos-as-informacoes"><span class="reg-sumario-num">7.</span> <span>Como usamos as informações pessoais que coletamos</span></a></li>
+        <li><a href="#politica-08-marketing"><span class="reg-sumario-num">8.</span> <span>Marketing</span></a></li>
+        <li><a href="#politica-09-como-compartilhamos"><span class="reg-sumario-num">9.</span> <span>Como compartilhamos informações pessoais com outras partes</span></a></li>
+      </ol>
+    </nav>
+  </details>
+
+  <p><strong>NOS COMPROMETEMOS COM A TRANSPARÊNCIA DO TRATAMENTO DE DADOS PESSOAIS DOS NOSSOS USUÁRIOS. POR ISSO, A PRESENTE POLÍTICA DE PRIVACIDADE ESTABELECE COMO É FEITA A COLETA, USO E TRANSFERÊNCIA DE INFORMAÇÕES DOS USUÁRIOS QUE ACESSAM OU USAM NOSSO SITE.</strong></p>
+  <p>A <strong>ZERO7 Tesouraria</strong> é uma empresa de publicação para o mercado financeiro, provendo materiais educacionais e ambiente de operação.</p>
+  <p>Ao acessar esse site, você entende que coletaremos e usaremos suas informações pessoais nas formas descritas nesta Política, sob as normas da Lei Geral de Proteção de Dados (13.709/2018), do Direito do Consumidor, assim como demais normas previstas no ordenamento jurídico brasileiro.</p>
+  <p>Você aceita essa política e concorda com tal coleta, armazenamento e uso ao se inscrever ou adquirir nossos produtos, serviços ou qualquer outro recurso, tecnologia ou funcionalidade que nós oferecemos ao acessar nosso site ou por qualquer outro meio.</p>
+  <p>Fica ressalvado que podemos alterar esta política a qualquer momento, divulgando uma versão revisada e atualizada em nossos sites. A versão revisada entrará em vigor assim que disponibilizada no site, independente de prévia notificação, sendo de responsabilidade do usuário a leitura e verificação a cada vez que acessar nossos sites e serviços.</p>
+
+  <section class="reg-secao" aria-labelledby="politica-01-descadastramento-opt-out">
+    <div class="reg-titulo">
+      <h2 id="politica-01-descadastramento-opt-out">Importante: Política de Descadastramento (“Opt-out”)</h2>
+      <a class="reg-ancora" href="#politica-01-descadastramento-opt-out" data-chrome aria-label="Copiar o link da seção Importante: Política de Descadastramento (“Opt-out”)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>O usuário cadastrado em nosso site ou adquirente de nossos produtos e que recebe nossas comunicações via e-mail pode a qualquer momento deixar de receber tais comunicações. Para tanto, basta clicar no link de descadastro encontrado no final de cada e-mail.</p>
+  </section>
+
+  <section class="reg-secao" aria-labelledby="politica-02-como-coletamos-informacoes">
+    <div class="reg-titulo">
+      <h2 id="politica-02-como-coletamos-informacoes">Como coletamos informações a seu respeito?</h2>
+      <a class="reg-ancora" href="#politica-02-como-coletamos-informacoes" data-chrome aria-label="Copiar o link da seção Como coletamos informações a seu respeito?"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>Quando os visitantes deixam comentários no site, coletamos os dados mostrados no formulário de comentários, além do endereço de IP e de dados do navegador do visitante, e as páginas que você acessou em nosso site para auxiliar na detecção de spam.</p>
+    <p>Quando você se inscreve para receber atualizações do nosso site, para fazer o download de algum dos nossos conteúdos, para participar de eventos online que promovemos, para comprar um dos nossos produtos, ou qualquer outra atividade em que solicitamos um cadastro seu, poderemos coletar os seguintes tipos de informações:</p>
+    <ul>
+      <li>Informações de conta: o seu nome, endereço, telefone, e-mail, dados qualificativos, tais como, CPF, RG, profissão, estado civil e outras informações semelhantes.</li>
+      <li>Informações financeiras: os números da conta bancária e do cartão de crédito que você forneceu quando adquiriu um produto ou um serviço ofertado pela ZERO7 Tesouraria.</li>
+      <li>Poderemos exigir que você forneça informações adicionais que poderemos usar para verificar sua identidade ou endereço ou gerenciar risco, como sua data de nascimento, número de registro nacional, nacionalidade e outras informações de identificação. Também podemos obter informações suas através de terceiros, como centros de crédito e serviços de verificação de identidade.</li>
+      <li>Quando estiver usando todas as ferramentas oferecidas nos produtos comercializados pela ZERO7 Tesouraria, coletaremos informações sobre suas transações e outras atividades suas em nosso site.</li>
+      <li>Se você envia imagens para o site, evite enviar as que contenham dados de localização incorporados (EXIF GPS). Visitantes podem baixar estas imagens do site e extrair delas seus dados de localização.</li>
+      <li>Podemos coletar informações sobre seu computador ou outro dispositivo de acesso com finalidade de prevenção contra fraude e, principalmente, violação de direitos de autor que importem em pirataria. Por fim, podemos coletar informações adicionais sobre você por outros meios, como de contatos com nossa equipe de suporte ao cliente, de resultados de suas respostas em pesquisas, de interações com membros da equipe administrativa dos produtos e/ou da empresa ZERO7 Tesouraria.</li>
+    </ul>
+  </section>
+
+  <section class="reg-secao" aria-labelledby="politica-03-como-usamos-cookies">
+    <div class="reg-titulo">
+      <h2 id="politica-03-como-usamos-cookies">Como usamos cookies?</h2>
+      <a class="reg-ancora" href="#politica-03-como-usamos-cookies" data-chrome aria-label="Copiar o link da seção Como usamos cookies?"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>Quando você acessa o nosso site, nós, incluindo as empresas que contratamos para acompanhar como nosso site é usado, podemos colocar pequenos arquivos de dados chamados “cookies” no seu computador. Enviamos um “cookie da sessão” para o seu computador quando você acessa nosso site, entra em sua conta ou acessa os produtos e/ou serviços comercializados por ZERO7 Tesouraria. Esse tipo de cookie nos ajuda a reconhecê-lo caso você visite várias páginas em nosso site durante a mesma sessão, para que não precisemos solicitar suas informações e/ou senha em todas as páginas. Depois que você sair ou fechar o seu navegador, esse cookie irá expirar e deixará de ter efeito. Também usamos cookies de maior duração para outras finalidades, como, por exemplo, para exibir o seu endereço de e-mail em um formulário de cadastro ou acesso, para que você não precise digitar novamente o endereço de e-mail sempre que quiser fazer um cadastro ou acesso em algum dos nossos serviços ou produtos. Codificamos nossos cookies para que apenas nós possamos interpretar as informações armazenadas neles. Você está livre para recusar nossos cookies caso o seu navegador permita, mas isso pode interferir no uso do nosso site. Nós e nossos prestadores de serviço também usam cookies para personalizar nossos serviços e/ou produtos, conteúdo e publicidade, avaliar a eficiência das promoções e promover confiança e segurança. Você pode encontrar cookies de terceiros ao acessar os serviços ou ao adquirir os produtos de ZERO7 Tesouraria em determinados sites que não estão sob nosso controle.</p>
+  </section>
+
+  <section class="reg-secao" aria-labelledby="politica-04-remarketing-do-google">
+    <div class="reg-titulo">
+      <h2 id="politica-04-remarketing-do-google">Remarketing do Google</h2>
+      <a class="reg-ancora" href="#politica-04-remarketing-do-google" data-chrome aria-label="Copiar o link da seção Remarketing do Google"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>Nós utilizamos o recurso de Remarketing do Google Adwords para veicular anúncios em sites de parceiros do Google. Este recurso permite identificar que você visitou o nosso site e assim o Google pode exibir o nosso anúncio para você em diferentes websites. Diversos fornecedores de terceiros, inclusive o Google, compram espaços de publicidade em sites da Internet. Nós, eventualmente, contratamos o Google para exibir nossos anúncios nesses espaços. Para identificar a sua visita no nosso site, tanto outros fornecedores de terceiros, quanto o Google, utilizam-se de cookies, de forma similar ao exposto na seção “Como usamos cookies?”. Você pode desativar o uso de cookies pelo Google acessando o Gerenciador de preferências de anúncio.</p>
+  </section>
+
+  <section class="reg-secao" aria-labelledby="politica-05-remarketing-do-facebook">
+    <div class="reg-titulo">
+      <h2 id="politica-05-remarketing-do-facebook">Remarketing do Facebook</h2>
+      <a class="reg-ancora" href="#politica-05-remarketing-do-facebook" data-chrome aria-label="Copiar o link da seção Remarketing do Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>Nós utilizamos o recurso de Remarketing do Facebook para veicular anúncios dentro do Facebook. Este recurso permite identificar que você visitou o nosso site e assim o Facebook pode exibir os nossos anúncios para você dentro do próprio Facebook. Para identificar a sua visita no nosso site utilizamos os cookies, de forma similar ao exposto na seção “Como usamos cookies?”. Caso você venha a visualizar um dos nossos anúncios no Facebook e não queira mais visualizá-lo, no próprio anúncio existem opções para ocultar e não visualizar futuramente os nossos anúncios.</p>
+  </section>
+
+  <section class="reg-secao" aria-labelledby="politica-06-como-protegemos-e-armazenamos">
+    <div class="reg-titulo">
+      <h2 id="politica-06-como-protegemos-e-armazenamos">Como protegemos e armazenamos informações pessoais</h2>
+      <a class="reg-ancora" href="#politica-06-como-protegemos-e-armazenamos" data-chrome aria-label="Copiar o link da seção Como protegemos e armazenamos informações pessoais"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>Ao longo desta política, usamos o termo “informações pessoais” para descrever informações que possam ser associadas a uma determinada pessoa e possam ser usadas para identificar essa pessoa. Nós não consideraremos como informações pessoais as informações que devem permanecer anônimas, para que elas não identifiquem um determinado usuário. Armazenamos e processamos suas informações pessoais em nossos computadores e as protegemos sob medidas de proteção físicas, eletrônicas e processuais. Usamos proteções de computador, como firewalls e criptografia de dados, aplicamos controles de acesso físico a nossos prédios e arquivos e autorizamos o acesso a informações pessoais apenas para os funcionários que precisem delas para cumprir suas responsabilidades profissionais, que o fazem de forma ética.</p>
+  </section>
+
+  <section class="reg-secao" aria-labelledby="politica-07-como-usamos-as-informacoes">
+    <div class="reg-titulo">
+      <h2 id="politica-07-como-usamos-as-informacoes">Como usamos as informações pessoais que coletamos</h2>
+      <a class="reg-ancora" href="#politica-07-como-usamos-as-informacoes" data-chrome aria-label="Copiar o link da seção Como usamos as informações pessoais que coletamos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>Nossa finalidade principal ao coletar informações pessoais é fornecer a você uma experiência segura, tranquila, eficiente e personalizada. Para isso, usamos suas informações pessoais para:</p>
+    <ul>
+      <li>Fornecer os serviços, comercializar os produtos e prestar o suporte ao usuário, se e somente quando solicitados;</li>
+      <li>Processar transações e enviar avisos sobre as suas transações;</li>
+      <li>Solucionar disputas, cobrar taxas e solucionar problemas;</li>
+      <li>Impedir atividades potencialmente proibidas ou ilegais;</li>
+      <li>Personalizar, avaliar e melhorar nossos serviços e produtos, além do conteúdo e do layout do nosso site;</li>
+      <li>Enviar materiais de marketing direcionados, avisos de atualização no serviço e/ou do produto e ofertas promocionais com base nas suas preferências de comunicação;</li>
+      <li>Comparar informações, para uma maior precisão e verificá-las com terceiros.</li>
+    </ul>
+  </section>
+
+  <section class="reg-secao" aria-labelledby="politica-08-marketing">
+    <div class="reg-titulo">
+      <h2 id="politica-08-marketing">Marketing</h2>
+      <a class="reg-ancora" href="#politica-08-marketing" data-chrome aria-label="Copiar o link da seção Marketing"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>Não vendemos nem alugamos suas informações pessoais para terceiros para fins de marketing sem seu consentimento explícito. Podemos combinar suas informações com as informações que coletamos de outras empresas e usá-las para melhorar e personalizar nossos serviços, conteúdo e publicidade. Se não desejar receber nossas mensagens de marketing nem participar de nossos programas de personalização de anúncios, basta clicar no link de descadastramento fornecido no final de todos os nossos e-mails.</p>
+  </section>
+
+  <section class="reg-secao" aria-labelledby="politica-09-como-compartilhamos">
+    <div class="reg-titulo">
+      <h2 id="politica-09-como-compartilhamos">Como compartilhamos informações pessoais com outras partes</h2>
+      <a class="reg-ancora" href="#politica-09-como-compartilhamos" data-chrome aria-label="Copiar o link da seção Como compartilhamos informações pessoais com outras partes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+    </div>
+    <p>Podemos compartilhar suas informações pessoais com:</p>
+    <ul>
+      <li>Membros da equipe administrativa da empresa ZERO7 Tesouraria para fornecer conteúdo, produtos e serviços conjuntos (como registro, transações e suporte ao cliente) e para ajudar a detectar e impedir atos potencialmente ilegais e violações de nossas políticas, além de cooperar nas decisões quanto a seus produtos, serviços e comunicações. Os membros da nossa equipe usarão essas informações para lhe enviar comunicações de marketing apenas e somente se solicitado por você.</li>
+      <li>Prestadores dos serviços sob contrato que colaboram, em partes, de nossas operações comerciais (prevenção contra fraude e pirataria, atividades de cobrança, marketing, serviços de tecnologia). Nossos contratos determinam que esses fornecedores de serviço só usem suas informações em relação aos serviços que realizam para nós, e não em benefício próprio.</li>
+      <li>Empresas com as quais pretendemos nos fundir ou adquirir. (Se ocorrer uma fusão, exigiremos que a nova entidade constituída siga essa política de privacidade com relação às suas informações pessoais. Se suas informações pessoais puderem ser usadas contra essa política, você receberá um aviso prévio).</li>
+      <li>Autoridades policiais, oficiais do governo ou outros terceiros quando: (i) formos obrigados a isso por intimação, decisão judicial ou procedimento legal semelhante; (ii) precisarmos fazer isso para estar em conformidade com a lei ou com as regras de associação de cartão de crédito; (iii) estivermos cooperando com uma investigação policial em andamento; acreditamos, de boa-fé, que a divulgação das informações pessoais é necessária para impedir danos físicos ou perdas financeiras ou reportar atividade ilegal suspeita.</li>
+      <li>Outros terceiros apenas com seu consentimento para tanto. Note que esses terceiros podem estar em outros países nos quais a legislação sobre o processamento de informações pessoais seja menos rígida do que a do seu país. Nos casos em que nossa empresa e um parceiro promovem juntos nossos serviços ou comercializam nossos produtos em parceria, nós podemos divulgar ao parceiro algumas informações pessoais tais como nome, endereço e nome de usuário das pessoas que se inscreveram nos nossos serviços ou adquiriram nossos produtos com resultado da promoção conjunta com o único propósito de permitir a nós e ao parceiro avaliar os resultados da promoção. Nesse caso, informações pessoais não podem ser usadas pelo parceiro para nenhum outro propósito. Não venderemos ou alugaremos nenhuma das suas informações pessoais para terceiros no curso normal dos negócios e só compartilha suas informações pessoais com terceiros, conforme descrito nesta política.</li>
+    </ul>
+  </section>
+
+  <p class="reg-aceite"><strong>ATENÇÃO! SE VOCÊ SE INSCREVER NA NOSSA BASE DE DADOS EM UM SITE DE TERCEIROS, OU POR MEIO DE UM APLICATIVO DE TERCEIROS, QUALQUER INFORMAÇÃO INSERIDA NAQUELE SITE OU APLICATIVO (E NÃO DIRETAMENTE NO NOSSO SITE) SERÁ COMPARTILHADA COM O PROPRIETÁRIO DESSE SITE OU APLICATIVO, E SUAS INFORMAÇÕES PODEM ESTAR SUJEITAS AS POLÍTICAS DE PRIVACIDADE DELES.</strong></p>
+</article>
+        <!-- /build:conteudo -->
+      </div>
+
+    </div>
+  </main>
+
+  <a class="reg-topo" href="#topo" data-chrome>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+    <span>Voltar ao topo</span>
+  </a>
+
+  <p class="reg-aviso" role="status" aria-live="polite"></p>
+
+  <!-- build:rodape -->
+  <footer id="footer">
+    <div class="wrapper">
+      <div class="content">
+        <div class="logo">
+          <img width="176" height="55" class="logo" src="../assets/logo zero7.svg" alt="">
+          <p class="rodape__cnpj">Zero7 Tesouraria LTDA | CNPJ: 49.452.697/0001-20</p>
+          <p>Av. Dep. Jamel Cecílio, nº 2929 - Jardim Goiás, Goiânia - GO, 74810-240</p>
+          <p>Segunda a sexta-feira, 8h às 18h</p>
+          <div id="ra-verified-seal">
+            <!-- C3: o selo custava 91KB de Google Fonts (Inter Tight + Open Sans,
+                 puxados pelo styles.css do raichu) + o bundle, tudo na
+                 janela inicial de quem nunca chega ao rodapé. O script
+                 agora entra quando o selo se APROXIMA (IO, 600px de
+                 folga), injetado com o MESMO id e data-* — o bundle do RA
+                 lê a própria tag por id. Sem IO, injeta direto (selo >
+                 performance nesse navegador). Markup da div intocado. -->
+            <script>
+              (function () {
+                var alvo = document.getElementById('ra-verified-seal');
+                var entrou = false;
+                function injetar() {
+                  if (entrou) return;
+                  entrou = true;
+                  var s = document.createElement('script');
+                  s.type = 'text/javascript';
+                  s.id = 'ra-embed-verified-seal';
+                  s.src = 'https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js';
+                  s.setAttribute('data-id', 'WDRYanlCUWlyT0xFUTFZeDp6ZXJvNy10ZXNvdXJhcmlh');
+                  s.setAttribute('data-target', 'ra-verified-seal');
+                  s.setAttribute('data-model', '2');
+                  alvo.appendChild(s);
+                }
+                if (!alvo) return;
+                if (!('IntersectionObserver' in window)) { injetar(); return; }
+                var obs = new IntersectionObserver(function (es) {
+                  if (es.some(function (e) { return e.isIntersecting; })) { obs.disconnect(); injetar(); }
+                }, { rootMargin: '600px 0px 600px 0px' });
+                obs.observe(alvo);
+              })();
+            </script>
+          </div>
+        </div>
+
+        <div class="navigation">
+          <h3>Navegação</h3>
+
+          <p><a href="../">Home</a></p>
+          <p><a href="https://blog.zero7.com.br/">Blog</a></p>
+          <p><a href="../#plan">Planos</a></p>
+          <p><a href="../regulamento/">Regulamento</a></p>
+          <p><a href="https://zero7.com.br/quem-somos/">Quem Somos</a></p>
+          <p><a target="_blank" rel="noopener" href="https://app.zero7.com.br/login">Área do Trader</a></p>
+        </div>
+
+        <div class="contato">
+          <h3>Suporte</h3>
+          <p>suporte@zero7.com.br</p>
+        </div>
+
+        <div class="redes-sociais">
+          <h3>Social</h3>
+          <div class="icons">
+            <a aria-label="Zero7 no Instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/zero7tesouraria/"><ion-icon
+                name="logo-instagram" aria-hidden="true"></ion-icon></a>
+            <a aria-label="Zero7 no TikTok" target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@zero7_mesa"><ion-icon name="logo-tiktok" aria-hidden="true"></ion-icon></a>
+            <a aria-label="Zero7 no Facebook" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/zero7tesouraria"><ion-icon
+                name="logo-facebook" aria-hidden="true"></ion-icon></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- /build:rodape -->
+
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCJQPMC" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="../dist/script/regulamento.94827c65.js" defer></script>
+</body>
+</html>

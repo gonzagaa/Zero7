@@ -29,7 +29,8 @@ const nav = await chromium.launch();
 
 /* Páginas (regra 27): cada página tem o SEU crítico, extraído com ela
    aberta, para cada bundle que ela carrega. A home: só o dela. O
-   regulamento: o bundle da home (nav, rodapé, tokens) + o regulamento.css
+   regulamento e a política (mesmo layout): o bundle da home (nav, rodapé,
+   tokens) + o regulamento.css
    — sem as faces .hero e a do swiper (a página declara as .sub depois dos
    links; face que não pinta não precisa estar no crítico). */
 async function decisoes(urlPagina, nomeBundle) {
@@ -281,10 +282,13 @@ return { texto: resultado.saida, bundle };
 
 const hash8 = (s) => crypto.createHash('sha256').update(s).digest('hex').slice(0, 8);
 const paginas = [{ nome: 'home', url: servidor.url, bundles: [manifest.css], saida: 'dist/critico.css', meta: 'dist/critico.meta.json' }];
-if (manifest.regulamento) {
+// as secundárias (regra 27) que o build registrou no manifest
+for (const chave of ['regulamento', 'politica']) {
+  const m = manifest[chave];
+  if (!m) continue;
   paginas.push({
-    nome: 'regulamento', url: new URL('/regulamento/index.html', servidor.url).href,
-    bundles: [manifest.css, manifest.regulamento.css], saida: 'dist/critico-regulamento.css', meta: 'dist/critico-regulamento.meta.json',
+    nome: chave, url: new URL(`/${m.pasta || chave}/index.html`, servidor.url).href,
+    bundles: [manifest.css, m.css], saida: `dist/critico-${chave}.css`, meta: `dist/critico-${chave}.meta.json`,
     semFaces: '\\.hero\\.woff2|swiper-icons',
   });
 }

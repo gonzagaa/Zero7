@@ -89,6 +89,8 @@ GSAP + countUp (cdnjs.cloudflare.com). As fontes são servidas de `css/fonts/`
 3. `node scripts/regulamento-fidelidade.mjs` — tem que acusar exatamente a mudança aprovada, nada além.
 4. Confirmada, grave o texto como o novo aprovado: `node scripts/regulamento-fidelidade.mjs --gravar-referencia --da-pagina`, e commite os dois juntos.
 
+A Política de Privacidade (`politica-de-privacidade/`, servida em `/home/politica-de-privacidade/`) segue os mesmos quatro passos, com o texto em `politica-de-privacidade/conteudo.html` e a sonda com `--alvo politica` (referência em `medidas/politica-referencia.txt`).
+
 ## Como trocar a tarja em vídeo
 
 1. Crie a pasta da campanha: `desktop.mp4` (3160×126), `mobile.mp4` (2080×284), 15 s, sem áudio, e `campanha.json` com `{ "slug": "nome-novo", "fim": "AAAA-MM-DD" }` (slug nunca repetido; `fim` opcional).

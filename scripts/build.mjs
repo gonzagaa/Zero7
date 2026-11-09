@@ -16,9 +16,9 @@
 // JS   -> ARQUIVO POR ARQUIVO para dist/script/<nome>.<hash8>.js. NÃO
 //         concatena: os escopos de topo colidiriam, e 4selet.js/blackPlanos.js
 //         têm lógica protegida (regra 4). vendor/ e CDN não entram.
-// HTML -> o index.html tem as referências trocadas; a página secundária
-//         regulamento/index.html é montada pelos marcadores (ver
-//         construirRegulamento, regra 27); nas páginas de obrigado
+// HTML -> o index.html tem as referências trocadas; as páginas secundárias
+//         (regulamento/ e politica-de-privacidade/) são montadas pelos
+//         marcadores (ver construirSecundarias, regra 27); nas páginas de obrigado
 //         (pedido-registrado/*) o build só preenche nav, contato e rodapé
 //         com os da home (ver construirObrigado, regra 28); cert/ fica
 //         como está.
@@ -213,20 +213,22 @@ async function construir() {
   }
 
   fs.writeFileSync(path.join(RAIZ, 'index.html'), html);
-  const reg = await construirRegulamento({ manifest, nomeCssHome: nomeCss, facesCompletas, htmlHome: html });
+  const secundarias = await construirSecundarias({ manifest, nomeCssHome: nomeCss, facesCompletas, htmlHome: html });
   const obrigado = construirObrigado({ htmlHome: html });
 
   fs.writeFileSync(path.join(DIST, 'manifest.json'), JSON.stringify(manifest, null, 1) + '\n');
-  console.log(`build ok: ${nomeCss} + ${tagsJs.length} js${reg ? ` | regulamento: ${reg}` : ''}${obrigado ? ` | obrigado: ${obrigado}` : ''}`);
+  console.log(`build ok: ${nomeCss} + ${tagsJs.length} js${secundarias.map((s) => ` | ${s}`).join('')}${obrigado ? ` | obrigado: ${obrigado}` : ''}`);
   return manifest;
 }
 
-/* ── Páginas secundárias: /regulamento/ (regra 27) ──────────────────────
-   Mesmo build, mesmas réguas. O regulamento/index.html é o LAYOUT (editado
-   à mão, fora dos marcadores <!-- build:x --> … <!-- /build:x -->); o build
-   preenche os marcadores a cada execução:
-     css      crítico DESTA página (dist/critico-regulamento.css, gerado
-              pelo critico.mjs) + o bundle da home + dist/regulamento.<h>.css
+/* ── Páginas secundárias: /regulamento/ e /politica-de-privacidade/ (regra 27)
+   Mesmo build, mesmas réguas, o MESMO layout (classes reg-*, o
+   regulamento.css e o regulamento.js valem para as duas). O
+   <pasta>/index.html é o LAYOUT (editado à mão, fora dos marcadores
+   <!-- build:x --> … <!-- /build:x -->); o build preenche os marcadores a
+   cada execução:
+     css      crítico DESTA página (dist/critico-<chave>.css, gerado pelo
+              critico.mjs) + o bundle da home + dist/regulamento.<h>.css
               (ambos assíncronos, padrão da regra 18) + as faces .sub
               (completas, as mesmas da home) com preload das que pintam a
               primeira tela: NCS (h1) e TT Fors Regular (corpo). Os .hero
@@ -235,32 +237,55 @@ async function construir() {
               5,6KB. Nenhum subset novo.
      nav      o <nav> da home, ADAPTADO: sem data-aos, sem a classe da
               tarja, com .scroll fixa (fundo sólido — o topo aqui é branco),
-              âncoras e assets com ../, aria-current em "Regulamento".
+              âncoras e assets com ../, aria-current no link da própria
+              página e os links para as outras secundárias relativos
+              (../regulamento/), sem o salto do 301 da raiz.
      rodape   o <footer> da home, com o mesmo ajuste de caminhos.
      sumario  a lista das seções, gerada dos h2 do conteúdo.
-     conteudo regulamento/conteudo.html (FONTE do texto — só muda junto com
-              a sonda de fidelidade), mais a interface que não é texto do
-              regulamento: tempo de leitura, sumário do celular e as
-              âncoras das seções — tudo marcado data-chrome, que a sonda
-              ignora.
+     conteudo <pasta>/conteudo.html (FONTE do texto — só muda junto com
+              a sonda de fidelidade), mais a interface que não é texto da
+              página: tempo de leitura, sumário do celular e as âncoras das
+              seções — tudo marcado data-chrome, que a sonda ignora.
    Os <script src="../script/x.js"> viram dist/script/x.<hash>.js como na
    home. A data do conteúdo (<time datetime>) alimenta o JSON-LD
-   (dateModified) e o cabeçalho de impressão. */
-async function construirRegulamento({ manifest, nomeCssHome, facesCompletas, htmlHome }) {
-  const PASTA = 'regulamento';
-  if (!fs.existsSync(path.join(RAIZ, PASTA, 'index.html'))) return null;
+   (dateModified) e o cabeçalho de impressão. Página nova = uma linha em
+   SECUNDARIAS + a pasta com index.html e conteudo.html + o critico.mjs, o
+   npm run check e o .htaccess (o 404 do conteudo.html). */
+const SECUNDARIAS = [
+  { pasta: 'regulamento', chave: 'regulamento', id: 'regulamento', sumario: 'Neste regulamento', impressao: 'Regulamento Zero7 — atualizado em', noSite: 'https://zero7.com.br/regulamento/' },
+  { pasta: 'politica-de-privacidade', chave: 'politica', id: 'politica', sumario: 'Nesta política', impressao: 'Política de Privacidade Zero7 — atualizada em', noSite: 'https://zero7.com.br/politica-de-privacidade/' },
+];
+const desatualizadoDe = (chave) => `critico${chave[0].toUpperCase()}${chave.slice(1)}Desatualizado`;
+
+async function construirSecundarias(ctx) {
+  const presentes = SECUNDARIAS.filter((s) => fs.existsSync(path.join(RAIZ, s.pasta, 'index.html')));
+  if (!presentes.length) return [];
+  /* CSS das secundárias, um só para todas, mesmo esquema de hash */
+  const cssReg = (await transform(reescreverUrls(ler('css/regulamento.css'), 'css'), { loader: 'css', minify: true })).code;
+  const hReg = hash8(cssReg);
+  const nomeCssReg = `dist/regulamento.${hReg}.css`;
+  for (const f of fs.readdirSync(DIST)) if (/^regulamento\.[0-9a-f]{8}\.css$/.test(f) && f !== `regulamento.${hReg}.css`) fs.rmSync(path.join(DIST, f));
+  fs.writeFileSync(path.join(RAIZ, nomeCssReg), cssReg);
+  const saida = [];
+  for (const cfg of presentes) saida.push(`${cfg.pasta}: ${await construirSecundaria(cfg, { ...ctx, nomeCssReg })}`);
+  return saida;
+}
+
+async function construirSecundaria(cfg, { manifest, nomeCssHome, nomeCssReg, facesCompletas, htmlHome }) {
+  const PASTA = cfg.pasta;
   let pag = ler(`${PASTA}/index.html`);
   const fonte = ler(`${PASTA}/conteudo.html`).replace(/<!--[\s\S]*?-->/g, '').trim();
   const texto = (h) => h.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+  const arq = `${PASTA}/conteudo.html`;
 
   /* 1) o conteúdo tem a forma que o layout espera — senão, LANÇA */
-  if ((fonte.match(/<h1[\s>]/g) || []).length !== 1) throw new Error('regulamento/conteudo.html: precisa de exatamente um <h1>');
-  const h2s = [...fonte.matchAll(/<h2 id="(regulamento-(\d{2})-[a-z0-9-]+)">([\s\S]*?)<\/h2>/g)];
-  if ((fonte.match(/<h2[\s>]/g) || []).length !== h2s.length) throw new Error('regulamento/conteudo.html: todo <h2> precisa de id="regulamento-NN-slug"');
-  h2s.forEach((m, i) => { if (Number(m[2]) !== i + 1) throw new Error(`regulamento/conteudo.html: seções fora de ordem (${m[1]} na posição ${i + 1})`); });
-  if (new Set(h2s.map((m) => m[1])).size !== h2s.length) throw new Error('regulamento/conteudo.html: id de seção repetido');
+  if ((fonte.match(/<h1[\s>]/g) || []).length !== 1) throw new Error(`${arq}: precisa de exatamente um <h1>`);
+  const h2s = [...fonte.matchAll(new RegExp(`<h2 id="(${cfg.id}-(\\d{2})-[a-z0-9-]+)">([\\s\\S]*?)<\\/h2>`, 'g'))];
+  if ((fonte.match(/<h2[\s>]/g) || []).length !== h2s.length) throw new Error(`${arq}: todo <h2> precisa de id="${cfg.id}-NN-slug"`);
+  h2s.forEach((m, i) => { if (Number(m[2]) !== i + 1) throw new Error(`${arq}: seções fora de ordem (${m[1]} na posição ${i + 1})`); });
+  if (new Set(h2s.map((m) => m[1])).size !== h2s.length) throw new Error(`${arq}: id de seção repetido`);
   const data = fonte.match(/<time datetime="(\d{4})-(\d{2})-(\d{2})">/);
-  if (!data) throw new Error('regulamento/conteudo.html: falta <time datetime="AAAA-MM-DD"> da última atualização');
+  if (!data) throw new Error(`${arq}: falta <time datetime="AAAA-MM-DD"> da última atualização`);
   const [, aaaa, mm, dd] = data;
 
   /* 2) compõe o artigo */
@@ -275,22 +300,21 @@ async function construirRegulamento({ manifest, nomeCssHome, facesCompletas, htm
   const icone = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
   let art = fonte
     .replace(/(<p class="reg-atualizacao">[\s\S]*?<\/p>)/, (m) => `<div class="reg-meta">\n      ${m}\n      <p class="reg-tempo" data-chrome><span aria-hidden="true">·</span>${minutos} min de leitura</p>\n    </div>`)
-    .replace('</header>', () => `</header>\n\n  <details class="reg-sumario-movel" data-chrome>\n    <summary>Neste regulamento</summary>\n    <nav aria-label="Neste regulamento">\n${lista('      ')}\n    </nav>\n  </details>`)
+    .replace('</header>', () => `</header>\n\n  <details class="reg-sumario-movel" data-chrome>\n    <summary>${cfg.sumario}</summary>\n    <nav aria-label="${cfg.sumario}">\n${lista('      ')}\n    </nav>\n  </details>`)
     .replace(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g, (m, id, inner) =>
       `<div class="reg-titulo">\n      ${m}\n      <a class="reg-ancora" href="#${id}" data-chrome aria-label="Copiar o link da seção ${texto(inner)}">${icone}</a>\n    </div>`);
-  if (!art.includes('class="reg-meta"') || !art.includes('reg-sumario-movel')) throw new Error('regulamento/conteudo.html: falta <header class="reg-cabeca"> com <p class="reg-atualizacao">');
+  if (!art.includes('class="reg-meta"') || !art.includes('reg-sumario-movel')) throw new Error(`${arq}: falta <header class="reg-cabeca"> com <p class="reg-atualizacao">`);
 
   /* 3) nav e rodapé: os da home, adaptados para ../ */
   const navHome = (htmlHome.match(/<nav\b[^>]*\bid="navigation"[^>]*>[\s\S]*?<\/nav>/) || [])[0];
   const rodapeHome = (htmlHome.match(/<footer id="footer">[\s\S]*?<\/footer>/) || [])[0];
   if (!navHome || !rodapeHome) throw new Error('não achei o <nav id="navigation"> ou o <footer id="footer"> no index.html');
-  const adaptar = (h) => h
+  const adaptar = (h) => SECUNDARIAS.reduce((acc, s) => acc.split(`href="${s.noSite}"`).join(s === cfg ? 'href="./" aria-current="page"' : `href="../${s.pasta}/"`), h
     .replace(/\s+data-aos(?:-[a-z-]+)?="[^"]*"/g, '')
     .replace(/ aria-current="page"/g, '')
     .replace(/href="#home"/g, 'href="../"')
     .replace(/href="#([^"]+)"/g, 'href="../#$1"')
-    .replace(/(src|href)="\.\/assets\//g, '$1="../assets/')
-    .replace(/<a ([^>]*?)href="https:\/\/zero7\.com\.br\/regulamento\/"/g, '<a $1href="./" aria-current="page"');
+    .replace(/(src|href)="\.\/assets\//g, '$1="../assets/'));
   const nav = adaptar(navHome).replace(/^<nav\b[^>]*>/, (tag) => {
     const classes = ((tag.match(/class="([^"]*)"/) || [])[1] || '').split(/\s+/).filter((c) => c && !/^active/.test(c));
     classes.push('scroll');
@@ -299,45 +323,41 @@ async function construirRegulamento({ manifest, nomeCssHome, facesCompletas, htm
   });
   const rodape = adaptar(rodapeHome);
 
-  /* 4) CSS da página, mesmo esquema de hash */
-  const cssReg = (await transform(reescreverUrls(ler('css/regulamento.css'), 'css'), { loader: 'css', minify: true })).code;
-  const hReg = hash8(cssReg);
-  const nomeCssReg = `dist/regulamento.${hReg}.css`;
-  for (const f of fs.readdirSync(DIST)) if (/^regulamento\.[0-9a-f]{8}\.css$/.test(f) && f !== `regulamento.${hReg}.css`) fs.rmSync(path.join(DIST, f));
-  fs.writeFileSync(path.join(RAIZ, nomeCssReg), cssReg);
-
-  /* 5) faces .sub (as completas da home, com caminho ../) + preloads */
+  /* 4) faces .sub (as completas da home, com caminho ../) + preloads */
   const faces = facesCompletas.map((f) => f.replace(/url\(\s*(['"]?)\.\/css\/fonts\//g, 'url($1../css/fonts/'));
   const urlDe = (f) => (f.match(/url\(\s*['"]?([^'")]+)['"]?\s*\)/) || [])[1];
   const preloadar = faces.filter((f) => /font-family:\s*'NCS Radhiumz'/.test(f) || (/font-family:\s*'TT Fors Trial'/.test(f) && /font-weight:\s*400\b/.test(f))).map(urlDe);
-  if (preloadar.length !== 2) throw new Error(`regulamento: esperava 2 faces para preload (NCS, TT Regular), achei ${preloadar.length}`);
+  if (preloadar.length !== 2) throw new Error(`${PASTA}: esperava 2 faces para preload (NCS, TT Regular), achei ${preloadar.length}`);
 
-  /* 6) bloco de CSS: crítico (se houver e for deste par de bundles) */
-  const metaCritico = fs.existsSync(path.join(DIST, 'critico-regulamento.meta.json')) ? JSON.parse(ler('dist/critico-regulamento.meta.json')) : null;
+  /* 5) bloco de CSS: crítico (se houver e for deste par de bundles) */
+  const CRITICO = `dist/critico-${cfg.chave}.css`;
+  const META = `dist/critico-${cfg.chave}.meta.json`;
+  const FLAG = desatualizadoDe(cfg.chave);
+  const metaCritico = fs.existsSync(path.join(RAIZ, META)) ? JSON.parse(ler(META)) : null;
   const hashDe = (rel) => crypto.createHash('sha256').update(fs.readFileSync(path.join(RAIZ, rel), 'utf8')).digest('hex').slice(0, 8);
   const linhas = [];
   for (const u of preloadar) linhas.push(`  <link rel="preload" href="${u}" as="font" type="font/woff2" crossorigin>`);
-  if (metaCritico && fs.existsSync(path.join(DIST, 'critico-regulamento.css'))) {
-    manifest.criticoRegulamentoDesatualizado = metaCritico.hashes?.home !== hashDe(nomeCssHome) || metaCritico.hashes?.regulamento !== hashDe(nomeCssReg);
-    if (manifest.criticoRegulamentoDesatualizado) console.warn('AVISO: dist/critico-regulamento.css nasceu de outros bundles — rode node scripts/critico.mjs e depois npm run build');
-    const critico = fs.readFileSync(path.join(DIST, 'critico-regulamento.css'), 'utf8').replace(/<\/style/gi, '<\\/style');
+  if (metaCritico && fs.existsSync(path.join(RAIZ, CRITICO))) {
+    manifest[FLAG] = metaCritico.hashes?.home !== hashDe(nomeCssHome) || metaCritico.hashes?.regulamento !== hashDe(nomeCssReg);
+    if (manifest[FLAG]) console.warn(`AVISO: ${CRITICO} nasceu de outros bundles — rode node scripts/critico.mjs e depois npm run build`);
+    const critico = fs.readFileSync(path.join(RAIZ, CRITICO), 'utf8').replace(/<\/style/gi, '<\\/style');
     linhas.push(`  <style id="css-critico">${critico}</style>`);
     for (const n of [nomeCssHome, nomeCssReg]) linhas.push(`  <link rel="stylesheet" href="../${n}" media="print" onload="this.media='all';this.onload=null">`);
     linhas.push(`  <noscript><link rel="stylesheet" href="../${nomeCssHome}"><link rel="stylesheet" href="../${nomeCssReg}"></noscript>`);
   } else {
     // primeiro build: bloqueante, até o critico.mjs gerar o crítico desta página
-    manifest.criticoRegulamentoDesatualizado = true;
+    manifest[FLAG] = true;
     for (const n of [nomeCssHome, nomeCssReg]) linhas.push(`  <link rel="stylesheet" href="../${n}">`);
   }
   // as .sub DEPOIS dos links: na cascata vencem as faces .hero que o bundle
   // da home declara para as mesmas famílias
   linhas.push(`  <style id="fontes-regulamento">${faces.join('\n')}</style>`);
 
-  /* 7) preenche os marcadores */
+  /* 6) preenche os marcadores */
   const entre = (h, nome, novo) => {
     const ini = `<!-- build:${nome} -->`, fim = `<!-- /build:${nome} -->`;
     const a = h.indexOf(ini), b = h.indexOf(fim);
-    if (a < 0 || b < a) throw new Error(`regulamento/index.html: marcador build:${nome} ausente`);
+    if (a < 0 || b < a) throw new Error(`${PASTA}/index.html: marcador build:${nome} ausente`);
     const recuo = (h.slice(0, a).match(/[ \t]*$/) || [''])[0];
     return h.slice(0, a + ini.length) + '\n' + novo + '\n' + recuo + h.slice(b);
   };
@@ -347,9 +367,9 @@ async function construirRegulamento({ manifest, nomeCssHome, facesCompletas, htm
   pag = entre(pag, 'conteudo', art);
   pag = entre(pag, 'rodape', '  ' + rodape);
   pag = pag.replace(/"dateModified": "\d{4}-\d{2}-\d{2}"/, `"dateModified": "${aaaa}-${mm}-${dd}"`);
-  pag = pag.replace(/(<p class="reg-impressao"[^>]*>)[^<]*(<\/p>)/, `$1Regulamento Zero7 — atualizado em ${dd}/${mm}/${aaaa}$2`);
+  pag = pag.replace(/(<p class="reg-impressao"[^>]*>)[^<]*(<\/p>)/, `$1${cfg.impressao} ${dd}/${mm}/${aaaa}$2`);
 
-  /* 8) JS da página: mesmo minify com hash da home */
+  /* 7) JS da página: mesmo minify com hash da home */
   const tags = [...pag.matchAll(/<script([^>]*)\ssrc="\.\.\/(?:script\/([\w-]+)\.js[^"]*|dist\/script\/([\w-]+)\.[0-9a-f]{8}\.js)"([^>]*)><\/script>/g)];
   const js = {};
   for (const m of tags) {
@@ -366,7 +386,7 @@ async function construirRegulamento({ manifest, nomeCssHome, facesCompletas, htm
   }
 
   fs.writeFileSync(path.join(RAIZ, PASTA, 'index.html'), pag);
-  manifest.regulamento = { css: nomeCssReg, js, palavras, minutosDeLeitura: minutos, secoes: itens.length, preload: preloadar };
+  manifest[cfg.chave] = { pasta: PASTA, css: nomeCssReg, js, palavras, minutosDeLeitura: minutos, secoes: itens.length, preload: preloadar };
   return `${nomeCssReg} + ${tags.length} js, ${itens.length} seções, ${palavras} palavras (${minutos} min)`;
 }
 
@@ -435,7 +455,7 @@ if (process.argv.includes('--watch')) {
   };
   fs.watch(path.join(RAIZ, 'css'), { recursive: true }, disparar);
   fs.watch(path.join(RAIZ, 'script'), disparar);
-  // o texto do regulamento também — só o arquivo-fonte: a pasta tem o
+  // o texto das secundárias também — só o arquivo-fonte: a pasta tem o
   // index.html que o próprio build reescreve
-  if (fs.existsSync(path.join(RAIZ, 'regulamento', 'conteudo.html'))) fs.watch(path.join(RAIZ, 'regulamento', 'conteudo.html'), disparar);
+  for (const s of SECUNDARIAS) if (fs.existsSync(path.join(RAIZ, s.pasta, 'conteudo.html'))) fs.watch(path.join(RAIZ, s.pasta, 'conteudo.html'), disparar);
 }

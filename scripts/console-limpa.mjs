@@ -2,9 +2,10 @@
 //
 //   node scripts/console-limpa.mjs
 //
-// Também /regulamento/ (regra 27): carga, rolagem até o rodapé, sumário do
-// celular (abrir, escolher seção), menu do celular (abrir, Esc), clique na
-// âncora de uma seção. Qualquer pageerror reprova.
+// Também as secundárias, /regulamento/ e /politica-de-privacidade/ (regra
+// 27): carga, rolagem até o rodapé, sumário do celular (abrir, escolher
+// seção), menu do celular (abrir, Esc), clique na âncora de uma seção.
+// Qualquer pageerror reprova.
 //
 // A lição que criou esta sonda: um ponto-e-vírgula faltando no global.js
 // (cbd4352, lote B) virou `window.zero7ArmarAnimacoes()(() => {…})` — o
@@ -75,7 +76,12 @@ for (const vp of [{ w: 390, h: 844, mob: true }, { w: 1474, h: 900, mob: false }
   await ctx.close();
 }
 
-/* ── /regulamento/ ─────────────────────────────────────────────────── */
+/* ── secundárias: /regulamento/ e /politica-de-privacidade/ ─────────── */
+const SECUNDARIAS = [
+  { nome: 'regulamento', pasta: 'regulamento', secaoMovel: 'regulamento-06-processo-da-fase-incubadora', secaoLateral: 'regulamento-09-planos-de-avaliacao' },
+  { nome: 'politica', pasta: 'politica-de-privacidade', secaoMovel: 'politica-06-como-protegemos-e-armazenamos', secaoLateral: 'politica-08-marketing' },
+];
+for (const pag of SECUNDARIAS)
 for (const vp of [{ w: 390, h: 844, mob: true }, { w: 1474, h: 900, mob: false }]) {
   const ctx = await nav.newContext({
     viewport: { width: vp.w, height: vp.h },
@@ -85,7 +91,7 @@ for (const vp of [{ w: 390, h: 844, mob: true }, { w: 1474, h: 900, mob: false }
   const p = await ctx.newPage();
   const erros = [];
   p.on('pageerror', (e) => erros.push(String(e).split('\n')[0].slice(0, 160)));
-  await p.goto(new URL('/regulamento/index.html', servidor.url).href, { waitUntil: 'load', timeout: 120_000 });
+  await p.goto(new URL(`/${pag.pasta}/index.html`, servidor.url).href, { waitUntil: 'load', timeout: 120_000 });
   await p.waitForTimeout(2000);
   await p.evaluate(async () => {
     const espera = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -97,7 +103,7 @@ for (const vp of [{ w: 390, h: 844, mob: true }, { w: 1474, h: 900, mob: false }
   if (vp.mob) {
     await tentar('sumário do celular', async () => {
       await p.click('.reg-sumario-movel > summary', { timeout: 5000 });
-      await p.click('.reg-sumario-movel a[href="#regulamento-06-processo-da-fase-incubadora"]', { timeout: 5000 });
+      await p.click(`.reg-sumario-movel a[href="#${pag.secaoMovel}"]`, { timeout: 5000 });
       await p.waitForTimeout(600);
       if (await p.evaluate(() => document.querySelector('.reg-sumario-movel').open)) erros.push('o sumário do celular não fechou ao escolher a seção');
     });
@@ -112,12 +118,12 @@ for (const vp of [{ w: 390, h: 844, mob: true }, { w: 1474, h: 900, mob: false }
     });
   } else {
     await tentar('sumário lateral', async () => {
-      await p.click('.reg-sumario a[href="#regulamento-09-planos-de-avaliacao"]', { timeout: 5000 });
+      await p.click(`.reg-sumario a[href="#${pag.secaoLateral}"]`, { timeout: 5000 });
       // espera a rolagem (suave, ~1,3s num salto longo) levar o título ao topo
-      await p.waitForFunction(() => { const t = document.getElementById('regulamento-09-planos-de-avaliacao').getBoundingClientRect().top; return t >= 0 && t < 260; }, null, { timeout: 8000 });
+      await p.waitForFunction((id) => { const t = document.getElementById(id).getBoundingClientRect().top; return t >= 0 && t < 260; }, pag.secaoLateral, { timeout: 8000 });
       await p.waitForTimeout(400);
       const ativo = await p.evaluate(() => document.querySelector('.reg-sumario a[aria-current="true"]')?.getAttribute('href'));
-      if (ativo !== '#regulamento-09-planos-de-avaliacao') erros.push(`sumário não marcou a seção lida (marcou ${ativo})`);
+      if (ativo !== `#${pag.secaoLateral}`) erros.push(`sumário não marcou a seção lida (marcou ${ativo})`);
     });
   }
   await tentar('âncora da seção', async () => {
@@ -127,7 +133,7 @@ for (const vp of [{ w: 390, h: 844, mob: true }, { w: 1474, h: 900, mob: false }
   });
   const ok = erros.length === 0;
   if (!ok) falhou = true;
-  console.log(`regulamento ${vp.w}px: ${ok ? 'console limpo, sumário/menu/âncora ok' : 'REPROVADO'}${erros.length ? '\n  - ' + erros.join('\n  - ') : ''}`);
+  console.log(`${pag.nome} ${vp.w}px: ${ok ? 'console limpo, sumário/menu/âncora ok' : 'REPROVADO'}${erros.length ? '\n  - ' + erros.join('\n  - ') : ''}`);
   await ctx.close();
 }
 

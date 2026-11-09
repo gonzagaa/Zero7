@@ -1,10 +1,10 @@
 // FOUC é a falha do item 5, e este é o juiz — medindo ESTILO, não conteúdo.
 //
-//   node scripts/fouc.mjs [--pagina home|regulamento]
+//   node scripts/fouc.mjs [--pagina home|regulamento|politica]
 //
-// Páginas (regra 27): sem --pagina, mede a home e /regulamento/. No
-// regulamento, a carga "só crítico" aborta os DOIS bundles (o da home e o
-// regulamento.<hash>.css).
+// Páginas (regra 27): sem --pagina, mede a home, /regulamento/ e
+// /politica-de-privacidade/. Nas secundárias, a carga "só crítico" aborta
+// os DOIS bundles (o da home e o regulamento.<hash>.css).
 //
 // Régua A (a pergunta certa): a MESMA página duas vezes, imagens e
 // terceiros bloqueados, animações congeladas — uma carga só com o crítico
@@ -28,6 +28,7 @@ const iPag = process.argv.indexOf('--pagina');
 const PAGINAS = [
   { nome: 'home', url: servidor.url, bundles: /dist\/home\.[0-9a-f]{8}\.css/ },
   { nome: 'regulamento', url: new URL('/regulamento/index.html', servidor.url).href, bundles: /dist\/(home|regulamento)\.[0-9a-f]{8}\.css/ },
+  { nome: 'politica', url: new URL('/politica-de-privacidade/index.html', servidor.url).href, bundles: /dist\/(home|regulamento)\.[0-9a-f]{8}\.css/ },
 ].filter((p) => iPag < 0 || p.nome === process.argv[iPag + 1]);
 const TERCEIROS = /googletagmanager|zdassets|zendesk|facebook|hotjar|reclameaqui|rdstation|cloudfront|doubleclick|google\.com|unpkg\.com\/ionicons/i;
 

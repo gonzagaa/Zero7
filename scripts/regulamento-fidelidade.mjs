@@ -7,6 +7,8 @@
 //   node scripts/regulamento-fidelidade.mjs --gravar-referencia --da-pagina   # texto da página → referência
 //   node scripts/regulamento-fidelidade.mjs --pagina regulamento/conteudo.html   # outra página local
 //   node scripts/regulamento-fidelidade.mjs --doc <export.html>   # documento novo × corpo da página
+//   node scripts/regulamento-fidelidade.mjs --alvo politica   # a Política de Privacidade (mesmas opções;
+//                                                       referência em medidas/politica-referencia.txt)
 //
 // --doc: o regulamento novo chega como export HTML do Google Docs. O texto
 // dele sai pelo MESMO extrator (estilo computado; links do Google
@@ -48,10 +50,19 @@ const opc = (n, p) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] :
 const SO_REFERENCIA = argv.includes('--referencia');
 const GRAVAR = argv.includes('--gravar-referencia');
 const DA_PAGINA = argv.includes('--da-pagina');
-const PAGINA = opc('--pagina', 'regulamento/index.html');
-const URL_WP = opc('--wp', 'https://zero7.com.br/regulamento/');
+/* --alvo: qual secundária (regra 27). Cada uma tem a SUA referência
+   aprovada e o seu ponto de partida no WordPress (os trechos que acham a
+   raiz do texto lá: o contêiner mais fundo que tem todos eles). */
+const ALVOS = {
+  regulamento: { pagina: 'regulamento/index.html', wp: 'https://zero7.com.br/regulamento/', ref: 'regulamento-referencia.txt', relatorio: 'regulamento-fidelidade.json', porTexto: ['O presente regulamento estabelece', 'atualização'] },
+  politica: { pagina: 'politica-de-privacidade/index.html', wp: 'https://zero7.com.br/politica-de-privacidade/', ref: 'politica-referencia.txt', relatorio: 'politica-fidelidade.json', porTexto: ['NOS COMPROMETEMOS COM A TRANSPARÊNCIA', 'SUJEITAS AS POLÍTICAS DE PRIVACIDADE'] },
+};
+const ALVO = ALVOS[opc('--alvo', 'regulamento')];
+if (!ALVO) { console.error(`--alvo desconhecido (use ${Object.keys(ALVOS).join(' ou ')})`); process.exit(1); }
+const PAGINA = opc('--pagina', ALVO.pagina);
+const URL_WP = opc('--wp', ALVO.wp);
 const DOC = opc('--doc', null);
-const ARQ_REF = path.join(RAIZ, 'medidas', 'regulamento-referencia.txt');
+const ARQ_REF = path.join(RAIZ, 'medidas', ALVO.ref);
 
 /* roda no navegador: devolve { texto, links, negritos } da raiz */
 function extrair({ seletorRaiz, porTexto, excluir }) {
@@ -155,7 +166,7 @@ const ler = async (url, cfg) => {
   return r;
 };
 
-const CFG_WP = { porTexto: ['O presente regulamento estabelece', 'atualização'], excluir: 'a.elementor-button' };
+const CFG_WP = { porTexto: ALVO.porTexto, excluir: 'a.elementor-button' };
 const CFG_NOVA = { seletorRaiz: 'article.regulamento', excluir: '[data-chrome]' };
 
 let wp = null;
@@ -232,6 +243,6 @@ if (temReferencia) comparar('referência aprovada × página', fs.readFileSync(A
 else if (!wp && !DOC) { console.error('sem WP e sem referência salva: nada para comparar'); process.exit(1); }
 
 fs.mkdirSync(path.join(RAIZ, 'medidas'), { recursive: true });
-fs.writeFileSync(path.join(RAIZ, 'medidas', 'regulamento-fidelidade.json'), JSON.stringify(relatorio, null, 1));
+fs.writeFileSync(path.join(RAIZ, 'medidas', ALVO.relatorio), JSON.stringify(relatorio, null, 1));
 console.log(falhou ? '\nFIDELIDADE: DIVERGE' : '\nFIDELIDADE: 0 divergências');
 process.exitCode = falhou ? 1 : 0;

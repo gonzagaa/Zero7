@@ -2621,6 +2621,19 @@ justamente o que a NCS não foi desenhada para fazer.
     EXATAMENTE a mudança aprovada, e só então gravar a referência nova
     (`--gravar-referencia --da-pagina`). Os ids dos h2 são estáveis
     (gente compartilha o link): não derive de novo do título.
+    **A Política de Privacidade é a segunda secundária** (nov/2026,
+    politica-de-privacidade/, saindo do WordPress): MESMO layout (classes
+    reg-*, regulamento.css e regulamento.js), uma linha em SECUNDARIAS no
+    build.mjs, crítico próprio (dist/critico-politica.css), ids
+    `politica-NN-slug`, referência em medidas/politica-referencia.txt
+    (`regulamento-fidelidade.mjs --alvo politica`) e as mesmas sondas
+    (`--pagina politica`). O texto veio do WP palavra por palavra, com o
+    negrito de lá; o que é novo é só o cabeçalho (título no artigo e
+    "Última atualização: 06/11/2026"). Sem Zendesk (o WP só carregava o
+    GTM). Entre as secundárias, os links viram relativos (../regulamento/),
+    sem o salto do 301 da raiz. A URL de fora (/politica-de-privacidade/)
+    chega aqui pelo 301 do .htaccess da RAIZ do documento, à mão, como o
+    do /regulamento/.
 
 28. **As páginas de obrigado recebem da home o que é igual à home**
     (pedido-registrado/ e as 8 subpastas por plano, out/2026). Nav,

@@ -46,6 +46,7 @@
  "criticoDesatualizado": false,
  "criticoRegulamentoDesatualizado": false,
  "regulamento": {
+  "pasta": "regulamento",
   "css": "dist/regulamento.f9c47e09.css",
   "js": {
    "script/regulamento.js": "dist/script/regulamento.94827c65.js"
@@ -53,6 +54,21 @@
   "palavras": 5064,
   "minutosDeLeitura": 25,
   "secoes": 16,
+  "preload": [
+   "../css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08",
+   "../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08"
+  ]
+ },
+ "criticoPoliticaDesatualizado": false,
+ "politica": {
+  "pasta": "politica-de-privacidade",
+  "css": "dist/regulamento.f9c47e09.css",
+  "js": {
+   "script/regulamento.js": "dist/script/regulamento.94827c65.js"
+  },
+  "palavras": 1796,
+  "minutosDeLeitura": 9,
+  "secoes": 9,
   "preload": [
    "../css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08",
    "../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08"

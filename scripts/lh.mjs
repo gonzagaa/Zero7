@@ -1,10 +1,11 @@
 // Lighthouse programático contra o servidor local, nos dois presets.
-//   node scripts/lh.mjs <rótulo> [execuções=5] [--pagina home|regulamento]
+//   node scripts/lh.mjs <rótulo> [execuções=5] [--pagina home|regulamento|politica]
 //
-// Páginas (regra 27): a home e /regulamento/ passam pela MESMA régua. Sem
-// --pagina, roda as duas. A home grava medidas/lh-<rótulo>-<preset>.json
-// (o nome de sempre); o regulamento, medidas/lh-<rótulo>-regulamento-
-// <preset>.json, com uma rodada a mais de ACESSIBILIDADE por preset
+// Páginas (regra 27): a home, /regulamento/ e /politica-de-privacidade/
+// passam pela MESMA régua. Sem --pagina, roda as três. A home grava
+// medidas/lh-<rótulo>-<preset>.json (o nome de sempre); as secundárias,
+// medidas/lh-<rótulo>-<nome>-<preset>.json, com uma rodada a mais de
+// ACESSIBILIDADE por preset
 // (separada das de performance: o axe roda depois da carga e não deve
 // pesar no tempo medido).
 // Mediana + intervalo de score, FCP, LCP, TBT, CLS, SI e o elemento LCP.
@@ -47,8 +48,8 @@ async function preflight(largura, pagina) {
     const p = await ctx.newPage();
     await p.goto(pagina.url, { waitUntil: 'load', timeout: 120_000 });
     await p.waitForTimeout(3000);
-    if (pagina.nome === 'regulamento') {
-      if (!(await p.evaluate(() => document.querySelectorAll('article.regulamento h1, article.regulamento h2').length > 1))) throw new Error('regulamento sem article/h1/h2');
+    if (pagina.nome !== 'home') {
+      if (!(await p.evaluate(() => document.querySelectorAll('article.regulamento h1, article.regulamento h2').length > 1))) throw new Error(`${pagina.nome} sem article/h1/h2`);
     } else if (RAIZ_SERVIDA === RAIZ) await conferirCarga(p, largura);
     else if (!(await p.evaluate(() => !!document.querySelector('h1')))) throw new Error('página servida de --dir sem h1');
   } finally {
@@ -104,6 +105,7 @@ try {
   const PAGINAS = [
     { nome: 'home', url: servidor.url, arquivo: (preset) => `medidas/lh-${rotulo}-${preset}.json` },
     { nome: 'regulamento', url: new URL('/regulamento/index.html', servidor.url).href, arquivo: (preset) => `medidas/lh-${rotulo}-regulamento-${preset}.json` },
+    { nome: 'politica', url: new URL('/politica-de-privacidade/index.html', servidor.url).href, arquivo: (preset) => `medidas/lh-${rotulo}-politica-${preset}.json` },
   ].filter((p) => !SO_PAGINA || p.nome === SO_PAGINA);
   const configDe = (preset) => (preset === 'desktop-1920' ? desktop1920 : preset === 'desktop' ? desktopConfig : undefined);
 
