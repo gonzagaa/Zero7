@@ -1,7 +1,7 @@
 {
  "gerado_por": "scripts/build.mjs",
  "fontes": {
-  "css (36 arquivos)": "dist/home.b688a81a.css",
+  "css (36 arquivos)": "dist/home.7ceb13d2.css",
   "script/global.js": "dist/script/global.38417c2f.js",
   "script/4selet.js": "dist/script/4selet.40684e8a.js",
   "script/blackPlanos.js": "dist/script/blackPlanos.bcbaae1a.js",
@@ -14,35 +14,35 @@
  },
  "fontesHero": {
   "NCS Radhiumz": {
-   "bytes": 6056,
-   "hash": "0f4a596e"
+   "bytes": 5968,
+   "hash": "39c40dc9"
   },
   "TT Fors Trial Light": {
-   "bytes": 17676,
-   "hash": "84c7b71e"
+   "bytes": 17600,
+   "hash": "57658536"
   },
   "TT Fors Trial Regular": {
-   "bytes": 17300,
-   "hash": "e967bfbb"
+   "bytes": 17204,
+   "hash": "ae1ba3cd"
   },
   "TT Fors Trial Medium": {
-   "bytes": 17852,
-   "hash": "19b2278e"
+   "bytes": 17716,
+   "hash": "8c1510a3"
   },
   "TT Fors Trial DemiBold": {
-   "bytes": 17696,
-   "hash": "68035478"
+   "bytes": 17628,
+   "hash": "e32dffd8"
   },
   "TT Fors Trial Bold": {
-   "bytes": 18224,
-   "hash": "88fb6ddb"
+   "bytes": 18072,
+   "hash": "27852c04"
   },
   "TT Fors Trial ExtraBold": {
-   "bytes": 18472,
-   "hash": "ca232811"
+   "bytes": 18412,
+   "hash": "69f57d93"
   }
  },
- "css": "dist/home.b688a81a.css",
+ "css": "dist/home.7ceb13d2.css",
  "criticoDesatualizado": false,
  "criticoRegulamentoDesatualizado": false,
  "regulamento": {
