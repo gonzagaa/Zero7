@@ -12,6 +12,11 @@
 //                   "link" opcional: href do <a> da tarja, desktop e mobile.
 //                   Só interno e sem UTM; sem "link", volta a HREF_PADRAO,
 //                   "#plan" — ver scripts/lib/tarja.mjs)
+//                  "cupom" opcional: { "titulo", "subtitulo", "cor" }, o cupom
+//                   em HTML da seção #plan; no subtítulo, **negrito**,
+//                   ==destaque== (máx. 2) e \n para quebrar a linha; "cor"
+//                   #RRGGBB opcional. Sem o bloco, o cupom do index.html não
+//                   muda — ver scripts/lib/cupom.mjs)
 //
 // Passos, nesta ordem, abortando com mensagem clara em qualquer falha:
 //   1. valida a pasta: tamanhos (a razão tem que bater com a do CSS — a
@@ -24,7 +29,8 @@
 //      é immutable de 1 ano, nome NUNCA se reaproveita;
 //   3. index.html: troca os pôsteres (srcset/src + width/height), os quatro
 //      data-* do <video> e o href do <a> da tarja ("link" ou o padrão). O
-//      aspect-ratio do CSS não muda (validado no 1).
+//      aspect-ratio do CSS não muda (validado no 1). Com "cupom", troca o
+//      componente entre <!-- cupom:inicio --> e <!-- cupom:fim -->.
 //      Com "fim", mostra o diff proposto em prazosPromo (só as datas; a
 //      lógica do contador é intocada — regra 5) e só aplica com --contador;
 //   4. npm run build, git add do que mudou, npm run check,
@@ -45,6 +51,7 @@ import ffmpeg from 'ffmpeg-static';
 import ffprobeStatic from 'ffprobe-static';
 import sharp from 'sharp';
 import { DURACAO, VARIANTES, cobertura, hrefDaCampanha, trocarHrefTarja } from './lib/tarja.mjs';
+import { cupomDaCampanha, markupCupom, trocarCupom } from './lib/cupom.mjs';
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ASSETS = path.join(RAIZ, 'assets', 'tarjapopup');
@@ -88,7 +95,10 @@ for (const k of ['inicio', 'fim']) if (campanha[k] !== undefined && !reData.test
 if (CONTADOR && !campanha.fim) aborta('--contador sem "fim" no campanha.json', 'acrescente "fim": "AAAA-MM-DD" (o último dia da campanha)');
 const link = hrefDaCampanha(campanha);
 if (link.erro) aborta(link.erro, link.dica || '');
-linha(`campanha.json: slug "${slug}"${campanha.nome ? ` (${campanha.nome})` : ''}${campanha.fim ? `, fim ${campanha.fim}` : ''}, link ${link.href} (${link.origem})`);
+// cupom validado aqui, antes do encode: erro de texto não pode custar minutos de vídeo
+const cupom = cupomDaCampanha(campanha);
+if (cupom && cupom.erro) aborta(cupom.erro, cupom.dica || '');
+linha(`campanha.json: slug "${slug}"${campanha.nome ? ` (${campanha.nome})` : ''}${campanha.fim ? `, fim ${campanha.fim}` : ''}, link ${link.href} (${link.origem})${cupom ? `, cupom "${cupom.titulo}"` : ''}`);
 
 // as razões que o CSS reserva (regras 17/21) têm que ser as do encoder
 const css = fs.readFileSync(path.join(RAIZ, 'css', 'tarjaImage.css'), 'utf8');
@@ -220,6 +230,17 @@ html = trocaHref.html;
 const hrefResumo = `href da tarja: ${trocaHref.depois} (${link.origem}${trocaHref.antes === trocaHref.depois ? ', igual ao que já estava' : `; antes ${trocaHref.antes}`})`;
 linha(hrefResumo);
 
+// cupom em HTML do #plan: só com o bloco "cupom"; sem ele o index.html fica como está
+let cupomResumo = 'sem "cupom" no campanha.json — cupom do #plan intocado';
+if (cupom) {
+  let trocaCupom;
+  try { trocaCupom = trocarCupom(html, markupCupom(cupom)); } catch (e) { aborta(`index.html: ${e.message}`); }
+  html = trocaCupom.html;
+  const cores = cupom.paleta ? `cor ${cupom.cor} (contraste escuro ${cupom.paleta.contrastes.escuro.toFixed(1)}:1, claro ${cupom.paleta.contrastes.claro.toFixed(1)}:1)` : 'paleta Água do CSS';
+  cupomResumo = `cupom: "${cupom.titulo}", ${cupom.linhas.length} linha(s) de subtítulo, ${cores}${trocaCupom.mudou ? '' : ' — igual ao que já estava'}`;
+}
+linha(cupomResumo);
+
 // contador: só as datas de prazosPromo (regra 5)
 let contadorResumo = 'sem "fim" no campanha.json — prazos do contador intocados';
 if (campanha.fim) {
@@ -291,6 +312,7 @@ console.log('\n   index.html (stage):');
 const dif = String(git('diff', '--cached', '-U0', '--', 'index.html').out).split('\n').filter((l) => /^[-+]\s/.test(l) && !/^(---|\+\+\+)/.test(l) && l.length < 400);
 console.log(dif.map((l) => '     ' + l.trim()).join('\n'));
 linha(hrefResumo);
+linha(cupomResumo);
 linha(contadorResumo);
 
 const referenciados = new Set([...html.matchAll(/tarjapopup\/(tarja-[^"']+)/g)].map((m) => m[1]));

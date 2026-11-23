@@ -1,11 +1,12 @@
 {
  "gerado_por": "scripts/build.mjs",
  "fontes": {
-  "css (36 arquivos)": "dist/home.ad806bb8.css",
+  "css (36 arquivos)": "dist/home.0bed7879.css",
   "script/global.js": "dist/script/global.38417c2f.js",
   "script/4selet.js": "dist/script/4selet.40684e8a.js",
   "script/blackPlanos.js": "dist/script/blackPlanos.bcbaae1a.js",
   "script/planosAtivo.js": "dist/script/planosAtivo.3f368f05.js",
+  "script/cupom.js": "dist/script/cupom.949e10ca.js",
   "script/limiteAlta.js": "dist/script/limiteAlta.ebdcf05d.js",
   "script/tarjaVideo.js": "dist/script/tarjaVideo.2be72a6f.js",
   "script/sectionFaq.js": "dist/script/sectionFaq.adee23fd.js",
@@ -41,7 +42,7 @@
    "hash": "ca232811"
   }
  },
- "css": "dist/home.ad806bb8.css",
+ "css": "dist/home.0bed7879.css",
  "criticoDesatualizado": false,
  "criticoRegulamentoDesatualizado": false,
  "regulamento": {

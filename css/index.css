@@ -36,6 +36,7 @@
 @import url("./obrigado.css?v=v95-liberdade-out08");
 @import url("./verificado.css?v=v95-liberdade-out08");
 @import url("./25k.css?v=v95-liberdade-out08");
+@import url("./cupom.css?v=v95-liberdade-out08");
 
 /* Lenis 1.1.14 (MIT) — o lenis.css do unpkg tinha 244 bytes e era
    <link> no <head>: uma requisição cross-origin, com DNS e TLS, para

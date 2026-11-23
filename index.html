@@ -590,8 +590,8 @@ html.lenis,html.lenis body{height:auto}
 [data-aos=fade-down]{transform:translate3d(0,-100px,0)}
 [data-aos=fade-right]{transform:translate3d(-100px,0,0)}
 [data-aos=fade-up-left]{transform:translate3d(100px,100px,0)}</style>
-  <link rel="stylesheet" href="./dist/home.ad806bb8.css" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="./dist/home.ad806bb8.css"></noscript>
+  <link rel="stylesheet" href="./dist/home.0bed7879.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="./dist/home.0bed7879.css"></noscript>
 
   <!-- C4: preconnect para os terceiros que restam na janela inicial
        (jquery, lenis/ionicons no unpkg, gsap/countUp no cdnjs) — 1 RTT
@@ -1283,33 +1283,20 @@ html.lenis,html.lenis body{height:auto}
 
     <div class="wrapper planos-topo-wrapper">
       <div class="planos-topo-grid">
-          <!-- Estes 507KB nunca vieram do popup: o popup está comentado lá em
-               cima, e a arte dele nem existe mais na pasta. São o par do
-               cross-fade black x white desta seção, achados pelo PARSER aos
-               337ms — a milhares de pixels da primeira tela, no celular.
-               loading=lazy tira os dois da janela inicial, igual ao par de
-               fundos .bg--ativo duas linhas acima. O width/height é a razão
-               real de cada arte (3482x1850 nas duas, mesma razão):
-               sem ele a célula nasceria com altura 0 e o cupom empurraria o
-               layout ao chegar. A largura continua vindo do CSS (30rem), a
-               caixa medida não muda, e a arte, o link e a lógica da campanha
-               ficam como estão.
-               PROFIT PRO (out/2026): a arte do designer é 3942x1470; o que
-               vai ao ar é a reexportação a 700px de largura (2x dos 350px
-               exibidos no desktop; AVIF q60 4:4:4, com alfa) = 700x261 nas
-               duas, e o width/height e o aspect-ratio do planosAtivo.css seguem
-               ESSE arquivo. Nome por campanha (cupom-<campanha>-black|white): o
-               cache dos assets é immutable de 1 ano e o nome antigo já servia
-               outra arte. -->
-          <!-- Cupom PROFIT PRO (out/2026) fora do ar desde 23/11 (pedido do
-               cliente): a campanha acabou. O cupom novo vem em HTML/CSS, em
-               teste. Para voltar este, descomente o bloco. -->
-          <!--
-          <div class="cupom-wrap">
-            <img class="cupom" width="700" height="261" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-profit-pro-black.avif" alt="">
-            <img class="cupom white" width="700" height="261" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-profit-pro-white.avif" alt="" aria-hidden="true">
+          <!-- Cupom em HTML/CSS (css/cupom.css + script/cupom.js). O markup
+               entre as marcas sai de scripts/lib/cupom.mjs: troque pelo bloco
+               "cupom" do campanha.json (npm run tarja), não à mão. -->
+          <!-- cupom:inicio -->
+          <div class="cupom-z7" data-cupom>
+            <p class="cupom-z7__titulo"><span class="cupom-z7__mask"><span class="cupom-z7__mi">Evolua no seu ritmo.</span></span></p>
+            <span class="cupom-z7__filete" aria-hidden="true"><span class="cupom-z7__luz"></span></span>
+            <p class="cupom-z7__sub">
+              <span class="cupom-z7__linha"><strong class="cupom-z7__d cupom-z7__d--1"><span class="cupom-z7__dt">Sem prazo</span><span class="cupom-z7__br" aria-hidden="true"><span class="cupom-z7__brt">Sem prazo</span></span></strong> para provar seu potencial</span>
+              <span class="cupom-z7__linha">e com <strong class="cupom-z7__d cupom-z7__d--2"><span class="cupom-z7__dt">75% OFF</span><span class="cupom-z7__br" aria-hidden="true"><span class="cupom-z7__brt">75% OFF</span></span></strong> em todos os planos.</span>
+            </p>
+            <script>(function(c){if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)c.setAttribute('data-anim','pendente')})(document.currentScript.parentNode)</script>
           </div>
-          -->
+          <!-- cupom:fim -->
       </div>
 
       <div class="planos-topo-conteudo" data-aos="fade-up">
@@ -2455,6 +2442,7 @@ const prazosPromo = [
   <script src="./dist/script/4selet.40684e8a.js"></script>
   <script src="./dist/script/blackPlanos.bcbaae1a.js"></script>
   <script src="./dist/script/planosAtivo.3f368f05.js"></script>
+  <script src="./dist/script/cupom.949e10ca.js"></script>
   <script src="./dist/script/limiteAlta.ebdcf05d.js"></script>
   <script src="./dist/script/tarjaVideo.2be72a6f.js" defer></script>
   <script src="./dist/script/sectionFaq.adee23fd.js" defer></script>

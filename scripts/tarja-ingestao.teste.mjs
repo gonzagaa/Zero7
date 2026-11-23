@@ -1,5 +1,6 @@
 // Teste da ingestão da tarja (npm run teste:tarja): a parte que não depende
-// de vídeo — o "link" do campanha.json e a troca do href no index.html.
+// de vídeo — o "link" e o "cupom" do campanha.json, a troca do href da
+// tarja e a do cupom no index.html.
 //
 //   node scripts/tarja-ingestao.teste.mjs
 //
@@ -9,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { HREF_PADRAO, hrefDaCampanha, trocarHrefTarja } from './lib/tarja.mjs';
+import { CUPOM_APROVADO, FUNDO_CLARO, contraste, cupomDaCampanha, markupCupom, trocarCupom } from './lib/cupom.mjs';
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // base: o index.html de hoje com a tarja no padrão (vale com qualquer campanha no ar)
@@ -79,4 +81,74 @@ caso('href com aspas, espaço ou < > é recusado', () => {
 caso('sem o bloco da tarja, lança em vez de mexer em outro <a>', () => {
   assert.throws(() => trocarHrefTarja('<html><a href="#plan">x</a></html>', '#faq'));
 });
+console.log('\ncupom do campanha.json');
+const cup = (c) => cupomDaCampanha({ slug: 'x', cupom: c });
+caso('sem "cupom": null (nada muda), e o index.html não é tocado', () => {
+  assert.equal(cupomDaCampanha({ slug: 'x' }), null);
+  assert.equal(cupomDaCampanha({ slug: 'x', cupom: null }), null);
+  assert.equal(cupomDaCampanha(null), null);
+});
+caso('o cupom aprovado gera EXATAMENTE o bloco que está no index.html', () => {
+  const c = cupomDaCampanha({ cupom: CUPOM_APROVADO });
+  assert.ok(c && !c.erro);
+  const r = trocarCupom(lido, markupCupom(c));
+  assert.equal(r.mudou, false, 'o markup entre as marcas difere do gerado — alguém editou à mão?');
+  assert.equal(r.html, lido);
+});
+caso('**negrito**, ==destaque== e \\n viram o markup certo', () => {
+  const c = cup({ titulo: 'Título', subtitulo: '==Sem prazo== e **forte**\nlinha ==dois==' });
+  assert.equal(c.linhas.length, 2);
+  const m = markupCupom(c);
+  assert.equal((m.match(/class="cupom-z7__linha"/g) || []).length, 2);
+  assert.match(m, /<strong class="cupom-z7__d cupom-z7__d--1"><span class="cupom-z7__dt">Sem prazo<\/span><span class="cupom-z7__br" aria-hidden="true">/);
+  assert.match(m, /cupom-z7__d--2"><span class="cupom-z7__dt">dois</);
+  assert.match(m, /<b class="cupom-z7__b">forte<\/b>/);
+  assert.ok(!/style=/.test(m), 'sem "cor": sem style (vale a paleta do CSS)');
+});
+caso('texto nunca vira HTML: < > & " escapados', () => {
+  const m = markupCupom(cup({ titulo: 'A <b>&</b> "x"', subtitulo: '==<script>== ok' }));
+  assert.ok(!m.includes('<b>&</b>'), 'tag do título não passa');
+  assert.ok(!m.replace(/<script>\(function\(c\)/, '').includes('<script>'), 'só o <script> do próprio componente');
+  assert.match(m, /A &lt;b&gt;&amp;&lt;\/b&gt; &quot;x&quot;/);
+  assert.match(m, /cupom-z7__dt">&lt;script&gt;</);
+});
+caso('"cor" gera as variáveis dos dois temas com contraste ≥ 4,5:1', () => {
+  for (const cor of ['#36DCC4', '#FF6A1A', '#FFD34E', '#7CC4FF']) {
+    const c = cup({ titulo: 'T', subtitulo: '==a==', cor });
+    assert.ok(!c.erro, `${cor}: ${c.erro}`);
+    assert.ok(c.paleta.contrastes.escuro >= 4.5 && c.paleta.contrastes.claro >= 4.5, `${cor}: ${JSON.stringify(c.paleta.contrastes)}`);
+    const m = markupCupom(c);
+    assert.match(m, /style="--cze-d1:#[0-9A-F]{6};[^"]*--czc-d1:#[0-9A-F]{6}/);
+    assert.ok(contraste([...[1, 3, 5].map((i) => parseInt(c.paleta.vars['--czc-d1'].slice(i, i + 2), 16))], FUNDO_CLARO) >= 4.5);
+  }
+});
+caso('erros: campos, marcação e cor', () => {
+  assert.ok(cup('texto').erro);
+  assert.ok(cup({ subtitulo: 'x' }).erro, 'sem título');
+  assert.ok(cup({ titulo: ' ', subtitulo: 'x' }).erro, 'título vazio');
+  assert.ok(cup({ titulo: 'a\nb', subtitulo: 'x' }).erro, 'título com quebra');
+  assert.ok(cup({ titulo: '==a==', subtitulo: 'x' }).erro, 'título com marcação');
+  assert.ok(cup({ titulo: 'T' }).erro, 'sem subtítulo');
+  assert.ok(cup({ titulo: 'T', subtitulo: '==a== ==b== ==c==' }).erro, 'três destaques');
+  assert.ok(cup({ titulo: 'T', subtitulo: '==aberto' }).erro, '== sem fechar');
+  assert.ok(cup({ titulo: 'T', subtitulo: '**aberto' }).erro, '** sem fechar');
+  assert.ok(cup({ titulo: 'T', subtitulo: '====' }).erro, 'marcação vazia');
+  assert.ok(cup({ titulo: 'T', subtitulo: 'x', cor: 'teal' }).erro, 'cor não hex');
+  assert.ok(cup({ titulo: 'T', subtitulo: 'x', cor: '#123' }).erro, 'hex curto');
+  assert.ok(/escura demais/.test(cup({ titulo: 'T', subtitulo: 'x', cor: '#1A1A40' }).erro), 'cor escura demais para o tema escuro');
+  assert.ok(/desconhecido/.test(cup({ titulo: 'T', subtitulo: 'x', link: '#a' }).erro), 'campo a mais');
+});
+caso('troca só entre as marcas; sem as marcas, lança', () => {
+  const novo = markupCupom(cup({ titulo: 'Outro', subtitulo: '==Novo== texto' }));
+  const r = trocarCupom(lido, novo);
+  assert.equal(r.mudou, true);
+  const [a, b] = [lido.indexOf('<!-- cupom:inicio -->'), r.html.indexOf('<!-- cupom:inicio -->')];
+  assert.equal(r.html.slice(0, b), lido.slice(0, a), 'nada antes das marcas muda');
+  assert.equal(r.html.slice(r.html.indexOf('<!-- cupom:fim -->')), lido.slice(lido.indexOf('<!-- cupom:fim -->')), 'nada depois das marcas muda');
+  const volta = trocarCupom(r.html, markupCupom(cupomDaCampanha({ cupom: CUPOM_APROVADO })));
+  assert.equal(volta.html, lido, 'volta byte a byte');
+  assert.throws(() => trocarCupom('<html></html>', novo));
+  assert.throws(() => trocarCupom('<!-- cupom:inicio --><!-- cupom:fim --><!-- cupom:inicio --><!-- cupom:fim -->', novo));
+});
+
 console.log(`\n${ok} casos ok`);

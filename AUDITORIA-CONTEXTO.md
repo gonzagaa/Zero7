@@ -2601,6 +2601,24 @@ justamente o que a NCS não foi desenhada para fazer.
     do CSS: mudar a proporção da tarja é OUTRA tarefa (tarjaImage.css,
     regras 17/21, e scripts/lib/tarja.mjs juntos). Prazos do contador só
     com --contador e só as datas de prazosPromo (regra 5).
+    **Cupom do #plan em HTML** (nov/2026, aprovado numa página de teste no
+    celular): o par de imagens .cupom-wrap virou o componente .cupom-z7
+    (css/cupom.css + script/cupom.js), fundo transparente, tema por
+    variável no MESMO elemento (#plan.white = claro). O markup entre
+    `<!-- cupom:inicio -->` e `<!-- cupom:fim -->` sai de
+    scripts/lib/cupom.mjs — não edite à mão: o teste:tarja compara o bloco
+    com o gerado. O campanha.json aceita `"cupom": { titulo, subtitulo,
+    cor }` (**negrito**, ==destaque== no máx. 2, \n quebra a linha; cor
+    #RRGGBB com o tema claro escurecido até 5,5:1 sobre o fundo medido) e
+    o npm run tarja injeta; sem o bloco, nada muda. Animação só
+    transform/opacity (o brilho dos destaques é uma janela que anda com o
+    texto andando ao contrário, não background-position), entrada uma vez,
+    loop de 7 s pausado fora da tela e com a aba oculta, estático com
+    movimento reduzido. Medido na entrada: axe sem violação no #plan nos
+    dois temas (color-contrast do texto com background-clip fica
+    "incompleto" — o contraste foi medido à parte: escuro ≥ 11,6:1, claro
+    ≥ 5,7:1), CLS entrando por #plan 0,0001/0,0004, A/B no mesmo build a
+    390 com CPU 4× sem quadro longo novo (mediana 24 × 28 sem o cupom).
 
 27. **Páginas secundárias passam pelo MESMO build e pelas MESMAS réguas**
     (/regulamento/, out/2026). O layout é regulamento/index.html, editado

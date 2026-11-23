@@ -93,7 +93,7 @@ A Política de Privacidade (`politica-de-privacidade/`, servida em `/home/politi
 
 ## Como trocar a tarja em vídeo
 
-1. Crie a pasta da campanha: `desktop.mp4` (3160×126), `mobile.mp4` (2080×284), 15 s, sem áudio, e `campanha.json` com `{ "slug": "nome-novo", "fim": "AAAA-MM-DD" }` (slug nunca repetido; `fim` opcional).
+1. Crie a pasta da campanha: `desktop.mp4` (3160×126), `mobile.mp4` (2080×284), 15 s, sem áudio, e `campanha.json` com `{ "slug": "nome-novo", "fim": "AAAA-MM-DD" }` (slug nunca repetido; `fim` opcional). Para trocar também o cupom da seção de planos, acrescente `"cupom": { "titulo": "…", "subtitulo": "==Destaque== e **negrito**\nsegunda linha", "cor": "#RRGGBB" }` (`cor` opcional; no máximo 2 destaques). Sem o bloco, o cupom fica como está.
 2. `npm run tarja -- <pasta>` (com `--contador` para aplicar os prazos do `fim`): valida, encoda, troca o `index.html`, roda build, check e a prova, e deixa tudo no stage. Se algo falhar, ele aborta e explica.
 3. Commit e push.
 4. TurboCloud: sincronize e faça o purge; depois `node scripts/producao.mjs https://zero7.com.br/home/`.
