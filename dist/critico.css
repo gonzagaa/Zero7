@@ -123,10 +123,12 @@ section#divisa .cards .card h3 span{filter:none;text-shadow:0 0 18px rgba(29,164
 .ba-card--hero:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 68% 58% at 50% 50%,rgba(0,2,5,.62) 0%,rgba(0,2,5,.24) 62%,transparent 100%),linear-gradient(to top,#00020580,#00040c29 45%,#000b1c42)}
 .ba-card--video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;border-radius:inherit}
 .planos{overflow:hidden;position:relative}
+.planos img.cupom{width:30rem;margin-bottom:6rem}
 .planos img.bg{position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;z-index:0}
 .planos:before,.planos:after{content:"";position:absolute;width:100%;height:2px;top:0;left:0;right:0;background:linear-gradient(to right,transparent,#023c83,#0080c9,#023c83,transparent);z-index:2}
 body section.planos .wrapper .swiper.mySwiper4{overflow:inherit}
 body section.planos .wrapper .swiper.mySwiper11{overflow:inherit}
+.planos .cupom{display:flex;width:100%;margin-top:2rem;gap:var(--esp-1);align-items:center}
 @media (max-width: 1079.98px){.planos .swiper-button-prev,.planos .swiper-button-next{display:none}}
 .planos .btn__label span{display:none}
 @media (min-width: 1080px){body section.planos .wrapper .swiper.mySwiper4{overflow:hidden}
@@ -138,6 +140,7 @@ body:where(.anima-ociosas) .planos .card--copa .card-tarja:before{animation:seni
 body:where(.anima-ociosas) .planos .card--copa .card-tarja:after{animation:seniorTarjaDesliza 9s ease-in-out infinite}
 @keyframes seniorTarjaDesliza{0%{transform:translate(0)}50%{transform:translate(-54.5455%)}to{transform:translate(0)}}
 @keyframes seniorTarjaShine{0%{transform:translate(-100%)}55%{transform:translate(100%)}to{transform:translate(100%)}}
+.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto;aspect-ratio:700 / 261}
 .plano-asset[hidden]{display:none!important}
 #faq [hidden]{display:none!important}
 .faq__search-loading[hidden]{display:none}
@@ -344,10 +347,6 @@ body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:tra
 @media (min-width: 1920px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-28px)}}
 @media (min-width: 1600px){#home.hero--black{padding-bottom:calc(5% + 36px)}}
 @media (min-width: 1920px){#home.hero--black{padding-bottom:calc(5% + 28px)}}
-.veu-plano-black{display:none}
-body:has(section#plan[data-veu=black]) section#plan{padding-block:4rem}
-body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:520px;overflow:hidden;animation:none;opacity:1;transform:none}
-@media (max-width: 1079.98px){body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:400px}}
 @media (max-width: 1079.98px){#author .autor__cnpj{display:none}}
 @media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
 @media (min-width: 1080px){footer .rodape__cnpj{display:none}}

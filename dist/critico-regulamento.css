@@ -162,9 +162,6 @@ body:has(#home.hero--black) #navigation .logo img{filter:brightness(0) invert(1)
 body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-12px)}}
 @media (min-width: 1600px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-20px)}}
 @media (min-width: 1920px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-28px)}}
-body:has(section#plan[data-veu=black]) section#plan{padding-block:4rem}
-body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:520px;overflow:hidden;animation:none;opacity:1;transform:none}
-@media (max-width: 1079.98px){body:has(section#plan[data-veu=black]) section#plan .plano-asset{max-height:400px}}
 @media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
 @media (min-width: 1080px){footer .rodape__cnpj{display:none}}
 html.lenis,html.lenis body{height:auto}

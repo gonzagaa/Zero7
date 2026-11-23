@@ -2649,7 +2649,14 @@ justamente o que a NCS não foi desenhada para fazer.
     a página continua à mão, com CSS e JS soltos e o ?v=. O cert/ não
     entrou: tem outro layout.
 
-29. **Véu de campanha sobre uma seção: o blur vai NOS FILHOS, nunca o
+29. **[HISTÓRICO — véu removido em 23/11/2026, fim da Black]** Os
+    atributos data-veu/data-veu-fim, o bloco .veu-plano-black, o
+    css/veuPlanos.css e o script/veuPlanos.js saíram do repo; o cupom do
+    #plan foi descomentado e a seção voltou à altura original. Para
+    reconstruir um véu numa próxima campanha, recupere os arquivos do
+    commit ec3d833 e siga o protocolo abaixo, que continua valendo.
+
+    **Véu de campanha sobre uma seção: o blur vai NOS FILHOS, nunca o
     backdrop-filter sobre a camada** (out/2026, Black Friday —
     veuPlanos.css + veuPlanos.js + guarda em global.js). Pedido do CEO:
     durante a campanha, #plan fica tampada por um véu com o CTA pra uma
