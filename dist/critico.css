@@ -308,8 +308,7 @@ div.tarjaImage img{border-radius:var(--raio-md) var(--raio-md) 0 0;border-radius
 @media (min-width: 1600px){div.tarjaImage{width:calc(100% - 340px);left:170px}}
 @media (min-width: 1080px){div.tarjaImage{left:0;right:0;margin-inline:auto;width:calc(min(var(--container-max),100%) - 4.8rem);overflow:hidden}
 div.tarjaImage a{display:flex;justify-content:center}
-div.tarjaImage .tarjaMidia{display:block;flex:none;max-width:none;width:max(100%,calc(100vw - 200px))}}
-@media (min-width: 1600px){div.tarjaImage .tarjaMidia{width:max(100%,calc(100vw - 340px))}}
+div.tarjaImage .tarjaMidia{display:block;flex:none;max-width:none;width:100%}}
 @media (max-width: 1079.98px){div.tarjaImage{left:0;right:0;margin-inline:auto;top:1.2rem;width:calc(min(var(--container-max),100%) - 4.8rem);border-radius:var(--raio-sm) 0 var(--raio-sm) 0;overflow:hidden;box-shadow:.25rem .3rem .8rem #0000002e}
 .countdown--promo{gap:var(--esp-2);padding-inline:.6rem}}
 .tarjaImage .tarjaMidia{aspect-ratio:1040 / 142}
@@ -317,7 +316,6 @@ div.tarjaImage .tarjaMidia{display:block;flex:none;max-width:none;width:max(100%
 @media (min-width: 1080px){div.tarjaImage .tarjaMidia{aspect-ratio:2370 / 94}}
 nav#navigation.activeCountdown{--tarja-offset: calc((min(var(--container-max), 100vw) - 4.8rem) / 7.3239 + 27.375px)}
 @media (min-width: 1080px){nav#navigation.activeCountdown{--tarja-offset: calc((min(var(--container-max), 100vw) - 4.8rem) / 25.2128 + 34px)}}
-@media (min-width: 1600px){nav#navigation.activeCountdown{--tarja-offset: calc((100vw - 340px) / 25.2128 + 34px)}}
 .countdown--escassez>div{display:none}
 .countdown--escassez p.text{gap:.55em;margin-right:0;font-size:inherit;font-weight:var(--peso-black);text-transform:none;letter-spacing:0}
 .countdown--escassez p.text:before{flex:none;width:8px;height:8px;border-radius:2px 0;background:#ff6a1a;box-shadow:0 0 #ff6a1ab3;animation-name:escassezPulso}

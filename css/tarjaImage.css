@@ -238,14 +238,17 @@
     }
 }
 
-/* ── Tarja na largura do conteúdo (fase 21) ─────────────────────────────
-   A tarja acompanha a nav, que agora tem a largura da caixa de conteúdo do
-   .wrapper. O conteúdo da arte fica sempre no meio, então quando a caixa
-   fica mais estreita que a tarja de antes, a arte NÃO encolhe: mantém a
-   escala de antes (100vw - 200px; 100vw - 340px no xl) e o container corta
-   as laterais por igual. Onde a caixa é mais larga que isso (1600 a ~1770),
-   a arte só acompanha a largura, sem corte nenhum em cima ou embaixo.
-   Nada aqui depende da proporção da arte: vale para qualquer campanha.
+/* ── Tarja na largura do conteúdo (fase 21; corte removido em 23/11/2026) ──
+   A tarja acompanha a nav, que tem a largura da caixa de conteúdo do
+   .wrapper, e a mídia tem EXATAMENTE a largura da caixa: a altura sai do
+   aspect-ratio da variante (2370/94 aqui, 1040/142 no celular) e nada é
+   cortado, em nenhuma largura.
+   Até 23/11 a mídia era max(100%, 100vw - 200px) (- 340px no xl): acima de
+   ~1749 px a arte ficava mais larga que a caixa e o overflow cortava as
+   laterais (86 px por lado em 1920, 266 em 2280) — com texto e botão perto
+   da borda (tarja avaliacao-ilimitada), sumia o "GA" de "GARANTA" e metade
+   do botão. Sem isso a tarja para de crescer quando a caixa para (1408 px):
+   55,8 px de altura de 1599 em diante, a mesma de 1599–1748 antes.
    A altura continua sendo medida pelo JS e entregue à nav em --tarja-offset. */
 @media (min-width: 1080px) {
     div.tarjaImage {
@@ -265,13 +268,7 @@
         display: block;
         flex: none;
         max-width: none;
-        width: max(100%, calc(100vw - 200px));
-    }
-}
-
-@media (min-width: 1600px) {
-    div.tarjaImage .tarjaMidia {
-        width: max(100%, calc(100vw - 340px));
+        width: 100%;
     }
 }
 
@@ -373,10 +370,10 @@
    barra do timer (27,375px abaixo de 1080; 34px de 1080 em diante). A razão
    é a do pipeline (scripts/lib/tarja.mjs: mob 1040/142 = 7,3239; desk
    2370/94 = 25,2128) e vale para qualquer campanha — o npm run tarja recusa
-   arte com outra razão. A largura é a da própria tarja: até 1599 a da caixa
-   de conteúdo, min(--container-max, 100%) − 4,8rem (a de antes,
-   100vw − 200px, dava a nav até 3,7px por cima da tarja no primeiro meio
-   segundo, outubro/2026); de 1600 em diante, 100vw − 340px. 100vw em vez
+   arte com outra razão. A largura é a da própria tarja, que é a da caixa de
+   conteúdo em todas as larguras: min(--container-max, 100%) − 4,8rem (até
+   23/11 havia um degrau em 1600 com 100vw − 340px, que errava a estimativa
+   entre 1600 e ~1748 e acompanhava a arte cortada acima disso). 100vw em vez
    de 100%: aqui o % seria da altura (top). Com barra de rolagem clássica o
    erro é de < 1px até o JS medir. */
 nav#navigation.activeCountdown {
@@ -386,12 +383,6 @@ nav#navigation.activeCountdown {
 @media (min-width: 1080px) {
     nav#navigation.activeCountdown {
         --tarja-offset: calc((min(var(--container-max), 100vw) - 4.8rem) / 25.2128 + 34px);
-    }
-}
-
-@media (min-width: 1600px) {
-    nav#navigation.activeCountdown {
-        --tarja-offset: calc((100vw - 340px) / 25.2128 + 34px);
     }
 }
 

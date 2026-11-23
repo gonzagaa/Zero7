@@ -1,7 +1,7 @@
 {
  "gerado_por": "scripts/build.mjs",
  "fontes": {
-  "css (36 arquivos)": "dist/home.0bed7879.css",
+  "css (36 arquivos)": "dist/home.b688a81a.css",
   "script/global.js": "dist/script/global.38417c2f.js",
   "script/4selet.js": "dist/script/4selet.40684e8a.js",
   "script/blackPlanos.js": "dist/script/blackPlanos.bcbaae1a.js",
@@ -42,7 +42,7 @@
    "hash": "ca232811"
   }
  },
- "css": "dist/home.0bed7879.css",
+ "css": "dist/home.b688a81a.css",
  "criticoDesatualizado": false,
  "criticoRegulamentoDesatualizado": false,
  "regulamento": {
