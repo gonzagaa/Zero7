@@ -151,6 +151,7 @@ section#divisa .cards .card h3 span{filter:none;text-shadow:0 0 18px rgba(29,164
 @media (max-width: 1079.98px){#divisa .cards .card p{font-size:var(--fs-850)}}
 #ano{display:inline-block;min-width:2.7em;text-align:center}
 #traders,#pagamentos{display:inline-block;min-width:2em;text-align:center}
+@media (min-width: 1080px) and (max-width: 1599.98px){section#divisa .cards .borderCard.tres .card h3{min-height:7.4rem}}
 #topicos{overflow:hidden;position:relative;border-radius:var(--raio-assinatura-xl)}
 #topicos:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(1200px 500px at 50% 0%,rgba(7,12,17,.1),transparent 60%),radial-gradient(900px 500px at 15% 90%,rgba(7,12,17,.08),transparent 65%),repeating-linear-gradient(135deg,rgba(7,12,17,.03) 0px,rgba(7,12,17,.03) 1px,transparent 1px,transparent 10px);mix-blend-mode:multiply;opacity:1}
 #topicos img.bgsection{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
@@ -169,12 +170,10 @@ section#divisa .cards .card h3 span{filter:none;text-shadow:0 0 18px rgba(29,164
 .ba-card--hero:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse 68% 58% at 50% 50%,rgba(0,2,5,.62) 0%,rgba(0,2,5,.24) 62%,transparent 100%),linear-gradient(to top,#00020580,#00040c29 45%,#000b1c42)}
 .ba-card--video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;border-radius:inherit}
 .planos{overflow:hidden;position:relative}
-.planos img.cupom{width:30rem;margin-bottom:6rem}
 .planos img.bg{position:absolute;width:100%;height:100%;object-fit:cover;top:0;left:0;z-index:0}
 .planos:before,.planos:after{content:"";position:absolute;width:100%;height:2px;top:0;left:0;right:0;background:linear-gradient(to right,transparent,#023c83,#0080c9,#023c83,transparent);z-index:2}
 body section.planos .wrapper .swiper.mySwiper4{overflow:inherit}
 body section.planos .wrapper .swiper.mySwiper11{overflow:inherit}
-.planos .cupom{display:flex;width:100%;margin-top:2rem;gap:var(--esp-1);align-items:center}
 @media (max-width: 1079.98px){.planos .swiper-button-prev,.planos .swiper-button-next{display:none}}
 .planos .btn__label span{display:none}
 @media (min-width: 1080px){body section.planos .wrapper .swiper.mySwiper4{overflow:hidden}
@@ -186,7 +185,6 @@ body:where(.anima-ociosas) .planos .card--copa .card-tarja:before{animation:seni
 body:where(.anima-ociosas) .planos .card--copa .card-tarja:after{animation:seniorTarjaDesliza 9s ease-in-out infinite}
 @keyframes seniorTarjaDesliza{0%{transform:translate(0)}50%{transform:translate(-54.5455%)}to{transform:translate(0)}}
 @keyframes seniorTarjaShine{0%{transform:translate(-100%)}55%{transform:translate(100%)}to{transform:translate(100%)}}
-.planos .cupom-wrap>.cupom{grid-area:1 / 1;transition:opacity .5s ease;height:auto;aspect-ratio:700 / 261}
 .plano-asset[hidden]{display:none!important}
 #faq [hidden]{display:none!important}
 .faq__search-loading[hidden]{display:none}
@@ -375,24 +373,13 @@ nav#navigation.activeCountdown{--tarja-offset: calc((min(var(--container-max), 1
 .countdown--escassez .escassez-acabando:after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:#ff6a1a}
 @media (max-width: 1079.98px){.countdown--escassez p.text span.escassez-friday{display:none}}
 #home.hero--black .btn,#home.hero--black .z7-btnx,body:has(#home.hero--black) #navigation .menu .buttons #navButton{--btn-grad: linear-gradient(90deg, #7a170d 0%, #C8261C 40%, #F2441F 70%, #FF8A3D 100%);--btn-escuro: 200 38 28;--btn-claro: 255 106 26}
-#home.hero--black .reveal-word{background:linear-gradient(120deg,#ff8a3d,#ff6a1a 36%,#f2441f 70%,#e52b24);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 22px rgba(255,106,26,.4))}
 body:has(#home.hero--black) #navigation .menu ul li a[aria-current=page],body:has(#home.hero--black) #navigation .menu ul li a[aria-current=page]:hover{color:#ff8a3d;background-color:#ff6a1a1a;border-color:#ff6a1a73}
 body:has(#home.hero--black) #navigation .logo img{filter:brightness(0) invert(1)}
 .bf-horizonte,.bf-selo{display:none}
-#home.hero--black .bf-horizonte{--bf-horizonte-p: 48px;display:block;position:absolute;left:-10%;width:120%;top:calc(100% - var(--bf-horizonte-p));height:calc(var(--bf-horizonte-p) * 4.48);bottom:auto;transform:none;border-radius:50%;z-index:1;pointer-events:none;background:#000;box-shadow:0 -1px #ffd6aae6,0 -6px 18px #ff8c3cbf,0 -30px 80px #ff5a1973,0 -90px 160px #e52b2438}
-@media (max-width: 1079.98px){#home.hero--black .bf-horizonte{--bf-horizonte-p: 40px}}
-@media (min-width: 1600px){#home.hero--black .bf-horizonte{--bf-horizonte-p: 56px}}
-@media (min-width: 1920px){#home.hero--black .bf-horizonte{--bf-horizonte-p: 64px}}
-#home.hero--black .bf-selo{display:block;position:absolute;z-index:6;width:clamp(150px,13.2vw,230px);height:clamp(150px,13.2vw,230px);left:calc(50% + 23vw);top:17.4vw;transform:rotate(-10deg);pointer-events:none;filter:drop-shadow(0 14px 30px rgba(0,0,0,.55)) drop-shadow(0 0 26px rgba(255,106,26,.45))}
-@media (max-width: 1079.98px){#home.hero--black .bf-selo{width:92px;height:92px;left:auto;right:12px;top:148px}}
-@media (min-width: 1600px){#home.hero--black .bf-selo{width:200px;height:200px;left:calc(50% + 430px);right:auto;top:250px}}
-#home.hero--black .bf-selo svg{display:block;width:100%;height:100%}
 @media (min-width: 1080px){body:has(#home.hero--black) section#divisa .cards .borderCard.um,body:has(#home.hero--black) section#divisa .cards .borderCard.tres{transform:translateY(0)}
 body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-12px)}}
 @media (min-width: 1600px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-20px)}}
 @media (min-width: 1920px){body:has(#home.hero--black) section#divisa .cards .borderCard.dois{transform:translateY(-28px)}}
-@media (min-width: 1600px){#home.hero--black{padding-bottom:calc(5% + 36px)}}
-@media (min-width: 1920px){#home.hero--black{padding-bottom:calc(5% + 28px)}}
 @media (max-width: 1079.98px){#author .autor__cnpj{display:none}}
 @media (max-width: 1079.98px){footer .logo:has(.rodape__cnpj)>p:not(.rodape__cnpj){display:none}}
 @media (min-width: 1080px){footer .rodape__cnpj{display:none}}
@@ -823,8 +810,10 @@ html.lenis,html.lenis body{height:auto}
   <!-- hero--black: identidade Black Friday (pedido do CEO, aprovado num
        protótipo da LP a-maior-black). Tudo fica atrás desta chave: tirar a
        classe = hero volta ao normal, byte a byte. Nada global. A nav é irmã,
-       recebe o acento via body:has(#home.hero--black) no heroBlack.css. -->
-  <header class="header boxpromotion hero--black" id="home">
+       recebe o acento via body:has(#home.hero--black) no heroBlack.css.
+       DESLIGADA em 23/11 (pedido do cliente: tirar a pegada da Black da
+       hero). Para religar, volte a classe hero--black neste <header>. -->
+  <header class="header boxpromotion" id="home">
     <div class="wrapper">
       <div class="content">
         <!-- Sem data-aos: o h1 e o CTA são candidatos a LCP, e o pai com
@@ -1312,10 +1301,15 @@ html.lenis,html.lenis body{height:auto}
                ESSE arquivo. Nome por campanha (cupom-<campanha>-black|white): o
                cache dos assets é immutable de 1 ano e o nome antigo já servia
                outra arte. -->
+          <!-- Cupom PROFIT PRO (out/2026) fora do ar desde 23/11 (pedido do
+               cliente): a campanha acabou. O cupom novo vem em HTML/CSS, em
+               teste. Para voltar este, descomente o bloco. -->
+          <!--
           <div class="cupom-wrap">
             <img class="cupom" width="700" height="261" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-profit-pro-black.avif" alt="">
             <img class="cupom white" width="700" height="261" loading="lazy" decoding="async" src="./assets/tarjapopup/cupom-profit-pro-white.avif" alt="" aria-hidden="true">
           </div>
+          -->
       </div>
 
       <div class="planos-topo-conteudo" data-aos="fade-up">
