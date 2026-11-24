@@ -5,9 +5,9 @@
     "modes": [
       {
         "id": "60dias",
-        "label": "Planos 60 dias",
+        "label": "Planos 30 dias",
         "active": true,
-        "footnote": "*Plataforma gratuita por 60 dias. Após, cobrança mensal."
+        "footnote": "*Plataforma gratuita por 30 dias. Após, cobrança mensal."
       },
       {
         "id": "30dias",
