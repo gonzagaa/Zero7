@@ -55,8 +55,8 @@
   "minutosDeLeitura": 25,
   "secoes": 16,
   "preload": [
-   "../css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08",
-   "../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08"
+   "../css/fonts/NCS%20Radhiumz.sub.woff2?v=v96-30dias-nov24",
+   "../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v96-30dias-nov24"
   ]
  },
  "criticoPoliticaDesatualizado": false,
@@ -70,8 +70,8 @@
   "minutosDeLeitura": 9,
   "secoes": 9,
   "preload": [
-   "../css/fonts/NCS%20Radhiumz.sub.woff2?v=v95-liberdade-out08",
-   "../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v95-liberdade-out08"
+   "../css/fonts/NCS%20Radhiumz.sub.woff2?v=v96-30dias-nov24",
+   "../css/fonts/TT%20Fors%20Trial%20Regular.sub.woff2?v=v96-30dias-nov24"
   ]
  }
 }
